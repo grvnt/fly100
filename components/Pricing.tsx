@@ -11,8 +11,8 @@ const Pricing = () => {
       <div className="py-24 px-8 max-w-5xl mx-auto">
         <div className="flex flex-col text-center w-full mb-20">
           <p className="font-medium text-primary mb-8">Pricing</p>
-          <h2 className="font-bold text-3xl lg:text-5xl tracking-tight">
-            Save hours of repetitive code and ship faster!
+          <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
+            Get the mentorship you need to reach your XC goals
           </h2>
         </div>
 
@@ -24,7 +24,7 @@ const Pricing = () => {
                   <span
                     className={`badge text-xs text-primary-content font-semibold border-0 bg-primary`}
                   >
-                    POPULAR
+                    Coaching Programme
                   </span>
                 </div>
               )}
@@ -52,17 +52,17 @@ const Pricing = () => {
                       <p className="relative">
                         <span className="absolute bg-base-content h-[1.5px] inset-x-0 top-[53%]"></span>
                         <span className="text-base-content/80">
-                          ${plan.priceAnchor}
+                          R{plan.priceAnchor}
                         </span>
                       </p>
                     </div>
                   )}
                   <p className={`text-5xl tracking-tight font-extrabold`}>
-                    ${plan.price}
+                    R{plan.price}
                   </p>
                   <div className="flex flex-col justify-end mb-[4px]">
                     <p className="text-xs text-base-content/60 uppercase font-semibold">
-                      USD
+                      per year
                     </p>
                   </div>
                 </div>
@@ -92,7 +92,7 @@ const Pricing = () => {
                   <ButtonCheckout priceId={plan.priceId} />
 
                   <p className="flex items-center justify-center gap-2 text-sm text-center text-base-content/80 font-medium relative">
-                    Pay once. Access forever.
+                    Annual Access.
                   </p>
                 </div>
               </div>

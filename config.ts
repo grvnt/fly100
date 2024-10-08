@@ -3,16 +3,16 @@ import { ConfigProps } from "./types/config";
 
 const config = {
   // REQUIRED
-  appName: "ShipFast",
+  appName: "Wingmates",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "The NextJS boilerplate with all you need to build your SaaS, AI tool, or any other web app.",
-  // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
-  domainName: "shipfa.st",
+    "The online resource for XC paraglider's striving to fly 100 km and beyond.",
+  // REQUIRED (no https://, not trailing slash at the end, just the naked domain)
+  domainName: "fly100.co",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (mailgun.supportEmail) otherwise customer support won't work.
     id: "",
-    // Hide Crisp by default, except on route "/". Crisp is toggled with <ButtonSupport/>. If you want to show Crisp on every routes, just remove this below
+    // Hide Crisp by default, except on route "/". Crisp is toggled with <ButtonSupport/>. If you want to show Crisp on every route, just remove this below
     onlyShowOnRoutes: ["/"],
   },
   stripe: {
@@ -22,45 +22,47 @@ const config = {
         // REQUIRED — we use this to find the plan in the webhook (for instance if you want to update the user's credits based on the plan)
         priceId:
           process.env.NODE_ENV === "development"
-            ? "price_1Niyy5AxyNprDp7iZIqEyD2h"
-            : "price_456",
+            ? process.env.DEV_PRICE_ID_STARTER
+            : process.env.PROD_PRICE_ID_STARTER,
         //  REQUIRED - Name of the plan, displayed on the pricing page
-        name: "Starter",
+        name: "Wingmates",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
-        description: "Perfect for small projects",
+        description: "The online community for budding XC pilots",
         // The price you want to display, the one user will be charged on Stripe.
-        price: 99,
+        price: 5000,
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
-        priceAnchor: 149,
+        // priceAnchor: 199,
         features: [
+          { name: "Courses & Workshops" },
           {
-            name: "NextJS boilerplate",
+            name: "Unlimited support",
           },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
+          { name: "Community forum" },
+          { name: "Weekly events" },
         ],
       },
       {
         priceId:
           process.env.NODE_ENV === "development"
-            ? "price_1O5KtcAxyNprDp7iftKnrrpw"
-            : "price_456",
+            ? process.env.DEV_PRICE_ID_ADVANCED
+            : process.env.PROD_PRICE_ID_ADVANCED,
         // This plan will look different on the pricing page, it will be highlighted. You can only have one plan with isFeatured: true
         isFeatured: true,
-        name: "Advanced",
-        description: "You need more power",
-        price: 149,
-        priceAnchor: 299,
+        name: "Birdmen Academy",
+        description: "Cape Town based mentorship and coaching",
+        price: 20000,
+        // priceAnchor: 299,
         features: [
           {
-            name: "NextJS boilerplate",
+            name: "On site and in flight coaching with Barry & Grant",
           },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
-          { name: "1 year of updates" },
-          { name: "24/7 support" },
+          { name: "Unlimited guiding*" },
+          { name: "Flight planning & post flight analysis" },
+          { name: "Wingmates community" },
+          { name: "Personalised Coaching" },
+          { name: "Community Deep Dives" },
+          { name: "Member Meetups" },
+          { name: "XC Clinics" },
         ],
       },
     ],
@@ -85,15 +87,15 @@ const config = {
   },
   colors: {
     // REQUIRED — The DaisyUI theme to use (added to the main layout.js). Leave blank for default (light & dark mode). If you any other theme than light/dark, you need to add it in config.tailwind.js in daisyui.themes.
-    theme: "light",
+    theme: "night",
     // REQUIRED — This color will be reflected on the whole app outside of the document (loading bar, Chrome tabs, etc..). By default it takes the primary color from your DaisyUI theme (make sure to update your the theme name after "data-theme=")
     // OR you can just do this to use a custom color: main: "#f37055". HEX only.
-    main: themes["light"]["primary"],
+    main: themes["night"]["primary"],
   },
   auth: {
     // REQUIRED — the path to log in users. It's use to protect private routes (like /dashboard). It's used in apiClient (/libs/api.js) upon 401 errors from our API
     loginUrl: "/signin",
-    // REQUIRED — the path you want to redirect users after successfull login (i.e. /dashboard, /private). This is normally a private page for users to manage their accounts. It's used in apiClient (/libs/api.js) upon 401 errors from our API & in ButtonSignin.js
+    // REQUIRED — the path you want to redirect users after successful login (i.e. /dashboard, /private). This is normally a private page for users to manage their accounts. It's used in apiClient (/libs/api.js) upon 401 errors from our API & in ButtonSignin.js
     callbackUrl: "/dashboard",
   },
 } as ConfigProps;

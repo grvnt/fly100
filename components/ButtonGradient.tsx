@@ -3,7 +3,7 @@
 import React from "react";
 
 const ButtonGradient = ({
-  title = "Gradient Button",
+  title = "Join Wingmates Today",
   onClick = () => {},
 }: {
   title?: string;

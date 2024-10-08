@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import type { JSX } from "react";
 import Image from "next/image";
+import ButtonGradient from "@/components/ButtonGradient";
 
 interface Feature {
   title: string;
@@ -23,12 +24,12 @@ interface Feature {
 // - alt: The alt text of the image (if type is 'image')
 const features = [
   {
-    title: "Emails",
+    title: "Weekly Live Events",
     description:
-      "Send transactional emails, setup your DNS to avoid spam folder (DKIM, DMARC, SPF in subdomain), and listen to webhook to receive & forward emails",
+      "Weekly live sessions designed to help you make real progress on your XC journey. From weather analysis to flight planning, and everything in between.",
     type: "video",
-    path: "https://d3m8mk7e1mf7xn.cloudfront.net/app/newsletter.webm",
-    format: "video/webm",
+    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-demo.mp4?t=2024-09-28T13%3A35%3A22.633Z",
+    format: "video/mp4",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -46,12 +47,12 @@ const features = [
     ),
   },
   {
-    title: "Payments",
+    title: "Discussion Spaces",
     description:
-      "Create checkout sessions, handle webhooks to update user's account (subscriptions, one-time payments...) and tips to setup your account & reduce chargebacks",
+      "Where paragliders come together to share their stories and challenges. The place to ask, share, learn, and connect with members in our friendly and supportive community.",
     type: "image",
-    path: "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3540&q=80",
-    alt: "A computer",
+    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/sign/images/wingmates-mockup.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvd2luZ21hdGVzLW1vY2t1cC5wbmciLCJpYXQiOjE3Mjc2ODAzOTUsImV4cCI6MjA0MzA0MDM5NX0.kBDDzzjQxLOiS9eEDaJtYWr-tNd1XKjNOU3WS-yjNvQ",
+    alt: "Wingmates Paragliding Community Mockup",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -70,9 +71,36 @@ const features = [
     ),
   },
   {
-    title: "Authentication",
+    title: "Courses & Workshops",
     description:
-      "Magic links setup, login with Google walkthrough, save user in MongoDB/Supabase, private/protected pages & API calls",
+      "Immediate, full access to all past (and future)  workshops & courses, recorded videos from curated live events, featuring top paragliders from around the world.",
+    type: "image",
+    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/course.png?t=2024-09-30T07%3A45%3A13.010Z",
+    alt: "Wingmates Paragliding Course Mockup",
+    svg: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-6 h-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: "Unlimited Mentorship",
+    description:
+      "I am personally available to answer all your questions in the forum and in direct messages. This is truly a place where you can get the support you need to fly far and fly safe.",
+    type: "image",
+    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-mentorship-crew.jpg?t=2024-10-04T04%3A40%3A02.669Z",
+    alt: "Bruno, Joerg, Eddie, and Grant paragliding crew",
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -86,27 +114,6 @@ const features = [
           strokeLinecap="round"
           strokeLinejoin="round"
           d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Style",
-    description:
-      "Components, animations & sections (like this features section), 20+ themes with daisyUI, automatic dark mode",
-    svg: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-6 h-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"
         />
       </svg>
     ),
@@ -166,41 +173,47 @@ const Item = ({
 
 // A component to display the media (video or image) of the feature. If the type is not specified, it will display an empty div.
 // Video are set to autoplay for best UX.
+// A component to display the media (video or image) of the feature. If the type is not specified, it will display an empty div.
+// Videos are set to autoplay for best UX.
 const Media = ({ feature }: { feature: Feature }) => {
   const { type, path, format, alt } = feature;
-  const style = "rounded-2xl aspect-square w-full sm:w-[26rem]";
+  // const style = "rounded-2xl w-full sm:w-[26rem] aspect-video";
   const size = {
-    width: 500,
-    height: 500,
+    width: 854, // 16:9 aspect ratio
+    height: 480, // 16:9 aspect ratio
   };
 
   if (type === "video") {
     return (
-      <video
-        className={style}
-        autoPlay
-        muted
-        loop
-        playsInline
-        controls
-        width={size.width}
-        height={size.height}
-      >
-        <source src={path} type={format} />
-      </video>
+      <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+        <video
+          className="absolute top-0 left-0 w-full h-full object-contain"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls
+          width={size.width}
+          height={size.height}
+        >
+          <source src={path} type={format} />
+        </video>
+      </div>
     );
   } else if (type === "image") {
     return (
-      <Image
-        src={path}
-        alt={alt}
-        className={`${style} object-cover object-center`}
-        width={size.width}
-        height={size.height}
-      />
+      <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
+        <Image
+          src={path}
+          alt={alt}
+          className="absolute top-0 left-0 w-full h-full object-contain"
+          width={size.width}
+          height={size.height}
+        />
+      </div>
     );
   } else {
-    return <div className={`${style} !border-none`}></div>;
+    return <div className="rounded-2xl w-full sm:w-[26rem] aspect-video"></div>;
   }
 };
 
@@ -215,10 +228,10 @@ const FeaturesAccordion = () => {
       id="features"
     >
       <div className="px-8">
-        <h2 className="font-extrabold text-4xl lg:text-6xl tracking-tight mb-12 md:mb-24">
-          All you need to ship your startup fast
+        <h2 className="font-extrabold text-4xl lg:text-5xl tracking-tight mb-12 md:mb-24 text-center">
+          Unlimited Support on Your XC Journey to
           <span className="bg-neutral text-neutral-content px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed whitespace-nowrap">
-            and get profitable
+            100 km and beyond
           </span>
         </h2>
         <div className=" flex flex-col md:flex-row gap-12 md:gap-24">
@@ -238,6 +251,9 @@ const FeaturesAccordion = () => {
             <Media feature={features[featureSelected]} key={featureSelected} />
           </div>
         </div>
+      </div>
+      <div className="flex justify-center mt-2">
+        <ButtonGradient href="/#pricing" text="Get Started" />
       </div>
     </section>
   );

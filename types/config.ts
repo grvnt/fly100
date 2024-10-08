@@ -20,6 +20,8 @@ export type Theme =
   | "black"
   | "luxury"
   | "dracula"
+  | "night"
+  | "dim"
   | "";
 
 export interface ConfigProps {
