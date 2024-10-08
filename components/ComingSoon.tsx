@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 const ComingSoon = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,25 +49,28 @@ const ComingSoon = () => {
             </button>
 
             <a href="#">
-              <img
+              <Image
                 className="w-auto h-6 sm:h-7"
                 src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/fly100-paragliding-logo.png?t=2024-10-08T12%3A57%3A58.302Z"
                 alt="Fly100 Paragliding logo"
+                width={100}
+                height={24}
               />
             </a>
           </div>
 
-          {/* <div
+          <div
             className={`absolute inset-x-0 z-20 w-full px-6 py-8 mt-8 space-y-6 transition-all duration-300 ease-in-out bg-white dark:bg-gray-900 top-16 md:bg-transparent md:dark:bg-transparent md:mt-0 md:p-0 md:top-0 md:relative md:w-auto md:opacity-100 md:translate-x-0 md:space-y-0 md:-mx-6 md:flex md:items-center ${
-              isOpen ? &apos;translate-x-0 opacity-100&apos; : &apos;opacity-0 -translate-x-full&apos;
+              isOpen ? 'translate-x-0 opacity-100' : 'opacity-0 -translate-x-full'
             }`}
           >
             <a
-              href="#"
+              href="/wingmates"
               className="block text-gray-600 transition-colors duration-300 dark:text-white md:px-6 hover:text-blue-500 dark:hover:text-blue-400"
             >
-              Payment
+              Wingmates
             </a>
+            {/* 
             <a
               href="#"
               className="block text-gray-600 transition-colors duration-300 dark:text-white md:px-6 hover:text-blue-500 dark:hover:text-blue-400"
@@ -95,7 +99,8 @@ const ComingSoon = () => {
                 </svg>
               </div>
             </button>
-          </div> */}
+            */}
+          </div>
         </nav>
 
         <section className="flex items-center flex-1">

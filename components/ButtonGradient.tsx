@@ -1,18 +1,19 @@
 "use client";
 
 import React from "react";
+import Link from 'next/link';
 
-const ButtonGradient = ({
-  title = "Join Wingmates Today",
-  onClick = () => {},
-}: {
-  title?: string;
-  onClick?: () => void;
-}) => {
+interface ButtonGradientProps {
+  href: string;
+  text: string;
+  className?: string;
+}
+
+const ButtonGradient: React.FC<ButtonGradientProps> = ({ href, text, className = '' }) => {
   return (
-    <button className="btn btn-gradient animate-shimmer" onClick={onClick}>
-      {title}
-    </button>
+    <Link href={href} className={`btn btn-gradient animate-shimmer ${className}`}>
+      {text}
+    </Link>
   );
 };
 

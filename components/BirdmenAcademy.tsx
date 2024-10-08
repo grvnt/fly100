@@ -21,15 +21,19 @@ const BirdmenAcademy = () => {
               {/* Left side for images */}
               <div className="md:w-1/2 mb-8 md:mb-0 md:mr-8">
                 {/* First image aligned with heading */}
-                <img
+                <Image
                   src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/birdmen-academy-crop.jpg"
                   alt="Barry, Eric, Grant"
                   className="mb-6 rounded-lg shadow-lg"
+                  width={500}
+                  height={300}
                 />
-                <img
+                <Image
                   src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-academy-collage.jpg?t=2024-10-05T06%3A19%3A56.492Z"
                   alt="Paragliding Academy Collage"
                   className="rounded-lg shadow-lg"
+                  width={500}
+                  height={300}
                 />
               </div>
 
@@ -66,7 +70,9 @@ const BirdmenAcademy = () => {
                     We are all learning. Which means when you grow, we grow.
                     That&apos;s the beauty of community.
                   </p>
-                  <p className="mb-4">By joining the Birdmen Academy you&apos;ll:</p>
+                  <p className="mb-4">
+                    By joining the Birdmen Academy you&apos;ll:
+                  </p>
                   <ul className="list-none pl-0">
                     <li className="flex items-center mb-2">
                       <span className="text-green-500 mr-2">✔</span>
@@ -115,7 +121,6 @@ const BirdmenAcademy = () => {
           </div>
         </div>
       </section>
-
     </>
   );
 };

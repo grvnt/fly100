@@ -1,6 +1,5 @@
 import Image from "next/image";
-import TestimonialsAvatars from "./TestimonialsAvatars";
-import config from "@/config";
+import ButtonGradient from "./ButtonGradient";
 
 const Hero = () => {
   return (
@@ -34,7 +33,11 @@ const Hero = () => {
           Speed up your progress in a safe and supportive learning environment,
           and experience the true joys of XC paragliding.
         </p>
-        <button className="btn btn-primary btn-wide">Join Wingmates</button>
+        <ButtonGradient
+          href="/wingmates/#pricing"
+          text="Join Wingmates"
+          className="btn-wide"
+        />
         {/* <TestimonialsAvatars priority={true} /> */}
       </div>
     </section>

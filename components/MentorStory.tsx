@@ -1,108 +1,116 @@
 import React from "react";
-import ButtonGradient from "./ButtonGradient";
+import Image from "next/image";
 
 const MentorStory = () => {
   return (
     <section className="bg-neutral text-neutral-content">
-      <div className="max-w-7xl mx-auto px-8 py-16 md:py-32">
-        {/* Flex container to split the screen */}
-        <div className="flex flex-col md:flex-row items-start justify-between">
-          {/* Left side for images */}
-          <div className="md:w-1/2 mb-8 md:mb-0 md:mr-8">
-            {/* First image aligned with heading */}
-            <img
-              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-grant-clan.jpg?t=2024-10-04T05%3A22%3A57.578Z"
+      <div className="max-w-7xl mx-auto px-8 py-16 md:py-32 text-center">
+        <h2 className="max-w-3xl mx-auto font-extrabold text-4xl md:text-4xl tracking-tight mb-6 md:mb-8">
+          From 10km Flights to 100km + Adventures
+        </h2>
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20 text-justify">
+          Flying a paraglider is easy. Even granny can learn to soar. <br />
+          <br />
+          But when you find yourself standing on the ground, looking up at the
+          pilots flying over your head you quickly realise becoming a competent
+          XC pilot is hard. <br />
+          <br />
+          For accomplished XC pilots, paragliding isn&apos;t just a hobby—it&apos;s a
+          lifestyle that demands dedication and daily practice.<br />
+          <br />
+          Wingmates is your support crew.
+        </p>
+        <h3 className="font-extrabold text-2xl md:text-3xl mb-6 md:mb-8">
+          There&apos;s a lot to learn
+        </h3>
+        <br />
+        <br />
+        <div className="flex flex-col md:flex-row max-w-4xl mx-auto">
+          <div className="w-full md:w-1/3 ml-1 pr-0 text-left">
+            <ul className="list-disc">
+              <li>Forecasting</li>
+              <li>Route Planning</li>
+              <li>Weather patterns & Micro-Meterology</li>
+              <li>Flying skills like thermaling & speed to fly</li>
+              <li>Strong wind launching</li>
+              <li>Using instruments effectively</li>
+              <li>Navigation & Airspace</li>
+              <li>Decision making</li>
+              <li>Changing weather conditions</li>
+              <li>Fear</li>
+              <li>Executing safe landings far from takeoff</li>
+              <li>Gear Choices</li>
+              <li>...the list goes on.</li>
+            </ul>
+          </div>
+          <div className="w-full md:w-2/3 flex flex-wrap">
+            <Image
+              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-skewt.jpg?t=2024-10-03T07%3A19%3A47.354Z"
+              alt="Skew-T"
+              className="w-full md:w-1/2 object-contain p-1"
+              width={500}
+              height={500}
+            />
+            <Image
+              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-clan-william.jpg?t=2024-10-03T07%3A20%3A14.906Z"
               alt="Paragliding over Clan William"
-              className="mb-6 rounded-lg shadow-lg"
+              className="w-full md:w-1/2 object-contain p-1"
+              width={500}
+              height={500}
+            />
+            <Image
+              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-apostles.jpg?t=2024-10-03T07%3A20%3A58.024Z"
+              alt="Paragliding over the Apostles"
+              className="w-full md:w-1/2 object-contain p-1"
+              width={500}
+              height={500}
+            />
+            <Image
+              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-task-map.jpg?t=2024-10-03T07%3A21%3A11.100Z"
+              alt="Paragliding Task Map"
+              className="w-full md:w-1/2 object-contain p-1"
+              width={500}
+              height={500}
             />
           </div>
-
-          {/* Right side for text */}
-          <div className="md:w-1/2 text-left">
-            <h3 className="font-extrabold text-2xl md:text-3xl mb-6 md:mb-8">
-              Why I built Wingmates
-              {/* <br />
-              (and my commitment to you) */}
-            </h3>
-            <div className="text-lg opacity-90 leading-relaxed mb-12 md:mb-0">
-              <p className="mb-4">Howzit, Grant here.</p>
-              <p className="mb-4">
-                When I&apos;m not flying or coaching with Barry, Wingmates is what I
-                pour my time into. I want this to be the most valuable
-                contribution I make to the paragliding community in my lifetime.
-              </p>
-              <p className="mb-4">
-                XC Paragliding changed my life. It helped me out of dark places
-                and showed me that I was capable of more than I believed.
-                Through paragliding I found direction, purpose, connection to
-                myself and nature, community, confidence, and identity.
-              </p>
-              <h3 className="font-extrabold text-2xl md:text-2xl mb-2 md:mb-2">
-                But it wasn&apos;t always like that...
-              </h3>
-              <p className="mb-4">
-                Soon after getting licensed my progression came to a screaming
-                halt. I had a hard time finding peers. I didn&apos;t know how to
-                forecast the weather.
-              </p>
-              <p className="mb-4">
-                <strong>Flying alone felt too dangerous and daunting.</strong>
-              </p>
-              <p className="mb-4">
-                At first my reasons not to fly seemed rational. But as time
-                passed fear from not staying current crept in and the &apos;reasons&apos;
-                coalesced into a permanent excuse.
-              </p>
-              <p className="mb-4">
-                Before I knew it, <strong>four years</strong> had passed.
-              </p>
-              <p className="mb-4">
-                If it wasn&apos;t for seeing Barry at Sir Lowry&apos;s pass one fateful
-                day, and his guidance, I may never have made it back.
-              </p>
-              <p className="mb-4">
-                And I definitely would not have accomplished or experienced what
-                I have without the support of my flying friends and mentors.
-              </p>
-              <ul className="list-disc ml-6 mb-4">
-                <li>My first time over the back at Porterville</li>
-                <li>My first 100 km</li>
-                <li>My first site record</li>
-                <li>My first comp</li>
-                <li>My first Kommetjie run</li>
-                <li>My first tandem</li>
-                <li>My first international trip</li>
-                <li>My first hike and fly</li>
-              </ul>
-              <p className="mb-4">This list could go on ad infinitum.</p>
-              <p className="mb-4">I owe everything to people.</p>
-              <p className="mb-4">I got lucky.</p>
-              <p className="mb-4">
-                But I&apos;ve seen many pilots over the years just as keen and
-                passionate get isolated and disappear soon after getting
-                licenced.
-              </p>
-              <p className="mb-4">
-                All that time and money invested, all the excitement and
-                possibility. Gone, before they ever got to experience the true
-                gifts paragliding has to offer.
-              </p>
-              <p className="mb-4">I don&apos;t want that to be you.</p>
-              <p className="mb-4">
-                Wingmates is the community I wish I had all those years ago.
-              </p>
-              {/* <div className="flex justify-center">
-                <button className="btn btn-primary btn-wide mb-0">
-                  Join Wingmates
-                </button>
-              </div> */}
-            </div>
-          </div>
         </div>
-        <div className="flex justify-center mt-4">
-          <ButtonGradient href="/#pricing" text="Get Started" />
+
+        <br />
+        <br />
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20 text-justify">
+          Newly licensed and low-airtime pilots often have limited experience
+          flying outside of radio contact with their instructor, and without the
+          support of a school, it can be daunting and difficult to find other
+          pilots to fly with.
+          <br />
+          <br />
+          Faced with this reality, pilots often struggle to progress beyond
+          local flights, give up on their XC dreams and many leave paragliding
+          entirely.
+          <br />
+          <br />
+          <b>Without mentorship</b>, most pilots never reach their potential and
+          miss out on the incredible experiences that XC paragliding has to
+          offer.
+          <br />
+          <br />
+          Whether you want hands on coaching or a supportive learning community,
+          we have everything you need to get through the risky intermediate
+          phase of your paragliding journey.
+        </p>
+        <div className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-4 md:mb-6 text-justify">
+          <blockquote className="border-l-4 border-gray-500 pl-4 italic text-neutral-content text-2xl">
+            &ldquo;If you want to go fast, go alone. If you want to go far, go
+            together.&rdquo; - African Proverb
+          </blockquote>
         </div>
       </div>
+      {/* <div className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-20 text-justify">
+          <blockquote className="border-l-4 border-gray-500 pl-4 italic text-neutral-content text-2xl">
+            "If you want to go fast, go alone. If you want to go far, go
+            together." - African Proverb
+          </blockquote>
+        </div> */}
     </section>
   );
 };
