@@ -10,7 +10,7 @@ const BirdmenAcademy = () => {
         <h2 className="font-extrabold text-4xl lg:text-5xl tracking-tight mb-1 md:mb-1 text-center">
           Birdmen Academy:
           <span className="bg-neutral text-neutral-content px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed whitespace-nowrap">
-            SA's first
+            SA&apos;s first
           </span>
           XC mentorship & coaching programme
         </h2>
@@ -64,9 +64,9 @@ const BirdmenAcademy = () => {
                   </p>
                   <p className="mb-4">
                     We are all learning. Which means when you grow, we grow.
-                    That's the beauty of community.
+                    That&apos;s the beauty of community.
                   </p>
-                  <p className="mb-4">By joining the Birdmen Academy you'll:</p>
+                  <p className="mb-4">By joining the Birdmen Academy you&apos;ll:</p>
                   <ul className="list-none pl-0">
                     <li className="flex items-center mb-2">
                       <span className="text-green-500 mr-2">✔</span>
@@ -78,7 +78,7 @@ const BirdmenAcademy = () => {
                     </li>
                     <li className="flex items-center mb-2">
                       <span className="text-green-500 mr-2">✔</span>
-                      Get guidance and signoffs for site like Lion's Head
+                      Get guidance and signoffs for site like Lion&apos;s Head
                     </li>
                     <li className="flex items-center mb-2">
                       <span className="text-green-500 mr-2">✔</span>

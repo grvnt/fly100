@@ -28,7 +28,7 @@ const TestimonialMerakai = () => {
 
             <p className="mt-4 text-lg leading-relaxed text-white md:text-xl">
               {" "}
-              “Grant was a great guide and is a great mentor. He's doing great things for the paragliding community.”
+              “Grant was a great guide and is a great mentor. He&apos;s doing great things for the paragliding community.”
             </p>
 
             {/* <div className="flex items-center justify-between mt-6 md:justify-start">

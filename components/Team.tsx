@@ -36,7 +36,7 @@ const Team: React.FC = () => {
               </p>
               <p className="mb-4">
                 Herman became the first hang glider to fly from Table Mountain
-                in the '70s. During a visit to Switzerland in 1996, he started
+                in the &apos;70s. During a visit to Switzerland in 1996, he started
                 paragliding and developed a true love for this artful form of
                 aviation.{" "}
               </p>

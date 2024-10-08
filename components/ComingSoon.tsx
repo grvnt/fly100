@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ComingSoon = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +58,7 @@ const ComingSoon = () => {
 
           {/* <div
             className={`absolute inset-x-0 z-20 w-full px-6 py-8 mt-8 space-y-6 transition-all duration-300 ease-in-out bg-white dark:bg-gray-900 top-16 md:bg-transparent md:dark:bg-transparent md:mt-0 md:p-0 md:top-0 md:relative md:w-auto md:opacity-100 md:translate-x-0 md:space-y-0 md:-mx-6 md:flex md:items-center ${
-              isOpen ? 'translate-x-0 opacity-100' : 'opacity-0 -translate-x-full'
+              isOpen ? &apos;translate-x-0 opacity-100&apos; : &apos;opacity-0 -translate-x-full&apos;
             }`}
           >
             <a

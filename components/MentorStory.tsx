@@ -27,7 +27,7 @@ const MentorStory = () => {
             <div className="text-lg opacity-90 leading-relaxed mb-12 md:mb-0">
               <p className="mb-4">Howzit, Grant here.</p>
               <p className="mb-4">
-                When I'm not flying or coaching with Barry, Wingmates is what I
+                When I&apos;m not flying or coaching with Barry, Wingmates is what I
                 pour my time into. I want this to be the most valuable
                 contribution I make to the paragliding community in my lifetime.
               </p>
@@ -38,11 +38,11 @@ const MentorStory = () => {
                 myself and nature, community, confidence, and identity.
               </p>
               <h3 className="font-extrabold text-2xl md:text-2xl mb-2 md:mb-2">
-                But it wasn't always like that...
+                But it wasn&apos;t always like that...
               </h3>
               <p className="mb-4">
                 Soon after getting licensed my progression came to a screaming
-                halt. I had a hard time finding peers. I didn't know how to
+                halt. I had a hard time finding peers. I didn&apos;t know how to
                 forecast the weather.
               </p>
               <p className="mb-4">
@@ -50,14 +50,14 @@ const MentorStory = () => {
               </p>
               <p className="mb-4">
                 At first my reasons not to fly seemed rational. But as time
-                passed fear from not staying current crept in and the 'reasons'
+                passed fear from not staying current crept in and the &apos;reasons&apos;
                 coalesced into a permanent excuse.
               </p>
               <p className="mb-4">
                 Before I knew it, <strong>four years</strong> had passed.
               </p>
               <p className="mb-4">
-                If it wasn't for seeing Barry at Sir Lowry's pass one fateful
+                If it wasn&apos;t for seeing Barry at Sir Lowry&apos;s pass one fateful
                 day, and his guidance, I may never have made it back.
               </p>
               <p className="mb-4">
@@ -78,7 +78,7 @@ const MentorStory = () => {
               <p className="mb-4">I owe everything to people.</p>
               <p className="mb-4">I got lucky.</p>
               <p className="mb-4">
-                But I've seen many pilots over the years just as keen and
+                But I&apos;ve seen many pilots over the years just as keen and
                 passionate get isolated and disappear soon after getting
                 licenced.
               </p>
@@ -87,7 +87,7 @@ const MentorStory = () => {
                 possibility. Gone, before they ever got to experience the true
                 gifts paragliding has to offer.
               </p>
-              <p className="mb-4">I don't want that to be you.</p>
+              <p className="mb-4">I don&apos;t want that to be you.</p>
               <p className="mb-4">
                 Wingmates is the community I wish I had all those years ago.
               </p>

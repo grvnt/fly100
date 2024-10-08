@@ -5,7 +5,7 @@ const features = [
   {
     title: "Collect user feedback",
     description:
-      "Use your Insighto's board to let users submit features they want.",
+      "Use your Insighto&apos;s board to let users submit features they want.",
     styles: "bg-primary text-primary-content",
     demo: (
       <div className="overflow-hidden h-full flex items-stretch">
@@ -53,7 +53,7 @@ const features = [
           },
           {
             text: "A new UI library for the dashboard",
-            secondaryText: "But don't ship that ❌",
+            secondaryText: "But don&apos;t ship that ❌",
             votes: 1,
           },
         ].map((feature, i) => (
@@ -199,7 +199,7 @@ const features = [
           },
           {
             id: 2,
-            text: "I'd definitelly pay for that 🤩",
+            text: "I&apos;d definitelly pay for that 🤩",
             userImg:
               "https://pbs.twimg.com/profile_images/1778434561556320256/knBJT1OR_400x400.jpg",
             userName: "Dan K.",

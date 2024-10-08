@@ -36,13 +36,13 @@ const Problem = () => {
           pilots flying over your head you quickly realise becoming a competent
           XC pilot is hard. <br />
           <br />
-          For accomplished XC pilots, paragliding isn't just a hobby—it's a
+          For accomplished XC pilots, paragliding isn&apos;t just a hobby—it&apos;s a
           lifestyle that demands dedication and daily practice.<br />
           <br />
           Wingmates is your support crew.
         </p>
         <h3 className="font-extrabold text-2xl md:text-3xl mb-6 md:mb-8">
-          There's a lot to learn
+          There&apos;s a lot to learn
         </h3>
         <br />
         <br />

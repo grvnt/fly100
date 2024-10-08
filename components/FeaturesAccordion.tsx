@@ -20,8 +20,8 @@ interface Feature {
 // - description: The description of the feature (when clicked)
 // - type: The type of media (video or image)
 // - path: The path to the media (for better SEO, try to use a local path)
-// - format: The format of the media (if type is 'video')
-// - alt: The alt text of the image (if type is 'image')
+// - format: The format of the media (if type is &apos;video&apos;)
+// - alt: The alt text of the image (if type is &apos;image&apos;)
 const features = [
   {
     title: "Weekly Live Events",
