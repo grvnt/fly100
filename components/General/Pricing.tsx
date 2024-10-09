@@ -1,5 +1,7 @@
+'use client';
+
+import React from "react";
 import config from "@/config";
-import ButtonCheckout from "./ButtonCheckout";
 import {
   Card,
   CardContent,
@@ -8,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const Pricing = () => {
   return (
@@ -75,7 +78,12 @@ const Pricing = () => {
                   </ul>
                 )}
                 <div className="mt-auto">
-                  <ButtonCheckout priceId={plan.priceId} />
+                  <Button 
+                    className="w-full" 
+                    data-formkit-toggle="28797b89a2"
+                  >
+                    Get Started
+                  </Button>
                   <p className="mt-4 text-sm text-center text-muted-foreground">
                     Instant Access.
                   </p>

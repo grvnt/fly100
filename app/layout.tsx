@@ -5,6 +5,7 @@ import { getSEOTags } from "@/libs/seo";
 import config from "@/config";
 import "./globals.css";
 import { ThemeProvider } from "@/components/General/ThemeProvider";
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,15 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Script
+          src="https://f.convertkit.com/ckjs/ck.5.js"
+          strategy="lazyOnload"
+        />
+        <Script
+          src="https://fly100.ck.page/28797b89a2/index.js"
+          data-uid="28797b89a2"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
