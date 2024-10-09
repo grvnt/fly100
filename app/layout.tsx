@@ -1,11 +1,10 @@
-import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { Viewport } from "next";
 import { getSEOTags } from "@/libs/seo";
-import ClientLayout from "@/components/General/LayoutClient";
 import config from "@/config";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/components/General/ThemeProvider";
+import { ThemeSwitcher } from "@/components/General/ThemeSwitcher";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -20,14 +19,22 @@ export const viewport: Viewport = {
 // You can override them in each page passing params to getSOTags() function.
 export const metadata = getSEOTags();
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {/* ClientLayout contains all the client wrappers (Crisp chat support, toast messages, tooltips, etc.) */}
-          <ClientLayout>{children}</ClientLayout>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <ThemeSwitcher />
         </ThemeProvider>
       </body>
     </html>
