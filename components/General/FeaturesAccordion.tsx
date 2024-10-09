@@ -234,28 +234,30 @@ const FeaturesAccordion = () => {
           </h2>
           <div className="flex flex-col md:flex-row gap-12 md:gap-24">
             <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
-              <ul className="w-full">
-                {features.map((feature, i) => (
-                  <Item
-                    key={feature.title}
-                    index={i}
-                    feature={feature}
-                    isOpen={featureSelected === i}
-                    setFeatureSelected={() => setFeatureSelected(i)}
-                  />
-                ))}
-              </ul>
+              <div>
+                <h4 className="text-xl sm:text-2xl font-semibold mb-6 text-center lg:text-left text-white">
+                  Select a Feature to{" "}
+                  <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text bg-300% animate-gradient-slow">
+                    Learn More
+                  </span>
+                </h4>
+                <ul className="w-full">
+                  {features.map((feature, i) => (
+                    <Item
+                      key={feature.title}
+                      index={i}
+                      feature={feature}
+                      isOpen={featureSelected === i}
+                      setFeatureSelected={() => setFeatureSelected(i)}
+                    />
+                  ))}
+                </ul>
+              </div>
 
               <Media feature={features[featureSelected]} key={featureSelected} />
             </div>
           </div>
         </div>
-        {/* <div className="flex justify-center mt-2">
-          <ButtonGradient
-            href="/wingmates/#pricing"
-            text="Join Today"
-          />
-        </div> */}
       </section>
     </div>
   );
