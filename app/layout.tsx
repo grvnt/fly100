@@ -4,7 +4,7 @@ import { Viewport } from "next";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config";
 import "./globals.css";
-import { ThemeProvider } from "@/components/General/ThemeProvider";
+// Remove the ThemeProvider import
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,16 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
         <Script
           src="https://f.convertkit.com/ckjs/ck.5.js"
           strategy="lazyOnload"

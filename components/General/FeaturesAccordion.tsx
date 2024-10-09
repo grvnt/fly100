@@ -254,7 +254,10 @@ const FeaturesAccordion = () => {
                 </ul>
               </div>
 
-              <Media feature={features[featureSelected]} key={featureSelected} />
+              <Media
+                feature={features[featureSelected]}
+                key={featureSelected}
+              />
             </div>
           </div>
         </div>
