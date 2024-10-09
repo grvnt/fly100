@@ -1,16 +1,20 @@
-import ButtonAccount from "@/components/ButtonAccount";
+import ButtonAccount from "@/components/General/ButtonAccount";
+import ParaglidingDashboard from "@/components/dashboard/ParaglidingDashboard";
 
 export const dynamic = "force-dynamic";
 
 // This is a private page: It's protected by the layout.js component which ensures the user is authenticated.
-// It's a server compoment which means you can fetch data (like the user profile) before the page is rendered.
+// It's a server component which means you can fetch data (like the user profile) before the page is rendered.
 // See https://shipfa.st/docs/tutorials/private-page
 export default async function Dashboard() {
   return (
     <main className="min-h-screen p-8 pb-24">
-      <section className="max-w-xl mx-auto space-y-8">
-        <ButtonAccount />
-        <h1 className="text-3xl md:text-4xl font-extrabold">Private Page</h1>
+      <section className="max-w-6xl mx-auto space-y-8">
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl md:text-4xl font-extrabold">Copilot Dashboard</h1>
+          <ButtonAccount />
+        </div>
+        <ParaglidingDashboard />
       </section>
     </main>
   );
@@ -44,7 +48,7 @@ export default async function Dashboard() {
 //       .from('flights')
 //       .select('*')
 //       .order('date', { ascending: true });
-    
+
 //     if (error) console.error('Error fetching flight data:', error);
 //     else setFlightData(data);
 //   };
@@ -54,7 +58,7 @@ export default async function Dashboard() {
 //       .from('goals')
 //       .select('*')
 //       .single();
-    
+
 //     if (error) console.error('Error fetching goals:', error);
 //     else setGoals(data);
 //   };
@@ -93,7 +97,7 @@ export default async function Dashboard() {
 //   return (
 //     <div className="p-4">
 //       <h1 className="text-2xl font-bold mb-4">Paragliding Progress Dashboard</h1>
-      
+
 //       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
 //         <Card>
 //           <CardHeader>
@@ -102,15 +106,15 @@ export default async function Dashboard() {
 //           <CardContent>
 //             <p className="text-3xl font-bold">{goals.annualFlightTime} minutes</p>
 //             <p>Current: {flightData.reduce((sum, flight) => sum + flight.flightTime, 0)} minutes</p>
-//             <Input 
-//               type="number" 
-//               value={goals.annualFlightTime} 
+//             <Input
+//               type="number"
+//               value={goals.annualFlightTime}
 //               onChange={(e) => updateGoal('annualFlightTime', e.target.value)}
 //               className="mt-2"
 //             />
 //           </CardContent>
 //         </Card>
-        
+
 //         <Card>
 //           <CardHeader>
 //             <CardTitle>Longest Flight Goal</CardTitle>
@@ -118,16 +122,16 @@ export default async function Dashboard() {
 //           <CardContent>
 //             <p className="text-3xl font-bold">{goals.longestFlight} km</p>
 //             <p>Current: {Math.max(...flightData.map(flight => flight.distance))} km</p>
-//             <Input 
-//               type="number" 
-//               value={goals.longestFlight} 
+//             <Input
+//               type="number"
+//               value={goals.longestFlight}
 //               onChange={(e) => updateGoal('longestFlight', e.target.value)}
 //               className="mt-2"
 //             />
 //           </CardContent>
 //         </Card>
 //       </div>
-      
+
 //       <Card className="mb-8">
 //         <CardHeader>
 //           <CardTitle>Flight Progress</CardTitle>
@@ -147,7 +151,7 @@ export default async function Dashboard() {
 //           </ResponsiveContainer>
 //         </CardContent>
 //       </Card>
-      
+
 //       <Card>
 //         <CardHeader>
 //           <CardTitle>Upload Tracklog</CardTitle>

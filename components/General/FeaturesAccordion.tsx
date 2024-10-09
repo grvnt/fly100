@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import type { JSX } from "react";
 import Image from "next/image";
-import ButtonGradient from "@/components/ButtonGradient";
+import ButtonGradient from "@/components/General/ButtonGradient";
 
 interface Feature {
   title: string;
@@ -250,7 +250,10 @@ const FeaturesAccordion = () => {
         </div>
       </div>
       <div className="flex justify-center mt-2">
-        <ButtonGradient href="/wingmates/#pricing" text="Join Wingmates Today" />
+        <ButtonGradient
+          href="/wingmates/#pricing"
+          text="Join Wingmates Today"
+        />
       </div>
     </section>
   );
