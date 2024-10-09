@@ -16,14 +16,17 @@ const Problem = () => {
           From 10km Flights to 100km + Adventures
         </h2>
         <p className="max-w-2xl mx-auto text-base sm:text-lg opacity-90 leading-relaxed mb-8 sm:mb-12 md:mb-16 text-left sm:text-justify">
-          Flying a paraglider is easy. Even granny can learn to soar. <br /><br />
+          Flying a paraglider is easy. <br />
+          <br />
           But when you find yourself standing on the ground, looking up at the
           pilots flying over your head you quickly realise becoming a competent
-          XC pilot is hard. <br /><br />
+          XC pilot is hard. <br />
+          <br />
           For accomplished XC pilots, paragliding isn&apos;t just a
           hobby—it&apos;s a lifestyle that demands dedication and daily
           practice.
-          <br /><br />
+          <br />
+          <br />
           Wingmates is your support crew.
         </p>
         <h3 className="font-extrabold text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8">
@@ -52,7 +55,7 @@ const Problem = () => {
               "paragliding-skewt.jpg",
               "paragliding-clan-william.jpg",
               "paragliding-apostles.jpg",
-              "paragliding-task-map.jpg"
+              "paragliding-task-map.jpg",
             ].map((img, index) => (
               <Image
                 key={index}
@@ -70,15 +73,18 @@ const Problem = () => {
           flying outside of radio contact with their instructor, and without the
           support of a school, it can be daunting and difficult to find other
           pilots to fly with.
-          <br /><br />
+          <br />
+          <br />
           Faced with this reality, pilots often struggle to progress beyond
           local flights, give up on their XC dreams and many leave paragliding
           entirely.
-          <br /><br />
+          <br />
+          <br />
           <b>Without mentorship</b>, most pilots never reach their potential and
           miss out on the incredible experiences that XC paragliding has to
           offer.
-          <br /><br />
+          <br />
+          <br />
           Whether you want hands on coaching or a supportive learning community,
           we have everything you need to get through the risky intermediate
           phase of your paragliding journey.

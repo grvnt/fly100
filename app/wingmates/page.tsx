@@ -25,8 +25,8 @@ export default function Home() {
         <FeaturesAccordion />
         <Pricing />
         <BirdmenAcademy />
-        <Pricing />
         <Team />
+        <Pricing />
       </main>
     </>
   );
