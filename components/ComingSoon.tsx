@@ -116,7 +116,7 @@ const ComingSoon = () => {
             </h1>
 
             <p className="max-w-3xl mx-auto mt-6 text-lg text-center text-gray-700 dark:text-white md:text-xl">
-              Paragliding dashboard and progress companion coming soon. 
+              Paragliding dashboard and progress companion. 
             </p>
 
             <div className="flex flex-col mt-8 space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
