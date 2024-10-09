@@ -224,13 +224,13 @@ const FeaturesAccordion = () => {
 
   return (
     <section
-      className="py-24 md:py-32 space-y-24 md:space-y-32 max-w-7xl mx-auto bg-base-100 "
+      className="py-16 sm:py-24 md:py-32 space-y-16 sm:space-y-24 md:space-y-32 max-w-7xl mx-auto bg-base-100"
       id="features"
     >
-      <div className="px-8">
-        <h2 className="font-extrabold text-4xl lg:text-5xl tracking-tight mb-12 md:mb-24 text-center">
+      <div className="px-4 sm:px-8">
+        <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-8 sm:mb-12 md:mb-16 text-center">
           Unlimited Support on Your XC Journey to
-          <span className="bg-neutral text-neutral-content px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed whitespace-nowrap">
+          <span className="bg-neutral text-neutral-content px-2 sm:px-3 md:px-4 ml-1 sm:ml-2 leading-relaxed whitespace-normal block mt-2 sm:mt-3">
             100 km and beyond
           </span>
         </h2>
