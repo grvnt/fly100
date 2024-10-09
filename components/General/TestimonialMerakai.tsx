@@ -3,73 +3,31 @@ import Image from "next/image";
 
 const TestimonialMerakai = () => {
   return (
-    <div className="bg-gray-50 dark:bg-slate-800">
-      <section className="max-w-6xl px-6 py-10 mx-auto">
-        <main className="relative z-20 w-full mt-8 md:flex md:items-center xl:mt-12">
-          <div className="absolute w-full bg-blue-500 -z-10 md:h-96 rounded-2xl"></div>
+    <div className="bg-gray-50 dark:bg-gray-900">
+      <section className="max-w-4xl px-4 py-8 mx-auto">
+        <main className="relative z-20 w-full md:flex md:items-center">
+          <div className="absolute w-full bg-blue-500 -z-10 md:h-64 rounded-xl"></div>
 
-          <div className="w-full p-6 bg-blue-600 md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly">
+          <div className="w-full p-4 bg-blue-600 md:flex md:items-center rounded-xl md:bg-transparent md:p-0 md:justify-between">
             <Image
-              className="h-24 w-24 md:mx-6 rounded-full object-cover shadow-md md:h-[32rem] md:w-80 lg:h-[36rem] lg:w-[26rem] md:rounded-2xl"
+              className="h-20 w-20 md:mx-4 rounded-full object-cover shadow-md md:h-56 md:w-56 md:rounded-xl"
               src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/testimonials/paul-stephan.png?t=2024-10-08T08%3A21%3A07.748Z"
               alt="Paul Guschlbauer & Stephan Gruber"
-              width={320}
-              height={512}
+              width={224}
+              height={224}
             />
 
-            <div className="mt-2 md:mx-6">
+            <div className="mt-2 md:mx-4 md:flex-1">
               <div>
-                <p className="text-xl font-medium tracking-tight text-white">
+                <p className="text-lg font-medium tracking-tight text-white">
                   Stephan Gruber
                 </p>
-                <p className="text-blue-200 ">Skywalk Test Pilot</p>
+                <p className="text-sm text-blue-200">Skywalk Test Pilot</p>
               </div>
 
-              <p className="mt-4 text-lg leading-relaxed text-white md:text-xl">
-                “Grant was a great guide and is a great mentor. He&apos;s doing great things for the paragliding community.”
+              <p className="mt-2 text-base leading-relaxed text-white md:text-lg">
+                "Grant was a great guide and is a great mentor. He&apos;s doing great things for the paragliding community."
               </p>
-
-              {/* <div className="flex items-center justify-between mt-6 md:justify-start">
-                <button
-                  title="left arrow"
-                  className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 hover:bg-blue-400"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-
-                <button
-                  title="right arrow"
-                  className="p-2 text-white transition-colors duration-300 border rounded-full rtl:-scale-x-100 md:mx-6 hover:bg-blue-400"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div> */}
             </div>
           </div>
         </main>

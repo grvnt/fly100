@@ -2,7 +2,7 @@ import { ConfigProps } from "./types/config";
 
 const config: ConfigProps = {
   // REQUIRED
-  appName: "Wingmates",
+  appName: "Fly100",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     "The online resource for XC paraglider's striving to fly 100 km and beyond.",
@@ -28,7 +28,7 @@ const config: ConfigProps = {
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
         description: "The online community for budding XC pilots",
         // The price you want to display, the one user will be charged on Stripe.
-        price: 5000,
+        price: 1500,
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
         // priceAnchor: 199,
         features: [
@@ -38,6 +38,7 @@ const config: ConfigProps = {
           },
           { name: "Community forum" },
           { name: "Weekly events" },
+          { name: "Member Meetups" },
         ],
       },
       {
@@ -49,18 +50,18 @@ const config: ConfigProps = {
         isFeatured: true,
         name: "Birdmen Academy",
         description: "Cape Town based mentorship and coaching",
-        price: 20000,
+        price: 10000,
         // priceAnchor: 299,
         features: [
           {
             name: "On site and in flight coaching with Barry & Grant",
           },
           { name: "Unlimited guiding*" },
+          { name: "Wingmates community (included)" },
           { name: "Flight planning & post flight analysis" },
-          { name: "Wingmates community" },
           { name: "Personalised Coaching" },
-          { name: "Community Deep Dives" },
-          { name: "Member Meetups" },
+          { name: "Weather Calls" },
+          { name: "Community Whatsapp Group" },
           { name: "XC Clinics" },
         ],
       },

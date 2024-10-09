@@ -1,14 +1,25 @@
 import config from "@/config";
 import ButtonCheckout from "./ButtonCheckout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const Pricing = () => {
   return (
-    <section className="bg-background text-foreground overflow-hidden" id="pricing">
+    <section
+      className="bg-background text-foreground overflow-hidden"
+      id="pricing"
+    >
       <div className="container mx-auto py-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <div className="text-center mb-20 max-w-3xl">
-          <Badge variant="secondary" className="mb-8">Pricing</Badge>
+          <Badge variant="secondary" className="mb-8">
+            Pricing
+          </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
             Get the mentorship you need to reach your XC goals
           </h2>
@@ -16,9 +27,11 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 w-full max-w-5xl">
           {config.stripe.plans.map((plan) => (
-            <Card 
-              key={plan.priceId} 
-              className={`flex flex-col ${plan.isFeatured ? "border-primary" : ""} relative h-full`}
+            <Card
+              key={plan.priceId}
+              className={`flex flex-col ${
+                plan.isFeatured ? "border-primary" : ""
+              } relative h-full`}
             >
               {plan.isFeatured && (
                 <Badge className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -33,8 +46,12 @@ const Pricing = () => {
               </CardHeader>
               <CardContent className="flex-grow flex flex-col">
                 <div className="flex items-baseline mb-4">
-                  <span className="text-5xl font-extrabold tracking-tight">R{plan.price}</span>
-                  <span className="ml-1 text-sm font-medium text-muted-foreground">/year</span>
+                  <span className="text-5xl font-extrabold tracking-tight">
+                    R{plan.price}
+                  </span>
+                  <span className="ml-1 text-sm font-medium text-muted-foreground">
+                    /quarter
+                  </span>
                 </div>
                 {plan.features && (
                   <ul className="space-y-2.5 leading-relaxed text-base mb-6 flex-grow">
@@ -60,7 +77,7 @@ const Pricing = () => {
                 <div className="mt-auto">
                   <ButtonCheckout priceId={plan.priceId} />
                   <p className="mt-4 text-sm text-center text-muted-foreground">
-                    Annual Access.
+                    Instant Access.
                   </p>
                 </div>
               </CardContent>
@@ -73,4 +90,3 @@ const Pricing = () => {
 };
 
 export default Pricing;
-
