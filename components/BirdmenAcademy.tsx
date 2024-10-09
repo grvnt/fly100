@@ -1,17 +1,11 @@
 import React from "react";
 import Image from "next/image";
-// import TestimonialsAvatars from "./TestimonialsAvatars";
-// import config from "@/config";
 
 const BirdmenAcademy = () => {
   return (
     <section className="max-w-7xl mx-auto bg-base-100 px-4 sm:px-8 py-8 lg:py-20">
-      <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl tracking-tight mb-8 text-center">
-        Birdmen Academy:
-        <span className="bg-neutral text-neutral-content px-2 sm:px-4 ml-1 sm:ml-1.5 leading-relaxed whitespace-normal block mt-2">
-          SA&apos;s first
-        </span>
-        XC mentorship & coaching programme
+      <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-8 sm:mb-12 md:mb-16 text-center max-w-4xl mx-auto">
+        Birdmen Academy: SA&apos;s first XC mentorship & coaching programme
       </h2>
       <div className="flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-16">
         {/* Left side for images */}
@@ -39,23 +33,28 @@ const BirdmenAcademy = () => {
           </h3>
           <div className="text-base sm:text-lg opacity-90 leading-relaxed space-y-4">
             <p>
-              In 2018 Barry & I recognised that the South African paragliding community had a critical need for post-school mentorship.
+              In 2018 Barry & I recognised that the South African paragliding
+              community had a critical need for post-school mentorship.
             </p>
             <p>
-              Newly licensed (and visiting) pilots were struggling in many aspects from weather forecasting, to strong wind takeoffs, to XC flying.
+              Newly licensed (and visiting) pilots were struggling in many
+              aspects from weather forecasting, to strong wind takeoffs, to XC
+              flying.
             </p>
             <p>
-              Together, we consolidated decades of experience and developed the Birdmen Academy, the first of its kind.
+              Together, we consolidated decades of experience and developed the
+              Birdmen Academy, the first of its kind.
             </p>
             <p>
-              The programme is designed to help pilots transform into confident and competent pilots able to have more fun, get more from their XC, and ultimately mentor others to strengthen the community.
+              The programme is designed to help pilots transform into confident
+              and competent pilots able to have more fun, get more from their
+              XC, and ultimately mentor others to strengthen the community.
             </p>
             <p>
-              We are all learning. Which means when you grow, we grow. That&apos;s the beauty of community.
+              We are all learning. Which means when you grow, we grow.
+              That&apos;s the beauty of community.
             </p>
-            <p>
-              By joining the Birdmen Academy you&apos;ll:
-            </p>
+            <p>By joining the Birdmen Academy you&apos;ll:</p>
             <ul className="list-none pl-0 space-y-2">
               <li className="flex items-center mb-2">
                 <span className="text-green-500 mr-2">✔</span>

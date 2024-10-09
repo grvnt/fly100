@@ -228,11 +228,8 @@ const FeaturesAccordion = () => {
       id="features"
     >
       <div className="px-4 sm:px-8">
-        <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-8 sm:mb-12 md:mb-16 text-center">
-          Unlimited Support on Your XC Journey to
-          <span className="bg-neutral text-neutral-content px-2 sm:px-3 md:px-4 ml-1 sm:ml-2 leading-relaxed whitespace-normal block mt-2 sm:mt-3">
-            100 km and beyond
-          </span>
+        <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-8 sm:mb-12 md:mb-16 text-center max-w-4xl mx-auto">
+          Unlimited Support on Your XC Journey to 100 km and beyond
         </h2>
         <div className=" flex flex-col md:flex-row gap-12 md:gap-24">
           <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">

@@ -13,10 +13,7 @@ const Hero = () => {
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
         <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-6 sm:mb-12">
-          Join the community of paragliders learning to fly
-          <span className="bg-neutral text-neutral-content px-2 md:px-4 ml-1 md:ml-1.5 leading-relaxed whitespace-normal sm:whitespace-nowrap block sm:inline mt-2 sm:mt-0">
-            100 km and beyond, together
-          </span>
+          Join the community of paragliders learning to fly 100 km and beyond, together
         </h1>
         <div className="w-full max-w-4xl mx-auto my-8">
           <div className="aspect-w-16 aspect-h-9 bg-gray-200">
