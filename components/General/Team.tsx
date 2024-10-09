@@ -97,13 +97,13 @@ const Team: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-2 mb-12">
+      {/* <div className="flex justify-center mt-2 mb-12">
         <ButtonGradient 
           href="/wingmates/#pricing" 
           text="Join Today"
           className="btn-animate" // Add this if there's a specific animation class
         />
-      </div>
+      </div> */}
     </section>
   );
 };

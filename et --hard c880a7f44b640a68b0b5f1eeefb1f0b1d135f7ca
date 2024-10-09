@@ -1,0 +1,60 @@
+[33mcommit c22f10ad77500b487738733196230455a02a0e6a[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Grant Smith <109231551+grvnt@users.noreply.github.com>
+Date:   Wed Oct 9 21:41:22 2024 +0200
+
+    gradient heading
+
+[1mdiff --git a/components/General/FeaturesAccordion.tsx b/components/General/FeaturesAccordion.tsx[m
+[1mindex 4ac4cd0..e60c849 100644[m
+[1m--- a/components/General/FeaturesAccordion.tsx[m
+[1m+++ b/components/General/FeaturesAccordion.tsx[m
+[36m@@ -232,30 +232,32 @@[m [mconst FeaturesAccordion = () => {[m
+           <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-8 sm:mb-12 md:mb-16 text-center max-w-4xl mx-auto">[m
+             Unlimited Support on Your XC Journey to 100 km and beyond[m
+           </h2>[m
+[32m+[m
+           <div className="flex flex-col md:flex-row gap-12 md:gap-24">[m
+             <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">[m
+[31m-              <ul className="w-full">[m
+[31m-                {features.map((feature, i) => ([m
+[31m-                  <Item[m
+[31m-                    key={feature.title}[m
+[31m-                    index={i}[m
+[31m-                    feature={feature}[m
+[31m-                    isOpen={featureSelected === i}[m
+[31m-                    setFeatureSelected={() => setFeatureSelected(i)}[m
+[31m-                  />[m
+[31m-                ))}[m
+[31m-              </ul>[m
+[32m+[m[32m              <div>[m
+[32m+[m[32m                <h4 className="text-lg font-semibold mb-4 text-center lg:text-left relative">[m
+[32m+[m[32m                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-gradient-x">[m
+[32m+[m[32m                    Click on a feature to learn more.[m
+[32m+[m[32m                  </span>[m
+[32m+[m[32m                </h4>[m
+[32m+[m[32m                <ul className="w-full">[m
+[32m+[m[32m                  {features.map((feature, i) => ([m
+[32m+[m[32m                    <Item[m
+[32m+[m[32m                      key={feature.title}[m
+[32m+[m[32m                      index={i}[m
+[32m+[m[32m                      feature={feature}[m
+[32m+[m[32m                      isOpen={featureSelected === i}[m
+[32m+[m[32m                      setFeatureSelected={() => setFeatureSelected(i)}[m
+[32m+[m[32m                    />[m
+[32m+[m[32m                  ))}[m
+[32m+[m[32m                </ul>[m
+[32m+[m[32m              </div>[m
+ [m
+               <Media feature={features[featureSelected]} key={featureSelected} />[m
+             </div>[m
+           </div>[m
+         </div>[m
+[31m-        <div className="flex justify-center mt-2">[m
+[31m-          <ButtonGradient[m
+[31m-            href="/wingmates/#pricing"[m
+[31m-            text="Join Today"[m
+[31m-          />[m
+[31m-        </div>[m
+       </section>[m
+     </div>[m
+   );[m
