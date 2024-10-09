@@ -1,80 +1,50 @@
 import config from "@/config";
 import ButtonCheckout from "./ButtonCheckout";
-
-// <Pricing/> displays the pricing plans for your app
-// It's your Stripe config in config.js.stripe.plans[] that will be used to display the plans
-// <ButtonCheckout /> renders a button that will redirect the user to Stripe checkout called the /api/stripe/create-checkout API endpoint with the correct priceId
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const Pricing = () => {
   return (
-    <section className="bg-base-200 overflow-hidden" id="pricing">
-      <div className="py-24 px-8 max-w-5xl mx-auto">
-        <div className="flex flex-col text-center w-full mb-20">
-          <p className="font-medium text-primary mb-8">Pricing</p>
+    <section className="bg-background text-foreground overflow-hidden" id="pricing">
+      <div className="container mx-auto py-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        <div className="text-center mb-20 max-w-3xl">
+          <Badge variant="secondary" className="mb-8">Pricing</Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
             Get the mentorship you need to reach your XC goals
           </h2>
         </div>
 
-        <div className="relative flex justify-center flex-col lg:flex-row items-center lg:items-stretch gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 w-full max-w-5xl">
           {config.stripe.plans.map((plan) => (
-            <div key={plan.priceId} className="relative w-full max-w-lg">
+            <Card 
+              key={plan.priceId} 
+              className={`flex flex-col ${plan.isFeatured ? "border-primary" : ""} relative h-full`}
+            >
               {plan.isFeatured && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                  <span
-                    className={`badge text-xs text-primary-content font-semibold border-0 bg-primary`}
-                  >
-                    Coaching Programme
-                  </span>
-                </div>
+                <Badge className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  Coaching Programme
+                </Badge>
               )}
-
-              {plan.isFeatured && (
-                <div
-                  className={`absolute -inset-[1px] rounded-[9px] bg-primary z-10`}
-                ></div>
-              )}
-
-              <div className="relative flex flex-col h-full gap-5 lg:gap-8 z-10 bg-base-100 p-8 rounded-lg">
-                <div className="flex justify-between items-center gap-4">
-                  <div>
-                    <p className="text-lg lg:text-xl font-bold">{plan.name}</p>
-                    {plan.description && (
-                      <p className="text-base-content/80 mt-2">
-                        {plan.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  {plan.priceAnchor && (
-                    <div className="flex flex-col justify-end mb-[4px] text-lg ">
-                      <p className="relative">
-                        <span className="absolute bg-base-content h-[1.5px] inset-x-0 top-[53%]"></span>
-                        <span className="text-base-content/80">
-                          R{plan.priceAnchor}
-                        </span>
-                      </p>
-                    </div>
-                  )}
-                  <p className={`text-5xl tracking-tight font-extrabold`}>
-                    R{plan.price}
-                  </p>
-                  <div className="flex flex-col justify-end mb-[4px]">
-                    <p className="text-xs text-base-content/60 uppercase font-semibold">
-                      per year
-                    </p>
-                  </div>
+              <CardHeader>
+                <CardTitle>{plan.name}</CardTitle>
+                {plan.description && (
+                  <CardDescription>{plan.description}</CardDescription>
+                )}
+              </CardHeader>
+              <CardContent className="flex-grow flex flex-col">
+                <div className="flex items-baseline mb-4">
+                  <span className="text-5xl font-extrabold tracking-tight">R{plan.price}</span>
+                  <span className="ml-1 text-sm font-medium text-muted-foreground">/year</span>
                 </div>
                 {plan.features && (
-                  <ul className="space-y-2.5 leading-relaxed text-base flex-1">
+                  <ul className="space-y-2.5 leading-relaxed text-base mb-6 flex-grow">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          className="w-[18px] h-[18px] opacity-80 shrink-0"
+                          className="w-[18px] h-[18px] text-primary shrink-0"
                         >
                           <path
                             fillRule="evenodd"
@@ -82,21 +52,19 @@ const Pricing = () => {
                             clipRule="evenodd"
                           />
                         </svg>
-
-                        <span>{feature.name} </span>
+                        <span>{feature.name}</span>
                       </li>
                     ))}
                   </ul>
                 )}
-                <div className="space-y-2">
+                <div className="mt-auto">
                   <ButtonCheckout priceId={plan.priceId} />
-
-                  <p className="flex items-center justify-center gap-2 text-sm text-center text-base-content/80 font-medium relative">
+                  <p className="mt-4 text-sm text-center text-muted-foreground">
                     Annual Access.
                   </p>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
@@ -105,3 +73,4 @@ const Pricing = () => {
 };
 
 export default Pricing;
+

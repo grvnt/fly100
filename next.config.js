@@ -4,27 +4,28 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
       },
       {
-        protocol: 'https',
-        hostname: 'pbs.twimg.com',
+        protocol: "https",
+        hostname: "pbs.twimg.com",
       },
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
       {
-        protocol: 'https',
-        hostname: 'logos-world.net',
+        protocol: "https",
+        hostname: "logos-world.net",
       },
       {
-        protocol: 'https',
-        hostname: 'usbcaazumzyoexabcmew.supabase.co',
+        protocol: "https",
+        hostname: "usbcaazumzyoexabcmew.supabase.co",
       },
     ],
   },
+  // Remove the postcss configuration from here
 };
 
 module.exports = nextConfig;
