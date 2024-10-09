@@ -1,12 +1,12 @@
-import { Inter } from "next/font/google";
+import React from 'react'
+import { Inter } from 'next/font/google'
 import { Viewport } from "next";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config";
 import "./globals.css";
 import { ThemeProvider } from "@/components/General/ThemeProvider";
-import { ThemeSwitcher } from "@/components/General/ThemeSwitcher";
 
-const font = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
   // Will use the primary color of your theme to show a nice theme color in the URL bar of supported browsers
@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

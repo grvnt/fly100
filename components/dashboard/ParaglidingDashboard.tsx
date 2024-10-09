@@ -51,14 +51,14 @@ const ParaglidingDashboard = () => {
   const uploadTracklog = async () => {
     if (!file) return;
 
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from('tracklogs')
       .upload(`${Date.now()}_${file.name}`, file);
 
     if (error) {
       console.error('Error uploading tracklog:', error);
     } else {
-      console.log('Tracklog uploaded successfully:', data);
+      console.log('Tracklog uploaded successfully');
       // Here you would typically trigger a server-side function to parse the tracklog
       // and update the flights table in Supabase
     }
