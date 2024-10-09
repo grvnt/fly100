@@ -43,13 +43,18 @@ const BirdmenAcademy = () => {
                 flying.
               </p>
               <p>
-                Together, we consolidated decades of experience and developed the
-                Birdmen Academy, the first of its kind.
+                Together, we consolidated decades of experience and developed
+                the Birdmen Academy, the first of its kind.
               </p>
               <p>
-                The programme is designed to help pilots transform into confident
-                and competent pilots able to have more fun, get more from their
-                XC, and ultimately mentor others to strengthen the community.
+                With numerous Western Cape XC site records under our belts, we
+                bring practical, real-world experience to our coaching program.
+              </p>
+              <p>
+                The programme is designed to help pilots transform into
+                confident and competent pilots able to have more fun, get more
+                from their XC, and ultimately mentor others to strengthen the
+                community.
               </p>
               <p>
                 We are all learning. Which means when you grow, we grow.
@@ -96,6 +101,10 @@ const BirdmenAcademy = () => {
                 <li className="flex items-center mb-2">
                   <span className="text-green-500 mr-2">✔</span>
                   Access to a growing library of resources
+                </li>
+                <li className="flex items-center mb-2">
+                  <span className="text-green-500 mr-2">✔</span>
+                  Learn from record-setting XC pilots
                 </li>
               </ul>
             </div>
