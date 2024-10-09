@@ -32,7 +32,7 @@ const Hero = () => {
         </p>
         <ButtonGradient
           href="/wingmates/#pricing"
-          text="Join Wingmates"
+          text="Join Today"
           className="btn-wide"
         />
         {/* <TestimonialsAvatars priority={true} /> */}

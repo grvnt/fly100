@@ -100,7 +100,7 @@ const Team: React.FC = () => {
       <div className="flex justify-center mt-2 mb-12">
         <ButtonGradient 
           href="/wingmates/#pricing" 
-          text="Join Wingmates Today"
+          text="Join Today"
           className="btn-animate" // Add this if there's a specific animation class
         />
       </div>

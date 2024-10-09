@@ -252,7 +252,7 @@ const FeaturesAccordion = () => {
       <div className="flex justify-center mt-2">
         <ButtonGradient
           href="/wingmates/#pricing"
-          text="Join Wingmates Today"
+          text="Join Today"
         />
       </div>
     </section>
