@@ -192,7 +192,7 @@ const Media = ({ feature }: { feature: Feature }) => {
           muted
           loop
           playsInline
-          controls
+          // controls
           width={size.width}
           height={size.height}
         >
@@ -229,9 +229,19 @@ const FeaturesAccordion = () => {
         id="features"
       >
         <div className="px-4 sm:px-8">
-          <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-8 sm:mb-12 md:mb-16 text-center max-w-4xl mx-auto">
+          <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-4 sm:mb-6 text-center max-w-4xl mx-auto">
             Unlimited Support on Your XC Journey to 100 km and beyond
           </h2>
+          <p className="text-base sm:text-lg md:text-xl text-center text-justify max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
+            Join Wingmates, a first-of-its-kind community, where passionate
+            paraglider&apos;s come together to improve their XC paragliding, and
+            connect with others on this beautiful journey.
+            <br />
+            <br />
+            Our comprehensive platform offers a unique blend of expert guidance,
+            peer support, and resources to help you get the most out of your
+            paragliding experience, no matter where you are in the world.
+          </p>
           <div className="flex flex-col md:flex-row gap-12 md:gap-24">
             <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
               <div>

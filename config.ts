@@ -32,13 +32,13 @@ const config: ConfigProps = {
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
         // priceAnchor: 199,
         features: [
-          { name: "Courses & Workshops" },
           {
             name: "Unlimited support",
           },
+          { name: "Courses & Workshops" },
           { name: "Community forum" },
           { name: "Weekly events" },
-          { name: "Member Meetups" },
+          { name: "Member-Led Meetups" },
         ],
       },
       {
@@ -53,16 +53,16 @@ const config: ConfigProps = {
         price: 8995,
         // priceAnchor: 299,
         features: [
+          { name: "Wingmates (everything in community included)" },
           {
             name: "On site and in flight coaching with Barry & Grant",
           },
           { name: "Unlimited guiding*" },
-          { name: "Wingmates community (included)" },
           { name: "Flight planning & post flight analysis" },
           { name: "Personalised Coaching" },
           { name: "Weather Calls" },
           { name: "Community Whatsapp Group" },
-          { name: "XC Clinics" },
+          { name: "XC Clinics & Fly-ins (Western Cape Area)" },
         ],
       },
     ],
