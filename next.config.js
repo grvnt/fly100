@@ -23,9 +23,24 @@ const nextConfig = {
         protocol: "https",
         hostname: "usbcaazumzyoexabcmew.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "blog.fly100.co",
+      },
+      {
+        protocol: "https",
+        hostname: "fly100.ghost.io",
+      },
     ],
   },
-  // Remove the postcss configuration from here
+  async rewrites() {
+    return [
+      {
+        source: '/blog/:path*',
+        destination: '/api/blog/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

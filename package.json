@@ -26,6 +26,7 @@
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "form-data": "^4.0.0",
+    "http-proxy-middleware": "^3.0.3",
     "lucide-react": "^0.451.0",
     "mailgun.js": "^9.4.1",
     "next": "^14.1.4",
