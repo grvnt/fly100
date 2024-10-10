@@ -97,3 +97,18 @@
     background-position: 0% 50%;
   }
 }
+
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: #3B82F6;
+    box-shadow: 0 0 5px #3B82F6;
+  }
+  50% {
+    border-color: #60A5FA;
+    box-shadow: 0 0 15px #60A5FA;
+  }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 4s ease-in-out infinite;
+}

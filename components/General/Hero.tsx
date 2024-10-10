@@ -17,9 +17,9 @@ const Hero = () => {
           together
         </h1>
         <div className="w-full max-w-4xl mx-auto my-8">
-          <div className="aspect-w-16 aspect-h-9 bg-gray-200">
+          <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
             <video
-              className="w-full h-full"
+              className="w-full h-full object-cover"
               controls
               src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-paragliding.mp4?t=2024-10-07T08%3A01%3A34.826Z"
             >
@@ -37,7 +37,6 @@ const Hero = () => {
           text="Join Today"
           className="btn-wide"
         />
-        {/* <TestimonialsAvatars priority={true} /> */}
       </div>
     </section>
   );

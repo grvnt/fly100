@@ -177,7 +177,6 @@ const Item = ({
 // Videos are set to autoplay for best UX.
 const Media = ({ feature }: { feature: Feature }) => {
   const { type, path, format, alt } = feature;
-  // const style = "rounded-2xl w-full sm:w-[26rem] aspect-video";
   const size = {
     width: 854, // 16:9 aspect ratio
     height: 480, // 16:9 aspect ratio
