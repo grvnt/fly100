@@ -1,28 +1,36 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+import { createProxyMiddleware, responseInterceptor } from 'http-proxy-middleware';
 
-export const config = {
-  runtime: 'edge',
-};
+const proxy = createProxyMiddleware({
+  target: 'https://blog.fly100.co',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/blog': '',
+  },
+  selfHandleResponse: true,
+  onProxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
+    // Modify headers to allow the content to be served from fly100.co
+    res.removeHeader('x-frame-options');
+    return responseBuffer;
+  }),
+});
 
-export async function GET(req: NextRequest) {
-  const url = new URL(req.url);
-  const targetUrl = new URL(url.pathname.replace(/^\/api\/blog/, ''), 'https://blog.fly100.co');
-  
-  return fetch(targetUrl.toString(), {
-    headers: req.headers,
-    method: 'GET',
+export async function GET(request: NextRequest) {
+  return new Promise<NextResponse>((resolve, reject) => {
+    // @ts-ignore (http-proxy-middleware doesn't have great types for Next.js)
+    proxy(request, {
+      end: (proxyRes) => {
+        const response = new NextResponse(proxyRes.pipe(new PassThrough()), {
+          status: proxyRes.statusCode,
+          headers: new Headers(proxyRes.headers as any),
+        });
+        resolve(response);
+      },
+      error: (err) => {
+        reject(err);
+      },
+    });
   });
 }
 
-export async function POST(req: NextRequest) {
-  const url = new URL(req.url);
-  const targetUrl = new URL(url.pathname.replace(/^\/api\/blog/, ''), 'https://blog.fly100.co');
-  
-  return fetch(targetUrl.toString(), {
-    headers: req.headers,
-    method: 'POST',
-    body: req.body,
-  });
-}
-
-// Add other HTTP methods as needed (PUT, DELETE, etc.)
+export { GET as POST, GET as PUT, GET as DELETE };
