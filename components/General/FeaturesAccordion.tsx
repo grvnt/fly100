@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import type { JSX } from "react";
 import Image from "next/image";
-import ButtonGradient from "@/components/General/ButtonGradient";
 
 interface Feature {
   title: string;
