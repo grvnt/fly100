@@ -1,11 +1,11 @@
-import React from 'react'
-import { Inter } from 'next/font/google'
+import React from "react";
+import { Inter } from "next/font/google";
 import { Viewport } from "next";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config";
 import "./globals.css";
 // Remove the ThemeProvider import
-import Script from 'next/script';
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
