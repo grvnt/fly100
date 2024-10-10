@@ -37,11 +37,11 @@ const nextConfig = {
     return [
       {
         source: '/blog',
-        destination: 'https://blog.fly100.co',
+        destination: '/api/blog',
       },
       {
         source: '/blog/:path*',
-        destination: 'https://blog.fly100.co/:path*',
+        destination: '/api/blog/:path*',
       },
     ];
   },
