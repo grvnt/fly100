@@ -27,10 +27,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "blog.fly100.co",
       },
-      {
-        protocol: "https",
-        hostname: "fly100.ghost.io",
-      },
+      // You can keep this as a fallback, but it may not be necessary
+      // {
+      //   protocol: "https",
+      //   hostname: "fly100.ghost.io",
+      // },
     ],
   },
   async rewrites() {
