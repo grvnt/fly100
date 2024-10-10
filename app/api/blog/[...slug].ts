@@ -1,32 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 
 export const config = {
-  api: {
-    bodyParser: false,
-  },
+  runtime: 'edge',
 };
 
-const proxy = createProxyMiddleware({
-  target: 'https://blog.fly100.co',
-  changeOrigin: true,
-  pathRewrite: {
-    '^/api/blog': '',
-  },
-});
-
-export default function handler(req: NextRequest) {
-  return new Promise((resolve, reject) => {
-    // @ts-ignore
-    proxy(req, {
-      // @ts-ignore
-      end: (proxyRes) => {
-        resolve(new NextResponse(proxyRes));
-      },
-      // @ts-ignore
-      onError: (err) => {
-        reject(err);
-      },
-    });
+export default async function handler(req: NextRequest) {
+  const url = new URL(req.url);
+  const targetUrl = new URL(url.pathname.replace(/^\/api\/blog/, ''), 'https://blog.fly100.co');
+  
+  return fetch(targetUrl.toString(), {
+    headers: req.headers,
+    method: req.method,
+    body: req.body,
   });
 }
