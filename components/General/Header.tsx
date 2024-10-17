@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import type { JSX } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/app/icon.png";
@@ -32,13 +32,13 @@ const cta: JSX.Element = <ButtonSignin extraStyle="btn-primary" />;
 // A header with a logo on the left, links in the center (like Pricing, etc...), and a CTA (like Get Started or Login) on the right.
 // The header is responsive, and on mobile, the links are hidden behind a burger button.
 const Header = () => {
-  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const pathname = usePathname();
 
-  // setIsOpen(false) when the route changes (i.e: when the user clicks on a link on mobile)
+  // Use useEffect to close the menu when the pathname changes
   useEffect(() => {
     setIsOpen(false);
-  }, [searchParams]);
+  }, [pathname]); // This will run whenever the pathname changes
 
   return (
     <header className="bg-base-200">
