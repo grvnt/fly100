@@ -1,4 +1,3 @@
-import EmailCaptureHero from "../components/General/EmailCaptureHero";
 import BlogList from "../components/General/BlogList";
 import { getAllPosts } from "../lib/blogApi";
 import { PostData } from "../types/post";
@@ -11,7 +10,7 @@ export default async function Home() {
     <main>
       <Header />
       {/* <EmailCaptureHero /> */}
-      <ConvertKitForm />  
+      <ConvertKitForm />
       <BlogList posts={posts} />
     </main>
   );

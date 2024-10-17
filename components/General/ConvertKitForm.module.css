@@ -1,0 +1,53 @@
+.convertKitForm :global(.formkit-form) {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  background: transparent !important;
+  padding: 1rem !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+.convertKitForm :global(.formkit-background) {
+  display: none !important;
+}
+
+.convertKitForm :global(.formkit-subheader),
+.convertKitForm :global(.formkit-header) {
+  color: inherit !important;
+}
+
+.convertKitForm :global(.formkit-fields) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.convertKitForm :global(.formkit-field),
+.convertKitForm :global(.formkit-submit) {
+  width: 100% !important;
+  max-width: 400px !important;
+}
+
+.convertKitForm :global(.formkit-powered-by-convertkit-container) {
+  display: none !important;
+}
+
+.formWrapper :global(#convertkit-form-container) {
+  padding: 0 !important;
+}
+
+.formWrapper :global(.formkit-form) {
+  border: none !important;
+  max-width: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+.formWrapper :global(.formkit-background) {
+  display: none !important;
+}
+
+.formWrapper :global(.formkit-fields) {
+  padding: 1rem !important;
+}

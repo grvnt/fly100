@@ -25,15 +25,15 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
+  async redirects() {
     return [
       {
-        source: '/:slug',
-        destination: '/blog/:slug',
+        source: '/blog/:slug',
+        destination: '/:slug',
+        permanent: true,
       },
     ];
   },
-  // Remove the postcss configuration from here
 };
 
 module.exports = nextConfig;

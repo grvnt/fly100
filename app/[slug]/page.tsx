@@ -1,8 +1,8 @@
-import { getPostBySlug, getAllPosts } from '../../../lib/blogApi';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import { notFound } from 'next/navigation';
+import { getPostBySlug, getAllPosts } from "../../lib/blogApi";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -11,7 +11,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = getPostBySlug(params.slug);
 
   if (!post) {

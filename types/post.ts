@@ -5,6 +5,7 @@ export interface Post {
   excerpt: string;
   coverImage: string;
   content: string;
+  category: string;
 }
 
 export interface PostData {
@@ -14,6 +15,7 @@ export interface PostData {
   excerpt: string;
   coverImage: string;
   content: string;
+  category: string;
   // ... other properties ...
 }
 
