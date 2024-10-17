@@ -1,5 +1,5 @@
 import configFile from "@/config";
-import { findCheckoutSession } from "@/libs/stripe";
+import { findCheckoutSession } from "@/lib/stripe";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";

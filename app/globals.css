@@ -76,8 +76,8 @@
 }
 
 :root {
-  --base-100: #your-base-100-color;
-  --base-300: #your-base-300-color;
+  --color-base-100: #your-color-here;
+  --color-base-300: #your-color-here;
 }
 
 @keyframes gradient {

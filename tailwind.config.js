@@ -141,6 +141,8 @@ module.exports = {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+        'base-100': 'var(--color-base-100)',
+        'base-300': 'var(--color-base-300)',
       },
       backgroundSize: {
         '300%': '300% 300%',

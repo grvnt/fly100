@@ -1,24 +1,23 @@
 import React from "react";
 import { Inter } from "next/font/google";
 import { Viewport } from "next";
-import { getSEOTags } from "@/libs/seo";
+import { getSEOTags } from "@/lib/seo";
 import config from "@/config";
-import "./globals.css";
-// Remove the ThemeProvider import
 import Script from "next/script";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
-  // Will use the primary color of your theme to show a nice theme color in the URL bar of supported browsers
   themeColor: config.colors.main,
   width: "device-width",
   initialScale: 1,
 };
 
-// This adds default SEO tags to all pages in our app.
-// You can override them in each page passing params to getSOTags() function.
-export const metadata = getSEOTags();
+export const metadata = getSEOTags({
+  title: 'fly100.co',
+  description: 'Your blog description here',
+});
 
 export default function RootLayout({
   children,

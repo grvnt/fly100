@@ -5,26 +5,26 @@ import type { JSX } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import ButtonSignin from "./ButtonSignin";
 import logo from "@/app/icon.png";
 import config from "@/config";
+import ButtonSignin from "./ButtonSignin";
 
 const links: {
   href: string;
   label: string;
 }[] = [
+  // {
+  //   href: "/#pricing",
+  //   label: "Pricing",
+  // },
   {
-    href: "/#pricing",
-    label: "Pricing",
+    href: "/wingmates",
+    label: "Wingmates",
   },
-  {
-    href: "/#testimonials",
-    label: "Reviews",
-  },
-  {
-    href: "/#faq",
-    label: "FAQ",
-  },
+  // {
+  //   href: "/#faq",
+  //   label: "FAQ",
+  // },
 ];
 
 const cta: JSX.Element = <ButtonSignin extraStyle="btn-primary" />;
