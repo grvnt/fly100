@@ -8,8 +8,12 @@ export interface Post {
 }
 
 export interface PostData {
-  id: string;
+  slug: string;
   title: string;
-  // ... other properties
+  date: string;
+  excerpt: string;
+  coverImage: string;
+  content: string;
+  // ... other properties ...
 }
 

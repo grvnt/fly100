@@ -25,6 +25,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/:slug',
+        destination: '/blog/:slug',
+      },
+    ];
+  },
   // Remove the postcss configuration from here
 };
 

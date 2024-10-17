@@ -1,66 +1,42 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { PostData } from '../types/post';
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'content', 'blog');
 
-interface PostData {
-  slug: string;
-  title: string;
-  date: string;
-  excerpt?: string;
-  coverImage?: string;
-  content: string;
-  [key: string]: any;
-}
-
-export function getPostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
+export function getPostData(slug: string): PostData {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const matterResult = matter(fileContents);
 
   return {
-    id,
-    ...matterResult.data,
+    slug,
+    title: matterResult.data.title,
+    date: matterResult.data.date,
+    excerpt: matterResult.data.excerpt,
+    coverImage: matterResult.data.coverImage,
     content: matterResult.content,
   };
 }
 
 export function getAllPosts(): PostData[] {
-  const postsDirectory = path.join(process.cwd(), 'content', 'blog');
+  if (!fs.existsSync(postsDirectory)) {
+    console.error("Posts directory does not exist:", postsDirectory);
+    return []; // Return an empty array if the directory doesn't exist
+  }
+
   const fileNames = fs.readdirSync(postsDirectory);
   
   return fileNames.map(fileName => {
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-
-    return {
-      slug: fileName.replace(/\.md$/, ''),
-      title: data.title,
-      date: data.date,
-      excerpt: data.excerpt,
-      coverImage: data.coverImage,
-      content
-    } as PostData;
+    const slug = fileName.replace(/\.md$/, '');
+    return getPostData(slug);
   });
 }
 
 export function getPostBySlug(slug: string): PostData {
-  const postsDirectory = path.join(process.cwd(), 'content', 'blog');
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-
-  return {
-    slug,
-    title: data.title,
-    date: data.date,
-    excerpt: data.excerpt,
-    coverImage: data.coverImage,
-    content
-  } as PostData;
+  return getPostData(slug);
 }
 
 // You can add more blog-related API functions here, such as:
