@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { JSX } from "react";
+// import type { JSX } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/app/icon.png";
 import config from "@/config";
-import ButtonSignin from "./ButtonSignin";
+// import ButtonSignin from "./ButtonSignin";
 import LoadingBorder from './LoadingBorder';
 
 const links: {
@@ -28,7 +28,8 @@ const links: {
   // },
 ];
 
-const cta: JSX.Element = <ButtonSignin extraStyle="btn-primary" />;
+// Comment out the CTA constant
+// const cta: JSX.Element = <ButtonSignin extraStyle="btn-primary" />;
 
 // A header with a logo on the left, links in the center (like Pricing, etc...), and a CTA (like Get Started or Login) on the right.
 // The header is responsive, and on mobile, the links are hidden behind a burger button.
@@ -105,8 +106,8 @@ const Header = () => {
           ))}
         </div>
 
-        {/* CTA on large screens */}
-        <div className="hidden lg:flex lg:justify-end lg:flex-1">{cta}</div>
+        {/* Comment out CTA on large screens */}
+        {/* <div className="hidden lg:flex lg:justify-end lg:flex-1">{cta}</div> */}
       </nav>
 
       {/* Mobile menu, show/hide based on menu state. */}
@@ -173,7 +174,7 @@ const Header = () => {
             </div>
             <div className="divider"></div>
             {/* Your CTA on small screens */}
-            <div className="flex flex-col">{cta}</div>
+            {/* <div className="flex flex-col">{cta}</div> */}
           </div>
         </div>
       </div>
