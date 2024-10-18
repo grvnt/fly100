@@ -41,7 +41,7 @@ const Header = () => {
   }, [pathname]); // This will run whenever the pathname changes
 
   return (
-    <header className="bg-base-200">
+    <header className="sticky top-0 z-50 bg-[#0F172A] border-b border-white/10 shadow-sm">
       <nav
         className="container flex items-center justify-between px-8 py-4 mx-auto"
         aria-label="Global"
