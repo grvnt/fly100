@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Pricing = () => {
   return (
@@ -80,12 +81,14 @@ const Pricing = () => {
                 <div className="mt-auto">
                   <Button 
                     className="w-full" 
-                    data-formkit-toggle="28797b89a2"
+                    asChild
                   >
-                    Get Started
+                    <Link href="#waitlist"> {/* Empty link for now */}
+                      Join Waitlist
+                    </Link>
                   </Button>
                   <p className="mt-4 text-sm text-center text-muted-foreground">
-                    Instant Access.
+                    Coming Soon
                   </p>
                 </div>
               </CardContent>

@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { Viewport } from "next";
 import { getSEOTags } from "@/lib/seo";
 import config from "@/config";
-import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +15,7 @@ export const viewport: Viewport = {
 
 export const metadata = getSEOTags({
   title: 'fly100.co',
-  description: 'Your blog description here',
+  description: 'The online resource for XC paraglider\'s striving to fly 100 km and beyond',
 });
 
 export default function RootLayout({
@@ -28,15 +27,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="dark">
       <body className={inter.className}>
         {children}
-        <Script
-          src="https://f.convertkit.com/ckjs/ck.5.js"
-          strategy="lazyOnload"
-        />
-        <Script
-          src="https://fly100.ck.page/28797b89a2/index.js"
-          data-uid="28797b89a2"
-          strategy="lazyOnload"
-        />
+        {/* ConvertKit scripts removed */}
       </body>
     </html>
   );

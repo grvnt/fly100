@@ -8,7 +8,7 @@ import Image from "next/image";
 import logo from "@/app/icon.png";
 import config from "@/config";
 // import ButtonSignin from "./ButtonSignin";
-import LoadingBorder from './LoadingBorder';
+import LoadingBorder from "./LoadingBorder";
 
 const links: {
   href: string;
