@@ -59,7 +59,7 @@ const Header = () => {
               src={logo}
               alt={`${config.appName} logo`}
               className="w-8"
-              placeholder="blur"
+              
               priority={true}
               width={32}
               height={32}
@@ -126,7 +126,7 @@ const Header = () => {
                 src={logo}
                 alt={`${config.appName} logo`}
                 className="w-8"
-                placeholder="blur"
+                
                 priority={true}
                 width={32}
                 height={32}
