@@ -7,8 +7,13 @@ const postsDirectory = path.join(process.cwd(), "content", "blog");
 
 export function getPostData(slug: string): PostData {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
 
+  // Check if the file exists before trying to read it
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`Post not found: ${fullPath}`);
+  }
+
+  const fileContents = fs.readFileSync(fullPath, "utf8");
   const matterResult = matter(fileContents);
 
   return {
@@ -36,8 +41,13 @@ export function getAllPosts(): PostData[] {
   });
 }
 
-export function getPostBySlug(slug: string): PostData {
-  return getPostData(slug);
+export function getPostBySlug(slug: string): PostData | null {
+  try {
+    return getPostData(slug);
+  } catch (error) {
+    console.error(`Error fetching post for slug: ${slug}`, error);
+    return null; // Return null if the post is not found
+  }
 }
 
 // You can add more blog-related API functions here, such as:
