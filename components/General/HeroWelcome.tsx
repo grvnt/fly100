@@ -6,10 +6,10 @@ const HeroWelcome = () => {
     <section className="max-w-7xl mx-auto bg-base-100 flex flex-col items-center justify-center gap-8 sm:gap-16 px-4 sm:px-8 pt-4 pb-8 lg:pt-8 lg:pb-20">
       <div className="flex flex-col gap-1 w-full max-w-4xl">
         <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-6 sm:mb-12 text-center text-[#3B82F6]">
-          You're officially in! 🎉
+          You&apos;re officially in! 🎉
         </h1>
         <p className="text-lg opacity-90 leading-relaxed text-center mb-8">
-          I'm beyond excited to start this journey with you. Let's make it amazing together!
+          I&apos;m beyond excited to start this journey with you. Let&apos;s make it amazing together!
         </p>
         <div className="w-full my-8">
           <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
@@ -43,13 +43,13 @@ const HeroWelcome = () => {
           <div className="flex items-start gap-3">
             <MessagesSquare className="w-6 h-6 text-[#3B82F6] mt-1 flex-shrink-0" style={{ backgroundColor: 'transparent' }} />
             <div>
-              <p className="font-medium text-[#3B82F6]">Let's get personal</p>
-              <p className="text-lg opacity-90 leading-relaxed">I've included a few quick questions in your welcome email - I'd love to learn more about you and how I can help on your journey.</p>
+              <p className="font-medium text-[#3B82F6]">Let&apos;s get personal</p>
+              <p className="text-lg opacity-90 leading-relaxed">I&apos;ve included a few quick questions in your welcome email - I&apos;d love to learn more about you and how I can help on your journey.</p>
             </div>
           </div>
           
           <p className="pt-4 text-lg opacity-90 leading-relaxed font-medium">
-            Can't wait to get to know you better!
+            Can&apos;t wait to get to know you better!
             <br />
           </p>
         </div>
