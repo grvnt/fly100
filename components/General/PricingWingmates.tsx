@@ -1,18 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { cn } from '@/lib/utils';
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import Link from "next/link";
+import ButtonGradient from './ButtonGradient'; // Import ButtonGradient component
 
 export interface PricingTierFrequency {
   id: string;
@@ -48,9 +41,11 @@ const plan: PricingTier = {
   discountPrice: { '1': '', '2': '' },
   description: "The online community for paragliders going from zero to XC Jedi.",
   features: [
-    "Feature A",
-    "Feature B",
-    "Feature C",
+    "Unlimited Support from Grant",
+    "Learn through Live Events & Workshops",
+    "Connect with paragliders from all over the world",
+    "Share progress, stories, tips & photos",
+    "Supercharge your progress with peer to peer learning",
   ],
   featured: true,
   highlighted: false,
@@ -75,13 +70,13 @@ const CheckIcon = ({ className }: { className?: string }) => {
   );
 };
 
-const PricingWingmates = () => {
+export default function PricingWingmates() {
   const [frequency, setFrequency] = useState(frequencies[0]);
 
   return (
     <section
       className="bg-background text-foreground overflow-hidden"
-      id="pricing"
+      id="pricing" // Add id for navigation
     >
       <div className="container mx-auto py-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <div className="text-center mb-20 max-w-3xl">
@@ -108,11 +103,12 @@ const PricingWingmates = () => {
               <Label className="sr-only">Payment frequency</Label>
               {frequencies.map((option) => (
                 <Label
-                  className={`cursor-pointer rounded-full px-2.5 py-2 transition-all ${
+                  className={cn(
                     frequency.value === option.value
-                      ? 'bg-blue-500/90 text-white dark:bg-blue-900/70 dark:text-white/70'
-                      : 'bg-transparent text-gray-500 hover:bg-blue-500/10'
-                  }`}
+                      ? 'bg-blue-500/90 text-white dark:bg-blue-700 dark:text-white'
+                      : 'bg-transparent text-gray-500 hover:bg-blue-500/10',
+                    'cursor-pointer rounded-full px-2.5 py-2 transition-all',
+                  )}
                   key={option.value}
                   htmlFor={option.value}
                 >
@@ -129,65 +125,79 @@ const PricingWingmates = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 gap-8 w-full max-w-2xl mt-8">
-          <Card
-            className={`flex flex-col ${
-              plan.featured ? "border-primary" : ""
-            } relative h-full text-center`}
-          >
-            {plan.featured && (
-              <Badge className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                Best Value
-              </Badge>
-            )}
-            <CardHeader>
-              <CardTitle>{plan.name}</CardTitle>
-              {plan.description && (
-                <CardDescription>{plan.description}</CardDescription>
-              )}
-            </CardHeader>
-            <CardContent className="flex-grow flex flex-col">
-              <div className="flex items-baseline mb-4 justify-center">
-                <span className="text-5xl font-extrabold tracking-tight">
-                  {typeof plan.price === 'string'
-                    ? plan.price
-                    : plan.price[frequency.value]}
-                </span>
-                <span className="ml-1 text-sm font-medium text-muted-foreground">
-                  {frequency.priceSuffix}
-                </span>
-              </div>
-              {plan.features && (
-                <ul className="space-y-2.5 leading-relaxed text-base mb-6 flex-grow">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2 justify-center">
-                      <CheckIcon
-                        className="w-[18px] h-[18px] text-primary shrink-0"
-                      />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <div className="mt-auto">
-                <Button 
-                  className="w-full" 
-                  asChild
+        <div className="flex flex-wrap xl:flex-nowrap items-center bg-white dark:bg-gray-900/80 backdrop-blur-md mx-auto mt-4 max-w-2xl rounded-3xl ring-1 ring-[#3B82F6] xl:mx-0 xl:flex xl:max-w-none">
+          <div className="p-8 sm:p-10 xl:flex-auto">
+            <h3 className="text-black dark:text-white text-2xl font-bold tracking-tight">{plan.name}</h3>
+            <p className="mt-6 text-base leading-7 text-gray-700 dark:text-gray-400">
+              {plan.description}
+            </p>
+            <div className="mt-12 flex items-center gap-x-4">
+              <h4 className="flex-none text-sm font-semibold leading-6 text-black dark:text-white">
+                Included features
+              </h4>
+              <div className="h-px flex-auto bg-gray-100 dark:bg-gray-700" />
+            </div>
+
+            <ul className="mt-10 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-700 dark:text-gray-400">
+              {plan.features.map((feature) => (
+                <li
+                  key={feature}
+                  className="flex items-center gap-x-2 text-sm"
                 >
-                  <Link href="#waitlist"> {/* Empty link for now */}
-                    {plan.cta}
-                  </Link>
-                </Button>
-                <p className="mt-4 text-sm text-center text-muted-foreground">
-                  Coming Soon
+                  <CheckIcon
+                    className="h-6 w-6 flex-none text-blue-500"
+                    aria-hidden="true"
+                  />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="-mt-2 p-2 xl:pr-8 xl:mt-0 w-full xl:max-w-md xl:flex-shrink-0">
+            <div
+              className={cn(
+                'rounded-2xl py-10 text-center ring-1 ring-inset ring-gray-300/50 dark:ring-gray-800/50 xl:flex xl:flex-col xl:justify-center xl:py-16',
+              )}
+            >
+              <div className="mx-auto max-w-xs px-8">
+                <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                  <span
+                    className={cn(
+                      'text-5xl font-bold tracking-tight text-black dark:text-white',
+                      plan.discountPrice &&
+                        plan.discountPrice[
+                          frequency.value as keyof typeof plan.discountPrice
+                        ]
+                        ? 'line-through'
+                        : '',
+                    )}
+                  >
+                    {typeof plan.price === 'string'
+                      ? plan.price
+                      : plan.price[frequency.value]}
+                  </span>
+
+                  <span>
+                    {typeof plan.discountPrice === 'string'
+                      ? plan.discountPrice
+                      : plan.discountPrice[frequency.value]}
+                  </span>
+
+                  <span className="text-sm font-semibold leading-6 tracking-wide text-gray-700 dark:text-gray-400">
+                    {frequency.priceSuffix}
+                  </span>
+                </p>
+                <div className="flex justify-center mt-8 flex-shrink-0">
+                  <ButtonGradient href="#waitlist" text={plan.cta} />
+                </div>
+                <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
+                  Sign up in seconds, no credit card required.
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default PricingWingmates;
+}
