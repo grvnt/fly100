@@ -191,7 +191,7 @@ export default function PricingWingmates() {
                   <ButtonGradient href="#waitlist" text={plan.cta} />
                 </div>
                 <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
-                  Sign up in seconds, no credit card required.
+                  Limited Spots Available
                 </p>
               </div>
             </div>
