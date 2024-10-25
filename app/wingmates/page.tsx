@@ -3,9 +3,8 @@ import dynamic from 'next/dynamic';
 import Hero from "@/components/General/Hero";
 import Problem from "@/components/General/Problem";
 import FeaturesAccordion from "@/components/General/FeaturesAccordion";
-import BirdmenAcademy from "@/components/General/BirdmenAcademy";
-import Team from "@/components/General/Team";
 import TestimonialMerakai from "@/components/General/TestimonialMerakai";
+import PricingWingmates from "@/components/General/PricingWingmates";
 
 const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
@@ -23,10 +22,11 @@ export default function Home() {
         <TestimonialMerakai />
         <Problem />
         <FeaturesAccordion />
-        <Pricing />
-        <BirdmenAcademy />
+        {/* <Pricing /> */}
+        <PricingWingmates />
+        {/* <BirdmenAcademy />
         <Team />
-        <Pricing />
+        <Pricing /> */}
       </main>
     </>
   );

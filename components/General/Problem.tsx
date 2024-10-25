@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 // The Arrow component is defined but not used in this file.

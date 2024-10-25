@@ -23,9 +23,9 @@ interface Feature {
 // - alt: The alt text of the image (if type is &apos;image&apos;)
 const features = [
   {
-    title: "Weekly Live Events",
+    title: "Live Events",
     description:
-      "Weekly live sessions designed to help you make real progress on your XC journey. From weather analysis to flight planning, and everything in between.",
+      "Live sessions designed to boost your XC journey. From weather analysis to flying techniques, and everything in between.",
     type: "video",
     path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-demo.mp4?t=2024-09-28T13%3A35%3A22.633Z",
     format: "video/mp4",
@@ -230,7 +230,7 @@ const FeaturesAccordion = () => {
           <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-4 sm:mb-6 text-center max-w-4xl mx-auto">
             Unlimited Support on Your XC Journey to 100 km and beyond
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-center text-justify max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
+          <p className="text-sm sm:text-base md:text-lg text-center text-justify max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
             Join Wingmates, a first-of-its-kind community, where passionate
             paraglider&apos;s come together to improve their XC paragliding, and
             connect with others on this beautiful journey.
