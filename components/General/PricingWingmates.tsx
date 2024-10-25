@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import ButtonGradient from './ButtonGradient'; // Import ButtonGradient component
+import React from 'react';
 
 export interface PricingTierFrequency {
   id: string;
@@ -39,7 +40,7 @@ const plan: PricingTier = {
   href: '/subscribe',
   price: { '1': '$99', '2': '$330' },
   discountPrice: { '1': '', '2': '' },
-  description: "The online community for paragliders going from zero to XC Jedi.",
+  description: "The world's first fully-fledged XC paragliding community.",
   features: [
     "Unlimited Support from Grant",
     "Learn through Live Events & Workshops",
@@ -188,10 +189,10 @@ export default function PricingWingmates() {
                   </span>
                 </p>
                 <div className="flex justify-center mt-8 flex-shrink-0">
-                  <ButtonGradient href="#waitlist" text={plan.cta} />
+                  <ButtonGradient href="https://forms.gle/Qmhsn7Vs2mk4b3i2A" text={plan.cta} />
                 </div>
                 <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
-                  Limited Spots Available
+                  Be part of the pre-launch private opening. Limited Spots Available
                 </p>
               </div>
             </div>

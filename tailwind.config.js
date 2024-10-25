@@ -4,7 +4,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./styles/globals.css",
+    "./app/globals.css",
   ],
   theme: {
     extend: {
@@ -18,10 +18,10 @@ module.exports = {
         wiggle: "wiggle 1.5s ease-in-out infinite",
         popup: "popup 0.25s ease-in-out",
         shimmer: "shimmer 3s ease-out infinite alternate",
-        'gradient': 'gradient 3s ease infinite',
-        'gradient-fast': 'gradient 1.5s ease infinite', // Added faster animation
-        'gradient-medium': 'gradient 2.25s ease infinite', // New medium speed animation
-        'gradient-slow': 'gradient 4s ease infinite', // New slower animation
+        gradient: "gradient 3s ease infinite",
+        "gradient-fast": "gradient 1.5s ease infinite", // Added faster animation
+        "gradient-medium": "gradient 2.25s ease infinite", // New medium speed animation
+        "gradient-slow": "gradient 4s ease infinite", // New slower animation
       },
       keyframes: {
         opacity: {
@@ -84,14 +84,14 @@ module.exports = {
             backgroundPosition: "0% 50%",
           },
         },
-        'gradient': {
-          '0%, 100%': {
-            'background-size': '200% 200%',
-            'background-position': 'left center'
+        gradient: {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
           },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
           },
         },
       },
@@ -141,13 +141,13 @@ module.exports = {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
-        'base-100': 'var(--color-base-100)',
-        'base-300': 'var(--color-base-300)',
+        "base-100": "var(--color-base-100)",
+        "base-300": "var(--color-base-300)",
       },
       backgroundSize: {
-        '300%': '300% 300%',
+        "300%": "300% 300%",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };

@@ -1,12 +1,12 @@
 import { Metadata } from "next";
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import Hero from "@/components/General/Hero";
 import Problem from "@/components/General/Problem";
 import FeaturesAccordion from "@/components/General/FeaturesAccordion";
 import TestimonialMerakai from "@/components/General/TestimonialMerakai";
 import PricingWingmates from "@/components/General/PricingWingmates";
 
-const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
+// const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
 export const metadata: Metadata = {
   title: "Wingmates | XC Paragliding Community",
@@ -22,11 +22,7 @@ export default function Home() {
         <TestimonialMerakai />
         <Problem />
         <FeaturesAccordion />
-        {/* <Pricing /> */}
         <PricingWingmates />
-        {/* <BirdmenAcademy />
-        <Team />
-        <Pricing /> */}
       </main>
     </>
   );
