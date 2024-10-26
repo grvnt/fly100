@@ -16,6 +16,10 @@ export function getPostData(slug: string): PostData {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const matterResult = matter(fileContents);
 
+  console.log(`Reading post: ${slug}`);
+  console.log(`Front matter:`, matterResult.data);
+  console.log(`Content:`, matterResult.content);
+
   return {
     slug,
     title: matterResult.data.title,

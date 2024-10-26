@@ -4,7 +4,9 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/globals.css",
+    "./app/[slug]/**/*.{js,ts,jsx,tsx,mdx}", // Include dynamic routes
+    "./app/globals.css", // Ensure this path is correct if globals.css is in the app directory
+    "./content/blog/**/*.{md,mdx}", // Include blog subdirectory
   ],
   theme: {
     extend: {

@@ -1,7 +1,6 @@
 import { getPostBySlug, getAllPosts } from "../../lib/blogApi";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -26,10 +25,9 @@ export default async function BlogPost({
     <article className="py-8">
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <p className="text-gray-600 mb-8">{post.date}</p>
-      <div className="prose max-w-none">
+      <div className="max-w-none prose prose-invert dark:prose-dark">
         <ReactMarkdown 
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
         >
           {post.content}
         </ReactMarkdown>
