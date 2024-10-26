@@ -16,10 +16,6 @@ export function getPostData(slug: string): PostData {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const matterResult = matter(fileContents);
 
-  console.log(`Reading post: ${slug}`);
-  console.log(`Front matter:`, matterResult.data);
-  console.log(`Content:`, matterResult.content);
-
   return {
     slug,
     title: matterResult.data.title,
@@ -33,8 +29,7 @@ export function getPostData(slug: string): PostData {
 
 export function getAllPosts(): PostData[] {
   if (!fs.existsSync(postsDirectory)) {
-    console.error("Posts directory does not exist:", postsDirectory);
-    return []; // Return an empty array if the directory doesn't exist
+    return [];
   }
 
   const fileNames = fs.readdirSync(postsDirectory);
@@ -49,13 +44,6 @@ export function getPostBySlug(slug: string): PostData | null {
   try {
     return getPostData(slug);
   } catch (error) {
-    console.error(`Error fetching post for slug: ${slug}`, error);
-    return null; // Return null if the post is not found
+    return null;
   }
 }
-
-// You can add more blog-related API functions here, such as:
-// export async function getPostById(id: string) { ... }
-// export async function createPost(postData: PostData) { ... }
-// export async function updatePost(id: string, postData: PostData) { ... }
-// export async function deletePost(id: string) { ... }
