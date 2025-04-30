@@ -18,10 +18,10 @@ const links: {
   //   href: "/#pricing",
   //   label: "Pricing",
   // },
-  {
+/*   {
     href: "/wingmates",
     label: "Wingmates",
-  },
+  }, */
   // {
   //   href: "/#faq",
   //   label: "FAQ",

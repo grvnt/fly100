@@ -19,7 +19,7 @@ export default async function Home() {
       <Header />
       {/* <EmailCaptureHero /> */}
       <ConvertKitForm />
-      <BlogList posts={posts} />
+      {/* <BlogList posts={posts} /> */}
     </main>
   );
 }
