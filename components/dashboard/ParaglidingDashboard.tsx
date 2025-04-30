@@ -1,14 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import supabase from "@/lib/supabase/client";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-
-// Initialize Supabase client
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
 const ParaglidingDashboard = () => {
   const [flightData, setFlightData] = useState([]);
@@ -17,6 +14,7 @@ const ParaglidingDashboard = () => {
     longestFlight: 100,
   });
   const [file, setFile] = useState<File | null>(null);
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     fetchFlightData();
