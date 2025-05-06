@@ -6,9 +6,9 @@ import ConvertKitForm from "@/components/General/ConvertKitForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Fly100 | Become an XC Paragliding Jedi",
+  title: "Fly100 | Paragliding Mindset, Flow & Mastery",
   description:
-    "The online resource for XC paragliding pilots.",
+    "Go beyond XC tactics with Fly100. Explore paragliding mindset, flow, and mental strength to fly with confidence, joy, and skill.",
 };
 
 export default async function Home() {
