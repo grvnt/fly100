@@ -49,28 +49,30 @@ const HeroWelcome = () => {
           </div>
           
           <p className="pt-4 text-lg opacity-90 leading-relaxed font-medium">
-            Can&apos;t wait to get to know you better!
+            See you on the inside.
+
+            Happy flying!
             <br />
           </p>
         </div>
 
-        <h2 className="font-bold text-xl sm:text-2xl md:text-3xl mt-12 mb-4 text-center text-[#3B82F6]">
+        {/* <h2 className="font-bold text-xl sm:text-2xl md:text-3xl mt-12 mb-4 text-center text-[#3B82F6]">
           Ready to Level Up?
-        </h2>
+        </h2> */}
 
-        <p className="text-lg opacity-90 leading-relaxed mb-12 md:mb-5 max-w-2xl mx-auto">
+        {/* <p className="text-lg opacity-90 leading-relaxed mb-12 md:mb-5 max-w-2xl mx-auto">
           Speed up your progress in a safe and supportive learning environment,
           guided by a multi-record setting pilot, and experience the true joys
           of XC paragliding.
-        </p>
+        </p> */}
 
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <ButtonGradient
             href="/wingmates"
             text="Join Wingmates"
             className="btn-wide"
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );
