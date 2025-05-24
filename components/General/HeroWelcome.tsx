@@ -1,3 +1,4 @@
+'use client';
 import ButtonGradient from "./ButtonGradient";
 import { InboxIcon, StarIcon, MessagesSquare } from "lucide-react";
 
@@ -16,7 +17,8 @@ const HeroWelcome = () => {
             <video
               className="w-full h-full object-cover"
               controls
-              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/fly100paragliding-signup.mp4?t=2024-10-18T10%3A55%3A32.696Z"
+              controlsList="nodownload"
+              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/fly100paragliding-signup-compressed.mp4"
             >
               Your browser does not support the video tag.
             </video>
