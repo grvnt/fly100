@@ -15,17 +15,25 @@ const ParaglidingDashboard = () => {
   });
   const [file, setFile] = useState<File | null>(null);
   const [data, setData] = useState<any>(null);
+  const [page, setPage] = useState(1);
+  const [dateRange, setDateRange] = useState({
+    start: new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().split('T')[0],
+    end: new Date().toISOString().split('T')[0]
+  });
 
   useEffect(() => {
     fetchFlightData();
     fetchGoals();
-  }, []);
+  }, [page, dateRange]);
 
   const fetchFlightData = async () => {
     const { data, error } = await supabase
       .from('flights')
       .select('*')
-      .order('date', { ascending: true });
+      .gte('date', dateRange.start)
+      .lte('date', dateRange.end)
+      .order('date', { ascending: false })
+      .range((page - 1) * 10, page * 10 - 1);
 
     if (error) console.error('Error fetching flight data:', error);
     else setFlightData(data || []);
