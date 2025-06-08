@@ -6,9 +6,9 @@ import ConvertKitForm from "@/components/General/ConvertKitForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Fly100 | 100% Commitment to Mastery of Mind, Flow, and Freedom through Paragliding",
+  title: "Fly100 | 100% Commitment to Mastery of Mind & Self through Paragliding",
   description:
-    " 100% commitment to mastery, flow, and freedom through paragliding. Fly100 is a movement for pilots chasing presence, performance, and purpose in the sky.",
+    "100% commitment to mastery, flow, and freedom through paragliding. Fly100 is a movement for pilots chasing presence, performance, and purpose in the sky.",
 };
 
 export default async function Home() {
