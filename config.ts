@@ -5,7 +5,7 @@ const config: ConfigProps = {
   appName: "Fly100",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "Dedicated to the Inner Game of Paragliding.",
+    "100% Commitment to Mastery of Mind, Flow, and Freedom through Paragliding",
   // REQUIRED (no https://, not trailing slash at the end, just the naked domain)
   domainName: "fly100.co",
   crisp: {

@@ -14,6 +14,10 @@ const links: {
   href: string;
   label: string;
 }[] = [
+  {
+    href: "/manifesto",
+    label: "Manifesto",
+  },
   // {
   //   href: "/#pricing",
   //   label: "Pricing",
