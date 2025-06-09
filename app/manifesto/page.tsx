@@ -195,11 +195,11 @@ export default function ManifestoPage() {
               100% Commitment to Mastery, Flow, and Freedom through Paragliding.
             </p>
             <p>
-              It's a way of life. It stands for a singular, unwavering commitment: To the mastery of
-              paragliding and the self, with the ultimate goal of pure freedom and expression of
-              oneself in the sky.
+              It&apos;s a way of life. It stands for a singular, unwavering commitment: To the
+              mastery of paragliding and the self, with the ultimate goal of pure freedom and
+              expression of oneself in the sky.
             </p>
-            <p>It's a promise we make every time we fly.</p>
+            <p>It&apos;s a promise we make every time we fly.</p>
             <p>To ourselves.</p>
             <p>To the sky.</p>
             <p>To the world.</p>
