@@ -6,12 +6,12 @@ export default function ManifestoPage() {
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl mb-4">
           The Fly100 Manifesto
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300">
+        {/* <p className="text-xl text-gray-600 dark:text-gray-300">
           Why We Fly, What We Chase, and Who We Are
-        </p>
+        </p> */}
         <div className="mt-8">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Flow is Why We Fly. Master Your Mind, Master the Sky.
+          <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200">
+            Flow is Why We Fly. Master Your Mind, Master the Sky. Grow Through Flow.
           </h2>
         </div>
       </div>
