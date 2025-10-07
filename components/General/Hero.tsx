@@ -13,8 +13,9 @@ const Hero = () => {
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
         <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-6 sm:mb-12">
-          Join the community of paragliders learning to fly 100 km and beyond,
-          together
+        Join Wingmates — the world&apos;s first flow-driven flying community.
+        Unlock freedom, confidence, and mastery — in paragliding and in life.
+
         </h1>
         <div className="w-full max-w-4xl mx-auto my-8">
           <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
@@ -28,13 +29,11 @@ const Hero = () => {
           </div>
         </div>
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-center">
-          Speed up your progress in a safe and supportive learning environment,
-          guided by a multi-record setting pilot, and experience the true joys
-          of XC paragliding.
+        Learn to master both wing and mind — in a supportive community devoted to flow and freedom.
         </p>
         <ButtonGradient
           href="/wingmates/#pricing"
-          text="Join Today"
+          text="Apply Now"
           className="btn-wide"
         />
       </div>
