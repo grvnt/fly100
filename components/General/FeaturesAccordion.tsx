@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import type { JSX } from 'react';
 import Image from 'next/image';
+import { H2, H3 } from '../ui/typography';
 
 interface Feature {
   title: string;
@@ -145,7 +146,7 @@ const Item = ({
       >
         <span className={`duration-100 ${isOpen ? 'text-primary' : ''}`}>{svg}</span>
         <span className={`flex-1 text-base-content ${isOpen ? 'text-primary font-semibold' : ''}`}>
-          <h3 className="inline">{title}</h3>
+          <H3 className="inline">{title}</H3>
         </span>
       </button>
 
@@ -221,14 +222,14 @@ const FeaturesAccordion = () => {
         id="features"
       >
         <div className="px-4 sm:px-8">
-          <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-4 sm:mb-6 text-center max-w-4xl mx-auto">
-            Guidance, Mentorship, Friendship & Group Flow
-          </h2>
+          <H2 className="mb-4 sm:mb-6 text-center max-w-4xl mx-auto">
+            Mentorship, Friendship & Group Flow
+          </H2>
           <p className="text-sm sm:text-base md:text-lg text-center text-justify max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
             Paragliding mastery takes more than airtime. It takes feedback, awareness, and a crew
             that pushes you to grow. <br />
             <br />
-            Wingmates gives you all three — a supportive global community where pilots trade
+            <i>Wingmates</i> gives you all three — a supportive global community where pilots trade
             insights, debriefs, and breakthroughs to sharpen both skill and mindset. <br />
             <br />
             Whether you&apos;re trying to reach cloudbase or your first 100 km flight, you&apos;ll

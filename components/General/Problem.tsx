@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { H2, H3 } from '../ui/typography';
 
 // The Arrow component is defined but not used in this file.
 // If it's not used elsewhere, you can safely remove it.
@@ -11,21 +12,17 @@ const Problem = () => {
   return (
     <section className="bg-neutral text-neutral-content">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-24 text-center">
-        <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight mb-6 sm:mb-8">
-          From Short Flights to Big Adventures
-        </h2>
+        <H2 className="mb-6 sm:mb-8">From Short Flights to Big Adventures</H2>
         <p className="max-w-2xl mx-auto text-base sm:text-lg opacity-90 leading-relaxed mb-8 sm:mb-12 md:mb-16 text-left sm:text-justify">
-          From your first 10 km to your first 100, Wingmates gives you the tools, feedback, and
+          From your first 10 km to your first 100, <i>Wingmates</i> gives you the tools, feedback, and
           mindset to master the art of cross-country flight - and connect with others on the same
           journey. <br />
           <br />
-          Wingmates is your support crew — a global community helping pilots progress faster through
+          <i>Wingmates</i> is your support crew — a global community helping pilots progress faster through
           shared learning, honest feedback, and a flow-driven approach to mastery.
           <br />
         </p>
-        <h3 className="font-extrabold text-xl sm:text-2xl md:text-3xl mb-6 sm:mb-8">
-          There&apos;s a lot to master
-        </h3>
+        <H3 className="mb-6 sm:mb-8">There&apos;s a lot to master</H3>
         <div className="flex flex-col md:flex-row max-w-4xl mx-auto mb-8 sm:mb-12">
           <div className="w-full md:w-1/3 mb-6 md:mb-0 pr-0 md:pr-4 text-left">
             <p>

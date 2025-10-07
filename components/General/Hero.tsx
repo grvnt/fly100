@@ -1,5 +1,6 @@
-import Image from "next/image";
-import ButtonGradient from "./ButtonGradient";
+import Image from 'next/image';
+import ButtonGradient from './ButtonGradient';
+import { H1 } from '../ui/typography';
 
 const Hero = () => {
   return (
@@ -12,11 +13,10 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-6 sm:mb-12">
-        Join Wingmates — the world&apos;s first flow-driven flying community.
-        Unlock freedom, confidence, and mastery — in paragliding and in life.
-
-        </h1>
+        <H1 className="mb-6 sm:mb-12">
+          Unlock freedom, confidence, and mastery inside <i>Wingmates</i>, the world&apos;s first
+          flow-driven flying community.
+        </H1>
         <div className="w-full max-w-4xl mx-auto my-8">
           <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
             <video
@@ -29,13 +29,10 @@ const Hero = () => {
           </div>
         </div>
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-center">
-        Learn to master both wing and mind — in a supportive community devoted to flow and freedom.
+          Learn to master both wing and mind — in a supportive community devoted to flow and
+          freedom.
         </p>
-        <ButtonGradient
-          href="/wingmates/#pricing"
-          text="Apply Now"
-          className="btn-wide"
-        />
+        <ButtonGradient href="/wingmates/#pricing" text="Apply Now" className="btn-wide" />
       </div>
     </section>
   );

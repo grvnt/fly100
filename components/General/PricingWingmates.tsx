@@ -51,7 +51,7 @@ const plan: PricingTier = {
   featured: true,
   highlighted: false,
   soldOut: false,
-  cta: 'Join Waitlist',
+  cta: 'Apply Now',
 };
 
 const CheckIcon = ({ className }: { className?: string }) => {
@@ -85,7 +85,7 @@ export default function PricingWingmates() {
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Get the mentorship and peer support you need
+            Apply to join <i>Wingmates</i> today.
           </h2>
         </div>
 
@@ -177,7 +177,28 @@ export default function PricingWingmates() {
                   </span>
                 </p>
                 <div className="flex justify-center mt-8 flex-shrink-0">
-                  <ButtonGradient href="https://forms.gle/Qmhsn7Vs2mk4b3i2A" text={plan.cta} />
+                  <a
+                    data-formkit-toggle="28797b89a2"
+                    href="https://fly100.kit.com/28797b89a2"
+                    className="btn animate-gradient btn-wide"
+                    style={{
+                      background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+                      backgroundSize: '400% 400%',
+                      animation: 'gradient 10s ease infinite',
+                      border: 'none',
+                      color: 'white',
+                      padding: '15px 32px',
+                      textAlign: 'center',
+                      textDecoration: 'none',
+                      display: 'inline-block',
+                      fontSize: '16px',
+                      margin: '4px 2px',
+                      cursor: 'pointer',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    {plan.cta}
+                  </a>
                 </div>
                 <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
                   Apply to be part of the pre-launch private opening. Limited Spots Available.

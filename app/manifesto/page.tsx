@@ -1,18 +1,18 @@
+import { H1, H2 } from '@/components/ui/typography';
+
 export default function ManifestoPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl mb-4">
-          The Fly100 Manifesto
-        </h1>
+        <H1 className="text-gray-900 dark:text-white mb-4">The Fly100 Manifesto</H1>
         <p className="text-xl text-gray-600 dark:text-gray-300">
           Why We Fly, What We Chase, and Who We Are
         </p>
         <div className="mt-8">
-          <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200">
+          <H2 className="text-gray-800 dark:text-gray-200">
             Flow is Why We Fly. Master Your Mind, Master the Sky. Grow Through Flow.
-          </h2>
+          </H2>
         </div>
       </div>
 
@@ -42,7 +42,7 @@ export default function ManifestoPage() {
       <div className="space-y-16">
         {/* Section 1 */}
         <section>
-          <h2 className="text-3xl font-bold mb-6">The Moment Everything Changed</h2>
+          <H2 className="mb-6">The Moment Everything Changed</H2>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p>
               For years, I chased numbers — longer flights, bigger XCs, podium finishes. From the
@@ -112,7 +112,7 @@ export default function ManifestoPage() {
 
         {/* Section 2 */}
         <section>
-          <h2 className="text-3xl font-bold mb-6">Paragliding as an Elemental Art</h2>
+          <H2 className="mb-6">Paragliding as an Elemental Art</H2>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p>
               At Fly100, we see paragliding not as a sport, but as an Elemental Art. A sacred
@@ -131,7 +131,7 @@ export default function ManifestoPage() {
 
         {/* Section 3 */}
         <section>
-          <h2 className="text-3xl font-bold mb-6">The Way of Flow</h2>
+          <H2 className="mb-6">The Way of Flow</H2>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p>
               Flow is our natural state when mind, body, and environment align. When time slows.
@@ -158,7 +158,7 @@ export default function ManifestoPage() {
 
         {/* Section 4 */}
         <section>
-          <h2 className="text-3xl font-bold mb-6">What It Means to Be a Flow Chaser</h2>
+          <H2 className="mb-6">What It Means to Be a Flow Chaser</H2>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p>We&apos;re not here to prove ourselves. We&apos;re here to lose ourselves.</p>
             <p>
@@ -189,7 +189,7 @@ export default function ManifestoPage() {
 
         {/* Section 5 */}
         <section>
-          <h2 className="text-3xl font-bold mb-6">What Fly100 Stands For</h2>
+          <H2 className="mb-6">What Fly100 Stands For</H2>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p className="text-xl font-medium">
               100% Commitment to Mastery, Flow, and Freedom through Paragliding.
@@ -208,7 +208,7 @@ export default function ManifestoPage() {
 
         {/* Section 6 */}
         <section className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
-          <h2 className="text-3xl font-bold mb-6">Join Us</h2>
+          <H2 className="mb-6">Join Us</H2>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p>If this resonates with you, you&apos;re already one of us.</p>
             <p>
