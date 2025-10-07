@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import ButtonGradient from './ButtonGradient'; // Import ButtonGradient component
@@ -35,23 +35,23 @@ const frequencies: PricingTierFrequency[] = [
 ];
 
 const plan: PricingTier = {
-  name: "Wingmates",
+  name: 'Wingmates',
   id: '0',
   href: '/subscribe',
   price: { '1': '$99', '2': '$330' },
   discountPrice: { '1': '', '2': '' },
-  description: "The world's first fully-fledged XC paragliding community.",
+  description: "The world's flow-driven paragliding community.",
   features: [
-    "Unlimited Support from Grant",
-    "Learn through Live Events & Workshops",
-    "Connect with paragliders from all over the world",
-    "Share progress, stories, tips & photos",
-    "Supercharge your progress with peer to peer learning",
+    'Unlimited Support',
+    'Learn through Live Events & Workshops',
+    'Connect with paragliders from all over the world',
+    'Share progress, stories, tips & photos',
+    'Supercharge your progress with peer to peer learning',
   ],
   featured: true,
   highlighted: false,
   soldOut: false,
-  cta: "Join Waitlist",
+  cta: 'Join Waitlist',
 };
 
 const CheckIcon = ({ className }: { className?: string }) => {
@@ -85,7 +85,7 @@ export default function PricingWingmates() {
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Get the mentorship and peer support you need to become a 100km XC pilot
+            Get the mentorship and peer support you need
           </h2>
         </div>
 
@@ -94,7 +94,7 @@ export default function PricingWingmates() {
             <RadioGroup
               defaultValue={frequency.value}
               onValueChange={(value: string) => {
-                setFrequency(frequencies.find((f) => f.value === value)!);
+                setFrequency(frequencies.find(f => f.value === value)!);
               }}
               className="grid gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 bg-white dark:bg-black ring-1 ring-inset ring-gray-200/30 dark:ring-gray-800"
               style={{
@@ -102,24 +102,20 @@ export default function PricingWingmates() {
               }}
             >
               <Label className="sr-only">Payment frequency</Label>
-              {frequencies.map((option) => (
+              {frequencies.map(option => (
                 <Label
                   className={cn(
                     frequency.value === option.value
                       ? 'bg-blue-500/90 text-white dark:bg-blue-700 dark:text-white'
                       : 'bg-transparent text-gray-500 hover:bg-blue-500/10',
-                    'cursor-pointer rounded-full px-2.5 py-2 transition-all',
+                    'cursor-pointer rounded-full px-2.5 py-2 transition-all'
                   )}
                   key={option.value}
                   htmlFor={option.value}
                 >
                   {option.label}
 
-                  <RadioGroupItem
-                    value={option.value}
-                    id={option.value}
-                    className="hidden"
-                  />
+                  <RadioGroupItem value={option.value} id={option.value} className="hidden" />
                 </Label>
               ))}
             </RadioGroup>
@@ -128,7 +124,9 @@ export default function PricingWingmates() {
 
         <div className="flex flex-wrap xl:flex-nowrap items-center bg-white dark:bg-gray-900/80 backdrop-blur-md mx-auto mt-4 max-w-2xl rounded-3xl ring-1 ring-[#3B82F6] xl:mx-0 xl:flex xl:max-w-none">
           <div className="p-8 sm:p-10 xl:flex-auto">
-            <h3 className="text-black dark:text-white text-2xl font-bold tracking-tight">{plan.name}</h3>
+            <h3 className="text-black dark:text-white text-2xl font-bold tracking-tight">
+              {plan.name}
+            </h3>
             <p className="mt-6 text-base leading-7 text-gray-700 dark:text-gray-400">
               {plan.description}
             </p>
@@ -140,15 +138,9 @@ export default function PricingWingmates() {
             </div>
 
             <ul className="mt-10 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-700 dark:text-gray-400">
-              {plan.features.map((feature) => (
-                <li
-                  key={feature}
-                  className="flex items-center gap-x-2 text-sm"
-                >
-                  <CheckIcon
-                    className="h-6 w-6 flex-none text-blue-500"
-                    aria-hidden="true"
-                  />
+              {plan.features.map(feature => (
+                <li key={feature} className="flex items-center gap-x-2 text-sm">
+                  <CheckIcon className="h-6 w-6 flex-none text-blue-500" aria-hidden="true" />
                   {feature}
                 </li>
               ))}
@@ -157,7 +149,7 @@ export default function PricingWingmates() {
           <div className="-mt-2 p-2 xl:pr-8 xl:mt-0 w-full xl:max-w-md xl:flex-shrink-0">
             <div
               className={cn(
-                'rounded-2xl py-10 text-center ring-1 ring-inset ring-gray-300/50 dark:ring-gray-800/50 xl:flex xl:flex-col xl:justify-center xl:py-16',
+                'rounded-2xl py-10 text-center ring-1 ring-inset ring-gray-300/50 dark:ring-gray-800/50 xl:flex xl:flex-col xl:justify-center xl:py-16'
               )}
             >
               <div className="mx-auto max-w-xs px-8">
@@ -166,16 +158,12 @@ export default function PricingWingmates() {
                     className={cn(
                       'text-5xl font-bold tracking-tight text-black dark:text-white',
                       plan.discountPrice &&
-                        plan.discountPrice[
-                          frequency.value as keyof typeof plan.discountPrice
-                        ]
+                        plan.discountPrice[frequency.value as keyof typeof plan.discountPrice]
                         ? 'line-through'
-                        : '',
+                        : ''
                     )}
                   >
-                    {typeof plan.price === 'string'
-                      ? plan.price
-                      : plan.price[frequency.value]}
+                    {typeof plan.price === 'string' ? plan.price : plan.price[frequency.value]}
                   </span>
 
                   <span>
@@ -192,7 +180,8 @@ export default function PricingWingmates() {
                   <ButtonGradient href="https://forms.gle/Qmhsn7Vs2mk4b3i2A" text={plan.cta} />
                 </div>
                 <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
-                  Be part of the pre-launch private opening. Limited Spots Available
+                  Apply to be part of the pre-launch private opening. Limited Spots Available.
+                  Lowest Price for a Limited Time.
                 </p>
               </div>
             </div>

@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useRef } from "react";
-import type { JSX } from "react";
-import Image from "next/image";
+import { useState, useRef } from 'react';
+import type { JSX } from 'react';
+import Image from 'next/image';
 
 interface Feature {
   title: string;
   description: string;
-  type?: "video" | "image";
+  type?: 'video' | 'image';
   path?: string;
   format?: string;
   alt?: string;
@@ -23,12 +23,12 @@ interface Feature {
 // - alt: The alt text of the image (if type is &apos;image&apos;)
 const features = [
   {
-    title: "Live Events",
+    title: 'Live Sessions & Workshops',
     description:
-      "Live sessions designed to boost your XC journey. From weather analysis to flying techniques, and everything in between.",
-    type: "video",
-    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-demo.mp4?t=2024-09-28T13%3A35%3A22.633Z",
-    format: "video/mp4",
+      'Live sessions designed to boost your XC journey. From weather analysis to flying techniques, and everything in between.',
+    type: 'video',
+    path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-demo.mp4?t=2024-09-28T13%3A35%3A22.633Z',
+    format: 'video/mp4',
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -46,12 +46,12 @@ const features = [
     ),
   },
   {
-    title: "Discussion Spaces",
+    title: 'Discussion Spaces',
     description:
-      "Where paragliders come together to share their stories and challenges. The place to ask, share, learn, and connect with members in our friendly and supportive community.",
-    type: "image",
-    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/sign/images/wingmates-mockup.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvd2luZ21hdGVzLW1vY2t1cC5wbmciLCJpYXQiOjE3Mjc2ODAzOTUsImV4cCI6MjA0MzA0MDM5NX0.kBDDzzjQxLOiS9eEDaJtYWr-tNd1XKjNOU3WS-yjNvQ",
-    alt: "Wingmates Paragliding Community Mockup",
+      'Where paragliders come together to share their stories and challenges. The place to ask, share, learn, and connect with members in our friendly and supportive community.',
+    type: 'image',
+    path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/sign/images/wingmates-mockup.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvd2luZ21hdGVzLW1vY2t1cC5wbmciLCJpYXQiOjE3Mjc2ODAzOTUsImV4cCI6MjA0MzA0MDM5NX0.kBDDzzjQxLOiS9eEDaJtYWr-tNd1XKjNOU3WS-yjNvQ',
+    alt: 'Wingmates Paragliding Community Mockup',
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -70,12 +70,12 @@ const features = [
     ),
   },
   {
-    title: "Courses & Workshops",
+    title: 'Courses & Workshops',
     description:
-      "Immediate, full access to all past (and future)  workshops & courses, recorded videos from curated live events, featuring top paragliders from around the world.",
-    type: "image",
-    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/course.png?t=2024-09-30T07%3A45%3A13.010Z",
-    alt: "Wingmates Paragliding Course Mockup",
+      'Immediate, full access to all past (and future)  workshops & courses, recorded videos from curated live events.',
+    type: 'image',
+    path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/course.png?t=2024-09-30T07%3A45%3A13.010Z',
+    alt: 'Wingmates Paragliding Course Mockup',
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -94,12 +94,12 @@ const features = [
     ),
   },
   {
-    title: "Unlimited Mentorship",
+    title: 'Unlimited Mentorship',
     description:
-      "I am personally available to answer all your questions in the forum and in direct messages. This is truly a place where you can get the support you need to fly far and fly safe.",
-    type: "image",
-    path: "https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-mentorship-crew.jpg?t=2024-10-04T04%3A40%3A02.669Z",
-    alt: "Bruno, Joerg, Eddie, and Grant paragliding crew",
+      'I am personally available to answer all your questions in the forum and in direct messages. This is truly a place where you can get the support you need to fly far and fly safe.',
+    type: 'image',
+    path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-mentorship-crew.jpg?t=2024-10-04T04%3A40%3A02.669Z',
+    alt: 'Bruno, Joerg, Eddie, and Grant paragliding crew',
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -137,20 +137,14 @@ const Item = ({
     <li>
       <button
         className="relative flex gap-2 items-center w-full py-5 text-base font-medium text-left md:text-lg"
-        onClick={(e) => {
+        onClick={e => {
           e.preventDefault();
           setFeatureSelected();
         }}
         aria-expanded={isOpen}
       >
-        <span className={`duration-100 ${isOpen ? "text-primary" : ""}`}>
-          {svg}
-        </span>
-        <span
-          className={`flex-1 text-base-content ${
-            isOpen ? "text-primary font-semibold" : ""
-          }`}
-        >
+        <span className={`duration-100 ${isOpen ? 'text-primary' : ''}`}>{svg}</span>
+        <span className={`flex-1 text-base-content ${isOpen ? 'text-primary font-semibold' : ''}`}>
           <h3 className="inline">{title}</h3>
         </span>
       </button>
@@ -181,7 +175,7 @@ const Media = ({ feature }: { feature: Feature }) => {
     height: 480, // 16:9 aspect ratio
   };
 
-  if (type === "video") {
+  if (type === 'video') {
     return (
       <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
         <video
@@ -198,7 +192,7 @@ const Media = ({ feature }: { feature: Feature }) => {
         </video>
       </div>
     );
-  } else if (type === "image") {
+  } else if (type === 'image') {
     return (
       <div className="relative w-full aspect-video rounded-2xl overflow-hidden">
         <Image
@@ -228,24 +222,23 @@ const FeaturesAccordion = () => {
       >
         <div className="px-4 sm:px-8">
           <h2 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight mb-4 sm:mb-6 text-center max-w-4xl mx-auto">
-            Unlimited Support on Your XC Journey to 100 km and beyond
+            Guidance, Mentorship, Friendship & Group Flow
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-center text-justify max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
-            Join Wingmates, a first-of-its-kind community, where passionate
-            paraglider&apos;s come together to improve their XC paragliding, and
-            connect with others on this beautiful journey.
+            Paragliding mastery takes more than airtime. It takes feedback, awareness, and a crew
+            that pushes you to grow. <br />
             <br />
+            Wingmates gives you all three — a supportive global community where pilots trade
+            insights, debriefs, and breakthroughs to sharpen both skill and mindset. <br />
             <br />
-            Our comprehensive platform offers a unique blend of expert guidance,
-            peer support, and resources to help you get the most out of your
-            flying by making paragliding a daily practice, no matter where you
-            are in the world.
+            Whether you&apos;re trying to reach cloudbase or your first 100 km flight, you&apos;ll
+            have access to:
           </p>
           <div className="flex flex-col md:flex-row gap-12 md:gap-24">
             <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
               <div>
                 <h4 className="text-xl sm:text-2xl font-semibold mb-6 text-center lg:text-left text-white">
-                  Select a Feature to{" "}
+                  Select a Feature to{' '}
                   <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text bg-300% animate-gradient-slow">
                     Learn More
                   </span>
@@ -263,10 +256,7 @@ const FeaturesAccordion = () => {
                 </ul>
               </div>
 
-              <Media
-                feature={features[featureSelected]}
-                key={featureSelected}
-              />
+              <Media feature={features[featureSelected]} key={featureSelected} />
             </div>
           </div>
         </div>
