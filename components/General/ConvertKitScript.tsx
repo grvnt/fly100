@@ -1,23 +1,24 @@
 'use client';
 
 import { useEffect } from 'react';
+import type { ReactElement } from 'react';
 
-export default function ConvertKitScript() {
+export default function ConvertKitScript(): ReactElement | null {
   useEffect(() => {
-    // Load ConvertKit script for modal functionality
-    const script = document.createElement('script');
+    // Avoid duplicate injection
+    if (document.querySelector('script[data-uid="28797b89a2"]')) return;
+
+    const script: HTMLScriptElement = document.createElement('script');
     script.src = 'https://fly100.kit.com/28797b89a2/index.js';
     script.async = true;
     script.setAttribute('data-uid', '28797b89a2');
     document.body.appendChild(script);
 
     return () => {
-      // Cleanup script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
+      const el = document.querySelector('script[data-uid="28797b89a2"]');
+      if (el && el.parentNode) el.parentNode.removeChild(el);
     };
   }, []);
 
-  return null; // This component doesn't render anything
+  return null;
 }
