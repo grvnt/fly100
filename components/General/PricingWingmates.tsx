@@ -38,8 +38,8 @@ const plan: PricingTier = {
   name: 'Wingmates',
   id: '0',
   href: '/subscribe',
-  price: { '1': '$99', '2': '$330' },
-  discountPrice: { '1': '', '2': '' },
+  price: { '1': '', '2': '' },
+  discountPrice: { '1': 'TBC', '2': 'TBC' },
   description: "The world's flow-driven paragliding community.",
   features: [
     'Unlimited Support',
