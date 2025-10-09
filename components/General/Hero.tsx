@@ -22,7 +22,7 @@ const Hero = () => {
             <video
               className="w-full h-full object-cover"
               controls
-              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-paragliding.mp4?t=2024-10-07T08%3A01%3A34.826Z"
+              src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4"
             >
               Your browser does not support the video tag.
             </video>
