@@ -39,7 +39,7 @@ const plan: PricingTier = {
   id: '0',
   href: '/subscribe',
   price: { '1': '', '2': '' },
-  discountPrice: { '1': 'TBC', '2': 'TBC' },
+  discountPrice: { '1': '$150', '2': '$490' },
   description: "The world's flow-driven paragliding community.",
   features: [
     'Unlimited Support',
@@ -201,8 +201,8 @@ export default function PricingWingmates() {
                   </a>
                 </div>
                 <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
-                  Apply to be part of the pre-launch private opening. Limited Spots Available.
-                  Lowest Price for a Limited Time.
+                  I open spots in small batches to maintain the quality of our group. Apply now 
+                  for priority access.
                 </p>
               </div>
             </div>
