@@ -25,7 +25,7 @@ export default function Home() {
         <TestimonialMerakai />
         <Problem />
         <FeaturesAccordion />
-        <SenjaEmbed />
+        <SenjaEmbed widgetId="0e2dc407-4d4f-487d-880b-0178d54161ab" />
         <PricingWingmates />
       </main>
     </>
