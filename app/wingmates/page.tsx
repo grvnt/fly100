@@ -6,6 +6,7 @@ import FeaturesAccordion from '@/components/General/FeaturesAccordion';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import ConvertKitScript from '@/components/General/ConvertKitScript';
+import SenjaEmbed from '@/components/General/SenjaEmbed';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
@@ -24,6 +25,7 @@ export default function Home() {
         <TestimonialMerakai />
         <Problem />
         <FeaturesAccordion />
+        <SenjaEmbed />
         <PricingWingmates />
       </main>
     </>
