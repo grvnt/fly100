@@ -1,11 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import ButtonGradient from './ButtonGradient'; // Import ButtonGradient component
 import React from 'react';
 
 export interface PricingTierFrequency {
@@ -29,18 +25,13 @@ export interface PricingTier {
   soldOut?: boolean;
 }
 
-const frequencies: PricingTierFrequency[] = [
-  { id: '1', value: '1', label: 'Quarterly', priceSuffix: '/quarter' },
-  { id: '2', value: '2', label: 'Annually', priceSuffix: '/year' },
-];
-
 const plan: PricingTier = {
   name: 'Wingmates',
   id: '0',
   href: '/subscribe',
-  price: { '1': '', '2': '' },
-  discountPrice: { '1': '$150', '2': '$490' },
-  description: "The world's flow-driven paragliding community.",
+  price: '',
+  discountPrice: '$150',
+  description: "The world's first flow-driven paragliding community.",
   features: [
     'Unlimited Support',
     'Learn through Live Events & Workshops',
@@ -72,55 +63,20 @@ const CheckIcon = ({ className }: { className?: string }) => {
 };
 
 export default function PricingWingmates() {
-  const [frequency, setFrequency] = useState(frequencies[0]);
-
   return (
     <section
       className="bg-background text-foreground overflow-hidden"
       id="pricing" // Add id for navigation
     >
-      <div className="container mx-auto py-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+      <div className="container mx-auto pt-12 pb-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         <div className="text-center mb-20 max-w-3xl">
           <Badge variant="secondary" className="mb-8">
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Apply to join <i>Wingmates</i> today.
+            Join <i>Wingmates</i> today.
           </h2>
         </div>
-
-        {frequencies.length > 1 && (
-          <div className="mt-16 flex justify-center">
-            <RadioGroup
-              defaultValue={frequency.value}
-              onValueChange={(value: string) => {
-                setFrequency(frequencies.find(f => f.value === value)!);
-              }}
-              className="grid gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 bg-white dark:bg-black ring-1 ring-inset ring-gray-200/30 dark:ring-gray-800"
-              style={{
-                gridTemplateColumns: `repeat(${frequencies.length}, minmax(0, 1fr))`,
-              }}
-            >
-              <Label className="sr-only">Payment frequency</Label>
-              {frequencies.map(option => (
-                <Label
-                  className={cn(
-                    frequency.value === option.value
-                      ? 'bg-blue-500/90 text-white dark:bg-blue-700 dark:text-white'
-                      : 'bg-transparent text-gray-500 hover:bg-blue-500/10',
-                    'cursor-pointer rounded-full px-2.5 py-2 transition-all'
-                  )}
-                  key={option.value}
-                  htmlFor={option.value}
-                >
-                  {option.label}
-
-                  <RadioGroupItem value={option.value} id={option.value} className="hidden" />
-                </Label>
-              ))}
-            </RadioGroup>
-          </div>
-        )}
 
         <div className="flex flex-wrap xl:flex-nowrap items-center bg-white dark:bg-gray-900/80 backdrop-blur-md mx-auto mt-4 max-w-2xl rounded-3xl ring-1 ring-[#3B82F6] xl:mx-0 xl:flex xl:max-w-none">
           <div className="p-8 sm:p-10 xl:flex-auto">
@@ -154,32 +110,16 @@ export default function PricingWingmates() {
             >
               <div className="mx-auto max-w-xs px-8">
                 <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                  <span
-                    className={cn(
-                      'text-5xl font-bold tracking-tight text-black dark:text-white',
-                      plan.discountPrice &&
-                        plan.discountPrice[frequency.value as keyof typeof plan.discountPrice]
-                        ? 'line-through'
-                        : ''
-                    )}
-                  >
-                    {typeof plan.price === 'string' ? plan.price : plan.price[frequency.value]}
+                  <span className="text-7xl md:text-8xl font-bold tracking-tight text-black dark:text-white">
+                    $150
                   </span>
-
-                  <span>
-                    {typeof plan.discountPrice === 'string'
-                      ? plan.discountPrice
-                      : plan.discountPrice[frequency.value]}
-                  </span>
-
-                  <span className="text-sm font-semibold leading-6 tracking-wide text-gray-700 dark:text-gray-400">
-                    {frequency.priceSuffix}
+                  <span className="text-xl md:text-2xl font-semibold leading-6 tracking-wide text-gray-700 dark:text-gray-400">
+                    /quarter
                   </span>
                 </p>
                 <div className="flex justify-center mt-8 flex-shrink-0">
                   <a
-                    data-formkit-toggle="28797b89a2"
-                    href="https://fly100.kit.com/28797b89a2"
+                    href="https://wingmates.fly100.co/checkout/wingmates"
                     className="btn animate-gradient btn-wide"
                     style={{
                       background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
@@ -197,13 +137,13 @@ export default function PricingWingmates() {
                       borderRadius: '4px',
                     }}
                   >
-                    {plan.cta}
+                    Join Wingmates
                   </a>
                 </div>
-                <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
+                {/* <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
                   I open spots in small batches to maintain the quality of our group. Apply now 
                   for priority access.
-                </p>
+                </p> */}
               </div>
             </div>
           </div>

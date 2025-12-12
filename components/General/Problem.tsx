@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { H2, H3 } from '../ui/typography';
+import SenjaEmbed from './SenjaEmbed';
 
 // The Arrow component is defined but not used in this file.
 // If it's not used elsewhere, you can safely remove it.
@@ -22,6 +23,13 @@ const Problem = () => {
           shared learning, honest feedback, and a flow-driven approach to mastery.
           <br />
         </p>
+        <div className="w-full max-w-4xl mx-auto my-8 sm:my-12">
+          <SenjaEmbed 
+            widgetId="7f9db280-16bb-4caa-a6de-24cf14892990" 
+            showContainer={false}
+            className="w-full"
+          />
+        </div>
         <H3 className="mb-6 sm:mb-8">There&apos;s a lot to master</H3>
         <div className="flex flex-col md:flex-row max-w-4xl mx-auto mb-8 sm:mb-12">
           <div className="w-full md:w-1/3 mb-6 md:mb-0 pr-0 md:pr-4 text-left">

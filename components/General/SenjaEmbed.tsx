@@ -32,7 +32,7 @@ export default function SenjaEmbed({
   if (showContainer) {
     return (
       <section className="bg-background text-foreground overflow-hidden">
-        <div className="container mx-auto py-24 px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto pt-24 pb-12 px-4 sm:px-6 lg:px-8">
           {content}
         </div>
       </section>
