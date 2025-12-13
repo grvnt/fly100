@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import type { JSX } from 'react';
 import Image from 'next/image';
+import Script from 'next/script';
 import { H2, H3 } from '../ui/typography';
 
 interface Feature {
@@ -230,7 +231,22 @@ const FeaturesAccordion = () => {
             that pushes you to grow. <br />
             <br />
             <i>Wingmates</i> gives you all three — a supportive global community where pilots trade
-            insights, debriefs, and breakthroughs to sharpen both skill and mindset. <br />
+            insights, debriefs, and breakthroughs to sharpen both skill and mindset.
+          </p>
+          <Script
+            src="https://widget.senja.io/widget/7b15ce99-71e8-447d-9582-5dd2b154384b/platform.js"
+            strategy="afterInteractive"
+          />
+          <div className="max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16">
+            <div
+              className="senja-embed"
+              data-id="7b15ce99-71e8-447d-9582-5dd2b154384b"
+              data-mode="shadow"
+              data-lazyload="false"
+              style={{ display: 'block', width: '100%' }}
+            />
+          </div>
+          <p className="text-sm sm:text-base md:text-lg text-center text-justify max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
             <br />
             Whether you&apos;re trying to reach cloudbase or your first 100 km flight, you&apos;ll
             have access to:
