@@ -3,7 +3,6 @@
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import React from 'react';
-import SenjaEmbed from './SenjaEmbed';
 
 export interface PricingTierFrequency {
   id: string;

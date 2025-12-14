@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { User } from "@supabase/supabase-js";
-import supabase from "@/lib/supabase/client";
-import apiClient from "@/lib/api";
+import { useState, useEffect } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import { User } from '@supabase/supabase-js';
+import supabase from '@/lib/supabase/client';
+import apiClient from '@/lib/api';
 
 // A button to show user some account actions
 //  1. Billing: open a Stripe Customer Portal to manage their billing (cancel subscription, update payment method, etc.).
@@ -27,23 +27,20 @@ const ButtonAccount = () => {
     };
 
     getUser();
-  }, [supabase]);
+  }, []);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    window.location.href = "/";
+    window.location.href = '/';
   };
 
   const handleBilling = async () => {
     setIsLoading(true);
 
     try {
-      const { url }: { url: string } = await apiClient.post(
-        "/stripe/create-portal",
-        {
-          returnUrl: window.location.href,
-        }
-      );
+      const { url }: { url: string } = await apiClient.post('/stripe/create-portal', {
+        returnUrl: window.location.href,
+      });
 
       window.location.href = url;
     } catch (e) {
@@ -61,7 +58,7 @@ const ButtonAccount = () => {
             {user?.user_metadata?.avatar_url ? (
               <img
                 src={user?.user_metadata?.avatar_url}
-                alt={"Profile picture"}
+                alt={'Profile picture'}
                 className="w-6 h-6 rounded-full shrink-0"
                 referrerPolicy="no-referrer"
                 width={24}
@@ -73,9 +70,7 @@ const ButtonAccount = () => {
               </span>
             )}
 
-            {user?.user_metadata?.name ||
-              user?.email?.split("@")[0] ||
-              "Account"}
+            {user?.user_metadata?.name || user?.email?.split('@')[0] || 'Account'}
 
             {isLoading ? (
               <span className="loading loading-spinner loading-xs"></span>
@@ -84,9 +79,7 @@ const ButtonAccount = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className={`w-5 h-5 duration-200 opacity-50 ${
-                  open ? "transform rotate-180 " : ""
-                }`}
+                className={`w-5 h-5 duration-200 opacity-50 ${open ? 'transform rotate-180 ' : ''}`}
               >
                 <path
                   fillRule="evenodd"

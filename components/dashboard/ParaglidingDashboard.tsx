@@ -1,11 +1,20 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import supabase from "@/lib/supabase/client";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import supabase from '@/lib/supabase/client';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const ParaglidingDashboard = () => {
   const [flightData, setFlightData] = useState([]);
@@ -14,16 +23,16 @@ const ParaglidingDashboard = () => {
     longestFlight: 100,
   });
   const [file, setFile] = useState<File | null>(null);
-  const [data, setData] = useState<any>(null);
-  const [page, setPage] = useState(1);
-  const [dateRange, setDateRange] = useState({
+  const [page] = useState(1);
+  const [dateRange] = useState({
     start: new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().split('T')[0],
-    end: new Date().toISOString().split('T')[0]
+    end: new Date().toISOString().split('T')[0],
   });
 
   useEffect(() => {
     fetchFlightData();
     fetchGoals();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, dateRange]);
 
   const fetchFlightData = async () => {
@@ -40,10 +49,7 @@ const ParaglidingDashboard = () => {
   };
 
   const fetchGoals = async () => {
-    const { data, error } = await supabase
-      .from('goals')
-      .select('*')
-      .single();
+    const { data, error } = await supabase.from('goals').select('*').single();
 
     if (error) console.error('Error fetching goals:', error);
     else setGoals(data || { annualFlightTime: 1000, longestFlight: 100 });
@@ -71,7 +77,7 @@ const ParaglidingDashboard = () => {
   };
 
   const updateGoal = async (goalType: string, value: number) => {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('goals')
       .update({ [goalType]: value })
       .eq('id', (goals as any).id);
@@ -89,11 +95,14 @@ const ParaglidingDashboard = () => {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold">{goals.annualFlightTime} minutes</p>
-            <p>Current: {flightData.reduce((sum: number, flight: any) => sum + flight.flightTime, 0)} minutes</p>
+            <p>
+              Current: {flightData.reduce((sum: number, flight: any) => sum + flight.flightTime, 0)}{' '}
+              minutes
+            </p>
             <Input
               type="number"
               value={goals.annualFlightTime}
-              onChange={(e) => updateGoal('annualFlightTime', Number(e.target.value))}
+              onChange={e => updateGoal('annualFlightTime', Number(e.target.value))}
               className="mt-2"
             />
           </CardContent>
@@ -109,7 +118,7 @@ const ParaglidingDashboard = () => {
             <Input
               type="number"
               value={goals.longestFlight}
-              onChange={(e) => updateGoal('longestFlight', Number(e.target.value))}
+              onChange={e => updateGoal('longestFlight', Number(e.target.value))}
               className="mt-2"
             />
           </CardContent>
@@ -129,8 +138,20 @@ const ParaglidingDashboard = () => {
               <YAxis yAxisId="right" orientation="right" />
               <Tooltip />
               <Legend />
-              <Line yAxisId="left" type="monotone" dataKey="flightTime" stroke="#8884d8" name="Flight Time (min)" />
-              <Line yAxisId="right" type="monotone" dataKey="distance" stroke="#82ca9d" name="Distance (km)" />
+              <Line
+                yAxisId="left"
+                type="monotone"
+                dataKey="flightTime"
+                stroke="#8884d8"
+                name="Flight Time (min)"
+              />
+              <Line
+                yAxisId="right"
+                type="monotone"
+                dataKey="distance"
+                stroke="#82ca9d"
+                name="Distance (km)"
+              />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
