@@ -13,64 +13,56 @@ const Problem = () => {
   return (
     <section className="bg-neutral text-neutral-content">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-24 text-center">
-        <H2 className="mb-6 sm:mb-8">From Short Flights to Big Adventures</H2>
+        <H2 className="mb-6 sm:mb-8">The Plateau is Real.</H2>
         <p className="max-w-2xl mx-auto text-base sm:text-lg opacity-90 leading-relaxed mb-8 sm:mb-12 md:mb-16 text-left sm:text-justify">
-          From your first 10 km to your first 100, <i>Wingmates</i> gives you the tools, feedback, and
-          mindset to master the art of cross-country flight - and connect with others on the same
-          journey. <br />
+          You&apos;ve mastered the launch. You understand the weather. You have the gear. But
+          you&apos;re still hitting a ceiling. Why? <br />
           <br />
-          <i>Wingmates</i> is your support crew — a global community helping pilots progress faster through
-          shared learning, honest feedback, and a flow-driven approach to mastery.
+          Because normally, the pilot is split. One part of you is monitoring threats. One part is
+          managing self-image ("Am I doing well?"). One part is trying to fly. These subsystems
+          compete for control.
+          <br /> <br />
+          This internal friction creates noise, hesitation, and exhaustion. Most schools teach you
+          to "try harder." We teach you how to stop the internal competition. <br />
+          <br />
+          <i>Wingmates</i> is your support crew — a global community helping pilots progress faster
+          through shared learning, honest feedback, and a flow-driven approach to mastery.
           <br />
         </p>
         <div className="w-full max-w-4xl mx-auto my-8 sm:my-12">
-          <SenjaEmbed 
-            widgetId="7f9db280-16bb-4caa-a6de-24cf14892990" 
+          <SenjaEmbed
+            widgetId="7f9db280-16bb-4caa-a6de-24cf14892990"
             showContainer={false}
             className="w-full"
           />
         </div>
-        <H3 className="mb-6 sm:mb-8">There&apos;s a lot to master</H3>
-        <div className="flex flex-col md:flex-row max-w-4xl mx-auto mb-8 sm:mb-12">
-          <div className="w-full md:w-1/3 mb-6 md:mb-0 pr-0 md:pr-4 text-left">
-            <p>
-              From forecasting and route planning to thermaling, decision-making, and fear —
-              cross-country flying demands more than skill. It calls for awareness, dedication,
-              self-cultivation, and community.
-              <br />
-              <br />
-              That&apos;s why <i>Wingmates</i> exists — to help you learn, share, and fly alongside
-              other like-minded pilots.
-              <br />
-              <br />
-              Whether you want hands-on coaching or a supportive learning environment,{' '}
-              <i>Wingmates</i> gives you everything you need to grow in confidence and master your
-              paragliding journey.
-            </p>
-          </div>
-          <div className="w-full md:w-2/3 grid grid-cols-2 gap-2">
-            {[
-              'paragliding-skewt.jpg',
-              'paragliding-clan-william.jpg',
-              'paragliding-apostles.jpg',
-              'paragliding-task-map.jpg',
-            ].map((img, index) => (
-              <Image
-                key={index}
-                src={`https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/${img}`}
-                alt={`Paragliding image ${index + 1}`}
-                className="w-full h-auto object-cover rounded"
-                width={250}
-                height={250}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-4 sm:mb-6">
-          <blockquote className="border-l-4 border-gray-500 pl-4 italic text-neutral-content text-xl sm:text-2xl">
-            &ldquo;If you want to go fast, go alone. If you want to go far, go together.&rdquo; -
-            African Proverb
-          </blockquote>
+        <H3 className="mb-6 sm:mb-8">We Focus on Alignment, Not Effort.</H3>
+        <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
+          <p className="max-w-2xl mx-auto text-base sm:text-lg opacity-90 leading-relaxed text-left sm:text-justify">
+            True focus is often misunderstood as &quot;straining&quot; or &quot;concentrating
+            hard.&quot; In Wingmates, we define focus differently: Focus is the removal of internal
+            competition.
+            <br />
+            <br />
+            When what you see, what you feel, and what you do are aligned, flow happens.
+            <br />
+            <br />
+            Distraction disappears (because rival goals are removed).
+            <br />
+            <br />
+            Action becomes responsive (not reactive).
+            <br />
+            <br />
+            Flying becomes effortless.
+            <br />
+            <br />
+            We provide the mental frameworks to achieve this alignment, turning the pilot into a
+            single, cohesive unit.
+            <br />
+            <br />
+            We believe paragliding is the ultimate mirror. To master the turbulence outside, you
+            must master the turbulence inside.
+          </p>
         </div>
       </div>
     </section>

@@ -25,9 +25,9 @@ interface Feature {
 // - alt: The alt text of the image (if type is &apos;image&apos;)
 const features = [
   {
-    title: 'Live Sessions & Workshops',
+    title: 'Direct Mentorship (Live Calls)',
     description:
-      'Live sessions designed to boost your XC journey. From weather analysis to flying techniques, and everything in between.',
+      "It's not just a lecture; it's a dialogue. Join regular live sessions where we break down flight tracks, analyze weather, and answer the specific questions holding you back.",
     type: 'video',
     path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-demo.mp4?t=2024-09-28T13%3A35%3A22.633Z',
     format: 'video/mp4',
@@ -48,33 +48,9 @@ const features = [
     ),
   },
   {
-    title: 'Discussion Spaces',
+    title: 'The Knowledge Archive',
     description:
-      'Where paragliders come together to share their stories and challenges. The place to ask, share, learn, and connect with members in our friendly and supportive community.',
-    type: 'image',
-    path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/sign/images/wingmates-mockup.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvd2luZ21hdGVzLW1vY2t1cC5wbmciLCJpYXQiOjE3Mjc2ODAzOTUsImV4cCI6MjA0MzA0MDM5NX0.kBDDzzjQxLOiS9eEDaJtYWr-tNd1XKjNOU3WS-yjNvQ',
-    alt: 'Wingmates Paragliding Community Mockup',
-    svg: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-6 h-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: 'Courses & Workshops',
-    description:
-      'Immediate, full access to all past (and future)  workshops & courses, recorded videos from curated live events.',
+      "Instant access to our full library of masterclasses, debriefs, and mental framework training. Whether you're stuck on thermal entry or glide path efficiency, the answer is here.",
     type: 'image',
     path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/course.png?t=2024-09-30T07%3A45%3A13.010Z',
     alt: 'Wingmates Paragliding Course Mockup',
@@ -96,12 +72,12 @@ const features = [
     ),
   },
   {
-    title: 'Unlimited Mentorship',
+    title: 'The Inner Circle (Community)',
     description:
-      'I am personally available to answer all your questions in the forum and in direct messages. This is truly a place where you can get the support you need to fly far and fly safe.',
+      'A dedicated space—noise-free and algorithm-free—where serious pilots share real-time beta, gear insights, and honest flight analysis.',
     type: 'image',
-    path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/paragliding-mentorship-crew.jpg?t=2024-10-04T04%3A40%3A02.669Z',
-    alt: 'Bruno, Joerg, Eddie, and Grant paragliding crew',
+    path: 'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/sign/images/wingmates-mockup.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvd2luZ21hdGVzLW1vY2t1cC5wbmciLCJpYXQiOjE3Mjc2ODAzOTUsImV4cCI6MjA0MzA0MDM5NX0.kBDDzzjQxLOiS9eEDaJtYWr-tNd1XKjNOU3WS-yjNvQ',
+    alt: 'Wingmates Paragliding Community Mockup',
     svg: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +90,7 @@ const features = [
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+          d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
         />
       </svg>
     ),
@@ -223,15 +199,11 @@ const FeaturesAccordion = () => {
         id="features"
       >
         <div className="px-4 sm:px-8">
-          <H2 className="mb-4 sm:mb-6 text-center max-w-4xl mx-auto">
-            Mentorship, Friendship & Group Flow
-          </H2>
+          <H2 className="mb-4 sm:mb-6 text-center max-w-4xl mx-auto">Group Flow</H2>
           <p className="text-sm sm:text-base md:text-lg text-center text-justify max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
-            Paragliding mastery takes more than airtime. It takes feedback, awareness, and a crew
-            that pushes you to grow. <br />
-            <br />
-            <i>Wingmates</i> gives you all three — a supportive global community where pilots trade
-            insights, debriefs, and breakthroughs to sharpen both skill and mindset.
+            Airtime isn&apos;t enough. True mastery requires feedback, awareness, and a crew that
+            pushes you to grow. Wingmates is that crew. We are a supportive global community where
+            pilots trade debriefs and breakthroughs, sharpening both skill and mindset.
           </p>
           <Script
             src="https://widget.senja.io/widget/7b15ce99-71e8-447d-9582-5dd2b154384b/platform.js"
@@ -246,11 +218,6 @@ const FeaturesAccordion = () => {
               style={{ display: 'block', width: '100%' }}
             />
           </div>
-          <p className="text-sm sm:text-base md:text-lg text-center text-justify max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16 text-gray-300">
-            <br />
-            Whether you&apos;re trying to reach cloudbase or your first 100 km flight, you&apos;ll
-            have access to:
-          </p>
           <div className="flex flex-col md:flex-row gap-12 md:gap-24">
             <div className="grid grid-cols-1 items-stretch gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
               <div>

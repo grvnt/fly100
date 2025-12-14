@@ -14,10 +14,7 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <H1 className="mb-6 sm:mb-12">
-          Unlock freedom, confidence, and mastery inside <i>Wingmates</i>, the world&apos;s first
-          flow-driven flying community.
-        </H1>
+        <H1 className="mb-6 sm:mb-12">Master the Mind, Flow will Follow. </H1>
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
             widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
@@ -37,8 +34,8 @@ const Hero = () => {
           </div>
         </div>
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-center">
-          Learn to master both wing and mind — in a supportive community devoted to flow and
-          freedom.
+          Mechanical skill gets you in the air. Mindset keeps you there. Wingmates is the community
+          dedicated to Flow State, Performance Psychology, and the Inner Game of Paragliding.
         </p>
         <ButtonGradient href="/wingmates/#pricing" text="Join Today" className="btn-wide" />
       </div>

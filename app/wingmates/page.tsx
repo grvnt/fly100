@@ -11,9 +11,9 @@ import SenjaEmbed from '@/components/General/SenjaEmbed';
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
 export const metadata: Metadata = {
-  title: 'Wingmates | XC Paragliding Community',
+  title: 'Wingmates | The Inner Game of Paragliding',
   description:
-    'Join Wingmates, the premier XC paragliding community. Learn, grow, and fly further with expert mentorship and support.',
+    'A community dedicated to flow state, decision-making, and the mental mastery of flight. Mechanical skill gets you airborne; mindset determines the rest.',
 };
 
 export default function Home() {

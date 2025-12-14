@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import React from 'react';
+import SenjaEmbed from './SenjaEmbed';
 
 export interface PricingTierFrequency {
   id: string;
@@ -26,18 +27,18 @@ export interface PricingTier {
 }
 
 const plan: PricingTier = {
-  name: 'Wingmates',
+  name: 'Start Your Evolution',
   id: '0',
   href: '/subscribe',
   price: '',
   discountPrice: '$150',
   description: "The world's first flow-driven paragliding community.",
   features: [
-    'Unlimited Support',
-    'Learn through Live Events & Workshops',
-    'Connect with paragliders from all over the world',
-    'Share progress, stories, tips & photos',
-    'Supercharge your progress with peer to peer learning',
+    'Continuous Community Support',
+    'Live Events & Workshops',
+    'Connect with Pilots Worldwide',
+    'Share Flights, Debriefs & Stories',
+    'Accelerate Peer to Peer Learning',
   ],
   featured: true,
   highlighted: false,
@@ -140,10 +141,9 @@ export default function PricingWingmates() {
                     Join Wingmates
                   </a>
                 </div>
-                {/* <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
-                  I open spots in small batches to maintain the quality of our group. Apply now 
-                  for priority access.
-                </p> */}
+                <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
+                  Cancel anytime.
+                </p>
               </div>
             </div>
           </div>
