@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { H2, H3 } from '../ui/typography';
 import SenjaEmbed from './SenjaEmbed';
 
@@ -19,11 +18,11 @@ const Problem = () => {
           you&apos;re still hitting a ceiling. Why? <br />
           <br />
           Because normally, the pilot is split. One part of you is monitoring threats. One part is
-          managing self-image ("Am I doing well?"). One part is trying to fly. These subsystems
-          compete for control.
+          managing self-image (&quot;Am I doing well?&quot;). One part is trying to fly. These
+          subsystems compete for control.
           <br /> <br />
           This internal friction creates noise, hesitation, and exhaustion. Most schools teach you
-          to "try harder." We teach you how to stop the internal competition. <br />
+          to &quot;try harder.&quot; We teach you how to stop the internal competition. <br />
           <br />
           <i>Wingmates</i> is your support crew — a global community helping pilots progress faster
           through shared learning, honest feedback, and a flow-driven approach to mastery.
