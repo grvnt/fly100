@@ -19,8 +19,8 @@ const Hero = () => {
           flow-driven flying community.
         </H1>
         <div className="w-full max-w-4xl mx-auto my-6">
-          <SenjaEmbed 
-            widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859" 
+          <SenjaEmbed
+            widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
             showContainer={false}
             className="w-full"
           />
@@ -40,7 +40,7 @@ const Hero = () => {
           Learn to master both wing and mind — in a supportive community devoted to flow and
           freedom.
         </p>
-        <ButtonGradient href="/wingmates/#pricing" text="Apply Now" className="btn-wide" />
+        <ButtonGradient href="/wingmates/#pricing" text="Join Today" className="btn-wide" />
       </div>
     </section>
   );
