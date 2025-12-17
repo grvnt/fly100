@@ -9,7 +9,7 @@ import { ScaleVariant, WingState, GliderClassDefinition } from './types';
 import logo from '@/app/icon.png';
 
 // --- CONFIGURATION ---
-const KIT_ACTION_URL = "https://app.kit.com/forms/8881848/subscriptions";
+const KIT_ACTION_URL = 'https://app.kit.com/forms/8881848/subscriptions';
 
 // Define Glider Classes and their specific ranges
 const GLIDER_CLASSES: GliderClassDefinition[] = [
@@ -169,9 +169,7 @@ const App: React.FC = () => {
         params.delete('access');
         const query = params.toString();
         const newUrl =
-          window.location.pathname +
-          (query ? `?${query}` : '') +
-          (window.location.hash ?? '');
+          window.location.pathname + (query ? `?${query}` : '') + (window.location.hash ?? '');
         window.history.replaceState({}, '', newUrl);
       }
     }
@@ -189,7 +187,6 @@ const App: React.FC = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
 
   // --- LOGIC ---
   const selectedClass = GLIDER_CLASSES.find(c => c.id === selectedClassId) || GLIDER_CLASSES[1];
@@ -269,41 +266,41 @@ const App: React.FC = () => {
 
   return (
     <div className="h-screen w-full bg-slate-100 relative flex flex-col font-sans text-slate-800 selection:bg-sky-200">
-      
       {/* --- 1. THE GATE (OVERLAY) --- */}
       {!isUnlocked && (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
           {/* The blurry backdrop */}
           <div className="absolute inset-0 bg-white/60 backdrop-blur-md" />
-          
+
           {/* The Signup Card */}
           <div className="relative bg-white shadow-2xl border border-gray-200 rounded-2xl p-8 max-w-md w-full text-center">
             <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
               <Lock className="w-6 h-6 text-blue-600" />
             </div>
-            
+
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Unlock the Calculator</h2>
             <p className="text-gray-600 mb-6">
-              Join other pilots using this tool to fly safely. Enter your email to unlock instant access.
+              Join other pilots using this tool to fly safely. Enter your email to unlock instant
+              access.
             </p>
 
             {/* CONNECTED KIT FORM */}
             <form action={KIT_ACTION_URL} method="post" className="space-y-3">
-              <input 
-                type="email" 
-                name="email_address" 
-                placeholder="Your email address" 
+              <input
+                type="email"
+                name="email_address"
+                placeholder="Your email address"
                 required
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               />
-              
-              <button 
+
+              <button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all shadow-lg hover:shadow-xl"
               >
                 Unlock Tool
               </button>
-              
+
               <p className="text-xs text-gray-400 mt-4">
                 Already subscribed? Check your email for the access link.
               </p>
@@ -312,10 +309,14 @@ const App: React.FC = () => {
         </div>
       )}
 
-
       {/* --- 2. THE MAIN APP CONTENT (BLURRED IF LOCKED) --- */}
-      <div className={`flex flex-col h-full w-full transition-all duration-500 ${!isUnlocked ? 'filter blur-sm pointer-events-none select-none overflow-hidden opacity-50' : ''}`}>
-        
+      <div
+        className={`flex flex-col h-full w-full transition-all duration-500 ${
+          !isUnlocked
+            ? 'filter blur-sm pointer-events-none select-none overflow-hidden opacity-50'
+            : ''
+        }`}
+      >
         {/* Background Decoration */}
         <div className="absolute inset-0 bg-[radial-gradient(at_top,_var(--tw-gradient-stops))] from-white via-slate-50 to-slate-200 -z-10" />
 
