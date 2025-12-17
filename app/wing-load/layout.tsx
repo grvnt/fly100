@@ -6,4 +6,3 @@ export const metadata = wingLoadMetadata;
 export default function WingLoadLayout({ children }: { children: ReactNode }) {
   return children;
 }
-
