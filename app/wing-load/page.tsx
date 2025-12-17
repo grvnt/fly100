@@ -230,7 +230,7 @@ const App: React.FC = () => {
       <div className="absolute inset-0 bg-[radial-gradient(at_top,_var(--tw-gradient-stops))] from-white via-slate-50 to-slate-200 -z-10" />
 
       {/* Header */}
-      <header className="flex-shrink-0 bg-white border-b border-slate-200 px-6 py-3 flex justify-between items-center z-10 shadow-sm h-16">
+      <header className="flex-shrink-0 bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex flex-col gap-3 items-start md:flex-row md:justify-between md:items-center z-10 shadow-sm">
         <div className="flex items-center gap-3">
           <div className="bg-sky-500 p-2 rounded-lg text-white shadow-lg shadow-sky-500/20">
             <Cloud className="w-5 h-5 fill-current" />
@@ -246,13 +246,13 @@ const App: React.FC = () => {
         </div>
 
         {/* Central Controls: Class Selector & Locks */}
-        <div className="flex items-center gap-4 mr-auto ml-12">
+        <div className="flex items-center gap-3 mt-1 md:mt-0 md:gap-4 md:mr-auto md:ml-12 w-full md:w-auto">
           {/* Glider Class Dropdown */}
-          <div className="relative">
+          <div className="relative w-full md:w-auto">
             <select
               value={selectedClassId}
               onChange={handleClassChange}
-              className="appearance-none pl-3 pr-8 py-1.5 bg-slate-50 border border-slate-200 rounded-md text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 shadow-sm cursor-pointer min-w-[180px]"
+              className="appearance-none pl-3 pr-8 py-1.5 bg-slate-50 border border-slate-200 rounded-md text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 shadow-sm cursor-pointer w-full md:w-auto min-w-[180px]"
             >
               {GLIDER_CLASSES.map(cls => (
                 <option key={cls.id} value={cls.id}>
