@@ -1,7 +1,7 @@
 export interface CalculationState {
   weight: number; // All up weight in kg
-  area: number;   // Wing area in m2
-  loading: number;// Wing loading in kg/m2
+  area: number; // Wing area in m2
+  loading: number; // Wing loading in kg/m2
 }
 
 export interface WingState {
@@ -35,6 +35,7 @@ export interface SliderProps {
   max: number;
   step: number;
   unit: string;
+  /* eslint-disable-next-line no-unused-vars */
   onChange: (value: number) => void;
   description?: string;
   colorClass?: string;

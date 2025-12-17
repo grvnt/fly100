@@ -7,8 +7,10 @@ interface CalculatorGroupProps {
   title: string;
   weight: number;
   area: number;
-  onWeightChange: (val: number) => void;
-  onAreaChange: (val: number) => void;
+  /* eslint-disable-next-line no-unused-vars */
+  onWeightChange: (value: number) => void;
+  /* eslint-disable-next-line no-unused-vars */
+  onAreaChange: (value: number) => void;
   variant?: ScaleVariant;
   isWeightLocked?: boolean;
   isAreaLocked?: boolean;
@@ -159,12 +161,7 @@ export const CalculatorGroup: React.FC<CalculatorGroupProps> = ({
 
       {/* 3. Info Panel Section (Fixed Width) */}
       <div className={`flex-shrink-0 ${styles.infoContainer} mt-4 lg:mt-0`}>
-        <InfoPanel
-          loading={currentLoading}
-          weight={weight}
-          variant={variant}
-          gliderClass={gliderClass}
-        />
+        <InfoPanel loading={currentLoading} variant={variant} gliderClass={gliderClass} />
       </div>
     </div>
   );
