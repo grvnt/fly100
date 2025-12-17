@@ -123,3 +123,47 @@
   width: 100% !important;
   box-sizing: border-box !important;
 }
+
+/* Range Slider Reset & Styling */
+input[type="range"] {
+  -webkit-appearance: none; /* Remove default browser styling */
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* The "Track" (the grey line) */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #e5e7eb; /* Light grey (Tailwind gray-200) */
+  border-radius: 9999px;
+}
+input[type="range"]::-moz-range-track {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 9999px;
+}
+
+/* The "Thumb" (the blue dot) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -6px; /* Centers the thumb on the track */
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid white; /* Adds that nice white ring */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  background-color: #3b82f6;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
