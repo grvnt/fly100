@@ -15,6 +15,10 @@ const links: {
   label: string;
 }[] = [
   {
+    href: '/wing-load',
+    label: 'Wing Load',
+  },
+  {
     href: '/wingmates',
     label: 'Wingmates',
   },
