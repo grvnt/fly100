@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSearchParams, useRouter } from 'next/navigation'; // Added for the Gate
 import { CalculatorGroup } from './components/CalculatorGroup';
 import { Settings2, Lock, Unlock, ChevronDown } from 'lucide-react';
 import { ScaleVariant, WingState, GliderClassDefinition } from './types';
@@ -130,8 +129,6 @@ const MOBILE_MAX_WIDTH = 1024; // px breakpoint for "mobile" behaviour
 const App: React.FC = () => {
   // --- GATE STATE ---
   const [isUnlocked, setIsUnlocked] = useState(false);
-  const searchParams = useSearchParams();
-  const router = useRouter();
 
   // --- APP STATE ---
   const [wingCount, setWingCount] = useState<number>(2);
@@ -153,23 +150,32 @@ const App: React.FC = () => {
 
   // 1. Check Unlock Status
   useEffect(() => {
-    // Check Local Storage (Returning users)
-    const hasUnlockedBefore = localStorage.getItem('wing_tool_unlocked');
-    
-    // Check URL Param (New signups coming back from Kit)
-    const hasAccessParam = searchParams.get('access') === 'granted';
+    if (typeof window === 'undefined') return;
+
+    // Check Local Storage (returning users)
+    const hasUnlockedBefore = window.localStorage.getItem('wing_tool_unlocked');
+
+    // Check URL param (new signups coming back from Kit)
+    const params = new URLSearchParams(window.location.search);
+    const hasAccessParam = params.get('access') === 'granted';
 
     if (hasUnlockedBefore === 'true' || hasAccessParam) {
       setIsUnlocked(true);
-      
-      // If they just arrived with the key, save it so they don't have to signup again
+
       if (hasAccessParam) {
-        localStorage.setItem('wing_tool_unlocked', 'true');
-        // Clean the URL so it looks nice (removes ?access=granted)
-        router.replace('/wing-load', { scroll: false });
+        window.localStorage.setItem('wing_tool_unlocked', 'true');
+
+        // Clean the URL so it won't keep the ?access=granted param
+        params.delete('access');
+        const query = params.toString();
+        const newUrl =
+          window.location.pathname +
+          (query ? `?${query}` : '') +
+          (window.location.hash ?? '');
+        window.history.replaceState({}, '', newUrl);
       }
     }
-  }, [searchParams, router]);
+  }, []);
 
   // 2. Handle Resize
   useEffect(() => {
