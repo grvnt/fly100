@@ -1,9 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { CalculatorGroup } from './components/CalculatorGroup';
-import { Cloud, Settings2, Lock, Unlock, ChevronDown } from 'lucide-react';
+import { Settings2, Lock, Unlock, ChevronDown } from 'lucide-react';
 import { ScaleVariant, WingState, GliderClassDefinition } from './types';
+import logo from '@/app/icon.png';
 
 // Define Glider Classes and their specific ranges
 const GLIDER_CLASSES: GliderClassDefinition[] = [
@@ -232,17 +235,22 @@ const App: React.FC = () => {
       {/* Header */}
       <header className="flex-shrink-0 bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex flex-col gap-3 items-start md:flex-row md:justify-between md:items-center z-10 shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="bg-sky-500 p-2 rounded-lg text-white shadow-lg shadow-sky-500/20">
-            <Cloud className="w-5 h-5 fill-current" />
-          </div>
-          <div>
-            <h1 className="text-lg font-bold tracking-tight text-slate-800 leading-none">
-              Wing Loading
-            </h1>
-            <span className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">
-              Comparison Tool
-            </span>
-          </div>
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src={logo}
+              alt="Fly100 logo"
+              className="w-8 h-8"
+              width={32}
+              height={32}
+              priority
+            />
+            <div className="flex flex-col">
+              <span className="text-sm font-semibold text-slate-700 leading-tight">Fly100</span>
+              <span className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">
+                Wing Loading Tool
+              </span>
+            </div>
+          </Link>
         </div>
 
         {/* Central Controls: Class Selector & Locks */}
