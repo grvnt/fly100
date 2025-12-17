@@ -5,7 +5,6 @@ import Problem from '@/components/General/Problem';
 import FeaturesAccordion from '@/components/General/FeaturesAccordion';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
-import ConvertKitScript from '@/components/General/ConvertKitScript';
 import SenjaEmbed from '@/components/General/SenjaEmbed';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <ConvertKitScript />
       <main>
         <Hero />
         <TestimonialMerakai />
