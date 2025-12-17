@@ -157,7 +157,7 @@ const App: React.FC = () => {
   };
   const effectiveWingCount = isMobile ? 1 : wingCount;
 
-  const variant = getVariant(effectiveWingCount);
+  const variant: ScaleVariant = isMobile ? 'compact' : getVariant(effectiveWingCount);
 
   // Handlers for state updates
   const handleUpdate = (index: number, field: 'weight' | 'area', value: number) => {
