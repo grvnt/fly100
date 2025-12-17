@@ -345,6 +345,7 @@ const App: React.FC = () => {
               isWeightLocked={lockWeight}
               isAreaLocked={lockArea}
               gliderClass={selectedClass}
+              showFullDescription={isMobile}
             />
           </div>
         ))}

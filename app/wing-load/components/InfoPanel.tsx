@@ -6,6 +6,7 @@ interface InfoPanelProps {
   loading: number;
   variant?: ScaleVariant;
   gliderClass: GliderClassDefinition;
+  showFullDescription?: boolean;
 }
 
 // Text content mapping based on glider category
@@ -114,6 +115,7 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({
   loading,
   variant = 'compact',
   gliderClass,
+  showFullDescription = false,
 }) => {
   // Normalize loading to 2 decimal places to match UI display (WYSIWYG)
   const normalizedLoading = parseFloat(loading.toFixed(2));
@@ -215,7 +217,7 @@ export const InfoPanel: React.FC<InfoPanelProps> = ({
         </div>
       </div>
 
-      {variant !== 'compact' && (
+      {(variant !== 'compact' || showFullDescription) && (
         <div className={`${styles.descSize} mt-3 opacity-90 max-w-[90%]`}>
           <p>{description}</p>
         </div>

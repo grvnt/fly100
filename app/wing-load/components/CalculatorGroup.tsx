@@ -15,6 +15,7 @@ interface CalculatorGroupProps {
   isWeightLocked?: boolean;
   isAreaLocked?: boolean;
   gliderClass: GliderClassDefinition;
+  showFullDescription?: boolean;
 }
 
 export const CalculatorGroup: React.FC<CalculatorGroupProps> = ({
@@ -27,6 +28,7 @@ export const CalculatorGroup: React.FC<CalculatorGroupProps> = ({
   isWeightLocked = false,
   isAreaLocked = false,
   gliderClass,
+  showFullDescription = false,
 }) => {
   const isTandem = gliderClass.type === 'tandem';
 
@@ -161,7 +163,12 @@ export const CalculatorGroup: React.FC<CalculatorGroupProps> = ({
 
       {/* 3. Info Panel Section (Fixed Width) */}
       <div className={`flex-shrink-0 ${styles.infoContainer} mt-4 lg:mt-0`}>
-        <InfoPanel loading={currentLoading} variant={variant} gliderClass={gliderClass} />
+        <InfoPanel
+          loading={currentLoading}
+          variant={variant}
+          gliderClass={gliderClass}
+          showFullDescription={showFullDescription}
+        />
       </div>
     </div>
   );
