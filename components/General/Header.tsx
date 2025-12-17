@@ -1,31 +1,27 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 // import type { JSX } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import logo from "@/app/icon.png";
-import config from "@/config";
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import logo from '@/app/icon.png';
+import config from '@/config';
 // import ButtonSignin from "./ButtonSignin";
-import LoadingBorder from "./LoadingBorder";
+import LoadingBorder from './LoadingBorder';
 
 const links: {
   href: string;
   label: string;
 }[] = [
   {
-    href: "/manifesto",
-    label: "Manifesto",
+    href: '/wingmates',
+    label: 'Wingmates',
   },
   // {
   //   href: "/#pricing",
   //   label: "Pricing",
   // },
-/*   {
-    href: "/wingmates",
-    label: "Wingmates",
-  }, */
   // {
   //   href: "/#faq",
   //   label: "FAQ",
@@ -63,7 +59,6 @@ const Header = () => {
               src={logo}
               alt={`${config.appName} logo`}
               className="w-8"
-              
               priority={true}
               width={32}
               height={32}
@@ -98,16 +93,37 @@ const Header = () => {
 
         {/* Your links on large screens */}
         <div className="hidden lg:flex lg:justify-center lg:gap-12 lg:items-center">
-          {links.map((link) => (
-            <Link
-              href={link.href}
-              key={link.href}
-              className="link link-hover"
-              title={link.label}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map(link =>
+            link.label === 'Wingmates' ? (
+              <Link href={link.href} key={link.href} title={link.label}>
+                <span
+                  className="btn animate-gradient btn-wide"
+                  style={{
+                    background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+                    backgroundSize: '400% 400%',
+                    animation: 'gradient 10s ease infinite',
+                    border: 'none',
+                    color: 'white',
+                    padding: '8px 15px',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    fontSize: '16px',
+                    margin: '4px 2px',
+                    cursor: 'pointer',
+                    borderRadius: '4px',
+                    fontWeight: '700',
+                  }}
+                >
+                  {link.label}
+                </span>
+              </Link>
+            ) : (
+              <Link href={link.href} key={link.href} className="link link-hover" title={link.label}>
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Comment out CTA on large screens */}
@@ -115,7 +131,7 @@ const Header = () => {
       </nav>
 
       {/* Mobile menu, show/hide based on menu state. */}
-      <div className={`relative z-50 ${isOpen ? "" : "hidden"}`}>
+      <div className={`relative z-50 ${isOpen ? '' : 'hidden'}`}>
         <div
           className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-base-200 sm:max-w-sm sm:ring-1 sm:ring-neutral/10 transform origin-right transition ease-in-out duration-300`}
         >
@@ -130,7 +146,6 @@ const Header = () => {
                 src={logo}
                 alt={`${config.appName} logo`}
                 className="w-8"
-                
                 priority={true}
                 width={32}
                 height={32}
@@ -151,11 +166,7 @@ const Header = () => {
                 stroke="currentColor"
                 className="w-6 h-6"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
@@ -164,16 +175,42 @@ const Header = () => {
           <div className="flow-root mt-6">
             <div className="py-4">
               <div className="flex flex-col gap-y-4 items-start">
-                {links.map((link) => (
-                  <Link
-                    href={link.href}
-                    key={link.href}
-                    className="link link-hover"
-                    title={link.label}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {links.map(link =>
+                  link.label === 'Wingmates' ? (
+                    <Link href={link.href} key={link.href} title={link.label}>
+                      <span
+                        className="btn animate-gradient"
+                        style={{
+                          background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+                          backgroundSize: '400% 400%',
+                          animation: 'gradient 10s ease infinite',
+                          border: 'none',
+                          color: 'white',
+                          padding: '15px 32px',
+                          textAlign: 'center',
+                          textDecoration: 'none',
+                          display: 'inline-block',
+                          fontSize: '16px',
+                          margin: '4px 2px',
+                          cursor: 'pointer',
+                          borderRadius: '4px',
+                          fontWeight: '700',
+                        }}
+                      >
+                        {link.label}
+                      </span>
+                    </Link>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      key={link.href}
+                      className="link link-hover"
+                      title={link.label}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
             <div className="divider"></div>
