@@ -118,6 +118,8 @@ const RANGES = {
   },
 };
 
+const MOBILE_MAX_WIDTH = 1024; // px breakpoint for "mobile" behaviour
+
 const App: React.FC = () => {
   const [wingCount, setWingCount] = useState<number>(2);
   const [selectedClassId, setSelectedClassId] = useState<string>('progression');
@@ -127,7 +129,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== 'undefined') {
-        setIsMobile(window.innerWidth < 768);
+        setIsMobile(window.innerWidth <= MOBILE_MAX_WIDTH);
       }
     };
 
