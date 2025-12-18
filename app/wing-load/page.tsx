@@ -269,8 +269,16 @@ const App: React.FC = () => {
       {/* --- 1. THE GATE (OVERLAY) --- */}
       {!isUnlocked && (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
-          {/* The blurry backdrop */}
-          <div className="absolute inset-0 bg-white/60 backdrop-blur-md" />
+          {/* Image background behind the unlock form */}
+          <div className="absolute inset-0">
+            {/* Mobile background */}
+            <div className="block lg:hidden w-full h-full bg-[url('https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/wing-load-gmobile.jpg')] bg-cover bg-center" />
+            {/* Desktop background */}
+            <div className="hidden lg:block w-full h-full bg-[url('https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/wing-load-gdesktop.jpg')] bg-cover bg-center" />
+          </div>
+
+          {/* The translucent overlay so text stays readable */}
+          <div className="absolute inset-0 bg-white/20 lg:bg-white/30 backdrop-blur-sm" />
 
           {/* The Signup Card */}
           <div className="relative bg-white shadow-2xl border border-gray-200 rounded-2xl p-8 max-w-md w-full text-center">
@@ -279,10 +287,6 @@ const App: React.FC = () => {
             </div>
 
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Unlock the Calculator</h2>
-            <p className="text-gray-600 mb-6">
-              Join other pilots using this tool to fly safely. Enter your email to unlock instant
-              access.
-            </p>
 
             {/* CONNECTED KIT FORM */}
             <form action={KIT_ACTION_URL} method="post" className="space-y-3">
@@ -302,7 +306,7 @@ const App: React.FC = () => {
               </button>
 
               <p className="text-xs text-gray-400 mt-4">
-                Already subscribed? Check your email for the access link.
+                {/* Already subscribed? Check your email for the access link. */}
               </p>
             </form>
           </div>
