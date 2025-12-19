@@ -14,91 +14,91 @@ const CONTENT_MAP: Record<string, any> = {
   recreational: {
     redUnder: {
       title: 'Severely Underloaded',
-      text: 'Internal pressure is critically low. The wing is prone to frequent collapses and deep stalls due to lack of airspeed. Control authority is severely compromised. Avoid flight in turbulent or windy conditions.',
+      text: 'Internal pressure is critically low. The wing will feel soft, have poor authority, and be more prone to collapses in turbulence. Avoid flying in wind or active air in this configuration.',
     },
     yellow: {
       title: 'Light',
-      text: 'Slower reactions and a dampened feel can make the ride smoother in bumps. However, reduced internal pressure limits wind penetration and precision when coring lift, with more frequent small tip movements due to reduced pressure stability.',
+      text: 'Slower reactions and a softer, more “cushioned” feel can make the ride comfortable. However, reduced pressure limits wind penetration, climb precision, and you may see more frequent small tip movements due to reduced pressure stability.',
     },
     green: {
-      title: 'Balanced / Standard',
-      text: 'The ideal compromise. Good passive safety with enough speed to safely fly in standard wind conditions.',
+      title: 'Balanced',
+      text: 'The ideal compromise. Good passive safety with enough internal pressure for stability, handling precision, and normal XC conditions.',
     },
     redOver: {
-      title: 'Heavy / Dynamic',
-      text: 'Warning: High wing loading significantly increases speed and inertia. Reactions to collapses will be impulsive. This configuration reduces the forgiveness typically relied upon by beginners.',
+      title: 'Heavy',
+      text: 'High wing loading significantly increases inertia and reaction energy. Collapses become more impulsive and less forgiving. Demands better pilot skill.',
     },
   },
   xc_sport: {
     redUnder: {
       title: 'Severely Underloaded',
-      text: 'Internal pressure is critically low. The wing is prone to frequent collapses and deep stalls due to lack of airspeed. Control authority is severely compromised. Avoid flight in turbulent or windy conditions.',
+      text: 'Critically low pressure. Soft structure, delayed reactions, and greater collapse susceptibility in turbulence. Avoid strong or windy conditions.',
     },
     yellow: {
       title: 'Light',
-      text: 'Lower internal loading reduces aerodynamic coherence, making the wing feel softer and less authoritative. Precision suffers in broken lift, wind penetration drops, and you may experience more frequent small tip movements due to reduced pressure stability.',
+      text: 'Reduced internal tension makes the wing feel softer and less authoritative. Precision suffers in broken lift, wind penetration decreases, and small tip movements become more frequent due to reduced pressure stability.',
     },
     green: {
       title: 'Solid / Agile',
-      text: 'Crisp handling and solid internal pressure. The wing cuts through turbulence effectively and responds well to inputs.',
+      text: 'Strong internal pressure, cohesive structure, precise handling, and effective turbulence cutting. Great XC configuration.',
     },
     redOver: {
       title: 'Heavy / Dynamic',
-      text: 'Significantly increased energy. Handling becomes race-style and crisp, but recovery from stalls or deflations will be impulsive. Demands high pilot skill to manage the inertia.',
+      text: 'Energy and speed increase significantly. Handling becomes sharper and collapses more energetic. Requires active, skilled piloting.',
     },
   },
   performance: {
     redUnder: {
       title: 'Unflyable / Unsafe',
-      text: 'Critical lack of internal pressure. The wingtips will not hold their shape, leading to constant cravats and deep stall tendencies. This configuration is dangerous.',
+      text: 'Unsafe. The profile cannot maintain structural tension. Expect frequent tip collapses, profile deformation, and stall tendencies. Do not fly.',
     },
     yellow: {
       title: 'Under-pressurized',
-      text: 'At this level of design, the profile expects higher internal pressure to perform correctly. When flown light, the wing loses shape stability, efficiency drops significantly, handling authority decreases, and there is an increased risk of more frequent small tip movements due to reduced pressure stability.',
+      text: 'At this level, the profile expects tension. Light loading reduces shape stability, decreases efficiency, weakens brake authority, and makes the wing deformable on bar, with more frequent small tip movements due to reduced pressure stability.',
     },
     green: {
       title: 'Race Optimized',
-      text: 'Full structural tension. The profile is rigid and collapse-resistant at speed. Maximum authority for aggressive flying.',
+      text: 'Full structural tension. Rigid profile, authority at speed, and excellent solidity in turbulence.',
     },
     redOver: {
       title: 'Heavy / Dynamic',
-      text: 'Explosive reactions. The wing is pressurized beyond standard performance parameters. Shock-loading risk is high. Structural limits may be compromised.',
+      text: 'Very high pressure and energy. Reactions become explosive. Shock-loading consequences increase. Requires elite pilot skill.',
     },
   },
   competition: {
     redUnder: {
       title: 'Unflyable / Unsafe',
-      text: 'Critical lack of internal pressure. The wingtips will not hold their shape, leading to constant cravats and deep stall tendencies. This configuration is dangerous.',
+      text: 'Unsafe. The wing cannot maintain designed profile tension. Frequent deformation and cravat risk. Do not fly.',
     },
     yellow: {
       title: 'Under-pressurized',
-      text: 'Competition wings require high wing loading to maintain profile integrity and speed performance. Flying light compromises structural stability, reduces bar authority, increases drag, and can lead to more frequent small tip movements due to reduced pressure stability, as well as potential flutter and cravat risk.',
+      text: 'CCC wings are designed to fly hard and loaded. Light loading reduces pitch stability, weakens bar authority, decreases efficiency at speed, and increases the likelihood of frequent small tip movements due to reduced pressure stability — with a higher chance of tip deformation when pushed.',
     },
     green: {
       title: 'Race Optimized',
-      text: 'Full structural tension. The profile is rigid and collapse-resistant at speed. Maximum authority for aggressive flying.',
+      text: 'Full structural tension and aerodynamic integrity. Maximum solidity, authority on bar, and competitive performance.',
     },
     redOver: {
       title: 'Heavy / Dynamic',
-      text: 'Explosive reactions. The wing is pressurized to its absolute maximum. While some modern wings (e.g., Icepeak X-One) are certified for this load, verify your manual strictly. Kinetic energy is extreme, and shock-loading risk is high.',
+      text: 'Extreme pressure and kinetic energy. Modern CCC designs may tolerate this, but always follow manufacturer limits. Reactions are violent and shock-loading risk is high; precision and discipline required.',
     },
   },
   tandem: {
     redUnder: {
       title: 'Dangerously Light',
-      text: 'The wing is effectively too large for the weight. You will have zero penetration in wind and extremely poor handling. Do not fly.',
+      text: 'The wing is effectively too large for the load. Very poor penetration, extremely soft handling, and compromised control. Do not fly.',
     },
     yellow: {
       title: 'Light',
-      text: 'Slower trim speed makes for gentle launches/landings with light passengers. However, the wing will struggle to penetrate strong winds and may feel sluggish in turns.',
+      text: 'Softer trim feel and very gentle launches/landings. However, reduced pressure makes the wing sluggish in turns and weak in wind.',
     },
     green: {
       title: 'Fast / Stable',
-      text: "High inertia smooths out bumps ('Cadillac' feel). Excellent penetration and flare authority for landing.",
+      text: 'Higher inertia provides stability (“Cadillac feel”), excellent penetration, and strong flare authority.',
     },
     redOver: {
       title: 'Heavy / Dynamic',
-      text: 'Very high trim speed. Caution: Launch requires running speed, and landing flare requires precise timing at high speed. Difficult to maintain altitude in weak lift.',
+      text: 'Very high trim speed. Requires strong launch commitment and precise landing timing. Weak lift climbing performance.',
     },
   },
 };
