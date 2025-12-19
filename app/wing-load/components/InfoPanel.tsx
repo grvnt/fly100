@@ -17,8 +17,8 @@ const CONTENT_MAP: Record<string, any> = {
       text: 'Internal pressure is critically low. The wing is prone to frequent collapses and deep stalls due to lack of airspeed. Control authority is severely compromised. Avoid flight in turbulent or windy conditions.',
     },
     yellow: {
-      title: 'Floaty / Vague',
-      text: 'Slower reactions and a dampened feel absorb sharp turbulence, offering a smoother ride. However, the wing lacks momentum to cut through gusts. Penetration will be the limiting factor in strong wind XC conditions.',
+      title: 'Light',
+      text: 'Slower reactions and a dampened feel can make the ride smoother in bumps. However, reduced internal pressure limits wind penetration and precision when coring lift, with more frequent small tip movements due to reduced pressure stability.',
     },
     green: {
       title: 'Balanced / Standard',
@@ -35,8 +35,8 @@ const CONTENT_MAP: Record<string, any> = {
       text: 'Internal pressure is critically low. The wing is prone to frequent collapses and deep stalls due to lack of airspeed. Control authority is severely compromised. Avoid flight in turbulent or windy conditions.',
     },
     yellow: {
-      title: 'Floaty / Vague',
-      text: 'Minimum sink rate is theoretically lower, but airfoil efficiency may suffer due to low internal pressure. Feedback is dampened, making it harder to precisely core thermals. Poor wind penetration.',
+      title: 'Light',
+      text: 'Lower internal loading reduces aerodynamic coherence, making the wing feel softer and less authoritative. Precision suffers in broken lift, wind penetration drops, and you may experience more frequent small tip movements due to reduced pressure stability.',
     },
     green: {
       title: 'Solid / Agile',
@@ -54,7 +54,7 @@ const CONTENT_MAP: Record<string, any> = {
     },
     yellow: {
       title: 'Under-pressurized',
-      text: 'Warning: The profile lacks the necessary weight to maintain its aerodynamic shape. High risk of wingtip fluttering, cravats, and performance loss. Ballast recommended.',
+      text: 'At this level of design, the profile expects higher internal pressure to perform correctly. When flown light, the wing loses shape stability, efficiency drops significantly, handling authority decreases, and there is an increased risk of more frequent small tip movements due to reduced pressure stability.',
     },
     green: {
       title: 'Race Optimized',
@@ -72,7 +72,7 @@ const CONTENT_MAP: Record<string, any> = {
     },
     yellow: {
       title: 'Under-pressurized',
-      text: 'Warning: The profile lacks the necessary weight to maintain its aerodynamic shape. High risk of wingtip fluttering, cravats, and performance loss. Ballast recommended.',
+      text: 'Competition wings require high wing loading to maintain profile integrity and speed performance. Flying light compromises structural stability, reduces bar authority, increases drag, and can lead to more frequent small tip movements due to reduced pressure stability, as well as potential flutter and cravat risk.',
     },
     green: {
       title: 'Race Optimized',
