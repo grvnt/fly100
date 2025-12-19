@@ -90,7 +90,7 @@ const CONTENT_MAP: Record<string, any> = {
     },
     yellow: {
       title: 'Light',
-      text: 'Softer trim feel and very gentle launches/landings. However, reduced pressure makes the wing sluggish in turns and weak in wind.',
+      text: 'Softer trim feel and gentle launches/landings. However, reduced pressure makes the wing slower to respond, reduces authority in turns, weakens wind penetration, and increases small tip movements due to reduced pressure stability.',
     },
     green: {
       title: 'Fast / Stable',
