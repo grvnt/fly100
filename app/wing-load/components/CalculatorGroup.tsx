@@ -133,13 +133,13 @@ export const CalculatorGroup: React.FC<CalculatorGroupProps> = ({
             value={weight}
             min={WEIGHT_MIN}
             max={WEIGHT_MAX}
-            step={1}
+            step={0.5}
             unit="kg"
             onChange={onWeightChange}
             colorClass="text-slate-700"
             variant={variant}
             isLocked={isWeightLocked}
-            precision={0}
+            precision={1}
           />
         </div>
 
