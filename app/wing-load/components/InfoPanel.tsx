@@ -47,6 +47,24 @@ const CONTENT_MAP: Record<string, any> = {
       text: 'Energy and speed increase significantly. Handling becomes sharper and collapses more energetic. Requires active, skilled piloting.',
     },
   },
+  sports_class: {
+    redUnder: {
+      title: 'Underloaded',
+      text: 'Internal pressure is too low for the wing to maintain its intended profile tension. The structure becomes soft, reactions slow down, and the wing is more susceptible to deformation in turbulence and when using speed bar. Expect vague brake feedback, reduced wind penetration, and a higher likelihood of collapses in active air.',
+    },
+    yellow: {
+      title: 'Light',
+      text: 'Reduced internal tension makes the wing feel softer and less authoritative. Precision suffers in broken lift, wind penetration decreases, and small tip movements become more frequent due to reduced pressure stability.',
+    },
+    green: {
+      title: 'Solid / Agile',
+      text: 'Strong internal pressure, cohesive structure, precise handling, and effective turbulence cutting. Great XC configuration.',
+    },
+    redOver: {
+      title: 'Heavy / Dynamic',
+      text: 'Energy and speed increase significantly. Handling becomes sharper and collapses more energetic. Requires active, skilled piloting.',
+    },
+  },
   performance: {
     redUnder: {
       title: 'Unflyable / Unsafe',
@@ -105,7 +123,8 @@ const CONTENT_MAP: Record<string, any> = {
 
 const getCategoryKey = (id: string) => {
   if (['school', 'progression'].includes(id)) return 'recreational';
-  if (['xc_sport', 'sports_class'].includes(id)) return 'xc_sport';
+  if (id === 'xc_sport') return 'xc_sport';
+  if (id === 'sports_class') return 'sports_class';
   if (id === 'performance') return 'performance';
   if (id === 'competition') return 'competition';
   return 'tandem';

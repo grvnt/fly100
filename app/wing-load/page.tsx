@@ -61,8 +61,8 @@ const GLIDER_CLASSES: GliderClassDefinition[] = [
     classification: 'EN C',
     type: 'solo',
     ranges: {
-      underloadedMax: 3.4,
-      lightMin: 3.4,
+      underloadedMax: 3.3,
+      lightMin: 3.3,
       lightMax: 3.9,
       optimalMin: 3.9,
       optimalMax: 4.3,
