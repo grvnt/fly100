@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import ButtonGradient from './ButtonGradient';
-import { H1 } from '../ui/typography';
+import { H1, H2 } from '../ui/typography';
 import SenjaEmbed from './SenjaEmbed';
 
 const Hero = () => {
@@ -14,7 +14,7 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <H1 className="mb-6 sm:mb-12">Master the Mind, Flow will Follow. </H1>
+        <H1 className="mb-6 sm:mb-12">Fly in Flow. </H1>
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
             widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
@@ -34,8 +34,8 @@ const Hero = () => {
           </div>
         </div>
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-center">
-          Mechanical skill gets you in the air. Mindset keeps you there. Wingmates is the community
-          dedicated to Flow State, Performance Psychology, and the Inner Game of Paragliding.
+          Skill gets you in the air. Mindset keeps you there. <br /> <br /> Wingmates is a community for pilots
+          focused on the inner game of paragliding — cultivating mastery and flow.
         </p>
         <ButtonGradient href="/wingmates/#pricing" text="Join Today" className="btn-wide" />
       </div>
