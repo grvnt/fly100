@@ -14,7 +14,7 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <H1 className="mb-6 sm:mb-12">Fly in Flow. </H1>
+        <H1 className="mb-6 sm:mb-12">Master the Inner Game of Paragliding </H1>
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
             widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
@@ -33,9 +33,10 @@ const Hero = () => {
             </video>
           </div>
         </div>
+        <H2 className="mb-6 sm:mb-12">Fly in Flow </H2>
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-center">
-          Skill gets you in the air. Mindset keeps you there. <br /> <br /> Wingmates is a community for pilots
-          focused on the inner game of paragliding — cultivating mastery and flow.
+          Skill gets you in the air. Mindset keeps you there. <br /> <br /> Wingmates is a supportive community of pilots
+          focused on the inner game of paragliding — dedicated to mastery and cultivating flow.
         </p>
         <ButtonGradient href="/wingmates/#pricing" text="Join Today" className="btn-wide" />
       </div>
