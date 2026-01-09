@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 // import dynamic from 'next/dynamic';
 import Hero from '@/components/General/Hero';
 import Problem from '@/components/General/Problem';
-import FeaturesAccordion from '@/components/General/FeaturesAccordion';
+import GroupFlow from '@/components/General/GroupFlow';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import SenjaEmbed from '@/components/General/SenjaEmbed';
@@ -22,7 +22,7 @@ export default function Home() {
         <Hero />
         <TestimonialMerakai />
         <Problem />
-        <FeaturesAccordion />
+        <GroupFlow />
         <SenjaEmbed widgetId="0e2dc407-4d4f-487d-880b-0178d54161ab" />
         <PricingWingmates />
         <SenjaEmbed widgetId="196a5b6b-801b-49df-93bf-325c3a57749f" />

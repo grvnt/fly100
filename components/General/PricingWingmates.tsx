@@ -69,13 +69,29 @@ export default function PricingWingmates() {
       id="pricing" // Add id for navigation
     >
       <div className="container mx-auto pt-12 pb-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        <div className="text-center mb-20 max-w-3xl">
+        <div className="text-center mb-10 sm:mb-16 max-w-3xl">
           <Badge variant="secondary" className="mb-8">
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
             Join <i>Wingmates</i> today.
           </h2>
+          <div className="mt-6 text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 space-y-4 text-justify max-w-2xl mx-auto">
+            <p className="font-semibold">A different path to 100km mastery.</p>
+            <p>
+              We often look for answers in our gear, spending $X,000 on a new wing to find a few extra
+              points of performance. But the real performance gap isn&apos;t in the fabric—it&apos;s in
+              the flow.
+            </p>
+            <p>
+              For less than the price of a reserve repack, you can give your mind the same level of care
+              you give your equipment. Wingmates targets the 95% mental game that actually wins flights,
+              helping you move from hesitation to Dynamic Calm.
+            </p>
+            <p>
+              Choose the upgrade that stays with you, no matter what wing you fly.
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-wrap xl:flex-nowrap items-center bg-white dark:bg-gray-900/80 backdrop-blur-md mx-auto mt-4 max-w-2xl rounded-3xl ring-1 ring-[#3B82F6] xl:mx-0 xl:flex xl:max-w-none">

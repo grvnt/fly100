@@ -36,8 +36,9 @@ const TestimonialMerakai = () => {
               </div>
 
               <p className="mt-2 text-base leading-relaxed text-white md:text-lg">
-                &ldquo;Grant is a fantastic pilot and guide. He&apos;s doing great things for the paragliding
-                community with Wingmates and his YouTube channel.&rdquo;
+                &ldquo;Grant understands that consistent 100km flights are won in the mind, not with
+                gear. He&apos;s doing great things for the paragliding community by bringing the
+                science of flow to the forefront with Wingmates.&rdquo;
               </p>
             </div>
           </div>
