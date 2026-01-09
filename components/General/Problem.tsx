@@ -108,7 +108,7 @@ const Problem = () => {
           </div>
         </div>
         <H2 className="mb-6 sm:mb-8">
-          Finally, Achieve the "Dynamic Calm" <br />
+          Finally, Achieve the &quot;Dynamic Calm&quot; <br />
           <span className="text-[#00dafc]">Required for 100km Mastery</span>
         </H2>
         <div className="max-w-2xl mx-auto mb-8 sm:mb-12">
