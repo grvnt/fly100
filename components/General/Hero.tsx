@@ -2,10 +2,11 @@ import Image from 'next/image';
 import ButtonGradient from './ButtonGradient';
 import { H1, H2 } from '../ui/typography';
 import SenjaEmbed from './SenjaEmbed';
+import LogoBar from './LogoBar';
 
 const Hero = () => {
   return (
-    <section className="max-w-7xl mx-auto bg-base-100 flex flex-col items-center justify-center gap-8 sm:gap-16 px-4 sm:px-8 py-8 lg:py-20">
+    <section className="max-w-7xl mx-auto bg-base-200 flex flex-col items-center justify-center gap-8 sm:gap-16 px-4 sm:px-8 py-8 lg:py-20">
       <div className="flex flex-col gap-1 items-center justify-center text-center w-full max-w-5xl">
         <Image
           src="/wingmates-landing-logo.png"
@@ -35,7 +36,10 @@ const Hero = () => {
             </video>
           </div>
         </div>
-        <H2 className="mb-6 sm:mb-12">If Paragliding is 95% mental, <br /> why do most pilots spend 0% time on it? </H2>
+        <LogoBar />
+        <H2 className="mb-6 sm:mb-12">
+          If Paragliding is 95% mental, <br /> why do most pilots spend 0% time on it?{' '}
+        </H2>
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-center">
           You have a choice: Chase performance through gear, or upgrade what equipment can&apos;t
           touch—your mind. Join the Wingmates tribe to master the PARA framework and achieve 100km

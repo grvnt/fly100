@@ -74,7 +74,7 @@ export default function PricingWingmates() {
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Join <i>Wingmates</i> today.
+            Upgrade Your Mind & Join <i>Wingmates</i> today.
           </h2>
           <div className="mt-6 text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 space-y-4 text-justify max-w-2xl mx-auto">
             <p className="font-semibold">A different path to 100km mastery.</p>
