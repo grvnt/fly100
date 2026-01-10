@@ -15,9 +15,10 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <H1 className="mb-6 sm:mb-12">
-          Pilots Who Master 100km Routes Upgrade Their Mind First, Not Their Gear{' '}
-        </H1>
+        <H1 className="mb-6 sm:mb-12">Empowering Pilots to Reach Their Full Potential </H1>
+        <p className="text-xl sm:text-2xl font-medium text-center opacity-80 mb-6 sm:mb-12 max-w-3xl">
+          A global flow tribe dedicated to paragliding mastery and human flourishing
+        </p>
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
             widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
