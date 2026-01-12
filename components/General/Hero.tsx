@@ -15,10 +15,8 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <H1 className="mb-6 sm:mb-12">Empowering Pilots to Reach Their Full Potential </H1>
-        <p className="text-xl sm:text-2xl font-medium text-center opacity-80 mb-6 sm:mb-12 max-w-3xl">
-          A global flow tribe dedicated to paragliding mastery and human flourishing
-        </p>
+        <H1 className="mb-6 sm:mb-12">Together We Honour the Magic of Freeflight</H1>
+
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
             widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
@@ -39,14 +37,31 @@ const Hero = () => {
         </div>
         <LogoBar />
         <H2 className="mb-6 sm:mb-12">
-          If Paragliding is 95% mental, <br /> why do most pilots spend 0% time on it?{' '}
+          We Believe Paragliding is the <br /> Ultimate Expression of Human Freedom{' '}
         </H2>
-        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-center">
-          You have a choice: Chase performance through gear, or upgrade what equipment can&apos;t
-          touch—your mind. Join the Wingmates tribe to master the PARA framework and achieve 100km
-          consistency through the science of flow.
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
+          Since the dawn of man, humanity looked at the birds and dreamed of joining them. We are
+          the first generation in the history of our species to truly live that dream.
         </p>
-        <ButtonGradient href="/wingmates/#pricing" text="Upgrade My Mind" className="btn-wide" />
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
+          To us, flying is a gift of evolution—a beacon of human potential and freedom. But the sky
+          is not just a playground; it is a mirror. We believe that paragliding is a vehicle for
+          self-evolution. Because evolution is a process of infinite mastery, human evolution is
+          Mastery Manifest. Like a martial art, the "Elemental Art" of paragliding provides a medium
+          to practice, grow, and evolve as people.
+        </p>
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
+          Wingmates exists to honour the gift of flight by using it to master ourselves, and inspire
+          others to do the same.
+        </p>
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
+          We practice paragliding not as a sport, but as a way of life.
+        </p>
+        <ButtonGradient
+          href="/wingmates/#pricing"
+          text="Evolve through Flow"
+          className="btn-wide"
+        />
       </div>
     </section>
   );
