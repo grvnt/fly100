@@ -47,8 +47,8 @@ const Hero = () => {
           To us, flying is a gift of evolution—a beacon of human potential and freedom. But the sky
           is not just a playground; it is a mirror. We believe that paragliding is a vehicle for
           self-evolution. Because evolution is a process of infinite mastery, human evolution is
-          Mastery Manifest. Like a martial art, the "Elemental Art" of paragliding provides a medium
-          to practice, grow, and evolve as people.
+          Mastery Manifest. Like a martial art, the &ldquo;Elemental Art&rdquo; of paragliding
+          provides a medium to practice, grow, and evolve as people.
         </p>
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
           Wingmates exists to honour the gift of flight by using it to master ourselves, and inspire
