@@ -15,8 +15,10 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <H1 className="mb-6 sm:mb-12">Together We Honour the Magic of Freeflight</H1>
-
+        <H1 className="mb-6 sm:mb-12">Paragliding is the Art of Freedom</H1>
+        <p className="text-xl sm:text-2xl font-medium text-center opacity-80 mb-6 sm:mb-12 max-w-3xl">
+          Together, we honor the magic of freeflight.
+        </p>
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
             widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
@@ -37,29 +39,38 @@ const Hero = () => {
         </div>
         <LogoBar />
         <H2 className="mb-6 sm:mb-12">
-          We Believe Paragliding is the <br /> Ultimate Expression of Human Freedom{' '}
+          We Believe Paragliding is the <br /> Ultimate Expression of Human Freedom
         </H2>
-        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
+
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-6 text-justify">
           Since the dawn of man, humanity looked at the birds and dreamed of joining them. We are
           the first generation in the history of our species to truly live that dream.
         </p>
-        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
-          To us, flying is a gift of evolution—a beacon of human potential and freedom. But the sky
-          is not just a playground; it is a mirror. We believe that paragliding is a vehicle for
-          self-evolution. Because evolution is a process of infinite mastery, human evolution is
-          Mastery Manifest. Like a martial art, the &ldquo;Elemental Art&rdquo; of paragliding
-          provides a medium to practice, grow, and evolve as people.
+
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-6 text-justify">
+          To us, flying is more than a thrill; it is a gift of evolution—a beacon of human
+          potential. But the sky is not just a playground; it is a mirror. We believe that
+          paragliding is the ultimate vehicle for self-evolution.
         </p>
-        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
+
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-6 text-justify">
+          Evolution is a process of infinite mastery, and in the sky, that evolution becomes
+          manifest. Like a martial art, the &ldquo;Elemental Art&rdquo; of paragliding is our medium
+          for self-expression—a deliberate practice to grow, refine our intuition, and evolve as
+          people.
+        </p>
+
+        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-10 text-justify">
           Wingmates exists to honour the gift of flight by using it to master ourselves, and inspire
           others to do the same.
         </p>
-        <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-12 md:mb-5 text-justify">
+
+        <p className="max-w-2xl mx-auto text-xl font-medium leading-relaxed mb-5 text-center italic border-t border-white/10 pt-8">
           We practice paragliding not as a sport, but as a way of life.
         </p>
         <ButtonGradient
           href="/wingmates/#pricing"
-          text="Evolve through Flow"
+          text="Become a Wingmate"
           className="btn-wide"
         />
       </div>
