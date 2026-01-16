@@ -17,7 +17,7 @@ const Hero = () => {
         />
         <H1 className="mb-6 sm:mb-12">Paragliding is the Art of Freedom</H1>
         <p className="text-xl sm:text-2xl font-medium text-center opacity-80 mb-6 sm:mb-12 max-w-3xl">
-          Together, we honor the magic of freeflight.
+          Honour the Magic of Freeflight on the QUEST for Mastery
         </p>
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
@@ -68,11 +68,7 @@ const Hero = () => {
         <p className="max-w-2xl mx-auto text-xl font-medium leading-relaxed mb-5 text-center italic border-t border-white/10 pt-8">
           We practice paragliding not as a sport, but as a way of life.
         </p>
-        <ButtonGradient
-          href="/wingmates/#pricing"
-          text="Become a Wingmate"
-          className="btn-wide"
-        />
+        <ButtonGradient href="/wingmates/#pricing" text="Start Your QUEST" className="btn-wide" />
       </div>
     </section>
   );
