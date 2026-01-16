@@ -21,7 +21,7 @@ const TestimonialMerakai = () => {
               <div>
                 <p className="text-lg font-medium tracking-tight text-white">Paul Guschlbauer</p>
                 <p className="text-sm text-blue-200">
-                  Skywalk Team Pilot & RedBull XAlps Competitor
+                  Skywalk Team Pilot & RedBull XAlps Podium Finisher
                 </p>
                 <p className="text-sm mt-1">
                   <a
@@ -36,7 +36,7 @@ const TestimonialMerakai = () => {
               </div>
 
               <p className="mt-2 text-base leading-relaxed text-white md:text-lg">
-                &ldquo;Grant understands that consistent 100km flights are won in the mind, not with
+                &ldquo;Grant understands that paragliding is won in the mind, not with
                 gear. He&apos;s doing great things for the paragliding community by bringing the
                 science of flow to the forefront with Wingmates.&rdquo;
               </p>

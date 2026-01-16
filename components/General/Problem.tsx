@@ -13,9 +13,9 @@ const Problem = () => {
     <section className="bg-neutral text-neutral-content">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-24 text-center">
         <H2 className="mb-6 sm:mb-8">
-          If you don&apos;t master the inner game,
+          The external game always changes,
           <br />
-          you&apos;re holding yourself back.
+          the inner game never does.
         </H2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-8 sm:mb-12 md:mb-16">
           {/* The Gear Trap */}
@@ -109,7 +109,7 @@ const Problem = () => {
         </div>
         <H2 className="mb-6 sm:mb-8">
           Finally, Achieve the &quot;Dynamic Calm&quot; <br />
-          <span className="text-[#00dafc]">Required for 100km Mastery</span>
+          <span className="text-[#00dafc]">Required for Paragliding Mastery</span>
         </H2>
         <div className="max-w-2xl mx-auto mb-8 sm:mb-12">
           <p className="text-base sm:text-lg opacity-90 leading-relaxed text-left sm:text-justify">
@@ -146,8 +146,8 @@ const Problem = () => {
               (P)lan: Your North Star
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Move from guessing to an identity and strategy that coordinates your mind and spirit
-              toward a 100km vision.
+              Identity-based learning coordinates your mind and spirit
+              toward an integral vision of the person you want to become.
             </p>
             <p className="text-sm sm:text-base text-white font-semibold text-center">
               The Result: Total alignment.

@@ -74,23 +74,22 @@ export default function PricingWingmates() {
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Upgrade Your Mind & Join <i>Wingmates</i> today.
+            Start Your QUEST for Mastery & Join <i>Wingmates</i> today.
           </h2>
           <div className="mt-6 text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 space-y-4 text-justify max-w-2xl mx-auto">
-            <p className="font-semibold">A different path to 100km mastery.</p>
+            <p className="font-semibold">A different path to paragliding mastery.</p>
             <p>
-              We often look for answers in our gear, spending $X,000 on a new wing to find a few extra
-              points of performance. But the real performance gap isn&apos;t in the fabric—it&apos;s in
-              the flow.
+              We often look for answers in our gear, spending $X,000 on a new wing to find a few
+              extra points of performance, neglecting the most important part of the equation: the
+              mind.
             </p>
             <p>
-              For less than the price of a reserve repack, you can give your mind the same level of care
-              you give your equipment. Wingmates targets the 95% mental game that actually wins flights,
-              helping you move from hesitation to Dynamic Calm.
+              For less than the price of a reserve repack, you can give your mind the same level of
+              care you give your equipment. Wingmates is a supportive home base, a place to learn,
+              grow and connect with like-minded pilots. Choose-your-own-adventure on the QUEST for
+              mastery and evolve into the pilot and person you want to become.
             </p>
-            <p>
-              Choose the upgrade that stays with you, no matter what wing you fly.
-            </p>
+            <p>Choose the upgrade that stays with you, no matter what wing you fly.</p>
           </div>
         </div>
 
