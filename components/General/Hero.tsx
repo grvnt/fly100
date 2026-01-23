@@ -15,10 +15,8 @@ const Hero = () => {
           height={100}
           className="mb-4 sm:mb-8 w-24 sm:w-32 h-auto"
         />
-        <H1 className="mb-6 sm:mb-12">Paragliding is the Art of Freedom</H1>
-        <p className="text-xl sm:text-2xl font-medium text-center opacity-80 mb-6 sm:mb-12 max-w-3xl">
-          Honour the Magic of Freeflight on the QUEST for Mastery
-        </p>
+        <H1 className="mb-6 sm:mb-12">Experience the Magic of Mastery</H1>
+
         <div className="w-full max-w-4xl mx-auto my-6">
           <SenjaEmbed
             widgetId="ad8250da-bdf3-4df5-bf01-16430ceda859"
@@ -39,7 +37,7 @@ const Hero = () => {
         </div>
         <LogoBar />
         <H2 className="mb-6 sm:mb-12">
-          We Believe Paragliding is the <br /> Ultimate Expression of Human Freedom
+          Because Paragliding <br /> is so much more than numbers...
         </H2>
 
         <p className="max-w-2xl mx-auto text-lg opacity-90 leading-relaxed mb-6 text-justify">

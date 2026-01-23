@@ -10,7 +10,7 @@ import SenjaEmbed from '@/components/General/SenjaEmbed';
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
 export const metadata: Metadata = {
-  title: 'Wingmates | The Inner Game of Paragliding',
+  title: 'Wingmates | Be the Flow',
   description:
     'A community dedicated to flow state, decision-making, and the mental mastery of flight. Mechanical skill gets you airborne; mindset determines the rest.',
 };
