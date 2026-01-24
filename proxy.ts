@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Add caching headers for video files from Supabase storage
   if (request.nextUrl.pathname.includes('/storage/v1/object/public/video/')) {
     const response = NextResponse.next();
@@ -23,4 +23,4 @@ export const config = {
     // Exclude static files and images
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
-}; 
+};

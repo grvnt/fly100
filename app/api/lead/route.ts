@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
     await supabase.from("leads").insert({ email: body.email });
 
     return NextResponse.json({});

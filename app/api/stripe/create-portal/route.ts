@@ -4,7 +4,7 @@ import { createCustomerPortal } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const body = await req.json();
 

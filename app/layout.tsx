@@ -8,6 +8,8 @@ import './globals.css';
 const notoSans = Noto_Sans({
   subsets: ['latin'],
   variable: '--font-noto-sans',
+  display: 'swap',
+  fallback: ['system-ui', 'arial'],
 });
 
 export const viewport: Viewport = {
