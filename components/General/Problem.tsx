@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { H2, H3 } from '../ui/typography';
 
 // The Arrow component is defined but not used in this file.
@@ -13,109 +12,14 @@ const Problem = () => {
     <section className="bg-neutral text-neutral-content">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-24 text-center">
         <H2 className="mb-6 sm:mb-8">
-          The external game always changes,
-          <br />
-          the inner game never does.
-        </H2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-8 sm:mb-12 md:mb-16">
-          {/* The Gear Trap */}
-          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left">
-            <div className="w-12 h-12 rounded-full bg-purple-700/40 flex items-center justify-center mb-4 mx-auto">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 text-center">
-              The Gear Trap
-            </h3>
-            <p className="text-base sm:text-lg text-white opacity-90 leading-relaxed mb-4">
-              Most pilots spend $X,000 on wings to gain a 5% performance edge but spend $0 to
-              upgrade their 95% mental game.
-            </p>
-            <p className="text-base sm:text-lg text-white font-semibold">
-              The Result: You try to solve a mental challenge with an equipment solution.
-            </p>
-          </div>
-
-          {/* The Survival Loop */}
-          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left">
-            <div className="w-12 h-12 rounded-full bg-blue-700/40 flex items-center justify-center mb-4 mx-auto">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 text-center">
-              The Fear Loop
-            </h3>
-            <p className="text-base sm:text-lg text-white opacity-90 leading-relaxed mb-4">
-              Fear and hesitation act like a &quot;handbrake&quot; on your flight. You react to the
-              air instead of flowing with it.
-            </p>
-            <p className="text-base sm:text-lg text-white font-semibold">
-              The Result: You stay trapped in a cycle of anxiety, comparison, and
-              &quot;near-miss&quot; frustration.
-            </p>
-          </div>
-
-          {/* The Performance Wall */}
-          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left">
-            <div className="w-12 h-12 rounded-full bg-orange-700/40 flex items-center justify-center mb-4 mx-auto">
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 text-center">
-              The Performance Wall
-            </h3>
-            <p className="text-base sm:text-lg text-white opacity-90 leading-relaxed mb-4">
-              You have the skills and the gear, but you&apos;ve hit a ceiling you can&apos;t think
-              your way through.
-            </p>
-            <p className="text-base sm:text-lg text-white font-semibold">
-              The Result: Your 100km goals remain out of reach because your internal &quot;OS&quot;
-              is outdated.
-            </p>
-          </div>
-        </div>
-        <H2 className="mb-6 sm:mb-8">
           Finally, Achieve the &quot;Dynamic Calm&quot; <br />
           <span className="text-[#00dafc]">Required for Paragliding Mastery</span>
         </H2>
         <div className="max-w-2xl mx-auto mb-8 sm:mb-12">
           <p className="text-base sm:text-lg opacity-90 leading-relaxed text-left sm:text-justify">
             Wingmates is a supportive community that provides mental frameworks and feedback to
-            harness the superpower of flow. Rewire your brain to become the pilot who flies 100km
-            flights with ease, upgrading your mind—and your life.
+            harness the superpower of flow. Rewire your brain to become the pilot you were born to
+            be, upgrading your mind—and your life.
           </p>
         </div>
 
@@ -146,8 +50,8 @@ const Problem = () => {
               (P)lan: Your North Star
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Identity-based learning coordinates your mind and spirit
-              toward an integral vision of the person you want to become.
+              Identity-based learning coordinates your mind and spirit toward an integral vision of
+              the person you want to become.
             </p>
             <p className="text-sm sm:text-base text-white font-semibold text-center">
               The Result: Total alignment.
@@ -238,26 +142,6 @@ const Problem = () => {
             </p>
             <p className="text-sm sm:text-base text-white font-semibold text-center">
               The Result: Permanent upgrade.
-            </p>
-          </div>
-        </div>
-
-        {/* Community Proof: The Flow Lab */}
-        <div className="max-w-5xl mx-auto mt-10 sm:mt-12">
-          <div className="bg-[#07122d] rounded-2xl p-4 sm:p-6 flex flex-col items-center gap-4">
-            <div className="w-full rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border group">
-              <Image
-                src="/wingmates-paragliding-feedback-posts.jpg"
-                alt="The Flow Lab community - pilots sharing experiences and wins"
-                width={1350}
-                height={768}
-                className="w-full h-auto transform-gpu transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-              />
-            </div>
-            <p className="text-sm sm:text-base text-white/80 text-left sm:text-center max-w-3xl">
-              A laboratory for your mental game. See PARA in action. Join daily discussions where
-              pilots share their &quot;Exposure Therapy,&quot; celebrate breakthroughs, and provide
-              the feedback you need to stay in flow.
             </p>
           </div>
         </div>

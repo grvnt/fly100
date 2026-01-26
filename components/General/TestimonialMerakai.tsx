@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const TestimonialMerakai = () => {
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-transparent">
       <section className="max-w-4xl px-4 py-8 mx-auto">
         <main className="relative z-20 w-full md:flex md:items-center">
           <div className="absolute w-full bg-gray-800 -z-10 md:h-64 rounded-xl"></div>

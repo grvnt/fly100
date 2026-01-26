@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
 // import dynamic from 'next/dynamic';
 import ButtonGradient from '@/components/General/ButtonGradient';
-import LogoBar from '@/components/General/LogoBar';
 import Problem from '@/components/General/Problem';
 import GroupFlow from '@/components/General/GroupFlow';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import SenjaEmbed from '@/components/General/SenjaEmbed';
+import TheShift from '@/components/General/TheShift';
+import { H2 } from '@/components/ui/typography';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
@@ -20,8 +21,8 @@ export default function Home() {
   return (
     <>
       <main>
-        <section className="max-w-7xl mx-auto bg-base-200 px-4 sm:px-8 py-8 lg:py-20">
-          <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <section className="max-w-7xl mx-auto bg-base-200 px-4 sm:px-8 py-12 sm:py-16 lg:py-32 min-h-[80vh] flex items-center">
+          <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
             {/* Left Column - The Hook */}
             <div className="flex flex-col gap-4 lg:gap-6">
               {/* Eyebrow */}
@@ -53,8 +54,8 @@ export default function Home() {
             </div>
 
             {/* Right Column - Video */}
-            <div className="w-full">
-              <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
+            <div className="w-full flex items-center justify-center">
+              <div className="w-full aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
                 <video
                   className="w-full h-full object-cover"
                   controls
@@ -110,9 +111,127 @@ export default function Home() {
           </div>
         </section>
 
-        <LogoBar />
+        <section className="bg-black px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="max-w-7xl mx-auto flex flex-col gap-6 items-center text-center">
+            {/* Eyebrow */}
+            <p className="text-base sm:text-lg font-semibold uppercase tracking-wider text-[#3B82F6] animate-pulse-text">
+              Paragliding is <span className="animate-shift-light">Evolving</span>
+            </p>
 
-        <TestimonialMerakai />
+            {/* H2 Heading */}
+            <H2 className="text-white">Freedom Comes From Flow, Not Rankings</H2>
+
+            {/* Body Text */}
+            <div className="max-w-3xl mx-auto text-white text-lg sm:text-xl leading-relaxed space-y-6 text-justify">
+              <p>
+                We lost the magic and freedom of flying and began measuring our worth and enjoyment
+                by points and rankings.
+              </p>
+              <p>
+                We fulfilled a dream and then turned this miracle into a battle of the ego. Social
+                networks and rating systems now push us to compare ourselves constantly, often
+                forcing pilots to ignore their own feelings and safety just for a few extra points.
+              </p>
+              <p>
+                But pilots are breaking away. There is a growing movement of people who realize
+                paragliding is more than a sport—and are reconnecting with it as a form of art and
+                personal growth.
+              </p>
+
+              <p>
+                We are returning to the Soul of Free Flight, where flying exists as an elemental art
+                of self-expression, self-discovery and, ultimately, self-evolution.
+              </p>
+              <p>We honour the XC Spirit of freedom and adventure.</p>
+            </div>
+          </div>
+        </section>
+
+        <TheShift />
+
+        <section
+          className="relative min-h-[60vh] flex items-center bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              'url(https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/gudauri-paragliding-sigma.jpg)',
+          }}
+        >
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/60"></div>
+
+          <div className="relative z-10 w-full">
+            <TestimonialMerakai />
+          </div>
+        </section>
+
+        <section className="bg-black px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="max-w-7xl mx-auto flex flex-col gap-6 items-center text-center">
+            {/* Heading */}
+            <H2 className="text-white">Who will benefit most from this?</H2>
+
+            {/* Body Text */}
+            <div className="max-w-3xl mx-auto text-white text-lg sm:text-xl leading-relaxed space-y-6 text-justify">
+              <p>
+                Let's be clear: This is not a retreat from performance. We aren't anti-competition.
+                We are anti-constraint. We are after the freedom to perform at our absolute best, to
+                push our limits, to break free from self-constraints, and to fly with a Warrior
+                Spirit.
+              </p>
+              <p>
+                We embrace the full spectrum and the challenges of flight to become the best
+                versions of ourselves—not to be the best in the world but to be the best for the
+                world.
+              </p>
+
+              <p>
+                But you cannot fly in flow if you are focused outwards and your mind is full of
+                "Noise." You will benefit most from Wingmates if you are ready to break free from:
+              </p>
+
+              <ul className="space-y-4 text-left list-disc list-inside">
+                <li>
+                  <strong>The Ranking Trap:</strong> You've started measuring your worth by numbers
+                  on a screen, turning a miracle into a "battle of the ego" and losing the
+                  "excitement, fun, and adventure" that brought you to paragliding.
+                </li>
+
+                <li>
+                  <strong>Fear is Holding You Back:</strong> On takeoff, on landing, when you're
+                  high or in turbulence when there is no "pause button".
+                </li>
+
+                <li>
+                  <strong>The "Retrieve Driver" Syndrome:</strong> You are sick of being the one
+                  sitting in the car, watching others enjoy the air because you "bombed out" again.
+                </li>
+
+                <li>
+                  <strong>The Overthinking Head:</strong> You have "10 contributors" jostling for
+                  the top spot in your mind, creating a distracted, busy head that makes the magic
+                  of flow impossible.
+                </li>
+
+                <li>
+                  <strong>The Rollercoaster Cycle:</strong> You've had breakthroughs before, but
+                  you're struggling with consistency.
+                </li>
+
+                <li>
+                  <strong>The Toxic Strain:</strong> You've considered walking away from the sport
+                  entirely because the mental strain and constant pressure to compare yourself have
+                  silenced your love for flying.
+                </li>
+
+                <li>
+                  <strong>Isolation:</strong> Paragliding is scary and lonely without a crew.
+                  Sharing ideas and experiences with the group to stay inspired and continue the
+                  flying journey.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         <Problem />
         <GroupFlow />
         <SenjaEmbed widgetId="0e2dc407-4d4f-487d-880b-0178d54161ab" />

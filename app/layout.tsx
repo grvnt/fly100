@@ -26,7 +26,7 @@ export const metadata = getSEOTags({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body className={notoSans.className}>
+      <body className={notoSans.className} suppressHydrationWarning>
         {children}
         {/* ConvertKit scripts removed */}
       </body>

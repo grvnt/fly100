@@ -26,7 +26,7 @@ const LogoBar = () => {
           {logos.map((logo, index) => (
             <div
               key={index}
-              className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300"
+              className="flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 rounded-lg p-3 border-2 border-transparent hover:border-[#3B82F6] hover:shadow-[0_0_15px_#3B82F6] hover:animate-pulse-border"
             >
               <Image
                 src={logo.src}
