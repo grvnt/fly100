@@ -114,6 +114,22 @@
   animation: pulse-border 4s ease-in-out infinite;
 }
 
+@keyframes pulse-text {
+  0%,
+  100% {
+    color: #3b82f6;
+    text-shadow: 0 0 5px #3b82f6;
+  }
+  50% {
+    color: #60a5fa;
+    text-shadow: 0 0 15px #60a5fa;
+  }
+}
+
+.animate-pulse-text {
+  animation: pulse-text 4s ease-in-out infinite;
+}
+
 /* Constrain Senja embeds to container width */
 .max-w-2xl .senja-embed,
 .max-w-2xl .senja-embed iframe,
