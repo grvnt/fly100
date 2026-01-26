@@ -229,6 +229,15 @@ export default function Home() {
                 </li>
               </ul>
             </div>
+
+            {/* Image */}
+            <div className="max-w-5xl mx-auto mt-12">
+              <img
+                src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/flow-channel-wingmates-paragliding.jpg"
+                alt="Flow channel wingmates paragliding"
+                className="w-full h-auto rounded-2xl"
+              />
+            </div>
           </div>
         </section>
 

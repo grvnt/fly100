@@ -9,8 +9,17 @@ import { H2, H3 } from '../ui/typography';
 
 const Problem = () => {
   return (
-    <section className="bg-neutral text-neutral-content">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-24 text-center">
+    <section
+      className="relative bg-neutral text-neutral-content bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          'url(https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/paragliding-ozone-fhoek.jpg)',
+      }}
+    >
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/70"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-24 text-center">
         <H2 className="mb-6 sm:mb-8">
           Finally, Achieve the &quot;Dynamic Calm&quot; <br />
           <span className="text-[#00dafc]">Required for Paragliding Mastery</span>
@@ -30,7 +39,7 @@ const Problem = () => {
         {/* Mental Frameworks blocks */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {/* Plan: Your North Star */}
-          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left">
+          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-sky-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 text-sky-300"
@@ -59,7 +68,7 @@ const Problem = () => {
           </div>
 
           {/* Act: Dynamic Calm */}
-          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left">
+          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-300"
@@ -88,7 +97,7 @@ const Problem = () => {
           </div>
 
           {/* Reflect: The Tribe Mirror */}
-          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left">
+          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-violet-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 text-violet-300"
@@ -117,7 +126,7 @@ const Problem = () => {
           </div>
 
           {/* Adjust: The Upward Spiral */}
-          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left">
+          <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 text-amber-300"
