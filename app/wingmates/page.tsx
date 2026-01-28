@@ -173,9 +173,12 @@ export default function Home() {
             <div className="max-w-3xl mx-auto text-white text-lg sm:text-xl leading-relaxed space-y-6 text-justify">
               <p>
                 Let's be clear: This is not a retreat from performance. We aren't anti-competition.
-                We are anti-constraint. We are after the freedom to perform at our absolute best, to
-                push our limits, to break free from self-constraints, and to fly with a Warrior
-                Spirit.
+                We aren't anti-ambition.
+              </p>
+              <p>We are anti-constraint - in flying and in life.</p>
+              <p>
+                We are after the freedom to perform at our absolute best, to push our limits, to
+                break free from self-constraints, by cultivating the Warrior Spirit within.
               </p>
               <p>
                 We embrace the full spectrum and the challenges of flight to become the best
@@ -223,9 +226,9 @@ export default function Home() {
                 </li>
 
                 <li>
-                  <strong>Isolation:</strong> Paragliding is scary and lonely without a crew.
-                  Sharing ideas and experiences with the group to stay inspired and continue the
-                  flying journey.
+                  <strong>Isolation:</strong> Paragliding can be scary and lonely without a crew.
+                  Sharing ideas and experiences with the group helps to stay inspired and continue
+                  the flying journey without feeling isolated.
                 </li>
               </ul>
             </div>
@@ -237,6 +240,52 @@ export default function Home() {
                 alt="Flow channel wingmates paragliding"
                 className="w-full h-auto rounded-2xl"
               />
+            </div>
+          </div>
+        </section>
+
+        {/* The Greatest Gift - About Grant */}
+        <section className="bg-base-200 px-4 sm:px-8 py-12 sm:py-16 lg:py-24">
+          <div className="max-w-5xl mx-auto text-center mb-10 sm:mb-14">
+            <p className="text-base sm:text-lg font-semibold uppercase tracking-wider text-[#3B82F6] animate-pulse-text">
+              THE GREATEST GIFT
+            </p>
+            <H2 className="text-white mt-4">
+              All Achievement is Meaningless
+              <br />
+              Without This
+            </H2>
+          </div>
+
+          <div className="max-w-5xl mx-auto flex flex-col items-center text-center gap-6">
+            {/* Quote */}
+            <blockquote className="max-w-3xl mx-auto text-white/80 text-base sm:text-lg italic border-l-4 border-[#3B82F6] pl-4 sm:pl-6">
+              “Achievement is something you reach or attain, like a goal. It is perishable. Success,
+              however, is a feeling or a state of being. It is the result of why you do what you
+              do.” — Adapted from Simon Sinek
+            </blockquote>
+
+            {/* Profile Image */}
+            <div className="flex justify-center">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
+                <img
+                  src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/grant-profile-pgatlas-crop.jpg"
+                  alt="Grant profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Text Content */}
+            <div className="text-white space-y-4">
+              <h3 className="text-2xl sm:text-3xl font-semibold">Hey, I&apos;m Grant</h3>
+              <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur.
+              </p>
             </div>
           </div>
         </section>
