@@ -277,14 +277,113 @@ export default function Home() {
             </div>
 
             {/* Text Content */}
-            <div className="text-white space-y-4">
-              <h3 className="text-2xl sm:text-3xl font-semibold">Hey, I&apos;m Grant</h3>
-              <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur.
+            <div className="text-white max-w-3xl mx-auto space-y-6 text-base sm:text-lg text-white/90 leading-relaxed text-justify">
+              <h3 className="text-2xl sm:text-3xl font-semibold text-center">
+                Hey, I&apos;m Grant
+              </h3>
+
+              <p>
+                Since I was a young boy, I dreamt of flying. I&apos;ll never forget the day I first
+                thermaled up to touch a cloud—it was a miracle beyond my wildest dreams. I poured my
+                heart and soul into paragliding, often ground handling in tough conditions, flying
+                as often as possible, reading paragliding books and studying the weather. I knew
+                nothing about XC and had no ambitions or goals other than just getting better at
+                flying, but in my first full season I found myself in flow, winning the local XC
+                league with six 100km+ flights.
+              </p>
+
+              <p>
+                I was showered with praise and told my talent was rare. I got invited to fly with
+                local legends. I was given guiding work and got the opportunity to work with some of
+                my heroes. It was all starting to look like success.
+              </p>
+
+              <p>
+                Beneath the surface, I was riddled with social anxiety and low self-worth which
+                I&apos;d been self-medicating with alcohol and a concoction of substances since high
+                school. This attention validated my worth and I felt accepted. I began to identify
+                with being &quot;the best&quot; and my fragile ego craved more hits of attention and
+                approval.
+              </p>
+
+              <p>
+                But &quot;winning&quot; is a fast-burning fuel which, like a drug, requires regular
+                hits and a dosage increase over time to have the same effect. It relies on the
+                fickle opinions of others which no one has any control over. When these opinions
+                change there&apos;s nothing left to do but to prove oneself because winning, by its
+                very nature, requires losers - and nobody wants to feel like a loser.
+              </p>
+
+              <p>
+                This is the shallow rollercoaster of achievement - a natural but unsustainable stage
+                of human development and a far cry from the reason I started flying in the first
+                place.
+              </p>
+
+              <h4 className="text-xl sm:text-2xl font-semibold text-white pt-2 text-center">
+                The Insight
+              </h4>
+              <p>
+                This all changed on a chilly spring day in Sweden after two years of no flying,
+                hundreds of meters above takeoff, I found myself working weak lift for the pure joy
+                of the challenge. No plans to go XC. No needing to prove anything. Flying for the
+                sake of flying. Time and my sense of self vanished. The self-critic was quiet. I
+                felt one with everything. I felt free.
+              </p>
+              <p>I was in Flow.</p>
+              <p>
+                The experience was so profound that I took to studying it with the same enthusiasm
+                as when I first started flying. And the deeper I went down the rabbit hole the more
+                profound it became.
+              </p>
+              <p>
+                Mihaly Csikszentmihalyi, the godfather of Flow, concluded that life is meaningless
+                without flow. Flow gives life meaning. Achievement without flow is meaningless.
+              </p>
+
+              <h4 className="text-xl sm:text-2xl font-semibold text-white pt-2 text-center">
+                The Alchemy of Alignment
+              </h4>
+              <p>
+                I returned to South Africa with nothing to prove, only a desire for personal growth
+                and to be a contribution to others. I just wanted to fly and share the gift of
+                flight. I shifted from &quot;Me&quot; to &quot;We,&quot; and Wingmates was born.
+              </p>
+              <p>
+                I realised how lopsided my personal development had been, how my shadow had been
+                running the show, and when I started to apply these principles to all four quadrants
+                of life - mind, body, spirit, and systems - it was clear that the ultimate
+                freedom—self-evolution—comes from their alignment.
+              </p>
+              <p>Flow is the natural byproduct of this alignment.</p>
+
+              <h4 className="text-xl sm:text-2xl font-semibold text-white pt-2 text-center">
+                The Result
+              </h4>
+              <p>
+                I applied these principles to my fitness, my social anxiety, and my professional
+                life. I launched my YouTube channel and Wingmates, I beat the addiction I
+                experienced. I improved my dating and social life, improved my finances, and
+                transformed my body.
+              </p>
+
+              <div className="py-8 flex justify-center">
+                <div className="max-w-full rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                  <img
+                    src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/transformation.jpg"
+                    alt="Transformation"
+                    className="max-w-full h-auto block"
+                  />
+                </div>
+              </div>
+
+              <p>
+                And it all came through the wisdom of paragliding, it came from the superhuman gift
+                we all have access - flow.
+              </p>
+              <p>
+                The path of the Flow Pilot is to align your life with the greatest gift of all:
+                Freedom.
               </p>
             </div>
           </div>
