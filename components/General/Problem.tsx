@@ -59,11 +59,11 @@ const Problem = () => {
               (P)lan: Your North Star
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Identity-based learning coordinates your mind and spirit toward an integral vision of
-              the person you want to become.
+              Identity-based learning that coordinates your mind and spirit toward a vision of the
+              pilot you want to become.
             </p>
             <p className="text-sm sm:text-base text-white font-semibold text-center">
-              The Result: Total alignment.
+              Result: Total alignment.
             </p>
           </div>
 
@@ -117,11 +117,11 @@ const Problem = () => {
               (R)eflect: The Tribe Mirror
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Use the community &quot;mirror&quot; to share, reflect and grow. Gain the radical
-              clarity solo flight logs can&apos;t provide.
+              Using the community to extract deep, implicit learning that solo flight logs
+              can&apos;t provide.
             </p>
             <p className="text-sm sm:text-base text-white font-semibold text-center">
-              The Result: Accelerated growth.
+              Result: Accelerated growth.
             </p>
           </div>
 
@@ -146,14 +146,20 @@ const Problem = () => {
               (A)djust: The Upward Spiral
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Rewire your personal narratives to shift your identity to make high performance your
+              Rewiring personal narratives to shift your identity, making high performance your
               baseline.
             </p>
             <p className="text-sm sm:text-base text-white font-semibold text-center">
-              The Result: Permanent upgrade.
+              Result: Permanent upgrade.
             </p>
           </div>
         </div>
+
+        <blockquote className="max-w-2xl mx-auto mt-10 sm:mt-12 text-white/90 text-base sm:text-lg italic border-l-4 border-[#00dafc] pl-4 sm:pl-6">
+          &quot;After my only son died in 2018, my life lost its meaning... Paragliding brought me
+          back to life 5 years ago. You suggested a way to return to myself. I find your practical
+          advice on stabilizing my psycho-emotional state most valuable.&quot; — Sergey
+        </blockquote>
       </div>
     </section>
   );

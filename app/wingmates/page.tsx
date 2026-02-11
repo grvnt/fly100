@@ -6,7 +6,6 @@ import GroupFlow from '@/components/General/GroupFlow';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import SenjaEmbed from '@/components/General/SenjaEmbed';
-import TheShift from '@/components/General/TheShift';
 import { H2 } from '@/components/ui/typography';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
@@ -119,7 +118,7 @@ export default function Home() {
             </p>
 
             {/* H2 Heading */}
-            <H2 className="text-white">Freedom Comes From Flow, Not Rankings</H2>
+            <H2 className="text-white">Flow is Freedom</H2>
 
             {/* Body Text */}
             <div className="max-w-3xl mx-auto text-white text-lg sm:text-xl leading-relaxed space-y-6 text-justify">
@@ -146,8 +145,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <TheShift />
 
         <section
           className="relative min-h-[60vh] flex items-center bg-cover bg-center bg-no-repeat"
@@ -379,7 +376,7 @@ export default function Home() {
 
               <p>
                 And it all came through the wisdom of paragliding, it came from the superhuman gift
-                we all have access - flow.
+                we all have access to - flow.
               </p>
               <p>
                 The path of the Flow Pilot is to align your life with the greatest gift of all:

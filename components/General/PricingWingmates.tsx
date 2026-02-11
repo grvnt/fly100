@@ -18,7 +18,7 @@ export interface PricingTier {
   discountPrice: string | Record<string, string>;
   price: string | Record<string, string>;
   description: string | React.ReactNode;
-  features: string[];
+  features: Array<string | React.ReactNode>;
   featured?: boolean;
   highlighted?: boolean;
   cta: string;
@@ -33,11 +33,26 @@ const plan: PricingTier = {
   discountPrice: '$150',
   description: "The world's first flow-driven paragliding community.",
   features: [
-    'Continuous Community Support',
-    'Live Events & Workshops',
-    'Connect with Pilots Worldwide',
-    'Share Flights, Debriefs & Stories',
-    'Accelerate Peer to Peer Learning',
+    <>
+      <strong>The I-PARA Flow System:</strong> Master the step-by-step method to stay in the 'Flow
+      Channel' and eliminate the anxiety of the 'Ranking Trap.'
+    </>,
+    <>
+      <strong>CCC (Quiet Mind) Toolkit:</strong> Practical techniques to silence the mind
+      to stop overthinking and work with fear.
+    </>,
+    <>
+      <strong>QUEST Reflection Protocol:</strong> Access the structured post-flight debrief system
+      that turns every landing into rapid self-evolution.
+    </>,
+    <>
+      <strong>The Wingmates Global Crew:</strong> Join a tribe that prioritizes the 'Soul of Flight'
+      and 'Flow' over ego-driven points and rankings.
+    </>,
+    <>
+      <strong>Weekly Online Events:</strong> Live interactive workshops to align your mind, body,
+      and systems for the ultimate flight experience.
+    </>,
   ],
   featured: true,
   highlighted: false,
@@ -76,21 +91,6 @@ export default function PricingWingmates() {
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
             Start Your QUEST for Mastery & Join <i>Wingmates</i> today.
           </h2>
-          <div className="mt-6 text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 space-y-4 text-justify max-w-2xl mx-auto">
-            <p className="font-semibold">A different path to paragliding mastery.</p>
-            <p>
-              We often look for answers in our gear, spending $X,000 on a new wing to find a few
-              extra points of performance, neglecting the most important part of the equation: the
-              mind.
-            </p>
-            <p>
-              For less than the price of a reserve repack, you can give your mind the same level of
-              care you give your equipment. Wingmates is a supportive home base, a place to learn,
-              grow and connect with like-minded pilots. Choose-your-own-adventure on the QUEST for
-              mastery and evolve into the pilot and person you want to become.
-            </p>
-            <p>Choose the upgrade that stays with you, no matter what wing you fly.</p>
-          </div>
         </div>
 
         <div className="flex flex-wrap xl:flex-nowrap items-center bg-white dark:bg-gray-900/80 backdrop-blur-md mx-auto mt-4 max-w-2xl rounded-3xl ring-1 ring-[#3B82F6] xl:mx-0 xl:flex xl:max-w-none">
@@ -109,10 +109,13 @@ export default function PricingWingmates() {
             </div>
 
             <ul className="mt-10 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-700 dark:text-gray-400">
-              {plan.features.map(feature => (
-                <li key={feature} className="flex items-center gap-x-2 text-sm">
-                  <CheckIcon className="h-6 w-6 flex-none text-blue-500" aria-hidden="true" />
-                  {feature}
+              {plan.features.map((feature, index) => (
+                <li key={index} className="flex items-start gap-x-3 text-sm">
+                  <CheckIcon
+                    className="h-6 w-6 flex-none text-blue-500 mt-0.5"
+                    aria-hidden="true"
+                  />
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
@@ -125,11 +128,14 @@ export default function PricingWingmates() {
             >
               <div className="mx-auto max-w-xs px-8">
                 <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                  <span className="text-7xl md:text-8xl font-bold tracking-tight text-black dark:text-white">
-                    $150
+                  <span className="text-2xl md:text-3xl font-semibold text-gray-500 dark:text-gray-400 line-through">
+                    $55
+                  </span>
+                  <span className="text-5xl md:text-6xl font-bold tracking-tight text-black dark:text-white">
+                    $37
                   </span>
                   <span className="text-xl md:text-2xl font-semibold leading-6 tracking-wide text-gray-700 dark:text-gray-400">
-                    /quarter
+                    /month
                   </span>
                 </p>
                 <div className="flex justify-center mt-8 flex-shrink-0">
