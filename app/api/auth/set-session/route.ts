@@ -12,7 +12,7 @@ type SupabaseCookie = {
 };
 
 // Fallback for when Supabase returns implicit flow (tokens in hash) instead of PKCE.
-// Client posts access_token + refresh_token here; we set session cookies and redirect to dashboard.
+// Client posts access_token + refresh_token here; we set session cookies and redirect to callbackUrl.
 export async function POST(req: NextRequest) {
   let access_token: string | undefined;
   let refresh_token: string | undefined;

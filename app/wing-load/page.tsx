@@ -305,8 +305,8 @@ const App: React.FC = () => {
                 Unlock Tool
               </button>
 
-              <p className="text-xs text-gray-400 mt-4">
-                {/* Already subscribed? Check your email for the access link. */}
+              <p className="text-xs text-gray-500 mt-4">
+                Using this tool will sign you up to my mailing list. Unsubscribe any time.
               </p>
             </form>
           </div>

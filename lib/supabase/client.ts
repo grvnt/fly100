@@ -1,17 +1,12 @@
-import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+import { createBrowserClient } from "@supabase/ssr";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// Use @supabase/ssr browser client so the PKCE code_verifier is stored in cookies.
+// That way when the OAuth redirect lands on /auth/callback, the verifier is available and exchangeCodeForSession succeeds.
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
 
-// Browser client used on the sign-in page & anywhere you call supabase-js directly.
-// Force the PKCE flow so the provider redirects back with ?code=... (not #access_token),
-// which our /api/auth/callback route can then exchange for a cookie-based session.
-const supabase = createSupabaseClient(supabaseUrl, supabaseKey, {
-  auth: {
-    flowType: "pkce",
-    persistSession: false,
-  },
-});
-
-export { createSupabaseClient as createClient };
-export default supabase;
+export default createClient();

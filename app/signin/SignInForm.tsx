@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import supabase from "@/lib/supabase/client";
 import { Provider } from "@supabase/supabase-js";
@@ -16,9 +16,8 @@ export default function SignInForm() {
   const error = searchParams.get("error");
   const callbackUrl = typeof window !== "undefined" ? `${window.location.origin}/api/auth/callback` : "";
 
-  // When Supabase returns implicit flow (tokens in hash), POST via form so server sets cookies and redirects; full navigation applies Set-Cookie.
-  const [hashTokens, setHashTokens] = useState<{ access_token: string; refresh_token: string } | null>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+  // When Supabase returns implicit flow (tokens in hash), store session and redirect to callbackUrl.
+  const [hashHandling, setHashHandling] = useState<"idle" | "pending" | "done">("idle");
   useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash?.slice(1);
@@ -26,12 +25,15 @@ export default function SignInForm() {
     const params = new URLSearchParams(hash);
     const access_token = params.get("access_token");
     const refresh_token = params.get("refresh_token");
-    if (access_token && refresh_token) setHashTokens({ access_token, refresh_token });
-  }, []);
+    if (!access_token || !refresh_token) return;
 
-  useEffect(() => {
-    if (hashTokens && formRef.current) formRef.current.submit();
-  }, [hashTokens]);
+    setHashHandling("pending");
+    (async () => {
+      const { error } = await supabase.auth.setSession({ access_token, refresh_token });
+      setHashHandling("done");
+      if (!error) window.location.replace(config.auth.callbackUrl);
+    })();
+  }, []);
 
   const handleSignup = async (
     e: React.FormEvent,
@@ -74,20 +76,11 @@ export default function SignInForm() {
     }
   };
 
-  if (hashTokens) {
+  if (hashHandling === "pending") {
     return (
       <main className="p-8 md:p-24" data-theme={config.colors.theme}>
         <div className="max-w-xl mx-auto text-center">
           <p className="text-lg">Signing you in…</p>
-          <form
-            ref={formRef}
-            method="post"
-            action="/api/auth/set-session"
-            className="hidden"
-          >
-            <input type="hidden" name="access_token" value={hashTokens.access_token} />
-            <input type="hidden" name="refresh_token" value={hashTokens.refresh_token} />
-          </form>
         </div>
       </main>
     );
@@ -131,7 +124,7 @@ export default function SignInForm() {
         </div>
       )}
 
-      {error === "auth_failed" && (
+      {(error === "auth_failed" || error === "exchange_failed") && (
         <div className="max-w-xl mx-auto mb-8 p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-sm text-red-200">
           <p className="font-semibold">Sign-in failed.</p>
           <p>Try again or use the magic link below.</p>

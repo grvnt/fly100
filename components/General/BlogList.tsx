@@ -11,7 +11,7 @@ export default function BlogList({ posts }: BlogListProps) {
       <ul className="space-y-4">
         {posts.map((post) => (
           <li key={post.slug} className="flex justify-between items-baseline border-b pb-2">
-            <Link href={`/${post.slug}`} className="hover:underline font-bold text-lg">
+            <Link href={`/blog/${post.slug}`} className="hover:underline font-bold text-lg">
               {post.title}
             </Link>
             <div className="text-sm text-gray-500 flex items-center space-x-2">

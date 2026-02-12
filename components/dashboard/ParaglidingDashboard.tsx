@@ -44,15 +44,23 @@ const ParaglidingDashboard = () => {
       .order('date', { ascending: false })
       .range((page - 1) * 10, page * 10 - 1);
 
-    if (error) console.error('Error fetching flight data:', error);
-    else setFlightData(data || []);
+    if (error) {
+      // Tables may not exist yet; use empty data so the dashboard still renders
+      setFlightData([]);
+    } else {
+      setFlightData(data || []);
+    }
   };
 
   const fetchGoals = async () => {
     const { data, error } = await supabase.from('goals').select('*').single();
 
-    if (error) console.error('Error fetching goals:', error);
-    else setGoals(data || { annualFlightTime: 1000, longestFlight: 100 });
+    if (error) {
+      // Table may not exist yet; keep default goals
+      setGoals((prev) => prev);
+    } else {
+      setGoals(data || { annualFlightTime: 1000, longestFlight: 100 });
+    }
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,13 +85,14 @@ const ParaglidingDashboard = () => {
   };
 
   const updateGoal = async (goalType: string, value: number) => {
+    const goalsWithId = goals as { id?: string; annualFlightTime?: number; longestFlight?: number };
+    if (!goalsWithId.id) return; // goals table not set up
     const { error } = await supabase
       .from('goals')
       .update({ [goalType]: value })
-      .eq('id', (goals as any).id);
+      .eq('id', goalsWithId.id);
 
-    if (error) console.error('Error updating goal:', error);
-    else fetchGoals();
+    if (!error) fetchGoals();
   };
 
   return (
@@ -96,7 +105,7 @@ const ParaglidingDashboard = () => {
           <CardContent>
             <p className="text-3xl font-bold">{goals.annualFlightTime} minutes</p>
             <p>
-              Current: {flightData.reduce((sum: number, flight: any) => sum + flight.flightTime, 0)}{' '}
+              Current: {flightData.reduce((sum: number, flight: any) => sum + (flight.flightTime ?? 0), 0)}{' '}
               minutes
             </p>
             <Input
@@ -114,7 +123,7 @@ const ParaglidingDashboard = () => {
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold">{goals.longestFlight} km</p>
-            <p>Current: {Math.max(...flightData.map((flight: any) => flight.distance))} km</p>
+            <p>Current: {flightData.length ? Math.max(...flightData.map((flight: any) => flight.distance ?? 0)) : 0} km</p>
             <Input
               type="number"
               value={goals.longestFlight}
