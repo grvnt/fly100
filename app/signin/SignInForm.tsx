@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import supabase from "@/lib/supabase/client";
 import { Provider } from "@supabase/supabase-js";
@@ -15,6 +15,29 @@ export default function SignInForm() {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const error = searchParams.get("error");
   const callbackUrl = typeof window !== "undefined" ? `${window.location.origin}/api/auth/callback` : "";
+
+  // When Supabase returns implicit flow (tokens in hash), exchange them for cookies and go to dashboard
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash?.slice(1);
+    if (!hash) return;
+    const params = new URLSearchParams(hash);
+    const access_token = params.get("access_token");
+    const refresh_token = params.get("refresh_token");
+    if (!access_token || !refresh_token) return;
+
+    (async () => {
+      const res = await fetch("/api/auth/set-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ access_token, refresh_token }),
+        redirect: "follow",
+      });
+      if (res.ok || res.redirected) {
+        window.location.replace(config.auth.callbackUrl);
+      }
+    })();
+  }, []);
 
   const handleSignup = async (
     e: React.FormEvent,
