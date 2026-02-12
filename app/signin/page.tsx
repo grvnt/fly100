@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import supabase from "@/lib/supabase/client";
 import { Provider } from "@supabase/supabase-js";
 import toast from "react-hot-toast";
@@ -10,9 +11,12 @@ import config from "@/config";
 // This a login/singup page for Supabase Auth.
 // Successfull login redirects to /api/auth/callback where the Code Exchange is processed (see app/api/auth/callback/route.js).
 export default function Login() {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const error = searchParams.get("error");
+  const callbackUrl = typeof window !== "undefined" ? `${window.location.origin}/api/auth/callback` : "";
 
   const handleSignup = async (
     e: any,
@@ -77,6 +81,28 @@ export default function Login() {
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-center mb-12">
         Sign-in to Fly100{" "}
       </h1>
+
+      {error === "no_code" && (
+        <div className="max-w-xl mx-auto mb-8 p-4 rounded-lg bg-amber-500/10 border border-amber-500/30 text-sm text-amber-200">
+          <p className="font-semibold mb-2">Redirect URL not allowed</p>
+          <p className="mb-2">
+            Add this exact URL in Supabase: <strong>Authentication → URL Configuration → Redirect URLs</strong>
+          </p>
+          <code className="block p-2 rounded bg-black/30 break-all text-xs">
+            {callbackUrl || "http://localhost:3000/api/auth/callback"}
+          </code>
+          <p className="mt-2 text-amber-200/80">
+            For local dev use <code className="text-xs">http://localhost:3000/api/auth/callback</code> (or your current origin + <code className="text-xs">/api/auth/callback</code>).
+          </p>
+        </div>
+      )}
+
+      {error === "auth_failed" && (
+        <div className="max-w-xl mx-auto mb-8 p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-sm text-red-200">
+          <p className="font-semibold">Sign-in failed.</p>
+          <p>Try again or use the magic link below.</p>
+        </div>
+      )}
 
       <div className="space-y-8 max-w-xl mx-auto">
         <button

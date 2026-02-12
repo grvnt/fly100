@@ -2,20 +2,20 @@ export interface Post {
   slug: string;
   title: string;
   date: string;
-  excerpt: string;
-  coverImage: string;
   content: string;
-  category: string;
+  category?: string;
+  excerpt?: string;
+  coverImage?: string;
+  description?: string;
 }
 
 export interface PostData {
   slug: string;
   title: string;
   date: string;
-  excerpt: string;
-  coverImage: string;
   content: string;
-  category: string;
-  // ... other properties ...
+  category?: string;
+  excerpt?: string;
+  coverImage?: string;
+  description?: string;
 }
-

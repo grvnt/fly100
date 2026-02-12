@@ -19,7 +19,10 @@ export default async function LayoutPrivate({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
+  // In production, keep /dashboard protected.
+  // In development, don't block access while auth is being debugged,
+  // so you can reach internal tools like the blog editor.
+  if (!user && process.env.NODE_ENV === "production") {
     redirect(config.auth.loginUrl);
   }
 

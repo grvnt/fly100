@@ -4,9 +4,11 @@ import config from "@/config";
 
 export const dynamic = "force-dynamic";
 
-// This route is called after a successful login. It exchanges the code for a session and redirects to the callback URL (see config.js).
+// This route is called after a successful login.
+// It exchanges the OAuth code for a Supabase session (setting cookies)
+// and then redirects to the app callback URL (normally /dashboard).
 export async function GET(req: NextRequest) {
-  const requestUrl = new URL(req.url);
+  const requestUrl = req.nextUrl ?? new URL(req.url);
   const code = requestUrl.searchParams.get("code");
 
   if (code) {

@@ -8,22 +8,22 @@ const postsDirectory = path.join(process.cwd(), "content", "blog");
 export function getPostData(slug: string): PostData {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
 
-  // Check if the file exists before trying to read it
   if (!fs.existsSync(fullPath)) {
     throw new Error(`Post not found: ${fullPath}`);
   }
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
-  const matterResult = matter(fileContents);
+  const { data, content } = matter(fileContents);
 
   return {
     slug,
-    title: matterResult.data.title,
-    date: matterResult.data.date,
-    category: matterResult.data.category,
-    excerpt: matterResult.data.excerpt,
-    coverImage: matterResult.data.coverImage,
-    content: matterResult.content,
+    title: data.title,
+    date: data.date,
+    category: data.category,
+    excerpt: data.excerpt ?? data.description,
+    coverImage: data.coverImage,
+    description: data.description,
+    content,
   };
 }
 
@@ -43,7 +43,7 @@ export function getAllPosts(): PostData[] {
 export function getPostBySlug(slug: string): PostData | null {
   try {
     return getPostData(slug);
-  } catch (error) {
+  } catch {
     return null;
   }
 }
