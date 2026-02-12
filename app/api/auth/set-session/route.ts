@@ -14,9 +14,19 @@ type SupabaseCookie = {
 // Fallback for when Supabase returns implicit flow (tokens in hash) instead of PKCE.
 // Client posts access_token + refresh_token here; we set session cookies and redirect to dashboard.
 export async function POST(req: NextRequest) {
-  const body = await req.json().catch(() => ({}));
-  const access_token = body.access_token as string | undefined;
-  const refresh_token = body.refresh_token as string | undefined;
+  let access_token: string | undefined;
+  let refresh_token: string | undefined;
+
+  const contentType = req.headers.get("content-type") || "";
+  if (contentType.includes("application/x-www-form-urlencoded")) {
+    const formData = await req.formData();
+    access_token = formData.get("access_token") as string | null;
+    refresh_token = formData.get("refresh_token") as string | null;
+  } else {
+    const body = await req.json().catch(() => ({}));
+    access_token = body.access_token;
+    refresh_token = body.refresh_token;
+  }
 
   if (!access_token || !refresh_token) {
     return NextResponse.json(

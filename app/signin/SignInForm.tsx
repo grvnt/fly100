@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import supabase from "@/lib/supabase/client";
 import { Provider } from "@supabase/supabase-js";
@@ -16,7 +16,9 @@ export default function SignInForm() {
   const error = searchParams.get("error");
   const callbackUrl = typeof window !== "undefined" ? `${window.location.origin}/api/auth/callback` : "";
 
-  // When Supabase returns implicit flow (tokens in hash), exchange them for cookies and go to dashboard
+  // When Supabase returns implicit flow (tokens in hash), POST via form so server sets cookies and redirects; full navigation applies Set-Cookie.
+  const [hashTokens, setHashTokens] = useState<{ access_token: string; refresh_token: string } | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash?.slice(1);
@@ -24,20 +26,12 @@ export default function SignInForm() {
     const params = new URLSearchParams(hash);
     const access_token = params.get("access_token");
     const refresh_token = params.get("refresh_token");
-    if (!access_token || !refresh_token) return;
-
-    (async () => {
-      const res = await fetch("/api/auth/set-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ access_token, refresh_token }),
-        redirect: "follow",
-      });
-      if (res.ok || res.redirected) {
-        window.location.replace(config.auth.callbackUrl);
-      }
-    })();
+    if (access_token && refresh_token) setHashTokens({ access_token, refresh_token });
   }, []);
+
+  useEffect(() => {
+    if (hashTokens && formRef.current) formRef.current.submit();
+  }, [hashTokens]);
 
   const handleSignup = async (
     e: React.FormEvent,
@@ -79,6 +73,25 @@ export default function SignInForm() {
       setIsLoading(false);
     }
   };
+
+  if (hashTokens) {
+    return (
+      <main className="p-8 md:p-24" data-theme={config.colors.theme}>
+        <div className="max-w-xl mx-auto text-center">
+          <p className="text-lg">Signing you in…</p>
+          <form
+            ref={formRef}
+            method="post"
+            action="/api/auth/set-session"
+            className="hidden"
+          >
+            <input type="hidden" name="access_token" value={hashTokens.access_token} />
+            <input type="hidden" name="refresh_token" value={hashTokens.refresh_token} />
+          </form>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="p-8 md:p-24" data-theme={config.colors.theme}>
