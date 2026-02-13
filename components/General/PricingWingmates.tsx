@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import SenjaEmbed from '@/components/General/SenjaEmbed';
 import React from 'react';
 
 export interface PricingTierFrequency {
@@ -92,12 +91,6 @@ export default function PricingWingmates() {
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
             Start Your QUEST for Mastery & Join <i>Wingmates</i> today.
           </h2>
-          <div className="mt-6 max-w-md mx-auto">
-            <SenjaEmbed
-              widgetId="196a5b6b-801b-49df-93bf-325c3a57749f"
-              showContainer={false}
-            />
-          </div>
         </div>
 
         <div className="flex flex-wrap xl:flex-nowrap items-center bg-white dark:bg-gray-900/80 backdrop-blur-md mx-auto mt-4 max-w-2xl rounded-3xl ring-1 ring-[#3B82F6] xl:mx-0 xl:flex xl:max-w-none">
