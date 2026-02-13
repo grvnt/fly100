@@ -390,7 +390,6 @@ export default function Home() {
         <GroupFlow />
         <SenjaEmbed widgetId="0e2dc407-4d4f-487d-880b-0178d54161ab" />
         <PricingWingmates />
-        <SenjaEmbed widgetId="196a5b6b-801b-49df-93bf-325c3a57749f" />
       </main>
     </>
   );
