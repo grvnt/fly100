@@ -13,27 +13,29 @@ type DbPost = {
   updated_at?: string;
 };
 
+type PostsQueryResult = { data: (DbPost & { content?: string })[] | null; error: unknown };
+
 // Posts table: see supabase/posts-schema.sql. We try full columns first, then minimal (id, slug, title, content_markdown) if you have different column names.
 export async function fetchPublishedPosts(): Promise<DbPost[]> {
   const supabase = await createClient();
 
   const fullSelect = "id, slug, title, subtitle, cover_image, content_markdown, created_at";
-  let result = await supabase
+  let result: PostsQueryResult = await supabase
     .from("posts")
     .select(fullSelect)
     .order("created_at", { ascending: false });
 
   if (result.error && (result.error as { code?: string }).code === "42703") {
-    result = await supabase
+    result = (await supabase
       .from("posts")
       .select("id, slug, title, content_markdown")
-      .order("id", { ascending: false });
+      .order("id", { ascending: false })) as PostsQueryResult;
   }
   if (result.error && (result.error as { code?: string }).code === "42703") {
-    result = await supabase
+    result = (await supabase
       .from("posts")
       .select("id, slug, title, content")
-      .order("id", { ascending: false });
+      .order("id", { ascending: false })) as PostsQueryResult;
   }
 
   if (result.error) {
@@ -56,28 +58,30 @@ export async function fetchPublishedPosts(): Promise<DbPost[]> {
   }));
 }
 
+type PostQueryResult = { data: (DbPost & { content?: string }) | null; error: unknown };
+
 export async function fetchPostBySlug(slug: string): Promise<DbPost | null> {
   const supabase = await createClient();
 
-  let result = await supabase
+  let result: PostQueryResult = await supabase
     .from("posts")
     .select("id, slug, title, subtitle, cover_image, content_markdown, created_at")
     .eq("slug", slug)
     .single();
 
   if (result.error && (result.error as { code?: string }).code === "42703") {
-    result = await supabase
+    result = (await supabase
       .from("posts")
       .select("id, slug, title, content_markdown")
       .eq("slug", slug)
-      .single();
+      .single()) as PostQueryResult;
   }
   if (result.error && (result.error as { code?: string }).code === "42703") {
-    result = await supabase
+    result = (await supabase
       .from("posts")
       .select("id, slug, title, content")
       .eq("slug", slug)
-      .single();
+      .single()) as PostQueryResult;
   }
 
   if (result.error) {
