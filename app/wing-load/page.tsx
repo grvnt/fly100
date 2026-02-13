@@ -310,11 +310,21 @@ const App: React.FC = () => {
                   {lockWeight ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />}
                   Lock Weight
                 </button>
+
+                <a
+                  href="https://flow.grantonthefly.com/s/wing-loading-calculator?utm_source=webapp&utm_content=nav"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all border bg-white text-sky-600 border-slate-200 hover:text-sky-700 hover:bg-slate-100"
+                >
+                  <Info className="w-3 h-3" />
+                  User Manual
+                </a>
               </>
             )}
           </div>
 
-          {/* Right Side: Manual link & Wing Count */}
+          {/* Right Side: Wing Count */}
           <div className="flex items-center gap-4 mt-3 md:mt-0">
             {!isMobile && (
               <div className="hidden md:flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200/60">
@@ -338,16 +348,6 @@ const App: React.FC = () => {
                 ))}
               </div>
             )}
-
-            <a
-              href="https://flow.grantonthefly.com/s/wing-loading-calculator?utm_source=webapp&utm_content=nav"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:text-sky-700 hover:underline whitespace-nowrap"
-            >
-              <Info className="w-3 h-3" />
-              Manual
-            </a>
           </div>
         </header>
 
