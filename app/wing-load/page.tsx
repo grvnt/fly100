@@ -312,7 +312,7 @@ const App: React.FC = () => {
                 </button>
 
                 <a
-                  href="https://flow.grantonthefly.com/s/wing-loading-calculator?utm_source=webapp&utm_content=nav"
+                  href="https://flow.grantonthefly.com/p/wing-loading-calculator?utm_source=webapp&utm_content=result_trigger"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all border bg-white text-sky-600 border-slate-200 hover:text-sky-700 hover:bg-slate-100"
