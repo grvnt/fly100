@@ -1,53 +1,37 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import styles from './ConvertKitForm.module.css';
+import React from "react";
+import styles from "./ConvertKitForm.module.css";
 
 export default function ConvertKitForm() {
-  const formContainerRef = useRef<HTMLDivElement>(null);
-  const scriptRef = useRef<HTMLScriptElement | null>(null);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://fly100.ck.page/6be775b702/index.js";
-    script.async = true;
-    script.setAttribute("data-uid", "6be775b702");
-
-    scriptRef.current = script;
-
-    script.onload = () => {
-      const existingForm = document.querySelector("form.formkit-form");
-      if (existingForm && formContainerRef.current) {
-        formContainerRef.current.appendChild(existingForm);
-      }
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      if (scriptRef.current && document.body.contains(scriptRef.current)) {
-        document.body.removeChild(scriptRef.current);
-      }
-      const form = document.querySelector("form.formkit-form");
-      if (form && form.parentNode) {
-        form.parentNode.removeChild(form);
-      }
-    };
-  }, []);
-
   return (
     <div className="py-8">
-      <div className="container mx-auto max-w-4xl">
+      <div className="container mx-auto max-w-3xl flex flex-col items-center gap-6 text-center">
+        <div className="w-full">
+          <p className="text-xl md:text-2xl font-semibold italic text-slate-100">
+            “Thanks Grant — your newsletter is super well written. I’m amazed at the
+            quality of your writing — what a gift.”
+          </p>
+          <p className="mt-2 text-sm font-medium tracking-[0.25em] text-slate-400 uppercase">
+            Rory Sutter
+          </p>
+        </div>
         <div
           className={`rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border ${styles.formWrapper}`}
         >
-          <div className="max-w-2xl mx-auto">
-            <div
-              ref={formContainerRef}
-              id="convertkit-form-container"
-              className="flex justify-center"
-            />
-          </div>
+          <iframe
+            src="https://flow.grantonthefly.com/embed"
+            width="480"
+            height="320"
+            style={{
+              border: "1px solid #EEE",
+              background: "white",
+              display: "block",
+              margin: "0 auto",
+            }}
+            frameBorder="0"
+            scrolling="no"
+          />
         </div>
       </div>
     </div>
