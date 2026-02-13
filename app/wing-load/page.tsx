@@ -4,12 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CalculatorGroup } from './components/CalculatorGroup';
-import { Settings2, Lock, Unlock, ChevronDown } from 'lucide-react';
+import { Settings2, Lock, Unlock, ChevronDown, Info } from 'lucide-react';
 import { ScaleVariant, WingState, GliderClassDefinition } from './types';
 import logo from '@/app/icon.png';
-
-// --- CONFIGURATION ---
-const KIT_ACTION_URL = 'https://app.kit.com/forms/8881848/subscriptions';
 
 // Define Glider Classes and their specific ranges
 const GLIDER_CLASSES: GliderClassDefinition[] = [
@@ -127,9 +124,6 @@ const RANGES = {
 const MOBILE_MAX_WIDTH = 1024; // px breakpoint for "mobile" behaviour
 
 const App: React.FC = () => {
-  // --- GATE STATE ---
-  const [isUnlocked, setIsUnlocked] = useState(false);
-
   // --- APP STATE ---
   const [wingCount, setWingCount] = useState<number>(2);
   const [selectedClassId, setSelectedClassId] = useState<string>('progression');
@@ -148,34 +142,7 @@ const App: React.FC = () => {
 
   // --- EFFECTS ---
 
-  // 1. Check Unlock Status
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    // Check Local Storage (returning users)
-    const hasUnlockedBefore = window.localStorage.getItem('wing_tool_unlocked');
-
-    // Check URL param (new signups coming back from Kit)
-    const params = new URLSearchParams(window.location.search);
-    const hasAccessParam = params.get('access') === 'granted';
-
-    if (hasUnlockedBefore === 'true' || hasAccessParam) {
-      setIsUnlocked(true);
-
-      if (hasAccessParam) {
-        window.localStorage.setItem('wing_tool_unlocked', 'true');
-
-        // Clean the URL so it won't keep the ?access=granted param
-        params.delete('access');
-        const query = params.toString();
-        const newUrl =
-          window.location.pathname + (query ? `?${query}` : '') + (window.location.hash ?? '');
-        window.history.replaceState({}, '', newUrl);
-      }
-    }
-  }, []);
-
-  // 2. Handle Resize
+  // Handle Resize
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== 'undefined') {
@@ -266,61 +233,8 @@ const App: React.FC = () => {
 
   return (
     <div className="h-screen w-full bg-slate-100 relative flex flex-col font-sans text-slate-800 selection:bg-sky-200">
-      {/* --- 1. THE GATE (OVERLAY) --- */}
-      {!isUnlocked && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
-          {/* Image background behind the unlock form */}
-          <div className="absolute inset-0">
-            {/* Mobile background */}
-            <div className="block lg:hidden w-full h-full bg-[url('https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/wing-load-gmobile.jpg')] bg-cover bg-center" />
-            {/* Desktop background */}
-            <div className="hidden lg:block w-full h-full bg-[url('https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/wing-load-gdesktop.jpg')] bg-cover bg-center" />
-          </div>
-
-          {/* The translucent overlay so text stays readable */}
-          <div className="absolute inset-0 bg-white/20 lg:bg-white/30 backdrop-blur-sm" />
-
-          {/* The Signup Card */}
-          <div className="relative bg-white shadow-2xl border border-gray-200 rounded-2xl p-8 max-w-md w-full text-center">
-            <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Lock className="w-6 h-6 text-blue-600" />
-            </div>
-
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Unlock the Calculator</h2>
-
-            {/* CONNECTED KIT FORM */}
-            <form action={KIT_ACTION_URL} method="post" className="space-y-3">
-              <input
-                type="email"
-                name="email_address"
-                placeholder="Your email address"
-                required
-                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all shadow-lg hover:shadow-xl"
-              >
-                Unlock Tool
-              </button>
-
-              <p className="text-xs text-gray-500 mt-4">
-                Using this tool will sign you up to my mailing list. Unsubscribe any time.
-              </p>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* --- 2. THE MAIN APP CONTENT (BLURRED IF LOCKED) --- */}
-      <div
-        className={`flex flex-col h-full w-full transition-all duration-500 ${
-          !isUnlocked
-            ? 'filter blur-sm pointer-events-none select-none overflow-hidden opacity-50'
-            : ''
-        }`}
-      >
+      {/* --- MAIN APP CONTENT --- */}
+      <div className="flex flex-col h-full w-full transition-all duration-500">
         {/* Background Decoration */}
         <div className="absolute inset-0 bg-[radial-gradient(at_top,_var(--tw-gradient-stops))] from-white via-slate-50 to-slate-200 -z-10" />
 
@@ -400,10 +314,10 @@ const App: React.FC = () => {
             )}
           </div>
 
-          {/* Right Side: Manual & Wing Count */}
-          {!isMobile && (
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200/60">
+          {/* Right Side: Manual link & Wing Count */}
+          <div className="flex items-center gap-4 mt-3 md:mt-0">
+            {!isMobile && (
+              <div className="hidden md:flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200/60">
                 <Settings2 className="w-4 h-4 text-slate-400 ml-2" />
                 <div className="h-4 w-[1px] bg-slate-300 mx-1"></div>
                 {[1, 2, 3, 4, 5, 6].map(num => (
@@ -411,20 +325,30 @@ const App: React.FC = () => {
                     key={num}
                     onClick={() => setWingCount(num)}
                     className={`
-                    w-9 h-8 rounded-md font-bold text-sm transition-all flex items-center justify-center relative
-                    ${
-                      wingCount === num
-                        ? 'bg-white text-sky-600 shadow-sm border border-slate-200 ring-1 ring-black/5'
-                        : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
-                    }
-                  `}
+                      w-9 h-8 rounded-md font-bold text-sm transition-all flex items-center justify-center relative
+                      ${
+                        wingCount === num
+                          ? 'bg-white text-sky-600 shadow-sm border border-slate-200 ring-1 ring-black/5'
+                          : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
+                      }
+                    `}
                   >
                     {num}
                   </button>
                 ))}
               </div>
-            </div>
-          )}
+            )}
+
+            <a
+              href="https://flow.grantonthefly.com/s/wing-loading-calculator?utm_source=webapp&utm_content=nav"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:text-sky-700 hover:underline whitespace-nowrap"
+            >
+              <Info className="w-3 h-3" />
+              Manual
+            </a>
+          </div>
         </header>
 
         {/* Main Content - Vertical Stack that Fills Height */}
@@ -450,6 +374,18 @@ const App: React.FC = () => {
             </div>
           ))}
         </main>
+
+        {/* Footer link to full guide */}
+        <footer className="flex-shrink-0 px-4 pb-3 text-center text-[11px] text-slate-500">
+          <a
+            href="https://flow.grantonthefly.com/p/wing-loading-calculator?utm_source=webapp&utm_content=result_trigger"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-semibold text-sky-600 hover:text-sky-700 hover:underline"
+          >
+            <span>Read the full Wing Loading Guide &amp; Manual</span>
+          </a>
+        </footer>
       </div>
     </div>
   );
