@@ -2,6 +2,7 @@ import React from 'react';
 import { Noto_Sans } from 'next/font/google';
 import { Viewport } from 'next';
 import { getSEOTags } from '@/lib/seo';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import config from '@/config';
 import './globals.css';
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         {/* ConvertKit scripts removed */}
       </body>
+      <GoogleAnalytics gaId="G-SB9F939KN2" />
     </html>
   );
 }
