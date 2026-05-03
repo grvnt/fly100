@@ -141,6 +141,7 @@ export default function PricingWingmates() {
                 <div className="flex justify-center mt-8 flex-shrink-0">
                   <a
                     href="https://wingmates.fly100.co/checkout/wingmates"
+                    onClick={() => (window as any).gtag?.('event', 'begin_checkout', { item_name: 'Wingmates' })}
                     className="btn animate-gradient btn-wide"
                     style={{
                       background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
