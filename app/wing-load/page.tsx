@@ -12,15 +12,15 @@ const STORAGE_KEY = 'wingload_unlocked';
 
 function SubscribeGate({ onUnlock }: { onUnlock: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm px-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 flex flex-col items-center gap-6 text-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-3 sm:px-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-8 flex flex-col items-center gap-4 sm:gap-6 text-center overflow-y-auto max-h-[95vh]">
         <div className="flex items-center gap-2">
-          <Image src={logo} alt="Fly100" width={32} height={32} />
+          <Image src={logo} alt="Fly100" width={28} height={28} />
           <span className="font-semibold text-slate-700">Fly100</span>
         </div>
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold text-slate-800">Free Wing Loading Calculator</h2>
-          <p className="text-slate-500 text-base leading-relaxed">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-800">Free Wing Loading Calculator</h2>
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
             Want to know what your wing loading actually means for your flying? Get the full guide — plus XC mental game insights from the world&apos;s first paragliding flow coach.
           </p>
         </div>
@@ -28,18 +28,43 @@ function SubscribeGate({ onUnlock }: { onUnlock: () => void }) {
           <iframe
             src="https://flow.grantonthefly.com/embed"
             width="100%"
-            height="320"
+            height="280"
             style={{ border: 'none', background: 'white', display: 'block' }}
             scrolling="no"
           />
         </div>
         <button
           onClick={onUnlock}
-          className="text-sm text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors"
+          className="text-sm text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors pb-1"
         >
           I&apos;ve subscribed — show me the calculator
         </button>
       </div>
+    </div>
+  );
+}
+
+function GuideBanner({ onDismiss }: { onDismiss: () => void }) {
+  return (
+    <div className="flex-shrink-0 bg-sky-50 border-b border-sky-200 px-4 py-2.5 flex items-center justify-between gap-3">
+      <p className="text-sm text-sky-800">
+        <span className="font-semibold">You&apos;re in.</span> The full Wing Loading Guide is waiting in your inbox.{' '}
+        <a
+          href="https://flow.grantonthefly.com/p/wing-loading-calculator"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold underline underline-offset-2 hover:text-sky-900"
+        >
+          Read it now →
+        </a>
+      </p>
+      <button
+        onClick={onDismiss}
+        className="text-sky-400 hover:text-sky-600 text-lg leading-none flex-shrink-0"
+        aria-label="Dismiss"
+      >
+        ×
+      </button>
     </div>
   );
 }
@@ -165,12 +190,14 @@ const App: React.FC = () => {
   const [selectedClassId, setSelectedClassId] = useState<string>('progression');
   const [isMobile, setIsMobile] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
 
   const handleUnlock = () => {
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEY, '1');
     }
     setUnlocked(true);
+    setShowBanner(true);
   };
 
   // Initialize state for up to 6 wings
@@ -402,6 +429,7 @@ const App: React.FC = () => {
             )}
           </div>
         </header>
+        {showBanner && <GuideBanner onDismiss={() => setShowBanner(false)} />}
 
         {/* Main Content - Vertical Stack that Fills Height */}
         <main className="flex-grow flex flex-col p-4 gap-3 overflow-y-auto">
