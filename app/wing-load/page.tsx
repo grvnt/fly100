@@ -8,6 +8,42 @@ import { Settings2, Lock, Unlock, ChevronDown, Info } from 'lucide-react';
 import { ScaleVariant, WingState, GliderClassDefinition } from './types';
 import logo from '@/app/icon.png';
 
+const STORAGE_KEY = 'wingload_unlocked';
+
+function SubscribeGate({ onUnlock }: { onUnlock: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm px-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 flex flex-col items-center gap-6 text-center">
+        <div className="flex items-center gap-2">
+          <Image src={logo} alt="Fly100" width={32} height={32} />
+          <span className="font-semibold text-slate-700">Fly100</span>
+        </div>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-2xl font-bold text-slate-800">Free Wing Loading Calculator</h2>
+          <p className="text-slate-500 text-base leading-relaxed">
+            Want to know what your wing loading actually means for your flying? Get the full guide — plus XC mental game insights from the world&apos;s first paragliding flow coach.
+          </p>
+        </div>
+        <div className="w-full rounded-xl overflow-hidden border border-slate-200">
+          <iframe
+            src="https://flow.grantonthefly.com/embed"
+            width="100%"
+            height="320"
+            style={{ border: 'none', background: 'white', display: 'block' }}
+            scrolling="no"
+          />
+        </div>
+        <button
+          onClick={onUnlock}
+          className="text-sm text-slate-400 hover:text-slate-600 underline underline-offset-2 transition-colors"
+        >
+          I&apos;ve subscribed — show me the calculator
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // Define Glider Classes and their specific ranges
 const GLIDER_CLASSES: GliderClassDefinition[] = [
   {
@@ -128,6 +164,14 @@ const App: React.FC = () => {
   const [wingCount, setWingCount] = useState<number>(2);
   const [selectedClassId, setSelectedClassId] = useState<string>('progression');
   const [isMobile, setIsMobile] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
+
+  const handleUnlock = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, '1');
+    }
+    setUnlocked(true);
+  };
 
   // Initialize state for up to 6 wings
   const [wings, setWings] = useState<WingState[]>(
@@ -141,6 +185,13 @@ const App: React.FC = () => {
   const [lockWeight, setLockWeight] = useState<boolean>(false);
 
   // --- EFFECTS ---
+
+  // Check if already unlocked
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUnlocked(localStorage.getItem(STORAGE_KEY) === '1');
+    }
+  }, []);
 
   // Handle Resize
   useEffect(() => {
@@ -233,6 +284,7 @@ const App: React.FC = () => {
 
   return (
     <div className="h-screen w-full bg-slate-100 relative flex flex-col font-sans text-slate-800 selection:bg-sky-200">
+      {!unlocked && <SubscribeGate onUnlock={handleUnlock} />}
       {/* --- MAIN APP CONTENT --- */}
       <div className="flex flex-col h-full w-full transition-all duration-500">
         {/* Background Decoration */}
