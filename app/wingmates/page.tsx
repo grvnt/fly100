@@ -5,8 +5,8 @@ import Problem from '@/components/General/Problem';
 import GroupFlow from '@/components/General/GroupFlow';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
+import RecognitionCards from '@/components/General/RecognitionCards';
 import SenjaEmbed from '@/components/General/SenjaEmbed';
-import { H2 } from '@/components/ui/typography';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
@@ -126,88 +126,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-black px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto flex flex-col gap-6 items-center text-center">
-            {/* Heading */}
-            <H2 className="text-white">Who will benefit most from this?</H2>
-
-            {/* Body Text */}
-            <div className="max-w-3xl mx-auto text-white text-lg sm:text-xl leading-relaxed space-y-6 text-justify">
-              <p>
-                Let's be clear: This is not a retreat from performance. We aren't anti-competition.
-                We aren't anti-ambition.
-              </p>
-              <p>We are anti-constraint - in flying and in life.</p>
-              <p>
-                We are after the freedom to perform at our absolute best, to push our limits, to
-                break free from self-constraints, by cultivating the Warrior Spirit within.
-              </p>
-              <p>
-                We embrace the full spectrum and the challenges of flight to become the best
-                versions of ourselves—not to be the best in the world but to be the best for the
-                world.
-              </p>
-
-              <p>
-                But you cannot fly in flow if you are focused outwards and your mind is full of
-                "Noise." You will benefit most from Wingmates if you are ready to break free from:
-              </p>
-
-              <ul className="space-y-4 text-left list-disc list-inside">
-                <li>
-                  <strong>The Ranking Trap:</strong> You land and check the stats before you check
-                  how it felt. The flying that brought you alive has become a performance review.
-                </li>
-
-                <li>
-                  <strong>Fear is Holding You Back:</strong> At launch, in turbulence, at the
-                  moment you need to commit — something takes over and you can&apos;t name it.
-                </li>
-
-                <li>
-                  <strong>The Retrieve Driver Syndrome:</strong> You bombed out. Again. You sat in
-                  the car and watched everyone else fly. You have the skills. You just can&apos;t
-                  access them when it counts.
-                </li>
-
-                <li>
-                  <strong>The Overthinking Head:</strong> Ten contributors jostling for the top
-                  spot. Launch is a committee meeting. You can&apos;t fly well when you&apos;re
-                  that loud to yourself.
-                </li>
-
-                <li>
-                  <strong>The Rollercoaster Cycle:</strong> You had a breakthrough. Then it
-                  vanished. You keep landing back at the start — same fear, different day.
-                </li>
-
-                <li>
-                  <strong>The Toxic Strain:</strong> You&apos;ve considered walking away entirely.
-                  Not because you don&apos;t love flying — because the mental weight has silenced
-                  the love.
-                </li>
-
-                <li>
-                  <strong>Isolation:</strong> Fear is harder to carry alone. Progress is slower
-                  without people who understand what you&apos;re working through.
-                </li>
-              </ul>
-              <p className="pt-4 font-medium text-white">
-                None of these are skill problems. They are interference problems. And interference
-                can be removed.
-              </p>
-            </div>
-
-            {/* Image */}
-            <div className="max-w-5xl mx-auto mt-12">
-              <img
-                src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/flow-channel-wingmates-paragliding.jpg"
-                alt="Flow channel wingmates paragliding"
-                className="w-full h-auto rounded-2xl"
-              />
-            </div>
-          </div>
-        </section>
+        <RecognitionCards />
 
         <Problem />
         <GroupFlow />
