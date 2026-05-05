@@ -26,13 +26,25 @@ export interface PricingTier {
 }
 
 const plan: PricingTier = {
-  name: 'Start Your Evolution',
+  name: 'Wingmates',
   id: '0',
   href: '/subscribe',
   price: '',
   discountPrice: '$150',
   description: "The world's first flow-driven paragliding community.",
   features: [
+    <>
+      <strong>Weekly calls with Grant:</strong> Live sessions every week. Bring your flight
+      stories, your sticking points, your questions.
+    </>,
+    <>
+      <strong>The Wingmates Crew:</strong> A global community of pilots doing the inner work
+      alongside you — structure, accountability, and honest conversation.
+    </>,
+    <>
+      <strong>Personal support from Grant:</strong> Direct access via DMs and the community.
+      Not a help desk — Grant himself.
+    </>,
     <>
       <strong>The Way of Fear</strong> <em>(coming soon):</em> A structured path through the fears
       that limit your flying — launch anxiety, commitment, and what happens in your body when the
@@ -42,18 +54,6 @@ const plan: PricingTier = {
       <strong>What is Flow</strong> <em>(coming soon):</em> Understanding the state every pilot
       chases but few access deliberately — how flow works, what blocks it, and how to create the
       conditions for it.
-    </>,
-    <>
-      <strong>Monthly Live Q&amp;A with Grant:</strong> One live session a month. Bring your flight
-      stories, your sticking points, your questions.
-    </>,
-    <>
-      <strong>The Wingmates Crew:</strong> A global community of pilots doing the inner work
-      alongside you — structure, accountability, and honest conversation.
-    </>,
-    <>
-      <strong>Unlimited support from Grant:</strong> Direct access via DMs and the community.
-      Not a help desk — Grant himself.
     </>,
   ],
   featured: true,

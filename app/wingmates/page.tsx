@@ -130,6 +130,43 @@ export default function Home() {
 
         <Problem />
         <GroupFlow />
+
+        {/* ===== ABOUT GRANT ===== */}
+        <section className="bg-base-200 px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
+          <div className="max-w-3xl mx-auto space-y-6 text-base sm:text-lg leading-relaxed text-white/80">
+            <div className="flex justify-center mb-2">
+              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
+                <img
+                  src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/grant-profile-pgatlas-crop.jpg"
+                  alt="Grant Smith"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <p className="text-base font-semibold uppercase tracking-wider text-[#3B82F6] animate-pulse-text">
+              Who is Grant?
+            </p>
+
+            <p>
+              Grant Smith is a qualified paragliding instructor, guide, and accomplished XC pilot.
+              He is completing the ICF Flow Coaching certification with The Flow Centre — training
+              to become the world&apos;s first paragliding flow coach.
+            </p>
+
+            <p>
+              His method follows the tradition of Gallwey&apos;s Inner Game. Not more instruction —
+              removing the interference that is already in the way. When the noise is cleared, pilots
+              discover they already know how to fly. The work is in getting out of your own way.
+            </p>
+
+            <p>
+              Every other paragliding coach teaches you more. Grant is the only one working
+              specifically on the gap between the flying you want and the flying you do. That gap
+              is not technical. It never was.
+            </p>
+          </div>
+        </section>
+
         <PricingWingmates />
       </main>
     </>
