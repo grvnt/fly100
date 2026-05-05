@@ -160,8 +160,8 @@ export default function Home() {
             </p>
 
             <p>
-              Every other paragliding coach teaches you more technique. The gap is not technique.
-              It&apos;s mental.
+              Most coaches teach more technique. But the masters know that skill can only take you
+              so far. The mental game is the true differentiator.
             </p>
           </div>
         </section>
