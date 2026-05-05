@@ -23,16 +23,6 @@ const TestimonialMerakai = () => {
                 <p className="text-sm text-blue-200">
                   Skywalk Team Pilot & RedBull XAlps Podium Finisher
                 </p>
-                <p className="text-sm mt-1">
-                  <a
-                    href="https://www.wanderbird.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#3B82F6] hover:text-blue-400 underline transition-colors duration-200"
-                  >
-                    Wanderbird.io
-                  </a>
-                </p>
               </div>
 
               <p className="mt-2 text-base leading-relaxed text-white md:text-lg">

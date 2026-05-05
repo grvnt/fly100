@@ -3,7 +3,7 @@ import SenjaEmbed from './SenjaEmbed';
 
 const GroupFlow = () => {
   return (
-    <section className="bg-slate-800">
+    <section className="bg-black">
       <div className="py-16 sm:py-24 md:py-32 max-w-7xl mx-auto px-4 sm:px-8">
         <H2 className="mb-8 sm:mb-12 text-center">Here Is What Our Wingmates Are Saying</H2>
         

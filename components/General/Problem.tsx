@@ -1,12 +1,5 @@
 import { H2, H3 } from '../ui/typography';
 
-// The Arrow component is defined but not used in this file.
-// If it's not used elsewhere, you can safely remove it.
-// If it's used in other files, keep it here but export it.
-// export const Arrow = ({ extraStyle }: { extraStyle: string }) => {
-//   // ... Arrow component code ...
-// };
-
 const Problem = () => {
   return (
     <section
@@ -21,14 +14,13 @@ const Problem = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-24 text-center">
         <H2 className="mb-6 sm:mb-8">
-          Finally, Achieve the &quot;Dynamic Calm&quot; <br />
-          <span className="text-[#00dafc]">Required for Paragliding Mastery</span>
+          How <span className="text-[#00dafc]">Wingmates</span> Works
         </H2>
         <div className="max-w-2xl mx-auto mb-8 sm:mb-12">
           <p className="text-base sm:text-lg opacity-90 leading-relaxed text-left sm:text-justify">
-            Wingmates is a supportive community that provides mental frameworks and feedback to
-            harness the superpower of flow. Rewire your brain to become the pilot you were born to
-            be, upgrading your mind—and your life.
+            Wingmates is built around a four-part practice. Not a curriculum you work through
+            once — a cycle you return to each month, each season, each time you want to fly
+            closer to your ceiling.
           </p>
         </div>
 
@@ -38,11 +30,11 @@ const Problem = () => {
 
         {/* Mental Frameworks blocks */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
-          {/* Plan: Your North Star */}
+          {/* Plan */}
           <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-sky-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3B82F6]/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-sky-300"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-[#3B82F6]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -58,20 +50,17 @@ const Problem = () => {
             <h3 className="text-lg sm:text-xl font-bold text-white mb-3 text-center max-w-xs mx-auto">
               (P)lan: Your North Star
             </h3>
-            <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Identity-based learning that coordinates your mind and spirit toward a vision of the
-              pilot you want to become.
-            </p>
-            <p className="text-sm sm:text-base text-white font-semibold text-center">
-              Result: Total alignment.
+            <p className="text-sm sm:text-base text-white/90 leading-relaxed max-w-xs mx-auto text-justify">
+              Get clear on the pilot you&apos;re becoming, not just the pilot you are.
+              Identity-based direction — where you&apos;re going and why it matters to you.
             </p>
           </div>
 
-          {/* Act: Dynamic Calm */}
+          {/* Act */}
           <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3B82F6]/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-300"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-[#3B82F6]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -87,20 +76,17 @@ const Problem = () => {
             <h3 className="text-lg sm:text-xl font-bold text-white mb-3 text-center max-w-xs mx-auto">
               (A)ct: Dynamic Calm
             </h3>
-            <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Harness the science of flow to move from fear to mastery. Fly with composure in
-              complex air.
-            </p>
-            <p className="text-sm sm:text-base text-white font-semibold text-center">
-              The Result: Fly in flow with ease.
+            <p className="text-sm sm:text-base text-white/90 leading-relaxed max-w-xs mx-auto text-justify">
+              Apply the mental tools in the air, not just in theory. Fear work, flow practice,
+              and composure under pressure — taken to the hill.
             </p>
           </div>
 
-          {/* Reflect: The Tribe Mirror */}
+          {/* Reflect */}
           <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-violet-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3B82F6]/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-violet-300"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-[#3B82F6]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -116,20 +102,17 @@ const Problem = () => {
             <h3 className="text-lg sm:text-xl font-bold text-white mb-3 text-center max-w-xs mx-auto">
               (R)eflect: The Mirror
             </h3>
-            <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Using the community to extract deep, implicit learning that solo flight logs
-              can&apos;t provide.
-            </p>
-            <p className="text-sm sm:text-base text-white font-semibold text-center">
-              Result: Accelerated growth.
+            <p className="text-sm sm:text-base text-white/90 leading-relaxed max-w-xs mx-auto text-justify">
+              Use the community as a mirror. Structured post-flight reflection surfaces the
+              patterns that solo flight logs miss.
             </p>
           </div>
 
-          {/* Adjust: The Upward Spiral */}
+          {/* Adjust */}
           <div className="bg-[#07122d] rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:border-[#3B82F6] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-400/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3B82F6]/20 flex items-center justify-center mb-3 sm:mb-4 mx-auto">
               <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-amber-300"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-[#3B82F6]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -145,21 +128,24 @@ const Problem = () => {
             <h3 className="text-lg sm:text-xl font-bold text-white mb-3 text-center max-w-xs mx-auto">
               (A)djust: The Upward Spiral
             </h3>
-            <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
-              Rewiring personal narratives to shift your identity, making high performance your
-              baseline.
-            </p>
-            <p className="text-sm sm:text-base text-white font-semibold text-center">
-              Result: Permanent upgrade.
+            <p className="text-sm sm:text-base text-white/90 leading-relaxed max-w-xs mx-auto text-justify">
+              Make the shifts permanent. Rewire the patterns that keep pulling you back to
+              the same landing.
             </p>
           </div>
         </div>
 
-        <blockquote className="max-w-2xl mx-auto mt-10 sm:mt-12 text-white/90 text-base sm:text-lg italic border-l-4 border-[#00dafc] pl-4 sm:pl-6">
-          &quot;After my only son died in 2018, my life lost its meaning... Paragliding brought me
-          back to life 5 years ago. You suggested a way to return to myself. I find your practical
-          advice on stabilizing my psycho-emotional state most valuable.&quot; — Sergey
-        </blockquote>
+        {/* Sergey — elevated */}
+        <div className="max-w-3xl mx-auto mt-16 sm:mt-20">
+          <blockquote className="bg-[#07122d] rounded-2xl p-8 sm:p-12 border-l-4 border-[#3B82F6] text-left">
+            <p className="text-white text-lg sm:text-xl leading-relaxed mb-6">
+              &ldquo;After my only son died in 2018, my life lost its meaning. Paragliding brought
+              me back to life five years ago. You suggested a way to return to myself. I find your
+              practical advice on stabilizing my psycho-emotional state most valuable.&rdquo;
+            </p>
+            <p className="text-[#3B82F6] font-semibold text-base">— Sergey</p>
+          </blockquote>
+        </div>
       </div>
     </section>
   );
