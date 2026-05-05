@@ -6,7 +6,6 @@ import GroupFlow from '@/components/General/GroupFlow';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import RecognitionCards from '@/components/General/RecognitionCards';
-import SenjaEmbed from '@/components/General/SenjaEmbed';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
@@ -39,7 +38,6 @@ export default function Home() {
               {/* Body */}
               <p className="text-lg sm:text-xl lg:text-xl text-white leading-relaxed max-w-2xl mt-2">
                 The paragliding community for pilots ready to master their mental game.
-                Silence the noise, find your flow, and experience the magic of mastery.
               </p>
 
               {/* Button */}
@@ -83,7 +81,6 @@ export default function Home() {
             {/* Body */}
             <p className="text-base sm:text-lg text-white leading-relaxed text-center max-w-2xl">
               The paragliding community for pilots ready to master their mental game.
-              Silence the noise, find your flow, and live the magic of mastery.
             </p>
 
             {/* Button */}
