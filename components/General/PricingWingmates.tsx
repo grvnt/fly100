@@ -34,24 +34,25 @@ const plan: PricingTier = {
   description: "The world's first flow-driven paragliding community.",
   features: [
     <>
-      <strong>The I-PARA Flow System:</strong> Master the step-by-step method to stay in the 'Flow
-      Channel' and eliminate the anxiety of the 'Ranking Trap.'
+      <strong>The Way of Fear:</strong> A structured path through the fears that limit your flying —
+      launch anxiety, commitment, and what happens in your body when the air changes.
     </>,
     <>
-      <strong>CCC (Quiet Mind) Toolkit:</strong> Practical techniques to silence the mind
-      to stop overthinking and work with fear.
+      <strong>What is Flow</strong> <em>(coming soon):</em> Understanding the state every pilot
+      chases but few access deliberately — how flow works, what blocks it, and how to create the
+      conditions for it.
     </>,
     <>
-      <strong>QUEST Reflection Protocol:</strong> Access the structured post-flight debrief system
-      that turns every landing into rapid self-evolution.
+      <strong>Monthly Live Q&amp;A with Grant:</strong> One live session a month. Bring your flight
+      stories, your sticking points, your questions.
     </>,
     <>
-      <strong>The Wingmates Global Crew:</strong> Join a tribe that prioritizes the 'Soul of Flight'
-      and 'Flow' over ego-driven points and rankings.
+      <strong>The Wingmates Crew:</strong> A global community of pilots doing the inner work
+      alongside you — structure, accountability, and honest conversation.
     </>,
     <>
-      <strong>Weekly Online Events:</strong> Live interactive workshops to align your mind, body,
-      and systems for the ultimate flight experience.
+      <strong>Structured Monthly Themes:</strong> Each month has a focus. The group and the
+      material meet you where you actually are.
     </>,
   ],
   featured: true,
@@ -89,7 +90,7 @@ export default function PricingWingmates() {
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Start Your QUEST for Mastery & Join <i>Wingmates</i> today.
+            Join <i>Wingmates</i> today.
           </h2>
         </div>
 

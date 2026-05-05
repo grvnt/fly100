@@ -31,15 +31,15 @@ export default function Home() {
 
               {/* Headline */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                Fly Far. Fly Free.
+                Mastery is the Goal.
                 <br />
-                Live Free.
+                Flow is the Way.
               </h1>
 
               {/* Body */}
               <p className="text-lg sm:text-xl lg:text-xl text-white leading-relaxed max-w-2xl mt-2">
-                Master the I-PARA Flow System to live your paragliding dreams and realise your true
-                potential. Silence the noise, find your flow, and experience the magic of mastery.
+                The mental training community for XC pilots who are ready for the inner work.
+                Silence the noise, find your flow, and experience the magic of mastery.
               </p>
 
               {/* Button */}
@@ -75,15 +75,15 @@ export default function Home() {
 
             {/* Headline */}
             <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-center">
-              Fly Far. Fly Free.
+              Mastery is the Goal.
               <br />
-              Live Free.
+              Flow is the Way.
             </h1>
 
             {/* Body */}
             <p className="text-base sm:text-lg text-white leading-relaxed text-center max-w-2xl">
-              Master the I-PARA Flow System within the Wingmates Community. Silence the noise, find
-              your flow, and live the magic of mastery.
+              The mental training community for XC pilots who are ready for the inner work.
+              Silence the noise, find your flow, and live the magic of mastery.
             </p>
 
             {/* Button */}
@@ -190,44 +190,47 @@ export default function Home() {
 
               <ul className="space-y-4 text-left list-disc list-inside">
                 <li>
-                  <strong>The Ranking Trap:</strong> You've started measuring your worth by numbers
-                  on a screen, turning a miracle into a "battle of the ego" and losing the
-                  "excitement, fun, and adventure" that brought you to paragliding.
+                  <strong>The Ranking Trap:</strong> You land and check the stats before you check
+                  how it felt. The flying that brought you alive has become a performance review.
                 </li>
 
                 <li>
-                  <strong>Fear is Holding You Back:</strong> On takeoff, on landing, when you're
-                  high or in turbulence when there is no "pause button".
+                  <strong>Fear is Holding You Back:</strong> At launch, in turbulence, at the
+                  moment you need to commit — something takes over and you can&apos;t name it.
                 </li>
 
                 <li>
-                  <strong>The "Retrieve Driver" Syndrome:</strong> You are sick of being the one
-                  sitting in the car, watching others enjoy the air because you "bombed out" again.
+                  <strong>The Retrieve Driver Syndrome:</strong> You bombed out. Again. You sat in
+                  the car and watched everyone else fly. You have the skills. You just can&apos;t
+                  access them when it counts.
                 </li>
 
                 <li>
-                  <strong>The Overthinking Head:</strong> You have "10 contributors" jostling for
-                  the top spot in your mind, creating a distracted, busy head that makes the magic
-                  of flow impossible.
+                  <strong>The Overthinking Head:</strong> Ten contributors jostling for the top
+                  spot. Launch is a committee meeting. You can&apos;t fly well when you&apos;re
+                  that loud to yourself.
                 </li>
 
                 <li>
-                  <strong>The Rollercoaster Cycle:</strong> You've had breakthroughs before, but
-                  you're struggling with consistency.
+                  <strong>The Rollercoaster Cycle:</strong> You had a breakthrough. Then it
+                  vanished. You keep landing back at the start — same fear, different day.
                 </li>
 
                 <li>
-                  <strong>The Toxic Strain:</strong> You've considered walking away from the sport
-                  entirely because the mental strain and constant pressure to compare yourself have
-                  silenced your love for flying.
+                  <strong>The Toxic Strain:</strong> You&apos;ve considered walking away entirely.
+                  Not because you don&apos;t love flying — because the mental weight has silenced
+                  the love.
                 </li>
 
                 <li>
-                  <strong>Isolation:</strong> Paragliding can be scary and lonely without a crew.
-                  Sharing ideas and experiences with the group helps to stay inspired and continue
-                  the flying journey without feeling isolated.
+                  <strong>Isolation:</strong> Fear is harder to carry alone. Progress is slower
+                  without people who understand what you&apos;re working through.
                 </li>
               </ul>
+              <p className="pt-4 font-medium text-white">
+                None of these are skill problems. They are interference problems. And interference
+                can be removed.
+              </p>
             </div>
 
             {/* Image */}
@@ -363,16 +366,6 @@ export default function Home() {
                 experienced. I improved my dating and social life, improved my finances, and
                 transformed my body.
               </p>
-
-              <div className="py-8 flex justify-center">
-                <div className="max-w-full rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border shadow-[0_0_20px_rgba(59,130,246,0.5)]">
-                  <img
-                    src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/transformation.jpg"
-                    alt="Transformation"
-                    className="max-w-full h-auto block"
-                  />
-                </div>
-              </div>
 
               <p>
                 And it all came through the wisdom of paragliding, it came from the superhuman gift
