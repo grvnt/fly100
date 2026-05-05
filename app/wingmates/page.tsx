@@ -143,24 +143,24 @@ export default function Home() {
                 />
               </div>
             </div>
-            <p className="text-base font-semibold uppercase tracking-wider text-[#3B82F6] animate-pulse-text">
-              Who is Grant?
+            <p className="text-2xl sm:text-3xl font-semibold text-white text-center">
+              Hey, I&apos;m Grant
             </p>
 
             <p>
-              Grant Smith is a qualified paragliding instructor, guide, and accomplished XC pilot.
-              He is completing the ICF Flow Coaching certification with The Flow Centre — training
+              I&apos;m a qualified paragliding instructor, guide, and accomplished XC pilot.
+              I&apos;m completing the ICF Flow Coaching certification with The Flow Centre — training
               to become the world&apos;s first paragliding flow coach.
             </p>
 
             <p>
-              His method follows the tradition of Gallwey&apos;s Inner Game. Not more instruction —
+              My method follows the tradition of Gallwey&apos;s Inner Game. Not more instruction —
               removing the interference that is already in the way. When the noise is cleared, pilots
               discover they already know how to fly. The work is in getting out of your own way.
             </p>
 
             <p>
-              Every other paragliding coach teaches you more. Grant is the only one working
+              Every other paragliding coach teaches you more. I&apos;m the only one working
               specifically on the gap between the flying you want and the flying you do. That gap
               is not technical. It never was.
             </p>
