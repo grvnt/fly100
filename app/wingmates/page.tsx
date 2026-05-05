@@ -160,9 +160,8 @@ export default function Home() {
             </p>
 
             <p>
-              Every other paragliding coach teaches you more technique. I&apos;m the only one
-              working specifically on the gap between the flying you want and the flying you do.
-              The gap is not technique. It&apos;s mental.
+              Every other paragliding coach teaches you more technique. The gap is not technique.
+              It&apos;s mental.
             </p>
           </div>
         </section>
