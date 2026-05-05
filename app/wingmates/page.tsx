@@ -160,8 +160,8 @@ export default function Home() {
             </p>
 
             <p>
-              Most coaches teach more technique. But the masters know that skill can only take you
-              so far. The mental game is the true differentiator.
+              Most coaching focuses on technique. This doesn&apos;t. The gap between the flying you
+              want and the flying you do is not technical. It&apos;s mental.
             </p>
           </div>
         </section>
