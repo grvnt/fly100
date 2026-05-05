@@ -21,7 +21,7 @@ const TestimonialMerakai = () => {
               <div>
                 <p className="text-lg font-medium tracking-tight text-white">Paul Guschlbauer</p>
                 <p className="text-sm text-blue-200">
-                  Skywalk Team Pilot & RedBull XAlps Podium Finisher
+                  Skywalk Team Pilot & 4x Red Bull X-Alps Podium Finisher
                 </p>
               </div>
 

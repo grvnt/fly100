@@ -177,7 +177,7 @@ export default function Home() {
                 relationship with fear and anxiety, recognising them not as stop signs, but as
                 energy to be transformed and utilised.&rdquo;
               </p>
-              <p className="text-[#3B82F6] font-semibold text-base">— Alex, Wingmates member</p>
+              <p className="text-[#3B82F6] font-semibold text-base">— Alex, UK</p>
             </blockquote>
           </div>
         </section>
