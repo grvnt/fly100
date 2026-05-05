@@ -11,7 +11,7 @@ import { H2 } from '@/components/ui/typography';
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
 export const metadata: Metadata = {
-  title: 'Wingmates | Find your Flow',
+  title: 'Wingmates | Ready to Flow',
   description:
     'A community dedicated to flow state, decision-making, and the mental mastery of flight. Mechanical skill gets you airborne; mindset determines the rest.',
 };
@@ -38,7 +38,7 @@ export default function Home() {
 
               {/* Body */}
               <p className="text-lg sm:text-xl lg:text-xl text-white leading-relaxed max-w-2xl mt-2">
-                The mental training community for XC pilots who are ready for the inner work.
+                The paragliding community for pilots ready to master their mental game.
                 Silence the noise, find your flow, and experience the magic of mastery.
               </p>
 
@@ -46,7 +46,7 @@ export default function Home() {
               <div className="mt-6">
                 <ButtonGradient
                   href="/wingmates/#pricing"
-                  text="Find your Flow"
+                  text="Ready to Flow"
                   className="btn-wide"
                 />
               </div>
@@ -82,7 +82,7 @@ export default function Home() {
 
             {/* Body */}
             <p className="text-base sm:text-lg text-white leading-relaxed text-center max-w-2xl">
-              The mental training community for XC pilots who are ready for the inner work.
+              The paragliding community for pilots ready to master their mental game.
               Silence the noise, find your flow, and live the magic of mastery.
             </p>
 
@@ -90,7 +90,7 @@ export default function Home() {
             <div className="mt-4">
               <ButtonGradient
                 href="/wingmates/#pricing"
-                text="Find your Flow"
+                text="Ready to Flow"
                 className="btn-wide"
               />
             </div>
@@ -110,47 +110,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-black px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto flex flex-col gap-6 items-center text-center">
-            {/* Eyebrow */}
-            <p className="text-base sm:text-lg font-semibold uppercase tracking-wider text-[#3B82F6] animate-pulse-text">
-              Paragliding is <span className="animate-shift-light">Evolving</span>
-            </p>
-
-            {/* H2 Heading */}
-            <H2 className="text-white">Flow is Freedom</H2>
-
-            {/* Body Text */}
-            <div className="max-w-3xl mx-auto text-white text-lg sm:text-xl leading-relaxed space-y-6 text-justify">
-              <p>
-                We lost the magic and freedom of flying and began measuring our worth and enjoyment
-                by points and rankings.
-              </p>
-              <p>
-                We fulfilled a dream and then turned this miracle into a battle of the ego. Social
-                networks and rating systems now push us to compare ourselves constantly, often
-                forcing pilots to ignore their own feelings and safety just for a few extra points.
-              </p>
-              <p>
-                But pilots are breaking away. There is a growing movement of people who realize
-                paragliding is more than a sport—and are reconnecting with it as a form of art and
-                personal growth.
-              </p>
-
-              <p>
-                We are returning to the Soul of Free Flight, where flying exists as an elemental art
-                of self-expression, self-discovery and, ultimately, self-evolution.
-              </p>
-              <p>We honour the XC Spirit of freedom and adventure.</p>
-            </div>
-          </div>
-        </section>
-
         <section
           className="relative min-h-[60vh] flex items-center bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
               'url(https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/gudauri-paragliding-sigma.jpg)',
+            backgroundAttachment: 'fixed',
           }}
         >
           {/* Dark overlay for text readability */}
