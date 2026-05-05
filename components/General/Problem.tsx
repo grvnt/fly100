@@ -114,7 +114,7 @@ const Problem = () => {
               </svg>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-white mb-3 text-center max-w-xs mx-auto">
-              (R)eflect: The Tribe Mirror
+              (R)eflect: The Mirror
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed mb-3 max-w-xs mx-auto text-justify">
               Using the community to extract deep, implicit learning that solo flight logs
