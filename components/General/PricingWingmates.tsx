@@ -34,8 +34,9 @@ const plan: PricingTier = {
   description: "The world's first flow-driven paragliding community.",
   features: [
     <>
-      <strong>The Way of Fear:</strong> A structured path through the fears that limit your flying —
-      launch anxiety, commitment, and what happens in your body when the air changes.
+      <strong>The Way of Fear</strong> <em>(coming soon):</em> A structured path through the fears
+      that limit your flying — launch anxiety, commitment, and what happens in your body when the
+      air changes.
     </>,
     <>
       <strong>What is Flow</strong> <em>(coming soon):</em> Understanding the state every pilot
@@ -51,8 +52,8 @@ const plan: PricingTier = {
       alongside you — structure, accountability, and honest conversation.
     </>,
     <>
-      <strong>Structured Monthly Themes:</strong> Each month has a focus. The group and the
-      material meet you where you actually are.
+      <strong>Unlimited support from Grant:</strong> Direct access via DMs and the community.
+      Not a help desk — Grant himself.
     </>,
   ],
   featured: true,
