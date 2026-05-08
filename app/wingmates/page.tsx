@@ -30,21 +30,22 @@ export default function Home() {
 
               {/* Headline */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                Mastery is the Goal.
+                Master the Mental Game.
                 <br />
-                Flow is the Way.
+                Fly in Flow.
               </h1>
 
               {/* Body */}
               <p className="text-lg sm:text-xl lg:text-xl text-white leading-relaxed max-w-2xl mt-2">
-                The paragliding community for pilots ready to master their mental game.
+                The community for pilots who want to fly with more confidence, focus and flow. Train
+                your mind, connect with your peers, rediscover and share your love for flying.
               </p>
 
               {/* Button */}
               <div className="mt-6">
                 <ButtonGradient
                   href="/wingmates/#pricing"
-                  text="Ready to Flow"
+                  text="Join Wingmates"
                   className="btn-wide"
                 />
               </div>
@@ -73,21 +74,22 @@ export default function Home() {
 
             {/* Headline */}
             <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-center">
-              Mastery is the Goal.
+              Master the Mental Game.
               <br />
-              Flow is the Way.
+              Fly in Flow.
             </h1>
 
             {/* Body */}
             <p className="text-base sm:text-lg text-white leading-relaxed text-center max-w-2xl">
-              The paragliding community for pilots ready to master their mental game.
+              The community for pilots who want to fly with more confidence, focus and flow. Train
+              your mind, connect with your peers, rediscover and share your love for flying.
             </p>
 
             {/* Button */}
             <div className="mt-4">
               <ButtonGradient
                 href="/wingmates/#pricing"
-                text="Ready to Flow"
+                text="Join Wingmates"
                 className="btn-wide"
               />
             </div>
