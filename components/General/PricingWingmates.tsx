@@ -46,14 +46,10 @@ const plan: PricingTier = {
       Not a help desk — Grant himself.
     </>,
     <>
-      <strong>The Way of Fear</strong> <em>(coming soon):</em> A structured path through the fears
-      that limit your flying — launch anxiety, commitment, and what happens in your body when the
-      air changes.
-    </>,
-    <>
-      <strong>What is Flow</strong> <em>(coming soon):</em> Understanding the state every pilot
-      chases but few access deliberately — how flow works, what blocks it, and how to create the
-      conditions for it.
+      <strong>The Way of Fear</strong> <em>(live — $197 value):</em> A structured path through the
+      fears that limit your flying — launch anxiety, commitment, and what happens in your body when
+      the air changes. Includes the flow science fundamentals behind why fear blocks flow and how to
+      work with it.
     </>,
   ],
   featured: true,

@@ -6,6 +6,7 @@ import GroupFlow from '@/components/General/GroupFlow';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import RecognitionCards from '@/components/General/RecognitionCards';
+import WayOfFear from '@/components/General/WayOfFear';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
@@ -129,6 +130,8 @@ export default function Home() {
 
         <Problem />
         <GroupFlow />
+
+        <WayOfFear />
 
         {/* ===== ABOUT GRANT ===== */}
         <section className="bg-base-200 px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
