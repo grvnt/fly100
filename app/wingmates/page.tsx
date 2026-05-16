@@ -38,8 +38,8 @@ export default function Home() {
 
               {/* Body */}
               <p className="text-lg sm:text-xl lg:text-xl text-white leading-relaxed max-w-2xl mt-2">
-                The community for pilots who want to fly with more confidence, focus and flow. Train
-                your mind, connect with your peers, rediscover and share your love for flying.
+                The community for pilots flying with more confidence, focus and flow. Train
+                your mind, connect with your peers, and share your love for flying.
               </p>
 
               {/* Button */}
