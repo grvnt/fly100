@@ -19,8 +19,7 @@ const Problem = () => {
         <div className="max-w-2xl mx-auto mb-8 sm:mb-12">
           <p className="text-base sm:text-lg opacity-90 leading-relaxed text-left sm:text-justify">
             Wingmates is built around a four-part practice. Not a curriculum you work through
-            once — a cycle you return to each month, each season, each time you want to fly
-            closer to your ceiling.
+            once — a cycle you return to each month, each season, each flight.
           </p>
         </div>
 
