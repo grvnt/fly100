@@ -129,8 +129,7 @@ const Problem = () => {
               (A)djust: The Upward Spiral
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed max-w-xs mx-auto text-justify">
-              Make the shifts permanent. Rewire the patterns that keep pulling you back to
-              the same landing.
+              Turn what you discover into how you fly. The upward spiral builds when reflection becomes practice, and practice becomes identity.
             </p>
           </div>
         </div>
