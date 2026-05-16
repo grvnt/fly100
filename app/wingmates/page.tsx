@@ -11,7 +11,7 @@ import WayOfFear from '@/components/General/WayOfFear';
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
 export const metadata: Metadata = {
-  title: 'Wingmates | Ready to Flow',
+  title: 'Wingmates | Fly in Flow',
   description:
     'A community dedicated to flow state, decision-making, and the mental mastery of flight. Mechanical skill gets you airborne; mindset determines the rest.',
 };
