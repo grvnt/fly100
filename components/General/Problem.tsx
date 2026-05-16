@@ -102,8 +102,7 @@ const Problem = () => {
               (R)eflect: The Mirror
             </h3>
             <p className="text-sm sm:text-base text-white/90 leading-relaxed max-w-xs mx-auto text-justify">
-              Use the community as a mirror. Structured post-flight reflection surfaces the
-              patterns that solo flight logs miss.
+              Share your flights, your wins, your struggles — in a safe and supportive community.
             </p>
           </div>
 
