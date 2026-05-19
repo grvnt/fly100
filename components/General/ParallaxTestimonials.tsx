@@ -40,7 +40,7 @@ export default function ParallaxTestimonials() {
             &ldquo;Working with you has changed my flying, especially dealing with the fear. I
             breathe, recognise it and now use it to my advantage.&rdquo;
           </p>
-          <p className="text-[#3B82F6] font-semibold text-base">— @kurtbester1170 · YouTube</p>
+          <p className="text-[#3B82F6] font-semibold text-base">— Kurt Bester · Coaching Client</p>
         </blockquote>
         <blockquote className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border-l-4 border-[#3B82F6] flex flex-col justify-between">
           <p className="text-white text-lg leading-relaxed mb-6">
