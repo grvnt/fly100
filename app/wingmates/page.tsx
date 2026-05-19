@@ -7,6 +7,7 @@ import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import RecognitionCards from '@/components/General/RecognitionCards';
 import WayOfFear from '@/components/General/WayOfFear';
+import ParallaxTestimonials from '@/components/General/ParallaxTestimonials';
 
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
@@ -168,21 +169,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ===== ALEX PULL QUOTE ===== */}
-        <section className="bg-black px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="max-w-3xl mx-auto">
-            <blockquote className="bg-[#07122d] rounded-2xl p-8 sm:p-12 border-l-4 border-[#3B82F6]">
-              <p className="text-white text-lg sm:text-xl leading-relaxed mb-6">
-                &ldquo;This has become more than just a flight skill — it&apos;s a way of being. I
-                feel a pervasive sense of calm and a significant reduction in mental noise, noticing
-                the difference even in mundane tasks like driving. I&apos;ve developed a new
-                relationship with fear and anxiety, recognising them not as stop signs, but as
-                energy to be transformed and utilised.&rdquo;
-              </p>
-              <p className="text-[#3B82F6] font-semibold text-base">— Alex, UK</p>
-            </blockquote>
-          </div>
-        </section>
+        {/* ===== TESTIMONIALS — PARALLAX ===== */}
+        <ParallaxTestimonials />
 
         <PricingWingmates />
       </main>
