@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 // import dynamic from 'next/dynamic';
+import Script from 'next/script';
 import ButtonGradient from '@/components/General/ButtonGradient';
 import Problem from '@/components/General/Problem';
 import GroupFlow from '@/components/General/GroupFlow';
@@ -43,12 +44,19 @@ export default function Home() {
                 your mind, connect with your peers, and share your love for flying.
               </p>
 
-              {/* Button */}
-              <div className="mt-6">
+              {/* Button + Senja widget */}
+              <div className="mt-6 flex flex-row items-center gap-6">
                 <ButtonGradient
                   href="/wingmates/#pricing"
                   text="Join Wingmates"
-                  className="btn-wide"
+                  className="btn-wide shrink-0"
+                />
+                <div
+                  className="senja-embed"
+                  data-id="ad8250da-bdf3-4df5-bf01-16430ceda859"
+                  data-mode="shadow"
+                  data-lazyload="false"
+                  style={{ display: 'block', width: '100%' }}
                 />
               </div>
             </div>
@@ -87,12 +95,19 @@ export default function Home() {
               your mind, connect with your peers, and share your love for flying.
             </p>
 
-            {/* Button */}
-            <div className="mt-4">
+            {/* Button + Senja widget */}
+            <div className="mt-4 flex flex-col items-center gap-4">
               <ButtonGradient
                 href="/wingmates/#pricing"
                 text="Join Wingmates"
                 className="btn-wide"
+              />
+              <div
+                className="senja-embed w-full"
+                data-id="ad8250da-bdf3-4df5-bf01-16430ceda859"
+                data-mode="shadow"
+                data-lazyload="false"
+                style={{ display: 'block' }}
               />
             </div>
 
@@ -174,6 +189,10 @@ export default function Home() {
 
         <PricingWingmates />
       </main>
+      <Script
+        src="https://widget.senja.io/widget/ad8250da-bdf3-4df5-bf01-16430ceda859/platform.js"
+        strategy="afterInteractive"
+      />
     </>
   );
 }
