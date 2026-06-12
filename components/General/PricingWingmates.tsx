@@ -160,7 +160,10 @@ export default function PricingWingmates() {
                     Join Wingmates
                   </a>
                 </div>
-                <p className="mt-2 text-xs leading-5 text-gray-700 dark:text-gray-400">
+                <p className="mt-2 text-xs leading-5 text-orange-400 font-semibold">
+                  Only 3 founding rate spots remaining.
+                </p>
+                <p className="mt-1 text-xs leading-5 text-gray-700 dark:text-gray-400">
                   Cancel anytime.
                 </p>
               </div>
