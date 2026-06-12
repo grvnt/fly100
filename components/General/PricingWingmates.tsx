@@ -136,6 +136,9 @@ export default function PricingWingmates() {
                     /month
                   </span>
                 </p>
+                <p className="mt-1 text-center text-xs font-semibold uppercase tracking-wider text-[#3B82F6]">
+                  Founding rate
+                </p>
                 <div className="flex justify-center mt-8 flex-shrink-0">
                   <a
                     href="https://wingmates.fly100.co/checkout/wingmates"
