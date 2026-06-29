@@ -135,16 +135,21 @@ export default function PricingWingmates() {
               )}
             >
               <div className="mx-auto max-w-xs px-8">
-                <p className="text-sm font-semibold text-black dark:text-white">
-                  Access is currently closed.
+                <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                  <span className="text-5xl md:text-6xl font-bold tracking-tight text-black dark:text-white">
+                    $150
+                  </span>
+                  <span className="text-xl md:text-2xl font-semibold leading-6 tracking-wide text-gray-700 dark:text-gray-400">
+                    /quarter
+                  </span>
                 </p>
-                <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-center text-xs font-semibold uppercase tracking-wider text-[#3B82F6]">
+                  Access currently closed
+                </p>
+                <p className="mt-4 text-sm leading-5 text-gray-500 dark:text-gray-400">
                   Enter your email for priority access when spots open.
                 </p>
                 <div className="mt-6" id="kit-waitlist-form" />
-                <p className="mt-4 text-xs leading-5 text-gray-500 dark:text-gray-400">
-                  When doors open, price moves to $150/quarter.
-                </p>
               </div>
             </div>
           </div>
