@@ -46,7 +46,7 @@ const plan: PricingTier = {
       Not a help desk — Grant himself.
     </>,
     <>
-      <strong>1 free 1:1 call with Grant:</strong> A private hot seat coaching session — we work
+      <strong>1 free 1:1 call with Grant</strong> <em>(live — $150 value):</em> A private hot seat coaching session — we work
       on whatever is holding you back in the air.
     </>,
     <>
