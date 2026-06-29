@@ -31,23 +31,23 @@ const plan: PricingTier = {
   href: '/subscribe',
   price: '',
   discountPrice: '$150',
-  description: "The world's first flow-driven paragliding community.",
+  description: "The community of paragliders flying in flow without being held back by fear.",
   features: [
     <>
       <strong>Biweekly calls with Grant:</strong> Live sessions every two weeks. Bring your flight
       stories, your sticking points, your questions.
     </>,
     <>
-      <strong>The Wingmates Crew:</strong> A global community of pilots doing the inner work
-      alongside you — structure, accountability, and honest conversation.
+      <strong>1 free 1:1 call with Grant</strong> <em>(live — $150 value):</em> A private hot seat
+      coaching session — we work on whatever is holding you back in the air.
     </>,
     <>
       <strong>Personal support from Grant:</strong> Direct access via DMs and the community.
       Not a help desk — Grant himself.
     </>,
     <>
-      <strong>1 free 1:1 call with Grant</strong> <em>(live — $150 value):</em> A private hot seat coaching session — we work
-      on whatever is holding you back in the air.
+      <strong>The Wingmates Crew:</strong> A global community of pilots doing the inner work
+      alongside you — structure, accountability, and honest conversation.
     </>,
     <>
       <strong>The Way of Fear</strong> <em>(live — $197 value):</em> A structured path through the
