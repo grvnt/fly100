@@ -50,7 +50,7 @@ const plan: PricingTier = {
       alongside you — structure, accountability, and honest conversation.
     </>,
     <>
-      <strong>The Way of Fear</strong> <em>(live — $197 value):</em> A structured path through the
+      <strong>The Way of Fear</strong> <em>($247 value):</em> A structured path through the
       fears that limit your flying — launch anxiety, commitment, and what happens in your body when
       the air changes. Includes the flow science fundamentals behind why fear blocks flow and how to
       work with it.
