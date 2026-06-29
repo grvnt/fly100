@@ -34,7 +34,7 @@ const plan: PricingTier = {
   description: "The world's first flow-driven paragliding community.",
   features: [
     <>
-      <strong>Weekly calls with Grant:</strong> Live sessions every week. Bring your flight
+      <strong>Biweekly calls with Grant:</strong> Live sessions every two weeks. Bring your flight
       stories, your sticking points, your questions.
     </>,
     <>
@@ -44,6 +44,10 @@ const plan: PricingTier = {
     <>
       <strong>Personal support from Grant:</strong> Direct access via DMs and the community.
       Not a help desk — Grant himself.
+    </>,
+    <>
+      <strong>1 free 1:1 call with Grant:</strong> A private hot seat coaching session — we work
+      on whatever is holding you back in the air.
     </>,
     <>
       <strong>The Way of Fear</strong> <em>(live — $197 value):</em> A structured path through the
@@ -116,7 +120,7 @@ export default function PricingWingmates() {
               <div className="h-px flex-auto bg-gray-100 dark:bg-gray-700" />
             </div>
 
-            <ul className="mt-10 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-700 dark:text-gray-400">
+            <ul className="mt-10 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-700 dark:text-gray-100">
               {plan.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-x-3 text-sm">
                   <CheckIcon
