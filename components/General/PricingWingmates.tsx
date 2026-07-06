@@ -101,7 +101,7 @@ export default function PricingWingmates() {
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Join the <i>Wingmates</i> waitlist.
+            Apply to join <i>Wingmates</i>.
           </h2>
         </div>
 
@@ -148,11 +148,38 @@ export default function PricingWingmates() {
                   </span>
                 </p>
                 <p className="mt-1 text-center text-xs font-semibold uppercase tracking-wider text-[#3B82F6]">
-                  Access currently closed
+                  30 pilots inside · By application
                 </p>
                 <p className="mt-4 text-sm leading-5 text-gray-500 dark:text-gray-400">
-                  Enter your email for priority access when spots open.
+                  Enter your email to apply. Grant reviews every application personally.
                 </p>
+                <figure className="mt-6 border-l-2 border-[#3B82F6]/50 pl-4 text-left">
+                  <blockquote className="text-sm italic leading-relaxed text-gray-600 dark:text-gray-300">
+                    &ldquo;It&apos;s only been a month and seen a real change&hellip; Open up
+                    to the program and it delivers.&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-2 text-xs font-medium not-italic text-gray-500 dark:text-gray-400">
+                    &mdash; Mark Limb
+                  </figcaption>
+                  <div
+                    className="mt-1.5 flex items-center gap-0.5"
+                    role="img"
+                    aria-label="5 out of 5 stars"
+                  >
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <svg
+                        key={i}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="#FBBF24"
+                        aria-hidden="true"
+                        className="w-3.5 h-3.5"
+                      >
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    ))}
+                  </div>
+                </figure>
                 <div className="mt-6" id="kit-waitlist-form" />
               </div>
             </div>

@@ -96,8 +96,8 @@ const WayOfFear = () => {
           {/* CTA */}
           <div className="mt-10 sm:mt-14 flex flex-col items-center gap-3">
             <ButtonGradient
-              href="/wingmates/#pricing"
-              text="Join Wingmates to access"
+              href="#pricing"
+              text="Apply for access"
               className="btn-wide"
             />
             <p className="text-xs sm:text-sm text-white/50">

@@ -33,7 +33,7 @@ export default function Home() {
 
               {/* Headline */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                Master the Mental Game.
+                Master the Inner Game.
                 <br />
                 Fly in Flow.
               </h1>
@@ -47,8 +47,8 @@ export default function Home() {
               {/* Button + Senja widget */}
               <div className="mt-6 flex flex-row items-center gap-6">
                 <ButtonGradient
-                  href="/wingmates/#pricing"
-                  text="Join Wingmates"
+                  href="#pricing"
+                  text="Apply Now"
                   className="btn-wide shrink-0"
                 />
                 <div
@@ -84,7 +84,7 @@ export default function Home() {
 
             {/* Headline */}
             <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-center">
-              Master the Mental Game.
+              Master the Inner Game.
               <br />
               Fly in Flow.
             </h1>
@@ -98,8 +98,8 @@ export default function Home() {
             {/* Button + Senja widget */}
             <div className="mt-4 flex flex-col items-center gap-4">
               <ButtonGradient
-                href="/wingmates/#pricing"
-                text="Join Wingmates"
+                href="#pricing"
+                text="Apply Now"
                 className="btn-wide"
               />
               <div

@@ -101,7 +101,7 @@ const HeroWelcome = () => {
           </p>
 
           <div className="flex justify-center">
-            <ButtonGradient href="/wingmates" text="Join Wingmates" className="btn-wide" />
+            <ButtonGradient href="/wingmates" text="Apply Now" className="btn-wide" />
           </div>
 
           <p className="text-sm opacity-75 mt-6">
