@@ -66,7 +66,7 @@ const WayOfFear = () => {
               <span className="mx-2 text-white/30" aria-hidden="true">
                 ·
               </span>
-              <span className="text-white">$197 value</span>
+              <span className="text-white">$247 value</span>
             </p>
           </div>
 
