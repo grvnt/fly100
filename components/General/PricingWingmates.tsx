@@ -4,9 +4,8 @@ import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import React from 'react';
 
-// Stripe Payment Links — paste from the Stripe dashboard. Both must be RECURRING prices.
-const STRIPE_QUARTERLY_URL = 'REPLACE_ME_QUARTERLY';
-const STRIPE_MONTHLY_URL = 'REPLACE_ME_MONTHLY';
+// Circle paywall checkout — presents both prices and the 7-day trial.
+const CIRCLE_CHECKOUT_URL = 'https://wingmates.fly100.co/checkout/wingmates-new';
 
 export interface PricingTierFrequency {
   id: string;
@@ -63,7 +62,7 @@ const plan: PricingTier = {
   featured: true,
   highlighted: false,
   soldOut: false,
-  cta: 'Join Wingmates',
+  cta: 'Start 7-day free trial',
 };
 
 const CheckIcon = ({ className }: { className?: string }) => {
@@ -143,25 +142,22 @@ export default function PricingWingmates() {
                   </span>
                 </p>
 
-                {/* Primary CTA — quarterly */}
+                {/* Secondary price — monthly, plain text */}
+                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                  or $60 / month
+                </p>
+
+                {/* Single CTA — Circle paywall handles price selection + trial */}
                 <a
-                  href={STRIPE_QUARTERLY_URL}
+                  href={CIRCLE_CHECKOUT_URL}
                   className="mt-8 block w-full rounded-lg bg-[#3B82F6] px-4 py-3 text-center text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#2563EB] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B82F6]"
                 >
                   {plan.cta}
                 </a>
 
-                {/* Secondary CTA — monthly */}
-                <a
-                  href={STRIPE_MONTHLY_URL}
-                  className="mt-3 block w-full rounded-lg border border-[#3B82F6]/60 px-4 py-3 text-center text-sm font-semibold text-[#3B82F6] transition-colors hover:bg-[#3B82F6]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B82F6] dark:text-[#60A5FA] dark:border-[#60A5FA]/60 dark:hover:bg-[#60A5FA]/10"
-                >
-                  Or $60 / month
-                </a>
-
-                {/* Quiet reassurance */}
+                {/* Trial + cancellation — plain fact, paired */}
                 <p className="mt-4 text-xs leading-5 text-gray-500 dark:text-gray-400">
-                  Cancel or pause anytime.
+                  7-day free trial. Cancel or pause anytime.
                 </p>
 
                 <figure className="mt-6 border-l-2 border-[#3B82F6]/50 pl-4 text-left">
