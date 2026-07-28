@@ -2,7 +2,11 @@
 
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
-import React, { useEffect } from 'react';
+import React from 'react';
+
+// Stripe Payment Links — paste from the Stripe dashboard. Both must be RECURRING prices.
+const STRIPE_QUARTERLY_URL = 'REPLACE_ME_QUARTERLY';
+const STRIPE_MONTHLY_URL = 'REPLACE_ME_MONTHLY';
 
 export interface PricingTierFrequency {
   id: string;
@@ -59,7 +63,7 @@ const plan: PricingTier = {
   featured: true,
   highlighted: false,
   soldOut: false,
-  cta: 'Apply Now',
+  cta: 'Join Wingmates',
 };
 
 const CheckIcon = ({ className }: { className?: string }) => {
@@ -80,16 +84,6 @@ const CheckIcon = ({ className }: { className?: string }) => {
 };
 
 export default function PricingWingmates() {
-  useEffect(() => {
-    const container = document.getElementById('kit-waitlist-form');
-    if (!container || container.querySelector('script')) return;
-    const script = document.createElement('script');
-    script.async = true;
-    script.setAttribute('data-uid', 'f81207161b');
-    script.src = 'https://fly100.kit.com/f81207161b/index.js';
-    container.appendChild(script);
-  }, []);
-
   return (
     <section
       className="bg-background text-foreground overflow-hidden"
@@ -101,7 +95,7 @@ export default function PricingWingmates() {
             Pricing
           </Badge>
           <h2 className="font-bold text-3xl lg:text-4xl tracking-tight">
-            Apply to join <i>Wingmates</i>.
+            Join <i>Wingmates</i>.
           </h2>
         </div>
 
@@ -139,6 +133,7 @@ export default function PricingWingmates() {
               )}
             >
               <div className="mx-auto max-w-xs px-8">
+                {/* Primary price — quarterly */}
                 <p className="mt-6 flex items-baseline justify-center gap-x-2">
                   <span className="text-5xl md:text-6xl font-bold tracking-tight text-black dark:text-white">
                     $150
@@ -147,12 +142,28 @@ export default function PricingWingmates() {
                     /quarter
                   </span>
                 </p>
-                <p className="mt-1 text-center text-xs font-semibold uppercase tracking-wider text-[#3B82F6]">
-                  30 pilots inside · By application
+
+                {/* Primary CTA — quarterly */}
+                <a
+                  href={STRIPE_QUARTERLY_URL}
+                  className="mt-8 block w-full rounded-lg bg-[#3B82F6] px-4 py-3 text-center text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#2563EB] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B82F6]"
+                >
+                  {plan.cta}
+                </a>
+
+                {/* Secondary CTA — monthly */}
+                <a
+                  href={STRIPE_MONTHLY_URL}
+                  className="mt-3 block w-full rounded-lg border border-[#3B82F6]/60 px-4 py-3 text-center text-sm font-semibold text-[#3B82F6] transition-colors hover:bg-[#3B82F6]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B82F6] dark:text-[#60A5FA] dark:border-[#60A5FA]/60 dark:hover:bg-[#60A5FA]/10"
+                >
+                  Or $60 / month
+                </a>
+
+                {/* Quiet reassurance */}
+                <p className="mt-4 text-xs leading-5 text-gray-500 dark:text-gray-400">
+                  Cancel or pause anytime.
                 </p>
-                <p className="mt-4 text-sm leading-5 text-gray-500 dark:text-gray-400">
-                  Enter your email to apply. Grant reviews every application personally.
-                </p>
+
                 <figure className="mt-6 border-l-2 border-[#3B82F6]/50 pl-4 text-left">
                   <blockquote className="text-sm italic leading-relaxed text-gray-600 dark:text-gray-300">
                     &ldquo;It&apos;s only been a month and seen a real change&hellip; Open up
@@ -180,7 +191,6 @@ export default function PricingWingmates() {
                     ))}
                   </div>
                 </figure>
-                <div className="mt-6" id="kit-waitlist-form" />
               </div>
             </div>
           </div>

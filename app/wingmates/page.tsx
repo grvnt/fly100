@@ -48,7 +48,7 @@ export default function Home() {
               <div className="mt-6 flex flex-row items-center gap-6">
                 <ButtonGradient
                   href="#pricing"
-                  text="Apply Now"
+                  text="Join Wingmates"
                   className="btn-wide shrink-0"
                 />
                 <div
@@ -99,7 +99,7 @@ export default function Home() {
             <div className="mt-4 flex flex-col items-center gap-4">
               <ButtonGradient
                 href="#pricing"
-                text="Apply Now"
+                text="Join Wingmates"
                 className="btn-wide"
               />
               <div
