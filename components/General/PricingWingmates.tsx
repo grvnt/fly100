@@ -157,7 +157,7 @@ export default function PricingWingmates() {
 
                 {/* Trial + cancellation — plain fact, paired */}
                 <p className="mt-4 text-xs leading-5 text-gray-500 dark:text-gray-400">
-                  7-day free trial. Cancel or pause anytime.
+                  7-day free trial. Cancel anytime.
                 </p>
 
                 <figure className="mt-6 border-l-2 border-[#3B82F6]/50 pl-4 text-left">
