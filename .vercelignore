@@ -1,0 +1,9 @@
+# The /sites directory MVP is built but NOT production-ready and NOT committed.
+# `vercel --prod` uploads the working directory, so without these entries the
+# unreviewed directory would ship to fly100.co alongside intended changes.
+# Remove this block when /sites is ready to go live.
+app/sites
+components/sites
+lib/destinations
+lib/membership.ts
+types/destination.ts
