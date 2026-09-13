@@ -167,8 +167,8 @@ export default function Home() {
 
             <p>
               I&apos;m a qualified paragliding instructor, guide, and accomplished XC pilot.
-              I&apos;m also an accredited Flow Coach — 143 ICF Level 2 accredited training hours
-              with The Flow Centre — and the world&apos;s first paragliding flow coach.
+              I&apos;m also an accredited Flow Coach with The Flow Centre, and the world&apos;s
+              first paragliding flow coach.
             </p>
 
             <p>
@@ -179,7 +179,8 @@ export default function Home() {
 
             <p>
               Most coaching focuses on technique. This doesn&apos;t. The gap between the flying you
-              want and the flying you do is not technical. It&apos;s mental.
+              want and the flying you do is not technical. It&apos;s mental. Paragliding is a mind
+              game.
             </p>
           </div>
         </section>
