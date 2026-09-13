@@ -167,8 +167,8 @@ export default function Home() {
 
             <p>
               I&apos;m a qualified paragliding instructor, guide, and accomplished XC pilot.
-              I&apos;m completing the ICF Flow Coaching certification with The Flow Centre — training
-              to become the world&apos;s first paragliding flow coach.
+              I&apos;m also an accredited Flow Coach — 143 ICF Level 2 accredited training hours
+              with The Flow Centre — and the world&apos;s first paragliding flow coach.
             </p>
 
             <p>

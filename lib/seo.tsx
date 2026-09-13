@@ -45,7 +45,6 @@ export const getSEOTags = ({
       title: ogTitle,
       description: ogDescription,
       card: "summary_large_image" as const,
-      creator: "@marc_louvion",
     },
     ...(canonicalUrlRelative && {
       alternates: { canonical: canonicalUrlRelative },

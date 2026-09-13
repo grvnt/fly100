@@ -455,16 +455,31 @@ const App: React.FC = () => {
           ))}
         </main>
 
-        {/* Footer link to full guide */}
-        <footer className="flex-shrink-0 px-4 pb-3 text-center text-[11px] text-slate-500">
-          <a
-            href="https://flow.grantonthefly.com/p/wing-loading-calculator?utm_source=webapp&utm_content=result_trigger"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-semibold text-sky-600 hover:text-sky-700 hover:underline"
-          >
-            <span>Read the full Wing Loading Guide &amp; Manual</span>
-          </a>
+        {/* Footer: Wingmates CTA + link to full guide */}
+        <footer className="flex-shrink-0 px-4 pb-3 space-y-2">
+          <div className="mx-auto max-w-xl rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-center">
+            <p className="text-xs text-slate-600">
+              The gap between the flying you want and the flying you do usually isn&apos;t technical.
+            </p>
+            <a
+              href="/wingmates?utm_source=webapp&utm_medium=wing-load&utm_content=footer_cta"
+              className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-sky-600 hover:text-sky-700 hover:underline"
+            >
+              <span>Join Wingmates</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+
+          <div className="text-center text-[11px] text-slate-500">
+            <a
+              href="https://flow.grantonthefly.com/p/wing-loading-calculator?utm_source=webapp&utm_content=result_trigger"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-semibold text-sky-600 hover:text-sky-700 hover:underline"
+            >
+              <span>Read the full Wing Loading Guide &amp; Manual</span>
+            </a>
+          </div>
         </footer>
       </div>
     </div>
