@@ -449,9 +449,7 @@ const App: React.FC = () => {
         {/* Footer: Wingmates CTA + link to full guide */}
         <footer className="flex-shrink-0 border-t border-white/10 bg-slate-900/80 backdrop-blur px-4 py-2.5 space-y-1.5">
           <div className="mx-auto max-w-xl rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-center">
-            <p className="text-xs text-slate-600">
-              The gap between the flying you want and the flying you do usually isn&apos;t technical.
-            </p>
+            <p className="text-xs text-slate-600">Fly better, together.</p>
             <a
               href="/wingmates?utm_source=webapp&utm_medium=wing-load&utm_content=footer_cta"
               className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-sky-600 hover:text-sky-700 hover:underline"
