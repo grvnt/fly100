@@ -48,14 +48,14 @@ function GuideBanner({ onDismiss }: { onDismiss: () => void }) {
   return (
     <div className="flex-shrink-0 bg-sky-50 border-b border-sky-200 px-4 py-2.5 flex items-center justify-between gap-3">
       <p className="text-sm text-sky-800">
-        <span className="font-semibold">You&apos;re in.</span> The full Wing Loading Guide is waiting in your inbox.{' '}
+        <span className="font-semibold">You&apos;re in.</span>{' '}
         <a
           href="https://flow.grantonthefly.com/p/wing-loading-calculator"
           target="_blank"
           rel="noopener noreferrer"
           className="font-semibold underline underline-offset-2 hover:text-sky-900"
         >
-          Read it now →
+          Read the full Wing Loading Guide here →
         </a>
       </p>
       <button
@@ -448,11 +448,11 @@ const App: React.FC = () => {
 
         {/* Footer: Wingmates CTA + link to full guide */}
         <footer className="flex-shrink-0 border-t border-white/10 bg-slate-900/80 backdrop-blur px-4 py-2.5 space-y-1.5">
-          <div className="mx-auto max-w-xl rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-center">
-            <p className="text-xs text-slate-600">Fly better, together.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+            <p className="text-sm text-slate-300">Fly better, together.</p>
             <a
               href="/wingmates?utm_source=webapp&utm_medium=wing-load&utm_content=footer_cta"
-              className="mt-1 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-sky-600 hover:text-sky-700 hover:underline"
+              className="inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-sky-400"
             >
               <span>Join Wingmates</span>
               <span aria-hidden="true">&rarr;</span>
