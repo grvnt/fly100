@@ -5,16 +5,19 @@ type RecognitionCard = {
 
 const cards: ReadonlyArray<RecognitionCard> = [
   {
-    label: 'The plateau',
-    recognition: "You know what your best flying feels like. You just can't find your way back to it.",
+    label: 'The judgement',
+    recognition:
+      '“I\'m not dealing with immediate fear of something; instead, I understand that high altitude flying in mountains is generally risky, and I\'m trying to find out where is a limit of acceptable risk.”',
   },
   {
-    label: 'The confidence',
-    recognition: "You have the skills. You've had the lessons. The confidence still isn't there.",
+    label: 'The noise',
+    recognition:
+      '“It\'s not like the technique stops working. It\'s rather my mind racing with thoughts driven by fear so I am forgetting to use the technique.”',
   },
   {
-    label: 'The numbers',
-    recognition: 'The flying that used to feel like freedom now feels like a performance review.',
+    label: 'The audience',
+    recognition:
+      '“My skills and the conditions were ideal, but still I felt somehow anxious without really knowing what it was about... I was scared about what other people will think of me when I come in too high and have to overfly take off while everyone watches.”',
   },
 ];
 
@@ -41,7 +44,7 @@ const RecognitionCards = ({ eyebrow = 'Does this sound familiar?' }: Recognition
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-white/50 mb-4">
                 {card.label}
               </p>
-              <p className="text-base sm:text-lg text-white leading-relaxed">
+              <p className="text-base sm:text-lg text-white leading-relaxed italic">
                 {card.recognition}
               </p>
             </article>

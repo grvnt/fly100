@@ -13,7 +13,7 @@ import ParallaxTestimonials from '@/components/General/ParallaxTestimonials';
 // const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
 
 export const metadata: Metadata = {
-  title: 'Wingmates | Fly in Flow',
+  title: 'Wingmates | Fly Better, Together',
   description:
     'A community dedicated to flow state, decision-making, and the mental mastery of flight. Mechanical skill gets you airborne; mindset determines the rest.',
 };
@@ -33,9 +33,7 @@ export default function Home() {
 
               {/* Headline */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                Master the Inner Game.
-                <br />
-                Fly in Flow.
+                Fly Better, Together.
               </h1>
 
               {/* Body */}
@@ -84,9 +82,7 @@ export default function Home() {
 
             {/* Headline */}
             <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-center">
-              Master the Inner Game.
-              <br />
-              Fly in Flow.
+              Fly Better, Together.
             </h1>
 
             {/* Body */}
