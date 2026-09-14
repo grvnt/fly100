@@ -182,7 +182,8 @@ const RANGES = {
   },
 };
 
-const MOBILE_MAX_WIDTH = 1024; // px breakpoint for "mobile" behaviour
+const MOBILE_MAX_WIDTH = 768; // px breakpoint for "mobile" behaviour
+const MOBILE_MAX_WINGS = 3; // stacked cards stay readable up to three on a phone
 
 const App: React.FC = () => {
   // --- APP STATE ---
@@ -242,7 +243,7 @@ const App: React.FC = () => {
     if (count <= 3) return 'standard';
     return 'compact';
   };
-  const effectiveWingCount = isMobile ? 1 : wingCount;
+  const effectiveWingCount = isMobile ? Math.min(wingCount, MOBILE_MAX_WINGS) : wingCount;
 
   const variant: ScaleVariant = isMobile ? 'compact' : getVariant(effectiveWingCount);
 
@@ -310,12 +311,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-slate-100 relative flex flex-col font-sans text-slate-800 selection:bg-sky-200">
+    <div className="h-dvh w-full bg-slate-900 relative flex flex-col font-sans text-slate-800 selection:bg-sky-200">
       {!unlocked && <SubscribeGate onUnlock={handleUnlock} />}
       {/* --- MAIN APP CONTENT --- */}
       <div className="flex flex-col h-full w-full transition-all duration-500">
         {/* Background Decoration */}
-        <div className="absolute inset-0 bg-[radial-gradient(at_top,_var(--tw-gradient-stops))] from-white via-slate-50 to-slate-200 -z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(at_top,_var(--tw-gradient-stops))] from-slate-700 via-slate-800 to-slate-950 -z-10" />
 
         {/* Header */}
         <header className="flex-shrink-0 bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex flex-col gap-3 items-start md:flex-row md:justify-between md:items-center z-10 shadow-sm">
@@ -389,44 +390,32 @@ const App: React.FC = () => {
                   {lockWeight ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />}
                   Lock Weight
                 </button>
-
-                <a
-                  href="https://flow.grantonthefly.com/p/wing-loading-calculator?utm_source=webapp&utm_content=result_trigger"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider transition-all border bg-white text-sky-600 border-slate-200 hover:text-sky-700 hover:bg-slate-100"
-                >
-                  <Info className="w-3 h-3" />
-                  User Manual
-                </a>
               </>
             )}
           </div>
 
           {/* Right Side: Wing Count */}
-          <div className="flex items-center gap-4 mt-3 md:mt-0">
-            {!isMobile && (
-              <div className="hidden md:flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200/60">
-                <Settings2 className="w-4 h-4 text-slate-400 ml-2" />
-                <div className="h-4 w-[1px] bg-slate-300 mx-1"></div>
-                {[1, 2, 3, 4, 5, 6].map(num => (
-                  <button
-                    key={num}
-                    onClick={() => setWingCount(num)}
-                    className={`
+          <div className="flex items-center gap-4 mt-3 md:mt-0 w-full md:w-auto">
+            <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg border border-slate-200/60 w-full md:w-auto justify-center">
+              <Settings2 className="w-4 h-4 text-slate-400 ml-2" />
+              <div className="h-4 w-[1px] bg-slate-300 mx-1"></div>
+              {(isMobile ? [1, 2, 3] : [1, 2, 3, 4, 5, 6]).map(num => (
+                <button
+                  key={num}
+                  onClick={() => setWingCount(num)}
+                  className={`
                       w-9 h-8 rounded-md font-bold text-sm transition-all flex items-center justify-center relative
                       ${
-                        wingCount === num
+                        effectiveWingCount === num
                           ? 'bg-white text-sky-600 shadow-sm border border-slate-200 ring-1 ring-black/5'
                           : 'text-slate-400 hover:text-slate-600 hover:bg-slate-200/50'
                       }
                     `}
-                  >
-                    {num}
-                  </button>
-                ))}
-              </div>
-            )}
+                >
+                  {num}
+                </button>
+              ))}
+            </div>
           </div>
         </header>
         {showBanner && <GuideBanner onDismiss={() => setShowBanner(false)} />}
@@ -436,7 +425,9 @@ const App: React.FC = () => {
           {Array.from({ length: effectiveWingCount }).map((_, index) => (
             <div
               key={index}
-              className="w-full flex-1 min-h-0 animate-in fade-in slide-in-from-bottom-4 duration-500"
+              className={`w-full animate-in fade-in slide-in-from-bottom-4 duration-500 ${
+                isMobile ? 'flex-shrink-0' : 'flex-1 min-h-0'
+              }`}
               style={{ animationDelay: `${index * 75}ms` }}
             >
               <CalculatorGroup
@@ -449,14 +440,14 @@ const App: React.FC = () => {
                 isWeightLocked={lockWeight}
                 isAreaLocked={lockArea}
                 gliderClass={selectedClass}
-                showFullDescription={isMobile}
+                showFullDescription={isMobile && effectiveWingCount === 1}
               />
             </div>
           ))}
         </main>
 
         {/* Footer: Wingmates CTA + link to full guide */}
-        <footer className="flex-shrink-0 px-4 pb-3 space-y-2">
+        <footer className="flex-shrink-0 border-t border-white/10 bg-slate-900/80 backdrop-blur px-4 py-2.5 space-y-1.5">
           <div className="mx-auto max-w-xl rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-center">
             <p className="text-xs text-slate-600">
               The gap between the flying you want and the flying you do usually isn&apos;t technical.
@@ -470,13 +461,14 @@ const App: React.FC = () => {
             </a>
           </div>
 
-          <div className="text-center text-[11px] text-slate-500">
+          <div className="text-center text-[11px] text-slate-400">
             <a
               href="https://flow.grantonthefly.com/p/wing-loading-calculator?utm_source=webapp&utm_content=result_trigger"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-semibold text-sky-600 hover:text-sky-700 hover:underline"
+              className="inline-flex items-center gap-1 font-semibold text-sky-300 hover:text-sky-200 hover:underline"
             >
+              <Info className="w-3 h-3" />
               <span>Read the full Wing Loading Guide &amp; Manual</span>
             </a>
           </div>
