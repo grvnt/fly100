@@ -109,16 +109,25 @@ export const villain = {
 };
 
 export const origin = {
-  heading: 'The One Change That Took Me From Winning a League to Throwing My Reserve',
+  /**
+   * ⛔ HEADING CORRECTED 2026-09-30. It was "The One Change That Took Me From Winning a
+   * League to Throwing My Reserve", borrowed from StoryOS's "The One Change That Took Me
+   * From X to Y". That structure demanded a change, and Grant's story does not contain
+   * one -- it contains a realisation. Forcing the shape produced a false first-person
+   * claim about his own accident. Grant: "the change i made came from deep reflection
+   * where i saw the role that ego had played and how it could have cost me my life."
+   */
+  heading: 'It Took a Thrown Reserve for Me to See What My Ego Was Doing',
   // VERBATIM Grant, published 2026-05-21. His account, unedited.
   published: [
     'The cause of my cascade was a type of Egofear born from insecurity and driven by the need for recognition — also known as intermediate syndrome. I’d burst onto the XC scene that year winning our local league and when I saw a friend doing wingovers I felt compelled to try them too. I hadn’t studied the skill and didn’t understand the dynamics, so when I had a small asymmetric on high side my immediate thought was, “ah that doesn’t scare me, I’ll just do it bigger,” incorrectly thinking that it was a lack of energy that caused the collapse. On the next turn I went bigger and the typical sequence of events for this type of mistake occurred — big assym on the topside into a cravat.',
     'The need to prove myself, to be the best, to win and fly further than others came from deep wounds.',
   ],
+  // FLOX DRAFT in Grant's register, built from his own correction. Rewrite in his words.
   landing: [
     'I threw my reserve a week before a scheduled SIV course. The part that still gets me is not the cravat. It is that I diagnosed my own collapse wrong, in the air, with total confidence, and then acted on the diagnosis.',
-    'Nobody was watching that flight except me.',
-    'The one change was letting somebody else look at my flying. Not another course, not more airtime, not a better wing. Somebody outside the cockpit telling me what actually happened.',
+    'What changed things afterwards was not a course, and it was not more airtime. It was sitting with what had happened for long enough to see the part my ego had been playing, and how close that had come to costing me my life.',
+    'Nobody was watching that flight except me. Nobody had been watching the months before it either, while I drifted towards it.',
   ],
   /**
    * The second story, from Grant 2026-09-30: "i got isolated twice in my flying career -
@@ -134,9 +143,17 @@ export const origin = {
     'There is a second thing I learned the slow way, and it cost me more time than the cravat did.',
     'Twice in my flying career I got isolated. The first time I did not fly for four years. The second time, two. Nothing went wrong and I did not lose interest. I just did not have a crew, and without other pilots around it, the flying quietly stopped happening.',
   ],
+  /**
+   * Grant 2026-09-30: "wingmates is the community i wish i had and the feedback to see
+   * i was heading in the wrong direction."
+   *
+   * NOTE THE FRAME: it is a wish about his own past, not a promise about the reader's
+   * future. ⛔ Never write that Wingmates would have prevented the accident, or that it
+   * will prevent anyone else's. That is a safety claim.
+   */
   handoff: [
-    'So there are two things I needed and did not have. Somebody outside the cockpit who could see what I could not. And a group of pilots to keep me in the sport when life made flying hard.',
-    'That is what I built. It is called Wingmates. It is somewhere to keep a home in this sport and stay connected to it, so you keep learning in the seasons you are flying a lot, and you are still here in the ones you are not.',
+    'Wingmates is the community I wish I had had. Not because anyone else can fly your glider, but because the drift is obvious from outside long before it is obvious from inside. What I was missing was somebody willing to tell me I was heading the wrong way.',
+    'And somewhere to keep a home in this sport when life makes flying hard, so you keep learning in the seasons you fly a lot and you are still here in the ones you do not.',
     'Let me show you how it works.',
   ],
 };
