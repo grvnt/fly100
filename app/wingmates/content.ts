@@ -32,8 +32,16 @@ export const hero = {
   subline:
     'Turn the skills you already have into better, more enjoyable flying, with fear training, post-flight debriefs and a gaggle of pilots in the core with you. No gear upgrade required.',
   cta: 'Join Wingmates',
-  // TODO Grant: replace with a real debrief screen recording (tracklog + your voice over it).
-  // Autoplays muted so it answers "what is this" without needing a click.
+  /**
+   * Hero video. Autoplays muted and loops, so it answers "what is this" without a click.
+   *
+   * TO SWAP IN THE DEBRIEF EXAMPLE: upload to the same Supabase bucket (`video`) and change
+   * only the filename below. Nothing else needs touching.
+   *
+   * ⚠️ A muted autoplay loop suits a SHORT clip, roughly 15-30 seconds. If the debrief
+   * recording is minutes long, either cut a short loop for the hero and link the full one,
+   * or turn autoplay off in page.tsx and let it be click-to-play with a poster frame.
+   */
   videoUrl:
     'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4',
   /**
