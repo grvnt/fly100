@@ -46,32 +46,36 @@ export const hero = {
 
 export const problem = {
   heading: 'Does This Sound Familiar?',
-  // VERBATIM. Five real pilots. Three from the comment/DM corpus, two from the survey.
-  cards: [
-    {
-      label: 'The judgement',
-      quote:
-        "I'm not dealing with immediate fear of something; instead, I understand that high altitude flying in mountains is generally risky, and I'm trying to find out where is a limit of acceptable risk.",
-    },
-    {
-      label: 'The noise',
-      quote:
-        "It's not like the technique stops working. It's rather my mind racing with thoughts driven by fear so I am forgetting to use the technique.",
-    },
-    {
-      label: 'The audience',
-      quote:
-        'My skills and the conditions were ideal, but still I felt somehow anxious without really knowing what it was about... I was scared about what other people will think of me when I come in too high and have to overfly take off while everyone watches.',
-    },
-    {
-      label: 'The decision',
-      quote:
-        "Why didn't I dare to continue south, even though that was the flight plan? ... I didn't fully trust my skills and decision-making; fear of the unknown.",
-    },
-    {
-      label: 'The verdict',
-      quote: "Yes all the poor decisions I've made. Lots of them.",
-    },
+  /**
+   * StoryOS format: plain second-person statements, not quote cards.
+   * A quote asks the reader to identify with a stranger; "you" points at them.
+   *
+   * Every line below is DERIVED from a real pilot answer, kept in the comment above it,
+   * so the language stays grounded even though it is no longer a direct quote.
+   * Sources: the comment/DM corpus and the pilot survey (Q1 and Q3).
+   */
+  lines: [
+    // "It's not like the technique stops working. It's rather my mind racing with thoughts
+    //  driven by fear so I am forgetting to use the technique."
+    'You know the technique. In the air your mind races and you forget to use it.',
+
+    // "My skills and the conditions were ideal, but still I felt somehow anxious... I was scared
+    //  about what other people will think of me when I come in too high."
+    'The conditions are good and your skills are good, and you are still uneasy about who is watching from launch.',
+
+    // "Why didn't I dare to continue south, even though that was the flight plan?
+    //  ... I didn't fully trust my skills and decision-making; fear of the unknown."
+    'You had a plan for the flight, you turned back early, and you still cannot say why.',
+
+    // "I tend to exit thermals too early, even knowing they're still climbing."
+    'You leave thermals before they stop climbing, knowing full well they are still going up.',
+
+    // "Finally getting away from my start hill... I already fly 6+ hours a session but am
+    //  too scared not to find lift when I fly away."
+    'You fly plenty of hours and you still have not got away from your local hill.',
+
+    // "Yes all the poor decisions I've made. Lots of them."
+    'You replay the decisions you got wrong, and you cannot tell which ones were actually wrong.',
   ],
   closingLine:
     'Not one of these is a skill problem. They are all the same problem wearing different clothes: you are the only one grading your own flying.',

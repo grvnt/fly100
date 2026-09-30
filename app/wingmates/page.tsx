@@ -129,25 +129,19 @@ export default function WingmatesPage() {
       {/* ===== 2. DOES THIS SOUND FAMILIAR ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
         <div className={`${WRAP} flex flex-col items-center gap-8 sm:gap-12`}>
-          <p
-            className="text-base font-semibold uppercase tracking-wider animate-pulse-text"
-            style={{ color: colors.accent }}
-          >
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center">
             {problem.heading}
-          </p>
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-            {problem.cards.map((card) => (
-              <article
-                key={card.label}
-                className="rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] flex flex-col"
-                style={{ backgroundColor: colors.card }}
+          {/* StoryOS format: plain "you" statements, one per line, no cards. */}
+          <div className="w-full max-w-3xl space-y-5">
+            {problem.lines.map((line) => (
+              <p
+                key={line.slice(0, 24)}
+                className="text-lg sm:text-xl text-white/90 leading-relaxed"
               >
-                <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-white/50 mb-4">
-                  {card.label}
-                </p>
-                <p className="text-base text-white leading-relaxed italic">{card.quote}</p>
-              </article>
+                {line}
+              </p>
             ))}
           </div>
 
