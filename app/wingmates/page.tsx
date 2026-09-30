@@ -26,8 +26,19 @@ export const metadata: Metadata = {
     'An ongoing coaching room for XC pilots who want consistent growth and confidence in the air. Send Grant a flight, find out what really happened.',
 };
 
-const SECTION = 'px-4 sm:px-8 py-12 sm:py-16 lg:py-20';
-const WRAP = 'max-w-5xl mx-auto';
+/**
+ * Design tokens. Change type and rhythm here, not on individual elements.
+ * Modelled on the StoryOS deliverable sections Grant shared: left-aligned text column,
+ * media alongside, generous size and leading, CTA centred underneath.
+ */
+const SECTION = 'px-5 sm:px-8 py-20 sm:py-24 lg:py-28';
+const WRAP = 'max-w-6xl mx-auto';
+const COL = 'max-w-3xl mx-auto';                            // reading column, centred
+const EYEBROW = 'text-sm font-semibold uppercase tracking-[0.18em]';
+const H2 = 'text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.12] tracking-tight';
+const H3 = 'text-xl sm:text-2xl font-bold text-white leading-snug';
+const BODY = 'text-lg sm:text-xl leading-[1.7] text-white/80 text-justify';
+const LEAD = 'text-xl sm:text-2xl leading-[1.6] text-white/90';
 
 function Cta({ className = '' }: { className?: string }) {
   return (
@@ -54,9 +65,9 @@ export default function WingmatesPage() {
       {/* ===== 1. HERO ===== */}
       <section className={`${SECTION} min-h-[80vh] flex items-center`} style={{ backgroundColor: colors.section }}>
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="flex flex-col gap-4 lg:gap-6 text-center">
+          <div className="flex flex-col gap-4 lg:gap-6">
             <p
-              className="text-sm sm:text-base font-semibold uppercase tracking-wider animate-pulse-text"
+              className={`${EYEBROW} animate-pulse-text`}
               style={{ color: colors.accent }}
             >
               {hero.eyebrow}
@@ -103,21 +114,18 @@ export default function WingmatesPage() {
               className="w-full aspect-video rounded-2xl overflow-hidden border-4 animate-pulse-border"
               style={{ borderColor: colors.accent }}
             >
-              {/*
-                Click-to-play, not autoplay. The debrief is 10m34s and 38MB, so autoplay
-                would pull 38MB on every page load and loop a ten-minute video silently.
-                preload="metadata" fetches only the header until someone presses play.
-              */}
+              {/* Original intro clip. Muted autoplay loop, so it plays without a click. */}
               <video
                 className="w-full h-full object-cover"
                 src={hero.videoUrl}
-                poster={hero.videoPoster}
-                preload="metadata"
+                autoPlay
+                muted
+                loop
                 playsInline
                 controls
               />
             </div>
-            <p className="mt-2 text-center text-xs text-white/50">{hero.videoCaption}</p>
+            
           </div>
         </div>
       </section>
@@ -139,7 +147,7 @@ export default function WingmatesPage() {
       {/* ===== 2. DOES THIS SOUND FAMILIAR ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
         <div className={`${WRAP} flex flex-col items-center gap-8 sm:gap-12`}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {problem.heading}
           </h2>
 
@@ -155,7 +163,7 @@ export default function WingmatesPage() {
             ))}
           </div>
 
-          <p className="max-w-3xl mx-auto text-white text-lg sm:text-xl lg:text-2xl leading-relaxed text-center">
+          <p className={`${COL} ${LEAD} text-center`}>
             {problem.bridge}
           </p>
         </div>
@@ -164,27 +172,27 @@ export default function WingmatesPage() {
       {/* ===== 3. THE ONE CHANGE (origin story) ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 max-w-3xl mx-auto text-center">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {origin.heading}
           </h2>
-          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <div className={`${COL} space-y-6 ${BODY}`}>
             {origin.published.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
-          <div className="mt-8 space-y-5 text-white text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {origin.landing.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
 
-          <div className="mt-10 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {origin.isolation.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
 
-          <div className="mt-10 space-y-5 text-white text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {origin.handoff.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
@@ -199,21 +207,21 @@ export default function WingmatesPage() {
       {/* ===== 4. THE REFRAME (villain) ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 text-center">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {villain.heading}
           </h2>
           <p className="mb-8 text-lg font-semibold" style={{ color: colors.accent }}>
             {villain.subheading}
           </p>
 
-          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <div className={`${COL} space-y-6 ${BODY}`}>
             {villain.intro.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
 
           <div
-            className="mt-10 rounded-2xl p-6 sm:p-8 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center"
+            className="mt-10 rounded-2xl p-6 sm:p-8 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl"
             style={{ backgroundColor: colors.card }}
           >
             {villain.published.map((p) => (
@@ -222,19 +230,19 @@ export default function WingmatesPage() {
           </div>
 
           <p
-            className="mt-10 max-w-3xl mx-auto text-center text-white text-lg sm:text-xl lg:text-2xl leading-relaxed border-t-4 pt-6 font-medium"
+            className="mt-10 max-w-3xl text-white text-lg sm:text-xl lg:text-2xl leading-relaxed border-t-4 pt-6 font-medium"
             style={{ borderColor: colors.accent }}
           >
             {villain.villainSentence}
           </p>
 
-          <div className="mt-10 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {villain.scoreboard.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
 
-          <p className="mt-10 max-w-3xl mx-auto text-center text-white text-lg sm:text-xl leading-relaxed">
+          <p className={`${COL} mt-10 ${LEAD}`}>
             {villain.close}
           </p>
 
@@ -249,10 +257,10 @@ export default function WingmatesPage() {
       {/* ===== 5. HOW IT WORKS ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 text-center">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {howItWorks.heading}
           </h2>
-          <p className="text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <p className={`${COL} ${BODY}`}>
             {howItWorks.intro}
           </p>
 
@@ -269,7 +277,7 @@ export default function WingmatesPage() {
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-3 text-lg sm:text-xl font-bold text-white leading-snug">
+                <h3 className={`${H3} mt-3`}>
                   {step.title}
                 </h3>
                 <p className="mt-2 text-white/70 text-sm sm:text-base leading-relaxed">
@@ -279,7 +287,7 @@ export default function WingmatesPage() {
             ))}
           </div>
 
-          <div className="mt-10 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {howItWorks.gaggle.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
@@ -296,13 +304,13 @@ export default function WingmatesPage() {
       {/* ===== 5b. WHAT BECOMES POSSIBLE ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 text-center">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {possible.heading}
           </h2>
-          <p className="text-white/80 text-base sm:text-lg mb-8">{possible.intro}</p>
-          <ul className="space-y-4 max-w-3xl mx-auto text-center">
+          <p className={`${COL} ${LEAD} mb-10`}>{possible.intro}</p>
+          <ul className="space-y-4 max-w-3xl">
             {possible.items.map((item) => (
-              <li key={item.slice(0, 24)} className="flex gap-3 justify-center text-white/90 text-base sm:text-lg leading-relaxed">
+              <li key={item.slice(0, 24)} className={`flex gap-4 ${BODY} text-left`}>
                 <span style={{ color: colors.accent }}>&#8594;</span>
                 <span>{item}</span>
               </li>
@@ -317,27 +325,55 @@ export default function WingmatesPage() {
       {/* ===== 6. EXACTLY HOW IT HELPS ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 max-w-3xl mx-auto text-center">
+          <h2 className={`${H2} mb-6`}>
             {objections.heading}
           </h2>
-          <p className="mb-10 text-white/80 text-base sm:text-lg max-w-3xl mx-auto text-center">{objections.intro}</p>
+          <p className={`${COL} mb-14 ${BODY}`}>{objections.intro}</p>
 
-          <div className="space-y-10 max-w-3xl mx-auto text-center">
+          <div className="space-y-16">
             {objections.items.map((item, i) => (
-              <div key={item.objection} className="text-center">
+              <div
+                key={item.objection}
+                className={
+                  item.media ? 'grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center' : ''
+                }
+              >
+                <div>
                 <p
-                  className="text-xs sm:text-sm font-semibold tracking-widest mb-2"
+                  className={`${EYEBROW} mb-3`}
                   style={{ color: colors.accent }}
                 >
                   {String(i + 1).padStart(2, '0')} &middot; {item.label}
                 </p>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">{item.result}</h3>
+                <h3 className={H3}>{item.result}</h3>
                 <p className="mt-3 text-white/60 text-base italic">
                   &ldquo;{item.objection}&rdquo;
                 </p>
-                <p className="mt-3 text-white/85 text-base sm:text-lg leading-relaxed">
+                <p className={`mt-4 ${BODY}`}>
                   {item.answer}
                 </p>
+                </div>
+
+                {item.media ? (
+                  <figure className="w-full">
+                    <div
+                      className="w-full aspect-video rounded-2xl overflow-hidden border-4"
+                      style={{ borderColor: colors.accent }}
+                    >
+                      <video
+                        className="w-full h-full object-cover"
+                        src={item.media.video}
+                        poster={item.media.poster}
+                        preload="metadata"
+                        playsInline
+                        controls
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-sm text-white/60">
+                      {item.media.caption}
+                    </figcaption>
+                  </figure>
+                ) : null}
               </div>
             ))}
           </div>
@@ -346,8 +382,8 @@ export default function WingmatesPage() {
             className="mt-12 rounded-2xl border-4 p-6 sm:p-8 animate-pulse-border"
             style={{ borderColor: colors.accent, backgroundColor: colors.section }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-white">{objections.included.title}</h3>
-            <p className="mt-3 text-white/85 text-base sm:text-lg leading-relaxed">
+            <h3 className={H3}>{objections.included.title}</h3>
+            <p className={`mt-4 ${BODY}`}>
               {objections.included.body}
             </p>
           </div>
@@ -361,7 +397,7 @@ export default function WingmatesPage() {
       {/* ===== 7. PROOF ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10 text-center">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {proof.heading}
           </h2>
 
@@ -408,7 +444,7 @@ export default function WingmatesPage() {
       {/* ===== 8. IS THIS FOR YOU ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10 text-center">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {forYou.heading}
           </h2>
 
@@ -417,7 +453,7 @@ export default function WingmatesPage() {
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{forYou.forHeading}</h3>
               <ul className="space-y-3">
                 {forYou.forItems.map((item) => (
-                  <li key={item} className="flex gap-3 justify-center text-white/85 text-base leading-relaxed">
+                  <li key={item} className={`flex gap-4 ${BODY} text-left`}>
                     <span style={{ color: colors.accent }}>✓</span>
                     <span>{item}</span>
                   </li>
@@ -429,7 +465,7 @@ export default function WingmatesPage() {
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{forYou.notHeading}</h3>
               <ul className="space-y-3">
                 {forYou.notItems.map((item) => (
-                  <li key={item} className="flex gap-3 justify-center text-white/70 text-base leading-relaxed">
+                  <li key={item} className={`flex gap-4 ${BODY} text-left`}>
                     <span className="text-white/40">✕</span>
                     <span>{item}</span>
                   </li>
@@ -444,7 +480,7 @@ export default function WingmatesPage() {
             </h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {forYou.doesntMatterItems.map((item) => (
-                <li key={item.slice(0, 24)} className="flex gap-3 justify-center text-white/85 text-base leading-relaxed">
+                <li key={item.slice(0, 24)} className={`flex gap-4 ${BODY} text-left`}>
                   <span style={{ color: colors.accent }}>&#8594;</span>
                   <span>{item}</span>
                 </li>
@@ -452,7 +488,7 @@ export default function WingmatesPage() {
             </ul>
           </div>
 
-          <p className="mt-8 text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto text-center">
+          <p className={`${COL} mt-10 ${BODY}`}>
             {forYou.note}
           </p>
 
@@ -464,7 +500,7 @@ export default function WingmatesPage() {
 
       {/* ===== ABOUT GRANT ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
-        <div className="max-w-3xl mx-auto text-center space-y-6 text-base sm:text-lg leading-relaxed text-white/85">
+        <div className="max-w-3xl space-y-6 text-base sm:text-lg leading-relaxed text-white/85">
           <div className="flex justify-center mb-2">
             <div
               className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 animate-pulse-border"
@@ -478,7 +514,7 @@ export default function WingmatesPage() {
               />
             </div>
           </div>
-          <p className="text-2xl sm:text-3xl font-semibold text-white text-center">
+          <p className="text-2xl sm:text-3xl font-semibold text-white">
             {about.heading}
           </p>
           {about.paragraphs.map((p) => (
@@ -492,8 +528,8 @@ export default function WingmatesPage() {
 
       {/* ===== 10. FAQ ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10 text-center">
+        <div className="max-w-3xl">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {faq.heading}
           </h2>
           <div className="space-y-6">
@@ -515,8 +551,8 @@ export default function WingmatesPage() {
 
       {/* ===== 11. FINAL OBJECTION + CTA ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 text-center">
+        <div className="max-w-3xl">
+          <h2 className={`${COL} ${H2} mb-8`}>
             {finalCta.heading}
           </h2>
           <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed">

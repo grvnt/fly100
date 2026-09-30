@@ -35,17 +35,11 @@ export const hero = {
   /**
    * Hero video. Autoplays muted and loops, so it answers "what is this" without a click.
    *
-   * TO SWAP IN THE DEBRIEF EXAMPLE: upload to the same Supabase bucket (`video`) and change
-   * only the filename below. Nothing else needs touching.
-   *
-   * ⚠️ A muted autoplay loop suits a SHORT clip, roughly 15-30 seconds. If the debrief
-   * recording is minutes long, either cut a short loop for the hero and link the full one,
-   * or turn autoplay off in page.tsx and let it be click-to-play with a poster frame.
+   * This is Grant's original intro clip. The DEBRIEF video lives further down the page,
+   * in the "Exactly How Wingmates Helps" section, next to the Debrief block.
    */
   videoUrl:
-    'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/debrief-web.mp4',
-  videoPoster: '/wingmates-debrief-poster.jpg',
-  videoCaption: 'Watch a real debrief · 10 min',
+    'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4',
   /**
    * The social-proof badge beside the CTA.
    *
@@ -253,6 +247,13 @@ export const objections = {
   items: [
     {
       label: 'THE DEBRIEF',
+      // A real debrief, 10m34s. Click-to-play with a poster, not autoplay: the file is 38MB.
+      media: {
+        video:
+          'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/debrief-web.mp4',
+        poster: '/wingmates-debrief-poster.jpg',
+        caption: 'A real debrief, start to finish. 10 min.',
+      },
       result: 'Use the flights you have already had',
       objection: "I don't fly enough for this to be worth it.",
       answer:
