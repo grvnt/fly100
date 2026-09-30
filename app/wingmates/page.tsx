@@ -11,6 +11,7 @@ import {
   villain,
   origin,
   howItWorks,
+  possible,
   objections,
   proof,
   forYou,
@@ -297,6 +298,27 @@ export default function WingmatesPage() {
         </div>
       </section>
 
+      {/* ===== 5b. WHAT BECOMES POSSIBLE ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+            {possible.heading}
+          </h2>
+          <p className="text-white/80 text-base sm:text-lg mb-8">{possible.intro}</p>
+          <ul className="space-y-4 max-w-3xl">
+            {possible.items.map((item) => (
+              <li key={item.slice(0, 24)} className="flex gap-3 text-white/90 text-base sm:text-lg leading-relaxed">
+                <span style={{ color: colors.accent }}>&#8594;</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10">
+            <Cta />
+          </div>
+        </div>
+      </section>
+
       {/* ===== 6. EXACTLY HOW IT HELPS ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
         <div className={WRAP}>
@@ -419,6 +441,20 @@ export default function WingmatesPage() {
                 ))}
               </ul>
             </div>
+          </div>
+
+          <div className="mt-6 rounded-2xl p-6 sm:p-8" style={{ backgroundColor: colors.card }}>
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-4">
+              {forYou.doesntMatterHeading}
+            </h3>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {forYou.doesntMatterItems.map((item) => (
+                <li key={item.slice(0, 24)} className="flex gap-3 text-white/85 text-base leading-relaxed">
+                  <span style={{ color: colors.accent }}>&#8594;</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <p className="mt-8 text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl">

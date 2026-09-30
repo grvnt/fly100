@@ -172,6 +172,24 @@ export const howItWorks = {
   refrain: 'The debrief is the learning.',
 };
 
+/**
+ * The after-state. Borrowed from learn.community's "When community works, here's what
+ * becomes possible:" beat, which is the thing that justifies paying every quarter rather
+ * than buying a course once. The page previously went from mechanism straight to objections
+ * with no picture of the destination.
+ */
+export const possible = {
+  heading: 'What Becomes Possible',
+  intro: 'When you stop being the only one looking at your flying:',
+  items: [
+    'You come down able to say what actually happened, instead of only how it felt.',
+    'You can tell the difference between wisdom and fear when you turn back.',
+    'You stop needing a number on the drive home to know whether it was a good day.',
+    'You have pilots who fly with you and tell you the truth afterwards, not just people who watched.',
+    'Each season builds on the last one instead of starting again.',
+  ],
+};
+
 export const objections = {
   heading:
     'Exactly How Wingmates Helps You Fly Further and Trust Your Own Decisions',
@@ -273,11 +291,23 @@ export const forYou = {
     'You want to be told you are already flying well',
     'You want to read and never send anything',
   ],
+  /**
+   * learn.community's strongest move: after "yes if" and "not for you if", a list that
+   * REMOVES the reasons people disqualify themselves. For Wingmates this is where the
+   * blocking belief ("I don't fly enough for this to help") gets answered up front.
+   */
+  doesntMatterHeading: "It doesn't matter if",
+  doesntMatterItems: [
+    'You are not flying much at the moment. The learning is in the flights you already had.',
+    'You have never flown 100km. Most people here have not yet.',
+    'You are coming back after a break, an accident, or a season off.',
+    'You would rather read than post. Plenty of members never post and still send flights.',
+  ],
   note: 'Most people here have flown XC and are working towards more of it. A few have not yet and are heading that way. If you are still in training, the flying comes first and this will keep.',
 };
 
 export const faq = {
-  heading: 'Everything You Need to Know Before Joining Wingmates',
+  heading: 'You Might Be Wondering...',
   items: [
     {
       q: 'What happens if I cancel?',
