@@ -43,7 +43,9 @@ export const hero = {
    * or turn autoplay off in page.tsx and let it be click-to-play with a poster frame.
    */
   videoUrl:
-    'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4',
+    'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/debrief-web.mp4',
+  videoPoster: '/wingmates-debrief-poster.jpg',
+  videoCaption: 'Watch a real debrief · 10 min',
   /**
    * The social-proof badge beside the CTA.
    *
