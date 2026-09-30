@@ -13,8 +13,24 @@ export const hero = {
   eyebrow: 'THE DEBRIEF IS THE LEARNING',
   headline:
     'The Paragliding System for Pilots Who Want Consistent XC Growth and Confidence in the Air',
+  /**
+   * Ed's shape: "Turn [what you have] into [what you want], with [three mechanisms]."
+   * Grant's brief 2026-09-30: pilots are held back by their minds, more performance and
+   * joy without upgrading gear, learning from others, fear training, post-flight debriefs.
+   *
+   * The gear demote is the kicker on purpose. It is Grant's strongest packaging register,
+   * and Guschlbauer's quote in the very next section confirms it word for word:
+   * "paragliding is won in the mind, not with gear." Claim, then proof, immediately.
+   *
+   * ALTERNATES, if this one does not sound like him:
+   * A) "Your mind is the limit, not your wing. Turn the hours you already have into flying
+   *     that is calmer, further and a lot more enjoyable, with fear training, post-flight
+   *     debriefs and 30 pilots who tell you what they see."
+   * B) "Fly further and enjoy it more without spending a cent on gear, using fear training,
+   *     post-flight debriefs with a coach, and a crew of pilots who fly the way you want to."
+   */
   subline:
-    'Turn the flights you have already had into the pilot you are trying to become, with a coach who watches your actual flying, a course on the fear that stops you committing, and 30 pilots doing the same work.',
+    'Turn the skills you already have into better more enjoyable flying, with fear training, post-flight debriefs and a group of pilots in your corner every step of the way. No gear upgrade required.',
   cta: 'Join Wingmates',
   // TODO Grant: replace with a real debrief screen recording (tracklog + your voice over it).
   // Autoplays muted so it answers "what is this" without needing a click.
