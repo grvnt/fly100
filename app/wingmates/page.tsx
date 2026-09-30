@@ -1,195 +1,483 @@
 import { Metadata } from 'next';
-// import dynamic from 'next/dynamic';
-import Script from 'next/script';
 import ButtonGradient from '@/components/General/ButtonGradient';
-import Problem from '@/components/General/Problem';
-import GroupFlow from '@/components/General/GroupFlow';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
-import RecognitionCards from '@/components/General/RecognitionCards';
-import WayOfFear from '@/components/General/WayOfFear';
+import GroupFlow from '@/components/General/GroupFlow';
 import ParallaxTestimonials from '@/components/General/ParallaxTestimonials';
-
-// const Pricing = dynamic(() => import('@/components/General/Pricing'), { ssr: false });
+import {
+  hero,
+  problem,
+  mirror,
+  villain,
+  origin,
+  howItWorks,
+  objections,
+  proof,
+  forYou,
+  faq,
+  finalCta,
+  about,
+  colors,
+} from './content';
 
 export const metadata: Metadata = {
   title: 'Wingmates | Fly Better, Together',
   description:
-    'A community dedicated to flow state, decision-making, and the mental mastery of flight. Mechanical skill gets you airborne; mindset determines the rest.',
+    'An ongoing coaching room for XC pilots who want consistent growth and confidence in the air. Send Grant a flight, find out what really happened.',
 };
 
-export default function Home() {
+const SECTION = 'px-4 sm:px-8 py-12 sm:py-16 lg:py-20';
+const WRAP = 'max-w-5xl mx-auto';
+
+function Cta({ className = '' }: { className?: string }) {
+  return <ButtonGradient href="#pricing" text={hero.cta} className={`btn-wide ${className}`} />;
+}
+
+function Refrain({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <main>
-        <section className="max-w-7xl mx-auto bg-base-200 px-4 sm:px-8 py-12 sm:py-16 lg:py-32 min-h-[80vh] flex items-center">
-          <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
-            {/* Left Column - The Hook */}
-            <div className="flex flex-col gap-4 lg:gap-6">
-              {/* Eyebrow */}
-              <p className="text-base sm:text-lg font-semibold uppercase tracking-wider text-[#3B82F6] animate-pulse-text">
-                THE FUTURE BELONGS TO THE FLOW PILOT
-              </p>
+    <p className="mt-8 text-xl sm:text-2xl font-bold text-white border-l-4 pl-5" style={{ borderColor: colors.accent }}>
+      {children}
+    </p>
+  );
+}
 
-              {/* Headline */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
-                Fly Better, Together.
-              </h1>
-
-              {/* Body */}
-              <p className="text-lg sm:text-xl lg:text-xl text-white leading-relaxed max-w-2xl mt-2">
-                The community for pilots flying with more confidence, focus and flow. Train
-                your mind, connect with your peers, and share your love for flying.
-              </p>
-
-              {/* Button + Senja widget */}
-              <div className="mt-6 flex flex-row items-center gap-6">
-                <ButtonGradient
-                  href="#pricing"
-                  text="Join Wingmates"
-                  className="btn-wide shrink-0"
-                />
-                <div
-                  className="senja-embed"
-                  data-id="ad8250da-bdf3-4df5-bf01-16430ceda859"
-                  data-mode="shadow"
-                  data-lazyload="false"
-                  style={{ display: 'block', width: '100%' }}
-                />
-              </div>
-            </div>
-
-            {/* Right Column - Video */}
-            <div className="w-full flex items-center justify-center">
-              <div className="w-full aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Layout - Stacked */}
-          <div className="lg:hidden flex flex-col gap-6 items-center">
-            {/* Eyebrow */}
-            <p className="text-base font-semibold uppercase tracking-wider text-[#3B82F6] text-center animate-pulse-text">
-              THE FUTURE BELONGS TO THE FLOW PILOT
+export default function WingmatesPage() {
+  return (
+    <main>
+      {/* ===== 1. HERO ===== */}
+      <section className={`${SECTION} min-h-[80vh] flex items-center`} style={{ backgroundColor: colors.section }}>
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="flex flex-col gap-4 lg:gap-6">
+            <p
+              className="text-sm sm:text-base font-semibold uppercase tracking-wider animate-pulse-text"
+              style={{ color: colors.accent }}
+            >
+              {hero.eyebrow}
             </p>
 
-            {/* Headline */}
-            <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-center">
-              Fly Better, Together.
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              {hero.headline}
             </h1>
 
-            {/* Body */}
-            <p className="text-base sm:text-lg text-white leading-relaxed text-center max-w-2xl">
-              The community for pilots flying with more confidence, focus and flow. Train
-              your mind, connect with your peers, and share your love for flying.
-            </p>
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed">{hero.subline}</p>
 
-            {/* Button + Senja widget */}
-            <div className="mt-4 flex flex-col items-center gap-4">
-              <ButtonGradient
-                href="#pricing"
-                text="Join Wingmates"
-                className="btn-wide"
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm sm:text-base font-semibold text-white/70">
+              {hero.stats.map((s) => (
+                <span key={s}>{s}</span>
+              ))}
+            </div>
+
+            <div className="mt-2">
+              <Cta />
+            </div>
+          </div>
+
+          <div className="w-full">
+            <div
+              className="w-full aspect-video rounded-2xl overflow-hidden border-4 animate-pulse-border"
+              style={{ borderColor: colors.accent }}
+            >
+              {/* Muted autoplay so the page answers "what is this" without a click. */}
+              <video
+                className="w-full h-full object-cover"
+                src={hero.videoUrl}
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
               />
+            </div>
+            <p className="mt-2 text-center text-xs text-white/50">Click for sound</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== GUSCHLBAUER ===== */}
+      <section
+        className="relative min-h-[50vh] flex items-center bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            'url(https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/gudauri-paragliding-sigma.jpg)',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 w-full">
+          <TestimonialMerakai />
+        </div>
+      </section>
+
+      {/* ===== 2. DOES THIS SOUND FAMILIAR ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+        <div className={`${WRAP} flex flex-col items-center gap-8 sm:gap-12`}>
+          <p
+            className="text-base font-semibold uppercase tracking-wider animate-pulse-text"
+            style={{ color: colors.accent }}
+          >
+            {problem.heading}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            {problem.cards.map((card) => (
+              <article
+                key={card.label}
+                className="rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] flex flex-col"
+                style={{ backgroundColor: colors.card }}
+              >
+                <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-white/50 mb-4">
+                  {card.label}
+                </p>
+                <p className="text-base text-white leading-relaxed italic">{card.quote}</p>
+              </article>
+            ))}
+          </div>
+
+          <p
+            className="max-w-3xl text-white text-lg sm:text-xl lg:text-2xl leading-relaxed border-l-4 pl-5 sm:pl-6 text-left"
+            style={{ borderColor: colors.accent }}
+          >
+            {problem.closingLine}
+          </p>
+
+          <p className="max-w-3xl text-white/80 text-base sm:text-lg leading-relaxed text-left">
+            {problem.bridge}
+          </p>
+        </div>
+      </section>
+
+      {/* ===== 2b. THE MIRROR ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 sm:mb-10">
+            {mirror.heading}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {mirror.quotes.map((q) => (
+              <blockquote
+                key={q.slice(0, 24)}
+                className="border-l-4 pl-5 text-white/90 text-base sm:text-lg leading-relaxed italic"
+                style={{ borderColor: colors.accent }}
+              >
+                {q}
+              </blockquote>
+            ))}
+          </div>
+          <p className="mt-10 text-white text-lg sm:text-xl leading-relaxed max-w-3xl">
+            {mirror.close}
+          </p>
+        </div>
+      </section>
+
+      {/* ===== 3. THE VILLAIN ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8">
+            {villain.heading}
+          </h2>
+
+          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {villain.intro.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+
+          <div
+            className="mt-10 rounded-2xl p-6 sm:p-8 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl"
+            style={{ backgroundColor: colors.card }}
+          >
+            {villain.published.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+
+          <p
+            className="mt-10 max-w-3xl text-white text-lg sm:text-xl lg:text-2xl leading-relaxed border-l-4 pl-5 sm:pl-6 font-medium"
+            style={{ borderColor: colors.accent }}
+          >
+            {villain.villainSentence}
+          </p>
+
+          <div className="mt-10 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {villain.scoreboard.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+
+          <p className="mt-10 max-w-3xl text-white text-lg sm:text-xl leading-relaxed">
+            {villain.close}
+          </p>
+
+          <Refrain>{villain.refrain}</Refrain>
+
+          <div className="mt-10">
+            <Cta />
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 4. ORIGIN STORY ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 max-w-3xl">
+            {origin.heading}
+          </h2>
+          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {origin.published.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+          <div className="mt-8 space-y-5 text-white text-base sm:text-lg leading-relaxed max-w-3xl">
+            {origin.landing.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 5. HOW IT WORKS ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6">
+            {howItWorks.heading}
+          </h2>
+          <p className="text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {howItWorks.intro}
+          </p>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {howItWorks.steps.map((step, i) => (
               <div
-                className="senja-embed w-full"
-                data-id="ad8250da-bdf3-4df5-bf01-16430ceda859"
-                data-mode="shadow"
-                data-lazyload="false"
-                style={{ display: 'block' }}
+                key={step.title}
+                className="rounded-2xl p-6 sm:p-8 border border-white/10"
+                style={{ backgroundColor: colors.card }}
+              >
+                <span
+                  className="text-xs font-semibold tracking-widest"
+                  style={{ color: colors.accent }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-3 text-lg sm:text-xl font-bold text-white leading-snug">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-white/70 text-sm sm:text-base leading-relaxed">
+                  {step.body}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {howItWorks.gaggle.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+
+          <Refrain>{howItWorks.refrain}</Refrain>
+
+          <div className="mt-10">
+            <Cta />
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 6. OBJECTIONS ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10 max-w-3xl">
+            {objections.heading}
+          </h2>
+
+          <div className="space-y-8">
+            {objections.items.map((item) => (
+              <div key={item.objection} className="border-l-4 pl-5 sm:pl-6" style={{ borderColor: colors.accent }}>
+                <p className="text-lg sm:text-xl font-semibold text-white italic">
+                  &ldquo;{item.objection}&rdquo;
+                </p>
+                <p className="mt-3 text-white/80 text-base sm:text-lg leading-relaxed">
+                  {item.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className="mt-12 rounded-2xl border-4 p-6 sm:p-8 animate-pulse-border"
+            style={{ borderColor: colors.accent, backgroundColor: colors.section }}
+          >
+            <h3 className="text-xl sm:text-2xl font-bold text-white">{objections.included.title}</h3>
+            <p className="mt-3 text-white/85 text-base sm:text-lg leading-relaxed">
+              {objections.included.body}
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <Cta />
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 7. PROOF ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10">
+            {proof.heading}
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {proof.items.map((item) => (
+              <figure
+                key={item.name}
+                className="rounded-2xl p-6 sm:p-8 border border-white/10"
+                style={{ backgroundColor: colors.card }}
+              >
+                <blockquote className="text-white text-base sm:text-lg leading-relaxed italic">
+                  &ldquo;{item.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-4 text-sm font-semibold" style={{ color: colors.accent }}>
+                  {item.name}
+                  {item.detail ? (
+                    <span className="block mt-1 font-normal text-white/60">{item.detail}</span>
+                  ) : null}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <div
+            className="mt-12 rounded-2xl p-6 sm:p-8 border-l-4"
+            style={{ backgroundColor: colors.card, borderColor: colors.accent }}
+          >
+            <h3 className="text-lg sm:text-xl font-bold text-white">
+              {proof.takeoffReview.heading}
+            </h3>
+            <div className="mt-4 space-y-4 text-white/85 text-base sm:text-lg leading-relaxed">
+              {proof.takeoffReview.body.map((p) => (
+                <p key={p.slice(0, 24)}>{p}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Senja walls, left as-is per Grant 2026-09-30 */}
+      <GroupFlow />
+      <ParallaxTestimonials />
+
+      {/* ===== 8. IS THIS FOR YOU ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10">
+            {forYou.heading}
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-2xl p-6 sm:p-8" style={{ backgroundColor: colors.card }}>
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{forYou.forHeading}</h3>
+              <ul className="space-y-3">
+                {forYou.forItems.map((item) => (
+                  <li key={item} className="flex gap-3 text-white/85 text-base leading-relaxed">
+                    <span style={{ color: colors.accent }}>✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl p-6 sm:p-8" style={{ backgroundColor: colors.card }}>
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{forYou.notHeading}</h3>
+              <ul className="space-y-3">
+                {forYou.notItems.map((item) => (
+                  <li key={item} className="flex gap-3 text-white/70 text-base leading-relaxed">
+                    <span className="text-white/40">✕</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <p className="mt-8 text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {forYou.note}
+          </p>
+
+          <div className="mt-10">
+            <Cta />
+          </div>
+        </div>
+      </section>
+
+      {/* ===== ABOUT GRANT ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+        <div className="max-w-3xl mx-auto space-y-6 text-base sm:text-lg leading-relaxed text-white/85">
+          <div className="flex justify-center mb-2">
+            <div
+              className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 animate-pulse-border"
+              style={{ borderColor: colors.accent }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={about.imageUrl}
+                alt="Grant Smith"
+                className="w-full h-full object-cover"
               />
             </div>
-
-            {/* Video */}
-            <div className="w-full max-w-4xl mx-auto mt-8">
-              <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-2xl overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
           </div>
-        </section>
+          <p className="text-2xl sm:text-3xl font-semibold text-white text-center">
+            {about.heading}
+          </p>
+          {about.paragraphs.map((p) => (
+            <p key={p.slice(0, 24)}>{p}</p>
+          ))}
+        </div>
+      </section>
 
-        <section
-          className="relative min-h-[60vh] flex items-center bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage:
-              'url(https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/gudauri-paragliding-sigma.jpg)',
-            backgroundAttachment: 'fixed',
-          }}
-        >
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/60"></div>
+      {/* ===== 9. PRICING ===== */}
+      <PricingWingmates />
 
-          <div className="relative z-10 w-full">
-            <TestimonialMerakai />
+      {/* ===== 10. FAQ ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10">
+            {faq.heading}
+          </h2>
+          <div className="space-y-6">
+            {faq.items.map((item) => (
+              <details
+                key={item.q}
+                className="rounded-2xl p-5 sm:p-6 border border-white/10"
+                style={{ backgroundColor: colors.card }}
+              >
+                <summary className="cursor-pointer text-base sm:text-lg font-semibold text-white">
+                  {item.q}
+                </summary>
+                <p className="mt-3 text-white/80 text-base leading-relaxed">{item.a}</p>
+              </details>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <RecognitionCards />
-
-        <Problem />
-        <GroupFlow />
-
-        <WayOfFear />
-
-        {/* ===== ABOUT GRANT ===== */}
-        <section className="bg-base-200 px-4 sm:px-8 py-12 sm:py-16 lg:py-20">
-          <div className="max-w-3xl mx-auto space-y-6 text-base sm:text-lg leading-relaxed text-white/80">
-            <div className="flex justify-center mb-2">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#3B82F6] animate-pulse-border">
-                <img
-                  src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/grant-profile-pgatlas-crop.jpg"
-                  alt="Grant Smith"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            <p className="text-2xl sm:text-3xl font-semibold text-white text-center">
-              Hey, I&apos;m Grant
-            </p>
-
-            <p>
-              I&apos;m a qualified paragliding instructor, guide, and accomplished XC pilot.
-              I&apos;m also an accredited Flow Coach with The Flow Centre, and the world&apos;s
-              first paragliding flow coach.
-            </p>
-
-            <p>
-              My method follows the tradition of Gallwey&apos;s Inner Game. Not more instruction —
-              removing the interference that is already in the way. When the noise is cleared, pilots
-              discover they already know how to fly. The work is in getting out of your own way.
-            </p>
-
-            <p>
-              Most coaching focuses on technique. This doesn&apos;t. The gap between the flying you
-              want and the flying you do is not technical. It&apos;s mental. Paragliding is a mind
-              game.
-            </p>
+      {/* ===== 11. FINAL OBJECTION + CTA ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8">
+            {finalCta.heading}
+          </h2>
+          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed">
+            {finalCta.body.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
           </div>
-        </section>
 
-        {/* ===== TESTIMONIALS — PARALLAX ===== */}
-        <ParallaxTestimonials />
+          <Refrain>{finalCta.refrain}</Refrain>
 
-        <PricingWingmates />
-      </main>
-      <Script
-        src="https://widget.senja.io/widget/ad8250da-bdf3-4df5-bf01-16430ceda859/platform.js"
-        strategy="afterInteractive"
-      />
-    </>
+          <div className="mt-10 flex flex-col items-start gap-3">
+            <Cta />
+            <p className="text-sm text-white/60">{finalCta.terms}</p>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

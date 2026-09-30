@@ -34,35 +34,33 @@ const plan: PricingTier = {
   href: '/subscribe',
   price: '',
   discountPrice: '$150',
-  description: "The community of paragliders flying in flow without being held back by fear.",
+  description: "An ongoing coaching room for XC pilots who want consistent growth and confidence in the air.",
   features: [
     <>
-      <strong>Biweekly calls with Grant:</strong> Live sessions every two weeks. Bring your flight
-      stories, your sticking points, your questions.
+      <strong>The Debrief:</strong> Send a launch, a landing, a thermal climb, or a tracklog from a
+      flight you can&apos;t explain. Grant reviews it and tells you what he saw.
     </>,
     <>
-      <strong>1 free 1:1 call with Grant</strong> <em>(live — $150 value):</em> A private hot seat
-      coaching session — we work on whatever is holding you back in the air.
+      <strong>A one to one call with Grant:</strong> Available to you inside the community, on
+      whatever is actually holding you back in the air.
     </>,
     <>
-      <strong>Personal support from Grant:</strong> Direct access via DMs and the community.
-      Not a help desk — Grant himself.
+      <strong>The Way of Fear:</strong> The work Grant does with pilots on launch anxiety, on
+      committing when the air changes, and on what your body does before you have decided anything.
+      Yours the day you join.
     </>,
     <>
-      <strong>The Wingmates Crew:</strong> A global community of pilots doing the inner work
-      alongside you — structure, accountability, and honest conversation.
+      <strong>The crew:</strong> 30 pilots across 14 countries. Members organise their own flights,
+      meetups and XC days with people at the same stage.
     </>,
     <>
-      <strong>The Way of Fear</strong> <em>($247 value):</em> A structured path through the
-      fears that limit your flying — launch anxiety, commitment, and what happens in your body when
-      the air changes. Includes the flow science fundamentals behind why fear blocks flow and how to
-      work with it.
+      <strong>A direct line to Grant:</strong> DMs, not a help desk.
     </>,
   ],
   featured: true,
   highlighted: false,
   soldOut: false,
-  cta: 'Start 7-day free trial',
+  cta: 'Join Wingmates',
 };
 
 const CheckIcon = ({ className }: { className?: string }) => {
@@ -142,9 +140,9 @@ export default function PricingWingmates() {
                   </span>
                 </p>
 
-                {/* Secondary price — monthly, plain text */}
+                {/* One price only — Grant 2026-09-30: "we will only have 150 per quarter on page" */}
                 <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  or $60 / month
+                  One price. No upsell.
                 </p>
 
                 {/* Single CTA — Circle paywall handles price selection + trial */}
@@ -157,7 +155,7 @@ export default function PricingWingmates() {
 
                 {/* Trial + cancellation — plain fact, paired */}
                 <p className="mt-4 text-xs leading-5 text-gray-500 dark:text-gray-400">
-                  7-day free trial. Cancel anytime.
+                  Cancel anytime. You keep access to the end of the quarter you have paid for.
                 </p>
 
                 <figure className="mt-6 border-l-2 border-[#3B82F6]/50 pl-4 text-left">
