@@ -93,6 +93,18 @@ export const problem = {
     // "Yes all the poor decisions I've made. Lots of them."
     'You replay the decisions you got wrong, and you cannot tell which ones were actually wrong.',
   ],
+  /**
+   * The bridge into the origin story. StoryOS has one here: "I struggled with every one of
+   * these problems too, until one change fixed everything."
+   *
+   * Grant's steer 2026-09-30: "maybe a line that says - You're not alone."
+   *
+   * Written as EVIDENCE rather than reassurance. On its own, "you're not alone" is comfort,
+   * and comfort is the sympathy frame his own research warns against. The second sentence
+   * makes it a fact about where the six cards came from, and hands off to his story.
+   */
+  bridge:
+    'You are not alone in any of it. Every one of those came from a pilot describing their own flying.',
 };
 
 export const villain = {

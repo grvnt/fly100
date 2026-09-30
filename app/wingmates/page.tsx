@@ -144,6 +144,10 @@ export default function WingmatesPage() {
               </article>
             ))}
           </div>
+
+          <p className="max-w-3xl text-white text-lg sm:text-xl lg:text-2xl leading-relaxed text-center">
+            {problem.bridge}
+          </p>
         </div>
       </section>
 
