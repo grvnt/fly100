@@ -61,12 +61,6 @@ export default function WingmatesPage() {
 
             <p className="text-lg sm:text-xl text-white/90 leading-relaxed">{hero.subline}</p>
 
-            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm sm:text-base font-semibold text-white/70">
-              {hero.stats.map((s) => (
-                <span key={s}>{s}</span>
-              ))}
-            </div>
-
             <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-4">
               <Cta />
               {/* Social proof badge. Wording lives in content.ts, not in a Senja setting. */}

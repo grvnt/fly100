@@ -20,8 +20,6 @@ export const hero = {
   // Autoplays muted so it answers "what is this" without needing a click.
   videoUrl:
     'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4',
-  // Rating lives in the Senja badge now, so it is not repeated here.
-  stats: ['30 pilots', '14 countries'],
   /**
    * The social-proof badge beside the CTA.
    *
