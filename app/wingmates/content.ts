@@ -30,7 +30,7 @@ export const hero = {
    *     post-flight debriefs with a coach, and a crew of pilots who fly the way you want to."
    */
   subline:
-    'Turn the skills you already have into better more enjoyable flying, with fear training, post-flight debriefs and a group of pilots in your corner every step of the way. No gear upgrade required.',
+    'Turn the skills you already have into better, more enjoyable flying, with fear training, post-flight debriefs and a gaggle of pilots in your corner. No gear upgrade required.',
   cta: 'Join Wingmates',
   // TODO Grant: replace with a real debrief screen recording (tracklog + your voice over it).
   // Autoplays muted so it answers "what is this" without needing a click.
