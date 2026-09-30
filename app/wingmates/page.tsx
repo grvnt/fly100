@@ -67,8 +67,33 @@ export default function WingmatesPage() {
               ))}
             </div>
 
-            <div className="mt-2">
+            <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-4">
               <Cta />
+              {/* Social proof badge. Wording lives in content.ts, not in a Senja setting. */}
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-3">
+                  {hero.badge.avatars.map((src, i) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={src}
+                      src={src}
+                      alt=""
+                      aria-hidden="true"
+                      className="w-9 h-9 rounded-full object-cover ring-2"
+                      style={{ zIndex: hero.badge.avatars.length - i, boxShadow: '0 0 0 2px #0F172A' }}
+                    />
+                  ))}
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span aria-hidden="true" className="text-[#FBBF24] text-sm tracking-tight">
+                      {'\u2605\u2605\u2605\u2605\u2605'}
+                    </span>
+                    <span className="text-sm font-semibold text-white">{hero.badge.rating}</span>
+                  </div>
+                  <p className="text-xs text-white/70">{hero.badge.caption}</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -145,7 +170,7 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 2b. THE MIRROR ===== */}
+      {/* ===== 2b. THE MIRROR (second half of the problem beat) ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
         <div className={WRAP}>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 sm:mb-10">
@@ -168,12 +193,34 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 3. THE VILLAIN ===== */}
+      {/* ===== 3. THE ONE CHANGE (origin story) ===== */}
+      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+        <div className={WRAP}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 max-w-3xl">
+            {origin.heading}
+          </h2>
+          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {origin.published.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+          <div className="mt-8 space-y-5 text-white text-base sm:text-lg leading-relaxed max-w-3xl">
+            {origin.landing.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 4. THE REFRAME (villain) ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.section }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">
             {villain.heading}
           </h2>
+          <p className="mb-8 text-lg font-semibold" style={{ color: colors.accent }}>
+            {villain.subheading}
+          </p>
 
           <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
             {villain.intro.map((p) => (
@@ -211,25 +258,6 @@ export default function WingmatesPage() {
 
           <div className="mt-10">
             <Cta />
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 4. ORIGIN STORY ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.card }}>
-        <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 max-w-3xl">
-            {origin.heading}
-          </h2>
-          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
-            {origin.published.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-          </div>
-          <div className="mt-8 space-y-5 text-white text-base sm:text-lg leading-relaxed max-w-3xl">
-            {origin.landing.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
           </div>
         </div>
       </section>
@@ -281,20 +309,28 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 6. OBJECTIONS ===== */}
+      {/* ===== 6. EXACTLY HOW IT HELPS ===== */}
       <section className={SECTION} style={{ backgroundColor: colors.card }}>
         <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-10 max-w-3xl">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 max-w-3xl">
             {objections.heading}
           </h2>
+          <p className="mb-10 text-white/80 text-base sm:text-lg max-w-3xl">{objections.intro}</p>
 
-          <div className="space-y-8">
-            {objections.items.map((item) => (
-              <div key={item.objection} className="border-l-4 pl-5 sm:pl-6" style={{ borderColor: colors.accent }}>
-                <p className="text-lg sm:text-xl font-semibold text-white italic">
+          <div className="space-y-10">
+            {objections.items.map((item, i) => (
+              <div key={item.objection}>
+                <p
+                  className="text-xs sm:text-sm font-semibold tracking-widest mb-2"
+                  style={{ color: colors.accent }}
+                >
+                  {String(i + 1).padStart(2, '0')} &middot; {item.label}
+                </p>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">{item.result}</h3>
+                <p className="mt-3 text-white/60 text-base italic">
                   &ldquo;{item.objection}&rdquo;
                 </p>
-                <p className="mt-3 text-white/80 text-base sm:text-lg leading-relaxed">
+                <p className="mt-3 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
                   {item.answer}
                 </p>
               </div>

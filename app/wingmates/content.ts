@@ -20,11 +20,34 @@ export const hero = {
   // Autoplays muted so it answers "what is this" without needing a click.
   videoUrl:
     'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/wingmates-intro-small.mp4',
-  stats: ['30 pilots', '14 countries', '15 five-star reviews'],
+  // Rating lives in the Senja badge now, so it is not repeated here.
+  stats: ['30 pilots', '14 countries'],
+  /**
+   * The social-proof badge beside the CTA.
+   *
+   * Built in-page rather than using the Senja "Total Reviews" widget, because the widget's
+   * caption ("Loved by Wingmates") is a Senja dashboard setting and cannot be edited from
+   * the repo. Building it here puts the wording in this file with the rest of the copy.
+   *
+   * rating and reviewCount are real: all 15 Senja testimonials are 5 stars (checked 2026-09-30).
+   * Avatars are the same member images the Senja widget already serves publicly.
+   */
+  badge: {
+    caption: 'Loved by 30+ pilots in 14 countries',
+    rating: '5.0',
+    reviewCount: 15,
+    avatars: [
+      'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
+      'https://cdn.senja.io/public/avatar/acab6065-c6ef-4b5a-89e1-7acf0267d3a7_F351DA62-F948-450F-BDA7-698C63033D68.jpeg',
+      'https://cdn.senja.io/public/avatar/6aafb943-3725-4baf-b8ab-124f6c2df42b_A75EABCE-8748-48E3-9E10-C641E03AE0A0_1_201_a.jpeg',
+      'https://cdn.senja.io/public/media/aa22d46c-4a35-4927-af4f-772e1fed9501_9ba703e5-0fb9-426f-9246-bb04c3b75e79_image.png',
+      'https://cdn.senja.io/public/avatar/7c9103c8-84b2-4a61-8ba5-47453877679e_IMG_5212.jpeg',
+    ],
+  },
 };
 
 export const problem = {
-  heading: 'Does this sound familiar?',
+  heading: 'Does This Sound Familiar?',
   // VERBATIM. Five real pilots. Three from the comment/DM corpus, two from the survey.
   cards: [
     {
@@ -54,12 +77,13 @@ export const problem = {
   ],
   closingLine:
     'Not one of these is a skill problem. They are all the same problem wearing different clothes: you are the only one grading your own flying.',
+  // StoryOS bridges the problem section straight into the origin story with one line.
   bridge:
-    'I had every one of these. I flew more to fix them, and flying more made one of them considerably worse.',
+    'I had every one of these too. I flew more to fix them, and flying more made one of them considerably worse. Then one change fixed it.',
 };
 
 export const mirror = {
-  heading: 'What you said you were working towards',
+  heading: 'And Here Is What You Said You Were Working Towards',
   // VERBATIM from the survey question "What are you working towards in your flying at the moment?"
   quotes: [
     'Just to get flying again and then get my 100k at some point...',
@@ -72,7 +96,8 @@ export const mirror = {
 };
 
 export const villain = {
-  heading: 'Why "just fly more" doesn\'t work',
+  heading: 'Most Paragliding Coaching Works on the Flight. Wingmates Works on the Debrief.',
+  subheading: 'Why "just fly more" does not fix it',
   intro: [
     'There is a stage most pilots pass through at around a hundred hours. You have enough skill to go places now. You have some results behind you. And your assessment of your own flying quietly stops matching your actual flying.',
     'The sport has a name for it. Intermediate syndrome.',
@@ -100,7 +125,7 @@ export const villain = {
 };
 
 export const origin = {
-  heading: "I found out the hard way that I couldn't grade my own flying",
+  heading: 'The One Change That Took Me From Winning a League to Throwing My Reserve',
   // VERBATIM Grant, published 2026-05-21. His account, unedited.
   published: [
     'The cause of my cascade was a type of Egofear born from insecurity and driven by the need for recognition — also known as intermediate syndrome. I’d burst onto the XC scene that year winning our local league and when I saw a friend doing wingovers I felt compelled to try them too. I hadn’t studied the skill and didn’t understand the dynamics, so when I had a small asymmetric on high side my immediate thought was, “ah that doesn’t scare me, I’ll just do it bigger,” incorrectly thinking that it was a lack of energy that caused the collapse. On the next turn I went bigger and the typical sequence of events for this type of mistake occurred — big assym on the topside into a cravat.',
@@ -108,12 +133,14 @@ export const origin = {
   ],
   landing: [
     'I threw my reserve a week before a scheduled SIV course. The part that still gets me is not the cravat. It is that I diagnosed my own collapse wrong, in the air, with total confidence, and then acted on the diagnosis.',
-    'Nobody was watching that flight except me. That is the whole problem, and it is the reason Wingmates exists.',
+    'Nobody was watching that flight except me.',
+    'The one change was letting somebody else look at my flying. Not another course, not more airtime, not a better wing. Somebody outside the cockpit telling me what actually happened.',
+    'That is what I built for other pilots. It is called Wingmates. Let me show you how it works.',
   ],
 };
 
 export const howItWorks = {
-  heading: 'What happens when you send me a flight',
+  heading: 'The Four-Step System Behind Every Debrief I Do',
   intro:
     "You upload a launch, a landing, a climb, or a tracklog from a day you can't account for. You tell me what you thought was going on. I go through it and tell you what I saw, which is usually a different story from the one you flew.",
   // Four steps, each titled as a RESULT rather than a module name.
@@ -144,37 +171,48 @@ export const howItWorks = {
 };
 
 export const objections = {
-  heading: "The reasons pilots don't join, and what I do about each one",
+  heading:
+    'Exactly How Wingmates Helps You Fly Further and Trust Your Own Decisions',
+  intro:
+    'Four parts, and each one exists because of something pilots told me was stopping them.',
   items: [
     {
+      label: 'THE DEBRIEF',
+      result: 'Use the flights you have already had',
       objection: "I don't fly enough for this to be worth it.",
       answer:
         'This is the one I hear most, and it has the answer built into it. If the learning is in the debrief, you do not need more flights. You need to use the ones you have already had, and most pilots are carrying years of them that nobody ever looked at. Send me a flight from last season.',
     },
     {
+      label: 'A ONE TO ONE CALL',
+      result: 'Get to the thing that is actually yours',
       objection: "My situation is specific. I'm not like everyone else in there.",
       answer:
         'There is a one to one call with me available to you inside the community, on whatever is actually holding you back. Not a group call where you wait your turn. Take it when you want it.',
     },
     {
+      label: 'THE TRACKLOG',
+      result: 'See the decisions a bystander cannot see',
       objection: "I'd rather pay someone to stand next to me on launch.",
       answer:
         'Sometimes you should, and I will tell you when that is the right call. But the thing standing between you and a bigger flight usually is not happening on launch, and it is not visible to somebody standing next to you. It is in the decisions you made an hour into the flight, which is what a tracklog shows and a bystander does not.',
     },
     {
+      label: 'THE CREW',
+      result: 'Have 30 pilots and me on the other end',
       objection: "I'll get stuck and have nobody to ask.",
       answer:
         'You get me on DMs, and 30 pilots across 14 countries who are working on the same thing and who organise their own flights, meetups and XC days.',
     },
   ],
   included: {
-    title: 'The Way of Fear',
+    title: 'Included Bonus: The Way of Fear',
     body: 'You also get The Way of Fear the day you join. It is the work I do with pilots on launch anxiety, on committing when the air changes, and on what your body does before you have decided anything. It is yours whether you stay or not.',
   },
 };
 
 export const proof = {
-  heading: 'What the Wingmates say',
+  heading: 'What the Wingmates Say',
   // VERBATIM from Senja. Order is deliberate: the ones a stranger cannot discount go first.
   items: [
     {
@@ -219,7 +257,7 @@ export const proof = {
 };
 
 export const forYou = {
-  heading: 'Who this is for',
+  heading: 'Wingmates Is for Pilots Who Want to Fly Further, Not Just Fly More',
   forHeading: "It's for you if",
   forItems: [
     'You are working towards bigger XC flights and something other than skill keeps deciding them',
@@ -237,7 +275,7 @@ export const forYou = {
 };
 
 export const faq = {
-  heading: 'Before you join',
+  heading: 'Everything You Need to Know Before Joining Wingmates',
   items: [
     {
       q: 'What happens if I cancel?',
@@ -267,7 +305,7 @@ export const faq = {
 };
 
 export const finalCta = {
-  heading: "Can't I work this out on my own?",
+  heading: "Can't I Work This Out on My Own?",
   body: [
     'Yes. I did.',
     'It took winning a league, a collapse I diagnosed wrong with complete confidence, a cravat, a thrown reserve, and several years afterwards working out what had actually been driving me. I got there. I would not recommend the route.',
