@@ -299,11 +299,12 @@ export const forYou = {
   doesntMatterHeading: "It doesn't matter if",
   doesntMatterItems: [
     'You are not flying much at the moment. The learning is in the flights you already had.',
-    'You have never flown 100km. Most people here have not yet.',
+    'You have never flown 100km. Plenty of members have not.',  // TODO Grant: confirm against Circle before publishing
     'You are coming back after a break, an accident, or a season off.',
     'You would rather read than post. Plenty of members never post and still send flights.',
   ],
-  note: 'Most people here have flown XC and are working towards more of it. A few have not yet and are heading that way. If you are still in training, the flying comes first and this will keep.',
+  // Grant 2026-09-30: "its a home for pilots wanting to progress at all xc levels."
+  note: 'This is a home for pilots who want to progress at every XC level, from your first flight away from the hill to your first three figures. If you are still in training, the flying comes first and this will keep.',
 };
 
 export const faq = {
