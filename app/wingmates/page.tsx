@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ButtonGradient from '@/components/General/ButtonGradient';
+import Link from 'next/link';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
 import GroupFlow from '@/components/General/GroupFlow';
@@ -17,7 +17,6 @@ import {
   faq,
   finalCta,
   about,
-  colors,
 } from './content';
 
 export const metadata: Metadata = {
@@ -27,267 +26,315 @@ export const metadata: Metadata = {
 };
 
 /**
- * Design tokens. Change type and rhythm here, not on individual elements.
- * Modelled on the StoryOS deliverable sections Grant shared: left-aligned text column,
- * media alongside, generous size and leading, CTA centred underneath.
+ * Stripe-inspired system (see DESIGN.md).
+ * Palette used through this file:
+ *   canvas      #ffffff
+ *   canvas-soft #f6f9fc
+ *   canvas-cream#f5e9d4
+ *   ink         #0d253d
+ *   ink-2       #273951
+ *   ink-mute    #64748d
+ *   hairline    #e3e8ee
+ *   primary     #533afd
+ *   navy-900    #1c1e54  (used sparingly for punctuation)
+ *
+ * Type: font-weight 300 for display sizes, tight negative tracking.
+ * Rhythm: light-dominant, two dark bands (Guschlbauer + villain reframe + final CTA)
+ * for emphasis, cream interlude at "What Becomes Possible".
  */
-const SECTION = 'px-5 sm:px-8 py-20 sm:py-24 lg:py-28';
-const WRAP = 'max-w-6xl mx-auto';
-const COL = 'max-w-3xl mx-auto';                            // reading column, centred
-const EYEBROW = 'text-sm font-semibold uppercase tracking-[0.18em]';
-const H2 = 'text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.12] tracking-tight';
-const H3 = 'text-xl sm:text-2xl font-bold text-white leading-snug';
-const BODY = 'text-lg sm:text-xl leading-[1.7] text-white/80 text-justify';
-const LEAD = 'text-xl sm:text-2xl leading-[1.6] text-white/90';
 
-function Cta({ className = '' }: { className?: string }) {
+const SECTION = 'px-5 sm:px-8 py-16 sm:py-20 lg:py-24';
+const WRAP = 'max-w-4xl mx-auto';
+const READ = 'max-w-[64ch]'; // reading measure, left-aligned with everything else
+
+// Type tokens
+const EYEBROW =
+  'text-[11px] font-semibold uppercase tracking-[0.16em] text-[#533afd]';
+const EYEBROW_ON_DARK =
+  'text-[11px] font-semibold uppercase tracking-[0.16em] text-[#b9b9f9]';
+const H1 =
+  'text-[2.25rem] sm:text-[2.75rem] lg:text-[3.5rem] font-light tracking-[-0.02em] leading-[1.05] text-[#0d253d]';
+const H2 =
+  'text-3xl sm:text-4xl lg:text-[2.5rem] font-light tracking-[-0.018em] leading-[1.1] text-[#0d253d]';
+const H2_ON_DARK =
+  'text-3xl sm:text-4xl lg:text-[2.5rem] font-light tracking-[-0.018em] leading-[1.1] text-white';
+const H3 = 'text-xl sm:text-[1.35rem] font-medium tracking-[-0.01em] text-[#0d253d]';
+const H3_ON_DARK =
+  'text-xl sm:text-[1.35rem] font-medium tracking-[-0.01em] text-white';
+const BODY = 'text-[17px] leading-[1.6] text-[#273951]';
+const BODY_ON_DARK = 'text-[17px] leading-[1.6] text-white/85';
+const LEAD =
+  'text-[19px] sm:text-[21px] leading-[1.5] font-light tracking-[-0.005em] text-[#0d253d]';
+const LEAD_ON_DARK =
+  'text-[19px] sm:text-[21px] leading-[1.5] font-light tracking-[-0.005em] text-white/95';
+
+/**
+ * Pill CTA. Tight radius (9999px), 8px 16px padding scaled up for touch.
+ * One filled indigo pill per band, per Stripe convention.
+ */
+function Cta({
+  variant = 'primary',
+  className = '',
+}: {
+  variant?: 'primary' | 'on-dark';
+  className?: string;
+}) {
+  const base =
+    'inline-flex items-center justify-center rounded-full px-6 py-3 text-[15px] font-medium tracking-[-0.005em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+  const styles =
+    variant === 'on-dark'
+      ? 'bg-white text-[#0d253d] hover:bg-white/90 focus-visible:ring-white focus-visible:ring-offset-[#1c1e54]'
+      : 'bg-[#533afd] text-white hover:bg-[#4434d4] focus-visible:ring-[#533afd] focus-visible:ring-offset-white';
   return (
-    <div className="flex justify-center">
-      <ButtonGradient href="#pricing" text={hero.cta} className={`btn-wide ${className}`} />
-    </div>
+    <Link href="#pricing" className={`${base} ${styles} ${className}`}>
+      {hero.cta}
+    </Link>
   );
 }
 
-function Refrain({ children }: { children: React.ReactNode }) {
+function Refrain({
+  children,
+  onDark = false,
+}: {
+  children: React.ReactNode;
+  onDark?: boolean;
+}) {
   return (
-    <p
-      className="mt-8 text-xl sm:text-2xl font-bold text-white text-center border-t-4 pt-5 max-w-lg mx-auto"
-      style={{ borderColor: colors.accent }}
-    >
-      {children}
-    </p>
+    <div className="mt-12 flex justify-center">
+      <p
+        className={`inline-block max-w-lg text-center text-[15px] font-semibold uppercase tracking-[0.18em] border-t pt-4 ${
+          onDark ? 'text-white border-[#665efd]' : 'text-[#533afd] border-[#e3e8ee]'
+        }`}
+      >
+        {children}
+      </p>
+    </div>
   );
 }
 
 export default function WingmatesPage() {
   return (
-    <main>
-      {/* ===== 1. HERO ===== */}
-      <section className={`${SECTION} min-h-[80vh] flex items-center`} style={{ backgroundColor: colors.section }}>
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="flex flex-col gap-4 lg:gap-6">
-            <p
-              className={`${EYEBROW} animate-pulse-text`}
-              style={{ color: colors.accent }}
-            >
-              {hero.eyebrow}
-            </p>
+    <main className="bg-white text-[#0d253d]">
+      {/* ===== 1. HERO — light canvas, subtle indigo wash top ===== */}
+      <section className="relative overflow-hidden bg-white">
+        {/* Soft gradient wash reminiscent of the DESIGN.md mesh, kept light. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+          style={{
+            background:
+              'radial-gradient(1200px 400px at 20% 0%, rgba(83,58,253,0.08), transparent 60%), radial-gradient(900px 380px at 90% 10%, rgba(249,107,238,0.06), transparent 65%), linear-gradient(to bottom, #f6f9fc 0%, #ffffff 70%)',
+          }}
+        />
+        <div
+          className={`${SECTION} relative`}
+          style={{ paddingTop: 'clamp(64px, 10vw, 112px)' }}
+        >
+          <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-16 items-center">
+            <div className="flex flex-col gap-6">
+              <p className={EYEBROW}>{hero.eyebrow}</p>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              {hero.headline}
-            </h1>
+              <h1 className={H1}>{hero.headline}</h1>
 
-            <p className="text-lg sm:text-xl text-white/90 leading-relaxed">{hero.subline}</p>
+              <p className={LEAD}>{hero.subline}</p>
 
-            <div className="mt-2 flex flex-col sm:flex-row sm:items-center justify-center gap-4">
-              <Cta />
-              {/* Social proof badge. Wording lives in content.ts, not in a Senja setting. */}
-              <div className="flex items-center justify-center gap-3">
-                <div className="flex -space-x-3">
-                  {hero.badge.avatars.map((src, i) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      key={src}
-                      src={src}
-                      alt=""
-                      aria-hidden="true"
-                      className="w-9 h-9 rounded-full object-cover ring-2"
-                      style={{ zIndex: hero.badge.avatars.length - i, boxShadow: '0 0 0 2px #0F172A' }}
-                    />
-                  ))}
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span aria-hidden="true" className="text-[#FBBF24] text-sm tracking-tight">
-                      {'\u2605\u2605\u2605\u2605\u2605'}
-                    </span>
-                    <span className="text-sm font-semibold text-white">{hero.badge.rating}</span>
+              <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6">
+                <Cta />
+                {/* Social proof badge. */}
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2.5">
+                    {hero.badge.avatars.map((src, i) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={src}
+                        src={src}
+                        alt=""
+                        aria-hidden="true"
+                        className="w-9 h-9 rounded-full object-cover"
+                        style={{
+                          zIndex: hero.badge.avatars.length - i,
+                          boxShadow: '0 0 0 2px #ffffff',
+                        }}
+                      />
+                    ))}
                   </div>
-                  <p className="text-xs text-white/70 text-left">{hero.badge.caption}</p>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span aria-hidden="true" className="text-[#f5a524] text-sm">
+                        {'★★★★★'}
+                      </span>
+                      <span className="text-[13px] font-medium text-[#0d253d]">
+                        {hero.badge.rating}
+                      </span>
+                    </div>
+                    <p className="text-[12px] text-[#64748d]">
+                      {hero.badge.caption}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="w-full">
-            <div
-              className="w-full aspect-video rounded-2xl overflow-hidden border-4 animate-pulse-border"
-              style={{ borderColor: colors.accent }}
-            >
-              {/* Original intro clip. Muted autoplay loop, so it plays without a click. */}
-              <video
-                className="w-full h-full object-cover"
-                src={hero.videoUrl}
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls
-              />
+            <div className="w-full">
+              <div
+                className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#e3e8ee]"
+                style={{
+                  boxShadow:
+                    '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
+                }}
+              >
+                <video
+                  className="w-full h-full object-cover"
+                  src={hero.videoUrl}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                />
+              </div>
             </div>
-            
           </div>
         </div>
       </section>
 
-      {/* ===== GUSCHLBAUER ===== */}
-      <section
-        className="relative min-h-[50vh] flex items-center bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage:
-            'url(https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/blog-images/gudauri-paragliding-sigma.jpg)',
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 w-full">
+      {/* ===== GUSCHLBAUER — deep navy interlude, single band of dark punctuation ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#1c1e54' }}>
+        <div className={WRAP}>
           <TestimonialMerakai />
         </div>
       </section>
 
-      {/* ===== 2. DOES THIS SOUND FAMILIAR ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.section }}>
-        <div className={`${WRAP} flex flex-col items-center gap-8 sm:gap-12`}>
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {problem.heading}
-          </h2>
+      {/* ===== 2. DOES THIS SOUND FAMILIAR — canvas-soft with hairline cards ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
+        <div className={`${WRAP}`}>
+          <div className="mb-12 max-w-3xl">
+            <p className={`${EYEBROW} mb-4`}>The problem</p>
+            <h2 className={H2}>{problem.heading}</h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-            {problem.lines.map((line) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {problem.lines.map((line, i) => (
               <article
                 key={line.slice(0, 24)}
-                className="rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] flex"
-                style={{ backgroundColor: colors.card }}
+                className="rounded-xl p-7 bg-white border border-[#e3e8ee] flex flex-col gap-4 transition-shadow duration-200 hover:shadow-[0_8px_24px_rgba(0,55,112,0.08),0_2px_6px_rgba(0,55,112,0.04)]"
               >
-                <p className="text-base sm:text-lg text-white leading-relaxed">{line}</p>
+                <span className="text-[11px] font-mono font-medium text-[#64748d] tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-[16px] leading-[1.55] text-[#273951]">
+                  {line}
+                </p>
               </article>
             ))}
           </div>
 
-          <p className={`${COL} ${LEAD} text-center`}>
-            {problem.bridge}
-          </p>
+          <p className={`mt-14 ${LEAD} max-w-3xl`}>{problem.bridge}</p>
         </div>
       </section>
 
-      {/* ===== 3. THE ONE CHANGE (origin story) ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+      {/* ===== 3. ORIGIN STORY — white canvas, reading column ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
         <div className={WRAP}>
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {origin.heading}
-          </h2>
-          <div className={`${COL} space-y-6 ${BODY}`}>
+          <div className="max-w-3xl">
+            <p className={`${EYEBROW} mb-4`}>Origin</p>
+            <h2 className={`${H2} mb-10`}>{origin.heading}</h2>
+          </div>
+          <div className={`${READ} space-y-5 ${BODY}`}>
             {origin.published.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
-          </div>
-          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {origin.landing.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
-          </div>
-
-          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {origin.isolation.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
-          </div>
-
-          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
             {origin.handoff.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
 
-          <div className="mt-10">
+          <div className="mt-12">
             <Cta />
           </div>
         </div>
       </section>
 
-      {/* ===== 4. THE REFRAME (villain) ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+      {/* ===== 4. THE REFRAME — dark navy band, the villain interlude ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#1c1e54' }}>
         <div className={WRAP}>
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {villain.heading}
-          </h2>
-          <p className="mb-8 text-lg font-semibold" style={{ color: colors.accent }}>
-            {villain.subheading}
-          </p>
+          <div className="max-w-3xl">
+            <p className={`${EYEBROW_ON_DARK} mb-4`}>{villain.subheading}</p>
+            <h2 className={`${H2_ON_DARK} mb-10`}>{villain.heading}</h2>
+          </div>
 
-          <div className={`${COL} space-y-6 ${BODY}`}>
+          <div className={`${READ} space-y-5 ${BODY_ON_DARK}`}>
             {villain.intro.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
 
-          <div
-            className="mt-10 rounded-2xl p-6 sm:p-8 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl"
-            style={{ backgroundColor: colors.card }}
+          {/* Verbatim published-Grant quote block: cream card as chromatic interlude
+              inside the dark section — quotes Grant's earlier essay verbatim. */}
+          <blockquote
+            className="mt-10 max-w-3xl rounded-xl px-7 py-8 space-y-5 text-[#0d253d]"
+            style={{ backgroundColor: '#f5e9d4' }}
           >
             {villain.published.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
+              <p key={p.slice(0, 24)} className="text-[16px] leading-[1.6]">
+                {p}
+              </p>
             ))}
-          </div>
+          </blockquote>
 
-          <p
-            className="mt-10 max-w-3xl text-white text-lg sm:text-xl lg:text-2xl leading-relaxed border-t-4 pt-6 font-medium"
-            style={{ borderColor: colors.accent }}
-          >
+          <p className="mt-10 max-w-3xl text-white text-[19px] sm:text-[21px] leading-[1.4] font-light tracking-[-0.005em] border-l-2 border-[#665efd] pl-5">
             {villain.villainSentence}
           </p>
 
-          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
+          <div className={`${READ} mt-10 space-y-5 ${BODY_ON_DARK}`}>
             {villain.scoreboard.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
           </div>
 
-          <p className={`${COL} mt-10 ${LEAD}`}>
-            {villain.close}
-          </p>
+          <p className={`${READ} mt-10 ${LEAD_ON_DARK}`}>{villain.close}</p>
 
-          <Refrain>{villain.refrain}</Refrain>
+          <Refrain onDark>{villain.refrain}</Refrain>
 
-          <div className="mt-10">
-            <Cta />
+          <div className="mt-12">
+            <Cta variant="on-dark" />
           </div>
         </div>
       </section>
 
-      {/* ===== 5. HOW IT WORKS ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+      {/* ===== 5. FOUR-STEP SYSTEM — canvas-soft, tidy 2x2 grid ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={WRAP}>
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {howItWorks.heading}
-          </h2>
-          <p className={`${COL} ${BODY}`}>
-            {howItWorks.intro}
-          </p>
+          <div className="max-w-3xl">
+            <p className={`${EYEBROW} mb-4`}>The system</p>
+            <h2 className={`${H2} mb-6`}>{howItWorks.heading}</h2>
+            <p className={`${BODY} mb-12`}>{howItWorks.intro}</p>
+          </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {howItWorks.steps.map((step, i) => (
               <div
                 key={step.title}
-                className="rounded-2xl p-6 sm:p-8 border border-white/10"
-                style={{ backgroundColor: colors.card }}
+                className="rounded-xl p-7 bg-white border border-[#e3e8ee]"
               >
-                <span
-                  className="text-xs font-semibold tracking-widest"
-                  style={{ color: colors.accent }}
-                >
-                  {String(i + 1).padStart(2, '0')}
+                <span className="text-[11px] font-mono font-medium text-[#533afd] tabular-nums tracking-widest">
+                  STEP {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className={`${H3} mt-3`}>
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-white/70 text-sm sm:text-base leading-relaxed">
+                <h3 className={`${H3} mt-3`}>{step.title}</h3>
+                <p className="mt-3 text-[15px] leading-[1.55] text-[#64748d]">
                   {step.body}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className={`${COL} mt-8 space-y-6 ${BODY}`}>
+          <div className={`${READ} mt-14 space-y-5 ${BODY}`}>
             {howItWorks.gaggle.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
@@ -295,70 +342,86 @@ export default function WingmatesPage() {
 
           <Refrain>{howItWorks.refrain}</Refrain>
 
-          <div className="mt-10">
+          <div className="mt-12">
             <Cta />
           </div>
         </div>
       </section>
 
-      {/* ===== 5b. WHAT BECOMES POSSIBLE ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+      {/* ===== 5b. WHAT BECOMES POSSIBLE — cream interlude ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#f5e9d4' }}>
         <div className={WRAP}>
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {possible.heading}
-          </h2>
-          <p className={`${COL} ${LEAD} mb-10`}>{possible.intro}</p>
-          <ul className="space-y-4 max-w-3xl">
+          <div className="max-w-3xl">
+            <p
+              className="text-[11px] font-semibold uppercase tracking-[0.16em] mb-4"
+              style={{ color: '#9b6829' }}
+            >
+              After
+            </p>
+            <h2 className={`${H2} mb-6`}>{possible.heading}</h2>
+            <p className={`${LEAD} mb-10`}>{possible.intro}</p>
+          </div>
+          <ul className="max-w-3xl space-y-4">
             {possible.items.map((item) => (
-              <li key={item.slice(0, 24)} className={`flex gap-4 ${BODY} text-left`}>
-                <span style={{ color: colors.accent }}>&#8594;</span>
+              <li
+                key={item.slice(0, 24)}
+                className="flex gap-4 text-[17px] leading-[1.55] text-[#0d253d]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="mt-[10px] shrink-0 w-1.5 h-1.5 rounded-full"
+                  style={{ backgroundColor: '#533afd' }}
+                />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
-          <div className="mt-10">
+          <div className="mt-12">
             <Cta />
           </div>
         </div>
       </section>
 
-      {/* ===== 6. EXACTLY HOW IT HELPS ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.card }}>
+      {/* ===== 6. EXACTLY HOW — white canvas, numbered deliverable blocks ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
         <div className={WRAP}>
-          <h2 className={`${H2} mb-6`}>
-            {objections.heading}
-          </h2>
-          <p className={`${COL} mb-14 ${BODY}`}>{objections.intro}</p>
+          <div className="max-w-3xl mb-16">
+            <p className={`${EYEBROW} mb-4`}>What you get</p>
+            <h2 className={`${H2} mb-6`}>{objections.heading}</h2>
+            <p className={BODY}>{objections.intro}</p>
+          </div>
 
-          <div className="space-y-16">
+          <div className="space-y-16 lg:space-y-24">
             {objections.items.map((item, i) => (
               <div
                 key={item.objection}
                 className={
-                  item.media ? 'grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center' : ''
+                  item.media
+                    ? 'grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center'
+                    : ''
                 }
               >
-                <div>
-                <p
-                  className={`${EYEBROW} mb-3`}
-                  style={{ color: colors.accent }}
-                >
-                  {String(i + 1).padStart(2, '0')} &middot; {item.label}
-                </p>
-                <h3 className={H3}>{item.result}</h3>
-                <p className="mt-3 text-white/60 text-base italic">
-                  &ldquo;{item.objection}&rdquo;
-                </p>
-                <p className={`mt-4 ${BODY}`}>
-                  {item.answer}
-                </p>
+                <div className="max-w-[62ch]">
+                  <p className={`${EYEBROW} mb-3`}>
+                    {String(i + 1).padStart(2, '0')} &middot; {item.label}
+                  </p>
+                  <h3 className={`${H3} text-[22px] sm:text-[26px] font-light tracking-[-0.01em] leading-[1.2]`}>
+                    {item.result}
+                  </h3>
+                  <p className="mt-4 text-[15px] text-[#64748d] italic leading-[1.55]">
+                    &ldquo;{item.objection}&rdquo;
+                  </p>
+                  <p className={`mt-4 ${BODY}`}>{item.answer}</p>
                 </div>
 
                 {item.media ? (
                   <figure className="w-full">
                     <div
-                      className="w-full aspect-video rounded-2xl overflow-hidden border-4"
-                      style={{ borderColor: colors.accent }}
+                      className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#e3e8ee] bg-[#0d253d]"
+                      style={{
+                        boxShadow:
+                          '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
+                      }}
                     >
                       <video
                         className="w-full h-full object-cover"
@@ -369,7 +432,7 @@ export default function WingmatesPage() {
                         controls
                       />
                     </div>
-                    <figcaption className="mt-3 text-sm text-white/60">
+                    <figcaption className="mt-3 text-[13px] text-[#64748d]">
                       {item.media.caption}
                     </figcaption>
                   </figure>
@@ -378,57 +441,60 @@ export default function WingmatesPage() {
             ))}
           </div>
 
+          {/* Included bonus card — cream to signal a warm 'plus'. */}
           <div
-            className="mt-12 rounded-2xl border-4 p-6 sm:p-8 animate-pulse-border"
-            style={{ borderColor: colors.accent, backgroundColor: colors.section }}
+            className="mt-16 rounded-xl p-8 sm:p-10 max-w-4xl"
+            style={{ backgroundColor: '#f5e9d4' }}
           >
-            <h3 className={H3}>{objections.included.title}</h3>
-            <p className={`mt-4 ${BODY}`}>
-              {objections.included.body}
+            <p
+              className="text-[11px] font-semibold uppercase tracking-[0.16em] mb-3"
+              style={{ color: '#9b6829' }}
+            >
+              Included bonus
             </p>
+            <h3 className={H3}>{objections.included.title}</h3>
+            <p className={`mt-4 ${BODY}`}>{objections.included.body}</p>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-12">
             <Cta />
           </div>
         </div>
       </section>
 
-      {/* ===== 7. PROOF ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+      {/* ===== 7. PROOF — canvas-soft, testimonial cards ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={WRAP}>
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {proof.heading}
-          </h2>
+          <div className="max-w-3xl mb-12">
+            <p className={`${EYEBROW} mb-4`}>Proof</p>
+            <h2 className={H2}>{proof.heading}</h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {proof.items.map((item) => (
               <figure
                 key={item.name}
-                className="rounded-2xl p-6 sm:p-8 border border-white/10"
-                style={{ backgroundColor: colors.card }}
+                className="rounded-xl p-7 sm:p-8 bg-white border border-[#e3e8ee]"
               >
-                <blockquote className="text-white text-base sm:text-lg leading-relaxed italic">
+                <blockquote className="text-[#0d253d] text-[17px] leading-[1.55]">
                   &ldquo;{item.quote}&rdquo;
                 </blockquote>
-                <figcaption className="mt-4 text-sm font-semibold" style={{ color: colors.accent }}>
-                  {item.name}
+                <figcaption className="mt-5 text-[14px]">
+                  <span className="font-medium text-[#0d253d]">{item.name}</span>
                   {item.detail ? (
-                    <span className="block mt-1 font-normal text-white/60">{item.detail}</span>
+                    <span className="block mt-1 text-[#64748d]">
+                      {item.detail}
+                    </span>
                   ) : null}
                 </figcaption>
               </figure>
             ))}
           </div>
 
-          <div
-            className="mt-12 rounded-2xl p-6 sm:p-8 border-l-4"
-            style={{ backgroundColor: colors.card, borderColor: colors.accent }}
-          >
-            <h3 className="text-lg sm:text-xl font-bold text-white">
-              {proof.takeoffReview.heading}
-            </h3>
-            <div className="mt-4 space-y-4 text-white/85 text-base sm:text-lg leading-relaxed">
+          <div className="mt-10 rounded-xl bg-white border border-[#e3e8ee] p-7 sm:p-9 max-w-4xl">
+            <p className={`${EYEBROW} mb-3`}>Case</p>
+            <h3 className={H3}>{proof.takeoffReview.heading}</h3>
+            <div className={`mt-5 space-y-4 ${BODY}`}>
               {proof.takeoffReview.body.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
@@ -441,32 +507,45 @@ export default function WingmatesPage() {
       <GroupFlow />
       <ParallaxTestimonials />
 
-      {/* ===== 8. IS THIS FOR YOU ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.section }}>
+      {/* ===== 8. IS THIS FOR YOU — white canvas ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
         <div className={WRAP}>
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {forYou.heading}
-          </h2>
+          <div className="max-w-3xl mb-12">
+            <p className={`${EYEBROW} mb-4`}>Fit</p>
+            <h2 className={H2}>{forYou.heading}</h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-2xl p-6 sm:p-8" style={{ backgroundColor: colors.card }}>
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{forYou.forHeading}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-xl p-7 bg-white border border-[#e3e8ee]">
+              <h3 className={`${H3} mb-5`}>{forYou.forHeading}</h3>
               <ul className="space-y-3">
                 {forYou.forItems.map((item) => (
-                  <li key={item} className={`flex gap-4 ${BODY} text-left`}>
-                    <span style={{ color: colors.accent }}>✓</span>
+                  <li
+                    key={item}
+                    className="flex gap-3 text-[16px] leading-[1.55] text-[#273951]"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-[8px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#533afd]"
+                    />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="rounded-2xl p-6 sm:p-8" style={{ backgroundColor: colors.card }}>
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-4">{forYou.notHeading}</h3>
+            <div className="rounded-xl p-7 bg-[#f6f9fc] border border-[#e3e8ee]">
+              <h3 className={`${H3} mb-5`}>{forYou.notHeading}</h3>
               <ul className="space-y-3">
                 {forYou.notItems.map((item) => (
-                  <li key={item} className={`flex gap-4 ${BODY} text-left`}>
-                    <span className="text-white/40">✕</span>
+                  <li
+                    key={item}
+                    className="flex gap-3 text-[16px] leading-[1.55] text-[#64748d]"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-[7px] shrink-0 w-2 h-[1.5px] bg-[#a8c3de]"
+                    />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -474,23 +553,25 @@ export default function WingmatesPage() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-2xl p-6 sm:p-8" style={{ backgroundColor: colors.card }}>
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-4">
-              {forYou.doesntMatterHeading}
-            </h3>
+          <div className="mt-4 rounded-xl p-7 sm:p-8 bg-white border border-[#e3e8ee]">
+            <h3 className={`${H3} mb-5`}>{forYou.doesntMatterHeading}</h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {forYou.doesntMatterItems.map((item) => (
-                <li key={item.slice(0, 24)} className={`flex gap-4 ${BODY} text-left`}>
-                  <span style={{ color: colors.accent }}>&#8594;</span>
+                <li
+                  key={item.slice(0, 24)}
+                  className="flex gap-3 text-[16px] leading-[1.55] text-[#273951]"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-[8px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#533afd]"
+                  />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <p className={`${COL} mt-10 ${BODY}`}>
-            {forYou.note}
-          </p>
+          <p className={`${READ} mt-10 ${BODY}`}>{forYou.note}</p>
 
           <div className="mt-10">
             <Cta />
@@ -498,74 +579,88 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== ABOUT GRANT ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.card }}>
-        <div className="max-w-3xl space-y-6 text-base sm:text-lg leading-relaxed text-white/85">
-          <div className="flex justify-center mb-2">
-            <div
-              className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 animate-pulse-border"
-              style={{ borderColor: colors.accent }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={about.imageUrl}
-                alt="Grant Smith"
-                className="w-full h-full object-cover"
-              />
+      {/* ===== ABOUT GRANT — canvas-soft, portrait side by side ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
+        <div className={WRAP}>
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-14 items-start">
+            <div className="flex justify-center lg:justify-start">
+              <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-[#e3e8ee]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={about.imageUrl}
+                  alt="Grant Smith"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="max-w-[62ch] space-y-5">
+              <p className={`${EYEBROW}`}>About</p>
+              <p className="text-[26px] sm:text-[30px] leading-[1.15] font-light tracking-[-0.015em] text-[#0d253d]">
+                {about.heading}
+              </p>
+              <div className={`space-y-4 ${BODY}`}>
+                {about.paragraphs.map((p) => (
+                  <p key={p.slice(0, 24)}>{p}</p>
+                ))}
+              </div>
             </div>
           </div>
-          <p className="text-2xl sm:text-3xl font-semibold text-white">
-            {about.heading}
-          </p>
-          {about.paragraphs.map((p) => (
-            <p key={p.slice(0, 24)}>{p}</p>
-          ))}
         </div>
       </section>
 
       {/* ===== 9. PRICING ===== */}
       <PricingWingmates />
 
-      {/* ===== 10. FAQ ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.section }}>
-        <div className="max-w-3xl">
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {faq.heading}
-          </h2>
-          <div className="space-y-6">
+      {/* ===== 10. FAQ — canvas-soft ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
+        <div className={WRAP}>
+          <div className="max-w-3xl mb-10">
+            <p className={`${EYEBROW} mb-4`}>Questions</p>
+            <h2 className={H2}>{faq.heading}</h2>
+          </div>
+          <div className="max-w-3xl space-y-3">
             {faq.items.map((item) => (
               <details
                 key={item.q}
-                className="rounded-2xl p-5 sm:p-6 border border-white/10"
-                style={{ backgroundColor: colors.card }}
+                className="group rounded-xl bg-white border border-[#e3e8ee] px-6 py-5 open:shadow-[0_1px_3px_rgba(0,55,112,0.08)]"
               >
-                <summary className="cursor-pointer text-base sm:text-lg font-semibold text-white">
-                  {item.q}
+                <summary className="cursor-pointer list-none flex items-start justify-between gap-4 text-[17px] font-medium text-[#0d253d]">
+                  <span>{item.q}</span>
+                  <span
+                    aria-hidden="true"
+                    className="mt-[6px] shrink-0 w-3 h-3 relative text-[#533afd] transition-transform duration-200 group-open:rotate-45"
+                  >
+                    <span className="absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-1/2 bg-current" />
+                    <span className="absolute inset-y-0 left-1/2 w-[1.5px] -translate-x-1/2 bg-current" />
+                  </span>
                 </summary>
-                <p className="mt-3 text-white/80 text-base leading-relaxed">{item.a}</p>
+                <p className="mt-4 text-[16px] leading-[1.6] text-[#273951]">
+                  {item.a}
+                </p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== 11. FINAL OBJECTION + CTA ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.card }}>
-        <div className="max-w-3xl">
-          <h2 className={`${COL} ${H2} mb-8`}>
-            {finalCta.heading}
-          </h2>
-          <div className="space-y-5 text-white/85 text-base sm:text-lg leading-relaxed">
-            {finalCta.body.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-          </div>
+      {/* ===== 11. FINAL OBJECTION + CTA — dark navy bookend ===== */}
+      <section className={SECTION} style={{ backgroundColor: '#1c1e54' }}>
+        <div className={WRAP}>
+          <div className="max-w-3xl">
+            <p className={`${EYEBROW_ON_DARK} mb-4`}>One last thing</p>
+            <h2 className={`${H2_ON_DARK} mb-10`}>{finalCta.heading}</h2>
+            <div className={`space-y-5 ${BODY_ON_DARK}`}>
+              {finalCta.body.map((p) => (
+                <p key={p.slice(0, 24)}>{p}</p>
+              ))}
+            </div>
 
-          <Refrain>{finalCta.refrain}</Refrain>
+            <Refrain onDark>{finalCta.refrain}</Refrain>
 
-          <div className="mt-10 flex flex-col items-start gap-3">
-            <Cta />
-            <p className="text-sm text-white/60">{finalCta.terms}</p>
+            <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-4">
+              <Cta variant="on-dark" />
+              <p className="text-[13px] text-white/60">{finalCta.terms}</p>
+            </div>
           </div>
         </div>
       </section>
