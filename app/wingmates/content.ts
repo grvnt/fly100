@@ -77,24 +77,6 @@ export const problem = {
     // "Yes all the poor decisions I've made. Lots of them."
     'You replay the decisions you got wrong, and you cannot tell which ones were actually wrong.',
   ],
-  closingLine:
-    'Not one of these is a skill problem. They are all the same problem wearing different clothes: you are the only one grading your own flying.',
-  // StoryOS bridges the problem section straight into the origin story with one line.
-  bridge:
-    'I had every one of these too. I flew more to fix them, and flying more made one of them considerably worse. Then one change fixed it.',
-};
-
-export const mirror = {
-  heading: 'And Here Is What You Said You Were Working Towards',
-  // VERBATIM from the survey question "What are you working towards in your flying at the moment?"
-  quotes: [
-    'Just to get flying again and then get my 100k at some point...',
-    '1. Having FUN 2. My first 100km XC (which requires slicker thermaling, esp in scrappy conditions)',
-    'Having a sense of ease and calm at launch and not being jittery all over.',
-    'Develop the patience to stay airborne for longer flights. Build the confidence to fly farther, even when the available landing areas are unfamiliar.',
-  ],
-  close:
-    'That is what I hear most. A bigger flight, and the settledness to actually go for it. Those are not two goals. The second one is how the first one happens.',
 };
 
 export const villain = {
@@ -137,7 +119,25 @@ export const origin = {
     'I threw my reserve a week before a scheduled SIV course. The part that still gets me is not the cravat. It is that I diagnosed my own collapse wrong, in the air, with total confidence, and then acted on the diagnosis.',
     'Nobody was watching that flight except me.',
     'The one change was letting somebody else look at my flying. Not another course, not more airtime, not a better wing. Somebody outside the cockpit telling me what actually happened.',
-    'That is what I built for other pilots. It is called Wingmates. Let me show you how it works.',
+  ],
+  /**
+   * The second story, from Grant 2026-09-30: "i got isolated twice in my flying career -
+   * once i didnt fly for 4 years, the other for 2 years - i didnt have a crew of pilots."
+   *
+   * FLOX DRAFT in his register. Rewrite in his own words.
+   *
+   * Why it belongs here and not as the villain: as a claim about pilots quitting it turns
+   * grim on repetition, which is why that version was parked in September. As HIS OWN
+   * STORY it is unarguable, and it pairs with the reserve throw. Two ways of losing years.
+   */
+  isolation: [
+    'There is a second thing I learned the slow way, and it cost me more time than the cravat did.',
+    'Twice in my flying career I got isolated. The first time I did not fly for four years. The second time, two. Nothing went wrong and I did not lose interest. I just did not have a crew, and without other pilots around it, the flying quietly stopped happening.',
+  ],
+  handoff: [
+    'So there are two things I needed and did not have. Somebody outside the cockpit who could see what I could not. And a group of pilots to keep me in the sport when life made flying hard.',
+    'That is what I built. It is called Wingmates. It is somewhere to keep a home in this sport and stay connected to it, so you keep learning in the seasons you are flying a lot, and you are still here in the ones you are not.',
+    'Let me show you how it works.',
   ],
 };
 

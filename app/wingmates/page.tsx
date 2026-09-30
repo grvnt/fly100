@@ -7,7 +7,6 @@ import ParallaxTestimonials from '@/components/General/ParallaxTestimonials';
 import {
   hero,
   problem,
-  mirror,
   villain,
   origin,
   howItWorks,
@@ -134,51 +133,17 @@ export default function WingmatesPage() {
             {problem.heading}
           </h2>
 
-          {/* StoryOS format: plain "you" statements, one per line, no cards. */}
-          <div className="w-full max-w-3xl space-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {problem.lines.map((line) => (
-              <p
+              <article
                 key={line.slice(0, 24)}
-                className="text-lg sm:text-xl text-white/90 leading-relaxed"
+                className="rounded-2xl p-6 sm:p-8 text-left border-4 border-transparent transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] flex"
+                style={{ backgroundColor: colors.card }}
               >
-                {line}
-              </p>
+                <p className="text-base sm:text-lg text-white leading-relaxed">{line}</p>
+              </article>
             ))}
           </div>
-
-          <p
-            className="max-w-3xl text-white text-lg sm:text-xl lg:text-2xl leading-relaxed border-l-4 pl-5 sm:pl-6 text-left"
-            style={{ borderColor: colors.accent }}
-          >
-            {problem.closingLine}
-          </p>
-
-          <p className="max-w-3xl text-white/80 text-base sm:text-lg leading-relaxed text-left">
-            {problem.bridge}
-          </p>
-        </div>
-      </section>
-
-      {/* ===== 2b. THE MIRROR (second half of the problem beat) ===== */}
-      <section className={SECTION} style={{ backgroundColor: colors.card }}>
-        <div className={WRAP}>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-8 sm:mb-10">
-            {mirror.heading}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {mirror.quotes.map((q) => (
-              <blockquote
-                key={q.slice(0, 24)}
-                className="border-l-4 pl-5 text-white/90 text-base sm:text-lg leading-relaxed italic"
-                style={{ borderColor: colors.accent }}
-              >
-                {q}
-              </blockquote>
-            ))}
-          </div>
-          <p className="mt-10 text-white text-lg sm:text-xl leading-relaxed max-w-3xl">
-            {mirror.close}
-          </p>
         </div>
       </section>
 
@@ -197,6 +162,22 @@ export default function WingmatesPage() {
             {origin.landing.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
             ))}
+          </div>
+
+          <div className="mt-10 space-y-5 text-white/85 text-base sm:text-lg leading-relaxed max-w-3xl">
+            {origin.isolation.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+
+          <div className="mt-10 space-y-5 text-white text-base sm:text-lg leading-relaxed max-w-3xl">
+            {origin.handoff.map((p) => (
+              <p key={p.slice(0, 24)}>{p}</p>
+            ))}
+          </div>
+
+          <div className="mt-10">
+            <Cta />
           </div>
         </div>
       </section>
