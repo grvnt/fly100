@@ -1,27 +1,24 @@
-import { Fraunces, Inter } from 'next/font/google';
+import { Geist } from 'next/font/google';
 
 /**
- * Type for the Wingmates page only. The rest of the site keeps Noto Sans.
+ * Type for the Wingmates page only; the rest of the site keeps Noto Sans.
  *
- * Fraunces  — display. A characterful serif with optical sizing. Gives the page editorial
- *             authority and matches Grant's essayist voice. Every rival paragliding site is
- *             all-caps sans over an action photo; a serif immediately reads as considered.
- * Inter     — body. Designed for screen reading at small sizes, tall x-height, no personality
- *             of its own, which is what body copy wants.
+ * Geist — Vercel's typeface. One family doing display and body, separated by weight,
+ * size and tracking rather than by mixing two faces. That is how modern product pages
+ * are set, and it avoids the muddiness of two similar sans together.
+ *
+ * Replaced Fraunces (serif) on 2026-10-01 — Grant: "the font is not working for me".
  */
-const fraunces = Fraunces({
+const geist = Geist({
   subsets: ['latin'],
   variable: '--font-display',
-  display: 'swap',
-  axes: ['SOFT', 'WONK', 'opsz'],
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-body',
   display: 'swap',
 });
 
 export default function WingmatesLayout({ children }: { children: React.ReactNode }) {
-  return <div className={`${fraunces.variable} ${inter.variable}`}>{children}</div>;
+  return (
+    <div className={geist.variable} style={{ ['--font-body' as string]: 'var(--font-display)' }}>
+      {children}
+    </div>
+  );
 }
