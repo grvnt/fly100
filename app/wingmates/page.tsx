@@ -93,26 +93,61 @@ function Cta({
   );
 }
 
+/** Avatar with a graceful initial fallback, so a missing photo never looks broken. */
+function Avatar({ src, name, size = 'w-14 h-14' }: { src?: string; name: string; size?: string }) {
+  if (src) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src} alt="" aria-hidden="true" className={`${size} rounded-full object-cover`} />;
+  }
+  return (
+    <span
+      aria-hidden="true"
+      className={`${size} rounded-full flex items-center justify-center text-lg font-semibold text-[#b9b9f9]`}
+      style={{ backgroundColor: 'rgba(255,255,255,0.12)' }}
+    >
+      {name.trim().charAt(0)}
+    </span>
+  );
+}
+
+/**
+ * Testimonial band. Every band is full-bleed deep navy, matching the Guschlbauer one.
+ *   `feature`   — quote, name, result line, avatar, plus a supporting image when there is one
+ *   `statement` — one big centred quote with an avatar beneath
+ */
 function Band({ band }: { band: any }) {
   if (band.shape === 'feature') {
     return (
-      <section className="px-5 sm:px-8 py-16 sm:py-20" style={{ backgroundColor: '#f6f9fc' }}>
-        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#0d253d' }}>
+        <div
+          className={
+            band.image
+              ? 'max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'
+              : 'max-w-3xl mx-auto'
+          }
+        >
           <div>
-            <p className="text-[22px] sm:text-[26px] font-light leading-[1.35] tracking-[-0.01em] text-[#0d253d]">
+            <p className="text-[24px] sm:text-[30px] font-light leading-[1.3] tracking-[-0.012em] text-white">
               &ldquo;{band.quote}&rdquo;
             </p>
-            <p className="mt-6 text-[15px] font-semibold text-[#0d253d]">{band.name}</p>
-            {band.result ? (
-              <p className="mt-1 text-[14px] leading-[1.5] text-[#64748d]">{band.result}</p>
-            ) : null}
+            <div className="mt-8 flex items-center gap-4">
+              <Avatar src={band.avatar} name={band.name} />
+              <div>
+                <p className="text-[15px] font-semibold text-[#b9b9f9]">{band.name}</p>
+                {band.result ? (
+                  <p className="mt-1 text-[14px] leading-[1.5] text-white/70 max-w-sm">
+                    {band.result}
+                  </p>
+                ) : null}
+              </div>
+            </div>
           </div>
           {band.image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={band.image}
               alt={band.imageAlt || ''}
-              className="w-full rounded-xl border border-[#e3e8ee] shadow-sm"
+              className="w-full rounded-xl ring-1 ring-white/15"
             />
           ) : null}
         </div>
@@ -120,17 +155,14 @@ function Band({ band }: { band: any }) {
     );
   }
   return (
-    <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#1c1e54' }}>
+    <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#0d253d' }}>
       <div className="max-w-3xl mx-auto text-center">
         <span aria-hidden="true" className="block text-5xl leading-none text-white/25">&ldquo;</span>
         <p className="mt-4 text-[26px] sm:text-[34px] font-light leading-[1.25] tracking-[-0.015em] text-white">
           &ldquo;{band.quote}&rdquo;
         </p>
-        <div className="mt-8 flex items-center justify-center gap-3">
-          {band.avatar ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={band.avatar} alt="" aria-hidden="true" className="w-11 h-11 rounded-full object-cover" />
-          ) : null}
+        <div className="mt-8 flex items-center justify-center gap-4">
+          <Avatar src={band.avatar} name={band.name} />
           <div className="text-left">
             <p className="text-[15px] font-semibold text-[#b9b9f9]">{band.name}</p>
             {band.sub ? <p className="text-[13px] text-white/60">{band.sub}</p> : null}
@@ -448,7 +480,7 @@ export default function WingmatesPage() {
                 ) : null}
                 </div>
                 {[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i] ? (
-                  <div className="-mx-5 sm:-mx-8 my-4">
+                  <div className="-mx-5 sm:-mx-8 my-10">
                     <Band band={[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i]} />
                   </div>
                 ) : null}

@@ -257,6 +257,8 @@ export const bands = {
     // VERBATIM from the same testimonial.
     result:
       'Broke a personal best twice in a month, crossed to another valley for the first time, and flew higher than ever before.',
+    avatar:
+      'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
     // TODO Grant: tracklog image from the 50km flight.
     image: '',
     imageAlt: '',
@@ -266,6 +268,8 @@ export const bands = {
     quote: "It's only been a month and seen a real change.",
     name: 'Mark Limb',
     sub: 'Found Grant on YouTube and joined',
+    // ⚠️ Mark has NO photo in Senja — he is the only one of the five without one.
+    // The band falls back to an initial until Grant adds a photo to his Senja entry.
     avatar: '',
   },
   afterDebrief: {
