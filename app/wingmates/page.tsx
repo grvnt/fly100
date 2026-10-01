@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
-import GroupFlow from '@/components/General/GroupFlow';
+import WallOfLove from '@/components/General/WallOfLove';
 import ParallaxTestimonials from '@/components/General/ParallaxTestimonials';
 import {
   hero,
@@ -504,35 +504,11 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 7. PROOF — canvas-soft, testimonial cards ===== */}
+      {/* ===== TAKEOFF REVIEW — the curated quote grid was removed 2026-10-01;
+             this block is Grant's own copy and stays ===== */}
       <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={WRAP}>
-          <div className="max-w-3xl mb-12">
-                        <h2 className={H2}>{proof.heading}</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {proof.items.map((item) => (
-              <figure
-                key={item.name}
-                className="rounded-xl p-7 sm:p-8 bg-white border border-[#e3e8ee]"
-              >
-                <blockquote className="text-[#0d253d] text-[17px] leading-[1.55]">
-                  &ldquo;{item.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-5 text-[14px]">
-                  <span className="font-medium text-[#0d253d]">{item.name}</span>
-                  {item.detail ? (
-                    <span className="block mt-1 text-[#64748d]">
-                      {item.detail}
-                    </span>
-                  ) : null}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <div className="mt-10 rounded-xl bg-white border border-[#e3e8ee] p-7 sm:p-9 max-w-4xl">
+          <div className="rounded-xl bg-white border border-[#e3e8ee] p-7 sm:p-9">
             <h3 className={H3}>{proof.takeoffReview.heading}</h3>
             <div className={`mt-5 space-y-4 ${BODY}`}>
               {proof.takeoffReview.body.map((p) => (
@@ -543,9 +519,8 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* Senja walls, left as-is per Grant 2026-09-30 */}
-      <GroupFlow />
-      <ParallaxTestimonials />
+      {/* Senja wall of love — https://senja.io/p/fly100/4BbOBg3 */}
+      <WallOfLove />
 
       {/* ===== 8. IS THIS FOR YOU — white canvas ===== */}
       <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
@@ -700,6 +675,7 @@ export default function WingmatesPage() {
           </div>
         </div>
       </section>
+      <ParallaxTestimonials />
     </main>
   );
 }

@@ -263,15 +263,15 @@ export const bands = {
     image:
       'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/zee-50k-paragliding.png',
     imageAlt: "Tracklog of Zee's 50km cross-country flight",
+    // Name on the tracklog is public on XContest. Grant confirmed 2026-10-01.
   },
   afterSystem: {
     shape: 'statement' as const,
     quote: "It's only been a month and seen a real change.",
     name: 'Mark Limb',
     sub: 'Found Grant on YouTube and joined',
-    // ⚠️ Mark has NO photo in Senja — he is the only one of the five without one.
-    // The band falls back to an initial until Grant adds a photo to his Senja entry.
-    avatar: '',
+    avatar:
+      'https://cdn.senja.io/public/media/4296449a-9332-49df-8160-359ffd362161_2d7f3199-b80c-4ebc-a0d4-c852c32959b7_mark-limb.jpeg',
   },
   afterDebrief: {
     shape: 'statement' as const,
