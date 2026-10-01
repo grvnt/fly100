@@ -118,9 +118,10 @@ export const problem = {
  * `blocks` is an ordered mix of paragraphs and pull quotes, matching the markdown.
  */
 export const villain = {
-  // ⏳ Heading kept from the old section. Flagged to Grant: the body now argues about
-  // competition culture rather than the debrief, so the heading may want to change.
-  heading: 'Most Paragliding Coaching Works on the Flight. Wingmates Works on the Debrief.',
+  // Grant's heading, recovered from VS Code local history after Flox overwrote it.
+  // "andConnection" was a missing space in his original; fixed.
+  heading:
+    'Most Paragliding Advice Creates Rankings and Competition. Wingmates is Designed to Create Group Flow and Connection.',
   blocks: [
     { type: 'p' as const, text: 'Traditional paragliding culture encourages you to chase metrics, enter XC leagues, and participate in competitions.' },
     { type: 'p' as const, text: 'This works if it enriches your flying and helps you to learn and grow.' },

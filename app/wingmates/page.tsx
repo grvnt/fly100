@@ -59,7 +59,7 @@ const BODYFONT = 'font-[family-name:var(--font-body)]';
 
 // Type tokens
 const EYEBROW =
-  `${BODYFONT} text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0076FF]`;
+  `${BODYFONT} text-[12px] font-semibold uppercase tracking-[0.12em] text-[#4DA3FF]`;
 const EYEBROW_ON_DARK =
   `${BODYFONT} text-[12px] font-semibold uppercase tracking-[0.12em] text-[#4DA3FF]`;
 const H1 =
@@ -67,11 +67,11 @@ const H1 =
 const H2 =
   `${DISPLAY} text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-[#FFFFFF]`;
 const H2_ON_DARK =
-  `${DISPLAY} text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-[#0F0F0F]`;
+  `${DISPLAY} text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-[#FFFFFF]`;
 const H3 = `${DISPLAY} text-[1.25rem] sm:text-[1.375rem] font-semibold tracking-[-0.02em] leading-[1.3] text-[#FFFFFF]`;
 const H3_ON_DARK =
-  `${DISPLAY} text-[1.25rem] sm:text-[1.375rem] font-semibold tracking-[-0.02em] leading-[1.3] text-[#0F0F0F]`;
-const BODY = `${BODYFONT} text-[17px] leading-[1.65] text-[#B4B4B4]`;
+  `${DISPLAY} text-[1.25rem] sm:text-[1.375rem] font-semibold tracking-[-0.02em] leading-[1.3] text-[#FFFFFF]`;
+const BODY = `${BODYFONT} text-[17px] leading-[1.65] text-[#B4B4B4]`; // on any dark surface
 const BODY_ON_DARK = `${BODYFONT} text-[17px] leading-[1.65] text-white/80`;
 const LEAD =
   `${BODYFONT} text-[19px] sm:text-[20px] leading-[1.55] text-[#B4B4B4]`;
@@ -235,14 +235,19 @@ function Refrain({
 export default function WingmatesPage() {
   return (
     <main className="bg-black text-white overflow-x-hidden">
-      {/* ===== 1. HERO — light canvas, subtle indigo wash top ===== */}
-      <section className="relative overflow-hidden bg-[#0F0F0F]">
-        {/* Soft gradient wash reminiscent of the DESIGN.md mesh, kept light. */}
+      {/* ===== 1. HERO ===== */}
+      {/*
+        The section is black and the glow covers it edge to edge. Previously the wash was a
+        fixed 520px band of #000000 sitting on a #0F0F0F section, so the video below the
+        band fell on a different colour and you could see the seam.
+      */}
+      <section className="relative overflow-hidden bg-black">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+          className="pointer-events-none absolute inset-0"
           style={{
-            background: 'radial-gradient(1100px 460px at 50% 0%, rgba(0,118,255,0.18), transparent 64%), #000000',
+            background:
+              'radial-gradient(1100px 520px at 50% 0%, rgba(0,118,255,0.20), transparent 62%)',
           }}
         />
         <div
@@ -253,7 +258,7 @@ export default function WingmatesPage() {
             <div className="flex flex-col gap-6">
               <p className={EYEBROW}>{hero.eyebrow}</p>
 
-              <h1 className={H1}>{hero.headline}</h1>
+              <h1 className={`${H1} text-center`}>{hero.headline}</h1>
 
               <p className={LEAD}>{hero.subline}</p>
 
@@ -317,7 +322,7 @@ export default function WingmatesPage() {
       </section>
 
       {/* ===== GUSCHLBAUER — deep navy interlude, single band of dark punctuation ===== */}
-      <section className={SECTION} style={{ backgroundColor: INK }}>
+      <section className={SECTION} style={{ backgroundColor: CANVAS }}>
         <div className={WRAP}>
           <TestimonialMerakai />
         </div>
