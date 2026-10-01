@@ -179,7 +179,7 @@ export default function WingmatesPage() {
           className={`${SECTION} relative`}
           style={{ paddingTop: 'clamp(64px, 10vw, 112px)' }}
         >
-          <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-16 items-center">
+          <div className="max-w-3xl mx-auto w-full">
             <div className="flex flex-col gap-6">
               <p className={EYEBROW}>{hero.eyebrow}</p>
 
@@ -188,7 +188,6 @@ export default function WingmatesPage() {
               <p className={LEAD}>{hero.subline}</p>
 
               <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6">
-                <Cta />
                 {/* Social proof badge. */}
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2.5">
@@ -224,7 +223,7 @@ export default function WingmatesPage() {
               </div>
             </div>
 
-            <div className="w-full">
+            <div className="w-full mt-12">
               <div
                 className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#e3e8ee]"
                 style={{
@@ -258,8 +257,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={`${WRAP}`}>
           <div className="mb-12 max-w-3xl">
-            <p className={`${EYEBROW} mb-4`}>The problem</p>
-            <h2 className={H2}>{problem.heading}</h2>
+                        <h2 className={H2}>{problem.heading}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -286,8 +284,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
         <div className={WRAP}>
           <div className="max-w-3xl">
-            <p className={`${EYEBROW} mb-4`}>Origin</p>
-            <h2 className={`${H2} mb-10`}>{origin.heading}</h2>
+                        <h2 className={`${H2} mb-10`}>{origin.heading}</h2>
           </div>
           <div className={`${READ} space-y-5 ${BODY}`}>
             {origin.published.map((p) => (
@@ -314,7 +311,6 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#1c1e54' }}>
         <div className={WRAP}>
           <div className="max-w-3xl">
-            <p className={`${EYEBROW_ON_DARK} mb-4`}>{villain.subheading}</p>
             <h2 className={`${H2_ON_DARK} mb-10`}>{villain.heading}</h2>
           </div>
 
@@ -362,8 +358,7 @@ export default function WingmatesPage() {
       {/* ===== 5. FOUR-STEP SYSTEM — canvas-soft, numbered blocks ===== */}
       <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={WRAP}>
-          <p className={`${EYEBROW} mb-3`}>THE SYSTEM</p>
-          <h2 className={`${H2} mb-5`}>{howItWorks.heading}</h2>
+                    <h2 className={`${H2} mb-5`}>{howItWorks.heading}</h2>
           <p className={`${READ} ${LEAD}`}>{howItWorks.intro}</p>
 
           <div className="mt-14 space-y-14">
@@ -400,8 +395,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
         <div className={WRAP}>
           <div className="max-w-3xl mb-16">
-            <p className={`${EYEBROW} mb-4`}>What you get</p>
-            <h2 className={`${H2} mb-6`}>{objections.heading}</h2>
+                        <h2 className={`${H2} mb-6`}>{objections.heading}</h2>
             <p className={BODY}>{objections.intro}</p>
           </div>
 
@@ -487,8 +481,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={WRAP}>
           <div className="max-w-3xl mb-12">
-            <p className={`${EYEBROW} mb-4`}>Proof</p>
-            <h2 className={H2}>{proof.heading}</h2>
+                        <h2 className={H2}>{proof.heading}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -513,7 +506,6 @@ export default function WingmatesPage() {
           </div>
 
           <div className="mt-10 rounded-xl bg-white border border-[#e3e8ee] p-7 sm:p-9 max-w-4xl">
-            <p className={`${EYEBROW} mb-3`}>Case</p>
             <h3 className={H3}>{proof.takeoffReview.heading}</h3>
             <div className={`mt-5 space-y-4 ${BODY}`}>
               {proof.takeoffReview.body.map((p) => (
@@ -532,7 +524,6 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
         <div className={WRAP}>
           <div className="max-w-3xl mb-12">
-            <p className={`${EYEBROW} mb-4`}>Fit</p>
             <h2 className={H2}>{forYou.heading}</h2>
           </div>
 
@@ -615,7 +606,6 @@ export default function WingmatesPage() {
               </div>
             </div>
             <div className="max-w-[62ch] space-y-5">
-              <p className={`${EYEBROW}`}>About</p>
               <p className="text-[26px] sm:text-[30px] leading-[1.15] font-light tracking-[-0.015em] text-[#0d253d]">
                 {about.heading}
               </p>
@@ -636,8 +626,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={WRAP}>
           <div className="max-w-3xl mb-10">
-            <p className={`${EYEBROW} mb-4`}>Questions</p>
-            <h2 className={H2}>{faq.heading}</h2>
+                        <h2 className={H2}>{faq.heading}</h2>
           </div>
           <div className="max-w-3xl space-y-3">
             {faq.items.map((item) => (
@@ -668,7 +657,6 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: '#1c1e54' }}>
         <div className={WRAP}>
           <div className="max-w-3xl">
-            <p className={`${EYEBROW_ON_DARK} mb-4`}>One last thing</p>
             <h2 className={`${H2_ON_DARK} mb-10`}>{finalCta.heading}</h2>
             <div className={`space-y-5 ${BODY_ON_DARK}`}>
               {finalCta.body.map((p) => (

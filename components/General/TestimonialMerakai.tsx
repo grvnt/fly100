@@ -18,9 +18,6 @@ const TestimonialMerakai = () => {
       />
 
       <div className="flex-1">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#b9b9f9] mb-4">
-          A word from
-        </p>
         <blockquote className="text-white text-[20px] sm:text-[24px] leading-[1.35] font-light tracking-[-0.01em]">
           &ldquo;Grant understands that paragliding is won in the mind, not with
           gear. He&apos;s doing great things for the paragliding community by
