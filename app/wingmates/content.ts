@@ -440,7 +440,7 @@ export const forYou = {
   notItems: [
     "You're here to prove you're better than other pilots. Rankings have their place, but this isn't it.",
     'You want praise more than honest, kind feedback.',
-    "You're looking for quick tips without reflecting on your own flying. Here the learning comes from your flights.",
+    "You're looking for quick tips without reflecting on your own flying. Here the learning comes from doing the work to reflect on your flights, with supportive feedback from Grant and the community.",
   ],
   doesntMatterHeading: "It doesn't matter if",
   doesntMatterItems: [
