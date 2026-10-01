@@ -484,43 +484,9 @@ export default function WingmatesPage() {
           </div>
 
           {/* Included bonus card — cream to signal a warm 'plus'. */}
-          <div
-            className="mt-16 rounded-xl p-8 sm:p-10 max-w-4xl"
-            style={{ backgroundColor: '#f5e9d4' }}
-          >
-            <p
-              className="text-[11px] font-semibold uppercase tracking-[0.16em] mb-3"
-              style={{ color: '#9b6829' }}
-            >
-              Included bonus
-            </p>
-            <h3 className={H3}>{objections.included.title}</h3>
-            <p className={`mt-4 ${BODY}`}>{objections.included.body}</p>
-          </div>
 
-          <div className="mt-12">
-            <Cta />
-          </div>
         </div>
       </section>
-
-      {/* ===== TAKEOFF REVIEW — the curated quote grid was removed 2026-10-01;
-             this block is Grant's own copy and stays ===== */}
-      <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
-        <div className={WRAP}>
-          <div className="rounded-xl bg-white border border-[#e3e8ee] p-7 sm:p-9">
-            <h3 className={H3}>{proof.takeoffReview.heading}</h3>
-            <div className={`mt-5 space-y-4 ${BODY}`}>
-              {proof.takeoffReview.body.map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Senja wall of love — https://senja.io/p/fly100/4BbOBg3 */}
-      <WallOfLove />
 
       {/* ===== 8. IS THIS FOR YOU — white canvas ===== */}
       <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
