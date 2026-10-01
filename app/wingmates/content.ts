@@ -423,35 +423,33 @@ export const proof = {
   },
 };
 
+/**
+ * ALL COPY BELOW IS GRANT'S, supplied 2026-10-01. Do not edit.
+ */
 export const forYou = {
-  heading: 'Wingmates Is for Pilots Who Want to Fly Further, Not Just Fly More',
+  heading: 'Wingmates Is for Pilots Who Put Flow Before Status',
   forHeading: "It's for you if",
   forItems: [
-    'You are working towards bigger XC flights and something other than skill keeps deciding them',
-    'You have flights you cannot explain and nobody to ask about them',
-    'You would rather understand one flight properly than log ten more',
-    'You are willing to put a flight you are not proud of in front of other people',
+    'You want to keep growing as a pilot, whatever that looks like for you: a first flight away from the hill, a big XC line, or a better comp result.',
+    "You want to sharpen your skills and your head, because you've noticed both decide your flights: technique, weather reading, and the fear, hesitation, or pushing that sits underneath.",
+    "You'd rather understand one flight properly than log ten more.",
+    'You want a crew to learn with, wherever in the world you fly.',
+    "You'll share honestly, including the flights you're not proud of, and help others do the same.",
   ],
   notHeading: "It's not for you if",
   notItems: [
-    'You want technique instruction. That is a real thing to want and this is not it. Ask me and I will point you somewhere useful',
-    'You want to be told you are already flying well',
-    'You want to read and never send anything',
+    "You're here to prove you're better than other pilots. Rankings have their place, but this isn't it.",
+    'You want praise more than honest, kind feedback.',
+    "You're looking for quick tips without reflecting on your own flying. Here the learning comes from your flights.",
   ],
-  /**
-   * learn.community's strongest move: after "yes if" and "not for you if", a list that
-   * REMOVES the reasons people disqualify themselves. For Wingmates this is where the
-   * blocking belief ("I don't fly enough for this to help") gets answered up front.
-   */
   doesntMatterHeading: "It doesn't matter if",
   doesntMatterItems: [
-    'You are not flying much at the moment. The learning is in the flights you already had.',
-    'You have never flown 100km. Plenty of members have not.',  // TODO Grant: confirm against Circle before publishing
-    'You are coming back after a break, an accident, or a season off.',
-    'You would rather read than post. Plenty of members never post and still send flights.',
+    'You compete, fly XC, or mostly soar your local site. Bring your goals, whatever they are.',
+    "You're not flying much right now. The learning is in the flights you've already had.",
+    "You're coming back after a break, an accident, or a season off.",
+    "You're quiet by nature. Start by reading other pilots' debriefs and share when you're ready.",
   ],
-  // Grant 2026-09-30: "its a home for pilots wanting to progress at all xc levels."
-  note: 'This is a home for pilots who want to progress at every XC level, from your first flight away from the hill to your first three figures. If you are still in training, the flying comes first and this will keep.',
+  note: "Coached by an instructor and flow coach, so you get the technical skills and the mental game in one place. Leagues and comps are welcome here. What we're about is flow, connection, and the joy of the journey, not status and ranking.",
 };
 
 export const faq = {
@@ -491,9 +489,8 @@ export const finalCta = {
     'It took winning a league, a collapse I diagnosed wrong with complete confidence, a cravat, a thrown reserve, and several years afterwards working out what had actually been driving me. I got there. I would not recommend the route.',
     'The part I could not do alone was the only part that mattered, which was seeing my own flying from outside it. That still needs somebody else, and it is the one thing you cannot buy anywhere else in this sport.',
   ],
-  refrain: 'The debrief is the learning. Send me the flight.',
+  refrain: 'The debrief is the learning.',
   cta: 'Join Wingmates',
-  terms: '$150 a quarter. Cancel anytime.',
 };
 
 export const about = {

@@ -1,25 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
-// Circle paywall checkout — presents both prices and the 7-day trial.
+/**
+ * Circle paywall checkout. Quarterly and annual are the two plans Grant set on
+ * 2026-10-01: $149/quarter, or $490/year which saves $106 against four quarters.
+ */
 const CIRCLE_CHECKOUT_URL = 'https://wingmates.fly100.co/checkout/wingmates-new';
 
-export interface PricingTier {
-  name: string;
-  id: string;
-  href: string;
-  price: string;
-  description: string;
-  features: Array<React.ReactNode>;
-  cta: string;
-}
+const PLANS = {
+  quarterly: { price: '$149', period: '/quarter', note: 'Billed every three months.' },
+  annual: {
+    price: '$490',
+    period: '/year',
+    note: 'Billed once a year. Saves $106 against four quarters.',
+  },
+} as const;
 
-const plan: PricingTier = {
+const plan = {
   name: 'Wingmates',
-  id: '0',
-  href: '/subscribe',
-  price: '$150',
   description:
     'An ongoing coaching room for XC pilots who want consistent growth and confidence in the air.',
   features: [
@@ -52,142 +51,94 @@ const plan: PricingTier = {
   cta: 'Join Wingmates',
 };
 
-const CheckIcon = ({ className = '' }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="none"
-    className={`w-4 h-4 ${className}`}
-    aria-hidden="true"
-  >
-    <path
-      d="M4 10.5L8 14.5L16 6"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const StarIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="#f5a524"
-    aria-hidden="true"
-    className="w-3.5 h-3.5"
-  >
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-  </svg>
-);
-
 export default function PricingWingmates() {
+  const [annual, setAnnual] = useState(false);
+  const active = annual ? PLANS.annual : PLANS.quarterly;
+
   return (
-    <section
-      id="pricing"
-      className="px-5 sm:px-8 py-16 sm:py-20 lg:py-24 bg-white"
-    >
-      <div className="max-w-6xl mx-auto">
-        <div className="max-w-3xl mb-12 text-center mx-auto">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#C2563C] mb-4">
-            Pricing
-          </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-normal tracking-[-0.018em] leading-[1.1] text-[#102A3F]">
-            Join <span className="italic">Wingmates</span>
-          </h2>
+    <section id="pricing" className="px-6 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#0C0E11' }}>
+      <div className="max-w-[62rem] mx-auto">
+        <h2 className="font-[family-name:var(--font-display)] text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-white text-center">
+          Join Wingmates
+        </h2>
+        <p className="mt-5 text-[19px] sm:text-[20px] leading-[1.55] text-[#B4B4B4] text-center max-w-[40rem] mx-auto">
+          {plan.description}
+        </p>
+
+        {/* Billing toggle */}
+        <div className="mt-10 flex justify-center">
+          <div
+            role="group"
+            aria-label="Billing period"
+            className="inline-flex rounded-full p-1"
+            style={{ backgroundColor: '#16181B' }}
+          >
+            {[
+              { key: 'q', label: 'Quarterly', on: !annual, set: false },
+              { key: 'a', label: 'Annual', on: annual, set: true },
+            ].map((opt) => (
+              <button
+                key={opt.key}
+                type="button"
+                onClick={() => setAnnual(opt.set)}
+                aria-pressed={opt.on}
+                className={`rounded-full px-5 py-2 text-[14px] font-medium transition-colors ${
+                  opt.on ? 'bg-[#0076FF] text-white' : 'text-[#B4B4B4] hover:text-white'
+                }`}
+              >
+                {opt.label}
+                {opt.set ? (
+                  <span className={opt.on ? 'ml-2 text-white/80' : 'ml-2 text-[#4DA3FF]'}>
+                    save $106
+                  </span>
+                ) : null}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-4 lg:gap-6 max-w-5xl mx-auto">
-          {/* Left: features on light card */}
-          <div className="rounded-xl bg-white border border-[#E3DED6] p-8 sm:p-10">
-            <h3 className="text-[22px] font-normal tracking-[-0.01em] text-[#102A3F]">
-              {plan.name}
+        <div
+          className="mt-10 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] rounded-2xl overflow-hidden ring-1 ring-white/10"
+          style={{ backgroundColor: '#16181B' }}
+        >
+          {/* Features */}
+          <div className="p-8 sm:p-10">
+            <h3 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#4DA3FF]">
+              What you get
             </h3>
-            <p className="mt-4 text-[16px] leading-[1.55] text-[#3D5467]">
-              {plan.description}
-            </p>
-
-            <div className="mt-8 flex items-center gap-4">
-              <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#C2563C]">
-                Included
-              </h4>
-              <div className="h-px flex-auto bg-[#E3DED6]" />
-            </div>
-
             <ul className="mt-6 space-y-4">
-              {plan.features.map((feature, index) => (
-                <li
-                  key={index}
-                  className="flex items-start gap-3 text-[15px] leading-[1.55] text-[#3D5467]"
-                >
-                  <span className="mt-[3px] flex items-center justify-center w-5 h-5 rounded-full bg-[#F6E3DC] text-[#C2563C] shrink-0">
-                    <CheckIcon />
-                  </span>
-                  <span className="[&_strong]:font-medium [&_strong]:text-[#102A3F]">
-                    {feature}
-                  </span>
+              {plan.features.map((feature, i) => (
+                <li key={i} className="flex gap-3 text-[16px] leading-[1.6] text-[#B4B4B4]">
+                  <span aria-hidden="true" className="mt-0.5 text-[#0076FF]">&#10003;</span>
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Right: featured price tier — deep navy per DESIGN.md card-pricing-featured */}
+          {/* Price */}
           <div
-            className="rounded-xl p-8 sm:p-10 flex flex-col justify-center"
-            style={{ backgroundColor: '#102A3F' }}
+            className="p-8 sm:p-10 flex flex-col justify-center text-center"
+            style={{ backgroundColor: '#0C0E11' }}
           >
-            <div className="max-w-xs mx-auto text-center">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#E8A48C]">
-                Membership
-              </p>
-              <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                <span
-                  className="text-[56px] font-normal tracking-[-0.03em] leading-[1] text-white tabular-nums"
-                  style={{ fontFeatureSettings: '"tnum"' }}
-                >
-                  $150
-                </span>
-                <span className="text-[16px] font-normal text-white/70">
-                  /quarter
-                </span>
-              </p>
+            <p className="flex items-baseline justify-center gap-2">
+              <span className="font-[family-name:var(--font-display)] text-[3.25rem] font-semibold tracking-[-0.035em] text-white">
+                {active.price}
+              </span>
+              <span className="text-[18px] text-[#B4B4B4]">{active.period}</span>
+            </p>
+            <p className="mt-3 text-[14px] text-[#7A7A7A]">{active.note}</p>
 
-              <p className="mt-3 text-[13px] text-white/60">
-                One price. No upsell.
-              </p>
+            <a
+              href={CIRCLE_CHECKOUT_URL}
+              className="mt-8 inline-flex items-center justify-center rounded-full bg-[#0076FF] px-7 py-3.5 text-[15px] font-medium text-white transition-all hover:bg-[#006AE6] shadow-[0_0_28px_rgba(0,118,255,0.45)] hover:shadow-[0_0_38px_rgba(0,118,255,0.6)]"
+            >
+              {plan.cta}
+            </a>
 
-              <a
-                href={CIRCLE_CHECKOUT_URL}
-                className="mt-8 block w-full rounded-full bg-[#C2563C] hover:bg-[#A8462F] px-4 py-3 text-center text-[15px] font-medium text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#102A3F]"
-              >
-                {plan.cta}
-              </a>
-
-              <p className="mt-4 text-[12px] leading-[1.5] text-white/60">
-                Cancel anytime. You keep access to the end of the quarter you
-                have paid for.
-              </p>
-
-              <figure className="mt-8 pt-6 border-t border-white/10 text-left">
-                <div
-                  className="mb-2 flex items-center gap-0.5"
-                  role="img"
-                  aria-label="5 out of 5 stars"
-                >
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <StarIcon key={i} />
-                  ))}
-                </div>
-                <blockquote className="text-[14px] italic leading-[1.5] text-white/85">
-                  &ldquo;It&apos;s only been a month and seen a real change&hellip;
-                  Open up to the program and it delivers.&rdquo;
-                </blockquote>
-                <figcaption className="mt-2 text-[12px] text-white/60 not-italic">
-                  &mdash; Mark Limb
-                </figcaption>
-              </figure>
-            </div>
+            <p className="mt-4 text-[13px] text-[#7A7A7A]">
+              Cancel anytime. You keep access to the end of the period you have paid for.
+            </p>
           </div>
         </div>
       </div>

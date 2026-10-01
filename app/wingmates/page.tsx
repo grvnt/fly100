@@ -334,7 +334,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={`${WRAP}`}>
           <div className="mb-12 max-w-3xl">
-                        <h2 className={H2}>{problem.heading}</h2>
+                        <h2 className={`${H2} text-center`}>{problem.heading}</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -360,7 +360,7 @@ export default function WingmatesPage() {
       {/* ===== THE ORIGIN — Grant's copy, from reserve.md ===== */}
       <section className={SECTION} style={{ backgroundColor: CANVAS }}>
         <div className={WRAP}>
-          <h2 className={`${H2_ON_DARK} mb-10`}>{origin.heading}</h2>
+          <h2 className={`${H2_ON_DARK} text-center mb-10`}>{origin.heading}</h2>
           <Blocks blocks={origin.blocks} />
           <div className="mt-12">
             <Cta />
@@ -371,7 +371,7 @@ export default function WingmatesPage() {
       {/* ===== THE REFRAME — Grant's copy, from most-coaching.md ===== */}
       <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={WRAP}>
-          <h2 className={`${H2_ON_DARK} mb-10`}>{villain.heading}</h2>
+          <h2 className={`${H2_ON_DARK} text-center mb-10`}>{villain.heading}</h2>
           <Blocks blocks={villain.blocks} />
           <Refrain onDark>{villain.refrain}</Refrain>
           <div className="mt-12">
@@ -525,7 +525,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: CANVAS }}>
         <div className={WRAP}>
           <div className="max-w-3xl mb-12">
-            <h2 className={H2}>{forYou.heading}</h2>
+            <h2 className={`${H2} text-center`}>{forYou.heading}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -627,7 +627,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={WRAP}>
           <div className="max-w-3xl mb-10">
-                        <h2 className={H2}>{faq.heading}</h2>
+                        <h2 className={`${H2} text-center`}>{faq.heading}</h2>
           </div>
           <div className="max-w-3xl space-y-3">
             {faq.items.map((item) => (
@@ -658,7 +658,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: INK }}>
         <div className={WRAP}>
           <div className="max-w-3xl">
-            <h2 className={`${H2_ON_DARK} mb-10`}>{finalCta.heading}</h2>
+            <h2 className={`${H2_ON_DARK} text-center mb-10`}>{finalCta.heading}</h2>
             <div className={`space-y-5 ${BODY_ON_DARK}`}>
               {finalCta.body.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
@@ -669,7 +669,6 @@ export default function WingmatesPage() {
 
             <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-4">
               <Cta variant="on-dark" />
-              <p className="text-[13px] text-white/60">{finalCta.terms}</p>
             </div>
           </div>
         </div>
