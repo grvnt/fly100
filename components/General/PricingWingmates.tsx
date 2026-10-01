@@ -90,41 +90,41 @@ export default function PricingWingmates() {
     >
       <div className="max-w-6xl mx-auto">
         <div className="max-w-3xl mb-12 text-center mx-auto">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#533afd] mb-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#C2563C] mb-4">
             Pricing
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-light tracking-[-0.018em] leading-[1.1] text-[#0d253d]">
+          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-normal tracking-[-0.018em] leading-[1.1] text-[#102A3F]">
             Join <span className="italic">Wingmates</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-4 lg:gap-6 max-w-5xl mx-auto">
           {/* Left: features on light card */}
-          <div className="rounded-xl bg-white border border-[#e3e8ee] p-8 sm:p-10">
-            <h3 className="text-[22px] font-light tracking-[-0.01em] text-[#0d253d]">
+          <div className="rounded-xl bg-white border border-[#E3DED6] p-8 sm:p-10">
+            <h3 className="text-[22px] font-normal tracking-[-0.01em] text-[#102A3F]">
               {plan.name}
             </h3>
-            <p className="mt-4 text-[16px] leading-[1.55] text-[#273951]">
+            <p className="mt-4 text-[16px] leading-[1.55] text-[#3D5467]">
               {plan.description}
             </p>
 
             <div className="mt-8 flex items-center gap-4">
-              <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#533afd]">
+              <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#C2563C]">
                 Included
               </h4>
-              <div className="h-px flex-auto bg-[#e3e8ee]" />
+              <div className="h-px flex-auto bg-[#E3DED6]" />
             </div>
 
             <ul className="mt-6 space-y-4">
               {plan.features.map((feature, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-3 text-[15px] leading-[1.55] text-[#273951]"
+                  className="flex items-start gap-3 text-[15px] leading-[1.55] text-[#3D5467]"
                 >
-                  <span className="mt-[3px] flex items-center justify-center w-5 h-5 rounded-full bg-[#eeeaff] text-[#533afd] shrink-0">
+                  <span className="mt-[3px] flex items-center justify-center w-5 h-5 rounded-full bg-[#F6E3DC] text-[#C2563C] shrink-0">
                     <CheckIcon />
                   </span>
-                  <span className="[&_strong]:font-medium [&_strong]:text-[#0d253d]">
+                  <span className="[&_strong]:font-medium [&_strong]:text-[#102A3F]">
                     {feature}
                   </span>
                 </li>
@@ -135,20 +135,20 @@ export default function PricingWingmates() {
           {/* Right: featured price tier — deep navy per DESIGN.md card-pricing-featured */}
           <div
             className="rounded-xl p-8 sm:p-10 flex flex-col justify-center"
-            style={{ backgroundColor: '#1c1e54' }}
+            style={{ backgroundColor: '#102A3F' }}
           >
             <div className="max-w-xs mx-auto text-center">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#b9b9f9]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#E8A48C]">
                 Membership
               </p>
               <p className="mt-6 flex items-baseline justify-center gap-x-2">
                 <span
-                  className="text-[56px] font-light tracking-[-0.03em] leading-[1] text-white tabular-nums"
+                  className="text-[56px] font-normal tracking-[-0.03em] leading-[1] text-white tabular-nums"
                   style={{ fontFeatureSettings: '"tnum"' }}
                 >
                   $150
                 </span>
-                <span className="text-[16px] font-light text-white/70">
+                <span className="text-[16px] font-normal text-white/70">
                   /quarter
                 </span>
               </p>
@@ -159,7 +159,7 @@ export default function PricingWingmates() {
 
               <a
                 href={CIRCLE_CHECKOUT_URL}
-                className="mt-8 block w-full rounded-full bg-[#533afd] hover:bg-[#4434d4] px-4 py-3 text-center text-[15px] font-medium text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1c1e54]"
+                className="mt-8 block w-full rounded-full bg-[#C2563C] hover:bg-[#A8462F] px-4 py-3 text-center text-[15px] font-medium text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#102A3F]"
               >
                 {plan.cta}
               </a>
