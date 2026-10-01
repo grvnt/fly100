@@ -111,82 +111,76 @@ export const problem = {
     'You are not alone in any of it. Every one of those came from a pilot describing their own flying.',
 };
 
+/**
+ * ALL COPY BELOW IS GRANT'S, from `02 Wingmates/Landing Page/most-coaching.md`.
+ * Replaced Flox's drafted villain section on 2026-10-01. Do not edit.
+ *
+ * `blocks` is an ordered mix of paragraphs and pull quotes, matching the markdown.
+ */
 export const villain = {
+  // ⏳ Heading kept from the old section. Flagged to Grant: the body now argues about
+  // competition culture rather than the debrief, so the heading may want to change.
   heading: 'Most Paragliding Coaching Works on the Flight. Wingmates Works on the Debrief.',
-  subheading: 'Why "just fly more" does not fix it',
-  intro: [
-    'There is a stage most pilots pass through at around a hundred hours. You have enough skill to go places now. You have some results behind you. And your assessment of your own flying quietly stops matching your actual flying.',
-    'The sport has a name for it. Intermediate syndrome.',
-    'It does not only look like overconfidence. It has a second face that nobody talks about, and I have worn both.',
+  blocks: [
+    { type: 'p' as const, text: 'Traditional paragliding culture encourages you to chase metrics, enter XC leagues, and participate in competitions.' },
+    { type: 'p' as const, text: 'This works if it enriches your flying and helps you to learn and grow.' },
+    { type: 'p' as const, text: 'Unfortunately, when society forces the elemental arts into an organized, competitive box, it fundamentally changes the nature of the activity.' },
+    { type: 'p' as const, text: 'Success is measured by points, podiums, medals, and judges\u2019 scores.' },
+    { type: 'p' as const, text: 'Other pilots become an obstacle.' },
+    { type: 'p' as const, text: 'Rivalries are born.' },
+    { type: 'p' as const, text: 'Suddenly flying, humanity\u2019s dream since the dawn of consciousness, becomes a zero-sum status game. A game of ranking and hierarchy. A game of comparison.' },
+    { type: 'p' as const, text: 'The ego gets attached to results which become a proxy for your value as a pilot. Your status in the community and individual worth gets boiled down to a single metric.' },
+    { type: 'p' as const, text: 'A metric that says nothing about the quality of the experience.' },
+    {
+      type: 'quote' as const,
+      text: 'It is good to have an end to journey toward; but it is the journey that matters, in the end.',
+      cite: 'Ursula K. Le Guin',
+    },
+    { type: 'p' as const, text: 'Flying a big line through complex terrain is a deeply subjective, profound experience. Kilometres and league points turn a complex, soulful act into a cheap, easily digestible number. A pilot can land from an objectively stunning and creative flight feeling on top of the world, only to have the feeling whipped away simply because they fell 5km short of another pilot\u2019s tracklog.' },
+    { type: 'p' as const, text: 'The problem with zero-sum games is that for you to win, someone else must lose. In this model joy is scarce and fleeting. However, in a positive-sum game everyone can win simultaneously.' },
+    { type: 'p' as const, text: 'This is known as wealth creation. And in this case the wealth you create is of experience. Success is measured by mastery, presence, a connection to the environment, and the richness of the experience.' },
+    { type: 'p' as const, text: 'In adventure sports, this shift from zero-sum competition to \u201Cthe act of doing\u201D is a deeply researched and lived philosophy. Many free-ride movements have broken away from the shackles of this imposed structure.' },
+    { type: 'p' as const, text: 'They moved towards connected communities, supportive celebration, and group flow.' },
+    { type: 'p' as const, text: 'That\u2019s why Wingmates uses a community-first XC Growth System.' },
+    { type: 'p' as const, text: 'A place to connect with other pilots and increase the collective knowledge and safety of the group in a supportive and collaborative environment.' },
   ],
-  // VERBATIM Grant, published 2026-06-11 in "seek-mastery". Both faces of intermediate syndrome.
-  published: [
-    'It’s also why you might upgrade your glider too early. The added performance to mask your perceived shortcomings and the ego-boost that saying you fly a C or a D gives you.',
-    'On the other end of the scale you might avoid takeoffs, people, conditions, even ground handling that is well within your ability, just to avoid looking bad. To avoid looking like a newbie. To avoid the shame of appearing foolish.',
-    'But this keeps you exactly where you don’t want to be. Your skills don’t improve. You fly less. You become rusty. And when you do fly you make mistakes because you haven’t practiced or developed your relationship with fear, feeding the cycle of belief that you are “bad” at paragliding. It becomes a self-fulfilling prophecy.',
-  ],
-  // VERBATIM Grant, published 2026-05-21 in "launch-anxiety". The villain sentence.
-  villainSentence:
-    'This is why “just fly more” doesn’t fix anxiety for many pilots. More skill doesn’t dissolve Egofear — it often inflates it. After some success, the self now has more to protect, not less.',
-  // The anti-scoreboard argument. This is where it belongs: the metric fixation is a
-  // symptom of the villain, not a separate enemy.
-  scoreboard: [
-    'So what do you do when you cannot see your own flying? You borrow somebody else’s measure. The league table. The guy who just upgraded to a C. The kilometre count on the way home.',
-    'That is where the number-chasing comes from. Not ambition. It is what you reach for when you have no other way of knowing whether you flew well. One pilot who answered my survey put his own version of it down as the thing standing between him and enjoying his flying: "Part of me is competitive and wants to reach new measurable goals." Another, well past a hundred kilometres, wrote that what he wanted was pleasure, and named the obstacle as "chasing figures."',
-    'I am not against your numbers. Your first hundred is worth wanting, and I will help you get it. I am against the number being the only thing telling you how you are doing, because it is a terrible instrument and it is not even yours.',
-  ],
-  close:
-    'Both faces come from the same place. You are the only one grading your own flying, and the grader is not neutral.',
   refrain: 'The debrief is the learning.',
 };
 
+/**
+ * ALL COPY BELOW IS GRANT'S, from `02 Wingmates/Landing Page/reserve.md`.
+ * Replaced Flox's drafted origin section on 2026-10-01. Do not edit.
+ *
+ * This now carries the intermediate-syndrome argument AND the isolation story AND the
+ * handoff, which were three separate drafted blocks before.
+ */
 export const origin = {
-  /**
-   * ⛔ HEADING CORRECTED 2026-09-30. It was "The One Change That Took Me From Winning a
-   * League to Throwing My Reserve", borrowed from StoryOS's "The One Change That Took Me
-   * From X to Y". That structure demanded a change, and Grant's story does not contain
-   * one -- it contains a realisation. Forcing the shape produced a false first-person
-   * claim about his own accident. Grant: "the change i made came from deep reflection
-   * where i saw the role that ego had played and how it could have cost me my life."
-   */
-  heading: 'It Took a Thrown Reserve for Me to See What My Ego Was Doing',
-  // VERBATIM Grant, published 2026-05-21. His account, unedited.
-  published: [
-    'The cause of my cascade was a type of Egofear born from insecurity and driven by the need for recognition — also known as intermediate syndrome. I’d burst onto the XC scene that year winning our local league and when I saw a friend doing wingovers I felt compelled to try them too. I hadn’t studied the skill and didn’t understand the dynamics, so when I had a small asymmetric on high side my immediate thought was, “ah that doesn’t scare me, I’ll just do it bigger,” incorrectly thinking that it was a lack of energy that caused the collapse. On the next turn I went bigger and the typical sequence of events for this type of mistake occurred — big assym on the topside into a cravat.',
-    'The need to prove myself, to be the best, to win and fly further than others came from deep wounds.',
-  ],
-  // FLOX DRAFT in Grant's register, built from his own correction. Rewrite in his words.
-  landing: [
-    'I threw my reserve a week before a scheduled SIV course. The part that still gets me is not the cravat. It is that I diagnosed my own collapse wrong, in the air, with total confidence, and then acted on the diagnosis.',
-    'What changed things afterwards was not a course, and it was not more airtime. It was sitting with what had happened for long enough to see the part my ego had been playing, and how close that had come to costing me my life.',
-    'Nobody was watching that flight except me. Nobody had been watching the months before it either, while I drifted towards it.',
-  ],
-  /**
-   * The second story, from Grant 2026-09-30: "i got isolated twice in my flying career -
-   * once i didnt fly for 4 years, the other for 2 years - i didnt have a crew of pilots."
-   *
-   * FLOX DRAFT in his register. Rewrite in his own words.
-   *
-   * Why it belongs here and not as the villain: as a claim about pilots quitting it turns
-   * grim on repetition, which is why that version was parked in September. As HIS OWN
-   * STORY it is unarguable, and it pairs with the reserve throw. Two ways of losing years.
-   */
-  isolation: [
-    'There is a second thing I learned the slow way, and it cost me more time than the cravat did.',
-    'Twice in my flying career I got isolated. The first time I did not fly for four years. The second time, two. Nothing went wrong and I did not lose interest. I just did not have a crew, and without other pilots around it, the flying quietly stopped happening.',
-  ],
-  /**
-   * Grant 2026-09-30: "wingmates is the community i wish i had and the feedback to see
-   * i was heading in the wrong direction."
-   *
-   * NOTE THE FRAME: it is a wish about his own past, not a promise about the reader's
-   * future. ⛔ Never write that Wingmates would have prevented the accident, or that it
-   * will prevent anyone else's. That is a safety claim.
-   */
-  handoff: [
-    'Wingmates is the community I wish I had had. Not because anyone else can fly your glider, but because the drift is obvious from outside long before it is obvious from inside. What I was missing was somebody willing to tell me I was heading the wrong way.',
-    'And somewhere to keep a home in this sport when life makes flying hard, so you keep learning in the seasons you fly a lot and you are still here in the ones you do not.',
-    'Let me show you how it works.',
+  heading: 'The Moment That Catalysed My Shift From Ego to Flow',
+  blocks: [
+    { type: 'p' as const, text: 'I almost killed myself.' },
+    { type: 'p' as const, text: 'A week before the one and only SIV course I\u2019ve ever done, I threw my reserve.' },
+    { type: 'p' as const, text: 'I didn\u2019t even have time to see it open. It opened just before I hit the perfectly angled slope. I landed without a scratch.' },
+    { type: 'p' as const, text: 'I\u2019d burst onto the XC scene that year winning our local league and when I saw a friend doing wingovers I felt compelled to try them too. I hadn\u2019t studied the skill and didn\u2019t understand the dynamics, so when I had a small asymmetric on high side my immediate thought was, \u201Cah that doesn\u2019t scare me, I\u2019ll just do it bigger,\u201D incorrectly thinking that it was a lack of energy that caused the collapse. On the next turn I went bigger and the typical sequence of events for this type of mistake occurred \u2014 big assym on the topside into a cravat.' },
+    {
+      type: 'quote' as const,
+      text: 'The cause of my cascade was a type of Egofear born from insecurity and driven by the need for recognition, also known as intermediate syndrome.',
+    },
+    { type: 'p' as const, text: 'The need to prove myself, to be the best, to win and fly further than others came from deep wounds.' },
+    { type: 'p' as const, text: 'What turned my trajectory around wasn\u2019t more airtime, it was the insights I gained through struggle and reflection. I had to dig deep. To be open and see the part my ego had been playing. To be open to feedback as a path to growth.' },
+    { type: 'p' as const, text: 'To explore and uncover deeper truths about why we fly.' },
+    { type: 'p' as const, text: 'That paragliding is a mind game and that it\u2019s gifts can be found when you focus on...' },
+    { type: 'quote' as const, text: 'Connection over competition.' },
+    { type: 'p' as const, text: 'I became isolated twice in my paragliding journey.' },
+    { type: 'p' as const, text: 'After getting my licence I didn\u2019t fly for four years. The second time, while living in Sweden, it was two years.' },
+    { type: 'p' as const, text: 'Wingmates is the community I wish I had had.' },
+    { type: 'p' as const, text: 'Somewhere to keep a home in this elemental art when life makes flying hard.' },
+    { type: 'p' as const, text: 'To keep learning in the seasons you fly a lot and to stay connected in the ones you do not.' },
+    { type: 'p' as const, text: 'To connect and find a crew to fly with, no matter what country you find yourself in.' },
+    { type: 'quote' as const, text: 'There is nothing more powerful than group flow.' },
+    { type: 'p' as const, text: 'To share your own hard won experience with others to help them stay on track.' },
+    { type: 'p' as const, text: 'To keep yourself accountable.' },
+    { type: 'p' as const, text: 'This is the power of community and why I started Wingmates.' },
+    { type: 'p' as const, text: 'Be part of a new connected movement of pilots putting flow and the love of free flight first.' },
   ],
 };
 
@@ -252,7 +246,7 @@ export const bands = {
   afterVillain: {
     shape: 'feature' as const,
     quote:
-      'In the last two months I have made more progress in my flying journey than in the last ten.',
+      'In the last two months I have made more progress in my flying journey than in the last two.',
     name: 'Zee',
     // VERBATIM from the same testimonial.
     result:

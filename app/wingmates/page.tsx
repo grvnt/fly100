@@ -36,17 +36,19 @@ export const metadata: Metadata = {
  *
  * PALETTE — three colours, not five. The old version had five backgrounds
  * including two near-identical darks, which read as noise rather than rhythm.
- * Near-black, white, one cool half-step, and a single vivid blue. High
- * contrast and cool rather than warm, which is what reads as modern.
+ * DARK MODE, taken verbatim from flow.grantonthefly.com's own theme
+ * variables so the page and his Substack read as one brand:
+ *   bg_web #000000 · bg_elevated #0F0F0F · elevated_secondary #222222
+ *   elevated_tertiary #484848 · detail #191919 · accent #0076FF
  *
  * NOTE: Tailwind JIT scans source text, so a colour used in a CLASS must be a
- * literal (text-[#1D4ED8]). These consts are for inline styles only.
+ * literal (text-[#0076FF]). These consts are for inline styles only.
  */
-const INK = '#0B1117';        // near-black with a blue cast — dark sections, headings
-const INK_SOFT = '#4B5563';   // body copy on light
-const CANVAS = '#FFFFFF';     // clean white — the default surface
-const CANVAS_ALT = '#F4F6F8'; // cool light grey — alternating sections
-const ACCENT = '#1D4ED8';     // vivid blue. Used sparingly: eyebrows, rules, CTA.
+const INK = '#000000';        // page background — from his Substack bg_web
+const INK_SOFT = '#B4B4B4';   // body copy on light
+const CANVAS = '#0F0F0F';     // elevated surface — Substack bg_elevated
+const CANVAS_ALT = '#000000'; // true black — alternates against the elevated panels
+const ACCENT = '#0076FF';     // his Substack accent, verbatim
 
 const SECTION = 'px-6 sm:px-8 py-20 sm:py-24 lg:py-28';
 const WRAP = 'max-w-[46rem] mx-auto';
@@ -57,22 +59,22 @@ const BODYFONT = 'font-[family-name:var(--font-body)]';
 
 // Type tokens
 const EYEBROW =
-  `${BODYFONT} text-[12px] font-semibold uppercase tracking-[0.12em] text-[#1D4ED8]`;
+  `${BODYFONT} text-[12px] font-semibold uppercase tracking-[0.12em] text-[#0076FF]`;
 const EYEBROW_ON_DARK =
-  `${BODYFONT} text-[12px] font-semibold uppercase tracking-[0.12em] text-[#93B4FF]`;
+  `${BODYFONT} text-[12px] font-semibold uppercase tracking-[0.12em] text-[#4DA3FF]`;
 const H1 =
-  `${DISPLAY} text-[2.5rem] sm:text-[3.25rem] lg:text-[3.75rem] font-semibold tracking-[-0.035em] leading-[1.05] text-[#0B1117]`;
+  `${DISPLAY} text-[2.5rem] sm:text-[3.25rem] lg:text-[3.75rem] font-semibold tracking-[-0.035em] leading-[1.05] text-[#FFFFFF]`;
 const H2 =
-  `${DISPLAY} text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-[#0B1117]`;
-const H2_ON_DARK =
   `${DISPLAY} text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-[#FFFFFF]`;
-const H3 = `${DISPLAY} text-[1.25rem] sm:text-[1.375rem] font-semibold tracking-[-0.02em] leading-[1.3] text-[#0B1117]`;
+const H2_ON_DARK =
+  `${DISPLAY} text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-[#0F0F0F]`;
+const H3 = `${DISPLAY} text-[1.25rem] sm:text-[1.375rem] font-semibold tracking-[-0.02em] leading-[1.3] text-[#FFFFFF]`;
 const H3_ON_DARK =
-  `${DISPLAY} text-[1.25rem] sm:text-[1.375rem] font-semibold tracking-[-0.02em] leading-[1.3] text-[#FFFFFF]`;
-const BODY = `${BODYFONT} text-[17px] leading-[1.65] text-[#4B5563]`;
+  `${DISPLAY} text-[1.25rem] sm:text-[1.375rem] font-semibold tracking-[-0.02em] leading-[1.3] text-[#0F0F0F]`;
+const BODY = `${BODYFONT} text-[17px] leading-[1.65] text-[#B4B4B4]`;
 const BODY_ON_DARK = `${BODYFONT} text-[17px] leading-[1.65] text-white/80`;
 const LEAD =
-  `${BODYFONT} text-[19px] sm:text-[20px] leading-[1.55] text-[#4B5563]`;
+  `${BODYFONT} text-[19px] sm:text-[20px] leading-[1.55] text-[#B4B4B4]`;
 const LEAD_ON_DARK =
   `${BODYFONT} text-[19px] sm:text-[20px] leading-[1.55] text-white/85`;
 
@@ -92,14 +94,45 @@ function Cta({
     'inline-flex items-center justify-center rounded-full px-6 py-3 text-[15px] font-medium tracking-[-0.005em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
   const styles =
     variant === 'on-dark'
-      ? 'bg-[#FFFFFF] text-[#0B1117] hover:bg-white focus-visible:ring-white focus-visible:ring-offset-[#0B1117]'
-      : 'bg-[#1D4ED8] text-white hover:bg-[#1E40AF] focus-visible:ring-[#1D4ED8] focus-visible:ring-offset-white';
+      ? 'bg-[#0F0F0F] text-[#FFFFFF] hover:bg-white focus-visible:ring-white focus-visible:ring-offset-[#000000]'
+      : 'bg-[#0076FF] text-white hover:bg-[#006AE6] focus-visible:ring-[#0076FF] focus-visible:ring-offset-white';
   // Centred in its own wrapper, so every call site gets it without repeating the class.
   return (
     <div className="flex justify-center">
       <Link href="#pricing" className={`${base} ${styles} ${className}`}>
         {hero.cta}
       </Link>
+    </div>
+  );
+}
+
+/**
+ * Renders Grant's prose blocks: paragraphs plus the ### pull quotes from his markdown.
+ * Used by the villain and origin sections, which are both verbatim from his own docs.
+ */
+function Blocks({ blocks, onDark = true }: { blocks: any[]; onDark?: boolean }) {
+  return (
+    <div className="space-y-6">
+      {blocks.map((b, i) =>
+        b.type === 'quote' ? (
+          <blockquote key={i} className="my-10 border-l-2 border-[#0076FF] pl-6">
+            <p
+              className={`text-[1.375rem] sm:text-[1.625rem] font-semibold tracking-[-0.02em] leading-[1.3] ${
+                onDark ? 'text-white' : 'text-[#FFFFFF]'
+              }`}
+            >
+              {b.text}
+            </p>
+            {b.cite ? (
+              <footer className="mt-3 text-[14px] text-[#7A7A7A]">&mdash; {b.cite}</footer>
+            ) : null}
+          </blockquote>
+        ) : (
+          <p key={i} className={onDark ? BODY_ON_DARK : BODY}>
+            {b.text}
+          </p>
+        )
+      )}
     </div>
   );
 }
@@ -113,7 +146,7 @@ function Avatar({ src, name, size = 'w-14 h-14' }: { src?: string; name: string;
   return (
     <span
       aria-hidden="true"
-      className={`${size} rounded-full flex items-center justify-center text-lg font-semibold text-[#93B4FF]`}
+      className={`${size} rounded-full flex items-center justify-center text-lg font-semibold text-[#4DA3FF]`}
       style={{ backgroundColor: 'rgba(255,255,255,0.12)' }}
     >
       {name.trim().charAt(0)}
@@ -137,7 +170,7 @@ function Band({ band }: { band: any }) {
           <div className="mt-8 flex items-center gap-4">
             <Avatar src={band.avatar} name={band.name} />
             <div>
-              <p className="text-[15px] font-semibold text-[#93B4FF]">{band.name}</p>
+              <p className="text-[15px] font-semibold text-[#4DA3FF]">{band.name}</p>
               {band.result ? (
                 <p className="mt-1 text-[14px] leading-[1.5] text-white/70">{band.result}</p>
               ) : null}
@@ -170,7 +203,7 @@ function Band({ band }: { band: any }) {
         <div className="mt-8 flex items-center justify-center gap-4">
           <Avatar src={band.avatar} name={band.name} />
           <div className="text-left">
-            <p className="text-[15px] font-semibold text-[#93B4FF]">{band.name}</p>
+            <p className="text-[15px] font-semibold text-[#4DA3FF]">{band.name}</p>
             {band.sub ? <p className="text-[13px] text-white/60">{band.sub}</p> : null}
           </div>
         </div>
@@ -190,7 +223,7 @@ function Refrain({
     <div className="mt-12 flex justify-center">
       <p
         className={`inline-block max-w-lg text-center text-[15px] font-semibold uppercase tracking-[0.18em] border-t pt-4 ${
-          onDark ? 'text-white border-[#665efd]' : 'text-[#1D4ED8] border-[#E6EAEF]'
+          onDark ? 'text-white border-[#665efd]' : 'text-[#0076FF] border-[#222222]'
         }`}
       >
         {children}
@@ -201,16 +234,15 @@ function Refrain({
 
 export default function WingmatesPage() {
   return (
-    <main className="bg-[#FFFFFF] text-[#0B1117] overflow-x-hidden">
+    <main className="bg-black text-white overflow-x-hidden">
       {/* ===== 1. HERO — light canvas, subtle indigo wash top ===== */}
-      <section className="relative overflow-hidden bg-[#FFFFFF]">
+      <section className="relative overflow-hidden bg-[#0F0F0F]">
         {/* Soft gradient wash reminiscent of the DESIGN.md mesh, kept light. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
           style={{
-            background:
-              'radial-gradient(1100px 420px at 50% 0%, rgba(29,78,216,0.07), transparent 62%), linear-gradient(to bottom, #F4F6F8 0%, #FFFFFF 64%)',
+            background: 'radial-gradient(1100px 460px at 50% 0%, rgba(0,118,255,0.18), transparent 64%), #000000',
           }}
         />
         <div
@@ -239,7 +271,7 @@ export default function WingmatesPage() {
                         className="w-9 h-9 rounded-full object-cover"
                         style={{
                           zIndex: hero.badge.avatars.length - i,
-                          boxShadow: '0 0 0 2px #ffffff',
+                          boxShadow: '0 0 0 2px #0F0F0F',
                         }}
                       />
                     ))}
@@ -249,11 +281,11 @@ export default function WingmatesPage() {
                       <span aria-hidden="true" className="text-[#f5a524] text-sm">
                         {'★★★★★'}
                       </span>
-                      <span className="text-[13px] font-medium text-[#0B1117]">
+                      <span className="text-[13px] font-medium text-[#FFFFFF]">
                         {hero.badge.rating}
                       </span>
                     </div>
-                    <p className="text-[12px] text-[#8A94A3]">
+                    <p className="text-[12px] text-[#7A7A7A]">
                       {hero.badge.caption}
                     </p>
                   </div>
@@ -263,7 +295,7 @@ export default function WingmatesPage() {
 
             <div className="w-full mt-12">
               <div
-                className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#E6EAEF]"
+                className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#222222]"
                 style={{
                   boxShadow:
                     '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
@@ -302,12 +334,12 @@ export default function WingmatesPage() {
             {problem.lines.map((line, i) => (
               <article
                 key={line.slice(0, 24)}
-                className="rounded-xl p-7 bg-[#FFFFFF] border border-[#E6EAEF] flex flex-col gap-4 transition-shadow duration-200 hover:shadow-[0_8px_24px_rgba(0,55,112,0.08),0_2px_6px_rgba(0,55,112,0.04)]"
+                className="rounded-xl p-7 bg-[#0F0F0F] border border-[#222222] flex flex-col gap-4 transition-shadow duration-200 hover:shadow-[0_8px_24px_rgba(0,55,112,0.08),0_2px_6px_rgba(0,55,112,0.04)]"
               >
-                <span className="text-[11px] font-mono font-medium text-[#8A94A3] tabular-nums">
+                <span className="text-[11px] font-mono font-medium text-[#7A7A7A] tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-[16px] leading-[1.55] text-[#4B5563]">
+                <p className="text-[16px] leading-[1.55] text-[#B4B4B4]">
                   {line}
                 </p>
               </article>
@@ -318,73 +350,23 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 3. ORIGIN STORY — white canvas, reading column ===== */}
+      {/* ===== THE ORIGIN — Grant's copy, from reserve.md ===== */}
       <section className={SECTION} style={{ backgroundColor: CANVAS }}>
         <div className={WRAP}>
-          <div className="max-w-3xl">
-                        <h2 className={`${H2} mb-10`}>{origin.heading}</h2>
-          </div>
-          <div className={`${READ} space-y-5 ${BODY}`}>
-            {origin.published.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-            {origin.landing.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-            {origin.isolation.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-            {origin.handoff.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-          </div>
-
+          <h2 className={`${H2_ON_DARK} mb-10`}>{origin.heading}</h2>
+          <Blocks blocks={origin.blocks} />
           <div className="mt-12">
             <Cta />
           </div>
         </div>
       </section>
 
-      {/* ===== 4. THE REFRAME — dark navy band, the villain interlude ===== */}
-      <section className={SECTION} style={{ backgroundColor: INK }}>
+      {/* ===== THE REFRAME — Grant's copy, from most-coaching.md ===== */}
+      <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={WRAP}>
-          <div className="max-w-3xl">
-            <h2 className={`${H2_ON_DARK} mb-10`}>{villain.heading}</h2>
-          </div>
-
-          <div className={`${READ} space-y-5 ${BODY_ON_DARK}`}>
-            {villain.intro.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-          </div>
-
-          {/* Verbatim published-Grant quote block: cream card as chromatic interlude
-              inside the dark section — quotes Grant's earlier essay verbatim. */}
-          <blockquote
-            className="mt-10 max-w-3xl rounded-xl px-7 py-8 space-y-5 text-[#0B1117]"
-            style={{ backgroundColor: CANVAS_ALT }}
-          >
-            {villain.published.map((p) => (
-              <p key={p.slice(0, 24)} className="text-[16px] leading-[1.6]">
-                {p}
-              </p>
-            ))}
-          </blockquote>
-
-          <p className="mt-10 max-w-3xl text-white text-[19px] sm:text-[21px] leading-[1.4] font-light tracking-[-0.005em] border-l-2 border-[#665efd] pl-5">
-            {villain.villainSentence}
-          </p>
-
-          <div className={`${READ} mt-10 space-y-5 ${BODY_ON_DARK}`}>
-            {villain.scoreboard.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-          </div>
-
-          <p className={`${READ} mt-10 ${LEAD_ON_DARK}`}>{villain.close}</p>
-
+          <h2 className={`${H2_ON_DARK} mb-10`}>{villain.heading}</h2>
+          <Blocks blocks={villain.blocks} />
           <Refrain onDark>{villain.refrain}</Refrain>
-
           <div className="mt-12">
             <Cta variant="on-dark" />
           </div>
@@ -455,7 +437,7 @@ export default function WingmatesPage() {
                   <h3 className={`${H3} text-[22px] sm:text-[26px] font-light tracking-[-0.01em] leading-[1.2]`}>
                     {item.result}
                   </h3>
-                  <p className="mt-4 text-[15px] text-[#8A94A3] italic leading-[1.55]">
+                  <p className="mt-4 text-[15px] text-[#7A7A7A] italic leading-[1.55]">
                     &ldquo;{item.objection}&rdquo;
                   </p>
                   <p className={`mt-4 ${BODY}`}>{item.answer}</p>
@@ -464,7 +446,7 @@ export default function WingmatesPage() {
                 {item.media ? (
                   <figure className="w-full">
                     <div
-                      className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#E6EAEF] bg-[#0B1117]"
+                      className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#222222] bg-[#000000]"
                       style={{
                         boxShadow:
                           '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
@@ -479,7 +461,7 @@ export default function WingmatesPage() {
                         controls
                       />
                     </div>
-                    <figcaption className="mt-3 text-[13px] text-[#8A94A3]">
+                    <figcaption className="mt-3 text-[13px] text-[#7A7A7A]">
                       {item.media.caption}
                     </figcaption>
                   </figure>
@@ -510,17 +492,17 @@ export default function WingmatesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-xl p-7 bg-[#FFFFFF] border border-[#E6EAEF]">
+            <div className="rounded-xl p-7 bg-[#0F0F0F] border border-[#222222]">
               <h3 className={`${H3} mb-5`}>{forYou.forHeading}</h3>
               <ul className="space-y-3">
                 {forYou.forItems.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-3 text-[16px] leading-[1.55] text-[#4B5563]"
+                    className="flex gap-3 text-[16px] leading-[1.55] text-[#B4B4B4]"
                   >
                     <span
                       aria-hidden="true"
-                      className="mt-[8px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#1D4ED8]"
+                      className="mt-[8px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#0076FF]"
                     />
                     <span>{item}</span>
                   </li>
@@ -528,13 +510,13 @@ export default function WingmatesPage() {
               </ul>
             </div>
 
-            <div className="rounded-xl p-7 bg-[#F4F6F8] border border-[#E6EAEF]">
+            <div className="rounded-xl p-7 bg-[#000000] border border-[#222222]">
               <h3 className={`${H3} mb-5`}>{forYou.notHeading}</h3>
               <ul className="space-y-3">
                 {forYou.notItems.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-3 text-[16px] leading-[1.55] text-[#8A94A3]"
+                    className="flex gap-3 text-[16px] leading-[1.55] text-[#7A7A7A]"
                   >
                     <span
                       aria-hidden="true"
@@ -547,17 +529,17 @@ export default function WingmatesPage() {
             </div>
           </div>
 
-          <div className="mt-4 rounded-xl p-7 sm:p-8 bg-[#FFFFFF] border border-[#E6EAEF]">
+          <div className="mt-4 rounded-xl p-7 sm:p-8 bg-[#0F0F0F] border border-[#222222]">
             <h3 className={`${H3} mb-5`}>{forYou.doesntMatterHeading}</h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {forYou.doesntMatterItems.map((item) => (
                 <li
                   key={item.slice(0, 24)}
-                  className="flex gap-3 text-[16px] leading-[1.55] text-[#4B5563]"
+                  className="flex gap-3 text-[16px] leading-[1.55] text-[#B4B4B4]"
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-[8px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#1D4ED8]"
+                    className="mt-[8px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#0076FF]"
                   />
                   <span>{item}</span>
                 </li>
@@ -578,7 +560,7 @@ export default function WingmatesPage() {
         <div className={WRAP}>
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-14 items-start">
             <div className="flex justify-center lg:justify-start">
-              <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-[#E6EAEF]">
+              <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-[#222222]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={about.imageUrl}
@@ -588,7 +570,7 @@ export default function WingmatesPage() {
               </div>
             </div>
             <div className="max-w-[62ch] space-y-5">
-              <p className="text-[26px] sm:text-[30px] leading-[1.15] font-light tracking-[-0.015em] text-[#0B1117]">
+              <p className="text-[26px] sm:text-[30px] leading-[1.15] font-light tracking-[-0.015em] text-[#FFFFFF]">
                 {about.heading}
               </p>
               <div className={`space-y-4 ${BODY}`}>
@@ -614,19 +596,19 @@ export default function WingmatesPage() {
             {faq.items.map((item) => (
               <details
                 key={item.q}
-                className="group rounded-xl bg-[#FFFFFF] border border-[#E6EAEF] px-6 py-5 open:shadow-[0_1px_3px_rgba(0,55,112,0.08)]"
+                className="group rounded-xl bg-[#0F0F0F] border border-[#222222] px-6 py-5 open:shadow-[0_1px_3px_rgba(0,55,112,0.08)]"
               >
-                <summary className="cursor-pointer list-none flex items-start justify-between gap-4 text-[17px] font-medium text-[#0B1117]">
+                <summary className="cursor-pointer list-none flex items-start justify-between gap-4 text-[17px] font-medium text-[#FFFFFF]">
                   <span>{item.q}</span>
                   <span
                     aria-hidden="true"
-                    className="mt-[6px] shrink-0 w-3 h-3 relative text-[#1D4ED8] transition-transform duration-200 group-open:rotate-45"
+                    className="mt-[6px] shrink-0 w-3 h-3 relative text-[#0076FF] transition-transform duration-200 group-open:rotate-45"
                   >
                     <span className="absolute inset-x-0 top-1/2 h-[1.5px] -translate-y-1/2 bg-current" />
                     <span className="absolute inset-y-0 left-1/2 w-[1.5px] -translate-x-1/2 bg-current" />
                   </span>
                 </summary>
-                <p className="mt-4 text-[16px] leading-[1.6] text-[#4B5563]">
+                <p className="mt-4 text-[16px] leading-[1.6] text-[#B4B4B4]">
                   {item.a}
                 </p>
               </details>
