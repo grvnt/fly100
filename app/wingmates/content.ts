@@ -196,22 +196,39 @@ export const howItWorks = {
     "You upload a launch, a landing, a climb, or a tracklog from a day you can't account for. You tell me what you thought was going on. I go through it and tell you what I saw, which is usually a different story from the one you flew.",
   // Four steps, each titled as a RESULT rather than a module name.
   // PARA runs underneath. The letters stay off the page on purpose.
+  /**
+   * ⚠️ FLOX DRAFT — expanded to StoryOS depth (2-3 paragraphs per step) at Grant's request.
+   * The TITLES are his and unchanged. The added paragraphs are my wording in his register
+   * and should be rewritten in his own words before this ships.
+   */
   steps: [
     {
       title: "Know what you're actually flying towards",
-      body: 'Instead of chasing whatever the group at launch is chasing this season.',
+      body: [
+        'Most pilots are working towards whatever the group at launch is working towards this season. A bigger wing, a longer flight, the site everyone is talking about.',
+        'Before anything else we get clear on what you actually want from your flying, and why it matters to you rather than to them. That is what every debrief afterwards gets measured against.',
+      ],
     },
     {
       title: 'Have something to do when it gets rough',
-      body: "Rather than finding out mid-thermal that you don't.",
+      body: [
+        'Knowing the technique is not the problem. Reaching for it when your heart rate is up is the problem, and most pilots have never practised that part.',
+        'You get the fear work, the seven-step protocol for the air and the short version for the moment it peaks. Not theory to read once, but something you take to the hill and use.',
+      ],
     },
     {
       title: 'Find out what really happened on the flight',
-      body: "From someone who wasn't inside your head while you flew it.",
+      body: [
+        'You send me a launch, a landing, a climb, or a tracklog from a day you cannot account for. You tell me what you thought was going on.',
+        'I go through it and tell you what I saw, which is usually a different story from the one you flew. Not a mark out of ten. The difference between what happened and what it felt like.',
+      ],
     },
     {
       title: 'Fly the next one differently',
-      body: 'Which is the only part that compounds.',
+      body: [
+        'Then you go flying, and the next one is different, because you are no longer working from your own version of what happened.',
+        'That is the part that compounds. One flight understood properly changes the next ten. Ten flights logged and never looked at change nothing.',
+      ],
     },
   ],
   gaggle: [
@@ -222,21 +239,61 @@ export const howItWorks = {
 };
 
 /**
- * The after-state. Borrowed from learn.community's "When community works, here's what
- * becomes possible:" beat, which is the thing that justifies paying every quarter rather
- * than buying a course once. The page previously went from mechanism straight to objections
- * with no picture of the destination.
+ * TESTIMONIAL BANDS — used as dividers between the big sections, the way StoryOS does it.
+ *
+ * Two shapes:
+ *   `feature` — quote + name + a result line + a supporting image (the Rian Doris shape)
+ *   `statement` — one big centred quote on dark with an avatar (the Charlie Morgan shape)
+ *
+ * All quotes are 🔵 VERBATIM from Senja. Do not edit them.
+ * `image` slots are empty until Grant supplies them. The band renders fine without one.
  */
-export const possible = {
-  heading: 'What Becomes Possible',
-  intro: 'When you stop being the only one looking at your flying:',
-  items: [
-    'You come down able to say what actually happened, instead of only how it felt.',
-    'You can tell the difference between wisdom and fear when you turn back.',
-    'You stop needing a number on the drive home to know whether it was a good day.',
-    'You have pilots who fly with you and tell you the truth afterwards, not just people who watched.',
-    'Each season builds on the last one instead of starting again.',
-  ],
+export const bands = {
+  afterVillain: {
+    shape: 'feature' as const,
+    quote:
+      'In the last two months I have made more progress in my flying journey than in the last ten.',
+    name: 'Zee',
+    // VERBATIM from the same testimonial.
+    result:
+      'Broke a personal best twice in a month, crossed to another valley for the first time, and flew higher than ever before.',
+    // TODO Grant: tracklog image from the 50km flight.
+    image: '',
+    imageAlt: '',
+  },
+  afterSystem: {
+    shape: 'statement' as const,
+    quote: "It's only been a month and seen a real change.",
+    name: 'Mark Limb',
+    sub: 'Found Grant on YouTube and joined',
+    avatar: '',
+  },
+  afterDebrief: {
+    shape: 'statement' as const,
+    quote: 'Grant = emotional intelligence + didactical excellence + flying expertise.',
+    name: 'Nikola Dentschev',
+    sub: '',
+    avatar:
+      'https://cdn.senja.io/public/avatar/e8ad2ea2-f32d-4b7f-a207-92b31d3ee946_IMG_4384.jpeg',
+  },
+  afterCall: {
+    shape: 'statement' as const,
+    quote:
+      "I'm finally starting to feel after two and a half years of flying that I'm actually starting to fly now.",
+    name: 'Kurt Bester',
+    sub: '',
+    avatar:
+      'https://cdn.senja.io/public/avatar/acab6065-c6ef-4b5a-89e1-7acf0267d3a7_F351DA62-F948-450F-BDA7-698C63033D68.jpeg',
+  },
+  afterTracklog: {
+    shape: 'statement' as const,
+    quote:
+      'I think Grant\'s skill is in recognising what people want from the sport and assisting in their own personal journey.',
+    name: 'Jeremy Samson',
+    sub: '',
+    avatar:
+      'https://cdn.senja.io/public/avatar/1e683ae6-0c91-425d-ba9a-d5e76dc21e9f_IMG_7880.jpeg',
+  },
 };
 
 export const objections = {
@@ -255,6 +312,13 @@ export const objections = {
         caption: 'A real debrief, start to finish. 10 min.',
       },
       result: 'Use the flights you have already had',
+      // ⚠️ FLOX DRAFT bullets — rewrite in Grant's words.
+      bullets: [
+        'Send a launch, a landing, a climb, or a whole tracklog.',
+        'Send one from last season. The learning does not expire.',
+        'Hear what actually happened, not what it felt like.',
+        'Stop needing me to spot what you can now see yourself.',
+      ],
       objection: "I don't fly enough for this to be worth it.",
       answer:
         'This is the one I hear most, and it has the answer built into it. If the learning is in the debrief, you do not need more flights. You need to use the ones you have already had, and most pilots are carrying years of them that nobody ever looked at. Send me a flight from last season.',
@@ -262,6 +326,11 @@ export const objections = {
     {
       label: 'A ONE TO ONE CALL',
       result: 'Get to the thing that is actually yours',
+      bullets: [
+        'A private session, not a group call where you wait your turn.',
+        'On whatever is actually holding you back, not a fixed syllabus.',
+        'Available inside the community. Take it when you want it.',
+      ],
       objection: "My situation is specific. I'm not like everyone else in there.",
       answer:
         'There is a one to one call with me available to you inside the community, on whatever is actually holding you back. Not a group call where you wait your turn. Take it when you want it.',
@@ -269,6 +338,11 @@ export const objections = {
     {
       label: 'THE TRACKLOG',
       result: 'See the decisions a bystander cannot see',
+      bullets: [
+        'The decisions you made an hour into the flight.',
+        'Where you left a climb that was still going.',
+        'Where you turned back, and whether that was wisdom or fear.',
+      ],
       objection: "I'd rather pay someone to stand next to me on launch.",
       answer:
         'Sometimes you should, and I will tell you when that is the right call. But the thing standing between you and a bigger flight usually is not happening on launch, and it is not visible to somebody standing next to you. It is in the decisions you made an hour into the flight, which is what a tracklog shows and a bystander does not.',
@@ -276,6 +350,11 @@ export const objections = {
     {
       label: 'THE CREW',
       result: 'Have 30 pilots and me on the other end',
+      bullets: [
+        'DMs with me, not a help desk.',
+        '30 pilots across 14 countries working on the same thing.',
+        'Members organise their own flights, meetups and XC days.',
+      ],
       objection: "I'll get stuck and have nobody to ask.",
       answer:
         'You get me on DMs, and 30 pilots across 14 countries who are working on the same thing and who organise their own flights, meetups and XC days.',

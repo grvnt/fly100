@@ -1,3 +1,4 @@
+import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
@@ -10,7 +11,7 @@ import {
   villain,
   origin,
   howItWorks,
-  possible,
+  bands,
   objections,
   proof,
   forYou,
@@ -89,6 +90,54 @@ function Cta({
     <Link href="#pricing" className={`${base} ${styles} ${className}`}>
       {hero.cta}
     </Link>
+  );
+}
+
+function Band({ band }: { band: any }) {
+  if (band.shape === 'feature') {
+    return (
+      <section className="px-5 sm:px-8 py-16 sm:py-20" style={{ backgroundColor: '#f6f9fc' }}>
+        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <p className="text-[22px] sm:text-[26px] font-light leading-[1.35] tracking-[-0.01em] text-[#0d253d]">
+              &ldquo;{band.quote}&rdquo;
+            </p>
+            <p className="mt-6 text-[15px] font-semibold text-[#0d253d]">{band.name}</p>
+            {band.result ? (
+              <p className="mt-1 text-[14px] leading-[1.5] text-[#64748d]">{band.result}</p>
+            ) : null}
+          </div>
+          {band.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={band.image}
+              alt={band.imageAlt || ''}
+              className="w-full rounded-xl border border-[#e3e8ee] shadow-sm"
+            />
+          ) : null}
+        </div>
+      </section>
+    );
+  }
+  return (
+    <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#1c1e54' }}>
+      <div className="max-w-3xl mx-auto text-center">
+        <span aria-hidden="true" className="block text-5xl leading-none text-white/25">&ldquo;</span>
+        <p className="mt-4 text-[26px] sm:text-[34px] font-light leading-[1.25] tracking-[-0.015em] text-white">
+          &ldquo;{band.quote}&rdquo;
+        </p>
+        <div className="mt-8 flex items-center justify-center gap-3">
+          {band.avatar ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={band.avatar} alt="" aria-hidden="true" className="w-11 h-11 rounded-full object-cover" />
+          ) : null}
+          <div className="text-left">
+            <p className="text-[15px] font-semibold text-[#b9b9f9]">{band.name}</p>
+            {band.sub ? <p className="text-[13px] text-white/60">{band.sub}</p> : null}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -308,35 +357,32 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 5. FOUR-STEP SYSTEM — canvas-soft, tidy 2x2 grid ===== */}
+      <Band band={bands.afterVillain} />
+
+      {/* ===== 5. FOUR-STEP SYSTEM — canvas-soft, numbered blocks ===== */}
       <section className={SECTION} style={{ backgroundColor: '#f6f9fc' }}>
         <div className={WRAP}>
-          <div className="max-w-3xl">
-            <p className={`${EYEBROW} mb-4`}>The system</p>
-            <h2 className={`${H2} mb-6`}>{howItWorks.heading}</h2>
-            <p className={`${BODY} mb-12`}>{howItWorks.intro}</p>
-          </div>
+          <p className={`${EYEBROW} mb-3`}>THE SYSTEM</p>
+          <h2 className={`${H2} mb-5`}>{howItWorks.heading}</h2>
+          <p className={`${READ} ${LEAD}`}>{howItWorks.intro}</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {howItWorks.steps.map((step, i) => (
-              <div
-                key={step.title}
-                className="rounded-xl p-7 bg-white border border-[#e3e8ee]"
-              >
-                <span className="text-[11px] font-mono font-medium text-[#533afd] tabular-nums tracking-widest">
-                  STEP {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className={`${H3} mt-3`}>{step.title}</h3>
-                <p className="mt-3 text-[15px] leading-[1.55] text-[#64748d]">
-                  {step.body}
-                </p>
+          <div className="mt-14 space-y-14">
+            {howItWorks.steps.map((step: any, i: number) => (
+              <div key={step.title} className={READ}>
+                <p className={`${EYEBROW} mb-3`}>{String(i + 1).padStart(2, '0')}</p>
+                <h3 className={`${H3} mb-4`}>{step.title}</h3>
+                <div className={`space-y-4 ${BODY}`}>
+                  {step.body.map((para: string) => (
+                    <p key={para.slice(0, 20)}>{para}</p>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
 
           <div className={`${READ} mt-14 space-y-5 ${BODY}`}>
-            {howItWorks.gaggle.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
+            {howItWorks.gaggle.map((para: string) => (
+              <p key={para.slice(0, 20)}>{para}</p>
             ))}
           </div>
 
@@ -348,39 +394,7 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 5b. WHAT BECOMES POSSIBLE — cream interlude ===== */}
-      <section className={SECTION} style={{ backgroundColor: '#f5e9d4' }}>
-        <div className={WRAP}>
-          <div className="max-w-3xl">
-            <p
-              className="text-[11px] font-semibold uppercase tracking-[0.16em] mb-4"
-              style={{ color: '#9b6829' }}
-            >
-              After
-            </p>
-            <h2 className={`${H2} mb-6`}>{possible.heading}</h2>
-            <p className={`${LEAD} mb-10`}>{possible.intro}</p>
-          </div>
-          <ul className="max-w-3xl space-y-4">
-            {possible.items.map((item) => (
-              <li
-                key={item.slice(0, 24)}
-                className="flex gap-4 text-[17px] leading-[1.55] text-[#0d253d]"
-              >
-                <span
-                  aria-hidden="true"
-                  className="mt-[10px] shrink-0 w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: '#533afd' }}
-                />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-12">
-            <Cta />
-          </div>
-        </div>
-      </section>
+      <Band band={bands.afterSystem} />
 
       {/* ===== 6. EXACTLY HOW — white canvas, numbered deliverable blocks ===== */}
       <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
@@ -392,7 +406,8 @@ export default function WingmatesPage() {
           </div>
 
           <div className="space-y-16 lg:space-y-24">
-            {objections.items.map((item, i) => (
+            {objections.items.map((item: any, i: number) => (
+              <React.Fragment key={item.objection}>
               <div
                 key={item.objection}
                 className={
@@ -437,7 +452,13 @@ export default function WingmatesPage() {
                     </figcaption>
                   </figure>
                 ) : null}
-              </div>
+                </div>
+                {[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i] ? (
+                  <div className="-mx-5 sm:-mx-8 my-4">
+                    <Band band={[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i]} />
+                  </div>
+                ) : null}
+              </React.Fragment>
             ))}
           </div>
 
