@@ -46,9 +46,10 @@ export const metadata: Metadata = {
  */
 const INK = '#000000';        // page background — from his Substack bg_web
 const INK_SOFT = '#B4B4B4';   // body copy on light
-const CANVAS = '#0F0F0F';     // elevated surface — Substack bg_elevated
-const CANVAS_ALT = '#000000'; // true black — alternates against the elevated panels
+const CANVAS = '#16181B';     // elevated surface, a shade lighter for contrast
+const CANVAS_ALT = '#0C0E11'; // near-black — alternates against the elevated panels
 const ACCENT = '#0076FF';     // his Substack accent, verbatim
+const BAND = '#000000';       // testimonial bands — deepest surface, always separates
 
 const SECTION = 'px-6 sm:px-8 py-20 sm:py-24 lg:py-28';
 const WRAP = 'max-w-[46rem] mx-auto';
@@ -91,11 +92,11 @@ function Cta({
   className?: string;
 }) {
   const base =
-    'inline-flex items-center justify-center rounded-full px-6 py-3 text-[15px] font-medium tracking-[-0.005em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+    'inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[15px] font-medium tracking-[-0.005em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shadow-[0_0_28px_rgba(0,118,255,0.45)] hover:shadow-[0_0_38px_rgba(0,118,255,0.6)]';
   const styles =
-    variant === 'on-dark'
-      ? 'bg-[#0F0F0F] text-[#FFFFFF] hover:bg-white focus-visible:ring-white focus-visible:ring-offset-[#000000]'
-      : 'bg-[#0076FF] text-white hover:bg-[#006AE6] focus-visible:ring-[#0076FF] focus-visible:ring-offset-white';
+    // One button everywhere. The old 'on-dark' variant turned dark grey in the palette
+    // swap, which is the weird colour under the reframe heading.
+    'bg-[#0076FF] text-white hover:bg-[#006AE6] focus-visible:ring-[#0076FF] focus-visible:ring-offset-black';
   // Centred in its own wrapper, so every call site gets it without repeating the class.
   return (
     <div className="flex justify-center">
@@ -162,7 +163,7 @@ function Avatar({ src, name, size = 'w-14 h-14' }: { src?: string; name: string;
 function Band({ band }: { band: any }) {
   if (band.shape === 'feature') {
     return (
-      <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: INK }}>
+      <section className="px-5 sm:px-8 py-24 sm:py-28" style={{ backgroundColor: BAND }}>
         <div className="max-w-3xl mx-auto">
           <p className="text-[24px] sm:text-[30px] font-light leading-[1.3] tracking-[-0.012em] text-white">
             &ldquo;{band.quote}&rdquo;
@@ -194,7 +195,7 @@ function Band({ band }: { band: any }) {
   }
 
   return (
-    <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: INK }}>
+    <section className="px-5 sm:px-8 py-24 sm:py-28" style={{ backgroundColor: BAND }}>
       <div className="max-w-3xl mx-auto text-center">
         <span aria-hidden="true" className="block text-5xl leading-none text-white/25">&ldquo;</span>
         <p className="mt-4 text-[26px] sm:text-[34px] font-light leading-[1.25] tracking-[-0.015em] text-white">
@@ -300,7 +301,7 @@ export default function WingmatesPage() {
 
             <div className="w-full mt-12">
               <div
-                className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#222222]"
+                className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]"
                 style={{
                   boxShadow:
                     '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
@@ -451,7 +452,7 @@ export default function WingmatesPage() {
                 {item.media ? (
                   <figure className="w-full">
                     <div
-                      className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-[#222222] bg-[#000000]"
+                      className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)] bg-[#000000]"
                       style={{
                         boxShadow:
                           '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
@@ -565,7 +566,7 @@ export default function WingmatesPage() {
         <div className={WRAP}>
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-14 items-start">
             <div className="flex justify-center lg:justify-start">
-              <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-[#222222]">
+              <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={about.imageUrl}
