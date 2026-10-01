@@ -186,64 +186,44 @@ export const origin = {
   ],
 };
 
+/**
+ * ALL COPY BELOW IS GRANT'S, supplied 2026-10-01. Do not edit.
+ * Rendered as StoryOS-style numbered steps: circled numeral, connecting rule, then the
+ * step heading and body.
+ */
 export const howItWorks = {
-  heading: 'The Four-Step System Behind Every Debrief I Do',
+  heading: 'The Four-Step System Behind Unbelievable XC Growth',
   intro:
-    "You upload a launch, a landing, a climb, or a tracklog from a day you can't account for. You tell me what you thought was going on. I go through it and tell you what I saw, which is usually a different story from the one you flew.",
-  // Four steps, each titled as a RESULT rather than a module name.
-  // PARA runs underneath. The letters stay off the page on purpose.
-  /**
-   * ⚠️ FLOX DRAFT — expanded to StoryOS depth (2-3 paragraphs per step) at Grant's request.
-   * The TITLES are his and unchanged. The added paragraphs are my wording in his register
-   * and should be rewritten in his own words before this ships.
-   */
+    "Here's how Wingmates turns the flights you already have into a project worth flying, and a crew that keeps you flying it.",
   steps: [
     {
-      title: "Know what you're actually flying towards",
+      title: 'Plan an XC Project Worth Flying (Before You Waste Another Season on the Wrong Goal)',
       body: [
-        'Most pilots are working towards whatever the group at launch is working towards this season. A bigger wing, a longer flight, the site everyone is talking about.',
-        'Before anything else we get clear on what you actually want from your flying, and why it matters to you rather than to them. That is what every debrief afterwards gets measured against.',
+        "Choose a project that fits your site, your wing, and what you want from flying, whether that's a first 30K triangle, a flight home from the hill, or a 100km line. You'll map what it takes to get there, so you're working toward your own dream and not someone else's number.",
       ],
     },
     {
-      title: 'Have something to do when it gets rough',
+      title: "Discover What's Holding You Back (Before Spending More Money on Gear)",
       body: [
-        'Knowing the technique is not the problem. Reaching for it when your heart rate is up is the problem, and most pilots have never practised that part.',
-        'You get the fear work, the seven-step protocol for the air and the short version for the moment it peaks. Not theory to read once, but something you take to the hill and use.',
+        "When XC stalls, most pilots assume they need a better wing or more airtime. Usually it's fear quietly steering your decisions: hesitating at the wrong moment, bombing out early, pushing when you should back off. You'll identify whether Egofear or Somafear is driving, and build the in-air habits that keep you calm and thinking clearly. No gear upgrade required.",
       ],
     },
     {
-      title: 'Find out what really happened on the flight',
+      title: "Never Land From a Flight You Can't Learn From Again",
       body: [
-        'You send me a launch, a landing, a climb, or a tracklog from a day you cannot account for. You tell me what you thought was going on.',
-        'I go through it and tell you what I saw, which is usually a different story from the one you flew. Not a mark out of ten. The difference between what happened and what it felt like.',
+        "The debrief is the learning. Most pilots glance at the track and move on, so the lessons from a great flight or a bomb-out disappear. Inside Wingmates you'll run a structured debrief after every flight and share it with pilots who understand. They'll help you see your decisions, your state, and what the flight was trying to teach you.",
       ],
     },
     {
-      title: 'Fly the next one differently',
+      title: 'Stay Connected and Keep Growing Through Every Slump',
       body: [
-        'Then you go flying, and the next one is different, because you are no longer working from your own version of what happened.',
-        'That is the part that compounds. One flight understood properly changes the next ten. Ten flights logged and never looked at change nothing.',
+        "Each debrief feeds your next plan, so you refine the project, change it, or set it down. And because you're part of a gaggle, you keep learning in the seasons you fly a lot and stay connected in the ones you don't, with a crew to fly with wherever you end up.",
       ],
     },
-  ],
-  gaggle: [
-    'You already know how this works in the air. You join a gaggle because somebody else found the thermal first, and from outside their climb you can see things about it they cannot see from inside it.',
-    'Your flying is the same. You cannot read the label of the jar from inside the jar.',
   ],
   refrain: 'The debrief is the learning.',
 };
 
-/**
- * TESTIMONIAL BANDS — used as dividers between the big sections, the way StoryOS does it.
- *
- * Two shapes:
- *   `feature` — quote + name + a result line + a supporting image (the Rian Doris shape)
- *   `statement` — one big centred quote on dark with an avatar (the Charlie Morgan shape)
- *
- * All quotes are 🔵 VERBATIM from Senja. Do not edit them.
- * `image` slots are empty until Grant supplies them. The band renders fine without one.
- */
 export const bands = {
   afterVillain: {
     shape: 'feature' as const,

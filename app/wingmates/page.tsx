@@ -387,25 +387,37 @@ export default function WingmatesPage() {
                     <h2 className={`${H2} mb-5`}>{howItWorks.heading}</h2>
           <p className={`${READ} ${LEAD}`}>{howItWorks.intro}</p>
 
-          <div className="mt-14 space-y-14">
+          {/* StoryOS-style numbered steps: circled numeral, connecting rule down the gutter. */}
+          <ol className="mt-16">
             {howItWorks.steps.map((step: any, i: number) => (
-              <div key={step.title} className={READ}>
-                <p className={`${EYEBROW} mb-3`}>{String(i + 1).padStart(2, '0')}</p>
-                <h3 className={`${H3} mb-4`}>{step.title}</h3>
-                <div className={`space-y-4 ${BODY}`}>
-                  {step.body.map((para: string) => (
-                    <p key={para.slice(0, 20)}>{para}</p>
-                  ))}
+              <li key={step.title} className="relative grid grid-cols-[auto_1fr] gap-x-6 sm:gap-x-8 pb-14 last:pb-0">
+                {/* numeral */}
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-[#0076FF] bg-black text-[15px] font-semibold text-[#4DA3FF]"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  {i < howItWorks.steps.length - 1 ? (
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-1/2 top-14 -ml-px h-[calc(100%-3.5rem)] w-px bg-white/12"
+                    />
+                  ) : null}
                 </div>
-              </div>
-            ))}
-          </div>
 
-          <div className={`${READ} mt-14 space-y-5 ${BODY}`}>
-            {howItWorks.gaggle.map((para: string) => (
-              <p key={para.slice(0, 20)}>{para}</p>
+                <div className="pt-2.5">
+                  <h3 className={`${H3} mb-4`}>{step.title}</h3>
+                  <div className={`space-y-4 ${BODY}`}>
+                    {step.body.map((para: string) => (
+                      <p key={para.slice(0, 20)}>{para}</p>
+                    ))}
+                  </div>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
 
           <Refrain>{howItWorks.refrain}</Refrain>
 
