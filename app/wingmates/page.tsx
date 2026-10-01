@@ -431,62 +431,81 @@ export default function WingmatesPage() {
 
       {/* ===== 6. EXACTLY HOW — white canvas, numbered deliverable blocks ===== */}
       <section className={SECTION} style={{ backgroundColor: CANVAS }}>
-        <div className={WRAP}>
+        <div className="max-w-[70rem] mx-auto">
           <div className="max-w-3xl mb-16">
                         <h2 className={`${H2} mb-6`}>{objections.heading}</h2>
             <p className={BODY}>{objections.intro}</p>
           </div>
 
-          <div className="space-y-16 lg:space-y-24">
+          <div className="mt-20 space-y-24">
             {objections.items.map((item: any, i: number) => (
-              <React.Fragment key={item.objection}>
-              <div
-                key={item.objection}
-                className={
-                  item.media
-                    ? 'grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center'
-                    : ''
-                }
-              >
-                <div className="max-w-[62ch]">
-                  <p className={`${EYEBROW} mb-3`}>
-                    {String(i + 1).padStart(2, '0')} &middot; {item.label}
-                  </p>
-                  <h3 className={`${H3} text-[22px] sm:text-[26px] font-light tracking-[-0.01em] leading-[1.2]`}>
-                    {item.result}
-                  </h3>
-                  <p className="mt-4 text-[15px] text-[#7A7A7A] italic leading-[1.55]">
-                    &ldquo;{item.objection}&rdquo;
-                  </p>
-                  <p className={`mt-4 ${BODY}`}>{item.answer}</p>
+              <React.Fragment key={item.heading}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                  {/* Copy column. Alternates side on desktop so the page does not march. */}
+                  <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
+                    <p className={`${EYEBROW} mb-4`}>
+                      {String(i + 1).padStart(2, '0')} &middot; {item.label}
+                    </p>
+                    <h3 className={`${H2} mb-6`}>{item.heading}</h3>
+                    <div className={`space-y-4 ${BODY}`}>
+                      {item.body.map((para: string) => (
+                        <p key={para.slice(0, 20)}>{para}</p>
+                      ))}
+                    </div>
+                    {item.leadIn ? (
+                      <p className="mt-7 text-[17px] font-semibold text-white">{item.leadIn}</p>
+                    ) : null}
+                    {item.bullets ? (
+                      <ul className="mt-4 space-y-3">
+                        {item.bullets.map((b: string) => (
+                          <li key={b.slice(0, 20)} className={`flex gap-3 ${BODY}`}>
+                            <span aria-hidden="true" className="mt-0.5 text-[#0076FF]">&#10003;</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    <div className="mt-9 flex justify-start">
+                      <Cta />
+                    </div>
+                  </div>
+
+                  {/* Media column */}
+                  <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
+                    {item.media?.video ? (
+                      <figure>
+                        <div className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]">
+                          <video
+                            className="w-full h-full object-cover"
+                            src={item.media.video}
+                            poster={item.media.poster}
+                            preload="metadata"
+                            playsInline
+                            controls
+                          />
+                        </div>
+                        {item.media.caption ? (
+                          <figcaption className="mt-3 text-[14px] text-[#7A7A7A]">
+                            {item.media.caption}
+                          </figcaption>
+                        ) : null}
+                      </figure>
+                    ) : (
+                      // TODO Grant: supply a real image for this block.
+                      <div
+                        className="w-full aspect-[4/3] rounded-xl ring-1 ring-white/10 flex items-center justify-center text-center px-8"
+                        style={{ backgroundColor: '#16181B' }}
+                      >
+                        <span className="text-[14px] text-[#7A7A7A]">
+                          {item.media?.placeholder ?? 'Image'}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                {item.media ? (
-                  <figure className="w-full">
-                    <div
-                      className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)] bg-[#000000]"
-                      style={{
-                        boxShadow:
-                          '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
-                      }}
-                    >
-                      <video
-                        className="w-full h-full object-cover"
-                        src={item.media.video}
-                        poster={item.media.poster}
-                        preload="metadata"
-                        playsInline
-                        controls
-                      />
-                    </div>
-                    <figcaption className="mt-3 text-[13px] text-[#7A7A7A]">
-                      {item.media.caption}
-                    </figcaption>
-                  </figure>
-                ) : null}
-                </div>
                 {[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i] ? (
-                  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen my-10">
+                  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
                     <Band band={[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i]} />
                   </div>
                 ) : null}

@@ -277,74 +277,90 @@ export const bands = {
   },
 };
 
+/**
+ * THE FOUR DELIVERABLE BLOCKS, in the StoryOS two-column format Grant screenshotted:
+ * eyebrow label, heading, body, a bold lead-in, a checkmark list, media alongside, CTA.
+ *
+ * ⚠️ FLOX DRAFT — headings, body and bullets are my wording in Grant's register,
+ * built from the four things he named. Rewrite before this ships.
+ * ✅ The debrief video is real. The other three images are placeholders.
+ */
 export const objections = {
-  heading:
-    'Exactly How Wingmates Helps You Fly Further and Trust Your Own Decisions',
+  heading: 'Exactly How Wingmates Helps You Fly Further and Trust Your Own Decisions',
   intro:
-    'Four parts, and each one exists because of something pilots told me was stopping them.',
+    'Four parts, working together: a system to follow, a coach who reviews your flying, private time when you need it, and a crew that keeps you in the sport.',
   items: [
     {
+      label: 'THE XC GROWTH SYSTEM',
+      heading: 'Follow the XC Growth System Inside Wingmates',
+      body: [
+        'The whole system lives inside the community, broken into steps you work through at your own pace, with the templates and prompts for each one.',
+        'You are never guessing what to do next, and you are never doing it alone.',
+      ],
+      leadIn: 'The four steps:',
+      bullets: [
+        'Plan a project that fits your site, your wing and what you want from flying.',
+        'Find what is actually holding you back, and whether it is Egofear or Somafear.',
+        'Debrief every flight, so nothing you learn disappears on the drive home.',
+        'Feed each debrief into the next plan, and keep going through the slumps.',
+      ],
+      media: { placeholder: 'The XC Growth System inside the Wingmates community' },
+    },
+    {
       label: 'THE DEBRIEF',
-      // A real debrief, 10m34s. Click-to-play with a poster, not autoplay: the file is 38MB.
+      heading: 'Send Me a Flight and Find Out What Actually Happened',
+      body: [
+        'Upload a launch, a landing, a climb, or a tracklog from a day you cannot account for. Tell me what you thought was going on.',
+        'I go through it and tell you what I saw, which is usually a different story from the one you flew. Not a mark out of ten. The difference between what happened and what it felt like.',
+      ],
+      leadIn: 'What a debrief covers:',
+      bullets: [
+        'The decisions you made an hour into the flight, not just the launch.',
+        'Where you left a climb that was still going.',
+        'Where you turned back, and whether that was wisdom or fear.',
+        'What the flight was trying to teach you.',
+      ],
+      // Real debrief, 10m34s / 38MB. Click-to-play with a poster, never autoplay.
       media: {
         video:
           'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/debrief-web.mp4',
         poster: '/wingmates-debrief-poster.jpg',
         caption: 'A real debrief, start to finish. 10 min.',
       },
-      result: 'Use the flights you have already had',
-      // ⚠️ FLOX DRAFT bullets — rewrite in Grant's words.
-      bullets: [
-        'Send a launch, a landing, a climb, or a whole tracklog.',
-        'Send one from last season. The learning does not expire.',
-        'Hear what actually happened, not what it felt like.',
-        'Stop needing me to spot what you can now see yourself.',
-      ],
-      objection: "I don't fly enough for this to be worth it.",
-      answer:
-        'This is the one I hear most, and it has the answer built into it. If the learning is in the debrief, you do not need more flights. You need to use the ones you have already had, and most pilots are carrying years of them that nobody ever looked at. Send me a flight from last season.',
     },
     {
-      label: 'A ONE TO ONE CALL',
-      result: 'Get to the thing that is actually yours',
-      bullets: [
-        'A private session, not a group call where you wait your turn.',
-        'On whatever is actually holding you back, not a fixed syllabus.',
-        'Available inside the community. Take it when you want it.',
+      label: 'HOT SEATS',
+      heading: 'Get One to One Time on Whatever Is Actually Yours',
+      body: [
+        'Some things do not belong in a group thread. A private hot seat with me, on whatever is holding you back in the air, available to you inside the community.',
+        'Not a group call where you wait your turn, and not a fixed syllabus. We work on your thing.',
       ],
-      objection: "My situation is specific. I'm not like everyone else in there.",
-      answer:
-        'There is a one to one call with me available to you inside the community, on whatever is actually holding you back. Not a group call where you wait your turn. Take it when you want it.',
-    },
-    {
-      label: 'THE TRACKLOG',
-      result: 'See the decisions a bystander cannot see',
+      leadIn: 'Pilots bring things like:',
       bullets: [
-        'The decisions you made an hour into the flight.',
-        'Where you left a climb that was still going.',
-        'Where you turned back, and whether that was wisdom or fear.',
+        'A flight that rattled them and will not leave.',
+        'Coming back after a break, an accident, or a season off.',
+        'A wing decision they keep going back and forth on.',
+        'The gap between how they fly alone and how they fly watched.',
       ],
-      objection: "I'd rather pay someone to stand next to me on launch.",
-      answer:
-        'Sometimes you should, and I will tell you when that is the right call. But the thing standing between you and a bigger flight usually is not happening on launch, and it is not visible to somebody standing next to you. It is in the decisions you made an hour into the flight, which is what a tracklog shows and a bystander does not.',
+      media: { placeholder: '1:1 hot seat session' },
     },
     {
       label: 'THE CREW',
-      result: 'Have 30 pilots and me on the other end',
-      bullets: [
-        'DMs with me, not a help desk.',
-        '30 pilots across 14 countries working on the same thing.',
-        'Members organise their own flights, meetups and XC days.',
+      heading: 'Fly With Pilots Who Are Doing the Same Work',
+      body: [
+        'Thirty pilots across fourteen countries, working on the same thing you are. Members organise their own flights, meetups and XC days.',
+        'Somewhere to keep a home in this sport when life makes flying hard, and a crew to fly with wherever you end up.',
       ],
-      objection: "I'll get stuck and have nobody to ask.",
-      answer:
-        'You get me on DMs, and 30 pilots across 14 countries who are working on the same thing and who organise their own flights, meetups and XC days.',
+      leadIn: 'What the crew gives you:',
+      bullets: [
+        'People who read your debrief and tell you what they see.',
+        'Pilots to fly with in a country you have just landed in.',
+        'A reason to stay in the sport through a season you are not flying.',
+        'Direct access to me on DMs, not a help desk.',
+      ],
+      media: { placeholder: 'Wingmates flying together' },
     },
   ],
-  included: {
-    title: 'Included Bonus: The Way of Fear',
-    body: 'You also get The Way of Fear the day you join. It is the work I do with pilots on launch anxiety, on committing when the air changes, and on what your body does before you have decided anything. It is yours whether you stay or not.',
-  },
 };
 
 export const proof = {
