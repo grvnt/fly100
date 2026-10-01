@@ -190,7 +190,7 @@ function Refrain({
 
 export default function WingmatesPage() {
   return (
-    <main className="bg-white text-[#0d253d]">
+    <main className="bg-white text-[#0d253d] overflow-x-hidden">
       {/* ===== 1. HERO — light canvas, subtle indigo wash top ===== */}
       <section className="relative overflow-hidden bg-white">
         {/* Soft gradient wash reminiscent of the DESIGN.md mesh, kept light. */}
@@ -475,7 +475,7 @@ export default function WingmatesPage() {
                 ) : null}
                 </div>
                 {[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i] ? (
-                  <div className="-mx-5 sm:-mx-8 my-10">
+                  <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen my-10">
                     <Band band={[bands.afterDebrief, bands.afterCall, bands.afterTracklog][i]} />
                   </div>
                 ) : null}
