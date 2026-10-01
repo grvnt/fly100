@@ -488,6 +488,9 @@ export default function WingmatesPage() {
         </div>
       </section>
 
+      {/* Senja testimonial wall */}
+      <WallOfLove />
+
       {/* ===== 8. IS THIS FOR YOU — white canvas ===== */}
       <section className={SECTION} style={{ backgroundColor: '#ffffff' }}>
         <div className={WRAP}>

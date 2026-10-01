@@ -3,10 +3,10 @@
 import Script from 'next/script';
 
 /**
- * Senja "wall of love" — https://senja.io/p/fly100/4BbOBg3
+ * Senja "wall of love" — https://widget.senja.io/widget/f7fc4e09-bd84-4cfa-8d1e-a02430b35393
  * Replaced the older "Scroll Photos" wall on the Wingmates page, 2026-10-01.
  */
-const WIDGET_ID = 'f54f7063-325a-46b0-9f4e-9e744e12b078';
+const WIDGET_ID = 'f7fc4e09-bd84-4cfa-8d1e-a02430b35393';
 
 export default function WallOfLove() {
   return (
