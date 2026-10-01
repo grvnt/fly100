@@ -119,41 +119,36 @@ function Band({ band }: { band: any }) {
   if (band.shape === 'feature') {
     return (
       <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#0d253d' }}>
-        <div
-          className={
-            band.image
-              ? 'max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'
-              : 'max-w-3xl mx-auto'
-          }
-        >
-          <div>
-            <p className="text-[24px] sm:text-[30px] font-light leading-[1.3] tracking-[-0.012em] text-white">
-              &ldquo;{band.quote}&rdquo;
-            </p>
-            <div className="mt-8 flex items-center gap-4">
-              <Avatar src={band.avatar} name={band.name} />
-              <div>
-                <p className="text-[15px] font-semibold text-[#b9b9f9]">{band.name}</p>
-                {band.result ? (
-                  <p className="mt-1 text-[14px] leading-[1.5] text-white/70 max-w-sm">
-                    {band.result}
-                  </p>
-                ) : null}
-              </div>
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[24px] sm:text-[30px] font-light leading-[1.3] tracking-[-0.012em] text-white">
+            &ldquo;{band.quote}&rdquo;
+          </p>
+          <div className="mt-8 flex items-center gap-4">
+            <Avatar src={band.avatar} name={band.name} />
+            <div>
+              <p className="text-[15px] font-semibold text-[#b9b9f9]">{band.name}</p>
+              {band.result ? (
+                <p className="mt-1 text-[14px] leading-[1.5] text-white/70">{band.result}</p>
+              ) : null}
             </div>
           </div>
+
+          {/* Supporting image sits BELOW the quote, full width of the column. */}
           {band.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={band.image}
-              alt={band.imageAlt || ''}
-              className="w-full rounded-xl ring-1 ring-white/15"
-            />
+            <figure className="mt-12">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={band.image}
+                alt={band.imageAlt || ''}
+                className="w-full rounded-xl ring-1 ring-white/15"
+              />
+            </figure>
           ) : null}
         </div>
       </section>
     );
   }
+
   return (
     <section className="px-5 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#0d253d' }}>
       <div className="max-w-3xl mx-auto text-center">

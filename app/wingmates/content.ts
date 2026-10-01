@@ -259,9 +259,10 @@ export const bands = {
       'Broke a personal best twice in a month, crossed to another valley for the first time, and flew higher than ever before.',
     avatar:
       'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
-    // TODO Grant: tracklog image from the 50km flight.
-    image: '',
-    imageAlt: '',
+    // Zee's 50km flight. Sits BELOW the quote, full width, not beside it.
+    image:
+      'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/zee-50k-paragliding.png',
+    imageAlt: "Tracklog of Zee's 50km cross-country flight",
   },
   afterSystem: {
     shape: 'statement' as const,
