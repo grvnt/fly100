@@ -283,7 +283,7 @@ export const bands = {
  *
  * ⚠️ FLOX DRAFT — headings, body and bullets are my wording in Grant's register,
  * built from the four things he named. Rewrite before this ships.
- * ✅ The debrief video is real. The other three images are placeholders.
+ * ✅ All media is real: the debrief video plus three screenshots Grant supplied.
  */
 export const objections = {
   heading: 'Exactly How Wingmates Helps You Fly Further and Trust Your Own Decisions',
@@ -304,7 +304,12 @@ export const objections = {
         'Debrief every flight, so nothing you learn disappears on the drive home.',
         'Feed each debrief into the next plan, and keep going through the slumps.',
       ],
-      media: { placeholder: 'The XC Growth System inside the Wingmates community' },
+      media: {
+        src: '/wingmates-xc-system.png',
+        alt: 'The Wingmates community, showing the Debrief space with a flight review and the course and resource sections alongside',
+        width: 1654,
+        height: 1048,
+      },
     },
     {
       label: 'THE DEBRIEF',
@@ -342,7 +347,12 @@ export const objections = {
         'A wing decision they keep going back and forth on.',
         'The gap between how they fly alone and how they fly watched.',
       ],
-      media: { placeholder: '1:1 hot seat session' },
+      media: {
+        src: '/wingmates-hot-seat.png',
+        alt: 'A recorded one to one session inside Wingmates, titled Anxiety and Fear',
+        width: 1668,
+        height: 1036,
+      },
     },
     {
       label: 'THE CREW',
@@ -358,7 +368,12 @@ export const objections = {
         'A reason to stay in the sport through a season you are not flying.',
         'Direct access to me on DMs, not a help desk.',
       ],
-      media: { placeholder: 'Wingmates flying together' },
+      media: {
+        src: '/wingmates-member-map.png',
+        alt: 'A world map of Wingmates members, with pilots across Europe, the Americas, the UK and South Africa',
+        width: 2457,
+        height: 1222,
+      },
     },
   ],
 };

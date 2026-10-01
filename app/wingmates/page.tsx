@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
@@ -384,8 +385,8 @@ export default function WingmatesPage() {
       {/* ===== 5. FOUR-STEP SYSTEM — canvas-soft, numbered blocks ===== */}
       <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={WRAP}>
-                    <h2 className={`${H2} mb-5`}>{howItWorks.heading}</h2>
-          <p className={`${READ} ${LEAD}`}>{howItWorks.intro}</p>
+                    <h2 className={`${H2} text-center mb-5`}>{howItWorks.heading}</h2>
+          <p className={`${LEAD} text-center`}>{howItWorks.intro}</p>
 
           {/* StoryOS-style numbered steps: circled numeral, connecting rule down the gutter. */}
           <ol className="mt-16">
@@ -432,9 +433,9 @@ export default function WingmatesPage() {
       {/* ===== 6. EXACTLY HOW — white canvas, numbered deliverable blocks ===== */}
       <section className={SECTION} style={{ backgroundColor: CANVAS }}>
         <div className="max-w-[70rem] mx-auto">
-          <div className="max-w-3xl mb-16">
-                        <h2 className={`${H2} mb-6`}>{objections.heading}</h2>
-            <p className={BODY}>{objections.intro}</p>
+          <div className="mb-16">
+                        <h2 className={`${H2} text-center mb-6`}>{objections.heading}</h2>
+            <p className={`${LEAD} text-center max-w-[44rem] mx-auto`}>{objections.intro}</p>
           </div>
 
           <div className="mt-20 space-y-24">
@@ -491,15 +492,14 @@ export default function WingmatesPage() {
                         ) : null}
                       </figure>
                     ) : (
-                      // TODO Grant: supply a real image for this block.
-                      <div
-                        className="w-full aspect-[4/3] rounded-xl ring-1 ring-white/10 flex items-center justify-center text-center px-8"
-                        style={{ backgroundColor: '#16181B' }}
-                      >
-                        <span className="text-[14px] text-[#7A7A7A]">
-                          {item.media?.placeholder ?? 'Image'}
-                        </span>
-                      </div>
+                      <Image
+                        src={item.media.src}
+                        alt={item.media.alt}
+                        width={item.media.width}
+                        height={item.media.height}
+                        sizes="(max-width: 1024px) 100vw, 560px"
+                        className="w-full h-auto rounded-xl ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]"
+                      />
                     )}
                   </div>
                 </div>
