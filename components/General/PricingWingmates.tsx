@@ -56,7 +56,7 @@ export default function PricingWingmates() {
   const active = annual ? PLANS.annual : PLANS.quarterly;
 
   return (
-    <section id="pricing" className="px-6 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#0C0E11' }}>
+    <section id="pricing" className="px-6 sm:px-8 py-20 sm:py-24" style={{ backgroundColor: '#000000' }}>
       <div className="max-w-[62rem] mx-auto">
         <h2 className="font-[family-name:var(--font-display)] text-[1.875rem] sm:text-[2.25rem] lg:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.12] text-white text-center">
           Join Wingmates
@@ -98,7 +98,7 @@ export default function PricingWingmates() {
         </div>
 
         <div
-          className="mt-10 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] rounded-2xl overflow-hidden ring-1 ring-white/10"
+          className="mt-10 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] rounded-2xl overflow-hidden ring-1 ring-[#0076FF]/30 shadow-[0_0_80px_rgba(0,118,255,0.14)]"
           style={{ backgroundColor: '#16181B' }}
         >
           {/* Features */}
@@ -119,7 +119,7 @@ export default function PricingWingmates() {
           {/* Price */}
           <div
             className="p-8 sm:p-10 flex flex-col justify-center text-center"
-            style={{ backgroundColor: '#0C0E11' }}
+            style={{ backgroundColor: '#0B0D10' }}
           >
             <p className="flex items-baseline justify-center gap-2">
               <span className="font-[family-name:var(--font-display)] text-[3.25rem] font-semibold tracking-[-0.035em] text-white">

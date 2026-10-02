@@ -476,6 +476,22 @@ export const faq = {
       a: 'The Way of Fear is a course and it is included. Wingmates is not. It is a practice you keep returning to, each flight and each season.',
     },
     {
+      q: 'You talk a lot about not chasing numbers. Does that mean Wingmates is against goals?',
+      // GRANT'S COPY, verbatim 2026-10-01. Multi-paragraph, so it renders as an array.
+      a: [
+        "No. We're not against goals. We're against goals that own you.",
+        'Wanting to fly 100km is a legitimate dream, and so is a first flight away from the hill, a podium at a comp, or simply flying your local ridge with more ease and joy. What matters is who owns the goal and what it means to you.',
+        "A goal as a scoreboard is a number set by a leaderboard or someone else's tracklog. Hitting it proves your worth, and missing it means you failed. That's the version we step away from, because it turns flying into a status game where your worth rides on a single number.",
+        'A goal as a project is one you choose, shaped by your site, your wing, and what you want from flying. It gives you direction. A flight can fall short and still be a good flight, because the debrief turns it into learning either way.',
+        "This isn't just philosophy. Clear goals and immediate feedback are two of the classic conditions for flow. In Wingmates, your project gives you the goal and the debrief gives you the feedback. Without a direction, pilots tend to drift. With a rigid attachment to the outcome, they tend to push, and pushing for the wrong reasons is where many of the worst decisions in the air come from. I learned that the hard way.",
+        "And if you'd rather not set a distance goal at all, that's fine too. Your project can be to enjoy your flying more, and the system works the same way.",
+      ],
+      quote: {
+        text: 'It is good to have an end to journey toward; but it is the journey that matters, in the end.',
+        cite: 'Ursula K. Le Guin',
+      },
+    },
+    {
       q: 'What if I fly in winter, or hardly fly at all right now?',
       a: 'That is the best argument for joining rather than against it. The learning is in the flights you already had, and most pilots have years of them that nobody ever looked at. The debrief is the learning.',
     },

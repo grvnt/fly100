@@ -630,7 +630,7 @@ export default function WingmatesPage() {
                         <h2 className={`${H2} text-center`}>{faq.heading}</h2>
           </div>
           <div className="max-w-3xl space-y-3">
-            {faq.items.map((item) => (
+            {faq.items.map((item: any) => (
               <details
                 key={item.q}
                 className="group rounded-xl bg-[#0F0F0F] border border-[#222222] px-6 py-5 open:shadow-[0_1px_3px_rgba(0,55,112,0.08)]"
@@ -645,9 +645,21 @@ export default function WingmatesPage() {
                     <span className="absolute inset-y-0 left-1/2 w-[1.5px] -translate-x-1/2 bg-current" />
                   </span>
                 </summary>
-                <p className="mt-4 text-[16px] leading-[1.6] text-[#B4B4B4]">
-                  {item.a}
-                </p>
+                <div className="mt-4 space-y-4 text-[16px] leading-[1.6] text-[#B4B4B4]">
+                  {(Array.isArray(item.a) ? item.a : [item.a]).map((para: string) => (
+                    <p key={para.slice(0, 20)}>{para}</p>
+                  ))}
+                  {item.quote ? (
+                    <blockquote className="mt-6 border-l-2 border-[#0076FF] pl-5">
+                      <p className="text-[17px] leading-[1.5] text-white italic">
+                        &ldquo;{item.quote.text}&rdquo;
+                      </p>
+                      <footer className="mt-2 text-[14px] not-italic text-[#7A7A7A]">
+                        &mdash; {item.quote.cite}
+                      </footer>
+                    </blockquote>
+                  ) : null}
+                </div>
               </details>
             ))}
           </div>
@@ -667,7 +679,7 @@ export default function WingmatesPage() {
 
             <Refrain onDark>{finalCta.refrain}</Refrain>
 
-            <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="mt-12">
               <Cta variant="on-dark" />
             </div>
           </div>
