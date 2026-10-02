@@ -509,6 +509,18 @@ export const finalCta = {
   cta: 'Join Wingmates',
 };
 
+/**
+ * Course testimonial, sits under the pricing section.
+ * VERBATIM from the Wingmates member survey, 2026-10-02 (Keriman Haire, NPS 10).
+ * Her full answer to "What's been most valuable to you?".
+ */
+export const courseProof = {
+  quote:
+    'The most valuable thing for me has been The Way of Fear Course that\u2019s offered on this platform.',
+  name: 'Keriman Haire',
+  sub: 'Wingmates member',
+};
+
 export const about = {
   heading: "Hey, I'm Grant - The World's First Paragliding Flow Coach",
   imageUrl:

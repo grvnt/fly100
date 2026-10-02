@@ -19,6 +19,7 @@ import {
   faq,
   finalCta,
   about,
+  courseProof,
 } from './content';
 
 export const metadata: Metadata = {
@@ -635,6 +636,17 @@ export default function WingmatesPage() {
       {/* ===== 9. PRICING ===== */}
       <PricingWingmates />
 
+      {/* Course testimonial, under the pricing section */}
+      <section className="px-6 sm:px-8 py-16 sm:py-20" style={{ backgroundColor: BAND }}>
+        <div className="max-w-[44rem] mx-auto text-center">
+          <p className="text-[20px] sm:text-[24px] font-light leading-[1.4] tracking-[-0.01em] text-white">
+            &ldquo;{courseProof.quote}&rdquo;
+          </p>
+          <p className="mt-5 text-[15px] font-semibold text-[#4DA3FF]">{courseProof.name}</p>
+          <p className="mt-1 text-[13px] text-[#7A7A7A]">{courseProof.sub}</p>
+        </div>
+      </section>
+
       {/* ===== 10. FAQ — canvas-soft ===== */}
       <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={WRAP}>
@@ -678,25 +690,12 @@ export default function WingmatesPage() {
         </div>
       </section>
 
-      {/* ===== 11. FINAL OBJECTION + CTA — dark navy bookend ===== */}
-      <section className={SECTION} style={{ backgroundColor: INK }}>
-        <div className={WRAP}>
-          <div className="max-w-3xl">
-            <h2 className={`${H2_ON_DARK} text-center mb-10`}>{finalCta.heading}</h2>
-            <div className={`space-y-5 ${BODY_ON_DARK}`}>
-              {finalCta.body.map((p) => (
-                <p key={p.slice(0, 24)}>{p}</p>
-              ))}
-            </div>
+      {/*
+        ===== 11. FINAL OBJECTION ("Can't I Work This Out on My Own?") =====
+        HIDDEN 2026-10-02 at Grant's request. The copy is intact in content.ts under
+        `finalCta`; the markup is in git history at commit 44d8c50 if it comes back.
+      */}
 
-            <Refrain onDark>{finalCta.refrain}</Refrain>
-
-            <div className="mt-12">
-              <Cta variant="on-dark" />
-            </div>
-          </div>
-        </div>
-      </section>
       <ParallaxTestimonials />
     </main>
   );

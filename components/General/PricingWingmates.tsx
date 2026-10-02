@@ -33,7 +33,7 @@ const plan = {
       you back in the air.
     </>,
     <>
-      <strong className="font-medium text-white">The Way of Fear:</strong> The
+      <strong className="font-medium text-white">The Way of Fear ($97 value):</strong> The
       work Grant does with pilots on launch anxiety, on committing when the air
       changes, and on what your body does before you have decided anything.
       Yours the day you join.
@@ -139,6 +139,27 @@ export default function PricingWingmates() {
             <p className="mt-4 text-[13px] text-[#7A7A7A]">
               Cancel anytime. You keep access to the end of the period you have paid for.
             </p>
+
+            <figure className="mt-8 pt-6 border-t border-white/10 text-left">
+              <div
+                className="mb-2 flex items-center gap-0.5"
+                role="img"
+                aria-label="5 out of 5 stars"
+              >
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <span key={i} aria-hidden="true" className="text-[#F5A524] text-[13px]">
+                    &#9733;
+                  </span>
+                ))}
+              </div>
+              <blockquote className="text-[14px] italic leading-[1.5] text-white/85">
+                &ldquo;It&apos;s only been a month and seen a real change&hellip; Open up to
+                the program and it delivers.&rdquo;
+              </blockquote>
+              <figcaption className="mt-2 text-[12px] text-[#7A7A7A] not-italic">
+                &mdash; Mark Limb
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
