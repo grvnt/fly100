@@ -217,7 +217,7 @@ export const howItWorks = {
     {
       title: "Discover What's Holding You Back (Before Spending More Money on Gear)",
       body: [
-        "When XC progress slows, most pilots blame time or gear but the blocks are usually mental. Uncover what's holding you back so that yuo can develop a practice that boosts your performance and enjoyment on the ground and in the air. No gear upgrade required.",
+        "When XC progress slows, most pilots blame time or gear but the blocks are usually mental. Uncover what's holding you back so that you can develop a practice that boosts your performance and enjoyment on the ground and in the air. No gear upgrade required.",
       ],
     },
     {
@@ -293,9 +293,8 @@ export const bands = {
  * THE FOUR DELIVERABLE BLOCKS, in the StoryOS two-column format Grant screenshotted:
  * eyebrow label, heading, body, a bold lead-in, a checkmark list, media alongside, CTA.
  *
- * ⚠️ FLOX DRAFT — headings, body and bullets are my wording in Grant's register,
- * built from the four things he named. Rewrite before this ships.
- * ✅ All media is real: the debrief video plus three screenshots Grant supplied.
+ * ✅ Grant rewrote the headings, body and bullets himself (2026-10-02). His words.
+ * ✅ All media is real: the debrief video plus three screenshots he supplied.
  */
 export const objections = {
   heading: 'Exactly How Wingmates Helps You Build Confidence and Fly Further ',
