@@ -204,32 +204,33 @@ export const origin = {
  * step heading and body.
  */
 export const howItWorks = {
-  heading: 'The Four-Step System Behind Unbelievable XC Growth',
+  heading: 'The Four-Step System Behind Lasting XC Growth',
   intro:
-    "Here's how Wingmates turns the flights you already have into a project worth flying, and a crew that keeps you flying it.",
+    "Built on flow science, the state where your best flying happens. Here's how Wingmates turns the flights you already have into a project worth flying, and a crew that keeps you flying it.",
   steps: [
     {
       title: 'Plan a Meaningful XC Project (Before You Waste More Time Chasing the Wrong Goal)',
       body: [
-        "Choose a project that aligns with your values, whether that's a first 30K triangle, a flight home from the hill, or a 100km line. You'll map what it takes to get there, so you're working toward your own dream not someone else's.",
+        "Choose a project that means something to you, whether that's a first 30K triangle, a flight home from the hill, or a 100km line. You'll map what it takes to get there, so you're working toward your own dream not someone else's.",
+        "The right goal stretches you without scaring you, and that's where your best flying happens.",
       ],
     },
     {
       title: "Discover What's Holding You Back (Before Spending More Money on Gear)",
       body: [
-        "When XC progress slows, most pilots blame time or gear but the blocks are usually mental. Uncover what's holding you back so that you can develop a practice that boosts your performance and enjoyment on the ground and in the air. No gear upgrade required.",
+        "When XC progress slows, most pilots blame time or gear. Usually it's something else: a mental block, a skill gap, or a sky they're not yet reading well. Find out which, and learn what gets you into flow, so you build a practice that lifts your flying and your enjoyment. No gear upgrade required.",
       ],
     },
     {
-      title: "Never Land From a Flight You Can't Learn From Again",
+      title: 'Turn Every Flight Into Progress',
       body: [
-        "The debrief is the learning. If you're like most pilots you glance at your track, see what number you flew, compare it to others on the day, and move on. The lessons from a great flight or a bomb-out disappear. Inside Wingmates you'll run a simple debrief and share it with your online flying friends. Work through your decisions, your state, and uncover insights to take with you into your next flight.",
+        "The debrief is the learning. If you're like most pilots you glance at your track, see what number you flew, compare it to others on the day, and move on. The lessons from a great flight or a bomb-out disappear. Inside Wingmates you'll run a simple debrief and share it with your crew. Work through your decisions, your state, and the moments you were in flow, and take those insights into your next flight.",
       ],
     },
     {
       title: 'Stay Connected and Keep Growing (Even Through A Flying Slump)',
       body: [
-        "You don't need to be flying actively to benefit from Wingmates. In fact, pilots going through a flying drought often benefit even more, it's through the tough times when you need the most support. When you're part of a gaggle, you keep learning in the seasons you fly a lot and stay connected in the ones you don't, with a crew to fly with wherever in the world you end up.",
+        "You don't need to be flying actively to benefit from Wingmates. Pilots in a flying drought often get the most out of it, because that's when support matters most. When you're part of a gaggle, you keep learning in the seasons you fly a lot and stay connected in the ones you don't, with a crew to fly with wherever in the world you end up.",
       ],
     },
   ],
