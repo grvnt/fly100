@@ -28,7 +28,7 @@ const plan = {
       can&apos;t explain. Grant reviews it and tells you what he saw.
     </>,
     <>
-      <strong className="font-medium text-white">A one to one call with Grant:</strong>{' '}
+      <strong className="font-medium text-white">A 1:1 call with Grant:</strong>{' '}
       Available to you inside the community, on whatever is actually holding
       you back in the air.
     </>,

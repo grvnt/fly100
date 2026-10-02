@@ -512,12 +512,13 @@ export const finalCta = {
 /**
  * Course testimonial, sits under the pricing section.
  * VERBATIM from the Wingmates member survey, 2026-10-02 (Keriman Haire, NPS 10).
+ * Displayed as 'Keri' at Grant's request.
  * Her full answer to "What's been most valuable to you?".
  */
 export const courseProof = {
   quote:
     'The most valuable thing for me has been The Way of Fear Course that\u2019s offered on this platform.',
-  name: 'Keriman Haire',
+  name: 'Keri',
   sub: 'Wingmates member',
 };
 
