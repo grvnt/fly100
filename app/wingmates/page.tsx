@@ -287,13 +287,13 @@ export default function WingmatesPage() {
         >
           <div className="max-w-3xl mx-auto w-full">
             <div className="flex flex-col gap-6">
-              <p className={EYEBROW}>{hero.eyebrow}</p>
+              <p className={`${EYEBROW} text-[14px] tracking-[0.16em] text-center`}>{hero.eyebrow}</p>
 
               <h1 className={`${H1} text-center`}>{hero.headline}</h1>
 
               <p className={LEAD}>{hero.subline}</p>
 
-              <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6">
+              <div className="mt-2 flex flex-col sm:flex-row sm:items-center justify-center gap-5 sm:gap-6">
                 {/* Social proof badge. */}
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2.5">
