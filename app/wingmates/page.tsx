@@ -609,9 +609,12 @@ export default function WingmatesPage() {
               <Image
                 src={about.badge.src}
                 alt={about.badge.alt}
-                width={473}
-                height={473}
-                sizes="112px"
+                width={256}
+                height={256}
+                // unoptimized on purpose: Next's optimiser palettises this PNG and
+                // flattens its alpha against black, which puts a black square behind
+                // the badge. The source is pre-sized to 256px so it stays small.
+                unoptimized
                 className="w-28 h-28 sm:w-32 sm:h-32"
               />
             </div>

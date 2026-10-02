@@ -510,7 +510,7 @@ export const finalCta = {
 };
 
 export const about = {
-  heading: "Hey, I'm Grant",
+  heading: "Hey, I'm Grant - The World's First Paragliding Flow Coach",
   imageUrl:
     'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/grant-profile-pgatlas-crop.jpg',
   // Flow Coaching Federation Certified badge, extracted from his accreditation
@@ -520,10 +520,9 @@ export const about = {
     alt: 'Flow Coaching Federation Certified',
   },
   paragraphs: [
-    "I'm a qualified paragliding instructor, guide, and accomplished XC pilot. I'm also an accredited Flow Coach with The Flow Centre, and the world's first paragliding flow coach.",
-    "My method follows the tradition of Gallwey's Inner Game. Not more instruction, but removing the interference that is already in the way. When the noise is cleared, pilots discover they already know how to fly. The work is in getting out of your own way.",
-    "Most coaching focuses on technique. This doesn't. I spend most of my working life watching pilots fly and telling them the truth about what they did.",
-    'Send me the flight you would rather nobody saw. That is where the useful work is.',
+    "I'm a qualified paragliding instructor, guide, and accomplished XC pilot with multiple local records. I'm also an accredited Flow Coach with The Flow Coaching Federation, the leaders in Flow Science.",
+    "My method follows the tradition of Gallwey's Inner Game. Not more technical instruction, but removing the interference getting in your way. When the noise clears, you discover that you already know how to fly. The work is in getting out of your own way.",
+    "I see paragliding as an Elemental Art. A practice that has the power to transform your life if you approach it in the right way. I'm here to help you on that journey.",
   ],
 };
 
