@@ -596,7 +596,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={WRAP}>
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-14 items-start">
-            <div className="flex flex-col items-center lg:items-start gap-6">
+            <div className="flex flex-col items-center gap-6">
               <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -612,7 +612,7 @@ export default function WingmatesPage() {
                 width={473}
                 height={473}
                 sizes="112px"
-                className="w-24 h-24 sm:w-28 sm:h-28"
+                className="w-28 h-28 sm:w-32 sm:h-32"
               />
             </div>
             <div className="max-w-[62ch] space-y-5">

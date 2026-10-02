@@ -449,7 +449,7 @@ export const forYou = {
     "You're coming back after a break, an accident, or a season off.",
     "You're quiet by nature. Start by reading other pilots' debriefs and share when you're ready.",
   ],
-  note: "Coached by an instructor and flow coach, so you get the technical skills and the mental game in one place. Leagues and comps are welcome here. What we're about is flow, connection, and the joy of the journey, not status and ranking.",
+  note: "Mentored by an instructor and flow coach, so you get the technical skills and the mental game in one place. While entering leagues and comps are welcome here, we take a flow approach prioritising growth, connection, and the joy of the journey, not status and ranking.",
 };
 
 export const faq = {
