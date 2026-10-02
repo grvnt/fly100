@@ -596,7 +596,7 @@ export default function WingmatesPage() {
       <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
         <div className={WRAP}>
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-14 items-start">
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex flex-col items-center lg:items-start gap-6">
               <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -605,6 +605,15 @@ export default function WingmatesPage() {
                   className="w-full h-full object-cover"
                 />
               </div>
+              {/* Flow Coaching Federation Certified badge, under the portrait. */}
+              <Image
+                src={about.badge.src}
+                alt={about.badge.alt}
+                width={473}
+                height={473}
+                sizes="112px"
+                className="w-24 h-24 sm:w-28 sm:h-28"
+              />
             </div>
             <div className="max-w-[62ch] space-y-5">
               <p className="text-[26px] sm:text-[30px] leading-[1.15] font-light tracking-[-0.015em] text-[#FFFFFF]">

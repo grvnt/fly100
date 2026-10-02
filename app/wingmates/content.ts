@@ -197,27 +197,27 @@ export const howItWorks = {
     "Here's how Wingmates turns the flights you already have into a project worth flying, and a crew that keeps you flying it.",
   steps: [
     {
-      title: 'Plan an XC Project Worth Flying (Before You Waste Another Season on the Wrong Goal)',
+      title: 'Plan a Meaningful XC Project (Before You Waste More Time Chasing the Wrong Goal)',
       body: [
-        "Choose a project that fits your site, your wing, and what you want from flying, whether that's a first 30K triangle, a flight home from the hill, or a 100km line. You'll map what it takes to get there, so you're working toward your own dream and not someone else's number.",
+        "Choose a project that aligns with your values, whether that's a first 30K triangle, a flight home from the hill, or a 100km line. You'll map what it takes to get there, so you're working toward your own dream not someone else's.",
       ],
     },
     {
       title: "Discover What's Holding You Back (Before Spending More Money on Gear)",
       body: [
-        "When XC stalls, most pilots assume they need a better wing or more airtime. Usually it's fear quietly steering your decisions: hesitating at the wrong moment, bombing out early, pushing when you should back off. You'll identify whether Egofear or Somafear is driving, and build the in-air habits that keep you calm and thinking clearly. No gear upgrade required.",
+        "When XC progress slows, most pilots blame time or gear but the blocks are usually mental. Uncover what's holding you back so that yuo can develop a practice that boosts your performance and enjoyment on the ground and in the air. No gear upgrade required.",
       ],
     },
     {
       title: "Never Land From a Flight You Can't Learn From Again",
       body: [
-        "The debrief is the learning. Most pilots glance at the track and move on, so the lessons from a great flight or a bomb-out disappear. Inside Wingmates you'll run a structured debrief after every flight and share it with pilots who understand. They'll help you see your decisions, your state, and what the flight was trying to teach you.",
+        "The debrief is the learning. If you're like most pilots you glance at your track, see what number you flew, compare it to others on the day, and move on. The lessons from a great flight or a bomb-out disappear. Inside Wingmates you'll run a simple debrief and share it with your online flying friends. Work through your decisions, your state, and uncover insights to take with you into your next flight.",
       ],
     },
     {
-      title: 'Stay Connected and Keep Growing Through Every Slump',
+      title: 'Stay Connected and Keep Growing (Even Through A Flying Slump)',
       body: [
-        "Each debrief feeds your next plan, so you refine the project, change it, or set it down. And because you're part of a gaggle, you keep learning in the seasons you fly a lot and stay connected in the ones you don't, with a crew to fly with wherever you end up.",
+        "You don't need to be flying actively to benefit from Wingmates. In fact, pilots going through a flying drought often benefit even more, it's through the tough times when you need the most support. When you're part of a gaggle, you keep learning in the seasons you fly a lot and stay connected in the ones you don't, with a crew to fly with wherever in the world you end up.",
       ],
     },
   ],
@@ -228,7 +228,7 @@ export const bands = {
   afterVillain: {
     shape: 'feature' as const,
     quote:
-      'In the last two months I have made more progress in my flying journey than in the last two.',
+      'In the last two months I have made more progress in my flying journey than in the last two years.',
     name: 'Zee',
     // VERBATIM from the same testimonial.
     result:
@@ -286,9 +286,9 @@ export const bands = {
  * ✅ All media is real: the debrief video plus three screenshots Grant supplied.
  */
 export const objections = {
-  heading: 'Exactly How Wingmates Helps You Fly Further and Trust Your Own Decisions',
+  heading: 'Exactly How Wingmates Helps You Build Confidence and Fly Further ',
   intro:
-    'Four parts, working together: a system to follow, a coach who reviews your flying, private time when you need it, and a crew that keeps you in the sport.',
+    'Four parts, working together: a system to follow, a coach who reviews your flying, 1:1 time when you need it, and a crew that keeps you plugged in.',
   items: [
     {
       label: 'THE XC GROWTH SYSTEM',
@@ -299,10 +299,10 @@ export const objections = {
       ],
       leadIn: 'The four steps:',
       bullets: [
-        'Plan a project that fits your site, your wing and what you want from flying.',
-        'Find what is actually holding you back, and whether it is Egofear or Somafear.',
-        'Debrief every flight, so nothing you learn disappears on the drive home.',
-        'Feed each debrief into the next plan, and keep going through the slumps.',
+        'Plan a project that fits your skill level, and what you want from flying.',
+        'Find what is actually holding you back, and develop a practice around it.',
+        'Debrief, so nothing you learn disappears on the drive home.',
+        'Use the insights from each debrief for the next plan: iterate, repeat, grow.',
       ],
       media: {
         src: '/wingmates-xc-system.png',
@@ -313,39 +313,39 @@ export const objections = {
     },
     {
       label: 'THE DEBRIEF',
-      heading: 'Send Me a Flight and Find Out What Actually Happened',
+      heading: 'Share Your Insights or Send Me Your Tracklog or Video To Review',
       body: [
-        'Upload a launch, a landing, a climb, or a tracklog from a day you cannot account for. Tell me what you thought was going on.',
-        'I go through it and tell you what I saw, which is usually a different story from the one you flew. Not a mark out of ten. The difference between what happened and what it felt like.',
+        'Upload a launch, a landing, a climb, or a tracklog from a day you want to learn from. Share your experience and what you thought was going on.',
+        'I go through it and help you discover your own insights. No marks, only learning.',
       ],
-      leadIn: 'What a debrief covers:',
+      leadIn: 'Example of what a debrief covers:',
       bullets: [
-        'The decisions you made an hour into the flight, not just the launch.',
-        'Where you left a climb that was still going.',
-        'Where you turned back, and whether that was wisdom or fear.',
-        'What the flight was trying to teach you.',
+        'The decisions you made.',
+        'What was happening internally.',
+        'Uncover what works well so you can repeat.',
+        'What lessons the flight was trying to teach you.',
       ],
       // Real debrief, 10m34s / 38MB. Click-to-play with a poster, never autoplay.
       media: {
         video:
           'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/video/debrief-web.mp4',
         poster: '/wingmates-debrief-poster.jpg',
-        caption: 'A real debrief, start to finish. 10 min.',
+        caption: 'A takeoff debrief inside Wingmates.',
       },
     },
     {
       label: 'HOT SEATS',
-      heading: 'Get One to One Time on Whatever Is Actually Yours',
+      heading: 'Get 1:1 Time on Something You Want To Work On',
       body: [
-        'Some things do not belong in a group thread. A private hot seat with me, on whatever is holding you back in the air, available to you inside the community.',
-        'Not a group call where you wait your turn, and not a fixed syllabus. We work on your thing.',
+        'Some things do not belong in a group thread. A hot seat with me, on whatever is holding you back, available to you inside the community.',
+        'Not a group call where you wait your turn, and not a fixed syllabus. We work on whatever is most meaningful to you.',
       ],
-      leadIn: 'Pilots bring things like:',
+      leadIn: 'Pilots bring topics like:',
       bullets: [
-        'A flight that rattled them and will not leave.',
+        'A flight that rattled them.',
         'Coming back after a break, an accident, or a season off.',
         'A wing decision they keep going back and forth on.',
-        'The gap between how they fly alone and how they fly watched.',
+        'The gap between solo performance and group flow.',
       ],
       media: {
         src: '/wingmates-hot-seat.png',
@@ -355,18 +355,18 @@ export const objections = {
       },
     },
     {
-      label: 'THE CREW',
-      heading: 'Fly With Pilots Who Are Doing the Same Work',
+      label: 'YOUR WINGMATES ',
+      heading: 'Fly With Pilots On The Same Journey',
       body: [
-        'Thirty pilots across fourteen countries, working on the same thing you are. Members organise their own flights, meetups and XC days.',
-        'Somewhere to keep a home in this sport when life makes flying hard, and a crew to fly with wherever you end up.',
+        'Thirty pilots across fourteen countries, growing through paragliding. Members organise their own flights, meetups and XC days.',
+        'Somewhere to stay connected when life makes flying hard, celebrate wins when things are good, and to fly with wherever you end up in the world.',
       ],
       leadIn: 'What the crew gives you:',
       bullets: [
-        'People who read your debrief and tell you what they see.',
-        'Pilots to fly with in a country you have just landed in.',
-        'A reason to stay in the sport through a season you are not flying.',
-        'Direct access to me on DMs, not a help desk.',
+        'Feedback and support on your debriefs.',
+        'Pilots to connect with while traveling.',
+        'Friends that keep you going even through periods when you are not flying.',
+        'Direct access to support from Grant in the DMs and the community.',
       ],
       media: {
         src: '/wingmates-member-map.png',
@@ -384,7 +384,7 @@ export const proof = {
   items: [
     {
       quote:
-        'In the last two months I have made more progress in my flying journey than in the last ten.',
+        'In the last two months I have made more progress in my flying journey than in the last two years.',
       name: 'Zee',
       detail: 'Two personal bests, a first valley crossing, and the highest they had ever flown.',
     },
@@ -513,6 +513,12 @@ export const about = {
   heading: "Hey, I'm Grant",
   imageUrl:
     'https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/images/grant-profile-pgatlas-crop.jpg',
+  // Flow Coaching Federation Certified badge, extracted from his accreditation
+  // certificate PDF (01 FLOW Coaching Resources/FCA Training/, 2026-09-02).
+  badge: {
+    src: '/flow-coaching-federation-certified.png',
+    alt: 'Flow Coaching Federation Certified',
+  },
   paragraphs: [
     "I'm a qualified paragliding instructor, guide, and accomplished XC pilot. I'm also an accredited Flow Coach with The Flow Centre, and the world's first paragliding flow coach.",
     "My method follows the tradition of Gallwey's Inner Game. Not more instruction, but removing the interference that is already in the way. When the noise is cleared, pilots discover they already know how to fly. The work is in getting out of your own way.",
