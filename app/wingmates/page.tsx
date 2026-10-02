@@ -215,7 +215,7 @@ function Band({ band }: { band: any }) {
               <img
                 src={band.image}
                 alt={band.imageAlt || ''}
-                className="w-full rounded-xl ring-1 ring-white/15"
+                className="w-full rounded-xl ring-1 ring-white/15 shadow-[0_0_80px_rgba(0,118,255,0.14)]"
               />
             </figure>
           ) : null}
@@ -331,7 +331,7 @@ export default function WingmatesPage() {
 
             <div className="w-full mt-12">
               <div
-                className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]"
+                className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_80px_rgba(0,118,255,0.14)]"
                 style={{
                   boxShadow:
                     '0 20px 40px -20px rgba(13,37,61,0.15), 0 8px 24px rgba(0,55,112,0.08)',
@@ -516,7 +516,7 @@ export default function WingmatesPage() {
                   <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
                     {item.media?.video ? (
                       <figure>
-                        <div className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]">
+                        <div className="w-full aspect-video rounded-xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_80px_rgba(0,118,255,0.14)]">
                           <video
                             className="w-full h-full object-cover"
                             src={item.media.video}
@@ -539,7 +539,7 @@ export default function WingmatesPage() {
                         width={item.media.width}
                         height={item.media.height}
                         sizes="(max-width: 1024px) 100vw, 560px"
-                        className="w-full h-auto rounded-xl ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]"
+                        className="w-full h-auto rounded-xl ring-1 ring-white/10 shadow-[0_0_80px_rgba(0,118,255,0.14)]"
                       />
                     )}
                     {item.quotes ? (
@@ -645,7 +645,7 @@ export default function WingmatesPage() {
         <div className={WRAP}>
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-14 items-start">
             <div className="flex flex-col items-center gap-6">
-              <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]">
+              <div className="w-40 h-40 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-1 ring-white/10 shadow-[0_0_80px_rgba(0,118,255,0.14)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={about.imageUrl}

@@ -10,7 +10,7 @@ const TestimonialMerakai = () => {
   return (
     <figure className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
       <Image
-        className="h-24 w-24 sm:h-40 sm:w-40 rounded-full object-cover ring-1 ring-white/15 shrink-0"
+        className="h-24 w-24 sm:h-40 sm:w-40 rounded-full object-cover shadow-[0_0_80px_rgba(0,118,255,0.14)] ring-1 ring-white/15 shrink-0"
         src="https://usbcaazumzyoexabcmew.supabase.co/storage/v1/object/public/testimonials/paul-guschlbauer.jpg?t=2024-10-10T08%3A31%3A06.719Z"
         alt="Paul Guschlbauer XAlps Paragliding Pilot"
         width={224}
