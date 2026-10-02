@@ -136,10 +136,6 @@ export default function PricingWingmates() {
               {plan.cta}
             </a>
 
-            <p className="mt-4 text-[13px] text-[#7A7A7A]">
-              Cancel anytime. You keep access to the end of the period you have paid for.
-            </p>
-
             <figure className="mt-8 pt-6 border-t border-white/10 text-left">
               <div
                 className="mb-2 flex items-center gap-0.5"
