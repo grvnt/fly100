@@ -302,8 +302,8 @@ export const objections = {
     'Four parts, working together: a system to follow, a coach who reviews your flying, 1:1 time when you need it, and a crew that keeps you plugged in.',
   items: [
     {
-      label: 'THE XC GROWTH SYSTEM',
-      heading: 'Follow the XC Growth System Inside Wingmates',
+      label: 'THE XC FLOW SYSTEM',
+      heading: 'Follow the XC Flow System Inside Wingmates',
       body: [
         'The whole system lives inside the community, broken into steps you work through at your own pace, with the templates and prompts for each one.',
         'You are never guessing what to do next, and you are never doing it alone.',
