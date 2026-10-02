@@ -140,6 +140,34 @@ function Blocks({ blocks, onDark = true }: { blocks: any[]; onDark?: boolean }) 
   );
 }
 
+/**
+ * A member quote, attributed by first name. Used where a member's own words prove the
+ * claim the surrounding section makes. Source: the 2026-10-02 member survey.
+ */
+function MemberQuote({
+  quote,
+  name,
+  sub,
+  className = '',
+}: {
+  quote: string;
+  name: string;
+  sub?: string;
+  className?: string;
+}) {
+  return (
+    <figure className={className}>
+      <blockquote className="text-[19px] sm:text-[21px] font-light leading-[1.45] tracking-[-0.01em] text-white">
+        &ldquo;{quote}&rdquo;
+      </blockquote>
+      <figcaption className="mt-4 text-[14px]">
+        <span className="font-semibold text-[#4DA3FF]">{name}</span>
+        {sub ? <span className="ml-2 text-[#7A7A7A]">{sub}</span> : null}
+      </figcaption>
+    </figure>
+  );
+}
+
 /** Avatar with a graceful initial fallback, so a missing photo never looks broken. */
 function Avatar({ src, name, size = 'w-14 h-14' }: { src?: string; name: string; size?: string }) {
   if (src) {
@@ -354,7 +382,12 @@ export default function WingmatesPage() {
             ))}
           </div>
 
-          <p className={`mt-14 ${LEAD} max-w-3xl`}>{problem.bridge}</p>
+          <MemberQuote
+            quote={problem.bridge.quote}
+            name={problem.bridge.name}
+            sub={problem.bridge.sub}
+            className="mt-14 max-w-3xl border-l-2 border-[#0076FF] pl-6"
+          />
         </div>
       </section>
 
@@ -375,6 +408,13 @@ export default function WingmatesPage() {
           <h2 className={`${H2_ON_DARK} text-center mb-10`}>{villain.heading}</h2>
           <Blocks blocks={villain.blocks} />
           <Refrain onDark>{villain.refrain}</Refrain>
+
+          <MemberQuote
+            quote={villain.proof.quote}
+            name={villain.proof.name}
+            sub={villain.proof.sub}
+            className="mt-14 text-center"
+          />
           <div className="mt-12">
             <Cta variant="on-dark" />
           </div>
@@ -502,6 +542,13 @@ export default function WingmatesPage() {
                         className="w-full h-auto rounded-xl ring-1 ring-white/10 shadow-[0_0_60px_rgba(0,118,255,0.12)]"
                       />
                     )}
+                    {item.quotes ? (
+                      <div className="mt-8 space-y-7">
+                        {item.quotes.map((q: any) => (
+                          <MemberQuote key={q.name} quote={q.quote} name={q.name} />
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
 

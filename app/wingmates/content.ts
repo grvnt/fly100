@@ -98,17 +98,19 @@ export const problem = {
     'You replay the decisions you got wrong, and you cannot tell which ones were actually wrong.',
   ],
   /**
-   * The bridge into the origin story. StoryOS has one here: "I struggled with every one of
-   * these problems too, until one change fixed everything."
+   * The bridge into the origin story.
    *
-   * Grant's steer 2026-09-30: "maybe a line that says - You're not alone."
-   *
-   * Written as EVIDENCE rather than reassurance. On its own, "you're not alone" is comfort,
-   * and comfort is the sympathy frame his own research warns against. The second sentence
-   * makes it a fact about where the six cards came from, and hands off to his story.
+   * 2026-10-02: this was Flox's phrasing ("You are not alone in any of it...") and is now
+   * a MEMBER saying the same thing. VERBATIM from the member survey, 2026-10-02.
+   * A member saying it beats Flox asserting it, sitting under six cards of pilots
+   * describing the same problems.
    */
-  bridge:
-    'You are not alone in any of it. Every one of those came from a pilot describing their own flying.',
+  bridge: {
+    quote:
+      'The community drive to improve, also seeing other pilots with the same issue so its not just you.',
+    name: 'Mark',
+    sub: 'Wingmates member',
+  },
 };
 
 /**
@@ -147,6 +149,16 @@ export const villain = {
     { type: 'p' as const, text: 'A place to connect with other pilots and increase the collective knowledge and safety of the group in a supportive and collaborative environment.' },
   ],
   refrain: 'The debrief is the learning.',
+  /**
+   * VERBATIM from the member survey, 2026-10-02 (Nikola).
+   * The reframe argues against status and ranking at length; this is the only proof on
+   * the page that the culture actually operates that way.
+   */
+  proof: {
+    quote: 'A bunch of pilots without hero-attitude.',
+    name: 'Nikola',
+    sub: 'Wingmates member',
+  },
 };
 
 /**
@@ -367,6 +379,22 @@ export const objections = {
         'Pilots to connect with while traveling.',
         'Friends that keep you going even through periods when you are not flying.',
         'Direct access to support from Grant in the DMs and the community.',
+      ],
+      /**
+       * VERBATIM from the member survey, 2026-10-02 (Nikola and Karin).
+       * Nikola's is the best line in the survey — it names the category in a pilot's
+       * own words, which is exactly what this block claims.
+       */
+      quotes: [
+        {
+          quote:
+            'Wingmates became for me \u201Cthe paragliding club I always wanted to have\u201D, even that it is virtual it became a good place for exchange of ideas.',
+          name: 'Nikola',
+        },
+        {
+          quote: 'I like the connection that it gives.',
+          name: 'Karin',
+        },
       ],
       media: {
         src: '/wingmates-member-map.png',
