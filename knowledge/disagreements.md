@@ -1,0 +1,55 @@
+# Disagreements and how the app should handle them
+
+Every point below is a place where credible sources genuinely conflict, not just a gap in our research. Where we recommend a handling approach, it's meant to inform the rubric-designer agent in step 2 of the build — this file doesn't make scoring decisions itself.
+
+## 1. SIV's value and whether it should gate anything
+
+**The disagreement:**
+
+- Pro-SIV-as-near-mandatory camp: [Flybubble's two articles](https://flybubble.com/blogs/blog/paragliders-which-class) both tie SIV to the EN-C and EN-D steps; [Malin Lobb via Cross Country Magazine](https://xcmag.com/magazine-articles/first-time-two-line/) treats specific SIV-trained skills (back-flying, frontal-collapse management, cravat recovery) as near-prerequisites for any EN-D or 2-liner wing; [Jocky Sanderson](https://www.jockysanderson.com/) runs SIV courses commercially and is a prominent voice arguing for their value (worth noting as a potential conflict of interest in his framing).
+- Skeptical/mixed camp: community discussion found in our search results describes SIV courses that go badly when a pilot is pushed too hard too early by an inconsistent instructor, sometimes creating fear or distrust rather than confidence; [Jérôme Daoust's](https://www.expandingknowledge.com/Jerome/PG/Gear/Best/Wing.htm) wing-choice methodology doesn't mention SIV at all as a factor in his recommendations; and — most tellingly — even [an official-adjacent competition body](https://www.usparaglidingcompetitions.com/pilot-qualifications/) that requires a formal P4/IPPI-4 pilot rating to compete only "highly recommends," rather than requires, an SIV course, even for its most demanding (CCC-eligible) competition class.
+- No official certifying body (EN/CEN, DHV, LTF) mentions SIV at all — it's entirely outside their remit, since they certify wings, not pilots.
+
+**Recommended handling:** Exactly as the brief specifies — SIV should be optional context only, never a hard gate, and should carry light weight at most, even at the D/2-liner/CCC steps where the pro-SIV sources are most emphatic. Credible, non-commercially-interested sources (Daoust, the P4/IPPI-4 competition rules) demonstrate that pilots can reasonably be assessed as ready without having done one. If the app wants to use SIV at all, the safest design is as a small positive signal if completed, never a penalty or cap if not completed, and perhaps as a suggested next step in the "things to work on" output for the C/D/2-liner steps specifically, where the evidence for its usefulness is strongest.
+
+## 2. Hours thresholds, generally
+
+**The disagreement:** figures for the same transition vary meaningfully between sources, and worse, sources mix cumulative-total hours, annual/currency hours, and hours-in-thermic-conditions-specifically without always being clear which they mean. Examples:
+
+- High-B → low-C: Flybubble gives 100 hours cumulative in one article and 75 hours cumulative in another (same retailer, different articles); 406 Paragliding gives 100+ hours; community rule-of-thumb discussion suggests ~50 hours *per year* (currency) as the more important framing.
+- Low-B → mid-B → high-B: paragliding24.ch gives a specific annual-hours ladder (10-30 / 30-50 / 50-80 hours/year) found nowhere else, while other sources talk in cumulative terms or avoid hours entirely (Daoust uses skill checks instead).
+- High-C → D: three sources converge well on "100+ hours per year, ongoing," but 406 Paragliding adds a cumulative 200+ hour figure on top, which no one else corroborates.
+- D → CCC: the only number found (300 hours) is a single secondhand opinion in a personal blog post.
+
+**Recommended handling:** The app already asks for both total hours and recent/current hours as separate inputs (per the brief) — this maps well onto the cumulative-vs-currency confusion in the sources. Use broad bands (e.g. "tens of hours," "roughly 50-100," "100+ per year ongoing") rather than picking one source's precise figure, and weight recent/currency hours independently from total hours rather than collapsing them into one number. Be explicit in any methodology notes that the exact thresholds are synthesised from several moderately-agreeing industry sources, not drawn from a single authoritative table — because no such table exists.
+
+## 3. Whether low/mid/high B (and low/high C) are real distinctions at all
+
+**The disagreement:** manufacturers themselves are inconsistent. [Niviuk's own guide](https://niviuk.com/en/which-en-b-wing-should-you-choose-based-on-your-level-safety-and-performance) deliberately avoids the low/mid/high B terminology, instead describing a philosophical progression (safety-first → balanced → performance-oriented). Meanwhile [Advance](https://flybubble.com/blog/advance-iota-reviews), [Gin](https://flybubble.com/blog/gin-explorer-paraglider-reviews) and [Nova](https://www.nova.eu/en/gliders/mentor-6/) all clearly do treat "high-B" as a distinct, more demanding tier in their own marketing and retailer-reported positioning. The community itself is split: a [forum thread literally titled "Low and high intra class classification: Is it BS?"](https://www.paraglidingforum.com/viewtopic.php?t=112338) captures the skepticism directly, while a separate thread comparing ["High End Bs vs. Low EN Cs"](https://www.paraglidingforum.com/viewtopic.php?t=75173) shows pilots disagreeing about which is actually calmer in bad air — i.e. even people who accept the sub-class labels disagree about where the real safety line falls relative to them.
+
+**Recommended handling:** Treat every sub-class label in the ladder as a soft, descriptive band for communicating with the pilot (useful for framing the recommendation in language they recognise), never as a scoring boundary with a hard numeric cutoff. Weight the pilot's self-reported skills, conditions flown, and collapse-recovery comfort more heavily than "which sub-class is the current wing" at the fuzzy boundaries (especially high-B/low-C), since multiple sources show the letter/sub-label doesn't reliably predict how demanding or forgiving a specific wing actually is.
+
+## 4. 2-liner-ness vs the C/D letter
+
+**The disagreement:** 2-liner wings used to be associated only with D/CCC-level wings, but [EN-C-certified 2-liners now exist](https://grandsespaces.com/en/en-c-2-liners-paragliders/) and are explicitly marketed as such. This breaks the assumption that "2-liner" and "D-class" are the same gate. At the same time, [Malin Lobb's analysis](https://xcmag.com/magazine-articles/first-time-two-line/) of 2-liner collapse behaviour (block-style collapses, higher cravat risk) applies regardless of whether the specific model is certified C or D.
+
+**Recommended handling:** Treat "is this a 2-liner" as its own independent hard-gate trigger, separate from the EN letter. A pilot asking about an EN-C-certified 2-liner should still be asked the stricter 2-liner-specific questions (cravat recovery experience, back-flying competence, frontal-collapse energy management), not just the standard low-C/high-C questions, even though its official certification letter is "only" C.
+
+## 5. Pilot-rating ladders (BHPA/USHPA/FFVL/SAHPA) vs the EN wing-class ladder
+
+**The disagreement:** these are genuinely two different systems that sources sometimes blur together. USHPA's own P2 syllabus defers to "whatever the manufacturer recommends," rather than specifying an EN letter; BHPA's CP/Pilot/Advanced-Pilot ratings (at least on the public pages we could access) don't state numeric hours or tie explicitly to EN classes at all; SAHPA ties wing-class *categories* (Beginner/Intermediate under a Basic licence; High-Performance/Competition under a Sport licence) to its own licensing tiers, and — interestingly — defaults an unregistered glider to the High-Performance/Competition category if a pilot doesn't actively register a lower class rating, which is a notably conservative-by-default design choice worth considering for the app's own defaults.
+
+**Recommended handling:** Don't ask pilots which national rating they hold as a primary input — most users of a global web app won't have one, and the ratings don't map cleanly onto each other or onto EN A-D anyway. Ask about hours, flights, skills and conditions directly, which is what the brief already specifies. SAHPA's "default to the most conservative category unless proven otherwise" pattern is worth borrowing as a design principle: when evidence is ambiguous, the app's recommendation should default toward "Not yet" or "Nearly ready" rather than "Ready."
+
+## 6. Source-quality outliers worth flagging specifically
+
+- **paragliding24.ch's annual-hours bands** (10-30 / 30-50 / 50-80 / 80+) are the single most precise numeric ladder we found anywhere, attached to every single sub-class boundary with suspicious tidiness. No other source corroborates this exact ladder, and the round, evenly-spaced numbers look more like a marketing-content pattern than a measured consensus. Use with caution; don't treat as more authoritative just because it's more precise.
+- **richiesadventures.com's "300 hours before a 2-liner / 300 hours before CCC"** figures are a single enthusiast's personal blog opinion (with the CCC figure itself attributed secondhand to "another pilot" within that post). Treat as indicative colour, not evidence.
+- **The two Flybubble articles disagreeing with each other** (75 vs 100 hours for EN-C; and a separate inconsistency about whether the first B should be held for 150+ hours before any further upgrade, vs a ~50-hour threshold for "high-B" named in their other article) show that even a single well-regarded industry source isn't fully internally consistent across its own back-catalogue. This is a useful reminder that "industry consensus" here means rough directional agreement, not precise agreement.
+
+## 7. What we could not find (true gaps, not disagreements)
+
+- No source — official or otherwise — gives corroborated, CCC-specific pilot-readiness criteria (as opposed to competition-entry licensing requirements). See `knowledge/steps/d-to-ccc.md`.
+- BHPA's and DHPC's official PDFs on EN classes could not be text-extracted directly by our tooling; the definitions we used were reconstructed from search-engine-indexed text, not a direct read of the primary document. We recommend a manual review of these two PDFs before treating their exact wording as settled, and especially before quoting anything from them in the app.
+- SAHPA's and FFVL's full training manuals (hundreds of pages, partly non-English for FFVL) were only reviewed at a search-summary level, not read in full. Deeper numeric pilot-progression criteria may exist in those manuals that we didn't surface.
+- Skywalk's own first-party upgrade guidance (as opposed to third-party retailer/press descriptions of their wings) was not found.
