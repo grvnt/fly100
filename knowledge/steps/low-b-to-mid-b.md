@@ -12,6 +12,8 @@ This boundary is one of the weakest-evidenced in the whole ladder. Several sourc
 
 - USHPA P3 (official) skills most relevant to this transition: reading wind/thermal/gradient cues, confident launches in a wider range of conditions, linked 180°/360° turns at varied bank angles, and — notably — practising symmetric and asymmetric wing-tip folds for descent control, plus theoretical knowledge of recovery from a 50% asymmetric collapse. This is the first point in the ladder where asymmetric-collapse competence is explicitly named.
 - [Jérôme Daoust](https://www.expandingknowledge.com/Jerome/PG/Gear/Best/Wing.htm) (expert) continues to apply the same practical-skills checklist across low/mid/high B rather than hours, and notes that mid-B delivers "intermediate performance" without defining it more precisely than that.
+- Speed bar (added Oct 2026): the clearest marker found for this step is behavioural rather than numeric — [a class-by-class speedbar ladder mirrored on GitHub](https://github.com/twpayne/paragliding-articles/blob/master/articles/speed-bar-when-to-use.md) (provenance uncertain, see `sources.md`) places EN-B pilots at "a little speed bar between thermals," roughly as often as a pilot would use the first half of the brake range — a step up from the EN-A "sink-escape only" pattern, but well short of the near-constant bar use expected from EN-C onward. No source gave a harder test than this for the low-B/mid-B line specifically.
+- Ground handling (added Oct 2026): no source we found addresses ground-handling expectations at this exact boundary specifically — the general-purpose material in `a-to-low-b.md` and the more advanced material in later step files are the closest we have. This is a genuine gap, plausibly because this step is defined more by in-air skills (collapse theory, thermal/wind reading) than by a distinct kiting milestone.
 
 ## Conditions flown
 
@@ -23,11 +25,17 @@ USHPA P3's explicit introduction of asymmetric (50%) collapse-recovery knowledge
 
 ## Psychological / mindset factors
 
-No source gave psychology-specific guidance unique to this step. General mindset material (see `a-to-low-b.md` and `disagreements.md`'s SIV section) applies throughout.
+No source gave psychology-specific guidance unique to *this exact boundary* — that gap, flagged in an earlier research pass, still stands. But general motivation and readiness material, absent from this file before, does apply here as much as at any other step, and we've added it rather than leaving this section empty:
+
+- Why they want to upgrade (added Oct 2026): [XC Mag — The Head Game, featuring Thomas Theurillat and Paul Guschlbauer](https://xcmag.com/magazine-articles/the-head-game-understanding-free-flight-psychology/) (industry/expert) frames readiness as keeping challenge matched to honest self-assessed skill — too big a jump produces stress rather than growth — while also treating ambition itself as legitimate fuel for progression, provided it's paired with real preparation rather than substituting for it.
+- [Passion Paragliding — Which Paraglider? How to Choose a Wing](https://www.passionparagliding.com/how-to-choose-a-paraglider) (industry): names peer pressure and the desire to "keep up" with flying partners as common, specific upgrade motivations at exactly this kind of early step, alongside a caution against buying performance a pilot hasn't yet demonstrably used up on their current wing.
+- General sport-psychology research on [task vs ego goal orientation](https://www.sciencedirect.com/topics/psychology/achievement-goal-theory) (academic, not paragliding-specific) distinguishes pilots motivated mainly by their own skill development from pilots motivated mainly by comparison to others; we apply this only as background framing for interpreting a pilot's stated motive, not as a paragliding-specific finding — see `sources.md` and `disagreements.md`.
 
 ## Red flags
 
 None found specific to this exact boundary.
+
+One general, official data point worth flagging here since this file had the most room for it: the [USHPA 2001 Paragliding Accident Summary](https://www.ushpa.org/public/articles/2001-paragliding-accident-summary.aspx) (official) found that around 64% of accidents happened on the ground or immediately after launch, and — notably — that accident rates were "essentially equivalent" across P1 through P4 pilot ratings. In plain terms: launch and ground-handling failures were not something pilots in this dataset simply grew out of as they progressed. We treat this as supporting evidence that ground-handling competence plausibly stays relevant well past the beginner step, even though no source gives a specific ground-handling skill test for mid-B or later (see the gap noted in `mid-b-to-high-b.md` and other later step files).
 
 ## SIV
 
@@ -35,4 +43,4 @@ Not mentioned by any source in connection with this specific step.
 
 ## Source-quality note
 
-This is one of the thinnest steps in the ladder. Only one source (paragliding24.ch) draws this exact boundary with numbers, and we flag it as an outlier rather than a corroborated consensus. The USHPA P3 syllabus is useful as an official-adjacent skills reference but wasn't written with a low-B/mid-B wing distinction in mind at all. Greg Hamerton, a named expert instructor, doesn't draw this boundary with numbers either — he groups low and mid-B together, consistent with the general thinness here rather than adding new resolution. The app should treat low-B→mid-B as a very soft, low-confidence step and avoid implying false precision.
+This is one of the thinnest steps in the ladder. Only one source (paragliding24.ch) draws this exact boundary with numbers, and we flag it as an outlier rather than a corroborated consensus. The USHPA P3 syllabus is useful as an official-adjacent skills reference but wasn't written with a low-B/mid-B wing distinction in mind at all. Greg Hamerton, a named expert instructor, doesn't draw this boundary with numbers either — he groups low and mid-B together, consistent with the general thinness here rather than adding new resolution. The app should treat low-B→mid-B as a very soft, low-confidence step and avoid implying false precision. (Oct 2026 gap-filling pass: this was also the step with the weakest psychological coverage in the whole ladder — previously none at all. We've added general motivation material above, but it's worth being honest that none of it is specific to this exact boundary; it's the same general framing that applies at every step, placed here because this file needed it most.)
