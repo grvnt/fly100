@@ -1,0 +1,51 @@
+{
+  "step": "a-to-low-b",
+  "id": "notyet-strong-hands-thin-motives",
+  "name": "Marcus — good hands, wrong reasons",
+  "summary": "45 hours, flies weekly, launches and handling are genuinely good, thermals confidently. But he's upgrading because his group is on B wings, expects the new wing to cope better with rough air, launches on days he's unsure about rather than be left behind, and has had several near misses he can't explain. Says rough air doesn't bother him.",
+  "why_this_persona": "The strong-skills, poor-motivation case. No single answer fires a gate — his skills are too strong for the combination gate's readiness condition — so this persona exists specifically to prove the psychological floor does real work rather than being a mild deduction.",
+  "answers": {
+    "total_airtime": "25_50",
+    "total_flights": "over_75",
+    "airtime_last_12m": "over_25",
+    "current_wing_hours": "25_50",
+    "training_status": "qualified_independent",
+    "flying_frequency": "weekly_plus",
+    "ground_handling_kiting": "hold_steady",
+    "ground_handling_practice": "sometimes",
+    "launch_reliability": "nearly_always",
+    "speed_heading_turns": "both_in_thermals",
+    "landing_accuracy": "within_few_wings",
+    "active_piloting_bumpy": "work_brakes_actively",
+    "conditions_flown": "moderate_thermal",
+    "rough_air_awareness": "usually_with_time",
+    "speed_bar": "routine_gliding_use",
+    "collapse_experience": "small_self_recovered",
+    "descent_bigears": "comfortable",
+    "reserve_familiarity": "know_location_only",
+    "manoeuvre_course": "one_course",
+    "external_feedback": "friends_think_so",
+    "upgrade_motivation": "keep_up_with_group",
+    "wing_expectation": "easier_in_rough_air",
+    "learning_curve_willingness": "rather_just_fly_it",
+    "ambitions": ["longer_xc", "competitions"],
+    "response_when_rough": "doesnt_bother_me",
+    "decline_to_fly": "no_launch_anyway",
+    "peer_pressure": "launch_anyway",
+    "incidents_12m": "several_unsure"
+  },
+  "expected": {
+    "recommendation": "not_yet",
+    "total_score_range": [55, 68],
+    "category_score_ranges": { "skills": [82, 94], "psychological": [22, 36] },
+    "gates_expected": [],
+    "rules_expected": ["not_yet_category_floor:psychological"],
+    "suggestions_must_include": ["motivation_reframe_equipment_fix", "motivation_reframe_keeping_up", "peer_pressure_plan", "debrief_habit"],
+    "suggestions_must_not_include": ["build_total_airtime", "ground_handling_basics", "launch_practice"],
+    "notes": [
+      "His completed manoeuvres course adds the full 2-point bonus and must not rescue the result — bonuses are applied before the floors and gates.",
+      "The combination gate 'equipment_as_a_fix_with_thin_readiness' deliberately does NOT fire here: his readiness is not thin. That is the intended behaviour from knowledge/disagreements.md point 9, and the psychological floor is what carries this result instead.",
+      "'ambition_without_readiness' also does not fire, because his skills score is well above 55. Ambition alone is never penalised."
+    ]
+  }
+}

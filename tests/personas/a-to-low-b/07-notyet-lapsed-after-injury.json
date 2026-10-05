@@ -1,0 +1,51 @@
+{
+  "step": "a-to-low-b",
+  "id": "notyet-lapsed-after-injury",
+  "name": "Ray — coming back after a broken ankle",
+  "summary": "40 hours over three years and was flying competently until a hard landing broke his ankle five months ago. Hasn't flown since. Healed now, keen to come back on something a bit nicer, and his instructor has said to leave the wing change alone for the moment.",
+  "why_this_persona": "A pilot whose underlying skills are mid-range but whose situation is unambiguous. Tests that gates override a middling score, and that three gates can co-exist without the output turning into a lecture.",
+  "answers": {
+    "total_airtime": "25_50",
+    "total_flights": "35_75",
+    "airtime_last_12m": "2_10",
+    "current_wing_hours": "25_50",
+    "training_status": "qualified_independent",
+    "flying_frequency": "none_3m",
+    "ground_handling_kiting": "hold_steady",
+    "ground_handling_practice": "rarely",
+    "launch_reliability": "most_times",
+    "speed_heading_turns": "both_calm",
+    "landing_accuracy": "safe_not_accurate",
+    "active_piloting_bumpy": "try_to_react",
+    "conditions_flown": "light_thermal_ridge",
+    "rough_air_awareness": "sometimes_notice",
+    "speed_bar": "sink_escape_only",
+    "collapse_experience": "never",
+    "descent_bigears": "comfortable",
+    "reserve_familiarity": "practised_once",
+    "manoeuvre_course": "no",
+    "external_feedback": "advised_to_wait",
+    "upgrade_motivation": "want_more_performance",
+    "wing_expectation": "small_step_speed_glide",
+    "learning_curve_willingness": "fine_take_it_gently",
+    "ambitions": ["local_soaring"],
+    "response_when_rough": "tense_want_to_land",
+    "decline_to_fly": "not_come_up",
+    "peer_pressure": "not_come_up",
+    "incidents_12m": "injury_or_reserve"
+  },
+  "expected": {
+    "recommendation": "not_yet",
+    "total_score_range": [48, 62],
+    "category_score_ranges": { "skills": [54, 68], "psychological": [42, 58] },
+    "gates_expected": ["no_recent_flying", "recent_injury_or_reserve", "instructor_said_wait"],
+    "rules_expected": [],
+    "suggestions_must_include": ["recurrency_plan", "instructor_conversation", "improve_currency"],
+    "suggestions_must_not_include": ["motivation_reframe_keeping_up", "motivation_reframe_equipment_fix", "acro_wrong_wing"],
+    "notes": [
+      "Only three gate reasons may be shown (max_gate_reasons_shown), and the tone must stay 'here's the order to do things in', not 'you shouldn't be flying'.",
+      "His motive ('wants more performance') must not be criticised anywhere in his output — knowledge/disagreements.md point 9.",
+      "Owner decision: the 'recent_injury_or_reserve' gate is our own conservative addition, not a sourced criterion. If the owner softens it, Ray should still be gated by currency and by his instructor's advice."
+    ]
+  }
+}

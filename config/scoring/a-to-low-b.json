@@ -1,0 +1,711 @@
+{
+  "step": "a-to-low-b",
+  "version": 1,
+  "meta": {
+    "confidence": "comparatively high for this step",
+    "confidence_source": {
+      "ref": "knowledge/steps/a-to-low-b.md#source-quality-note",
+      "cites": "Best official-adjacent coverage in the ladder (USHPA P2 numeric syllabus) plus two broadly agreeing industry sources on the 0-50 hour window.",
+      "note": "knowledge/disagreements.md point 6 warns that the Hamerton (Cross Country Magazine) and Flybubble voices are not fully independent of each other, so confidence language should stay a notch below 'several independent sources agree'. 406 Paragliding is the one genuinely separate voice on the 0-50 hour framing."
+    },
+    "method": "Each answer has a score from 0 to 1. Within a category, score = sum(weight x answer_score) / sum(weight of answered, scored questions) x 100. Total = 0.55 x skills + 0.45 x psychological, then bonuses are added and the total is clamped to 0-100. Gates are applied last and override the total.",
+    "unanswered_handling": {
+      "rule": "exclude_from_denominator",
+      "conservative_backstop": {
+        "max_unanswered_core_for_ready": 2,
+        "effect": "nearly_ready",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's design pattern of defaulting an unregistered glider to the most demanding category unless a lower class is actively registered.",
+          "note": "Applied here as: when the evidence is incomplete, default down rather than up."
+        }
+      }
+    },
+    "rounding": "Round category and total scores to the nearest whole number for display only; compare thresholds against unrounded values.",
+    "source_fields_are_internal": "Every 'source' block in this file is provenance for the owner and reviewer only. Do not render 'ref', 'cites' or 'note' text in the UI. Pilot-facing copy lives in the questions config, the gate 'message' fields and the suggestions config."
+  },
+
+  "categories": {
+    "skills": {
+      "label": "Skills and experience",
+      "weight": 0.55,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md",
+        "cites": "Most of the usable, corroborated criteria for this step are skills/experience criteria (USHPA P2 syllabus, Daoust's practical checklist, Flybubble's and Hamerton's hours framing).",
+        "note": "Skills is given a slight majority share because the evidence base for this step is skills-heavy, but the split is kept close to even so psychological answers carry real weight, per the brief."
+      }
+    },
+    "psychological": {
+      "label": "Mindset and motivation",
+      "weight": 0.45,
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "\"Psychological answers carry real weight, not a side note.\"",
+        "note": "Supported by knowledge/steps/a-to-low-b.md#psychological--mindset-factors (406 Paragliding on willingness to restart the learning curve; XC Mag's 'The Head Game' on challenge-skill balance) and knowledge/disagreements.md point 9."
+      }
+    }
+  },
+
+  "questions": {
+    "total_airtime": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#hours--experience",
+        "cites": "Flybubble (industry) recommends EN-B for recently-licensed pilots once they have roughly 10+ hours of airtime; Hamerton via Cross Country Magazine (expert) frames the first 0-50 hours as fundamentals on high-A or low/mid-B.",
+        "note": "Band-based rather than a single figure, per knowledge/disagreements.md point 2."
+      },
+      "options": {
+        "under_10": 0.0,
+        "10_25": 0.45,
+        "25_50": 0.8,
+        "50_100": 1.0,
+        "over_100": 1.0
+      },
+      "disagreement_note": "Hamerton treats a low-B as a reasonable first wing (implying no hours minimum at all), while Flybubble wants roughly 10 hours first. We take Flybubble's more conservative line and gate below 10 hours. Above 50 hours adds nothing further at this step, since the sources stop distinguishing."
+    },
+    "total_flights": {
+      "category": "skills",
+      "weight": 7,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#hours--experience",
+        "cites": "USHPA P2 (Novice) syllabus via AirAddict (official): 35 flights across 7 flying days as the formal picture of a pilot ready to leave pure-beginner gear.",
+        "note": "Flights are asked separately from hours because short coastal or training flights accumulate flights far faster than hours."
+      },
+      "options": {
+        "under_15": 0.0,
+        "15_35": 0.45,
+        "35_75": 0.85,
+        "over_75": 1.0
+      },
+      "disagreement_note": "P2's 35 flights is used as the full-marks threshold, not as the gate. The gate sits lower (15 flights) deliberately: P2 is a pilot-rating bar that explicitly defers wing class to the manufacturer's own recommendation rather than setting an EN threshold, so treating 35 flights as a hard cutoff would read more into it than the source supports."
+    },
+    "airtime_last_12m": {
+      "category": "skills",
+      "weight": 8,
+      "source": {
+        "ref": "knowledge/disagreements.md#2",
+        "cites": "Sources mix cumulative, annual and conditions-specific hours without distinguishing them; the recommended handling is to weight recent hours independently from the lifetime total.",
+        "note": "Also supported by knowledge/steps/a-to-low-b.md#skills, where Daoust treats regular flying as a precondition for moving past pure-A gear."
+      },
+      "options": {
+        "under_2": 0.1,
+        "2_10": 0.5,
+        "10_25": 0.85,
+        "over_25": 1.0
+      }
+    },
+    "current_wing_hours": {
+      "category": "skills",
+      "weight": 4,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#hours--experience",
+        "cites": "Hamerton via Cross Country Magazine (expert) frames the first 0-50 hours as a fundamentals phase on the current wing; 406 Paragliding (industry) frames upgrading as something that follows having used up what the current wing offers.",
+        "note": "Low weight: the brief asks for current wing and time on it as an input, but no source makes it a threshold at this step."
+      },
+      "options": {
+        "no_own_wing": 0.5,
+        "under_10": 0.3,
+        "10_25": 0.6,
+        "25_50": 0.9,
+        "over_50": 1.0
+      }
+    },
+    "training_status": {
+      "category": "skills",
+      "weight": 6,
+      "source": {
+        "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class",
+        "cites": "USHPA P2 defers wing choice to whatever the manufacturer recommends for Beginner-to-Intermediate pilots rather than naming an EN letter, i.e. the call sits with the school/manufacturer while a pilot is still in training.",
+        "note": "Phrased as training status, not as a national rating, per knowledge/disagreements.md point 5."
+      },
+      "options": {
+        "in_training": 0.0,
+        "just_qualified": 0.55,
+        "qualified_independent": 1.0
+      }
+    },
+    "flying_frequency": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "Daoust (expert) flags flying at least four times a month as a precondition for being ready to move beyond pure-A gear; knowledge/steps/a-to-low-b.md#red-flags names general under-currency as one of only two red flags found for this step.",
+        "note": "Weighted as heavily as lifetime hours, per knowledge/disagreements.md point 2's instruction to weight currency independently."
+      },
+      "options": {
+        "none_3m": 0.0,
+        "less_than_monthly": 0.3,
+        "about_monthly": 0.5,
+        "two_or_three_monthly": 0.8,
+        "weekly_plus": 1.0
+      }
+    },
+    "ground_handling_kiting": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "Daoust's checklist (expert) asks whether a pilot can reverse-kite for 10+ seconds within their first 8 hours of trying; Urs Aschmann via Podz-Glidz (expert) and Flybubble/Fly With Greg (industry/expert) treat kiting as a never-finished skill with real headroom beyond that.",
+        "note": "Heavily weighted but deliberately never gated, per knowledge/disagreements.md point 11: ground handling should be asked at every step and treated as informative, since no numeric bar exists beyond Daoust's beginner checklist."
+      },
+      "options": {
+        "not_tried": 0.1,
+        "struggles": 0.3,
+        "hold_brief": 0.65,
+        "hold_steady": 0.9,
+        "hold_and_move": 1.0
+      },
+      "disagreement_note": "Daoust's 10-second reverse hold scores 0.65, not full marks, because Aschmann and Fly With Greg both show the beginner check is a floor rather than the ceiling of what ground handling asks for."
+    },
+    "ground_handling_practice": {
+      "category": "skills",
+      "weight": 4,
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "USHPA's 2001 Paragliding Accident Summary (official) found accident rates essentially equivalent across P1-P4 ratings with launch/ground-phase problems a persistent contributor; Aschmann (expert) frames ground handling as lifelong practice.",
+        "note": "Low weight — this is a habit question, used mainly to trigger suggestions."
+      },
+      "options": {
+        "never": 0.15,
+        "rarely": 0.4,
+        "sometimes": 0.75,
+        "regularly": 1.0
+      }
+    },
+    "launch_reliability": {
+      "category": "skills",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "Daoust (expert) checks for roughly 75% success on forward launches and 65% on reverse launches; USHPA P2 (official) requires canopy inflation across a range of wind conditions.",
+        "note": "Supported by USHPA's 2001 accident summary (official): roughly 64% of accidents occurred on the ground or immediately after launch, with poor inflation behind about 75% of launch-phase accidents."
+      },
+      "options": {
+        "often_aborted": 0.0,
+        "about_half": 0.4,
+        "most_times": 0.8,
+        "nearly_always": 1.0
+      }
+    },
+    "speed_heading_turns": {
+      "category": "skills",
+      "weight": 7,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "USHPA P2 (official): airspeed control from near-minimum-sink to fast flight while holding a heading, plus coordinated 360-degree turns.",
+        "note": "Simon Winkler via Podz-Glidz (expert) adds that static light-brake flying is actively discouraged even at beginner level, which is why 'both, including in light thermals' rather than 'both in calm air' takes full marks."
+      },
+      "options": {
+        "neither": 0.15,
+        "one_of_them": 0.45,
+        "both_calm": 0.8,
+        "both_in_thermals": 1.0
+      }
+    },
+    "landing_accuracy": {
+      "category": "skills",
+      "weight": 6,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "USHPA P2 (official): landing within 25 feet of a target on five attempts.",
+        "note": "Scored as a proxy for approach planning rather than as a literal measurement, since pilots won't have measured it."
+      },
+      "options": {
+        "hit_and_miss": 0.2,
+        "safe_not_accurate": 0.55,
+        "within_few_wings": 0.85,
+        "on_the_spot": 1.0
+      }
+    },
+    "active_piloting_bumpy": {
+      "category": "skills",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "Simon Winkler via Podz-Glidz (expert, DHV instructor) describes active-piloting demands scaling up through the class ladder and discourages static, light-brake flying from beginner level onward; XC Mag's 'Active flying' (industry) notes school wings stay stable through major collapses while higher-class wings need pilot input.",
+        "note": "Also the single clearest read on whether this pilot's current habits already cover what a slightly less forgiving wing will ask of them."
+      },
+      "options": {
+        "freeze_hands_still": 0.1,
+        "grip_tight": 0.25,
+        "try_to_react": 0.6,
+        "work_brakes_actively": 0.9,
+        "automatic_active": 1.0
+      }
+    },
+    "conditions_flown": {
+      "category": "skills",
+      "weight": 8,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
+        "cites": "Sources consistently describe this step as still happening in gentle, forgiving conditions — light thermic days and moderate ridge soaring, avoiding rough air by a wide margin. USHPA P2 (official) caps novices to roughly 12mph base wind, 15mph gusts, climbs under 200fpm and bank under 30 degrees.",
+        "note": "Non-monotonic. 'Moderate thermals' takes full marks; 'strong thermic or mountain days regularly' scores slightly below it, because regularly flying big air on an A wing is more a sign of exposure outside the class's intended window than of readiness. Hamerton via Cloudbase Mayhem 186 (expert) specifically warns new pilots against flying conditions beyond their level."
+      },
+      "options": {
+        "smooth_only": 0.35,
+        "light_thermal_ridge": 0.8,
+        "moderate_thermal": 1.0,
+        "strong_big_air": 0.9
+      }
+    },
+    "rough_air_awareness": {
+      "category": "skills",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
+        "cites": "Daoust's checklist (expert) explicitly asks whether a pilot can identify and avoid rough air 30+ minutes before it arrives, as a gate for moving past pure-A gear.",
+        "note": "Non-monotonic: 'I only fly gentle conditions so it hasn't come up' is scored as neutral/low-information (0.5) rather than as a failure, because Daoust's check is about judgement, not about having been caught out."
+      },
+      "options": {
+        "caught_out": 0.0,
+        "sometimes_notice": 0.45,
+        "usually_with_time": 0.85,
+        "plan_around_it": 1.0,
+        "not_come_up": 0.5
+      }
+    },
+    "speed_bar": {
+      "category": "skills",
+      "weight": 3,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "The class-by-class speedbar ladder mirrored on GitHub (provenance uncertain, see knowledge/sources.md) places EN-A pilots in a sink-escape-only bracket; Daoust's tips (expert) recommend near-ground accelerator use for emergencies only and warn that stomping the bar on makes a collapse more likely.",
+        "note": "Non-monotonic and deliberately low weight. At this step, 'never used it' is normal and 'on bar routinely' is not evidence of readiness — the correct pattern for the class is sink-escape only or gentle experimentation with height. Corroborated by XC Mag's speed bar piece and Flybubble's Speed To Fly Basics (both industry) on reduced collapse margin under bar."
+      },
+      "options": {
+        "never_tried": 0.7,
+        "tried_gently_with_height": 1.0,
+        "sink_escape_only": 1.0,
+        "routine_gliding_use": 0.5,
+        "full_bar_low": 0.1
+      }
+    },
+    "collapse_experience": {
+      "category": "skills",
+      "weight": 4,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#collapse-handling",
+        "cites": "No source emphasises collapse handling at this step: the A/low-B boundary is defined mainly by passive recovery behaviour, so active collapse-recovery skill is something to build during this step rather than a prerequisite for it.",
+        "note": "Hence the low weight and the 0.7 score for 'never' — on an A wing, no collapse history is normal and not a deficit. The worst option still triggers a gate, per the brief's own gate example."
+      },
+      "options": {
+        "never": 0.7,
+        "small_self_recovered": 0.9,
+        "bigger_i_corrected": 1.0,
+        "froze_but_ok": 0.35,
+        "lost_control": 0.0
+      }
+    },
+    "descent_bigears": {
+      "category": "skills",
+      "weight": 4,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "USHPA P3 via AirAddict (official) introduces symmetric and asymmetric tip folds for descent control at the next rating up; big ears sit just below that as the standard descent tool taught during the A/low-B phase.",
+        "note": "Low weight: no source makes a descent technique a requirement for this specific step, so this is scored as useful margin rather than a threshold."
+      },
+      "options": {
+        "never_tried": 0.25,
+        "tried_once_twice": 0.6,
+        "comfortable": 0.9,
+        "plus_other_methods": 1.0
+      }
+    },
+    "reserve_familiarity": {
+      "category": "skills",
+      "weight": 5,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "USHPA P2 (official) includes reserve-deployment and PLF knowledge among its required skills.",
+        "note": "Scored but not gated: the source treats this as knowledge within the syllabus rather than as a wing-class threshold, and it's cheap to fix, so it drives a high-priority suggestion instead."
+      },
+      "options": {
+        "unsure": 0.0,
+        "know_location_only": 0.5,
+        "practised_once": 0.85,
+        "practised_recent_repack": 1.0
+      }
+    },
+    "external_feedback": {
+      "category": "skills",
+      "weight": 7,
+      "source": {
+        "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class",
+        "cites": "USHPA P2 (official) defers the wing-class decision to the manufacturer's recommendation rather than to an EN letter, and BRIEF.md requires the app to recommend discussing the upgrade with an instructor regardless of result.",
+        "note": "Someone who has watched the pilot fly is better evidence than any self-report in this questionnaire, which is why a direct 'wait' from an instructor is a gate and 'nobody has seen me fly' scores low."
+      },
+      "options": {
+        "advised_to_wait": 0.0,
+        "nobody_seen_recently": 0.4,
+        "friends_think_so": 0.7,
+        "instructor_suggested": 1.0
+      }
+    },
+
+    "upgrade_motivation": {
+      "category": "psychological",
+      "weight": 12,
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Camp one (Advance/Gin via Flybubble, Seb Ospina via XC Mag, Passion Paragliding) treats aspirational or ego-driven buying as a warning sign; camp two (Guschlbauer via XC Mag's 'The Head Game', and Hamerton, both expert) treats wanting more performance as normal, legitimate fuel. Yvonne Dathe via Podz-Glidz (expert, sports psychologist) names upgrading equipment to paper over a skill gap as a specific red flag.",
+        "note": "Conservative resolution per the recommended handling: motivation is genuinely scored, but 'wants more performance' is NOT penalised (0.8, close to full). Only comparison-driven and equipment-as-a-fix answers score low, and even then they mainly bite through the combination gate rather than alone."
+      },
+      "options": {
+        "wing_limiting": 1.0,
+        "instructor_suggested": 1.0,
+        "want_more_performance": 0.8,
+        "replacing_anyway": 0.65,
+        "keep_up_with_group": 0.25,
+        "wing_will_handle_conditions": 0.1
+      }
+    },
+    "wing_expectation": {
+      "category": "psychological",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/classification-overview.md#what-the-official-standard-actually-says",
+        "cites": "EN A is defined as having maximum passive safety and the most resistance to leaving normal flight; B has good passive safety but less resistance to disturbance than A. So expecting a B to handle rough air better than an A is factually backwards.",
+        "note": "Hamerton via FAI/CIVL's safety pages (expert) adds that the certification letter alone doesn't tell a pilot how often a given wing actually collapses, and that newly upgraded gear raises risk until familiarity catches up — i.e. the honest expectation is 'slightly less forgiving, a bit faster', not 'safer'."
+      },
+      "options": {
+        "small_step_speed_glide": 1.0,
+        "more_feedback_to_learn": 1.0,
+        "not_sure": 0.35,
+        "less_of_a_struggle": 0.3,
+        "easier_in_rough_air": 0.1
+      }
+    },
+    "learning_curve_willingness": {
+      "category": "psychological",
+      "weight": 8,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#psychological--mindset-factors",
+        "cites": "406 Paragliding (industry) frames readiness partly as being willing to start over on the new wing's learning curve rather than clinging to comfort on the old one.",
+        "note": "Hamerton via FAI/CIVL (expert) gives the concrete version of the same idea: after any class change, deliberately compensate — easier sites, less aggressive flying, and study of the new wing's specific behaviour."
+      },
+      "options": {
+        "keen_ground_handle_first": 1.0,
+        "fine_take_it_gently": 0.85,
+        "rather_just_fly_it": 0.35,
+        "expect_comfortable_immediately": 0.15
+      }
+    },
+    "ambitions": {
+      "category": "psychological",
+      "weight": 0,
+      "scored": false,
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Recommended handling: avoid treating 'wants more performance' or 'wants to fly with faster friends' alone as a penalty; the diagnostic combination is an ambition-flavoured motive paired with thin evidence of readiness elsewhere.",
+        "note": "Deliberately zero-weighted. Ambition only affects the result through the combination gate 'ambition_without_readiness', and otherwise only shapes which suggestions appear."
+      }
+    },
+    "response_when_rough": {
+      "category": "psychological",
+      "weight": 14,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#psychological--mindset-factors",
+        "cites": "XC Mag's 'The Head Game' (industry/expert, featuring sports psychologist Thomas Theurillat) frames readiness as challenge matched to honest self-assessed skill, with too big a jump producing stress rather than growth; Yvonne Dathe via Podz-Glidz (expert) frames fear as a protective signal to listen to rather than override.",
+        "note": "Highest single psychological weight because it asks what the pilot does under load rather than whether they feel nervous. Nerves themselves are not scored down: 'heart rate goes up but I keep flying the wing' scores 0.85. 'It doesn't really bother me' is scored at 0.6, below the active answers, because the general extreme-sports literature in knowledge/sources.md associates risk-seeking and low threat-appraisal with higher injury rates — but the reduction is deliberately mild, since this is non-paragliding-specific background only."
+      },
+      "options": {
+        "freeze_and_hang_on": 0.05,
+        "tense_want_to_land": 0.3,
+        "heart_up_keep_flying": 0.85,
+        "calm_active_exit_plan": 1.0,
+        "doesnt_bother_me": 0.6
+      }
+    },
+    "decline_to_fly": {
+      "category": "psychological",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/sources.md#podcast--podz-glidz--lu-glidz-lucian-haas-translatedparaphrased-transcripts",
+        "cites": "Yvonne Dathe (expert, sports psychologist) frames choosing not to launch when conditions and honest self-assessed skill don't match as sound judgement rather than cowardice; Bendicht Erb (expert, flight instructor and sports psychologist) names escalation of commitment — rationalising a marginal launch because of effort already invested — as a specific failure pattern.",
+        "note": "Scoring a 'yes, and I was happy with the call' answer at full marks is the clearest place the rubric refuses to reward pressing on."
+      },
+      "options": {
+        "yes_several_comfortable": 1.0,
+        "yes_once_or_twice": 0.85,
+        "no_launch_anyway": 0.2,
+        "not_come_up": 0.55
+      }
+    },
+    "peer_pressure": {
+      "category": "psychological",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Passion Paragliding (industry) names peer pressure and ego explicitly as common unhealthy upgrade motives; Simon Winkler via Podz-Glidz (expert, DHV) independently names social pressure — cameras, crowds, watching peers — as a driver of unnecessary risk-taking; Bendicht Erb (expert) adds that newer, less-drilled skills specifically degrade under observation.",
+        "note": "This asks about behaviour under social pressure rather than about the pilot's self-image, which is why it is scored more firmly than the motivation question itself."
+      },
+      "options": {
+        "launch_anyway": 0.1,
+        "feel_pushed_usually_wait": 0.6,
+        "own_call_comfortable": 1.0,
+        "not_come_up": 0.6
+      }
+    },
+    "incidents_12m": {
+      "category": "psychological",
+      "weight": 12,
+      "source": {
+        "ref": "BRIEF.md#inputs",
+        "cites": "\"Honesty about recent incidents and near misses\" is listed as a required psychological input.",
+        "note": "Non-monotonic: an honest, reflected-on near miss scores higher (1.0) than 'nothing happened' (0.85), because the first gives evidence of a working debrief habit and the second gives no evidence either way. Supported by Bendicht Erb via Podz-Glidz (expert) on accident processing and by Dathe's mini-step re-exposure approach for pilots still uneasy after a scare."
+      },
+      "options": {
+        "none": 0.85,
+        "one_or_two_reflected": 1.0,
+        "several_unsure": 0.25,
+        "shook_me": 0.2,
+        "injury_or_reserve": 0.0
+      }
+    }
+  },
+
+  "bonuses": [
+    {
+      "id": "manoeuvre_course_bonus",
+      "question": "manoeuvre_course",
+      "points": { "no": 0, "booked": 0.5, "one_course": 2, "more_than_one": 2 },
+      "max_total_bonus": 2,
+      "never_negative": true,
+      "applies_to": "total",
+      "source": {
+        "ref": "knowledge/disagreements.md#1",
+        "cites": "Recommended handling: SIV should be optional context only, never a hard gate, and should carry light weight at most — a small positive signal if completed, never a penalty or cap if not.",
+        "note": "knowledge/steps/a-to-low-b.md#siv records that no source treats SIV as relevant to this step at all, so this sits outside the scored categories entirely as a capped 2-point bonus. It can never move a Not yet to a Ready on its own, and the gates are applied after it."
+      }
+    }
+  ],
+
+  "thresholds": {
+    "ready": {
+      "total_min": 72,
+      "category_floors": { "skills": 65, "psychological": 60 },
+      "on_floor_failure": "nearly_ready",
+      "source": {
+        "ref": "knowledge/disagreements.md#5",
+        "cites": "SAHPA's conservative-by-default pattern: when evidence is ambiguous, default toward 'Not yet' or 'Nearly ready' rather than 'Ready'.",
+        "note": "Category floors exist so a pilot with strong hands and thin or comparison-driven motives cannot be called Ready on skills alone, and equally so a very keen, well-motivated pilot with thin flying cannot be called Ready on enthusiasm. The total threshold is set at 72 rather than higher because this step is a low bar: Hamerton and 406 Paragliding both treat a low-B as a legitimate first or early wing, so Ready has to be genuinely reachable."
+      },
+      "critical_check_floor": {
+        "min_answer_score": 0.5,
+        "questions": [
+          "flying_frequency",
+          "ground_handling_kiting",
+          "launch_reliability",
+          "active_piloting_bumpy",
+          "rough_air_awareness",
+          "reserve_familiarity",
+          "response_when_rough"
+        ],
+        "on_failure": "nearly_ready",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#red-flags",
+          "cites": "Daoust's checklist (expert) functions as a red-flag list in reverse — a pilot failing his practical checks (reverse kiting, launch success, committing to flying regularly, avoiding rough air) should stay on A.",
+          "note": "Stops a strong overall average from masking one specifically weak safety check. Only the listed questions apply, and only their bottom bands trip it. Ground handling appears here as a Ready-blocker rather than a gate, which keeps it informative rather than a hard numeric bar, per knowledge/disagreements.md point 11."
+        }
+      },
+      "unevidenced_core_checks": {
+        "answers": ["rough_air_awareness:not_come_up"],
+        "on_match": "nearly_ready",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's pattern of defaulting to the most conservative category unless a lower one is actively evidenced.",
+          "note": "Daoust frames reading and avoiding rough air as a gate-level check, so 'it hasn't really come up' is treated as not-yet-demonstrated rather than as a pass. It blocks Ready but is not scored as a failure (0.5, neutral) and never fires a gate."
+        }
+      }
+    },
+    "nearly_ready": {
+      "total_min": 55,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#consensus-read",
+        "cites": "Sources broadly agree the first tens of hours should be on A or low-B gear and that low-B is an acceptable starting wing for many newly-qualified pilots, so the middle band is wide rather than narrow.",
+        "note": "Below 55 the result is Not yet."
+      }
+    },
+    "not_yet": {
+      "total_max": 54.999,
+      "framing": "A legitimate, successful result — the tool working, not the pilot failing.",
+      "category_floors": { "psychological": 35, "skills": 40 },
+      "floor_rule": "If either category falls below its floor, the result is Not yet regardless of the total.",
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "\"Psychological answers carry real weight, not a side note.\"",
+        "note": "This is what stops very strong hands from buying out a seriously poor answer set on motives, social pressure and unexplained incidents — the combination knowledge/disagreements.md point 9 identifies as the one both camps agree is concerning. Floors are set low (35 / 40) so only genuinely poor profiles trip them, not merely mediocre ones."
+      }
+    }
+  },
+
+  "gates": [
+    {
+      "id": "still_in_training",
+      "cap": "not_yet",
+      "when": { "question": "training_status", "answer_in": ["in_training"] },
+      "message": "While you're still in training, your wing choice is your instructor's call, not a questionnaire's. Ask them directly — schools often do put students on low-B wings, and they can see your flying.",
+      "source": {
+        "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class",
+        "cites": "USHPA P2 (official) defers wing class to the manufacturer's recommendation for Beginner-to-Intermediate pilots rather than naming an EN letter itself.",
+        "note": "Conservative per knowledge/disagreements.md point 5. The cap is a deferral, not a judgement, and the message says so — some schools legitimately train on low-B wings."
+      }
+    },
+    {
+      "id": "airtime_under_10h",
+      "cap": "not_yet",
+      "when": { "question": "total_airtime", "answer_in": ["under_10"] },
+      "message": "Under about 10 hours total, the advice across sources is to keep building fundamentals on your current wing first.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#hours--experience",
+        "cites": "Flybubble (industry) recommends EN-B for recently-licensed pilots once they have at least roughly 10 hours of airtime.",
+        "note": "Sources disagree here: Hamerton (expert) positions a low-B as a reasonable first wing with no hours minimum. We take Flybubble's more conservative line as a gate, per the instruction to prefer the conservative option where sources conflict."
+      }
+    },
+    {
+      "id": "flights_under_15",
+      "cap": "not_yet",
+      "when": { "question": "total_flights", "answer_in": ["under_15"] },
+      "message": "Fewer than about 15 flights is still very early. More flights, in easy conditions, is the thing that moves this on.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#hours--experience",
+        "cites": "USHPA P2 (official, via AirAddict): 35 flights across 7 flying days.",
+        "note": "Gate set well below P2's figure on purpose — P2 is a pilot-rating bar that defers wing class to the manufacturer, so its 35 flights is used as the full-marks score rather than as the cutoff. 15 is our own conservative floor, not a figure any source states."
+      }
+    },
+    {
+      "id": "no_recent_flying",
+      "cap": "not_yet",
+      "when": { "question": "flying_frequency", "answer_in": ["none_3m"] },
+      "message": "Get current again on the wing you know before changing wings. A few flights back in easy air, and this answer changes.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#red-flags",
+        "cites": "General under-currency (not flying often enough) is one of only two red flags any source gives for this step; Daoust (expert) treats flying at least four times a month as a precondition for moving beyond pure-A gear.",
+        "note": "Gated at the clearest case — no flying at all in three months — rather than at Daoust's full 4-per-month figure, which is scored instead."
+      }
+    },
+    {
+      "id": "unreliable_launches",
+      "cap": "not_yet",
+      "when": { "question": "launch_reliability", "answer_in": ["often_aborted"] },
+      "message": "Launching is where this one gets decided. Ground handling and launch practice will move this faster than any new wing.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "Daoust (expert) checks for roughly 75% forward and 65% reverse launch success as a readiness signal; USHPA's 2001 Paragliding Accident Summary (official) found roughly 64% of accidents on the ground or just after launch, with poor inflation behind about 75% of launch-phase accidents.",
+        "note": "This is a launch-reliability gate, not a ground-handling gate. Ground handling itself is scored but never gated, per knowledge/disagreements.md point 11."
+      }
+    },
+    {
+      "id": "rough_air_catches_me_out",
+      "cap": "not_yet",
+      "when": { "question": "rough_air_awareness", "answer_in": ["caught_out"] },
+      "message": "Being able to see the rough part of the day coming — and getting down or staying away before it does — is the one check the sources treat as non-negotiable before leaving A-class gear.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
+        "cites": "Daoust's checklist (expert) explicitly asks whether a pilot can identify and avoid rough air 30+ minutes before it arrives, framed as a gate for moving past pure-A gear.",
+        "note": "Only the 'it usually catches me out' answer gates. A pilot who answers 'I only fly gentle conditions so it hasn't come up' is not gated — that's low information, not a failure."
+      }
+    },
+    {
+      "id": "uncontrolled_collapse",
+      "cap": "not_yet",
+      "when": { "question": "collapse_experience", "answer_in": ["lost_control"] },
+      "message": "Losing control of where the wing was going, on a class of wing designed to recover largely on its own, is worth working through with a coach before adding any performance.",
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "\"Hard gates: some answers (e.g. frequent collapses they struggle to recover from...) cap the result at 'Not yet'.\"",
+        "note": "Supported by knowledge/classification-overview.md: EN-A is defined by maximum resistance to leaving normal flight, so an uncontrolled event on an A is a stronger signal than the same event on a higher class. Also echoes Melchior Lindenstruth's reserve-deployment case in knowledge/disagreements.md point 2 as an illustration of demands outrunning skill."
+      }
+    },
+    {
+      "id": "recent_injury_or_reserve",
+      "cap": "not_yet",
+      "when": { "question": "incidents_12m", "answer_in": ["injury_or_reserve"] },
+      "message": "After an injury or a reserve ride, the next wing is a conversation to have with an instructor or coach who knows what happened — not something to settle from a form.",
+      "source": {
+        "ref": "knowledge/disagreements.md#5",
+        "cites": "SAHPA's conservative-by-default design pattern — default to the most conservative category unless proven otherwise.",
+        "note": "No source states this gate directly; it is our own conservative application of that default, combined with the brief's hard-gate instruction. Flagged for owner review: an owner who thinks this is too blunt could soften it to Nearly ready plus a mandatory instructor referral."
+      }
+    },
+    {
+      "id": "instructor_said_wait",
+      "cap": "not_yet",
+      "when": { "question": "external_feedback", "answer_in": ["advised_to_wait"] },
+      "message": "Someone who has watched you fly has already told you to wait. That beats anything this tool can work out from a questionnaire.",
+      "source": {
+        "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class",
+        "cites": "USHPA P2 (official) defers the wing-class decision to the manufacturer's recommendation and, in practice, to the instructor applying it; BRIEF.md requires an instructor recommendation in every result.",
+        "note": "Direct observation outranks self-report, so this is treated as the strongest available evidence."
+      }
+    },
+    {
+      "id": "equipment_as_a_fix_with_thin_readiness",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          {
+            "any_of": [
+              { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group", "wing_will_handle_conditions"] },
+              { "question": "wing_expectation", "answer_in": ["easier_in_rough_air", "less_of_a_struggle"] }
+            ]
+          },
+          {
+            "any_of": [
+              { "category_below": { "category": "skills", "value": 62 } },
+              { "question": "total_airtime", "answer_in": ["under_10", "10_25"] },
+              { "question": "active_piloting_bumpy", "answer_in": ["freeze_hands_still", "grip_tight"] }
+            ]
+          }
+        ]
+      },
+      "message": "A low-B won't make rough air easier — it gives you a bit more speed and glide and asks slightly more of you in return. The things that would make rough air easier are airtime, ground handling and active flying on the wing you already have.",
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Both camps converge on this specific combination: an ambition- or comparison-flavoured motive paired with thin evidence of readiness elsewhere (low hours, no experience of real collapses, discomfort in rough air) is where the sources agree there's real concern — not the motive in isolation. Yvonne Dathe via Podz-Glidz (expert) names upgrading to compensate for a skill gap as a distinct red flag.",
+        "note": "Deliberately a combination gate, not a single-answer gate, so that a well-prepared pilot who simply wants more performance is never capped for their motive alone."
+      }
+    },
+    {
+      "id": "ambition_without_readiness",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "ambitions", "answer_includes_any": ["longer_xc", "competitions", "acro"] },
+          { "category_below": { "category": "skills", "value": 55 } }
+        ]
+      },
+      "message": "The goals are fine — they're the reason people keep flying. The gap is the groundwork underneath them, and that's what the suggestions below are about.",
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Recommended handling: ambition itself is legitimate fuel (Guschlbauer via XC Mag) and must not be penalised alone; the concerning pattern is ambition paired with thin readiness.",
+        "note": "Only fires when skills are already weak, which is why the message is framed around the groundwork rather than around the ambition. Hamerton via Cloudbase Mayhem 186 (expert) supports the general principle that progression should stay deliberate at this stage."
+      }
+    }
+  ],
+
+  "gate_behaviour": {
+    "rule": "Any fired gate caps the recommendation at Not yet, regardless of score. The numeric score is still shown, with the gate reasons listed above it.",
+    "evaluation_order": "Gates are evaluated first and short-circuit: if any gate fires, the recommendation is Not yet and the threshold rules (category floors, critical_check_floor, unevidenced_core_checks) are not evaluated or reported. This keeps the explanation short and specific rather than piling on reasons.",
+    "show_score_with_gate": true,
+    "max_gate_reasons_shown": 3,
+    "tone_rule": "Gate messages state what to work on and why, never that the pilot is unsuitable or has failed. Required by BRIEF.md's safety framing.",
+    "source": {
+      "ref": "BRIEF.md#scoring-design",
+      "cites": "\"Hard gates: some answers ... cap the result at 'Not yet' regardless of total score.\"",
+      "note": "Showing the score alongside the gate keeps the result transparent and rule-based rather than a black box, as the brief requires."
+    }
+  },
+
+  "always_output": {
+    "instructor_recommendation": "Whatever this says, run it past an instructor or coach who has seen you fly — and ideally test-fly the wing before you buy it.",
+    "disclaimer": "This is a self-assessment tool based on published guidance from national associations, manufacturers, retailers and instructors. It isn't an instructor, it can't see you fly, and it isn't a safety clearance. Wing choice is your responsibility and your instructor's advice always comes first.",
+    "methodology_note": "Thresholds here are synthesised from several moderately agreeing industry, expert and association sources, not taken from a single authoritative table — no such table exists. Every weight and gate links back to the criterion it came from.",
+    "source": {
+      "ref": "BRIEF.md#outputs",
+      "cites": "\"A recommendation to discuss the upgrade with an instructor, plus a clear disclaimer.\"",
+      "note": "Methodology wording follows knowledge/disagreements.md point 2's instruction to be explicit that thresholds are synthesised, and point 6's instruction to keep confidence language modest."
+    }
+  }
+}

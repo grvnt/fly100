@@ -1,0 +1,51 @@
+{
+  "step": "a-to-low-b",
+  "id": "notyet-still-in-training",
+  "name": "Ellie — still on the course, buying her first wing",
+  "summary": "Mid-way through her training, 8 hours and about a dozen flights, still flying school gear. Launches regularly need several attempts. Needs to buy a wing soon and is wondering whether to skip the A and get a low-B.",
+  "why_this_persona": "The commonest real-world version of this question, and a multi-gate case. The result must read as 'ask your instructor, this is their call' rather than as a verdict on her.",
+  "answers": {
+    "total_airtime": "under_10",
+    "total_flights": "under_15",
+    "airtime_last_12m": "under_2",
+    "current_wing_hours": "no_own_wing",
+    "training_status": "in_training",
+    "flying_frequency": "two_or_three_monthly",
+    "ground_handling_kiting": "struggles",
+    "ground_handling_practice": "sometimes",
+    "launch_reliability": "often_aborted",
+    "speed_heading_turns": "one_of_them",
+    "landing_accuracy": "hit_and_miss",
+    "active_piloting_bumpy": "try_to_react",
+    "conditions_flown": "smooth_only",
+    "rough_air_awareness": "not_come_up",
+    "speed_bar": "never_tried",
+    "collapse_experience": "never",
+    "descent_bigears": "never_tried",
+    "reserve_familiarity": "know_location_only",
+    "manoeuvre_course": "no",
+    "external_feedback": "nobody_seen_recently",
+    "upgrade_motivation": "replacing_anyway",
+    "wing_expectation": "not_sure",
+    "learning_curve_willingness": "fine_take_it_gently",
+    "ambitions": ["local_soaring", "first_xc"],
+    "response_when_rough": "tense_want_to_land",
+    "decline_to_fly": "not_come_up",
+    "peer_pressure": "not_come_up",
+    "incidents_12m": "none"
+  },
+  "expected": {
+    "recommendation": "not_yet",
+    "total_score_range": [40, 56],
+    "category_score_ranges": { "skills": [34, 48], "psychological": [55, 70] },
+    "gates_expected": ["still_in_training", "airtime_under_10h", "flights_under_15", "unreliable_launches"],
+    "rules_expected": [],
+    "suggestions_must_include": ["instructor_conversation", "launch_practice", "ground_handling_basics", "build_total_airtime"],
+    "suggestions_must_not_include": ["motivation_reframe_keeping_up", "post_scare_support", "speed_bar_overuse", "big_air_caution"],
+    "notes": [
+      "The 'still_in_training' gate message must be shown first and must make clear that schools legitimately put students on low-B wings — the cap is a deferral to her instructor, not a judgement on her flying.",
+      "No ground-handling gate exists, by design (knowledge/disagreements.md point 11): her weak kiting shows up only in the score and in the suggestions. Her launch answer is what gates.",
+      "rules_expected is empty because gates short-circuit the threshold rules. Her skills score of about 35 would independently trip the Not yet floor if no gate had fired."
+    ]
+  }
+}

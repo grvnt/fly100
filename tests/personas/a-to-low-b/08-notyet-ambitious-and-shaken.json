@@ -1,0 +1,63 @@
+{
+  "step": "a-to-low-b",
+  "id": "notyet-ambitious-and-shaken",
+  "name": "Jonas — big plans, thin groundwork",
+  "summary": "Qualified eight months ago, 15 hours, about 25 flights, flies roughly monthly. Has been going out on thermic days where the air catches him out, had a collapse that got away from him and has been uneasy since. Never practised the reserve, doesn't ground handle, pushes bar when he's low. Wants to be flying long cross-countries and competitions next season and thinks a better wing will cope with the conditions he's finding hard.",
+  "why_this_persona": "The clear Not yet, and the one that exercises both combination gates. He is also the test that the output treats his unease as information rather than something to talk him out of.",
+  "answers": {
+    "total_airtime": "10_25",
+    "total_flights": "15_35",
+    "airtime_last_12m": "2_10",
+    "current_wing_hours": "10_25",
+    "training_status": "just_qualified",
+    "flying_frequency": "about_monthly",
+    "ground_handling_kiting": "struggles",
+    "ground_handling_practice": "never",
+    "launch_reliability": "about_half",
+    "speed_heading_turns": "one_of_them",
+    "landing_accuracy": "safe_not_accurate",
+    "active_piloting_bumpy": "grip_tight",
+    "conditions_flown": "moderate_thermal",
+    "rough_air_awareness": "caught_out",
+    "speed_bar": "full_bar_low",
+    "collapse_experience": "lost_control",
+    "descent_bigears": "never_tried",
+    "reserve_familiarity": "unsure",
+    "manoeuvre_course": "no",
+    "external_feedback": "friends_think_so",
+    "upgrade_motivation": "wing_will_handle_conditions",
+    "wing_expectation": "easier_in_rough_air",
+    "learning_curve_willingness": "rather_just_fly_it",
+    "ambitions": ["longer_xc", "competitions"],
+    "response_when_rough": "tense_want_to_land",
+    "decline_to_fly": "no_launch_anyway",
+    "peer_pressure": "launch_anyway",
+    "incidents_12m": "shook_me"
+  },
+  "expected": {
+    "recommendation": "not_yet",
+    "total_score_range": [24, 37],
+    "category_score_ranges": { "skills": [34, 46], "psychological": [14, 26] },
+    "gates_expected": [
+      "rough_air_catches_me_out",
+      "uncontrolled_collapse",
+      "equipment_as_a_fix_with_thin_readiness",
+      "ambition_without_readiness"
+    ],
+    "rules_expected": [],
+    "suggestions_must_include": [
+      "motivation_reframe_equipment_fix",
+      "learn_to_read_the_day",
+      "post_scare_support",
+      "reserve_practice"
+    ],
+    "suggestions_must_not_include": ["test_fly_first"],
+    "notes": [
+      "Four gates fire but only three may be shown. The three shown must be the most actionable ones, and the suggestion list must not simply restate them.",
+      "rules_expected is empty because gates short-circuit the threshold rules (see gate_behaviour.evaluation_order in the scoring config). His psychological score of about 19 would independently trip the Not yet floor if no gate had fired.",
+      "'post_scare_support' must be worded so his unease is treated as useful information — docs/design-context.md. Nothing in his output may encourage him toward the upgrade.",
+      "'xc_skills_on_current_wing' should still appear or be available: his ambitions are not the problem and must not be framed as one.",
+      "'test_fly_first' is excluded here only because a Not yet result this clear shouldn't be pointing him at shops; the owner may prefer to keep it as an always-on item."
+    ]
+  }
+}

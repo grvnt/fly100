@@ -1,0 +1,49 @@
+{
+  "step": "a-to-low-b",
+  "id": "nearly-modest-but-sound",
+  "name": "Tom — nearly there, a couple of gaps",
+  "summary": "20 hours, 45 flights, flies a couple of times a month. Launches mostly go fine, kiting is middling, and he admits the day's rough patch sometimes catches him out. Sensible motives, no incidents, nobody qualified has watched him fly in a while.",
+  "why_this_persona": "The borderline case. His total score lands in Ready territory, but a weak answer on reading the day holds him at Nearly ready — the rule that stops a good average masking one specific soft spot.",
+  "answers": {
+    "total_airtime": "10_25",
+    "total_flights": "35_75",
+    "airtime_last_12m": "10_25",
+    "current_wing_hours": "10_25",
+    "training_status": "qualified_independent",
+    "flying_frequency": "two_or_three_monthly",
+    "ground_handling_kiting": "hold_brief",
+    "ground_handling_practice": "sometimes",
+    "launch_reliability": "most_times",
+    "speed_heading_turns": "both_calm",
+    "landing_accuracy": "safe_not_accurate",
+    "active_piloting_bumpy": "try_to_react",
+    "conditions_flown": "light_thermal_ridge",
+    "rough_air_awareness": "sometimes_notice",
+    "speed_bar": "never_tried",
+    "collapse_experience": "never",
+    "descent_bigears": "tried_once_twice",
+    "reserve_familiarity": "know_location_only",
+    "manoeuvre_course": "no",
+    "external_feedback": "nobody_seen_recently",
+    "upgrade_motivation": "want_more_performance",
+    "wing_expectation": "small_step_speed_glide",
+    "learning_curve_willingness": "fine_take_it_gently",
+    "ambitions": ["local_soaring", "first_xc"],
+    "response_when_rough": "heart_up_keep_flying",
+    "decline_to_fly": "yes_once_or_twice",
+    "peer_pressure": "feel_pushed_usually_wait",
+    "incidents_12m": "none"
+  },
+  "expected": {
+    "recommendation": "nearly_ready",
+    "total_score_range": [70, 80],
+    "category_score_ranges": { "skills": [62, 74], "psychological": [78, 90] },
+    "gates_expected": [],
+    "rules_expected": ["critical_check_floor:rough_air_awareness"],
+    "suggestions_must_include": ["learn_to_read_the_day", "ground_handling_basics", "reserve_practice", "get_eyes_on_your_flying"],
+    "suggestions_must_not_include": ["recurrency_plan", "post_scare_support", "motivation_reframe_equipment_fix"],
+    "notes": [
+      "If a future tuning pass raises his total above the Ready threshold, the critical_check_floor rule must still hold him at Nearly ready while 'rough_air_awareness' is in its bottom bands."
+    ]
+  }
+}

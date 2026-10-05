@@ -1,0 +1,484 @@
+{
+  "step": "a-to-low-b",
+  "version": 1,
+  "meta": {
+    "label": "EN-A to low-end EN-B",
+    "pilot_facing_title": "Moving from an A wing to a low-B",
+    "estimated_minutes": 7,
+    "intro": "28 quick questions, one tap each. Answer honestly rather than optimistically — a \"not yet\" here is a useful, normal answer, and it tells you exactly what to work on next.",
+    "category_labels": {
+      "skills": "Skills and experience",
+      "psychological": "Mindset and motivation"
+    },
+    "design_notes": [
+      "No question asks which national pilot rating the pilot holds. Per knowledge/disagreements.md point 5, we ask about hours, flights, skills and conditions directly, because the national rating ladders don't map onto each other or onto EN A-D, and most users of a global web app won't hold one.",
+      "Hours are asked in broad bands, and cumulative hours are asked separately from recent hours, per knowledge/disagreements.md point 2.",
+      "Ground handling is asked about even though no numeric bar exists for it beyond Jerome Daoust's beginner checklist, per knowledge/disagreements.md point 11. It is weighted but never gated.",
+      "Ambitions are asked but carry no score of their own, per knowledge/disagreements.md point 9. They only matter in combination with thin readiness elsewhere.",
+      "The manoeuvre-course question is optional and can only ever add a small bonus, never subtract, per knowledge/disagreements.md point 1 and the brief. knowledge/steps/a-to-low-b.md notes no source treats SIV as relevant at this step at all, so it is not part of the scored set.",
+      "Several questions are deliberately not an ordered best-to-worst ladder (speed bar use, incidents, what happens in rough air, conditions flown). These are marked \"ordered\": false so the UI never implies the last option is the best one."
+    ]
+  },
+  "sections": [
+    {
+      "id": "experience",
+      "title": "Your flying so far",
+      "questions": ["total_airtime", "total_flights", "airtime_last_12m", "current_wing_hours", "training_status"]
+    },
+    {
+      "id": "currency",
+      "title": "How recently you've been flying",
+      "questions": ["flying_frequency"]
+    },
+    {
+      "id": "ground",
+      "title": "On the ground and on launch",
+      "questions": ["ground_handling_kiting", "ground_handling_practice", "launch_reliability"]
+    },
+    {
+      "id": "air",
+      "title": "In the air",
+      "questions": ["speed_heading_turns", "landing_accuracy", "active_piloting_bumpy", "conditions_flown", "rough_air_awareness", "speed_bar", "collapse_experience"]
+    },
+    {
+      "id": "kit",
+      "title": "Coming down and emergencies",
+      "questions": ["descent_bigears", "reserve_familiarity", "manoeuvre_course"]
+    },
+    {
+      "id": "upgrade",
+      "title": "About the upgrade",
+      "questions": ["upgrade_motivation", "wing_expectation", "external_feedback", "learning_curve_willingness", "ambitions"]
+    },
+    {
+      "id": "pressure",
+      "title": "Rough days and busy launches",
+      "questions": ["response_when_rough", "decline_to_fly", "peer_pressure", "incidents_12m"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "total_airtime",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Roughly how many hours have you flown in total, since you started?",
+      "help": "A rough band is fine. Count solo airtime, not tandems.",
+      "options": [
+        { "id": "under_10", "label": "Under 10 hours" },
+        { "id": "10_25", "label": "Between 10 and 25 hours" },
+        { "id": "25_50", "label": "Between 25 and 50 hours" },
+        { "id": "50_100", "label": "Between 50 and 100 hours" },
+        { "id": "over_100", "label": "More than 100 hours" }
+      ]
+    },
+    {
+      "id": "total_flights",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Roughly how many flights have you done in total?",
+      "help": "Short top-to-bottoms and sledders all count.",
+      "options": [
+        { "id": "under_15", "label": "Fewer than 15" },
+        { "id": "15_35", "label": "Between 15 and 35" },
+        { "id": "35_75", "label": "Between 35 and 75" },
+        { "id": "over_75", "label": "More than 75" }
+      ]
+    },
+    {
+      "id": "airtime_last_12m",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "And roughly how many hours have you flown in the last 12 months?",
+      "help": "We ask this separately on purpose — recent flying matters as much as your lifetime total.",
+      "options": [
+        { "id": "under_2", "label": "Under 2 hours" },
+        { "id": "2_10", "label": "Between 2 and 10 hours" },
+        { "id": "10_25", "label": "Between 10 and 25 hours" },
+        { "id": "over_25", "label": "More than 25 hours" }
+      ]
+    },
+    {
+      "id": "current_wing_hours",
+      "category": "skills",
+      "priority": "secondary",
+      "type": "single",
+      "ordered": true,
+      "text": "How much have you flown the wing you're on now?",
+      "options": [
+        { "id": "no_own_wing", "label": "I don't own one yet — I've been flying school or borrowed wings" },
+        { "id": "under_10", "label": "Under 10 hours" },
+        { "id": "10_25", "label": "Between 10 and 25 hours" },
+        { "id": "25_50", "label": "Between 25 and 50 hours" },
+        { "id": "over_50", "label": "More than 50 hours" }
+      ]
+    },
+    {
+      "id": "training_status",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Where are you with your training?",
+      "options": [
+        { "id": "in_training", "label": "Still in training, or still flying under instructor supervision" },
+        { "id": "just_qualified", "label": "Just finished my course and cleared to fly on my own" },
+        { "id": "qualified_independent", "label": "Qualified a while ago and flying independently" }
+      ]
+    },
+    {
+      "id": "flying_frequency",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Over the last three months, how often have you actually got in the air?",
+      "help": "Think about months with flyable weather, not the whole calendar.",
+      "options": [
+        { "id": "none_3m", "label": "I haven't flown at all in the last three months" },
+        { "id": "less_than_monthly", "label": "Less than once a month" },
+        { "id": "about_monthly", "label": "About once a month" },
+        { "id": "two_or_three_monthly", "label": "Two or three times a month" },
+        { "id": "weekly_plus", "label": "About once a week or more" }
+      ]
+    },
+    {
+      "id": "ground_handling_kiting",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "On a breezy day, how well can you hold the wing up facing it (reverse) and keep it there?",
+      "options": [
+        { "id": "not_tried", "label": "I haven't really tried this" },
+        { "id": "struggles", "label": "It usually gets away from me within a few seconds" },
+        { "id": "hold_brief", "label": "I can hold it for about ten seconds before I lose it" },
+        { "id": "hold_steady", "label": "I can hold it steady for a minute or more" },
+        { "id": "hold_and_move", "label": "Steady, and I can walk around under it, turn it and manage stronger wind" }
+      ]
+    },
+    {
+      "id": "ground_handling_practice",
+      "category": "skills",
+      "priority": "secondary",
+      "type": "single",
+      "ordered": true,
+      "text": "How often do you practise with the wing on the ground, away from flying?",
+      "options": [
+        { "id": "never", "label": "Never — I only handle the wing when I'm about to fly" },
+        { "id": "rarely", "label": "Once or twice ever" },
+        { "id": "sometimes", "label": "Now and then, when a day's unflyable" },
+        { "id": "regularly", "label": "Regularly, as its own thing" }
+      ]
+    },
+    {
+      "id": "launch_reliability",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How often do your launches go cleanly, first attempt?",
+      "help": "Count both forward and reverse launches.",
+      "options": [
+        { "id": "often_aborted", "label": "Not often — I regularly need several goes, get pulled around, or abort" },
+        { "id": "about_half", "label": "About half the time" },
+        { "id": "most_times", "label": "Most of the time — roughly three out of four" },
+        { "id": "nearly_always", "label": "Nearly always, in the conditions I choose to fly" }
+      ]
+    },
+    {
+      "id": "speed_heading_turns",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Can you change speed while holding a straight line, and fly smooth turns both ways?",
+      "help": "Slowing towards minimum sink and speeding up again, without the wing wandering off heading; and tidy, coordinated 360s left and right.",
+      "options": [
+        { "id": "neither", "label": "Not confident with either yet" },
+        { "id": "one_of_them", "label": "One of them, but not the other" },
+        { "id": "both_calm", "label": "Both, in calm air" },
+        { "id": "both_in_thermals", "label": "Both, including in light thermals" }
+      ]
+    },
+    {
+      "id": "landing_accuracy",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How close to a chosen spot do you normally land?",
+      "options": [
+        { "id": "hit_and_miss", "label": "My approaches are still a bit hit and miss" },
+        { "id": "safe_not_accurate", "label": "I land safely, but not near a particular spot" },
+        { "id": "within_few_wings", "label": "Usually within a few wing-lengths of where I meant to" },
+        { "id": "on_the_spot", "label": "Consistently on the spot, flight after flight" }
+      ]
+    },
+    {
+      "id": "active_piloting_bumpy",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "When the air gets bumpy, what do your hands actually do?",
+      "options": [
+        { "id": "freeze_hands_still", "label": "They stop moving — I hold still and wait it out" },
+        { "id": "grip_tight", "label": "I grip the brakes and pull them in a bit" },
+        { "id": "try_to_react", "label": "I try to react, but it's not automatic yet" },
+        { "id": "work_brakes_actively", "label": "I work the brakes to keep the pressure even and the wing overhead" },
+        { "id": "automatic_active", "label": "That's automatic now — I'm feeling and correcting without thinking about it" }
+      ]
+    },
+    {
+      "id": "conditions_flown",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "What kind of air have you been flying in, mostly?",
+      "options": [
+        { "id": "smooth_only", "label": "Smooth evenings and calm mornings only" },
+        { "id": "light_thermal_ridge", "label": "Light thermals and gentle ridge or coastal soaring" },
+        { "id": "moderate_thermal", "label": "Moderate thermals, with some proper bumps in them" },
+        { "id": "strong_big_air", "label": "Strong thermic or mountain days fairly regularly" }
+      ]
+    },
+    {
+      "id": "rough_air_awareness",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "How well can you see rough air coming before you're in it?",
+      "help": "Reading the forecast, the clouds, other pilots and the feel of the day, and getting down or staying away in good time.",
+      "options": [
+        { "id": "caught_out", "label": "Honestly, it usually catches me out — I find out when it's already rough" },
+        { "id": "sometimes_notice", "label": "Sometimes I spot it, sometimes I don't" },
+        { "id": "usually_with_time", "label": "Usually, with enough time to land or move away" },
+        { "id": "plan_around_it", "label": "Yes — I plan my day around when it's likely to kick off" },
+        { "id": "not_come_up", "label": "I only fly gentle conditions, so it hasn't really come up" }
+      ]
+    },
+    {
+      "id": "speed_bar",
+      "category": "skills",
+      "priority": "secondary",
+      "type": "single",
+      "ordered": false,
+      "text": "How do you use the speed bar at the moment?",
+      "help": "There's no wrong answer here — \"never touched it\" is completely normal on an A wing.",
+      "options": [
+        { "id": "never_tried", "label": "I've never used it" },
+        { "id": "tried_gently_with_height", "label": "I've tried a little, gently, with plenty of height in smooth air" },
+        { "id": "sink_escape_only", "label": "I use it to get out of sinking air, and otherwise leave it alone" },
+        { "id": "routine_gliding_use", "label": "I'm on bar fairly often when I'm gliding" },
+        { "id": "full_bar_low", "label": "I push a lot of bar, including fairly low down, to get back" }
+      ]
+    },
+    {
+      "id": "collapse_experience",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Have you had the wing collapse on you in flight, and what happened?",
+      "help": "A wing collapses so rarely on an A that \"never\" is a completely normal answer at this stage.",
+      "options": [
+        { "id": "never", "label": "Never" },
+        { "id": "small_self_recovered", "label": "Small tip collapses — the wing sorted itself out" },
+        { "id": "bigger_i_corrected", "label": "Something bigger, and I caught it and flew it out" },
+        { "id": "froze_but_ok", "label": "Yes, and I froze — the wing recovered on its own, not because of me" },
+        { "id": "lost_control", "label": "Yes, and it got away from me — I lost control of where the wing was going" }
+      ]
+    },
+    {
+      "id": "descent_bigears",
+      "category": "skills",
+      "priority": "secondary",
+      "type": "single",
+      "ordered": true,
+      "text": "Can you pull big ears and get rid of them again when you need to come down?",
+      "options": [
+        { "id": "never_tried", "label": "I've never tried" },
+        { "id": "tried_once_twice", "label": "Once or twice, with an instructor talking me through it" },
+        { "id": "comfortable", "label": "Yes, I'm comfortable with them" },
+        { "id": "plus_other_methods", "label": "Yes, and I've got another way down as well if I need it" }
+      ]
+    },
+    {
+      "id": "reserve_familiarity",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Your reserve — where is it, and have you ever practised the throw?",
+      "options": [
+        { "id": "unsure", "label": "I'm not completely sure I could find the handle in a hurry" },
+        { "id": "know_location_only", "label": "I know exactly where the handle is, but I've never practised" },
+        { "id": "practised_once", "label": "I've practised the throw at least once, hanging in a harness" },
+        { "id": "practised_recent_repack", "label": "Practised recently, and the repack is up to date" }
+      ]
+    },
+    {
+      "id": "manoeuvre_course",
+      "category": "skills",
+      "priority": "optional",
+      "type": "single",
+      "ordered": true,
+      "optional": true,
+      "text": "Have you done a manoeuvres course (over water, with an instructor)?",
+      "help": "Optional, and genuinely not expected at this stage. It can only help your result here, never hurt it.",
+      "options": [
+        { "id": "no", "label": "No" },
+        { "id": "booked", "label": "Not yet, but I've got one booked" },
+        { "id": "one_course", "label": "Yes, one" },
+        { "id": "more_than_one", "label": "Yes, more than one" }
+      ]
+    },
+    {
+      "id": "external_feedback",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Has anyone who has actually watched you fly said anything about a B wing?",
+      "options": [
+        { "id": "advised_to_wait", "label": "An instructor or coach has told me to wait" },
+        { "id": "nobody_seen_recently", "label": "Nobody who knows what they're looking at has seen me fly lately" },
+        { "id": "friends_think_so", "label": "Flying mates reckon I'd be fine on one" },
+        { "id": "instructor_suggested", "label": "An instructor or coach has said I'm ready for one" }
+      ]
+    },
+    {
+      "id": "upgrade_motivation",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "What's the main reason you want to move up?",
+      "help": "Pick the one that's closest to the truth, not the one that sounds best.",
+      "options": [
+        { "id": "wing_limiting", "label": "My wing now feels like it's holding back flying I can already do" },
+        { "id": "instructor_suggested", "label": "My instructor or coach suggested it" },
+        { "id": "want_more_performance", "label": "I want more glide and speed for longer flights" },
+        { "id": "replacing_anyway", "label": "I need a new wing anyway, so I may as well go a step up" },
+        { "id": "keep_up_with_group", "label": "Most people I fly with are on B wings and I don't want to be the odd one out" },
+        { "id": "wing_will_handle_conditions", "label": "I'm hoping a better wing will cope with conditions I currently find hard" }
+      ]
+    },
+    {
+      "id": "wing_expectation",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "What do you expect to actually change when you're on a low-B?",
+      "options": [
+        { "id": "small_step_speed_glide", "label": "A bit more speed and glide — mostly it'll feel fairly similar" },
+        { "id": "more_feedback_to_learn", "label": "More feedback through the brakes, which I'll need to learn to read" },
+        { "id": "not_sure", "label": "I'm not really sure — I haven't looked into the differences" },
+        { "id": "less_of_a_struggle", "label": "Flying will feel less of a struggle than it does now" },
+        { "id": "easier_in_rough_air", "label": "It'll handle rough air better than my current wing does" }
+      ]
+    },
+    {
+      "id": "learning_curve_willingness",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "A new wing means a spell of relearning the basics on it — ground handling, launches, how it talks to you. How does that sit with you?",
+      "options": [
+        { "id": "keen_ground_handle_first", "label": "Fine — I'd spend time on the ground with it before flying anything demanding" },
+        { "id": "fine_take_it_gently", "label": "Fine — I'd keep to easy days and easy sites for a while" },
+        { "id": "rather_just_fly_it", "label": "I'd rather just get on and fly it" },
+        { "id": "expect_comfortable_immediately", "label": "I'd expect to be straight back to normal on it within a flight or two" }
+      ]
+    },
+    {
+      "id": "ambitions",
+      "category": "psychological",
+      "priority": "core",
+      "type": "multi",
+      "ordered": false,
+      "scored": false,
+      "text": "What do you want to be doing more of over the next year?",
+      "help": "Pick any that apply. Wanting more is fine — this just helps us tailor the suggestions.",
+      "options": [
+        { "id": "local_soaring", "label": "More local flying and soaring" },
+        { "id": "first_xc", "label": "My first cross-country flights" },
+        { "id": "longer_xc", "label": "Long cross-country flights" },
+        { "id": "hike_fly", "label": "Hike and fly in the mountains" },
+        { "id": "competitions", "label": "Competitions" },
+        { "id": "acro", "label": "Acro or wing-overs" },
+        { "id": "just_enjoy", "label": "Nothing in particular — just enjoying it" }
+      ]
+    },
+    {
+      "id": "response_when_rough",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "When the air gets properly rough, what usually happens for you?",
+      "help": "Everyone's heart rate goes up. We're asking what you do next.",
+      "options": [
+        { "id": "freeze_and_hang_on", "label": "I lock up a bit — I hang on and wait for it to pass" },
+        { "id": "tense_want_to_land", "label": "I get tense, want to land straight away, and my flying gets scrappier" },
+        { "id": "heart_up_keep_flying", "label": "Heart rate goes up, but I carry on flying the wing" },
+        { "id": "calm_active_exit_plan", "label": "I stay fairly calm, keep flying actively, and have a way out if it builds" },
+        { "id": "doesnt_bother_me", "label": "It doesn't really bother me" }
+      ]
+    },
+    {
+      "id": "decline_to_fly",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "In the last few months, have you walked away from a launch, or landed early, because the day wasn't what you wanted to handle?",
+      "options": [
+        { "id": "yes_several_comfortable", "label": "More than once, and I was happy with the call" },
+        { "id": "yes_once_or_twice", "label": "Once or twice" },
+        { "id": "no_launch_anyway", "label": "No — I generally launch and see how it goes" },
+        { "id": "not_come_up", "label": "No — it hasn't come up" }
+      ]
+    },
+    {
+      "id": "peer_pressure",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Your friends are launching into a day you're unsure about. What usually happens?",
+      "options": [
+        { "id": "launch_anyway", "label": "I go too — I don't want to be the one left on the hill" },
+        { "id": "feel_pushed_usually_wait", "label": "I feel the pull, but I usually wait" },
+        { "id": "own_call_comfortable", "label": "I make my own call and I'm comfortable either way" },
+        { "id": "not_come_up", "label": "Hasn't come up" }
+      ]
+    },
+    {
+      "id": "incidents_12m",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "In the last 12 months, any incidents or near misses? A messy launch, a hard landing, a scare in the air?",
+      "help": "Nobody sees this but you. An honest answer makes the result worth having.",
+      "options": [
+        { "id": "none", "label": "Nothing I'd call a near miss" },
+        { "id": "one_or_two_reflected", "label": "One or two moments that made me think — and I know what I'd do differently" },
+        { "id": "several_unsure", "label": "A few, and I'm not really sure what went wrong" },
+        { "id": "shook_me", "label": "Something that shook me up, and I've been uneasy flying since" },
+        { "id": "injury_or_reserve", "label": "An injury, or I threw my reserve" }
+      ]
+    }
+  ]
+}

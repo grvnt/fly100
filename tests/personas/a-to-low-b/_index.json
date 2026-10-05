@@ -1,0 +1,43 @@
+{
+  "step": "a-to-low-b",
+  "version": 1,
+  "how_to_use": "Each persona file holds a complete answer set and the expected outcome. A persona passes if the recommendation matches, the total and both category scores fall inside their ranges, the fired gates match exactly, the threshold rules match exactly, and the suggestion include/exclude assertions hold. Suggestion assertions are against the triggered set, not the 3-5 displayed.",
+  "expected_values_provenance": "The score ranges in these files were computed by hand from config/scoring/a-to-low-b.json (skills weights total 130, psychological weights total 75, category split 0.55/0.45). The first run of a real scorer should reproduce the 'computed' figures below to within rounding; if it doesn't, the scorer and not the personas is probably wrong.",
+  "computed": {
+    "ready-earned-upgrade": { "skills": 98.0, "psychological": 95.4, "total": 96.8, "recommendation": "ready" },
+    "ready-cautious-but-capable": { "skills": 91.1, "psychological": 91.6, "total": 91.3, "recommendation": "ready" },
+    "nearly-modest-but-sound": { "skills": 67.5, "psychological": 82.9, "total": 74.4, "recommendation": "nearly_ready" },
+    "nearly-coastal-narrow-experience": { "skills": 79.3, "psychological": 93.8, "total": 85.8, "recommendation": "nearly_ready" },
+    "notyet-strong-hands-thin-motives": { "skills": 88.9, "psychological": 28.0, "total": 63.5, "recommendation": "not_yet", "bonus": 2 },
+    "notyet-still-in-training": { "skills": 34.7, "psychological": 57.9, "total": 45.2, "recommendation": "not_yet" },
+    "notyet-lapsed-after-injury": { "skills": 64.4, "psychological": 55.4, "total": 60.3, "recommendation": "not_yet" },
+    "notyet-ambitious-and-shaken": { "skills": 40.3, "psychological": 19.2, "total": 30.8, "recommendation": "not_yet" }
+  },
+  "distribution": { "ready": 2, "nearly_ready": 2, "not_yet": 4 },
+  "gate_coverage": {
+    "still_in_training": ["notyet-still-in-training"],
+    "airtime_under_10h": ["notyet-still-in-training"],
+    "flights_under_15": ["notyet-still-in-training"],
+    "no_recent_flying": ["notyet-lapsed-after-injury"],
+    "unreliable_launches": ["notyet-still-in-training"],
+    "rough_air_catches_me_out": ["notyet-ambitious-and-shaken"],
+    "uncontrolled_collapse": ["notyet-ambitious-and-shaken"],
+    "recent_injury_or_reserve": ["notyet-lapsed-after-injury"],
+    "instructor_said_wait": ["notyet-lapsed-after-injury"],
+    "equipment_as_a_fix_with_thin_readiness": ["notyet-ambitious-and-shaken"],
+    "ambition_without_readiness": ["notyet-ambitious-and-shaken"]
+  },
+  "rule_coverage": {
+    "ready_category_floor": "Not exercised by a persona. notyet-strong-hands-thin-motives would trip it if the Not yet psychological floor didn't catch him first; worth a synthetic unit check.",
+    "critical_check_floor": ["nearly-modest-but-sound"],
+    "unevidenced_core_checks": ["nearly-coastal-narrow-experience"],
+    "not_yet_category_floor:psychological": ["notyet-strong-hands-thin-motives"],
+    "not_yet_category_floor:skills": "Not exercised in isolation — both low-skills personas are gated first, and gates short-circuit the floors."
+  },
+  "negative_checks": [
+    "No persona whose only psychological weakness is wanting more performance may lose a band for it (knowledge/disagreements.md point 9) — see ready-cautious-but-capable and notyet-lapsed-after-injury.",
+    "No persona may be gated on ground handling alone (knowledge/disagreements.md point 11) — see notyet-still-in-training, whose kiting is weak but is gated on launches, hours and training status.",
+    "The optional manoeuvre-course answer must never change a band on its own — see notyet-strong-hands-thin-motives, who has done one and is still Not yet.",
+    "A pilot who reports no collapse history must not be penalised for it (knowledge/steps/a-to-low-b.md#collapse-handling) — see ready-cautious-but-capable."
+  ]
+}

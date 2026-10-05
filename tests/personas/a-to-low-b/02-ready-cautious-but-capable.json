@@ -1,0 +1,51 @@
+{
+  "step": "a-to-low-b",
+  "id": "ready-cautious-but-capable",
+  "name": "Priya — cautious, and good at it",
+  "summary": "70 hours over four seasons, flies two or three times a month, excellent on the ground, has walked away from several marginal days without regret. Honest that her heart rate climbs in rough air, but she keeps flying the wing. Nervous about whether she's 'allowed' to move up.",
+  "why_this_persona": "Checks that well-founded caution and honest nerves are not scored as weakness. She openly admits to adrenaline in rough air and has never had a collapse, and should still come out Ready.",
+  "answers": {
+    "total_airtime": "50_100",
+    "total_flights": "over_75",
+    "airtime_last_12m": "10_25",
+    "current_wing_hours": "25_50",
+    "training_status": "qualified_independent",
+    "flying_frequency": "two_or_three_monthly",
+    "ground_handling_kiting": "hold_steady",
+    "ground_handling_practice": "regularly",
+    "launch_reliability": "nearly_always",
+    "speed_heading_turns": "both_in_thermals",
+    "landing_accuracy": "on_the_spot",
+    "active_piloting_bumpy": "work_brakes_actively",
+    "conditions_flown": "light_thermal_ridge",
+    "rough_air_awareness": "plan_around_it",
+    "speed_bar": "tried_gently_with_height",
+    "collapse_experience": "never",
+    "descent_bigears": "comfortable",
+    "reserve_familiarity": "practised_once",
+    "manoeuvre_course": "no",
+    "external_feedback": "friends_think_so",
+    "upgrade_motivation": "want_more_performance",
+    "wing_expectation": "small_step_speed_glide",
+    "learning_curve_willingness": "keen_ground_handle_first",
+    "ambitions": ["first_xc"],
+    "response_when_rough": "heart_up_keep_flying",
+    "decline_to_fly": "yes_several_comfortable",
+    "peer_pressure": "own_call_comfortable",
+    "incidents_12m": "none"
+  },
+  "expected": {
+    "recommendation": "ready",
+    "total_score_range": [85, 96],
+    "category_score_ranges": { "skills": [84, 95], "psychological": [88, 98] },
+    "gates_expected": [],
+    "rules_expected": [],
+    "suggestions_must_include": ["instructor_conversation", "get_eyes_on_your_flying"],
+    "suggestions_must_not_include": ["nerves_are_not_the_problem", "motivation_reframe_keeping_up", "peer_pressure_plan", "improve_currency"],
+    "notes": [
+      "'want_more_performance' must not pull her below Ready on its own — knowledge/disagreements.md point 9.",
+      "'collapse_experience: never' must not be treated as a deficit — knowledge/steps/a-to-low-b.md#collapse-handling.",
+      "Reviewer check: nothing in her output should read as talking her into the upgrade."
+    ]
+  }
+}
