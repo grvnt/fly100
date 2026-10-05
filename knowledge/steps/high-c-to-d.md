@@ -29,6 +29,7 @@ The brief requires this step (and the two above/below it in difficulty) to carry
 ## Psychological / mindset factors
 
 - Seb Ospina's interview (via xcmag) is the most pointed psychological source in the ladder here: he explicitly describes his own early jump to high-end wings (age 17-18) as something that set his progression *back* rather than forward, directly warning against ambition-driven upgrades at this level.
+- [Greg Hamerton — Reducing Your Risk](http://old.fai.org/civl-our-sport/safety/37170-hamerton) (expert) doesn't address EN-D specifically, but his general compounding-risk framework applies with extra force at this step: given how many of this step's other risk factors are already elevated (collapse violence, currency demands, SIV expectations), his recommendation to compensate elsewhere — conservative sites, less aggressive flying, more pre-flight study — is arguably most relevant of all at this point in the ladder, even though he never names EN-D directly.
 
 ## Red flags
 

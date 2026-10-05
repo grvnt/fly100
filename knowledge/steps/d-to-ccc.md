@@ -37,7 +37,7 @@ Same as the D step, but with one additional, genuinely official-adjacent data po
 
 ## Source-quality note and explicit gap
 
-This step is thin by a wide margin. We recommend the app:
+This step is thin by a wide margin. (Oct 2026 note: we specifically checked Greg Hamerton's published material — a former PWC competitor and instructor — for CCC-specific pilot-readiness guidance, since he's exactly the kind of voice who might have it. We did not find anything addressing CCC wings specifically, as opposed to general competition/high-performance flying; his relevant material is used in the earlier steps instead. This remains a genuine gap, not something we're papering over.) We recommend the app:
 - Treat CCC readiness primarily through the lens of **competition licensing and rating** (e.g. asking whether the pilot already holds or is working toward a recognised advanced/competition pilot rating) rather than inventing a precise hours number not supported by sources.
 - Avoid stating any specific hours figure for this step with confidence — the only number we found (300 hours) is a single unverified secondhand opinion.
 - Require an explicit instructor/competition-mentor consultation recommendation at this step more heavily than at any other, given how little independent criteria exists to score against.

@@ -25,6 +25,7 @@ This is arguably the most contested boundary on the entire ladder — the commun
 ## Collapse handling
 
 - This is the first step where "precise pilot input required for recovery" (the core EN-C certification language) starts being treated by sources as something a pilot needs to already be good at, rather than something to learn on the new wing. The community consensus captured in the paraglidingforum thread is blunt about the asymmetry of risk: "the penalty for choosing a C when you should be on a B can be rather more severe than the penalty for flying a B when you should have gone for a C" (paraphrased from the thread's recurring theme) — i.e., sources agree err on the side of caution at this specific boundary more than at earlier ones.
+- [Greg Hamerton — Reducing Your Risk](http://old.fai.org/civl-our-sport/safety/37170-hamerton) (expert) adds a relevant caution here: he's explicit that the EN/AFNOR letter on its own is only a guideline and doesn't tell a pilot how often a given wing actually collapses in practice. This directly corroborates the existing fuzziness already recorded in `disagreements.md` point 3 (whether the sub-class labels are meaningful) — a second, independent expert voice agreeing the letter alone shouldn't be over-trusted at this boundary specifically.
 
 ## Psychological / mindset factors
 
@@ -40,6 +41,7 @@ This is arguably the most contested boundary on the entire ladder — the commun
 - Flybubble's "Which Class?" article is the first source in the ladder to mention SIV, pairing it with the ~100-hour threshold for EN-C, though it calls it "some SIV experience" rather than a hard requirement.
 - Flybubble's "Reducing Risk" article similarly recommends an SIV course "especially" for EN-C-curious pilots, alongside ongoing wingover/spiral/asymmetric practice.
 - Per the brief, and consistent with the disagreement captured in `disagreements.md`, SIV should remain optional context here, not a gate — multiple credible sources (Daoust, the forum consensus, USHPA's official syllabi) don't require it at all for reaching this point.
+- [Greg Hamerton — Reducing Your Risk](http://old.fai.org/civl-our-sport/safety/37170-hamerton) (expert) reinforces Flybubble's recommendation here (unsurprising, given he was Flybubble's own instructor/content lead — see the independence caveat in `steps/mid-b-to-high-b.md` and `disagreements.md` point 6), recommending a manoeuvres clinic before pushing a new wing's performance envelope.
 
 ## Source-quality note
 
