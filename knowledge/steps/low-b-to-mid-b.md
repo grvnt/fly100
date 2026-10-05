@@ -20,6 +20,15 @@ This boundary is one of the weakest-evidenced in the whole ladder. Several sourc
 
 No source gave conditions-specific criteria unique to this exact boundary; the general pattern across sources is a gradual widening of acceptable wind strength and thermal activity through the B sub-tiers, continuous with the step below.
 
+**Checked specifically, Oct 2026 (owner-prompted gap-check):** no source ties the strongest thermal/conditions a pilot has flown without a collapse to this boundary specifically, or indeed to any boundary in the ladder — see `steps/a-to-low-b.md` for the fuller note on why this idea appears genuinely unsourced everywhere we looked.
+
+## Cross-country distance and site variety (added Oct 2026, owner-prompted gap-check)
+
+Checked specifically for this boundary and found genuinely thin, though slightly more present than at the step below:
+
+- **Site variety:** [USHPA's P3 syllabus](https://airaddict.com/p3-certification-requirements/) (official, re-checked) has no site-count requirement — that only appears at P4, mapped to `steps/high-b-to-low-c.md`. But France's **FFVL** system (official) plausibly lands its own site-variety milestone around here: the **Brevet de Pilote** level explicitly extends a pilot from "known site only" to "any site," and [Soaring Académie's description](https://www.soaring.fr/formations/brevets-ffvl/) (industry, reproducing the official structure) frames this stage as one where pilots deliberately "discover new sites and vary flight conditions" to build experience — a genuinely different framing from "more hours," closer to the owner's intuition that site variety builds a distinct skill (adapting to unfamiliar terrain). We flag this as the best-available mapping, not a confirmed EN-letter-specific match: FFVL's brevets are a pilot-rating ladder, not the EN wing-class ladder, and `disagreements.md` point 5 already cautions that these two systems don't map cleanly onto each other.
+- **Cross-country distance:** not found at this boundary. P3 has no XC-distance figure; FFVL's Brevet de Pilote unlocks "any site" flying but is not itself evaluated on a specific distance flown — that only appears at FFVL's third tier (Brevet de Pilote Confirmé) and BHPA's Advanced Pilot rating, both of which map later, to `steps/high-b-to-low-c.md`. This is consistent with the existing framing in this file and `a-to-low-b.md` that XC only becomes a real criterion once pilots are actually doing real cross-country flying, not during this still largely local/ridge-flying phase.
+
 ## Collapse handling
 
 USHPA P3's explicit introduction of asymmetric (50%) collapse-recovery knowledge is the clearest skill marker we found for this transition — it's reasonable to treat "has practised recognising and correcting an asymmetric collapse" as the defining collapse-handling skill gained during this step, even though no source frames it as a strict gate.

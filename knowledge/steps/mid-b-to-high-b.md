@@ -25,6 +25,7 @@ Better evidenced than the previous step, largely because manufacturers are expli
 ## Conditions flown
 
 - Convergent theme across manufacturer positioning (Advance, Gin, Nova) and Flybubble: high-B is explicitly for pilots moving into proper cross-country flying and more turbulent thermic air, not just bigger ridge days. Multiple sources frame this as the step where the wing starts rewarding (and requiring) active piloting in rough air rather than just tolerating it.
+- **Checked specifically, Oct 2026 (owner-prompted gap-check):** no source frames "strongest thermal/conditions flown without a collapse" as a specific, falsifiable marker at this step either, despite this being exactly the step where sources start talking about turbulent thermic conditions in general terms. The gap is the same one noted throughout the ladder — see `steps/a-to-low-b.md`. This step is also the first one where pilots are plausibly starting genuine XC (per Hamerton's "frustration... probably means XC flying is becoming your focus" framing already in this file's Hours section), but no source we found ties a specific XC *distance* or *site count* to this exact boundary — those numbers only appear later, at `steps/high-b-to-low-c.md`, via pilot-rating ladders (USHPA P4, BHPA Advanced Pilot, FFVL) rather than via any EN-letter-specific source.
 
 ## Collapse handling
 

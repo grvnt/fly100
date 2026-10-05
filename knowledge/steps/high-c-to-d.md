@@ -23,6 +23,7 @@ The brief requires this step (and the two above/below it in difficulty) to carry
 ## Conditions flown
 
 - The repeated "100+ hours/year" framing implicitly demands flying across a full season's range of conditions, not just occasional good-weather days — currency itself is treated as a safety requirement at this step, more explicitly than at any earlier one.
+- **Checked specifically, Oct 2026 (owner-prompted gap-check):** no source ties strongest-thermal-survived-without-collapse, XC distance, or site/terrain variety to EN-D specifically. No national pilot-rating ladder we found extends numerically past Advanced Pilot/P4/Confirmé (see `steps/high-b-to-low-c.md`), and no manufacturer or expert source discussing EN-D (Ozone, Malin Lobb, Hamerton) mentions any of these three ideas either.
 
 ## Collapse handling
 

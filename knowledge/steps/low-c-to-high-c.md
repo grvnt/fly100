@@ -24,6 +24,7 @@ This step covers two things sources often conflate: (a) moving from an accessibl
 ## Conditions flown
 
 - richiesadventures explicitly recommends starting 2-liner flying in milder conditions, not jumping straight into extreme thermic days, and accepting an extended learning curve.
+- **Checked specifically, Oct 2026 (owner-prompted gap-check):** no source ties strongest-thermal-survived-without-collapse, XC distance, or site/terrain variety to this step specifically. The pilot-rating ladders (USHPA, BHPA, FFVL) that gave us XC-distance and site-variety material for `steps/high-b-to-low-c.md` top out at Advanced Pilot/P4/Confirmé and don't extend to a 2-liner-specific or EN-D-specific tier — so this step inherits no further resolution on these three ideas beyond what the step below already provides as general background.
 
 ## Collapse handling
 
