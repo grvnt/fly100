@@ -1,6 +1,6 @@
 {
   "step": "a-to-low-b",
-  "version": 1,
+  "version": 2,
   "meta": {
     "label": "EN-A to low-end EN-B",
     "pilot_facing_title": "Moving from an A wing to a low-B",
@@ -14,7 +14,9 @@
       "No question asks which national pilot rating the pilot holds. Per knowledge/disagreements.md point 5, we ask about hours, flights, skills and conditions directly, because the national rating ladders don't map onto each other or onto EN A-D, and most users of a global web app won't hold one.",
       "Hours are asked in broad bands, and cumulative hours are asked separately from recent hours, per knowledge/disagreements.md point 2.",
       "Ground handling is asked about even though no numeric bar exists for it beyond Jerome Daoust's beginner checklist, per knowledge/disagreements.md point 11. It is weighted but never gated.",
-      "Ambitions are asked but carry no score of their own, per knowledge/disagreements.md point 9. They only matter in combination with thin readiness elsewhere.",
+      "Ambitions are asked but carry no score of their own, per knowledge/disagreements.md point 9. They are never added to or subtracted from the score. They do two other jobs: they combine with thin readiness in the 'ambition_without_readiness' gate, and (added in v2) they tell the rubric what kind of flying the pilot's own plans will expose them to, which decides whether an untested rough-air answer blocks a Ready result. See 'intended_flying_context' in config/scoring/a-to-low-b.json.",
+      "v2 design call — intended flying context reuses the 'ambitions' question rather than adding a new one. Reasons: (a) 'what do you want to be doing over the next year' and 'what kind of flying do you plan to keep doing' are the same question to a pilot on a phone, and asking both invites inconsistent answers and adds a 29th question to a 7-minute form; (b) the question is multi-select, so 'local soaring only' and 'local soaring plus my first XC' are already distinguishable; (c) it fails safe — a pilot who ticks any cross-country, hike-and-fly, competition or acro box, even speculatively, keeps the stricter treatment, so an over-optimistic tick can only ever make the result more conservative, never less. The wording and help text were tightened in v2 so the question reads as flying plans rather than idle wishes.",
+      "v2 note on the incidents question: 'an injury, or I threw my reserve' still scores lowest on this question and this question still carries one of the two highest psychological weights, but it no longer caps the result on its own. An injury can come from a bad landing or a ground-handling accident and may say nothing about whether the current wing suits the pilot. See removed_gates in config/scoring/a-to-low-b.json. No change to the question's wording or options — the honesty framing in its help text matters more than ever, since the answer now feeds the score rather than a cap.",
       "The manoeuvre-course question is optional and can only ever add a small bonus, never subtract, per knowledge/disagreements.md point 1 and the brief. knowledge/steps/a-to-low-b.md notes no source treats SIV as relevant at this step at all, so it is not part of the scored set.",
       "Several questions are deliberately not an ordered best-to-worst ladder (speed bar use, incidents, what happens in rough air, conditions flown). These are marked \"ordered\": false so the UI never implies the last option is the best one."
     ]
@@ -408,10 +410,10 @@
       "type": "multi",
       "ordered": false,
       "scored": false,
-      "text": "What do you want to be doing more of over the next year?",
-      "help": "Pick any that apply. Wanting more is fine — this just helps us tailor the suggestions.",
+      "text": "Over the next year, what kind of flying do you mainly want to be doing?",
+      "help": "Pick any that apply, including things you're only thinking about. There's no better or worse answer here — it doesn't add or lose you any points. It tells us which skills your own plans will actually ask of you, so the advice fits the flying you do.",
       "options": [
-        { "id": "local_soaring", "label": "More local flying and soaring" },
+        { "id": "local_soaring", "label": "Local flying, ridge or coastal soaring" },
         { "id": "first_xc", "label": "My first cross-country flights" },
         { "id": "longer_xc", "label": "Long cross-country flights" },
         { "id": "hike_fly", "label": "Hike and fly in the mountains" },

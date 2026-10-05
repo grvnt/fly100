@@ -1,5 +1,6 @@
 {
   "step": "a-to-low-b",
+  "version": 2,
   "id": "ready-earned-upgrade",
   "name": "Sam — has clearly outgrown the A",
   "summary": "60 hours, 90-odd flights, flies most weekends, clean launches, light thermals, instructor has already told him he's ready. Wants a low-B because his current wing feels sluggish for the flying he can already do.",
@@ -40,7 +41,12 @@
     "category_score_ranges": { "skills": [92, 100], "psychological": [92, 100] },
     "gates_expected": [],
     "rules_expected": [],
+    "exemptions_expected": [],
     "suggestions_must_include": ["instructor_conversation", "test_fly_first", "xc_skills_on_current_wing"],
-    "suggestions_must_not_include": ["build_total_airtime", "improve_currency", "motivation_reframe_equipment_fix", "nerves_are_not_the_problem"]
+    "suggestions_must_not_include": ["build_total_airtime", "improve_currency", "motivation_reframe_equipment_fix", "nerves_are_not_the_problem", "scope_matches_your_plans"],
+    "notes": [
+      "v2 re-check, unchanged. Neither v2 change touches him. He answers 'rough_air_awareness: plan_around_it', so 'unevidenced_core_checks' and its new exemption are never in play; and 'incidents_12m: one_or_two_reflected', so the removed injury gate is irrelevant. All three scores and the recommendation are as computed in v1.",
+      "His ambitions include 'first_xc', so he does not meet the local_only profile — 'scope_matches_your_plans' is asserted absent to confirm that profile needs the absence of every cross-country, hike-and-fly, competition and acro tick, not just the presence of 'local_soaring'."
+    ]
   }
 }

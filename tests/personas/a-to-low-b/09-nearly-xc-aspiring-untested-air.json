@@ -1,0 +1,68 @@
+{
+  "step": "a-to-low-b",
+  "version": 2,
+  "id": "nearly-xc-aspiring-untested-air",
+  "name": "Nadia — same flying as Dave, different plans",
+  "summary": "Deliberately a near-clone of persona 04. Identical answers to Dave's on every skills and mindset question — 22 hours over 120 short flights, out most weeks, excellent ground handling and launches, has never been in a thermal, and says reading rough air 'hasn't really come up'. The one difference: she wants her first cross-countries and a hike-and-fly trip to the mountains next summer.",
+  "why_this_persona": "The control for the v2 stated-plans exemption on the untested rough-air check. Added specifically so a reviewer can see that the exemption is driven by stated flying plans and by nothing else. Her plans will take her into thermic and mountain air, which is exactly the air the check is about, so the untested answer still blocks Ready and she is held at Nearly ready. If she and Dave ever return the same recommendation, the exemption is implemented wrongly.",
+  "answers": {
+    "total_airtime": "10_25",
+    "total_flights": "over_75",
+    "airtime_last_12m": "10_25",
+    "current_wing_hours": "10_25",
+    "training_status": "qualified_independent",
+    "flying_frequency": "weekly_plus",
+    "ground_handling_kiting": "hold_and_move",
+    "ground_handling_practice": "regularly",
+    "launch_reliability": "nearly_always",
+    "speed_heading_turns": "both_calm",
+    "landing_accuracy": "within_few_wings",
+    "active_piloting_bumpy": "try_to_react",
+    "conditions_flown": "light_thermal_ridge",
+    "rough_air_awareness": "not_come_up",
+    "speed_bar": "never_tried",
+    "collapse_experience": "never",
+    "descent_bigears": "tried_once_twice",
+    "reserve_familiarity": "practised_once",
+    "manoeuvre_course": "no",
+    "external_feedback": "friends_think_so",
+    "upgrade_motivation": "wing_limiting",
+    "wing_expectation": "more_feedback_to_learn",
+    "learning_curve_willingness": "fine_take_it_gently",
+    "ambitions": ["first_xc", "hike_fly"],
+    "response_when_rough": "heart_up_keep_flying",
+    "decline_to_fly": "yes_once_or_twice",
+    "peer_pressure": "own_call_comfortable",
+    "incidents_12m": "one_or_two_reflected"
+  },
+  "expected": {
+    "recommendation": "nearly_ready",
+    "total_score_range": [80, 90],
+    "category_score_ranges": { "skills": [74, 86], "psychological": [90, 100] },
+    "gates_expected": [],
+    "rules_expected": ["unevidenced_core_checks:rough_air_awareness"],
+    "exemptions_expected": [],
+    "suggestions_must_include": [
+      "air_awareness_untested",
+      "xc_skills_on_current_wing",
+      "build_total_airtime",
+      "active_piloting_drill",
+      "hesitancy_is_valid"
+    ],
+    "suggestions_must_not_include": [
+      "scope_matches_your_plans",
+      "ground_handling_basics",
+      "launch_practice",
+      "improve_currency",
+      "big_air_caution",
+      "acro_wrong_wing"
+    ],
+    "notes": [
+      "Her numeric scores are identical to persona 04's (skills ~79.3, psychological ~93.8, total ~85.8) because ambitions are zero-weighted. Only the recommendation differs. That identity is the point of the persona: if a scorer produces different scores for the two, something other than the exemption has changed.",
+      "'ambition_without_readiness' must NOT fire. Her ambitions are first_xc and hike_fly, which are not in that gate's list (longer_xc / competitions / acro), and her skills score is far above the gate's 55 threshold. Ambition alone is never penalised — knowledge/disagreements.md point 9.",
+      "Her result must be framed as a sequence, not a refusal: her flying is strong and the gap is one specific, learnable thing that her own plans will require. 'air_awareness_untested' and 'xc_skills_on_current_wing' together should carry that.",
+      "'scope_matches_your_plans' must be absent. It is written for a pilot whose plans stay local, and would read as contradictory here.",
+      "Both Dave and Nadia receive 'air_awareness_untested'. That is deliberate: the two pilots get the same advice and different recommendations, because the same gap has different consequences for the flying each has described."
+    ]
+  }
+}

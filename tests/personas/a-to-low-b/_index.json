@@ -1,19 +1,31 @@
 {
   "step": "a-to-low-b",
-  "version": 1,
-  "how_to_use": "Each persona file holds a complete answer set and the expected outcome. A persona passes if the recommendation matches, the total and both category scores fall inside their ranges, the fired gates match exactly, the threshold rules match exactly, and the suggestion include/exclude assertions hold. Suggestion assertions are against the triggered set, not the 3-5 displayed.",
-  "expected_values_provenance": "The score ranges in these files were computed by hand from config/scoring/a-to-low-b.json (skills weights total 130, psychological weights total 75, category split 0.55/0.45). The first run of a real scorer should reproduce the 'computed' figures below to within rounding; if it doesn't, the scorer and not the personas is probably wrong.",
+  "version": 2,
+  "how_to_use": "Each persona file holds a complete answer set and the expected outcome. A persona passes if the recommendation matches, the total and both category scores fall inside their ranges, the fired gates match exactly, the threshold rules match exactly, the exemptions match exactly, and the suggestion include/exclude assertions hold. Suggestion assertions are against the triggered set, not the 3-5 displayed.",
+  "field_notes": {
+    "rules_expected": "Threshold rules that actually applied and changed or constrained the result. Named as '<rule_id>:<question_id>' where a rule is driven by one answer.",
+    "exemptions_expected": "Added in v2. Exemption ids (from config/scoring/a-to-low-b.json) that suppressed a rule which would otherwise have applied. A rule suppressed by an exemption must appear in 'exemptions_expected' and must NOT appear in 'rules_expected'. Every persona carries this field, empty where nothing is exempted, so a scorer that over-applies an exemption fails loudly."
+  },
+  "v2_changes": [
+    "Removed the 'recent_injury_or_reserve' gate from the rubric. Affects only 'notyet-lapsed-after-injury', whose gate list drops from three to two. No score and no recommendation changed anywhere — see that persona's notes.",
+    "Added a stated-plans exemption to the 'unevidenced_core_checks' Ready-blocker, driven by the 'ambitions' answer via intended_flying_context. 'ready-coastal-narrow-experience' (persona 04, formerly 'nearly-coastal-narrow-experience') moves from Nearly ready to Ready, with his ambitions answer narrowed to ['local_soaring'] so his flying plans are unambiguous. New persona 09 'nearly-xc-aspiring-untested-air' is his paired control: identical answers, cross-country and hike-and-fly plans, still Nearly ready.",
+    "Persona 04's file was renamed to '04-ready-coastal-narrow-experience.json' to match its new outcome.",
+    "Every other persona was re-checked answer by answer against both changes and is unchanged. Each now carries an explicit 'v2 re-check, unchanged' note naming why neither change reaches it."
+  ],
+  "persona_count_note": "Nine personas, one above the brief's 6-8 range. The ninth exists only as the paired control for the v2 stated-plans exemption and is a deliberate near-clone of persona 04 rather than a new pilot profile. Owner may prefer to treat 04 and 09 as a single paired case.",
+  "expected_values_provenance": "The score ranges in these files were computed by hand from config/scoring/a-to-low-b.json (skills weights total 130, psychological weights total 75, category split 0.55/0.45). The first run of a real scorer should reproduce the 'computed' figures below to within rounding; if it doesn't, the scorer and not the personas is probably wrong. None of the v2 changes alters any computed figure: the removed gate did not affect scoring, and the 'ambitions' question is zero-weighted.",
   "computed": {
     "ready-earned-upgrade": { "skills": 98.0, "psychological": 95.4, "total": 96.8, "recommendation": "ready" },
     "ready-cautious-but-capable": { "skills": 91.1, "psychological": 91.6, "total": 91.3, "recommendation": "ready" },
     "nearly-modest-but-sound": { "skills": 67.5, "psychological": 82.9, "total": 74.4, "recommendation": "nearly_ready" },
-    "nearly-coastal-narrow-experience": { "skills": 79.3, "psychological": 93.8, "total": 85.8, "recommendation": "nearly_ready" },
+    "ready-coastal-narrow-experience": { "skills": 79.3, "psychological": 93.8, "total": 85.8, "recommendation": "ready" },
     "notyet-strong-hands-thin-motives": { "skills": 88.9, "psychological": 28.0, "total": 63.5, "recommendation": "not_yet", "bonus": 2 },
     "notyet-still-in-training": { "skills": 34.7, "psychological": 57.9, "total": 45.2, "recommendation": "not_yet" },
     "notyet-lapsed-after-injury": { "skills": 64.4, "psychological": 55.4, "total": 60.3, "recommendation": "not_yet" },
-    "notyet-ambitious-and-shaken": { "skills": 40.3, "psychological": 19.2, "total": 30.8, "recommendation": "not_yet" }
+    "notyet-ambitious-and-shaken": { "skills": 40.3, "psychological": 19.2, "total": 30.8, "recommendation": "not_yet" },
+    "nearly-xc-aspiring-untested-air": { "skills": 79.3, "psychological": 93.8, "total": 85.8, "recommendation": "nearly_ready" }
   },
-  "distribution": { "ready": 2, "nearly_ready": 2, "not_yet": 4 },
+  "distribution": { "ready": 3, "nearly_ready": 2, "not_yet": 4 },
   "gate_coverage": {
     "still_in_training": ["notyet-still-in-training"],
     "airtime_under_10h": ["notyet-still-in-training"],
@@ -22,22 +34,33 @@
     "unreliable_launches": ["notyet-still-in-training"],
     "rough_air_catches_me_out": ["notyet-ambitious-and-shaken"],
     "uncontrolled_collapse": ["notyet-ambitious-and-shaken"],
-    "recent_injury_or_reserve": ["notyet-lapsed-after-injury"],
     "instructor_said_wait": ["notyet-lapsed-after-injury"],
     "equipment_as_a_fix_with_thin_readiness": ["notyet-ambitious-and-shaken"],
     "ambition_without_readiness": ["notyet-ambitious-and-shaken"]
   },
+  "retired_gate_coverage": {
+    "recent_injury_or_reserve": "Removed in v2 (see removed_gates in config/scoring/a-to-low-b.json). No persona asserts it. 'notyet-lapsed-after-injury' is the persona that answers 'incidents_12m: injury_or_reserve' and must now be capped by 'no_recent_flying' and 'instructor_said_wait' alone. Any scorer still firing this gate fails that persona."
+  },
   "rule_coverage": {
     "ready_category_floor": "Not exercised by a persona. notyet-strong-hands-thin-motives would trip it if the Not yet psychological floor didn't catch him first; worth a synthetic unit check.",
     "critical_check_floor": ["nearly-modest-but-sound"],
-    "unevidenced_core_checks": ["nearly-coastal-narrow-experience"],
+    "unevidenced_core_checks": ["nearly-xc-aspiring-untested-air"],
+    "unevidenced_core_checks:exemption:stated_plans_dont_require_rough_air_judgement": ["ready-coastal-narrow-experience"],
     "not_yet_category_floor:psychological": ["notyet-strong-hands-thin-motives"],
-    "not_yet_category_floor:skills": "Not exercised in isolation — both low-skills personas are gated first, and gates short-circuit the floors."
+    "not_yet_category_floor:skills": "Not exercised in isolation — both low-skills personas are gated first, and gates short-circuit the floors.",
+    "uncovered_branches": [
+      "The local_only profile can also be met by 'just_enjoy' alone, with no 'local_soaring' tick. No persona covers that branch; worth a synthetic unit check.",
+      "No persona covers an empty 'ambitions' answer. By design that must NOT meet local_only (no stated plans means no evidence of scope), so a pilot answering 'not_come_up' with no ambitions selected should still be blocked from Ready. Worth a synthetic unit check."
+    ]
   },
   "negative_checks": [
     "No persona whose only psychological weakness is wanting more performance may lose a band for it (knowledge/disagreements.md point 9) — see ready-cautious-but-capable and notyet-lapsed-after-injury.",
     "No persona may be gated on ground handling alone (knowledge/disagreements.md point 11) — see notyet-still-in-training, whose kiting is weak but is gated on launches, hours and training status.",
     "The optional manoeuvre-course answer must never change a band on its own — see notyet-strong-hands-thin-motives, who has done one and is still Not yet.",
-    "A pilot who reports no collapse history must not be penalised for it (knowledge/steps/a-to-low-b.md#collapse-handling) — see ready-cautious-but-capable."
+    "A pilot who reports no collapse history must not be penalised for it (knowledge/steps/a-to-low-b.md#collapse-handling) — see ready-cautious-but-capable.",
+    "An injury or reserve deployment in the last 12 months must not cap a result on its own (v2) — see notyet-lapsed-after-injury, where it still costs most of a weight-12 psychological question and still triggers 'post_scare_support', but the cap comes from currency and from his instructor's advice.",
+    "No ambitions answer may ever add or remove a point, and no ambitions answer may make a result more generous than the same answers with a cross-country, hike-and-fly, competition or acro tick added (v2) — compare ready-coastal-narrow-experience with nearly-xc-aspiring-untested-air, whose scores are identical and whose recommendations differ in the conservative direction.",
+    "The stated-plans exemption must never reach the 'rough_air_catches_me_out' hard gate or the 'critical_check_floor' rule — see notyet-ambitious-and-shaken (gated whatever his plans) and nearly-modest-but-sound (held by the floor, and local-only plans would not help him).",
+    "An exempted pilot must still be told the rough-air check is untested — see ready-coastal-narrow-experience, who asserts both 'air_awareness_untested' and 'scope_matches_your_plans' present."
   ]
 }

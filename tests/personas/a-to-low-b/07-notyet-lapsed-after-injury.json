@@ -1,9 +1,10 @@
 {
   "step": "a-to-low-b",
+  "version": 2,
   "id": "notyet-lapsed-after-injury",
   "name": "Ray — coming back after a broken ankle",
   "summary": "40 hours over three years and was flying competently until a hard landing broke his ankle five months ago. Hasn't flown since. Healed now, keen to come back on something a bit nicer, and his instructor has said to leave the wing change alone for the moment.",
-  "why_this_persona": "A pilot whose underlying skills are mid-range but whose situation is unambiguous. Tests that gates override a middling score, and that three gates can co-exist without the output turning into a lecture.",
+  "why_this_persona": "A pilot whose underlying skills are mid-range but whose situation is unambiguous. Tests that gates override a middling score, that two gates can co-exist without the output turning into a lecture, and — from v2 — that the injury itself is no longer what caps him. His broken ankle came from a hard landing, which says nothing about whether a low-B suits his flying. Currency and his instructor's direct advice are what carry the result.",
   "answers": {
     "total_airtime": "25_50",
     "total_flights": "35_75",
@@ -38,14 +39,18 @@
     "recommendation": "not_yet",
     "total_score_range": [48, 62],
     "category_score_ranges": { "skills": [54, 68], "psychological": [42, 58] },
-    "gates_expected": ["no_recent_flying", "recent_injury_or_reserve", "instructor_said_wait"],
+    "gates_expected": ["no_recent_flying", "instructor_said_wait"],
     "rules_expected": [],
-    "suggestions_must_include": ["recurrency_plan", "instructor_conversation", "improve_currency"],
-    "suggestions_must_not_include": ["motivation_reframe_keeping_up", "motivation_reframe_equipment_fix", "acro_wrong_wing"],
+    "exemptions_expected": [],
+    "suggestions_must_include": ["recurrency_plan", "instructor_conversation", "improve_currency", "post_scare_support"],
+    "suggestions_must_not_include": ["motivation_reframe_keeping_up", "motivation_reframe_equipment_fix", "acro_wrong_wing", "scope_matches_your_plans"],
     "notes": [
-      "Only three gate reasons may be shown (max_gate_reasons_shown), and the tone must stay 'here's the order to do things in', not 'you shouldn't be flying'.",
+      "v2 change: the 'recent_injury_or_reserve' gate was removed from the rubric, so he now fires two gates instead of three. His answers and all three scores are unchanged (skills ~64.4, psychological ~55.4, total ~60.3) and the recommendation is still Not yet. This is the persona that proves the gate removal did not change any outcome: 'no_recent_flying' and 'instructor_said_wait' each cap him on their own.",
+      "Without any gate his total of ~60.3 would read Nearly ready, and his psychological score of ~55.4 sits above the Not yet floor of 35 — so the two remaining gates are genuinely doing the work here, not just agreeing with a score that was already low.",
+      "His injury still shows in the output in two places: 'incidents_12m: injury_or_reserve' scores 0.0 on a weight-12 question (it is most of why his psychological score is ~55 rather than ~75), and the 'post_scare_support' suggestion fires, which is now asserted. That suggestion carries the useful half of the removed gate's message — debrief it with an instructor before changing anything.",
+      "Only three gate reasons may ever be shown (max_gate_reasons_shown), and the tone must stay 'here's the order to do things in', not 'you shouldn't be flying'.",
       "His motive ('wants more performance') must not be criticised anywhere in his output — knowledge/disagreements.md point 9.",
-      "Owner decision: the 'recent_injury_or_reserve' gate is our own conservative addition, not a sourced criterion. If the owner softens it, Ray should still be gated by currency and by his instructor's advice."
+      "His ambitions are ['local_soaring'], which meets the local_only profile, but the v2 stated-plans exemption cannot apply to him: his rough_air_awareness answer is 'sometimes_notice', not 'not_come_up', so 'unevidenced_core_checks' was never in play. 'scope_matches_your_plans' is asserted absent to confirm the exemption's trigger is correctly scoped to that one answer."
     ]
   }
 }

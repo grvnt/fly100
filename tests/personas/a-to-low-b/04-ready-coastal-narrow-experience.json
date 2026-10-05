@@ -1,0 +1,68 @@
+{
+  "step": "a-to-low-b",
+  "version": 2,
+  "id": "ready-coastal-narrow-experience",
+  "name": "Dave — lots of flights, narrow experience, and happy with it",
+  "summary": "Coastal soaring pilot. 120 short flights but only 22 hours, out most weeks, superb ground handling and launches, wing feels sluggish in a light sea breeze. Has never been in a thermal and says reading rough air 'hasn't really come up'. Has no plans beyond carrying on soaring his local coast.",
+  "why_this_persona": "Tests the hours-versus-flights split (disagreements point 2) and, from v2, the stated-plans exemption on the untested rough-air check. His hands are better than most Ready pilots'. One gate-level check is untested — but his own stated flying plans don't put him in the air that check is about, so it no longer blocks Ready. He is the paired twin of persona 09, who gives identical answers with cross-country plans and stays at Nearly ready.",
+  "answers": {
+    "total_airtime": "10_25",
+    "total_flights": "over_75",
+    "airtime_last_12m": "10_25",
+    "current_wing_hours": "10_25",
+    "training_status": "qualified_independent",
+    "flying_frequency": "weekly_plus",
+    "ground_handling_kiting": "hold_and_move",
+    "ground_handling_practice": "regularly",
+    "launch_reliability": "nearly_always",
+    "speed_heading_turns": "both_calm",
+    "landing_accuracy": "within_few_wings",
+    "active_piloting_bumpy": "try_to_react",
+    "conditions_flown": "light_thermal_ridge",
+    "rough_air_awareness": "not_come_up",
+    "speed_bar": "never_tried",
+    "collapse_experience": "never",
+    "descent_bigears": "tried_once_twice",
+    "reserve_familiarity": "practised_once",
+    "manoeuvre_course": "no",
+    "external_feedback": "friends_think_so",
+    "upgrade_motivation": "wing_limiting",
+    "wing_expectation": "more_feedback_to_learn",
+    "learning_curve_willingness": "fine_take_it_gently",
+    "ambitions": ["local_soaring"],
+    "response_when_rough": "heart_up_keep_flying",
+    "decline_to_fly": "yes_once_or_twice",
+    "peer_pressure": "own_call_comfortable",
+    "incidents_12m": "one_or_two_reflected"
+  },
+  "expected": {
+    "recommendation": "ready",
+    "total_score_range": [80, 90],
+    "category_score_ranges": { "skills": [74, 86], "psychological": [90, 100] },
+    "gates_expected": [],
+    "rules_expected": [],
+    "exemptions_expected": ["stated_plans_dont_require_rough_air_judgement"],
+    "suggestions_must_include": [
+      "air_awareness_untested",
+      "scope_matches_your_plans",
+      "build_total_airtime",
+      "active_piloting_drill",
+      "test_fly_first"
+    ],
+    "suggestions_must_not_include": [
+      "ground_handling_basics",
+      "launch_practice",
+      "improve_currency",
+      "big_air_caution",
+      "xc_skills_on_current_wing",
+      "hesitancy_is_valid"
+    ],
+    "notes": [
+      "v2 change: he was Nearly ready in v1, held there by 'unevidenced_core_checks' on rough_air_awareness:not_come_up. His only answer change is ambitions, from ['local_soaring', 'first_xc'] to ['local_soaring'], which makes him unambiguously a local/coastal-only pilot and therefore eligible for the stated-plans exemption. No score changed — ambitions carry zero weight.",
+      "All three exemption conditions must hold for him: ambitions include local_soaring, ambitions include none of first_xc/longer_xc/hike_fly/competitions/acro, and conditions_flown is 'light_thermal_ridge'. If a scorer passes him with any one of those missing, the exemption is implemented too loosely.",
+      "Being exempted must not mean the untested check disappears from his output. 'air_awareness_untested' and 'scope_matches_your_plans' are both asserted present for exactly that reason, and 'scope_matches_your_plans' must name the condition (going inland, cross-country or mountain flying) under which his result would be different.",
+      "'xc_skills_on_current_wing' must be absent: it is a useful suggestion, but it would contradict the stated plans the exemption is built on and would read as nudging him toward flying he hasn't asked about.",
+      "His result must not read as a telling-off and must not read as a reward either. His flying is strong, his plans are modest, and the two match."
+    ]
+  }
+}

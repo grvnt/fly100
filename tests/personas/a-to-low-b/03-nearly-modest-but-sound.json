@@ -1,5 +1,6 @@
 {
   "step": "a-to-low-b",
+  "version": 2,
   "id": "nearly-modest-but-sound",
   "name": "Tom — nearly there, a couple of gaps",
   "summary": "20 hours, 45 flights, flies a couple of times a month. Launches mostly go fine, kiting is middling, and he admits the day's rough patch sometimes catches him out. Sensible motives, no incidents, nobody qualified has watched him fly in a while.",
@@ -40,9 +41,12 @@
     "category_score_ranges": { "skills": [62, 74], "psychological": [78, 90] },
     "gates_expected": [],
     "rules_expected": ["critical_check_floor:rough_air_awareness"],
+    "exemptions_expected": [],
     "suggestions_must_include": ["learn_to_read_the_day", "ground_handling_basics", "reserve_practice", "get_eyes_on_your_flying"],
-    "suggestions_must_not_include": ["recurrency_plan", "post_scare_support", "motivation_reframe_equipment_fix"],
+    "suggestions_must_not_include": ["recurrency_plan", "post_scare_support", "motivation_reframe_equipment_fix", "scope_matches_your_plans"],
     "notes": [
+      "v2 re-check, unchanged. He is held by 'critical_check_floor', not by 'unevidenced_core_checks': his answer is 'sometimes_notice' (scores 0.45, below that rule's 0.5 minimum), not 'not_come_up'. The v2 stated-plans exemption applies only to 'not_come_up' and only to 'unevidenced_core_checks' — 'critical_check_floor' has no exemption of any kind and must not acquire one. He is the persona that proves that boundary.",
+      "He also does not meet the local_only profile, since his ambitions include 'first_xc'. Both reasons independently rule the exemption out for him; a scorer that exempts him has implemented the trigger too broadly.",
       "If a future tuning pass raises his total above the Ready threshold, the critical_check_floor rule must still hold him at Nearly ready while 'rough_air_awareness' is in its bottom bands."
     ]
   }

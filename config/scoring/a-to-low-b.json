@@ -1,7 +1,31 @@
 {
   "step": "a-to-low-b",
-  "version": 1,
+  "version": 2,
   "meta": {
+    "design_decisions": [
+      {
+        "id": "v2-remove-injury-gate",
+        "change": "Removed the standalone 'recent_injury_or_reserve' hard gate (v1 gate id, fired on incidents_12m:injury_or_reserve).",
+        "reason": "An injury or reserve ride in the last 12 months is not reliably tied to wing-class readiness. It can come from a bad landing, a ground-handling accident or a cause with nothing to do with whether the pilot's current wing matches their skill, so it is too blunt a signal to cap a result on its own. The event that genuinely speaks to wing-class readiness — losing control of the wing after a collapse — is already gated by 'uncontrolled_collapse' (collapse_experience:lost_control), which is the gate the brief's own example points at.",
+        "what_still_bites": "incidents_12m:injury_or_reserve still scores 0.0 on the highest-weighted group of psychological questions (weight 12 of 75), so it pulls the psychological category down hard and can still produce Not yet through the not_yet psychological category floor (35) in combination with other weak answers. Other gates (currency, instructor advice, uncontrolled collapse) are unaffected, and the 'post_scare_support' suggestion still triggers on this answer.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Hard gates: some answers (e.g. frequent collapses they struggle to recover from, very low hours for the target class) cap the result at 'Not yet'.\" The brief's examples are all wing-class-relevant capability signals, not incident outcomes.",
+          "note": "Owner decision, recorded Oct 2026. The v1 gate was explicitly flagged in-config as our own unsourced conservative addition and as a candidate for softening; this is that softening. No knowledge-base criterion supported the gate, so removing it does not contradict any source."
+        }
+      },
+      {
+        "id": "v2-intended-flying-context",
+        "change": "The 'unevidenced_core_checks' Ready-blocker on rough_air_awareness:not_come_up now has a narrow, explicitly-conditioned exemption driven by the pilot's stated flying plans (the 'ambitions' answer).",
+        "reason": "Daoust's rough-air check asks whether a pilot can see the rough part of the day coming and stay out of it. How much that matters depends on what air the pilot's own flying will put them in. A pilot whose stated plans are squarely local, ridge or coastal soaring is not heading for thermic or mountain air, so 'reading rough air hasn't come up' describes a scope they have chosen rather than a skill they are missing for the flying they do. A pilot with any cross-country, hike-and-fly, competition or acro plan is heading straight for exactly the conditions the check is about, so for them the untested answer remains a Ready-blocker.",
+        "explicitly_not_a_loosening": "This is a judgement about which demands a pilot's own plans create, not a reduction in the standard. The standard itself is unchanged: the hard gate on 'it usually catches me out' still fires for everyone, the exemption requires three conditions to all hold, and both the 'air_awareness_untested' and 'scope_matches_your_plans' suggestions still appear for an exempted pilot so the untested check is never silently dropped. Two pilots giving the same rough-air answer can legitimately get different results because they are asking different things of the wing.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
+          "cites": "\"Sources consistently describe this step as still happening in gentle, forgiving conditions — light thermic days, moderate ridge soaring, avoiding rough air by a wide margin.\" Moderate ridge and coastal soaring is inside the window the sources describe for this step, not outside it. Daoust's (expert) check is framed as identifying and avoiding rough air, i.e. about managing exposure rather than about having been exposed.",
+          "note": "Also consistent with XC Mag's 'The Head Game' (industry/expert, Theurillat and Guschlbauer) framing of readiness as challenge matched to skill — the challenge a pilot is matched against is the one their own flying creates. Owner decision, recorded Oct 2026, replacing the v1 behaviour where every pilot answering 'hasn't really come up' was capped at Nearly ready regardless of what flying they planned."
+        }
+      }
+    ],
     "confidence": "comparatively high for this step",
     "confidence_source": {
       "ref": "knowledge/steps/a-to-low-b.md#source-quality-note",
@@ -43,6 +67,30 @@
         "cites": "\"Psychological answers carry real weight, not a side note.\"",
         "note": "Supported by knowledge/steps/a-to-low-b.md#psychological--mindset-factors (406 Paragliding on willingness to restart the learning curve; XC Mag's 'The Head Game' on challenge-skill balance) and knowledge/disagreements.md point 9."
       }
+    }
+  },
+
+  "intended_flying_context": {
+    "purpose": "Named, reusable groupings of the 'ambitions' answer, used to decide which demands a pilot's own stated plans create. Never scored and never shown to the pilot. Referenced by thresholds.ready.unevidenced_core_checks.exemptions and by the 'scope_matches_your_plans' suggestion.",
+    "profiles": {
+      "exposure_bound": {
+        "label_internal": "Plans that will put the pilot in thermic, mountain or high-workload air",
+        "ambitions_includes_any": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"],
+        "note": "Cross-country (even a first XC), hike-and-fly, competition and acro flying all mean leaving the known site, flying through the usable thermic part of the day, or deliberately loading the wing. All of them will expose the pilot to the air Daoust's rough-air check is about."
+      },
+      "local_only": {
+        "label_internal": "Plans that stay inside local, ridge or coastal soaring",
+        "requires_all": [
+          { "ambitions_includes_any": ["local_soaring", "just_enjoy"] },
+          { "ambitions_includes_none_of": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"] }
+        ],
+        "note": "Requires a positive statement of local-only or no-particular-goal flying, not merely the absence of an ambition tick. A pilot who selects nothing at all is NOT local_only — no stated plans means no evidence of scope, and knowledge/disagreements.md point 5 says default down when evidence is missing."
+      }
+    },
+    "source": {
+      "ref": "knowledge/disagreements.md#9",
+      "cites": "Recommended handling: ambition must not be treated as a penalty in itself; the diagnostic combination is an ambition-flavoured motive paired with thin readiness elsewhere.",
+      "note": "Using ambitions as scope context is consistent with that: it still never costs the pilot a point, and the only direction it can move a result for a pilot who ticks an ambition box is the conservative one. See meta.design_decisions 'v2-intended-flying-context'."
     }
   },
 
@@ -398,7 +446,7 @@
       "source": {
         "ref": "knowledge/disagreements.md#9",
         "cites": "Recommended handling: avoid treating 'wants more performance' or 'wants to fly with faster friends' alone as a penalty; the diagnostic combination is an ambition-flavoured motive paired with thin evidence of readiness elsewhere.",
-        "note": "Deliberately zero-weighted. Ambition only affects the result through the combination gate 'ambition_without_readiness', and otherwise only shapes which suggestions appear."
+        "note": "Deliberately zero-weighted — no answer here adds or removes a single point. Ambitions affect the result in exactly two places: the combination gate 'ambition_without_readiness', and (v2) the stated-plans exemption on thresholds.ready.unevidenced_core_checks, via intended_flying_context. Otherwise they only shape which suggestions appear. Both uses are asymmetric in the conservative direction: ticking an ambition box can only ever make the result stricter, never more generous."
       }
     },
     "response_when_rough": {
@@ -453,7 +501,8 @@
       "source": {
         "ref": "BRIEF.md#inputs",
         "cites": "\"Honesty about recent incidents and near misses\" is listed as a required psychological input.",
-        "note": "Non-monotonic: an honest, reflected-on near miss scores higher (1.0) than 'nothing happened' (0.85), because the first gives evidence of a working debrief habit and the second gives no evidence either way. Supported by Bendicht Erb via Podz-Glidz (expert) on accident processing and by Dathe's mini-step re-exposure approach for pilots still uneasy after a scare."
+        "note": "Non-monotonic: an honest, reflected-on near miss scores higher (1.0) than 'nothing happened' (0.85), because the first gives evidence of a working debrief habit and the second gives no evidence either way. Supported by Bendicht Erb via Podz-Glidz (expert) on accident processing and by Dathe's mini-step re-exposure approach for pilots still uneasy after a scare.",
+        "v2_note": "'injury_or_reserve' keeps its 0.0 score and this question keeps its weight of 12 (the joint-highest psychological weight after response_when_rough), but it no longer fires a hard gate of its own — see meta.design_decisions 'v2-remove-injury-gate'. Scoring it at 0.0 on a heavily weighted question means it still drags the psychological category toward the not_yet floor of 35 in combination with other weak answers, which is the proportionate treatment for a signal that may or may not be about wing-class readiness at all."
       },
       "options": {
         "none": 0.85,
@@ -516,7 +565,31 @@
           "ref": "knowledge/disagreements.md#5",
           "cites": "SAHPA's pattern of defaulting to the most conservative category unless a lower one is actively evidenced.",
           "note": "Daoust frames reading and avoiding rough air as a gate-level check, so 'it hasn't really come up' is treated as not-yet-demonstrated rather than as a pass. It blocks Ready but is not scored as a failure (0.5, neutral) and never fires a gate."
-        }
+        },
+        "exemptions": [
+          {
+            "id": "stated_plans_dont_require_rough_air_judgement",
+            "exempts": "rough_air_awareness:not_come_up",
+            "when": {
+              "all_of": [
+                { "intended_flying_context": "local_only" },
+                { "question": "conditions_flown", "answer_in": ["smooth_only", "light_thermal_ridge"] }
+              ]
+            },
+            "effect": "The listed answer does not block a Ready result. Nothing else about the rule changes, and no score changes.",
+            "still_required": [
+              "The 'rough_air_catches_me_out' hard gate is unaffected — 'it usually catches me out' still caps the result at Not yet for every pilot, whatever their plans.",
+              "The 'critical_check_floor' rule is unaffected. rough_air_awareness:not_come_up scores 0.5, which sits exactly on that rule's minimum, so an exempted pilot is passing it rather than being excused from it.",
+              "Suggestions 'air_awareness_untested' and 'scope_matches_your_plans' still fire, so an exempted pilot is still told the check is untested and still told plainly that it becomes essential the moment their plans widen."
+            ],
+            "why_conditions_flown_is_also_required": "The exemption needs the pilot's own account of the air they fly to be consistent with the answer. A pilot who says they regularly fly moderate or strong thermic days and then says reading rough air hasn't come up is giving a contradictory pair of answers, and knowledge/disagreements.md point 5 says default down when the evidence is ambiguous. So the exemption only applies to pilots whose conditions answer is 'smooth evenings and calm mornings' or 'light thermals and gentle ridge or coastal soaring'.",
+            "source": {
+              "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
+              "cites": "Sources describe this step as happening in gentle, forgiving conditions — light thermic days and moderate ridge soaring — with a wide margin kept from rough air. Daoust's (expert) check is phrased as being able to identify AND avoid rough air 30+ minutes ahead, i.e. it is a check on managing exposure.",
+              "note": "Deliberate design call, not a loosening — see meta.design_decisions 'v2-intended-flying-context' for the full reasoning and for why two pilots with the same rough-air answer can correctly get different results. A reviewer comparing tests/personas/a-to-low-b/04 (coastal, local plans, Ready) with 09 (identical answers, cross-country plans, Nearly ready) is looking at this rule and nothing else."
+            }
+          }
+        ]
       }
     },
     "nearly_ready": {
@@ -619,17 +692,6 @@
       }
     },
     {
-      "id": "recent_injury_or_reserve",
-      "cap": "not_yet",
-      "when": { "question": "incidents_12m", "answer_in": ["injury_or_reserve"] },
-      "message": "After an injury or a reserve ride, the next wing is a conversation to have with an instructor or coach who knows what happened — not something to settle from a form.",
-      "source": {
-        "ref": "knowledge/disagreements.md#5",
-        "cites": "SAHPA's conservative-by-default design pattern — default to the most conservative category unless proven otherwise.",
-        "note": "No source states this gate directly; it is our own conservative application of that default, combined with the brief's hard-gate instruction. Flagged for owner review: an owner who thinks this is too blunt could soften it to Nearly ready plus a mandatory instructor referral."
-      }
-    },
-    {
       "id": "instructor_said_wait",
       "cap": "not_yet",
       "when": { "question": "external_feedback", "answer_in": ["advised_to_wait"] },
@@ -682,6 +744,16 @@
         "cites": "Recommended handling: ambition itself is legitimate fuel (Guschlbauer via XC Mag) and must not be penalised alone; the concerning pattern is ambition paired with thin readiness.",
         "note": "Only fires when skills are already weak, which is why the message is framed around the groundwork rather than around the ambition. Hamerton via Cloudbase Mayhem 186 (expert) supports the general principle that progression should stay deliberate at this stage."
       }
+    }
+  ],
+
+  "removed_gates": [
+    {
+      "id": "recent_injury_or_reserve",
+      "removed_in_version": 2,
+      "fired_on": "incidents_12m:injury_or_reserve",
+      "reason": "See meta.design_decisions 'v2-remove-injury-gate'. Recorded here so the id is not silently absent: any scorer, test or persona file still referencing it is out of date.",
+      "replaced_by": "No replacement gate. The answer keeps its 0.0 score on a weight-12 psychological question and reaches Not yet, where appropriate, through the not_yet psychological category floor. Genuinely wing-class-relevant loss of control is gated by 'uncontrolled_collapse'."
     }
   ],
 

@@ -1,7 +1,14 @@
 {
   "step": "a-to-low-b",
-  "version": 1,
+  "version": 2,
   "meta": {
+    "trigger_operators": {
+      "question + answer_in": "Single-select match.",
+      "question + answer_includes_any": "Multi-select question contains at least one of the listed options.",
+      "recommendation_in": "Matches on the final recommendation, so these are evaluated after scoring and gating.",
+      "any_of / all_of": "Boolean combinators over the above.",
+      "intended_flying_context": "Added in v2. Matches a named profile defined in intended_flying_context.profiles in config/scoring/a-to-low-b.json ('local_only' or 'exposure_bound'), which are groupings of the 'ambitions' answer. Kept in the scoring config rather than duplicated here so the rule and the suggestion can never drift apart."
+    },
     "selection": {
       "min_shown": 3,
       "max_shown": 5,
@@ -203,11 +210,30 @@
       "priority": 3,
       "trigger": { "question": "rough_air_awareness", "answer_in": ["not_come_up"] },
       "title": "Test your read of the day while the stakes are low",
-      "body": "If you've stuck to gentle conditions, you won't yet know how good your read of the day is — and that's the one check the sources treat as essential before leaving A-class gear. Start calling it out loud before you fly: when will it get rough, why, and what's your plan when it does? Then check yourself against what happened, and against what the experienced pilots on the hill thought.",
+      "body": "If you've stuck to gentle conditions, you won't yet know how good your read of the day is — and the published guidance treats that read as essential before anyone takes a less forgiving wing into bigger air. Start calling it out loud before you fly: when will it get rough, why, and what's your plan when it does? Then check yourself against what happened, and against what the experienced pilots on the hill thought.",
       "source": {
         "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
         "cites": "Daoust's checklist (expert) asks whether a pilot can identify and avoid rough air 30+ minutes before it arrives, framed as a gate for moving past pure-A gear.",
-        "note": "Pairs with the 'unevidenced_core_checks' rule in config/scoring/a-to-low-b.json, which blocks a Ready result on this answer without scoring it as a failure."
+        "note": "Pairs with the 'unevidenced_core_checks' rule in config/scoring/a-to-low-b.json, which blocks a Ready result on this answer without scoring it as a failure. This suggestion fires on the answer alone, so it also appears for a pilot exempted from that rule by their stated local-only flying plans — the check is never silently dropped. Wording was broadened slightly in v2 ('before anyone takes a less forgiving wing into bigger air' rather than 'before leaving A-class gear') so it reads accurately for an exempted pilot who has been told Ready."
+      }
+    },
+    {
+      "id": "scope_matches_your_plans",
+      "topic": "scope",
+      "priority": 2,
+      "trigger": {
+        "all_of": [
+          { "question": "rough_air_awareness", "answer_in": ["not_come_up"] },
+          { "intended_flying_context": "local_only" },
+          { "question": "conditions_flown", "answer_in": ["smooth_only", "light_thermal_ridge"] }
+        ]
+      },
+      "title": "This result is about the flying you've described",
+      "body": "You've said you're sticking to local, ridge or coastal soaring, and that reading rough air hasn't really come up. Those two answers fit together, and your result takes them at face value. Worth knowing where the line is, though. The moment you start heading inland, going cross-country, or flying mountain sites, being able to see the rough part of the day coming — with half an hour's warning, not once you're in it — stops being optional. If that's where you're heading, build that read on the wing you already know, before you change anything.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
+        "cites": "Sources describe this step as happening in gentle conditions — light thermic days and moderate ridge soaring — with a wide margin kept from rough air. Daoust's (expert) check is about identifying and avoiding rough air 30+ minutes ahead.",
+        "note": "Exists specifically so the stated-plans exemption in thresholds.ready.unevidenced_core_checks is visible to the pilot it benefits, in plain language and without stating the rule mechanically. It names the condition under which their result would change, which is the honest version of a scope-limited Ready. Tone rule: not a warning and not a caveat that undercuts the result — a boundary stated once, as information."
       }
     },
     {
@@ -309,7 +335,8 @@
       "body": "Feeling uneasy after a fright or an injury is information, not a flaw — and it usually means something real needs rebuilding rather than overriding. Debrief what happened with an instructor or a pilot you trust, then rebuild in deliberate small steps: ground handling, then easy flights at a familiar site, then slightly more. Changing wing in the middle of that adds a second new thing to manage.",
       "source": {
         "ref": "knowledge/sources.md#podcast--podz-glidz--lu-glidz-lucian-haas-translatedparaphrased-transcripts",
-        "cites": "Yvonne Dathe (expert, sports psychologist) frames fear as a protective signal to listen to rather than override, and recommends deliberate mini-steps outward from the comfort zone. Bendicht Erb (expert, instructor and sports psychologist) describes the same staged re-exposure path after his own low-altitude double frontal collapse. XC Mag's 'The Head Game' (industry/expert, Thomas Theurillat) treats pre-flight fear as useful signal, not something to override."
+        "cites": "Yvonne Dathe (expert, sports psychologist) frames fear as a protective signal to listen to rather than override, and recommends deliberate mini-steps outward from the comfort zone. Bendicht Erb (expert, instructor and sports psychologist) describes the same staged re-exposure path after his own low-altitude double frontal collapse. XC Mag's 'The Head Game' (industry/expert, Thomas Theurillat) treats pre-flight fear as useful signal, not something to override.",
+        "note": "From v2 this suggestion carries more of the weight for the 'injury_or_reserve' answer, since that answer no longer fires a hard gate (see removed_gates in config/scoring/a-to-low-b.json). It is priority 1, so it always reaches the displayed set. Its body already points the pilot at a debrief with an instructor, which was the useful half of the removed gate's message."
       }
     },
     {

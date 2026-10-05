@@ -1,5 +1,6 @@
 {
   "step": "a-to-low-b",
+  "version": 2,
   "id": "ready-cautious-but-capable",
   "name": "Priya — cautious, and good at it",
   "summary": "70 hours over four seasons, flies two or three times a month, excellent on the ground, has walked away from several marginal days without regret. Honest that her heart rate climbs in rough air, but she keeps flying the wing. Nervous about whether she's 'allowed' to move up.",
@@ -40,9 +41,11 @@
     "category_score_ranges": { "skills": [84, 95], "psychological": [88, 98] },
     "gates_expected": [],
     "rules_expected": [],
+    "exemptions_expected": [],
     "suggestions_must_include": ["instructor_conversation", "get_eyes_on_your_flying"],
-    "suggestions_must_not_include": ["nerves_are_not_the_problem", "motivation_reframe_keeping_up", "peer_pressure_plan", "improve_currency"],
+    "suggestions_must_not_include": ["nerves_are_not_the_problem", "motivation_reframe_keeping_up", "peer_pressure_plan", "improve_currency", "scope_matches_your_plans"],
     "notes": [
+      "v2 re-check, unchanged. She answers 'rough_air_awareness: plan_around_it' and 'incidents_12m: none', so neither v2 change reaches her. Scores and recommendation as computed in v1.",
       "'want_more_performance' must not pull her below Ready on its own — knowledge/disagreements.md point 9.",
       "'collapse_experience: never' must not be treated as a deficit — knowledge/steps/a-to-low-b.md#collapse-handling.",
       "Reviewer check: nothing in her output should read as talking her into the upgrade."

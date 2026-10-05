@@ -1,5 +1,6 @@
 {
   "step": "a-to-low-b",
+  "version": 2,
   "id": "notyet-strong-hands-thin-motives",
   "name": "Marcus — good hands, wrong reasons",
   "summary": "45 hours, flies weekly, launches and handling are genuinely good, thermals confidently. But he's upgrading because his group is on B wings, expects the new wing to cope better with rough air, launches on days he's unsure about rather than be left behind, and has had several near misses he can't explain. Says rough air doesn't bother him.",
@@ -40,9 +41,12 @@
     "category_score_ranges": { "skills": [82, 94], "psychological": [22, 36] },
     "gates_expected": [],
     "rules_expected": ["not_yet_category_floor:psychological"],
+    "exemptions_expected": [],
     "suggestions_must_include": ["motivation_reframe_equipment_fix", "motivation_reframe_keeping_up", "peer_pressure_plan", "debrief_habit"],
-    "suggestions_must_not_include": ["build_total_airtime", "ground_handling_basics", "launch_practice"],
+    "suggestions_must_not_include": ["build_total_airtime", "ground_handling_basics", "launch_practice", "scope_matches_your_plans"],
     "notes": [
+      "v2 re-check, unchanged. He answers 'rough_air_awareness: usually_with_time' and 'incidents_12m: several_unsure', so neither v2 change reaches him. He remains the persona that carries the Not yet psychological floor on its own, with no gate firing.",
+      "His ambitions ['longer_xc', 'competitions'] put him in the exposure_bound profile, so the stated-plans exemption could never apply to him even if his rough-air answer were 'not_come_up'.",
       "His completed manoeuvres course adds the full 2-point bonus and must not rescue the result — bonuses are applied before the floors and gates.",
       "The combination gate 'equipment_as_a_fix_with_thin_readiness' deliberately does NOT fire here: his readiness is not thin. That is the intended behaviour from knowledge/disagreements.md point 9, and the psychological floor is what carries this result instead.",
       "'ambition_without_readiness' also does not fire, because his skills score is well above 55. Ambition alone is never penalised."

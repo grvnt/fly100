@@ -1,5 +1,6 @@
 {
   "step": "a-to-low-b",
+  "version": 2,
   "id": "notyet-still-in-training",
   "name": "Ellie — still on the course, buying her first wing",
   "summary": "Mid-way through her training, 8 hours and about a dozen flights, still flying school gear. Launches regularly need several attempts. Needs to buy a wing soon and is wondering whether to skip the A and get a low-B.",
@@ -40,9 +41,12 @@
     "category_score_ranges": { "skills": [34, 48], "psychological": [55, 70] },
     "gates_expected": ["still_in_training", "airtime_under_10h", "flights_under_15", "unreliable_launches"],
     "rules_expected": [],
+    "exemptions_expected": [],
     "suggestions_must_include": ["instructor_conversation", "launch_practice", "ground_handling_basics", "build_total_airtime"],
-    "suggestions_must_not_include": ["motivation_reframe_keeping_up", "post_scare_support", "speed_bar_overuse", "big_air_caution"],
+    "suggestions_must_not_include": ["motivation_reframe_keeping_up", "post_scare_support", "speed_bar_overuse", "big_air_caution", "scope_matches_your_plans"],
     "notes": [
+      "v2 re-check, unchanged. She is the one other persona who answers 'rough_air_awareness: not_come_up', so she is worth checking against the new exemption explicitly. Her ambitions include 'first_xc', so she does not meet the local_only profile and is not exempt. Even if she were, all four of her gates would still cap her at Not yet, and gates short-circuit the threshold rules — so the exemption can never affect her result. Both scores and the recommendation are as computed in v1.",
+      "'incidents_12m: none', so the removed injury gate is irrelevant to her.",
       "The 'still_in_training' gate message must be shown first and must make clear that schools legitimately put students on low-B wings — the cap is a deferral to her instructor, not a judgement on her flying.",
       "No ground-handling gate exists, by design (knowledge/disagreements.md point 11): her weak kiting shows up only in the score and in the suggestions. Her launch answer is what gates.",
       "rules_expected is empty because gates short-circuit the threshold rules. Her skills score of about 35 would independently trip the Not yet floor if no gate had fired."

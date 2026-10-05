@@ -1,5 +1,6 @@
 {
   "step": "a-to-low-b",
+  "version": 2,
   "id": "notyet-ambitious-and-shaken",
   "name": "Jonas — big plans, thin groundwork",
   "summary": "Qualified eight months ago, 15 hours, about 25 flights, flies roughly monthly. Has been going out on thermic days where the air catches him out, had a collapse that got away from him and has been uneasy since. Never practised the reserve, doesn't ground handle, pushes bar when he's low. Wants to be flying long cross-countries and competitions next season and thinks a better wing will cope with the conditions he's finding hard.",
@@ -45,14 +46,16 @@
       "ambition_without_readiness"
     ],
     "rules_expected": [],
+    "exemptions_expected": [],
     "suggestions_must_include": [
       "motivation_reframe_equipment_fix",
       "learn_to_read_the_day",
       "post_scare_support",
       "reserve_practice"
     ],
-    "suggestions_must_not_include": ["test_fly_first"],
+    "suggestions_must_not_include": ["test_fly_first", "scope_matches_your_plans"],
     "notes": [
+      "v2 re-check, unchanged. His rough-air answer is 'caught_out', which fires the 'rough_air_catches_me_out' hard gate — and that gate has no exemption for anyone, whatever their stated plans. His ambitions ['longer_xc', 'competitions'] also put him in the exposure_bound profile. His incident answer is 'shook_me', not 'injury_or_reserve', so the removed injury gate never applied to him either. All four of his gates still fire.",
       "Four gates fire but only three may be shown. The three shown must be the most actionable ones, and the suggestion list must not simply restate them.",
       "rules_expected is empty because gates short-circuit the threshold rules (see gate_behaviour.evaluation_order in the scoring config). His psychological score of about 19 would independently trip the Not yet floor if no gate had fired.",
       "'post_scare_support' must be worded so his unease is treated as useful information — docs/design-context.md. Nothing in his output may encourage him toward the upgrade.",
