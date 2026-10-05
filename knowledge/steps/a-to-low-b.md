@@ -30,7 +30,6 @@ Not heavily emphasised at this step by any source — the A/low-B class boundary
 ## Psychological / mindset factors
 
 - [406 Paragliding](https://406paragliding.com/upgrading-your-wing-when-should-you-upgrade-your-wing/) frames readiness partly as emotional: being willing to "start over" on the new wing's learning curve rather than clinging to comfort on the old one.
-- [Paraclinic Aotearoa — Hidden Risk in Paragliding](https://www.paraclinicsaotearoa.co.nz/post/the-hidden-risk-in-paragliding-ego-mindset-the-psychology-of-safety) (expert) is not step-specific but is directly relevant here: it distinguishes task-oriented motivation (flying for its own sake, associated with safer decisions) from ego-oriented motivation (flying to keep up with others or prove something, associated with more risk-taking) — useful framing for how the app should interpret a pilot's stated reason for wanting to upgrade at any step, including this first one.
 
 ## Red flags
 

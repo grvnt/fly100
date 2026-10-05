@@ -13,6 +13,7 @@ This step covers two things sources often conflate: (a) moving from an accessibl
 
 - [Grands Espaces](https://grandsespaces.com/en/en-c-2-liners-paragliders/) (industry): describes 2-liner C wings as requiring more active piloting specifically in turns, compared to the more "intuitive, easy to adjust" turn behaviour of mainstream 3-liner C wings.
 - [Cross Country Magazine — First Time Two-Line](https://xcmag.com/magazine-articles/first-time-two-line/) (industry/expert, Malin Lobb): names specific SIV-trained skills expected before a 2-liner — confident back-flying, managing the energy from a frontal collapse, and efficiently clearing a cravat through a half-spin.
+- [Brett Janaway — Thermaling Masterclass (YouTube)](https://youtu.be/G-gqUxq0C6Q) (expert instructor): disagrees specifically on back-flying — he doesn't think it's a necessary skill, even for 2-liners. He puts the real priorities as pitch control and cravat clearing instead. See the SIV disagreement note below and `disagreements.md`.
 - [richiesadventures.com](https://richiesadventures.com/2019/08/19/two-liner-progression-tips/) (industry/enthusiast): recommends learning B-line (rear riser) control before adding speed-bar input on a 2-liner, and starting with minimal, conservative inputs rather than "overflying" the wing from day one.
 
 ## Conditions flown
@@ -36,7 +37,8 @@ This step covers two things sources often conflate: (a) moving from an accessibl
 
 ## SIV
 
-- This is the step where sources first treat SIV as close to a precondition rather than optional enrichment: Malin Lobb's "well versed in SIV" framing, and the specific skill list (back-flying, frontal-collapse energy management, cravat recovery via half-spin) all assume dedicated SIV training, not just incidental in-flight experience.
+- This is the step where sources first treat SIV as close to a precondition rather than optional enrichment: Malin Lobb's "well versed in SIV" framing, and the specific skill list (frontal-collapse energy management, cravat recovery via half-spin) assume dedicated SIV training, not just incidental in-flight experience.
+- Which specific SIV skill matters most is itself contested: Malin Lobb includes back-flying in the must-have list; Brett Janaway explicitly disagrees that back-flying is necessary, even for 2-liners, and instead names pitch control and cravat clearing as the real priorities. Both treat cravat clearing as important — the disagreement is narrower than it first looks, confined to back-flying specifically. See `disagreements.md`.
 - Per the brief, SIV still shouldn't become a hard gate in the app even here — but this is the step where, if the app wants to surface SIV as a *strong recommendation* (optional context, not scored), the evidence best supports that framing. See `disagreements.md`.
 
 ## Source-quality note

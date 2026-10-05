@@ -29,7 +29,6 @@ The brief requires this step (and the two above/below it in difficulty) to carry
 ## Psychological / mindset factors
 
 - Seb Ospina's interview (via xcmag) is the most pointed psychological source in the ladder here: he explicitly describes his own early jump to high-end wings (age 17-18) as something that set his progression *back* rather than forward, directly warning against ambition-driven upgrades at this level.
-- The broader "ego vs task orientation" framing from [Paraclinic Aotearoa](https://www.paraclinicsaotearoa.co.nz/post/the-hidden-risk-in-paragliding-ego-mindset-the-psychology-of-safety) (expert) is arguably most relevant at exactly this step, where the performance gap between "what I can fly" and "what I want to fly" tends to be largest and most ego-charged.
 
 ## Red flags
 
