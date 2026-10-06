@@ -30,7 +30,7 @@
     "wing_expectation": "modest_step",
     "progress_goals": "technique_and_enjoyment",
     "learning_curve_willingness": "ground_handle_first",
-    "ambitions": ["xc_flights", "hike_fly"],
+    "ambitions": ["first_xc", "hike_fly"],
     "external_feedback": "instructor_suggested",
     "response_when_rough": "calm_active_exit_plan",
     "decline_to_fly": "yes_several_comfortable",
@@ -59,7 +59,7 @@
     "notes": [
       "Computed skills 83.9, psychological 97.9, total 90.6 — identical to persona 04, because the 'ambitions' question is zero-weighted and no answer in it adds or removes a point.",
       "Core invariant from knowledge/disagreements.md point 9: no ambitions answer may ever make a result MORE generous. Comparing 04 and 05 proves the direction — the only pilot whose result changes because of the ambitions answer is the one with narrower plans, and he changes toward Ready, not away from it. A scorer that produced Ready here, or Nearly ready for persona 04, would be inverting the asymmetry.",
-      "'ambition_without_readiness' must NOT fire. It requires an ambition in [longer_xc, competitions, acro] and a skills score below 55; he ticks neither condition — 'xc_flights' and 'hike_fly' are not on the gate's list and his skills score is 83.9.",
+      "'ambition_without_readiness' must NOT fire. It requires an ambition in [longer_xc, competitions, acro] and a skills score below 55; he ticks neither condition — 'first_xc' and 'hike_fly' are not on the gate's list and his skills score is 83.9.",
       "'scope_matches_your_plans' must NOT fire for him. It is the suggestion that explains the exemption, and he isn't exempted. He gets 'thermalling_untested' instead, which names the gap without the scope framing."
     ]
   }

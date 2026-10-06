@@ -1,6 +1,6 @@
 {
   "step": "low-b-to-mid-b",
-  "version": 1,
+  "version": 2,
   "meta": {
     "trigger_operators": {
       "question + answer_in": "Single-select match.",
@@ -550,7 +550,7 @@
       "id": "xc_skills_on_current_wing",
       "topic": "ambition",
       "priority": 6,
-      "trigger": { "question": "ambitions", "answer_includes_any": ["xc_flights", "longer_xc", "hike_fly", "competitions"] },
+      "trigger": { "question": "ambitions", "answer_includes_any": ["first_xc", "longer_xc", "hike_fly", "competitions"] },
       "title": "Most of what's stopping your longer flights isn't the wing",
       "body": "Centring climbs, climbing efficiently, reading the day, route choice, glide decisions and landing out safely — all of that is learnable on the wing you've got, and all of it transfers. One industry voice argues directly against tying wing upgrades to kilometres flown, on the grounds that the performance difference between adjacent categories is too small to matter next to how well you make decisions in the air. Build the decisions, and the upgrade becomes something you've earned rather than something you're hoping will help.",
       "source": {

@@ -1,6 +1,6 @@
 {
   "step": "low-b-to-mid-b",
-  "version": 1,
+  "version": 2,
   "meta": {
     "label": "Low-end EN-B to mid-range EN-B",
     "pilot_facing_title": "Moving from a low-B to a mid-B",
@@ -22,6 +22,8 @@
       "COLLAPSE PRACTICE IS NOT A PREREQUISITE. knowledge/steps/low-b-to-mid-b.md calls asymmetric-collapse competence 'the defining collapse-handling skill gained during this step' — gained during, not required before. So 'have you practised recognising and correcting an asymmetric collapse' is scored and heavily suggestion-driving, but it is deliberately neither a gate nor a Ready-blocker, and its worst answer scores 0.25 rather than 0. What IS gated is losing control of the wing, or repeatedly struggling to sort a collapse out, which is the brief's own gate example.",
       "ORDERED FLAGS. Questions marked \"ordered\": false are not a worst-to-best ladder, so the UI must never imply the last option is the best one. At this step that covers thermalling (because 'I mostly soar rather than thermal' is low-information, not bad), conditions flown, speed bar, collapse history, what your hands do, and all five motivation/mindset questions.",
       "deliberately_not_asked: (1) Strongest thermal or conditions flown without a collapse — knowledge/disagreements.md point 7 records this was searched for specifically across every source and every step and found nowhere; the knowledge base explicitly recommends not inventing it. (2) Cross-country distance flown — knowledge/steps/low-b-to-mid-b.md checked for this at this boundary and found nothing, and knowledge/disagreements.md point 14 adds a credible industry voice (Joy Paragliding) arguing distance is a poor proxy for wing readiness anyway. (3) Spot-landing accuracy — USHPA P2 names it and so A to low-B asks it, but P3, the proxy syllabus for this step, does not, and no other source raises it here. (4) Which sub-class the current wing is — see the sub-class note above. Each of these is an absence in the research, not an oversight, and is recorded here so a later reviewer does not 'fix' it by adding an unsourced question.",
+      "v2 CHAIN ALIGNMENT (Oct 2026, step-4 review follow-up). Two questions here asked the same thing as their A to low-B counterparts in slightly different words, so the chain merge (app/upgrade/lib/mergeQuestions.ts, which only dedupes when id, text, option ids and option LABELS all match) correctly treated them as different questions and asked both, back to back, in an A to mid-B run. Both are now byte-identical to config/questions/a-to-low-b.json and merge into a single screen. (1) 'reserve_familiarity': text moved to A to low-B's \"Your reserve — where is it, and have you ever practised the throw?\" and the 'know_location_only' label to \"...where the handle is...\". Option ids and all four option scores were already identical in both steps' scoring configs, and nothing about where your reserve is or whether you've practised the throw is step-specific, so there was never a reason for two screens. A to low-B's wording was kept as the reviewed one; it is also the better of the two, because the low-B wording repeated the phrase \"find the handle in a hurry\" that already appears in the first option. (2) 'ambitions': option id 'xc_flights' renamed to 'first_xc' and the help text matched to A to low-B's, so the whole question is now identical. The LABEL that survived is this step's broader \"Cross-country flights — first ones, or building them up\", and A to low-B was changed to match it rather than the other way round — see the v3 note in config/questions/a-to-low-b.json. Narrowing it to \"my first cross-country flights\" would have left a low-B pilot who already flies short cross-countries nothing to tick, which could have wrongly qualified them for the lenient 'local_only' stated-plans profile. Scoring impact of the whole v2 change: none. 'ambitions' is unscored (weight 0), the renamed id was updated in lockstep in config/scoring/low-b-to-mid-b.json (both intended_flying_context profiles), config/suggestions/low-b-to-mid-b.json ('xc_skills_on_current_wing') and the five personas that reference it, and all 9 personas plus scripts/check-merge-rule.mts were re-run.",
+      "NOT aligned, on purpose: the other same-id pairs across these two steps (total_airtime, total_flights, airtime_last_12m, training_status, ground_handling_kiting, ground_handling_practice, launch_reliability, conditions_flown, speed_bar, collapse_experience, upgrade_motivation, wing_expectation, learning_curve_willingness, external_feedback) stay as two separate questions, because their answer bands, option sets or the thing being asked genuinely differ by step. See the MUST_NOT_MERGE_IDS list in scripts/check-merge-rule.mts, which asserts they are never deduped.",
       "Site variety IS asked (home site only, through to regularly flying new places), on the strength of FFVL's Brevet de Pilote extending a pilot from 'known site only' to 'any site' around roughly this stage. knowledge/steps/low-b-to-mid-b.md flags this as 'the best-available mapping, not a confirmed EN-letter-specific match', and knowledge/disagreements.md point 5 warns the French pilot-rating ladder and the EN wing-class ladder don't map cleanly. It is therefore the lowest-weighted real skills question in the set, its worst answer still scores 0.4, and it never gates or blocks anything."
     ]
   },
@@ -343,10 +345,10 @@
       "priority": "core",
       "type": "single",
       "ordered": true,
-      "text": "Your reserve — could you find the handle in a hurry, and have you practised the throw?",
+      "text": "Your reserve — where is it, and have you ever practised the throw?",
       "options": [
         { "id": "unsure", "label": "I'm not completely sure I could find the handle in a hurry" },
-        { "id": "know_location_only", "label": "I know exactly where it is, but I've never practised" },
+        { "id": "know_location_only", "label": "I know exactly where the handle is, but I've never practised" },
         { "id": "practised_once", "label": "I've practised the throw at least once, hanging in a harness" },
         { "id": "practised_recent_repack", "label": "Practised recently, and the repack is up to date" }
       ]
@@ -436,10 +438,10 @@
       "ordered": false,
       "scored": false,
       "text": "Over the next year, what kind of flying do you mainly want to be doing?",
-      "help": "Pick any that apply, including things you're only thinking about. There's no better or worse answer and it doesn't add or lose you any points — it tells us which skills your own plans will actually ask of you, so the advice fits the flying you do.",
+      "help": "Pick any that apply, including things you're only thinking about. There's no better or worse answer here — it doesn't add or lose you any points. It tells us which skills your own plans will actually ask of you, so the advice fits the flying you do.",
       "options": [
         { "id": "local_soaring", "label": "Local flying, ridge or coastal soaring" },
-        { "id": "xc_flights", "label": "Cross-country flights — first ones, or building them up" },
+        { "id": "first_xc", "label": "Cross-country flights — first ones, or building them up" },
         { "id": "longer_xc", "label": "Long cross-country flights" },
         { "id": "hike_fly", "label": "Hike and fly in the mountains" },
         { "id": "competitions", "label": "Competitions" },

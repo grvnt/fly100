@@ -1,6 +1,6 @@
 {
   "step": "a-to-low-b",
-  "version": 2,
+  "version": 3,
   "meta": {
     "label": "EN-A to low-end EN-B",
     "pilot_facing_title": "Moving from an A wing to a low-B",
@@ -18,7 +18,8 @@
       "v2 design call — intended flying context reuses the 'ambitions' question rather than adding a new one. Reasons: (a) 'what do you want to be doing over the next year' and 'what kind of flying do you plan to keep doing' are the same question to a pilot on a phone, and asking both invites inconsistent answers and adds a 29th question to a 7-minute form; (b) the question is multi-select, so 'local soaring only' and 'local soaring plus my first XC' are already distinguishable; (c) it fails safe — a pilot who ticks any cross-country, hike-and-fly, competition or acro box, even speculatively, keeps the stricter treatment, so an over-optimistic tick can only ever make the result more conservative, never less. The wording and help text were tightened in v2 so the question reads as flying plans rather than idle wishes.",
       "v2 note on the incidents question: 'an injury, or I threw my reserve' still scores lowest on this question and this question still carries one of the two highest psychological weights, but it no longer caps the result on its own. An injury can come from a bad landing or a ground-handling accident and may say nothing about whether the current wing suits the pilot. See removed_gates in config/scoring/a-to-low-b.json. No change to the question's wording or options — the honesty framing in its help text matters more than ever, since the answer now feeds the score rather than a cap.",
       "The manoeuvre-course question is optional and can only ever add a small bonus, never subtract, per knowledge/disagreements.md point 1 and the brief. knowledge/steps/a-to-low-b.md notes no source treats SIV as relevant at this step at all, so it is not part of the scored set.",
-      "Several questions are deliberately not an ordered best-to-worst ladder (speed bar use, incidents, what happens in rough air, conditions flown). These are marked \"ordered\": false so the UI never implies the last option is the best one."
+      "Several questions are deliberately not an ordered best-to-worst ladder (speed bar use, incidents, what happens in rough air, conditions flown). These are marked \"ordered\": false so the UI never implies the last option is the best one.",
+      "v3 (chain alignment, Oct 2026) — the ONLY change in v3 is the label of the 'ambitions' option 'first_xc', from \"My first cross-country flights\" to \"Cross-country flights — first ones, or building them up\". No id, no score, no gate and no suggestion trigger changed, and 'ambitions' is unscored, so no persona result moves. Two reasons. (a) A pilot's flying plans for the next year are a property of the pilot, not of the rung being assessed, so in a chained assessment (A to mid-B runs this step then low-B to mid-B) it must be asked once. The merge in app/upgrade/lib/mergeQuestions.ts only dedupes a question when id, text, option ids AND option labels match exactly, so this label had to become byte-identical to the low-B to mid-B version before the question could be merged. (b) Of the two existing wordings, the broader one is the safer one to standardise on: the narrow \"my first\" phrasing leaves a pilot who has already flown a few short cross-countries and wants to build on them with nothing to tick, which could let them fall into the 'local_only' stated-plans profile and get the more lenient treatment. The broad wording keeps them in 'exposure_bound', which is the conservative side. The id stays 'first_xc' for continuity with the already-reviewed scoring, gate lists, suggestion triggers and personas; it now reads slightly narrower than its own label, which is deliberate and recorded here."
     ]
   },
   "sections": [
@@ -414,7 +415,7 @@
       "help": "Pick any that apply, including things you're only thinking about. There's no better or worse answer here — it doesn't add or lose you any points. It tells us which skills your own plans will actually ask of you, so the advice fits the flying you do.",
       "options": [
         { "id": "local_soaring", "label": "Local flying, ridge or coastal soaring" },
-        { "id": "first_xc", "label": "My first cross-country flights" },
+        { "id": "first_xc", "label": "Cross-country flights — first ones, or building them up" },
         { "id": "longer_xc", "label": "Long cross-country flights" },
         { "id": "hike_fly", "label": "Hike and fly in the mountains" },
         { "id": "competitions", "label": "Competitions" },

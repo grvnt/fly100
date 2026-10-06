@@ -38,28 +38,33 @@ const stepConfigs: Record<string, StepConfig> = {
 
 const merged = mergeQuestionsAcrossChain(['a-to-low-b', 'low-b-to-mid-b'], stepConfigs);
 
-// Hand-verified (scripts/check-merge-rule.mts investigation, 2026-10-06,
-// updated after step-4 review tightened sameQuestion() to also compare
-// option labels, not just ids): exactly these 6 ids have byte-identical
-// id+text+option-ids+option-labels across both steps and must be merged
-// (asked once, answer reused for both legs). ground_handling_practice
-// was in this list until the label check landed — its "rarely" option
-// reads "Once or twice ever" at A->low-B but "Hardly ever" at
-// low-B->mid-B, same id, same score, different words. Caught by the
-// reviewer, not by the original (options-id-only) version of this check.
+// Hand-verified (scripts/check-merge-rule.mts investigation, 2026-10-06;
+// updated after (a) step-4 review tightened sameQuestion() to also
+// compare option labels, not just ids, and (b) a rubric-designer pass
+// aligned 'ambitions' and 'reserve_familiarity' wording across both
+// steps so they now genuinely are the same question). Exactly these 8
+// ids have byte-identical id+text+option-ids+option-labels across both
+// steps and must be merged (asked once, answer reused for both legs).
+// ground_handling_practice was briefly in this list until the label
+// check landed — its "rarely" option reads "Once or twice ever" at
+// A->low-B but "Hardly ever" at low-B->mid-B, same id, same score,
+// different words — caught by the reviewer, not the original
+// (options-id-only) version of this check.
 const EXPECTED_MERGED_IDS = [
+  'ambitions',
   'decline_to_fly',
   'flying_frequency',
   'incidents_12m',
   'manoeuvre_course',
   'peer_pressure',
+  'reserve_familiarity',
   'response_when_rough',
 ].sort();
 
 // These share an id across both steps but have DIFFERENT answer bands,
-// or (external_feedback, reserve_familiarity) different question
-// wording, or (ground_handling_practice) a different option LABEL
-// under a matching id/score — and must never be merged.
+// or (external_feedback) different question wording, or
+// (ground_handling_practice) a different option LABEL under a matching
+// id/score — and must never be merged.
 const MUST_NOT_MERGE_IDS = [
   'total_airtime',
   'total_flights',
@@ -74,9 +79,7 @@ const MUST_NOT_MERGE_IDS = [
   'upgrade_motivation',
   'wing_expectation',
   'learning_curve_willingness',
-  'ambitions',
   'external_feedback',
-  'reserve_familiarity',
 ];
 
 let failures = 0;
@@ -104,7 +107,7 @@ if (failures === 0) {
   console.log(`PASS  none of the ${MUST_NOT_MERGE_IDS.length} known different-banded ids were merged`);
 }
 
-// Sanity: total flat question count should be 28 + 30 - 6 = 52.
+// Sanity: total flat question count should be 28 + 30 - 8 = 50.
 const expectedTotal = stepConfigs['a-to-low-b'].questions.questions.length + stepConfigs['low-b-to-mid-b'].questions.questions.length - EXPECTED_MERGED_IDS.length;
 if (merged.length !== expectedTotal) {
   failures++;

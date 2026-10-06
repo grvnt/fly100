@@ -1,6 +1,6 @@
 {
   "step": "low-b-to-mid-b",
-  "version": 1,
+  "version": 2,
   "meta": {
     "confidence": "low — the lowest of any step built so far",
     "confidence_source": {
@@ -9,6 +9,17 @@
       "note": "Compare config/scoring/a-to-low-b.json, whose confidence field reads 'comparatively high for this step' on the strength of USHPA's numeric P2 syllabus plus two broadly agreeing industry sources. Nothing like that exists here. knowledge/disagreements.md point 6 adds that Greg Hamerton (Cross Country Magazine) and Flybubble are not fully independent voices, and point 3 records that manufacturers and the community genuinely disagree about whether a 'mid B' is a real distinction at all. Confidence language in anything pilot-facing must stay at or below 'this is a steer, not a standard'."
     },
     "design_decisions": [
+      {
+        "id": "v2-ambitions-option-id-renamed-for-chain-merge",
+        "change": "The 'ambitions' option id 'xc_flights' is renamed to 'first_xc' throughout, to match config/questions/a-to-low-b.json. Updated in both intended_flying_context profiles here ('exposure_bound'.ambitions_includes_any and 'local_only'.requires_all[1].ambitions_includes_none_of), in the 'xc_skills_on_current_wing' trigger in config/suggestions/low-b-to-mid-b.json, and in the five personas that select it. Nothing else about the rubric changed: 'ambitions' has weight 0 and scored: false, so no score, threshold, gate boundary or persona expectation moves. The 'ambition_without_readiness' gate never listed this option (it fires on longer_xc / competitions / acro only) and is untouched.",
+        "reason": "A pilot's flying plans for the coming year belong to the pilot, not to the rung being assessed, so a chained run (A to mid-B runs both steps' question sets) must ask this once. The merge in app/upgrade/lib/mergeQuestions.ts only dedupes a question when its id, text, option ids AND option labels are identical, which is the deliberate safety rule from BRIEF.md's 'Multi-step jumps' implementation trap — so the option id and label had to be made genuinely identical before the question could legitimately merge. The surviving pilot-facing label is this step's broader \"Cross-country flights — first ones, or building them up\" (A to low-B was moved onto it, see that file's v3 note); the surviving id is A to low-B's, to avoid churning an already-reviewed config's gate lists and personas. Same pass aligned 'reserve_familiarity' wording, which needed no scoring change at all — its option ids and all four option scores were already identical at both steps.",
+        "what_this_costs": "The id 'first_xc' now reads slightly narrower than the label it points at. That is a readability cost for whoever edits this config, not a scoring one, and standardising on the broader LABEL is the conservative direction: a low-B pilot already flying short cross-countries has something to tick, so they land in 'exposure_bound' (stricter) rather than falling through to 'local_only' (which exempts an untested thermalling answer from blocking Ready).",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's conservative-by-default pattern: where the evidence or the pilot's own statement is ambiguous, default down rather than up.",
+          "note": "Applied to a wording choice rather than a number: between two reviewed labels for the same option, keep the one that captures more pilots in the stricter profile. Mechanism and merge rule from BRIEF.md 'Multi-step jumps'."
+        }
+      },
       {
         "id": "v1-fewer-numeric-gates-than-a-to-low-b",
         "change": "Correction (step 4 review, Oct 2026): this rubric has two gates that rest on a number (airtime_under_20h and no_recent_flying, the currency gate), not one as originally stated here — A to low-B's own equivalent note counts its currency gate toward its total of three, so the fair comparison is two here versus three there, not one versus three. No gate here uses flights, hours on the current wing, or any conditions/site/ground-handling figure, which is still the real, smaller difference.",
@@ -132,14 +143,14 @@
     "profiles": {
       "exposure_bound": {
         "label_internal": "Plans that will put the pilot in thermic, mountain or high-workload air",
-        "ambitions_includes_any": ["xc_flights", "longer_xc", "hike_fly", "competitions", "acro"],
+        "ambitions_includes_any": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"],
         "note": "Cross-country flying, hike-and-fly, competition and acro all mean leaving the known site, working the usable thermic part of the day, or deliberately loading the wing. All of them put the pilot in exactly the air the thermalling and collapse-recognition markers for this step are about."
       },
       "local_only": {
         "label_internal": "Plans that stay inside local, ridge or coastal soaring",
         "requires_all": [
           { "ambitions_includes_any": ["local_soaring", "just_enjoy"] },
-          { "ambitions_includes_none_of": ["xc_flights", "longer_xc", "hike_fly", "competitions", "acro"] }
+          { "ambitions_includes_none_of": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"] }
         ],
         "note": "Requires a positive statement of local-only or no-particular-goal flying, not merely the absence of an ambition tick. A pilot who selects nothing at all is NOT local_only — no stated plans means no evidence of scope, and knowledge/disagreements.md point 5 says default down when evidence is missing."
       }
