@@ -30,6 +30,7 @@ interface ResultViewProps {
   skillsScore: number;
   psychScore: number;
   gates: GateHit[];
+  ruleMessages: string[];
   suggestions: Suggestion[];
   alwaysOutput: ScoringConfig['always_output'];
   onRestart: () => void;
@@ -49,7 +50,7 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
   );
 }
 
-export function ResultView({ recommendation, totalScore, skillsScore, psychScore, gates, suggestions, alwaysOutput, onRestart }: ResultViewProps) {
+export function ResultView({ recommendation, totalScore, skillsScore, psychScore, gates, ruleMessages, suggestions, alwaysOutput, onRestart }: ResultViewProps) {
   const copy = RECOMMENDATION_COPY[recommendation];
 
   return (
@@ -70,13 +71,18 @@ export function ResultView({ recommendation, totalScore, skillsScore, psychScore
         </CardContent>
       </Card>
 
-      {gates.length > 0 && (
+      {(gates.length > 0 || ruleMessages.length > 0) && (
         <Card>
           <CardContent className="p-5 flex flex-col gap-3">
             <h3 className="font-semibold">What's holding this back</h3>
             {gates.map((g) => (
               <p key={g.id} className="text-sm leading-relaxed">
                 {g.message}
+              </p>
+            ))}
+            {ruleMessages.map((message, i) => (
+              <p key={i} className="text-sm leading-relaxed">
+                {message}
               </p>
             ))}
           </CardContent>

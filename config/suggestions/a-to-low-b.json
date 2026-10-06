@@ -1,7 +1,11 @@
 {
   "step": "a-to-low-b",
-  "version": 2,
+  "version": 3,
   "meta": {
+    "v3_changes": [
+      "Added two 'always': true suggestions — 'stay_current_whatever_you_decide' (priority 10, topic currency) and 'pace_the_next_step' (priority 11, topic progression) — so the always pool can satisfy meta.selection.min_shown on its own. Before this, 'instructor_conversation' was the only always suggestion, and the stated backfill rule could not actually deliver three. See meta.selection.always_pool for the profile this was found on and why an existing gap-specific suggestion was not reused.",
+      "No existing suggestion's trigger, priority, topic, title, body or source changed. The displayed set changes only for pilots who previously saw fewer than five suggestions."
+    ],
     "trigger_operators": {
       "question + answer_in": "Single-select match.",
       "question + answer_includes_any": "Multi-select question contains at least one of the listed options.",
@@ -16,6 +20,17 @@
       "dedupe_by": "topic",
       "rule": "Gate-linked suggestions always take the first slots. Then fill from triggered suggestions by priority. If fewer than three are triggered, fill from the 'always' pool.",
       "testing_note": "The persona files in tests/personas/a-to-low-b assert against the full set of suggestions a pilot's answers TRIGGER, not against the 3-5 actually displayed. Many pilots trigger a dozen or more; the display is the highest-priority subset of that set.",
+      "always_pool": {
+        "ids": ["instructor_conversation", "stay_current_whatever_you_decide", "pace_the_next_step"],
+        "guarantee": "Three suggestions carry \"always\": true, so the min_shown of 3 is satisfiable for any answer set, including the strongest possible one. Each of the three sits on a distinct topic (instructor, currency, progression), so topic dedupe can never collapse the pool below three for a pilot who has nothing else triggered.",
+        "priority_design": "instructor_conversation stays at priority 1 because BRIEF.md requires the instructor recommendation in every result. The other two are deliberately priority 10 and 11, numerically higher than every gap-specific suggestion in the file and therefore last in the sort order, so they backfill the display for a pilot with few triggered items and never crowd out specific, earned advice for a pilot with many. 'stay_current_whatever_you_decide' also shares the 'currency' topic with 'improve_currency' and 'recurrency_plan' so it can never appear alongside the gap-specific version of the same message.",
+        "regression_this_closes": "A reviewer pass found a legitimate profile that reached only two suggestions under v2: a strong, well-prepared pilot whose only stated ambition is 'just_enjoy' triggers instructor_conversation (always) and test_fly_first (fires on a ready/nearly_ready result) and nothing else — no gap-specific suggestion, and no 'xc_skills_on_current_wing' because no exposure-bound ambition is ticked. Locked in by tests/personas/a-to-low-b/10-ready-content-local-only.json, which triggers exactly four.",
+        "why_not_reuse_a_gap_suggestion": "Marking an existing gap-specific suggestion (e.g. ground_handling_basics) as always:true would have been the smaller edit but would show irrelevant advice to pilots who do not have that gap. Both new always suggestions are written to be true and useful for any pilot at this step — content or ambitious, strong or weak — and are sourced accordingly.",
+        "source": {
+          "ref": "BRIEF.md#outputs",
+          "cites": "\"3-5 concrete suggestions for what to work on.\" A floor of three is only meaningful if it is reachable from every answer set, including the ones that trigger nothing."
+        }
+      },
       "source": {
         "ref": "BRIEF.md#outputs",
         "cites": "\"3-5 concrete suggestions for what to work on.\""
@@ -40,6 +55,32 @@
       "source": {
         "ref": "BRIEF.md#outputs",
         "cites": "\"A recommendation to discuss the upgrade with an instructor.\" Reinforced by USHPA P2 (official), which defers wing class to the manufacturer's recommendation rather than setting its own EN threshold."
+      }
+    },
+    {
+      "id": "stay_current_whatever_you_decide",
+      "topic": "currency",
+      "always": true,
+      "priority": 10,
+      "title": "Protect the regular flying, whichever wing you're on",
+      "body": "Not flying often enough is one of only two things the published guidance for this step singles out, and the pattern it points at is roughly four flights a month whenever the weather allows. It's worth treating that as something to defend rather than something that holds by itself — diaries fill up, weather goes bad for a month, and currency fades faster than most pilots expect. After a long gap, or after any change of wing, the useful move is to start the next session with the wing on the ground before you launch.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "Daoust (expert) flags flying at least four times a month as a precondition for being ready to move beyond pure-A gear; knowledge/steps/a-to-low-b.md#red-flags names general under-currency as one of only two red flags any source gives for this step. Hamerton via FAI/CIVL safety pages (expert) supports the 'after any change of wing' half: after a class change, deliberately compensate with easier sites, less aggressive flying and study of the new wing's specific behaviour. Urs Aschmann via Podz-Glidz (expert, ground-handling specialist) supports starting back on the ground: his staged progression is flat ground first, advancing only once the easier stage feels solid.",
+        "note": "Added in v3 as an 'always' suggestion. Universal by design: it is the one habit every source for this step treats as a precondition rather than a skill level, so it is as true for a pilot flying weekly (keep it) as for one flying monthly (build it). It shares the 'currency' topic with 'improve_currency' and 'recurrency_plan', so a pilot who has a specific currency gap sees the specific version instead of this one, never both. Phrased as a habit to protect rather than a deficiency, per meta.tone_rules, and it does not nudge in either direction on the upgrade itself."
+      }
+    },
+    {
+      "id": "pace_the_next_step",
+      "topic": "progression",
+      "always": true,
+      "priority": 11,
+      "title": "Whatever you fly next, plan on staying there a long time",
+      "body": "The guidance for this stage is consistent and a bit unfashionable: a wing class is somewhere to spend seasons, not a rung to pass through. One widely-read retailer suggests well over a hundred hours on a first B before even thinking about the step after it, and the instructors writing about this stage describe good progression as deliberate and gradual from the very beginning. The useful part is that almost everything that actually makes you better — thermalling, reading the day, launches, approaches, deciding when not to fly — is the same work on every wing, so none of it is time spent waiting.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#hours--experience",
+        "cites": "Flybubble (industry) recommends staying on that first B for a long time — 150+ cumulative hours — before even thinking about the next step up. Greg Hamerton via Cloudbase Mayhem 186 (expert) frames progression as something that should stay deliberate and gradual from the very start, explicitly warning new pilots against upgrading equipment prematurely. knowledge/disagreements.md point 13 records that every source in this knowledge base that addresses progression pace assumes one rung at a time.",
+        "note": "Added in v3 as an 'always' suggestion. Universal by design: it is about the step after whichever wing the pilot ends up on, so it is equally true and equally useful for a Ready, Nearly ready or Not yet result, and for a content local pilot or an ambitious one. Deliberately does not comment on whether this upgrade should happen, so it cannot read as a nudge in either direction — per meta.tone_rules. The '150+ hours' figure is softened to 'well over a hundred hours' and attributed to a single retailer, because knowledge/disagreements.md point 6 records that Flybubble's own articles are not internally consistent on this and that Flybubble/Hamerton are not fully independent voices."
       }
     },
     {

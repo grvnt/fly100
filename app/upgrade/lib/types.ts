@@ -134,6 +134,18 @@ export interface ScoringConfig {
   gate_behaviour: {
     max_gate_reasons_shown: number;
   };
+  // Pilot-safe copy for the threshold rules, mirroring gate.message.
+  // `by_rule` is keyed by the exact string the engine puts in
+  // ScoreResult.firedRules ("critical_check_floor:ground_handling_kiting",
+  // "ready_category_floor:psychological", "conservative_backstop").
+  // `fallback_by_rule_id` is keyed by the part before the colon and is
+  // only hit when a rule gains a question/answer without per-case copy.
+  // See config/scoring/<step>.json rule_messages.lookup.
+  rule_messages: {
+    display: { max_rule_reasons_shown: number };
+    by_rule: Record<string, { message: string }>;
+    fallback_by_rule_id: Record<string, { message?: string }>;
+  };
   always_output: {
     instructor_recommendation: string;
     disclaimer: string;

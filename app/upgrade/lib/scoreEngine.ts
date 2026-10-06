@@ -205,3 +205,26 @@ export function scoreAnswers(answers: Answers, scoring: ScoringConfig, questions
 
   return { skillsScore, psychScore, total, bonus, recommendation: 'nearly_ready', firedGates: [], firedRules, exemptions };
 }
+
+/**
+ * Pilot-safe messages for fired threshold rules (as opposed to hard
+ * gates, which already carry their own `message`). Implements the
+ * lookup algorithm documented at scoring.rule_messages.lookup:
+ * exact rule string -> fallback by rule id prefix -> nothing (never
+ * render a raw rule/question id). Caps at display.max_rule_reasons_shown.
+ */
+export function resolveRuleMessages(firedRules: string[], scoring: ScoringConfig): string[] {
+  const { by_rule, fallback_by_rule_id, display } = scoring.rule_messages;
+  const messages: string[] = [];
+  for (const rule of firedRules) {
+    const exact = by_rule[rule]?.message;
+    if (exact) {
+      messages.push(exact);
+      continue;
+    }
+    const ruleId = rule.split(':')[0];
+    const fallback = fallback_by_rule_id[ruleId]?.message;
+    if (fallback) messages.push(fallback);
+  }
+  return messages.slice(0, display.max_rule_reasons_shown);
+}

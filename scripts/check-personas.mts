@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 import { scoreAnswers } from '../app/upgrade/lib/scoreEngine.ts';
-import { triggeredSuggestions } from '../app/upgrade/lib/selectSuggestions.ts';
+import { selectDisplaySuggestions, triggeredSuggestions } from '../app/upgrade/lib/selectSuggestions.ts';
 import type { Persona, QuestionsConfig, ScoringConfig, SuggestionsConfig } from '../app/upgrade/lib/types.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -87,6 +87,25 @@ for (const file of personaFiles) {
   }
   for (const mustExclude of persona.expected.suggestions_must_not_include ?? []) {
     if (triggeredIds.has(mustExclude)) issues.push(`unexpectedly triggered suggestion: ${mustExclude}`);
+  }
+
+  // Global invariant, not a per-persona assertion: BRIEF.md requires 3-5
+  // suggestions on every result, so the DISPLAYED set (after priority
+  // sort, topic dedupe and always-pool backfill) must land in that range
+  // for every persona. A reviewer pass found a strong, no-stated-ambition
+  // pilot who only reached two; tests/personas/a-to-low-b/10 is that case.
+  const displayed = selectDisplaySuggestions(
+    persona.answers,
+    { skills: result.skillsScore, psychological: result.psychScore },
+    result.recommendation,
+    scoring,
+    suggestions
+  );
+  const { min_shown, max_shown } = suggestions.meta.selection;
+  if (displayed.length < min_shown || displayed.length > max_shown) {
+    issues.push(
+      `displayed suggestions: got ${displayed.length} [${displayed.map((s) => s.id).join(', ')}], expected between ${min_shown} and ${max_shown}`
+    );
   }
 
   if (issues.length === 0) {

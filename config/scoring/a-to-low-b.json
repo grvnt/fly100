@@ -1,8 +1,19 @@
 {
   "step": "a-to-low-b",
-  "version": 2,
+  "version": 3,
   "meta": {
     "design_decisions": [
+      {
+        "id": "v3-rule-messages",
+        "change": "Added a top-level 'rule_messages' block giving pilot-safe copy for every threshold rule (critical_check_floor, unevidenced_core_checks, ready_category_floor, not_yet_category_floor, conservative_backstop), matching what gates already carry on gate.message. No scoring, weight, threshold, gate or exemption changed.",
+        "reason": "A reviewer pass found that gates explain themselves to the pilot and threshold rules did not. The engine already computes which rule fired and on which question or category, but there was no copy to render for it, so a pilot held at Nearly ready by a rule — or pushed to Not yet by a category floor — saw only the generic band blurb and the suggestion list. That is roughly half the blocking mechanisms in this rubric with no explanation attached.",
+        "structure_choice": "Two flat maps rather than templated strings: 'by_rule' keyed by the exact fired-rule string the engine emits ('critical_check_floor:ground_handling_kiting', 'ready_category_floor:psychological', 'conservative_backstop'), and 'fallback_by_rule_id' keyed by the part before the colon as a safety net. Per-question copy was chosen over one templated message because the seven questions critical_check_floor can trip are seven different gaps with seven different next actions, and a template would have had to name the question id to the pilot. See rule_messages.lookup for the exact render-time algorithm.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "The brief requires the result to be transparent and rule-based rather than a black box. Gate messages already met that bar; the threshold rules did not.",
+          "note": "The two not_yet_category_floor messages are additionally bound by docs/design-context.md's safety guard — a 'not yet' must land as a legitimate, successful result of using the tool. That document is never named, quoted or paraphrased in any pilot-facing string. Owner decision, recorded Oct 2026."
+        }
+      },
       {
         "id": "v2-remove-injury-gate",
         "change": "Removed the standalone 'recent_injury_or_reserve' hard gate (v1 gate id, fired on incidents_12m:injury_or_reserve).",
@@ -46,7 +57,7 @@
       }
     },
     "rounding": "Round category and total scores to the nearest whole number for display only; compare thresholds against unrounded values.",
-    "source_fields_are_internal": "Every 'source' block in this file is provenance for the owner and reviewer only. Do not render 'ref', 'cites' or 'note' text in the UI. Pilot-facing copy lives in the questions config, the gate 'message' fields and the suggestions config."
+    "source_fields_are_internal": "Every 'source' block in this file is provenance for the owner and reviewer only. Do not render 'ref', 'cites' or 'note' text in the UI. Pilot-facing copy in this file is exactly two things: the 'message' field on each gate, and the 'message' field on each entry under rule_messages.by_rule / rule_messages.fallback_by_rule_id. Everything else in this file — including every 'purpose', 'note', 'reason', 'why_*' and 'structure_choice' field — is internal. The rest of the pilot-facing copy lives in the questions and suggestions configs."
   },
 
   "categories": {
@@ -767,6 +778,180 @@
       "ref": "BRIEF.md#scoring-design",
       "cites": "\"Hard gates: some answers ... cap the result at 'Not yet' regardless of total score.\"",
       "note": "Showing the score alongside the gate keeps the result transparent and rule-based rather than a black box, as the brief requires."
+    }
+  },
+
+  "rule_messages": {
+    "purpose": "Pilot-safe copy for the threshold rules, so a pilot held at Nearly ready or pushed to Not yet by a rule gets the same explicit 'here's what's holding this back' as a pilot held by a hard gate. Gates carry their copy on gate.message; the threshold rules had none until v3, which left roughly half the blocking mechanisms in this rubric unexplained and undercut BRIEF.md's 'transparent and rule-based, not a black box' requirement.",
+
+    "lookup": {
+      "engine_output": "app/upgrade/lib/scoreEngine.ts returns ScoreResult.firedRules as an array of strings in one of two shapes: '<rule_id>' (only 'conservative_backstop' today) or '<rule_id>:<question_id_or_category>' (everything else). The strings are produced at scoreEngine.ts lines ~138-203.",
+      "structure": "Two flat maps. 'by_rule' is keyed by the EXACT fired-rule string, so no parsing or templating is needed at render time. 'fallback_by_rule_id' is keyed by the part before the colon, and exists only so a future question added to critical_check_floor.questions (or a future answer added to unevidenced_core_checks.answers) can never render a missing message.",
+      "algorithm": [
+        "1. message = rule_messages.by_rule[firedRule]",
+        "2. if not found: message = rule_messages.fallback_by_rule_id[firedRule.split(':')[0]]",
+        "3. if still not found: render nothing for that rule. Never render the raw fired-rule string, a rule id, or a question id to a pilot."
+      ],
+      "why_keyed_by_full_string_not_templated": "A single templated message (\"the '<question>' check came out low\") would have had to name the question to a pilot, and the seven questions critical_check_floor can trip are seven genuinely different gaps with seven different next actions — a kiting gap and a reserve-familiarity gap have nothing useful in common beyond the rule that caught them. Per-question copy is also the only way to keep each message as specific and actionable as the gate messages already are. The cost is that adding a question to critical_check_floor.questions means writing a message for it; the fallback stops that being a rendering bug in the meantime.",
+      "render_as": "Each entry has a plain prose 'message' string, exactly like gate.message, intended for the same 'What's holding this back' card and the same paragraph treatment in app/upgrade/components/ResultView.tsx. There is deliberately no per-message heading or title field: rules can fire together, and two different headings in one card reads badly. Every message below is written to sit under that one heading, including 'conservative_backstop'.",
+      "division_of_labour_with_suggestions": "Every answer band that can trip a threshold rule also triggers a suggestion in config/suggestions/a-to-low-b.json, and both appear on the same result screen. To stop them reading as the same paragraph twice, the split is: the rule message says WHY this one answer is holding the result and what the standard is; the suggestion says HOW to move it. Several of these messages therefore end by pointing at the suggestion rather than repeating its drill. The pairs are flying_frequency/improve_currency, ground_handling_kiting/ground_handling_basics, launch_reliability/launch_practice, active_piloting_bumpy/active_piloting_drill, rough_air_awareness/learn_to_read_the_day, reserve_familiarity/reserve_practice, response_when_rough/nerves_are_not_the_problem, and unevidenced_core_checks:rough_air_awareness/air_awareness_untested. If any of those suggestions is retired or re-triggered, re-read the paired message — a 'there's a suggestion below' pointer with nothing below it is the failure mode to watch for.",
+      "multiplicity": "Useful when laying out the card: critical_check_floor breaks on its first failing question (scoreEngine.ts ~line 162), so at most ONE 'critical_check_floor:*' string can ever appear in firedRules, and the question it names is the first failure in thresholds.ready.critical_check_floor.questions order, not necessarily the worst one. Same for unevidenced_core_checks. The two category-floor rules are independent, so 'ready_category_floor:skills' and 'ready_category_floor:psychological' can both appear, as can both not_yet floors. Gates and rules are mutually exclusive: gates short-circuit, so firedRules is always empty when firedGates is non-empty, and the card never needs to mix the two.",
+      "internal_fields": "The 'source' block on each entry is provenance for the owner and reviewer only, exactly as meta.source_fields_are_internal states for the rest of this file. Only 'message' is ever rendered."
+    },
+
+    "display": {
+      "max_rule_reasons_shown": 2,
+      "order": "The order the engine emits them, which is already roughly most-to-least specific: category floors, then critical_check_floor, then unevidenced_core_checks, then conservative_backstop.",
+      "why_two_and_not_three": "gate_behaviour.max_gate_reasons_shown is 3, but up to five rules can fire together on the Nearly ready path, and these are softer and more overlapping reasons than gates. Nearly ready means 'close' — listing five things reads as a telling-off and contradicts the result. Two keeps it specific; the suggestions list carries the rest of the detail. Owner decision, flagged as adjustable.",
+      "tone_rule": "Same rule as gate_behaviour.tone_rule: state what is holding the result and what moves it, never that the pilot is unsuitable or has failed. Additionally, for the not_yet_category_floor messages specifically, docs/design-context.md requires the result read as a legitimate, useful outcome of using the tool — so those two messages must not be alarming and must not invite the pilot to argue with the result.",
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "The brief requires the result to be transparent and rule-based rather than a black box, and requires the 'Not yet' framing to be a legitimate result rather than a failure.",
+        "note": "docs/design-context.md's safety guard is the binding constraint on the two not_yet_category_floor messages. No wording from that document, and none of its terminology, appears in any message here."
+      }
+    },
+
+    "by_rule": {
+      "critical_check_floor:flying_frequency": {
+        "message": "One thing is holding this back: at less than a flight a month, you're below the amount of flying the guidance for this step treats as the baseline — roughly four times a month when the weather allows. That isn't about talent, it's about how fast currency fades. Get the frequency up on the wing you already know and this stops being the limiting factor.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#skills",
+          "cites": "Daoust (expert) flags flying at least four times a month as a precondition for moving beyond pure-A gear; knowledge/steps/a-to-low-b.md#red-flags names general under-currency as one of only two red flags any source gives for this step.",
+          "note": "Only 'less than once a month' reaches this rule. 'No flying at all in three months' is caught earlier by the 'no_recent_flying' gate, and 'about once a month' scores 0.5, exactly on the rule's minimum, so it passes."
+        }
+      },
+      "critical_check_floor:ground_handling_kiting": {
+        "message": "One thing is holding this back, and it's ground handling. It's the cheapest skill in the sport to practise and it pays back everywhere else — cleaner launches, knowing what the wing is about to do before it does it, and staying in control when a gust arrives. A few sessions on a flat field move this more than anything else on the list.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#skills",
+          "cites": "Daoust's checklist (expert) asks whether a pilot can reverse-kite for 10+ seconds within their first 8 hours of trying; Urs Aschmann via Podz-Glidz (expert, ground-handling specialist) frames kiting as the skill that teaches a pilot what a wing feels like before it misbehaves.",
+          "note": "Ground handling deliberately appears as a Ready-blocker and never as a hard gate, per knowledge/disagreements.md point 11 — no numeric ground-handling bar exists beyond Daoust's beginner check, so this message names it as the limiting factor without implying a measured standard has been failed."
+        }
+      },
+      "critical_check_floor:launch_reliability": {
+        "message": "One thing is holding this back: clean launches about half the time. The figure worth aiming at is three out of four first time, forwards and reverse. It carries this much weight because the ground and the first seconds of flight are where most accidents in this sport happen, and a poor inflation is behind more of those than anything else is — which is also why it's the one check a change of wing can only make harder. There's a suggestion below on the fastest way to move it.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#skills",
+          "cites": "Daoust (expert) checks for roughly 75% success on forward launches and 65% on reverse launches; USHPA's 2001 Paragliding Accident Summary (official) found roughly 64% of accidents on the ground or immediately after launch, with poor inflation behind about 75% of launch-phase accidents.",
+          "note": "'Not often — several goes or aborts' is caught earlier by the 'unreliable_launches' gate, so only the 'about half the time' answer reaches this rule."
+        }
+      },
+      "critical_check_floor:active_piloting_bumpy": {
+        "message": "One thing is holding this back: what your hands do when the air gets bumpy. Of everything in this questionnaire, that's the closest match to what a slightly less forgiving wing will ask of you — a B gives more feedback and expects more input in return. Building that habit on the wing that forgives it is much easier than building it on the one that doesn't.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#skills",
+          "cites": "Simon Winkler via Podz-Glidz (expert, DHV instructor) discourages static, light-brake flying from beginner level onward and describes active-piloting demands scaling up through the class ladder; XC Mag's 'Active flying' (industry) notes school wings stay stable through major collapses while higher-class wings need pilot input."
+        }
+      },
+      "critical_check_floor:rough_air_awareness": {
+        "message": "One thing is holding this back: spotting the rough part of the day sometimes, but not reliably. The standard the sources point at is seeing it coming with about half an hour to spare, so getting down or staying away is a plan rather than a scramble. It's the one check the guidance for this step treats as close to non-negotiable, which is why a single answer on it holds the result even when the rest is strong. It's a judgement skill rather than a handling one, and the suggestions below cover how to build it.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#conditions-flown",
+          "cites": "Daoust's checklist (expert) explicitly asks whether a pilot can identify and avoid rough air 30+ minutes before it arrives, as a gate for moving past pure-A gear.",
+          "note": "'It usually catches me out' is caught earlier by the 'rough_air_catches_me_out' gate, and 'it hasn't really come up' scores 0.5, exactly on this rule's minimum, so it passes here and is handled by 'unevidenced_core_checks' instead. Only 'sometimes I spot it, sometimes I don't' reaches this rule."
+        }
+      },
+      "critical_check_floor:reserve_familiarity": {
+        "message": "One thing is holding this back, and it's the quickest on the whole list to fix: not being certain you could find the reserve handle in a hurry. Reserve drill is part of the novice syllabus this step is measured against, and it's the one item here that takes minutes rather than seasons — which is the only reason a single answer about it can hold an otherwise strong result. There's a suggestion below on how to practise it.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#skills",
+          "cites": "USHPA P2 (official) includes reserve-deployment and PLF knowledge among its required skills.",
+          "note": "Scored and used as a Ready-blocker rather than a gate because the source treats it as syllabus knowledge rather than a wing-class threshold — and because it is genuinely cheap to fix, which the message says plainly."
+        }
+      },
+      "critical_check_floor:response_when_rough": {
+        "message": "One thing is holding this back, and it isn't nerves — everyone's heart rate climbs in rough air and that part is normal, not a weakness. It's what comes next: tightening up and waiting it out, rather than carrying on flying the wing. That answer carries more weight here than any other mindset question, because it asks what you do under load rather than how you feel about it — and what you do is a habit rather than a personality trait, so it builds. Until it feels different, the more forgiving wing is the right one to be building it on — there's a suggestion below on how.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#psychological--mindset-factors",
+          "cites": "XC Mag's 'The Head Game' (industry/expert, featuring sports psychologist Thomas Theurillat) frames readiness as challenge matched to honest self-assessed skill, with too big a jump producing stress rather than growth; Yvonne Dathe via Podz-Glidz (expert, sports psychologist) treats fear as a protective signal to work with rather than override, and recommends deliberate mini-steps outward.",
+          "note": "Written about behaviour under load, not about feeling afraid, and deliberately does not reassure a hesitant pilot toward upgrading — the hesitation here is well-founded and the message says the forgiving wing is the right one for now. Required by docs/design-context.md; none of its terminology is used."
+        }
+      },
+
+      "unevidenced_core_checks:rough_air_awareness": {
+        "message": "One thing is unevidenced rather than weak. You've said you stick to gentle conditions, so reading rough air hasn't been tested — and that isn't counted against you, it scores as neutral, because the question is about judgement rather than about having been caught out. But the published guidance treats being able to see the rough part of the day coming as a check to have passed before taking a less forgiving wing into bigger air, and your answers can't show it either way yet. There's a suggestion below on how to test it while the stakes are low.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's design pattern of defaulting to the most conservative category unless a lower one is actively evidenced — applied here as: when the evidence is incomplete, default down rather than up. Daoust's (expert) rough-air check is the gate-level check being treated as not-yet-demonstrated.",
+          "note": "Deliberately explains the rule and nothing else. The how-to (calling the day out loud before you fly, checking yourself against what happened, comparing notes on the hill) lives in the 'air_awareness_untested' suggestion in config/suggestions/a-to-low-b.json, which fires on the same answer and will appear on the same screen — so this message ends by pointing at it rather than repeating it. If that suggestion is ever retired, this message needs the practical half adding back."
+        }
+      },
+
+      "ready_category_floor:skills": {
+        "message": "Your total is in the ready band, but the skills and experience half of it isn't carrying its own weight yet. The two halves are scored separately on purpose, so that good judgement and honest motives can't stand in for airtime and handling, or the other way round. What's holding this back is on the skills side, and the suggestions below are the specific parts of it.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's conservative-by-default pattern: when evidence is ambiguous, default toward 'Not yet' or 'Nearly ready' rather than 'Ready'.",
+          "note": "Explains why a total above the Ready threshold didn't produce Ready, which is the specific case this rule exists for. Names the category rather than the floor value — the number would be a false precision, since thresholds.ready.source records these figures as synthesised rather than sourced."
+        }
+      },
+      "ready_category_floor:psychological": {
+        "message": "Your total is in the ready band, but the mindset and motivation half of it is sitting well below the skills half. Those are scored separately on purpose and they count for nearly as much: what you expect the new wing to actually do, how the call gets made on a marginal day, and what you do when it gets rough all matter here as much as hours and handling. That's where this result is being held, and it's usually the quicker half to move.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Psychological answers carry real weight, not a side note.\"",
+          "note": "Supported by knowledge/steps/a-to-low-b.md#psychological--mindset-factors (XC Mag's 'The Head Game' on challenge-skill balance; 406 Paragliding on willingness to restart the learning curve) and knowledge/disagreements.md point 9. 'Usually the quicker half to move' is deliberate: these are answers that change with a conversation and some reading, not with another fifty hours — and saying so keeps the message from reading as a verdict on the pilot's character."
+        }
+      },
+
+      "not_yet_category_floor:skills": {
+        "message": "Whatever the total came out at, the skills and experience answers here point the same way: more time on the wing you've already got is the useful next step, rather than a different wing. That's a completely normal place to be at this stage, and it's the most fixable half of the picture — flights, hours, ground handling and launches all move it, and all of them transfer to whatever you fly next.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Hard gates: some answers ... cap the result at 'Not yet' regardless of total score.\" The category floors are the same idea applied to a whole category rather than a single answer.",
+          "note": "Tone is bound by docs/design-context.md's safety guard: this must land as a legitimate, useful result, never as a failure. Hence 'a completely normal place to be' and 'the most fixable half', and no wording that casts the pilot or their result as deficient. Supported by knowledge/steps/a-to-low-b.md#hours--experience, where every source treats the first tens of hours as a fundamentals phase rather than a holding pen."
+        }
+      },
+      "not_yet_category_floor:psychological": {
+        "message": "This one isn't about your hands. The answers about why the change, what you expect it to give you, how decisions get made on a day you're unsure about, and what's happened in the last year are where this result comes from — and here they count for nearly as much as hours and handling, by design. None of that is a judgement on you as a pilot. It's the half of the picture worth working through first, and it usually takes a conversation with someone who knows your flying rather than another fifty hours in the air.",
+        "source": {
+          "ref": "knowledge/disagreements.md#9",
+          "cites": "Recommended handling: motivation is a genuinely scored input, and the diagnostic combination both camps agree on is an ambition- or comparison-flavoured motive paired with thin evidence of readiness elsewhere. Yvonne Dathe via Podz-Glidz (expert, sports psychologist) names upgrading equipment to paper over a skill gap as a specific red flag.",
+          "note": "This is the more serious of the two floors — it produces Not yet rather than Nearly ready — so the tone constraint from docs/design-context.md is strictest here. 'None of that is a judgement on you as a pilot' is load-bearing and should not be cut: the answers that trip this floor (comparison-driven motives, launching under social pressure, unexplained near misses) are the ones most likely to read as character criticism if stated plainly. The message names the question areas without quoting any specific answer back at the pilot."
+        }
+      },
+
+      "conservative_backstop": {
+        "message": "A few of the main questions were left blank, so there isn't quite enough here to put the result any higher than this. Nothing is counted against you for skipping them — when the tool doesn't know, it assumes the more cautious answer rather than the generous one. If you'd like a sharper result, going back and filling those in is the whole fix.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's design pattern of defaulting an unregistered glider to the most demanding category unless a lower class is actively registered. Applied here as: when the evidence is incomplete, default down rather than up.",
+          "note": "Framed as missing information, not as a penalty, and ends with the action. It fires when more than two 'core' questions are unanswered (meta.unanswered_handling.conservative_backstop). It can fire alongside other rules, which is one reason display.max_rule_reasons_shown is 2 — but the engine emits it last, so if it is cut by that limit the pilot still sees the more specific reason."
+        }
+      }
+    },
+
+    "fallback_purpose": "Entries under 'fallback_by_rule_id' are used only when 'by_rule' has no entry for the exact fired-rule string — i.e. when a question is added to thresholds.ready.critical_check_floor.questions, or an answer to thresholds.ready.unevidenced_core_checks.answers, without per-case copy being written. They are intentionally vaguer than the per-question messages and should be treated as a bug signal, not a design target: if one of these ever renders, write the specific message. Kept as a sibling field rather than a key inside the map so that 'fallback_by_rule_id' stays a homogeneous rule-id -> { message, source } map for the UI to index into blindly.",
+
+    "fallback_by_rule_id": {
+      "critical_check_floor": {
+        "message": "One specific check for this step came out low, and a single weak answer in that group holds the result here even when everything else is strong — that's deliberate, so a good overall average can't cover one thin safety skill. The suggestions below name the one it was and what moves it.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#red-flags",
+          "cites": "Daoust's checklist (expert) functions as a red-flag list in reverse: a pilot failing his practical checks should stay on A."
+        }
+      },
+      "unevidenced_core_checks": {
+        "message": "One of the checks for this step hasn't been tested rather than failed. That isn't counted against you — it scores as neutral — but the guidance treats it as something to have demonstrated before taking a less forgiving wing into bigger air, so the result stays here until it has been. The suggestions below cover how to test it while the stakes are low.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's pattern of defaulting to the most conservative category unless a lower one is actively evidenced."
+        }
+      },
+      "ready_category_floor": {
+        "message": "Your total is in the ready band, but one of the two halves of it — skills and experience, or mindset and motivation — is sitting well below the other. They're scored separately on purpose so neither can stand in for the other. The suggestions below are about the half that's holding it.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's conservative-by-default pattern: default toward 'Nearly ready' rather than 'Ready' where the evidence is uneven."
+        }
+      },
+      "not_yet_category_floor": {
+        "message": "One of the two halves of this — skills and experience, or mindset and motivation — came out low enough that it decides the result on its own, whatever the total says. That's a normal result and a useful one: it means there's a specific half to work on rather than a vague sense of not being ready. The suggestions below are the concrete version.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Psychological answers carry real weight, not a side note.\" Plus docs/design-context.md's requirement that a 'not yet' land as a legitimate result rather than a failure."
+        }
+      }
     }
   },
 

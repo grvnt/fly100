@@ -1,18 +1,24 @@
 {
   "step": "a-to-low-b",
-  "version": 2,
-  "how_to_use": "Each persona file holds a complete answer set and the expected outcome. A persona passes if the recommendation matches, the total and both category scores fall inside their ranges, the fired gates match exactly, the threshold rules match exactly, the exemptions match exactly, and the suggestion include/exclude assertions hold. Suggestion assertions are against the triggered set, not the 3-5 displayed.",
+  "version": 3,
+  "how_to_use": "Each persona file holds a complete answer set and the expected outcome. A persona passes if the recommendation matches, the total and both category scores fall inside their ranges, the fired gates match exactly, the threshold rules match exactly, the exemptions match exactly, and the suggestion include/exclude assertions hold. Suggestion assertions are against the triggered set, not the 3-5 displayed. Separately, scripts/check-personas.mts applies one global invariant to every persona, with no per-persona assertion needed: the DISPLAYED suggestion count must land between meta.selection.min_shown and max_shown (3-5) in config/suggestions/a-to-low-b.json.",
   "field_notes": {
     "rules_expected": "Threshold rules that actually applied and changed or constrained the result. Named as '<rule_id>:<question_id>' where a rule is driven by one answer.",
     "exemptions_expected": "Added in v2. Exemption ids (from config/scoring/a-to-low-b.json) that suppressed a rule which would otherwise have applied. A rule suppressed by an exemption must appear in 'exemptions_expected' and must NOT appear in 'rules_expected'. Every persona carries this field, empty where nothing is exempted, so a scorer that over-applies an exemption fails loudly."
   },
+  "v3_changes": [
+    "Added persona 10 'ready-content-local-only'. New profile, not a variant of an existing one: a strong, well-prepared pilot whose only stated ambition is 'nothing in particular'. He is the case a reviewer pass found where the displayed suggestion count fell to two, below the brief's floor of three — see config/suggestions/a-to-low-b.json meta.selection.always_pool. His exclude list is the whole suggestions file minus the four he must trigger, so he also doubles as the regression test for any gap-specific suggestion leaking to a pilot with no gaps.",
+    "config/suggestions/a-to-low-b.json gained two 'always': true suggestions ('stay_current_whatever_you_decide', 'pace_the_next_step') so the always pool can satisfy min_shown on its own. These are triggered for every persona, by definition. No persona's include/exclude assertions needed changing: the new ids were not previously asserted anywhere, and no existing suggestion's trigger changed. The DISPLAYED set changes only for personas who previously showed fewer than five suggestions (01 goes 3 -> 5, 02 goes 4 -> 5), which no assertion covered.",
+    "config/scoring/a-to-low-b.json gained a 'rule_messages' block (pilot-safe copy for the threshold rules). It is display-only data, read by nothing in app/upgrade/lib/scoreEngine.ts, so no persona score, gate, rule or exemption changes.",
+    "scripts/check-personas.mts now asserts the global displayed-count invariant (3-5) for every persona. All ten pass it; before the suggestions change, persona 10 would have failed it at two."
+  ],
   "v2_changes": [
     "Removed the 'recent_injury_or_reserve' gate from the rubric. Affects only 'notyet-lapsed-after-injury', whose gate list drops from three to two. No score and no recommendation changed anywhere — see that persona's notes.",
     "Added a stated-plans exemption to the 'unevidenced_core_checks' Ready-blocker, driven by the 'ambitions' answer via intended_flying_context. 'ready-coastal-narrow-experience' (persona 04, formerly 'nearly-coastal-narrow-experience') moves from Nearly ready to Ready, with his ambitions answer narrowed to ['local_soaring'] so his flying plans are unambiguous. New persona 09 'nearly-xc-aspiring-untested-air' is his paired control: identical answers, cross-country and hike-and-fly plans, still Nearly ready.",
     "Persona 04's file was renamed to '04-ready-coastal-narrow-experience.json' to match its new outcome.",
     "Every other persona was re-checked answer by answer against both changes and is unchanged. Each now carries an explicit 'v2 re-check, unchanged' note naming why neither change reaches it."
   ],
-  "persona_count_note": "Nine personas, one above the brief's 6-8 range. The ninth exists only as the paired control for the v2 stated-plans exemption and is a deliberate near-clone of persona 04 rather than a new pilot profile. Owner may prefer to treat 04 and 09 as a single paired case.",
+  "persona_count_note": "Ten persona files, against the brief's 6-8 range. Two of the ten are not independent pilot profiles: persona 09 is a deliberate near-clone of 04, existing only as the paired control for the v2 stated-plans exemption, so 04+09 count as one case. On that reading this is eight distinct profiles plus a control. Persona 10 was added in v3 as a genuinely new profile — the strong pilot with no stated ambitions — because no existing persona reached the thin end of the suggestion-trigger space and that is where the min_shown floor broke. Owner call if the count should be trimmed: 03 'nearly-modest-but-sound' and 07 'notyet-lapsed-after-injury' are the two with the most overlap elsewhere in the set.",
   "expected_values_provenance": "The score ranges in these files were computed by hand from config/scoring/a-to-low-b.json (skills weights total 130, psychological weights total 75, category split 0.55/0.45). The first run of a real scorer should reproduce the 'computed' figures below to within rounding; if it doesn't, the scorer and not the personas is probably wrong. None of the v2 changes alters any computed figure: the removed gate did not affect scoring, and the 'ambitions' question is zero-weighted.",
   "computed": {
     "ready-earned-upgrade": { "skills": 98.0, "psychological": 95.4, "total": 96.8, "recommendation": "ready" },
@@ -23,9 +29,10 @@
     "notyet-still-in-training": { "skills": 34.7, "psychological": 57.9, "total": 45.2, "recommendation": "not_yet" },
     "notyet-lapsed-after-injury": { "skills": 64.4, "psychological": 55.4, "total": 60.3, "recommendation": "not_yet" },
     "notyet-ambitious-and-shaken": { "skills": 40.3, "psychological": 19.2, "total": 30.8, "recommendation": "not_yet" },
-    "nearly-xc-aspiring-untested-air": { "skills": 79.3, "psychological": 93.8, "total": 85.8, "recommendation": "nearly_ready" }
+    "nearly-xc-aspiring-untested-air": { "skills": 79.3, "psychological": 93.8, "total": 85.8, "recommendation": "nearly_ready" },
+    "ready-content-local-only": { "skills": 98.0, "psychological": 87.6, "total": 93.3, "recommendation": "ready" }
   },
-  "distribution": { "ready": 3, "nearly_ready": 2, "not_yet": 4 },
+  "distribution": { "ready": 4, "nearly_ready": 2, "not_yet": 4 },
   "gate_coverage": {
     "still_in_training": ["notyet-still-in-training"],
     "airtime_under_10h": ["notyet-still-in-training"],
@@ -49,9 +56,31 @@
     "not_yet_category_floor:psychological": ["notyet-strong-hands-thin-motives"],
     "not_yet_category_floor:skills": "Not exercised in isolation — both low-skills personas are gated first, and gates short-circuit the floors.",
     "uncovered_branches": [
-      "The local_only profile can also be met by 'just_enjoy' alone, with no 'local_soaring' tick. No persona covers that branch; worth a synthetic unit check.",
+      "The local_only profile can also be met by 'just_enjoy' alone, with no 'local_soaring' tick. Persona 10 'ready-content-local-only' now takes that branch, but inertly — he answers 'rough_air_awareness: plan_around_it', so nothing downstream of the profile is in play for him and his 'exemptions_expected' is empty. The branch is reachable and proven not to misfire; a synthetic unit check pairing 'just_enjoy' alone with 'not_come_up' is still the way to prove the exemption itself fires on that branch.",
       "No persona covers an empty 'ambitions' answer. By design that must NOT meet local_only (no stated plans means no evidence of scope), so a pilot answering 'not_come_up' with no ambitions selected should still be blocked from Ready. Worth a synthetic unit check."
     ]
+  },
+  "rule_message_coverage": {
+    "note": "config/scoring/a-to-low-b.json rule_messages.by_rule has an entry for every fired-rule string the engine can produce. Personas exercise only the rules they fire, so most message keys have no persona behind them — that is expected, since the messages are display data and the engine never reads them. Listed here so a reviewer can see which copy has and has not been seen in a real result.",
+    "exercised_by_a_persona": {
+      "critical_check_floor:rough_air_awareness": ["nearly-modest-but-sound"],
+      "not_yet_category_floor:psychological": ["notyet-strong-hands-thin-motives"],
+      "unevidenced_core_checks:rough_air_awareness": ["nearly-xc-aspiring-untested-air"]
+    },
+    "not_exercised_by_any_persona": [
+      "critical_check_floor:flying_frequency",
+      "critical_check_floor:ground_handling_kiting",
+      "critical_check_floor:launch_reliability",
+      "critical_check_floor:active_piloting_bumpy",
+      "critical_check_floor:reserve_familiarity",
+      "critical_check_floor:response_when_rough",
+      "ready_category_floor:skills",
+      "ready_category_floor:psychological",
+      "not_yet_category_floor:skills",
+      "conservative_backstop",
+      "every entry under rule_messages.fallback_by_rule_id, which is correct — a fallback rendering means a rule gained a case without copy being written"
+    ],
+    "owner_decision": "Worth deciding whether the un-exercised messages justify a few more personas or a synthetic copy-review pass. The scoring behaviour behind each of them is already covered by the rule logic itself; what is not covered is whether each piece of copy reads correctly in context."
   },
   "negative_checks": [
     "No persona whose only psychological weakness is wanting more performance may lose a band for it (knowledge/disagreements.md point 9) — see ready-cautious-but-capable and notyet-lapsed-after-injury.",
@@ -61,6 +90,8 @@
     "An injury or reserve deployment in the last 12 months must not cap a result on its own (v2) — see notyet-lapsed-after-injury, where it still costs most of a weight-12 psychological question and still triggers 'post_scare_support', but the cap comes from currency and from his instructor's advice.",
     "No ambitions answer may ever add or remove a point, and no ambitions answer may make a result more generous than the same answers with a cross-country, hike-and-fly, competition or acro tick added (v2) — compare ready-coastal-narrow-experience with nearly-xc-aspiring-untested-air, whose scores are identical and whose recommendations differ in the conservative direction.",
     "The stated-plans exemption must never reach the 'rough_air_catches_me_out' hard gate or the 'critical_check_floor' rule — see notyet-ambitious-and-shaken (gated whatever his plans) and nearly-modest-but-sound (held by the floor, and local-only plans would not help him).",
-    "An exempted pilot must still be told the rough-air check is untested — see ready-coastal-narrow-experience, who asserts both 'air_awareness_untested' and 'scope_matches_your_plans' present."
+    "An exempted pilot must still be told the rough-air check is untested — see ready-coastal-narrow-experience, who asserts both 'air_awareness_untested' and 'scope_matches_your_plans' present.",
+    "Every pilot must reach at least three displayed suggestions, including the strongest possible answer set (v3) — enforced for all ten personas by the displayed-count invariant in scripts/check-personas.mts, and pinned at the thin end by ready-content-local-only, who triggers exactly four.",
+    "The two always suggestions added in v3 must never displace earned, specific advice (v3). They are priority 10 and 11, numerically higher than every gap-specific suggestion and therefore last in the sort order, so they can only occupy slots a pilot has nothing more specific to fill — compare ready-content-local-only (sees both) with notyet-ambitious-and-shaken and notyet-still-in-training, whose five slots fill up with the instructor conversation plus priority-1 and priority-2 gap-specific items long before either v3 suggestion is reached."
   ]
 }

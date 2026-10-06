@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { questionsConfig, scoringConfig, suggestionsConfig } from './lib/config';
-import { scoreAnswers } from './lib/scoreEngine';
+import { resolveRuleMessages, scoreAnswers } from './lib/scoreEngine';
 import { selectDisplaySuggestions } from './lib/selectSuggestions';
 import { ProgressBar } from './components/ProgressBar';
 import { QuestionScreen } from './components/QuestionScreen';
@@ -129,6 +129,7 @@ export default function UpgradePage() {
             skillsScore={result.skillsScore}
             psychScore={result.psychScore}
             gates={result.firedGates.slice(0, scoringConfig.gate_behaviour.max_gate_reasons_shown)}
+            ruleMessages={resolveRuleMessages(result.firedRules, scoringConfig)}
             suggestions={suggestions}
             alwaysOutput={scoringConfig.always_output}
             onRestart={restart}
