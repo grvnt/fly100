@@ -9,6 +9,25 @@ export type Recommendation = 'ready' | 'nearly_ready' | 'not_yet';
 
 export type Answers = Record<string, string | string[]>;
 
+// ---- ladder / multi-step chaining ----
+
+export type LadderRung = 'A' | 'low-B' | 'mid-B' | 'high-B' | 'low-C' | 'high-C' | 'D' | 'CCC';
+
+export interface StepConfig {
+  questions: QuestionsConfig;
+  scoring: ScoringConfig;
+  suggestions: SuggestionsConfig;
+}
+
+// One leg's complete result, used to build a chain summary.
+export interface ChainLegResult {
+  stepId: string;
+  from: LadderRung;
+  to: LadderRung;
+  answers: Answers;
+  result: ScoreResult;
+}
+
 // ---- questions config ----
 
 export interface QuestionOption {

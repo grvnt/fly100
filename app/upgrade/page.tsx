@@ -2,30 +2,44 @@
 
 import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { questionsConfig, scoringConfig, suggestionsConfig } from './lib/config';
+import { STEP_CONFIGS } from './lib/config';
+import { STEP_REGISTRY } from './lib/ladder';
+import { mergeQuestionsAcrossChain } from './lib/mergeQuestions';
 import { resolveRuleMessages, scoreAnswers } from './lib/scoreEngine';
 import { selectDisplaySuggestions } from './lib/selectSuggestions';
 import { ProgressBar } from './components/ProgressBar';
 import { QuestionScreen } from './components/QuestionScreen';
-import { ResultView } from './components/ResultView';
+import { ChainResultView, type LegSummary } from './components/ChainResultView';
+import { WingPicker } from './components/WingPicker';
 import type { Answers } from './lib/types';
 
-type Stage = 'intro' | 'question' | 'result';
+type Stage = 'picker' | 'question' | 'result';
 
 export default function UpgradePage() {
-  const [stage, setStage] = useState<Stage>('intro');
+  const [stage, setStage] = useState<Stage>('picker');
+  const [chain, setChain] = useState<string[]>([]);
+  const [answersByStep, setAnswersByStep] = useState<Record<string, Answers>>({});
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<Answers>({});
 
   const flatQuestions = useMemo(() => {
-    const byId = new Map(questionsConfig.questions.map((q) => [q.id, q]));
-    return questionsConfig.sections.flatMap((section) =>
-      section.questions.map((id) => ({ sectionTitle: section.title, question: byId.get(id)! }))
-    );
-  }, []);
+    if (chain.length === 0) return [];
+    return mergeQuestionsAcrossChain(chain, STEP_CONFIGS);
+  }, [chain]);
 
   const total = flatQuestions.length;
   const current = flatQuestions[index];
+
+  function startChain(newChain: string[]) {
+    setChain(newChain);
+    setAnswersByStep({});
+    setIndex(0);
+    setStage('question');
+  }
+
+  function stepsForCurrent(): string[] {
+    if (!current) return [];
+    return [current.ownerStepId, ...current.alsoAnswersForSteps];
+  }
 
   function goNext() {
     if (index + 1 >= total) {
@@ -40,65 +54,94 @@ export default function UpgradePage() {
   }
 
   function handleSingleAnswer(optionId: string) {
-    setAnswers((prev) => ({ ...prev, [current.question.id]: optionId }));
+    if (!current) return;
+    const steps = stepsForCurrent();
+    setAnswersByStep((prev) => {
+      const next = { ...prev };
+      for (const stepId of steps) {
+        next[stepId] = { ...next[stepId], [current.question.id]: optionId };
+      }
+      return next;
+    });
     goNext();
   }
 
   function handleMultiToggle(optionId: string) {
-    setAnswers((prev) => {
-      const existing = Array.isArray(prev[current.question.id]) ? (prev[current.question.id] as string[]) : [];
-      const next = existing.includes(optionId) ? existing.filter((o) => o !== optionId) : [...existing, optionId];
-      return { ...prev, [current.question.id]: next };
+    if (!current) return;
+    const steps = stepsForCurrent();
+    setAnswersByStep((prev) => {
+      const next = { ...prev };
+      for (const stepId of steps) {
+        const stepAnswers = next[stepId] ?? {};
+        const existing = Array.isArray(stepAnswers[current.question.id]) ? (stepAnswers[current.question.id] as string[]) : [];
+        const updated = existing.includes(optionId) ? existing.filter((o) => o !== optionId) : [...existing, optionId];
+        next[stepId] = { ...stepAnswers, [current.question.id]: updated };
+      }
+      return next;
     });
   }
 
   function handleSkip() {
-    setAnswers((prev) => {
+    if (!current) {
+      goNext();
+      return;
+    }
+    const steps = stepsForCurrent();
+    setAnswersByStep((prev) => {
       const next = { ...prev };
-      delete next[current.question.id];
+      for (const stepId of steps) {
+        const stepAnswers = { ...next[stepId] };
+        delete stepAnswers[current.question.id];
+        next[stepId] = stepAnswers;
+      }
       return next;
     });
     goNext();
   }
 
   function restart() {
-    setAnswers({});
+    setChain([]);
+    setAnswersByStep({});
     setIndex(0);
-    setStage('intro');
+    setStage('picker');
   }
 
-  const result = useMemo(() => {
-    if (stage !== 'result') return null;
-    return scoreAnswers(answers, scoringConfig, questionsConfig);
-  }, [stage, answers]);
-
-  const suggestions = useMemo(() => {
-    if (!result) return [];
-    return selectDisplaySuggestions(
-      answers,
-      { skills: result.skillsScore, psychological: result.psychScore },
-      result.recommendation,
-      scoringConfig,
-      suggestionsConfig
-    );
-  }, [result, answers]);
+  const legs: LegSummary[] = useMemo(() => {
+    if (stage !== 'result') return [];
+    return chain.map((stepId) => {
+      const { questions, scoring, suggestions } = STEP_CONFIGS[stepId];
+      const answers = answersByStep[stepId] ?? {};
+      const result = scoreAnswers(answers, scoring, questions);
+      const displaySuggestions = selectDisplaySuggestions(
+        answers,
+        { skills: result.skillsScore, psychological: result.psychScore },
+        result.recommendation,
+        scoring,
+        suggestions
+      );
+      const ruleMessages = resolveRuleMessages(result.firedRules, scoring);
+      const { from, to } = STEP_REGISTRY[stepId];
+      return {
+        stepId,
+        from,
+        to,
+        recommendation: result.recommendation,
+        totalScore: result.total,
+        skillsScore: result.skillsScore,
+        psychScore: result.psychScore,
+        gates: result.firedGates.slice(0, scoring.gate_behaviour.max_gate_reasons_shown),
+        ruleMessages,
+        suggestions: displaySuggestions,
+        alwaysOutput: scoring.always_output,
+      };
+    });
+  }, [stage, chain, answersByStep]);
 
   return (
     <main className="min-h-screen bg-background px-4 py-8 flex justify-center">
       <div className="w-full max-w-md">
-        {stage === 'intro' && (
-          <div className="flex flex-col gap-6">
-            <div>
-              <h1 className="text-2xl font-bold">{questionsConfig.meta.pilot_facing_title}</h1>
-              <p className="mt-3 text-muted-foreground leading-relaxed">{questionsConfig.meta.intro}</p>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              About {questionsConfig.meta.estimated_minutes} minutes. You can skip anything you're not sure about.
-            </p>
-            <Button onClick={() => setStage('question')} size="lg">
-              Start
-            </Button>
-          </div>
+        {stage === 'picker' && (
+          <WingPicker onSubmit={(newChain) => startChain(newChain)} />
         )}
 
         {stage === 'question' && current && (
@@ -106,7 +149,7 @@ export default function UpgradePage() {
             <ProgressBar current={index + 1} total={total} sectionTitle={current.sectionTitle} />
             <QuestionScreen
               question={current.question}
-              value={answers[current.question.id]}
+              value={answersByStep[current.ownerStepId]?.[current.question.id]}
               onSingleAnswer={handleSingleAnswer}
               onMultiToggle={handleMultiToggle}
               onSkip={handleSkip}
@@ -122,19 +165,7 @@ export default function UpgradePage() {
           </div>
         )}
 
-        {stage === 'result' && result && (
-          <ResultView
-            recommendation={result.recommendation}
-            totalScore={result.total}
-            skillsScore={result.skillsScore}
-            psychScore={result.psychScore}
-            gates={result.firedGates.slice(0, scoringConfig.gate_behaviour.max_gate_reasons_shown)}
-            ruleMessages={resolveRuleMessages(result.firedRules, scoringConfig)}
-            suggestions={suggestions}
-            alwaysOutput={scoringConfig.always_output}
-            onRestart={restart}
-          />
-        )}
+        {stage === 'result' && legs.length > 0 && <ChainResultView legs={legs} onRestart={restart} />}
       </div>
     </main>
   );
