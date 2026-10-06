@@ -1,0 +1,18 @@
+{
+  "id": "clears-both-legs",
+  "name": "An A-to-mid-B jump — genuinely ready for the whole thing",
+  "summary": "Pairs a-to-low-b's 'ready-cautious-but-capable' with low-b-to-mid-b's 'ready-coastal-local-plans' — both independently Ready. Tests that when every leg clears, the chain focuses on the FINAL leg (the wing the pilot is actually about to fly), not the first one, and the overall result is Ready.",
+  "chain": ["a-to-low-b", "low-b-to-mid-b"],
+  "legSources": {
+    "a-to-low-b": "ready-cautious-but-capable",
+    "low-b-to-mid-b": "ready-coastal-local-plans"
+  },
+  "expected": {
+    "legs": [
+      { "stepId": "a-to-low-b", "recommendation": "ready" },
+      { "stepId": "low-b-to-mid-b", "recommendation": "ready" }
+    ],
+    "focusStepId": "low-b-to-mid-b",
+    "overallRecommendation": "ready"
+  }
+}

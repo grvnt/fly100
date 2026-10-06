@@ -1,0 +1,18 @@
+{
+  "id": "blocked-at-later-leg",
+  "name": "An A-to-mid-B jump — clears the first leg, not the second",
+  "summary": "Pairs a-to-low-b's 'ready-earned-upgrade' (a clean Ready) with low-b-to-mid-b's 'nearly-mid-pack-honest' (Nearly ready on the total alone, no gate, no rule — the ordinary case). Tests that the chain correctly moves its focus to the LATER leg once the earlier one clears, rather than staying fixed on the first leg.",
+  "chain": ["a-to-low-b", "low-b-to-mid-b"],
+  "legSources": {
+    "a-to-low-b": "ready-earned-upgrade",
+    "low-b-to-mid-b": "nearly-mid-pack-honest"
+  },
+  "expected": {
+    "legs": [
+      { "stepId": "a-to-low-b", "recommendation": "ready" },
+      { "stepId": "low-b-to-mid-b", "recommendation": "nearly_ready" }
+    ],
+    "focusStepId": "low-b-to-mid-b",
+    "overallRecommendation": "nearly_ready"
+  }
+}

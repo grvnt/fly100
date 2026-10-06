@@ -8,7 +8,9 @@ import { STEP_CONFIGS } from '../lib/config';
 import type { LadderRung } from '../lib/types';
 
 interface WingPickerProps {
-  onSubmit: (chain: string[], from: LadderRung, to: LadderRung) => void;
+  // page.tsx re-derives each leg's own from/to from STEP_REGISTRY when
+  // scoring, so this callback only needs the chain itself.
+  onSubmit: (chain: string[]) => void;
 }
 
 const selectClasses =
@@ -84,13 +86,15 @@ export function WingPicker({ onSubmit }: WingPickerProps) {
             )}
             <p className="text-sm text-muted-foreground">
               About {estimatedMinutes} minutes in total
-              {chain.length > 1 ? '. Longer than a single step, because a bigger jump genuinely asks more of you — feel free to come back and finish later.' : '.'}
+              {chain.length > 1
+                ? ` — longer than the usual under-10-minutes, because you're genuinely asking a bigger question. No need to do it in one sitting.`
+                : '.'}
             </p>
           </CardContent>
         </Card>
       )}
 
-      <Button size="lg" disabled={!chain} onClick={() => chain && onSubmit(chain, from, to)}>
+      <Button size="lg" disabled={!chain} onClick={() => chain && onSubmit(chain)}>
         Start
       </Button>
     </div>

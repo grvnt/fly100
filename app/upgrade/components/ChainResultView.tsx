@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { ResultView } from './ResultView';
+import { selectFocusLegIndex } from '../lib/chainResult';
 import type { GateHit, LadderRung, Recommendation, ScoringConfig, Suggestion } from '../lib/types';
 
 export interface LegSummary {
@@ -18,9 +19,6 @@ export interface LegSummary {
   alwaysOutput: ScoringConfig['always_output'];
 }
 
-// Not yet < Nearly ready < Ready — lower rank is more blocking.
-const RANK: Record<Recommendation, number> = { not_yet: 0, nearly_ready: 1, ready: 2 };
-
 const LEG_BADGE_LABEL: Record<Recommendation, string> = {
   ready: 'Ready',
   nearly_ready: 'Nearly ready',
@@ -33,12 +31,7 @@ interface ChainResultViewProps {
 }
 
 export function ChainResultView({ legs, onRestart }: ChainResultViewProps) {
-  // The focus leg is the earliest one that isn't Ready — that's the
-  // pilot's real, immediate hurdle. If every leg is Ready, the focus
-  // is the final leg, since that's the wing they're actually about to
-  // fly. Either way the focus leg's own recommendation IS the overall
-  // one: it's either the first blocker, or (if none) "ready" throughout.
-  const focusLeg = legs.find((leg) => leg.recommendation !== 'ready') ?? legs[legs.length - 1];
+  const focusLeg = legs[selectFocusLegIndex(legs)];
 
   return (
     <div className="flex flex-col gap-6">
@@ -58,6 +51,9 @@ export function ChainResultView({ legs, onRestart }: ChainResultViewProps) {
               <span className="text-muted-foreground">{LEG_BADGE_LABEL[leg.recommendation]}</span>
             </div>
           ))}
+          <p className="text-sm text-muted-foreground">
+            The detail below is for the {focusLeg.from} → {focusLeg.to} step — that's the one actually deciding your result right now.
+          </p>
         </div>
       )}
 

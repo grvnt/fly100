@@ -38,28 +38,35 @@ const stepConfigs: Record<string, StepConfig> = {
 
 const merged = mergeQuestionsAcrossChain(['a-to-low-b', 'low-b-to-mid-b'], stepConfigs);
 
-// Hand-verified (scripts/check-merge-rule.mts investigation, 2026-10-06):
-// exactly these 7 ids have byte-identical id+text+options across both
-// steps and must be merged (asked once, answer reused for both legs).
+// Hand-verified (scripts/check-merge-rule.mts investigation, 2026-10-06,
+// updated after step-4 review tightened sameQuestion() to also compare
+// option labels, not just ids): exactly these 6 ids have byte-identical
+// id+text+option-ids+option-labels across both steps and must be merged
+// (asked once, answer reused for both legs). ground_handling_practice
+// was in this list until the label check landed — its "rarely" option
+// reads "Once or twice ever" at A->low-B but "Hardly ever" at
+// low-B->mid-B, same id, same score, different words. Caught by the
+// reviewer, not by the original (options-id-only) version of this check.
 const EXPECTED_MERGED_IDS = [
   'decline_to_fly',
   'flying_frequency',
-  'ground_handling_practice',
   'incidents_12m',
   'manoeuvre_course',
   'peer_pressure',
   'response_when_rough',
 ].sort();
 
-// These share an id across both steps but have DIFFERENT answer bands
-// (or, for external_feedback/reserve_familiarity, different wording
-// despite identical options) and must never be merged.
+// These share an id across both steps but have DIFFERENT answer bands,
+// or (external_feedback, reserve_familiarity) different question
+// wording, or (ground_handling_practice) a different option LABEL
+// under a matching id/score — and must never be merged.
 const MUST_NOT_MERGE_IDS = [
   'total_airtime',
   'total_flights',
   'airtime_last_12m',
   'training_status',
   'ground_handling_kiting',
+  'ground_handling_practice',
   'launch_reliability',
   'conditions_flown',
   'speed_bar',
@@ -82,7 +89,7 @@ if (JSON.stringify(actuallyMergedIds) !== JSON.stringify(EXPECTED_MERGED_IDS)) {
   console.log(`        got:      [${actuallyMergedIds.join(', ')}]`);
   console.log(`        expected: [${EXPECTED_MERGED_IDS.join(', ')}]`);
 } else {
-  console.log(`PASS  merged-id set is exactly the 7 hand-verified safe ids`);
+  console.log(`PASS  merged-id set is exactly the ${EXPECTED_MERGED_IDS.length} hand-verified safe ids`);
 }
 
 for (const id of MUST_NOT_MERGE_IDS) {
@@ -97,13 +104,13 @@ if (failures === 0) {
   console.log(`PASS  none of the ${MUST_NOT_MERGE_IDS.length} known different-banded ids were merged`);
 }
 
-// Sanity: total flat question count should be 28 + 30 - 7 = 51.
+// Sanity: total flat question count should be 28 + 30 - 6 = 52.
 const expectedTotal = stepConfigs['a-to-low-b'].questions.questions.length + stepConfigs['low-b-to-mid-b'].questions.questions.length - EXPECTED_MERGED_IDS.length;
 if (merged.length !== expectedTotal) {
   failures++;
   console.log(`FAIL  merged list length: got ${merged.length}, expected ${expectedTotal}`);
 } else {
-  console.log(`PASS  merged list length is ${merged.length} (28 + 30 - 7 deduped)`);
+  console.log(`PASS  merged list length is ${merged.length} (28 + 30 - ${EXPECTED_MERGED_IDS.length} deduped)`);
 }
 
 console.log(failures === 0 ? '\nAll merge-rule checks passed.' : `\n${failures} merge-rule check(s) failed.`);

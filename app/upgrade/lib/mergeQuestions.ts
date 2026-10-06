@@ -28,7 +28,11 @@ export interface MergedQuestionItem {
 function sameQuestion(a: QuestionDef, b: QuestionDef): boolean {
   if (a.id !== b.id || a.text !== b.text) return false;
   if (a.options.length !== b.options.length) return false;
-  return a.options.every((opt, i) => opt.id === b.options[i].id);
+  // Compare labels as well as ids: two steps could reuse an option id
+  // for a genuinely different-meaning answer, and the id alone
+  // wouldn't catch that — exactly the class of bug this function
+  // exists to prevent.
+  return a.options.every((opt, i) => opt.id === b.options[i].id && opt.label === b.options[i].label);
 }
 
 export function mergeQuestionsAcrossChain(

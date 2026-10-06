@@ -1,0 +1,18 @@
+{
+  "id": "blocked-at-earlier-leg",
+  "name": "Jonas's A-to-mid-B jump — the earlier leg is the real problem",
+  "summary": "Reuses existing, already-verified single-step personas rather than new answer data: a-to-low-b's 'notyet-ambitious-and-shaken' (gated Not yet — rough air catches him out, lost control of a collapse) paired with low-b-to-mid-b's 'ready-earned-the-step' (a clean Ready). Tests that the chain correctly focuses on the EARLIER leg when it's the one blocking, even though the later leg alone would be fine.",
+  "chain": ["a-to-low-b", "low-b-to-mid-b"],
+  "legSources": {
+    "a-to-low-b": "notyet-ambitious-and-shaken",
+    "low-b-to-mid-b": "ready-earned-the-step"
+  },
+  "expected": {
+    "legs": [
+      { "stepId": "a-to-low-b", "recommendation": "not_yet" },
+      { "stepId": "low-b-to-mid-b", "recommendation": "ready" }
+    ],
+    "focusStepId": "a-to-low-b",
+    "overallRecommendation": "not_yet"
+  }
+}
