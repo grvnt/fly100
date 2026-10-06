@@ -24,6 +24,9 @@ Only A, B, C and D are official EN classes (CCC is the competition class). The s
 - 3–5 concrete suggestions for what to work on
 - A recommendation to discuss the upgrade with an instructor, plus a clear disclaimer
 
+## Multi-step jumps (decided 2026-10-06, applies once step 5 "Expand" adds more steps)
+A pilot isn't always one rung below their target — e.g. a low-B pilot may genuinely be ready to skip mid-B and go straight to high-B. The tool must not invent a separate, easier "skip" assessment for this. Instead: let the pilot pick their current wing and their target wing (not just assume the next rung up), run them through **every intermediate step's questions in sequence** (merged so nothing is asked twice), score each step with its own already-built rubric, and only recommend Ready if every rung along the way clears. If an intermediate rung doesn't clear, that's the real, specific answer ("not ready to jump to high-B because of a gap at mid-B"), not a vague no. This matches `knowledge/disagreements.md` point 13's recommended handling — a pilot with a real case to skip gets asked harder questions, not a free pass. Not built yet (only A→low-B exists as of 2026-10-06) — needs a current-wing/target-wing selector and a step-chaining orchestrator once a second step's rubric lands.
+
 ## Knowledge base (research before building)
 Research and compile upgrade guidance from reputable sources before any scoring or code:
 - EN/LTF certification standards and what each class means
@@ -60,10 +63,10 @@ The psychological questions and suggestions should be informed by the framework 
 2. **Rubric:** rubric-designer agent turns it into questions, weights, gates and personas for the **A → low B** step only.
 3. **Build:** main session builds the app end to end for that one step.
 4. **Review:** reviewer agent runs the personas, checks the safety wording and flags anything copied from sources.
-5. **Expand:** add the remaining steps one at a time, repeating steps 2 and 4 for each.
+5. **Expand:** add the remaining steps one at a time, repeating steps 2 and 4 for each. Once a second step exists, this is also where the current-wing/target-wing selector and step-chaining orchestrator from "Multi-step jumps" above need to get built — don't leave it for later, since the UI structure for a single hardcoded step (what exists today) needs to change to support it.
 
 Use plan mode before each build step. Commit after each working step.
 
 ## Open questions
-- Route inside the existing fly100.co app, or separate app on a subdomain?
+- Route inside the existing fly100.co app, or separate app on a subdomain? **Resolved 2026-10-06:** route (`/upgrade`) inside the main app, following the existing `/wing-load` precedent. No subdomain.
 - Should results be shareable (e.g. a link a pilot can send their instructor)? Not needed for v1.
