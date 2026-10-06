@@ -1,0 +1,78 @@
+{
+  "step": "low-b-to-mid-b",
+  "version": 1,
+  "how_to_use": "Each persona file holds a complete answer set and the expected outcome. A persona passes if the recommendation matches, the total and both category scores fall inside their ranges, the fired gates match exactly, the threshold rules match exactly, the exemptions match exactly, and the suggestion include/exclude assertions hold. Suggestion assertions are against the TRIGGERED set, not the 3-5 displayed. Separately, scripts/check-personas.mts applies one global invariant to every persona with no per-persona assertion needed: the DISPLAYED suggestion count must land between meta.selection.min_shown and max_shown (3-5) in config/suggestions/low-b-to-mid-b.json. Run with: node --experimental-strip-types scripts/check-personas.mts low-b-to-mid-b",
+  "field_notes": {
+    "rules_expected": "Threshold rules that actually applied and changed or constrained the result. Named '<rule_id>:<question_id_or_category>' where a rule is driven by one answer or one category. Note the engine only reports a threshold rule when the total itself reached the Ready threshold — a pilot held at Nearly ready by their total alone reports no rule. Persona 09 pins that behaviour.",
+    "exemptions_expected": "Exemption ids (from config/scoring/low-b-to-mid-b.json) that suppressed a rule which would otherwise have applied. A rule suppressed by an exemption must appear in 'exemptions_expected' and must NOT appear in 'rules_expected'. Every persona carries this field, empty where nothing is exempted, so a scorer that over-applies an exemption fails loudly."
+  },
+  "persona_count_note": "Nine files, against the brief's 6-8 range. Persona 05 is not an independent pilot profile — it is a deliberate near-clone of 04, existing only as the paired control for the stated-plans exemption, so 04+05 count as one case. On that reading this is eight distinct profiles plus one control, matching the A to low-B precedent where the same pairing was added in v2. Nothing here is padding: if the count needs trimming, the honest candidate is 03 'nearly-froze-in-a-collapse', whose single-weak-check behaviour could in principle be covered by a synthetic unit test rather than a full persona — though it is the persona that exercises this step's most distinctive criterion, so it is the last one worth losing.",
+  "expected_values_provenance": "The score ranges in these files were computed by hand from config/scoring/low-b-to-mid-b.json (skills weights total 140, psychological weights total 84, category split 0.52/0.48). The 'computed' figures below are the hand-calculated values; each persona's asserted range is roughly plus or minus four points around them to tolerate arithmetic slip. The first run of a real scorer should reproduce the 'computed' figures to within rounding; if it doesn't, check the arithmetic here before changing the engine, but if a persona's RECOMMENDATION, gates, rules or exemptions differ then the disagreement is structural and worth investigating properly.",
+  "computed": {
+    "ready-earned-the-step": { "skills": 94.0, "psychological": 95.4, "total": 94.7, "bonus": 0, "recommendation": "ready" },
+    "ready-cautious-but-capable": { "skills": 84.2, "psychological": 92.5, "total": 88.2, "bonus": 0, "recommendation": "ready" },
+    "nearly-froze-in-a-collapse": { "skills": 83.7, "psychological": 87.3, "total": 85.4, "bonus": 0, "recommendation": "nearly_ready" },
+    "ready-coastal-local-plans": { "skills": 83.9, "psychological": 97.9, "total": 90.6, "bonus": 0, "recommendation": "ready" },
+    "nearly-coastal-xc-plans": { "skills": 83.9, "psychological": 97.9, "total": 90.6, "bonus": 0, "recommendation": "nearly_ready" },
+    "notyet-strong-hands-thin-motives": { "skills": 84.8, "psychological": 25.2, "total": 58.2, "bonus": 2, "recommendation": "not_yet" },
+    "notyet-lapsed-and-told-to-wait": { "skills": 53.6, "psychological": 67.0, "total": 60.0, "bonus": 0, "recommendation": "not_yet" },
+    "notyet-low-hours-big-plans": { "skills": 47.4, "psychological": 60.9, "total": 53.9, "bonus": 0, "recommendation": "not_yet" },
+    "nearly-mid-pack-honest": { "skills": 64.1, "psychological": 84.7, "total": 74.0, "bonus": 0, "recommendation": "nearly_ready" }
+  },
+  "distribution": { "ready": 3, "nearly_ready": 3, "not_yet": 3 },
+  "profile_coverage": {
+    "clearly_ready": "01 ready-earned-the-step",
+    "cautious_but_capable": "02 ready-cautious-but-capable",
+    "borderline_single_weak_check": "03 nearly-froze-in-a-collapse",
+    "narrow_experience_matched_by_narrow_plans": "04 ready-coastal-local-plans",
+    "narrow_experience_outrun_by_plans": "05 nearly-coastal-xc-plans (control for 04)",
+    "strong_skills_poor_motivation": "06 notyet-strong-hands-thin-motives",
+    "lapsed_and_externally_advised": "07 notyet-lapsed-and-told-to-wait",
+    "clearly_not_ready": "08 notyet-low-hours-big-plans",
+    "ordinary_middle": "09 nearly-mid-pack-honest"
+  },
+  "gate_coverage": {
+    "airtime_under_20h": ["notyet-low-hours-big-plans"],
+    "no_recent_flying": ["notyet-lapsed-and-told-to-wait"],
+    "instructor_said_wait": ["notyet-lapsed-and-told-to-wait"],
+    "ambition_without_readiness": ["notyet-low-hours-big-plans"],
+    "still_in_training": "Not exercised by a persona. It is a near-inert deferral at this step — a pilot on a low-B shopping for a mid-B is usually long past supervised flying — and config/scoring/low-b-to-mid-b.json meta.owner_decisions flags it as removable. Worth a synthetic unit check rather than a persona.",
+    "unreliable_launches": "Not exercised by a persona. No persona answers 'launch_reliability: often_aborted' — the two personas with weak launches answer 'most_times_easy_conditions', which is scored rather than gated. Worth a synthetic unit check.",
+    "collapse_control_lost": "Not exercised by a persona, deliberately. Persona 03 sits one band above it ('froze and the wing recovered on its own'), which is the distinction that matters most in this rubric: freezing trips a Ready-blocker, losing control trips a gate. A synthetic unit check should confirm both 'lost_control' and 'repeated_struggle' cap at Not yet.",
+    "equipment_as_a_fix_with_thin_readiness": "Deliberately NOT exercised as a firing gate. Persona 06 matches its first clause and must not be gated, because the second clause requires genuinely thin readiness — that negative case is the more important one to lock down, per knowledge/disagreements.md point 9. A synthetic unit check should confirm it DOES fire for the same motives paired with 'active_piloting: grip_tight'."
+  },
+  "rule_coverage": {
+    "critical_check_floor:collapse_experience": ["nearly-froze-in-a-collapse"],
+    "unevidenced_core_checks:thermal_turn_control": ["nearly-coastal-xc-plans"],
+    "unevidenced_core_checks:exemption:stated_plans_dont_require_thermal_evidence": ["ready-coastal-local-plans"],
+    "not_yet_category_floor:psychological": ["notyet-strong-hands-thin-motives"],
+    "no_rule_fired_nearly_ready": ["nearly-mid-pack-honest"],
+    "not_exercised": [
+      "critical_check_floor on flying_frequency, launch_reliability, thermal_turn_control, reading_the_day, active_piloting, reserve_familiarity and response_when_rough. Several personas hold the failing answers (07 and 09 both fail active_piloting at 0.45; 08 fails reading_the_day at 0.2) but are either gated first or never reach the Ready threshold, so the rule is not reported. Each is worth a synthetic unit check: take persona 01 and change one answer at a time.",
+      "ready_category_floor:skills and ready_category_floor:psychological. Not reachable from any persona here — persona 09 is the closest (skills 64.1 against a floor of 66) but her total is 74.0, just under the Ready threshold, so the floor is never reported. A synthetic check should raise her airtime_last_12m to 15_30 and confirm the floor is then named.",
+      "not_yet_category_floor:skills. Both low-skills personas (07, 08) are gated first and gates short-circuit, and neither falls below the floor of 40 anyway. Worth a synthetic check.",
+      "conservative_backstop. No persona leaves questions blank; every persona answers all 30."
+    ],
+    "owner_decision": "The un-exercised threshold rules are all covered by the rule logic itself, which is shared with A to low-B and already proven there. What is NOT covered is whether each piece of rule_messages copy reads correctly in a real result. Worth deciding between a few more personas and a synthetic copy-review pass."
+  },
+  "suggestion_coverage": {
+    "always_pool_sizing": "config/suggestions/low-b-to-mid-b.json ships FOUR 'always': true suggestions on four distinct topics (instructor, currency, step_confidence, progression), one more than min_shown. This was built in from v1 rather than discovered as a gap: A to low-B shipped v1 with a single always suggestion and a backfill rule that could not deliver three, and a reviewer pass found a real profile that reached only two. Every persona here reaches exactly five displayed suggestions, so the floor is not currently under pressure — but the pool is sized so that it holds even for a pilot who triggers nothing, which no persona in this set actually is.",
+    "thin_end_note": "The thinnest trigger set among these personas is persona 01 at eight triggered suggestions. A genuinely gap-free pilot with no stated ambitions would trigger five (four always plus test_fly_first), still at max_shown. The pool cannot drop below four for any answer set, because the four always suggestions have distinct topics and only one of them ('stay_current_whatever_you_decide') can ever be topic-deduped away — and that only happens for a pilot who has a specific currency gap, who by definition has gap-specific suggestions to fill the slots.",
+    "step_confidence_suggestion": "'soft_step_honest_framing' is priority 11, so it backfills rather than crowding out earned advice, which means a pilot with several real gaps will not see it. That is intentional and not a coverage hole: the same honesty is carried for every pilot by always_output.methodology_note in config/scoring/low-b-to-mid-b.json and by meta.confidence_statement_for_ui in config/questions/low-b-to-mid-b.json, both of which display unconditionally. Owner call if it should be promoted."
+  },
+  "negative_checks": [
+    "No persona may be gated or band-dropped for not having done a manoeuvres course. Persona 01 reaches Ready with 'manoeuvre_course: no'; persona 06 stays Not yet having done one. knowledge/disagreements.md point 1 and BRIEF.md both require SIV to be a small positive signal only.",
+    "No persona may be gated on ground handling. knowledge/disagreements.md point 11 and knowledge/steps/low-b-to-mid-b.md's 'genuine gap' finding mean ground handling is scored here but is not even a Ready-blocker at this step. Personas 07, 08 and 09 all have weak kiting and none is held by it — 07 and 08 are gated on other things, 09 is held by her total.",
+    "A pilot who reports no collapse history must not be penalised into a lower band for it. Persona 02 answers 'collapse_experience: never' and reaches Ready.",
+    "A pilot who has not practised collapse recovery must not be gated or Ready-blocked for it. Persona 02 answers 'collapse_practice: theory_only' and persona 03 answers 'no'; neither is capped by that question. knowledge/steps/low-b-to-mid-b.md calls this the skill gained during this step rather than a prerequisite for it. A scorer that adds collapse_practice to critical_check_floor.questions will fail persona 02.",
+    "No persona whose only psychological weakness is wanting more performance may lose a band for it, per knowledge/disagreements.md point 9. See personas 02, 03, 07 and 09, all of whom answer 'want_more_performance'.",
+    "Ambition alone may never cost a band. Personas 03 and 06 both tick ambitions on the 'ambition_without_readiness' list with strong skills and are not gated by it; only persona 08, who pairs them with a skills score below 55, is.",
+    "No ambitions answer may make a result MORE generous than the same answers with a cross-country, hike-and-fly, competition or acro tick added. Compare personas 04 and 05: identical scores, and the recommendations differ only in the conservative direction.",
+    "The stated-plans exemption must never reach a gate or the critical_check_floor rule. Persona 04's exemption removes only the unevidenced-check block; her thermalling answer still scores 0.5 and still passes the floor rather than being excused from it.",
+    "An exempted pilot must still be told the check is untested. Persona 04 asserts both 'thermalling_untested' and 'scope_matches_your_plans' present.",
+    "An injury or reserve deployment in the last 12 months must not cap a result on its own. No persona here answers 'incidents_12m: injury_or_reserve' — worth a synthetic check that such a pilot, otherwise strong, is NOT gated and does trigger 'post_collapse_support'. Carried forward from config/scoring/a-to-low-b.json's v2 removal of exactly that gate.",
+    "No rule or gate message may state a precise standard for this boundary. knowledge/steps/low-b-to-mid-b.md instructs the app to avoid implying false precision. A reviewer should read every fired message in personas 03, 05, 06, 07 and 08 against that rule specifically — the currency and launch messages are the two most likely to drift toward a number.",
+    "Every pilot must reach at least three displayed suggestions. Enforced for all nine personas by the displayed-count invariant in scripts/check-personas.mts; all nine reach five.",
+    "Nothing in a Ready or Nearly ready output may read as talking a hesitant pilot into the upgrade. Persona 02 is the one to read for this — she is capable, hesitant, and correct to be cautious, and docs/design-context.md's safety guard forbids reassurance as a design goal."
+  ]
+}
