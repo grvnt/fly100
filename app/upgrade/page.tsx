@@ -125,6 +125,7 @@ export default function UpgradePage() {
         {stage === 'result' && result && (
           <ResultView
             recommendation={result.recommendation}
+            totalScore={result.total}
             skillsScore={result.skillsScore}
             psychScore={result.psychScore}
             gates={result.firedGates.slice(0, scoringConfig.gate_behaviour.max_gate_reasons_shown)}

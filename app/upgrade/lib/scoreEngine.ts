@@ -200,6 +200,7 @@ export function scoreAnswers(answers: Answers, scoring: ScoringConfig, questions
     if (psychScore < ready.category_floors.psychological) firedRules.push('ready_category_floor:psychological');
     if (!criticalFloorOk) firedRules.push(`critical_check_floor:${criticalFloorQuestionId}`);
     if (unevidencedBlocks && !unevidencedExempted) firedRules.push(`unevidenced_core_checks:${unevidencedQuestionId}`);
+    if (!unansweredCoreOk) firedRules.push('conservative_backstop');
   }
 
   return { skillsScore, psychScore, total, bonus, recommendation: 'nearly_ready', firedGates: [], firedRules, exemptions };

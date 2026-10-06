@@ -175,7 +175,7 @@ export interface ScoreResult {
   total: number; // 0-100, unrounded, includes bonus, pre-gate
   bonus: number;
   recommendation: Recommendation;
-  firedGates: GateHit[]; // already capped to max_gate_reasons_shown for display
+  firedGates: GateHit[]; // FULL fired-gate list, uncapped — caller applies max_gate_reasons_shown at display time
   firedRules: string[]; // e.g. "critical_check_floor", "unevidenced_core_checks:rough_air_awareness"
   exemptions: string[]; // exemption ids that suppressed a rule
 }

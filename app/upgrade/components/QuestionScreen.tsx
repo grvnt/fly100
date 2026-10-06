@@ -12,6 +12,11 @@ interface QuestionScreenProps {
   onSkip: () => void;
 }
 
+// Options always render in the config's own array order, with no
+// gradient/highlight tied to position — this is what makes `ordered:
+// false` on a question (see config/questions/<step>.json) safe: there
+// is no ranking cue to imply the last option is "best" in the first
+// place, for any question, ordered or not.
 export function QuestionScreen({ question, value, onSingleAnswer, onMultiToggle, onSkip }: QuestionScreenProps) {
   const isMulti = question.type === 'multi';
   const selectedSingle = typeof value === 'string' ? value : undefined;

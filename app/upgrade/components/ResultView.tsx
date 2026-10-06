@@ -26,6 +26,7 @@ const BADGE_CLASSES = 'border-primary/40 bg-primary/10 text-foreground';
 
 interface ResultViewProps {
   recommendation: Recommendation;
+  totalScore: number;
   skillsScore: number;
   psychScore: number;
   gates: GateHit[];
@@ -48,7 +49,7 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
   );
 }
 
-export function ResultView({ recommendation, skillsScore, psychScore, gates, suggestions, alwaysOutput, onRestart }: ResultViewProps) {
+export function ResultView({ recommendation, totalScore, skillsScore, psychScore, gates, suggestions, alwaysOutput, onRestart }: ResultViewProps) {
   const copy = RECOMMENDATION_COPY[recommendation];
 
   return (
@@ -57,7 +58,8 @@ export function ResultView({ recommendation, skillsScore, psychScore, gates, sug
         <span className={cn('inline-block rounded-full px-3 py-1 text-sm font-semibold border', BADGE_CLASSES)}>
           {copy.label}
         </span>
-        <p className="mt-3 text-lg">{copy.blurb}</p>
+        <p className="mt-3 text-4xl font-bold tabular-nums">{Math.round(totalScore)}<span className="text-lg font-medium text-muted-foreground">/100</span></p>
+        <p className="mt-2 text-lg">{copy.blurb}</p>
       </div>
 
       <Card>
