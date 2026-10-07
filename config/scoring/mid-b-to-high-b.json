@@ -1,0 +1,1066 @@
+{
+  "step": "mid-b-to-high-b",
+  "version": 1,
+  "meta": {
+    "confidence": "moderate-to-good — the best-evidenced step above A to low-B",
+    "confidence_source": {
+      "ref": "knowledge/steps/mid-b-to-high-b.md#source-quality-note",
+      "cites": "\"Reasonably well evidenced: sources agree on ~50 hours (with the independence caveat above), and three manufacturer-via-retailer sources independently agree on the 'not for beginners/occasional pilots, needs genuine currency' framing. This is one of the stronger-consensus steps in the ladder.\"",
+      "note": "Deliberately NOT written as 'three independent sources agree'. knowledge/disagreements.md point 6 records that the Cross Country Magazine article behind the ~50-hour figure is authored by Greg Hamerton, Flybubble's long-time content lead, so the hours consensus is closer to two independent voices (a Hamerton/Flybubble house view, plus 406 Paragliding) than three. The manufacturer agreement (Advance, Gin, Nova) IS three separate voices, though all three reach us via retailer/manufacturer positioning copy rather than instructional writing. Compare config/scoring/a-to-low-b.json ('comparatively high for this step') and config/scoring/low-b-to-mid-b.json ('low — the lowest of any step built so far')."
+    },
+    "design_decisions": [
+      {
+        "id": "v1-the-hours-gate-is-a-thermic-hours-gate",
+        "change": "The hours question that carries the most weight (13, the single highest skills weight) and the only hours gates in this rubric are on 'thermic_airtime', not on 'total_airtime'. total_airtime is weight 5 and gates nothing on its own.",
+        "reason": "All three sources that put a number on this boundary measure thermic flying specifically, not cumulative airtime: Hamerton via Cross Country Magazine (roughly 50 hours of thermic flying), Flybubble (at least 50 hours of incident-free thermic flying), 406 Paragliding (50+ hours of thermic flying). Gating on total airtime instead would be substituting a number none of them gave for the one all of them gave. This is the clearest case in the ladder so far where the evidence names its own unit of measurement, so the rubric uses that unit.",
+        "what_this_costs": "A pilot with 400 hours of coastal soaring and 15 thermic hours scores badly on a question a pilot with 90 total hours and 60 thermic hours aces. That inversion is deliberate and is what the sources describe — three manufacturers position this tier for pilots moving into proper cross-country and turbulent thermic air, so thermic exposure is the relevant experience, not airtime as such.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+          "cites": "Hamerton via Cross Country Magazine (expert): roughly 50 hours of thermic flying. Flybubble (industry): at least 50 hours of incident-free thermic flying, under the heading \"XC (high EN-B)\". 406 Paragliding (industry): 50+ hours of thermic flying. The step file calls this \"one of the better-corroborated hours figures in the whole ladder\".",
+          "note": "Independence caveat per knowledge/disagreements.md point 6 — treat as two voices, not three. That caveat is why the GATE sits at under 10 hours and the Ready-blocker at under 25, rather than at the 50-hour figure itself. See the gates and thresholds below."
+        }
+      },
+      {
+        "id": "v1-hamertons-ridge-soaring-alternative-scored-not-honoured",
+        "change": "Hamerton's alternative route into high-B — roughly 100 hours of ridge soaring in place of roughly 50 hours of thermic flying — is NOT built as an alternative qualifying path. Thermic hours is the measure, full stop. The only concession to the ridge route is the shape of the second thermic gate, which does not fire for a pilot whose total airtime is large enough to make the ridge route plausible (see gate 'thermic_hours_low_and_little_other_airtime').",
+        "reason": "The sources disagree and BRIEF.md instructs taking the more conservative option. Hamerton offers the ridge alternative; Flybubble's own article, from the same house view, asks for 50 hours of thermic flying with no ridge equivalent at all, and 406 Paragliding does the same. Meanwhile Advance, Gin and Nova all position this tier around turbulent thermic and cross-country air, which is an argument that ridge hours do not evidence readiness for the demands in question even if they evidence general competence.",
+        "what_this_costs": "A very experienced, very current coastal pilot with few thermic hours cannot reach Ready at this step; the best available result is Nearly ready, with 'build_thermic_hours' at the top of their suggestions. tests/personas/mid-b-to-high-b/03 is exactly that pilot, and the honest framing of their result — strong flying, wrong kind of hours for this particular wing class — is carried by rule_messages.by_rule['critical_check_floor:thermic_airtime'].",
+        "source": {
+          "ref": "knowledge/disagreements.md#2",
+          "cites": "Recommended handling: use broad bands rather than any single source's precise figure, and be explicit that thresholds are synthesised from moderately-agreeing sources. Also BRIEF.md's instruction, via the rubric brief, that where sources disagree the more conservative option is chosen and the disagreement noted.",
+          "note": "Recorded as an owner decision below, because a reviewer could reasonably argue the ridge route should be honoured for a pilot whose stated plans stay on the ridge. The counter-argument is that such a pilot is being assessed for a wing class whose own makers describe it as a cross-country tier."
+        }
+      },
+      {
+        "id": "v1-currency-gets-its-own-combination-gate",
+        "change": "A new gate, 'occasional_pilot_profile', caps the result at Not yet for a pilot who has flown less than once a month over the last three months AND has under 25 hours in the last 12 months. Neither of the two steps below has a currency gate above the 'no flying at all in three months' line.",
+        "reason": "This is the one place where three genuinely separate manufacturer voices say the same thing: Nova describes its benchmark high-B as explicitly not suitable for beginners and occasional pilots; Advance and Gin both reserve their high-B models for pilots who are naturally talented or very current, and both caution against them as a pilot's first high-B. 'Occasional' is the word Nova uses, so a question about how occasional the pilot's flying actually is can carry a cap here where it could not at the steps below.",
+        "why_a_combination_and_not_a_single_answer": "A single-answer gate on 'less than once a month' would fire for a pilot in a genuine winter lull who flew 70 hours last season, which is the opposite of occasional. Requiring the 12-month figure to be thin as well means the gate fires for pilots who are genuinely not flying much, not for pilots who answered honestly about a bad three months.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+          "cites": "Nova (manufacturer): the Mentor, their benchmark high-B, is explicitly \"not suitable for beginners and occasional pilots\". Advance via Flybubble (manufacturer via retailer): the step up to a high-B is \"a clear step up in demands on the pilot\", probably not ideal as a first high-B unless the pilot is naturally talented or flying very current. Gin via Flybubble (manufacturer via retailer): matches this almost exactly.",
+          "note": "knowledge/disagreements.md point 2 is why the gate uses two separate currency measures rather than one: sources mix annual and recency framings, and the app asks both. paragliding24.ch's 50-80 annual-hours band for high-B points the same way but is flagged as an uncorroborated outlier in point 6, so it is used as the top of the airtime_last_12m scale and takes no part in the gate."
+        }
+      },
+      {
+        "id": "v1-ospinas-behavioural-marker-is-its-own-question",
+        "change": "A new question, 'wing_limiting_evidence' (weight 10, skills), asks directly whether the current wing has actually stopped the pilot doing something. It is a Ready-blocker in its two lowest bands and one half of a dedicated gate, 'aspirational_rather_than_demonstrated'.",
+        "reason": "Four sources converge on this being the real readiness marker at this step, in different words: Seb Ospina via XC Mag frames genuine readiness as consistently maxing out what the current wing can give; Advance and Gin both warn against buying a high-B aspirationally rather than because the pilot has outgrown what they have; Hamerton via Cloudbase Mayhem 72 says he personally flies gear below his own technical ceiling and treats matching equipment to demonstrated ability as the right default. That is the broadest agreement on any single criterion at this boundary, and inferring it from the motivation question alone would have under-used it — a pilot can hold a perfectly good motive and still have no evidence the wing is the limiting factor.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#psychological--mindset-factors",
+          "cites": "\"Seb Ospina's framing (via xcmag) is the clearest psychological-readiness marker in this step: real readiness looks like having already been limited by your current wing in practice (maxed it out, crossed terrain others on higher-class wings navigate easily), not just wanting more performance in the abstract.\" Plus the red-flags section: \"Buying a high-B as an 'aspirational' first upgrade rather than because you've demonstrably outgrown your current wing is flagged, in different words, by Advance, Gin, and Seb Ospina's interview.\"",
+          "note": "Categorised as skills rather than psychological on purpose: it asks for evidence from flights flown, not for a motive. The motive lives in 'upgrade_motivation', which is psychological. The diagnostic pairing of the two is what the gate uses, per knowledge/disagreements.md point 9."
+        }
+      },
+      {
+        "id": "v1-no-stated-plans-exemption-at-this-step",
+        "change": "intended_flying_context is defined exactly as at the two steps below and is used to select suggestions, but NO exemption attaches to any Ready-blocker. thresholds.ready.unevidenced_core_checks.exemptions is deliberately empty.",
+        "reason": "At A to low-B and low-B to mid-B the exemption is defensible because neither step's evidence requires thermic flying — the sources describe gentle conditions and a gradual widening, so a pilot whose own plans stay on the ridge is not missing a sourced requirement. That reasoning does not transfer here. Every source at this boundary locates the step in thermic and cross-country air: all three hours figures are thermic-hours figures, and Advance, Gin, Nova and Flybubble all describe this tier as the one for pilots moving into proper cross-country flying. So 'thermalling hasn't come up' is not a scope the pilot has legitimately chosen out of at this step; it is the central thing unevidenced. Exempting it on the strength of local-only plans would quietly reintroduce Hamerton's ridge route through the back door, after the decision above declined to honour it in the open.",
+        "what_this_costs": "A local-only pilot who answers 'I mostly soar rather than thermal' cannot reach Ready at this step however strong everything else is. That is the intended behaviour and it is explained to them in plain language by the 'local_plans_and_this_wings_purpose' suggestion rather than left as a silent block.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#conditions-flown",
+          "cites": "\"Convergent theme across manufacturer positioning (Advance, Gin, Nova) and Flybubble: high-B is explicitly for pilots moving into proper cross-country flying and more turbulent thermic air, not just bigger ridge days.\"",
+          "note": "knowledge/disagreements.md point 5's conservative-by-default pattern is the tie-breaker: where the evidence is ambiguous, default down. The exemptions array is kept in the config, empty and annotated, so the structural difference from the two steps below is visible rather than looking like an omission."
+        }
+      },
+      {
+        "id": "v1-in-air-skill-and-currency-outweigh-cumulative-hours",
+        "change": "The six in-air and collapse-handling questions (active_piloting 12, thermal_turn_control 11, collapse_practice 10, reading_the_day 9, collapse_experience 9, conditions_flown 9) carry 60 of the 164 skills weight, 37%. The two currency questions (airtime_last_12m 10, flying_frequency 10) carry 20, 12%. The three purely cumulative questions (total_airtime 5, total_flights 3, current_wing_time 7) carry 15, 9%. thermic_airtime, at 13, sits with the hours group in form but with the conditions group in substance.",
+        "reason": "Same philosophy as low-B to mid-B, but here it is positively sourced rather than a defensive softening. Advance names the demand specifically as \"doing the right things in turbulence\"; Simon Winkler via Podz-Glidz gives the most granular skill description in this whole knowledge base for this stage (hands up on calm glides, light contact in mild turbulence, mid-brake-travel for active correction in thermic lift, and static light-brake flying explicitly discouraged as a false sense of security); Flybubble's Reducing Risk article asks for regular proactive practice of wingovers, spirals and asymmetrics around this stage; Ospina asks whether the pilot reads air well enough for a better wing's extra feedback to be useful rather than wasted.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+          "cites": "Advance via Flybubble (manufacturer via retailer) on turbulence specifically; Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor) on phase-dependent hand position; Flybubble's Reducing Risk (industry) on proactive wingover, spiral and asymmetric practice; Seb Ospina via XC Mag (industry/expert) on reading air well enough to use the extra feedback.",
+          "note": "Also knowledge/disagreements.md point 3's recommended handling — weight self-reported skills, conditions flown and collapse-recovery comfort more heavily than class labels at the fuzzy boundaries."
+        }
+      },
+      {
+        "id": "v1-active-piloting-bar-raised-again",
+        "change": "'active_piloting' reuses the low-B to mid-B question byte-identically but scores it harder: 'I work the brakes to keep the pressure even and the wing overhead' drops from 0.9 to 0.7, and 'I try to react, but it's not automatic yet' drops from 0.45 to 0.35. Only the phase-dependent answer takes full marks. Weight rises from 11 to 12, the joint-highest skills weight.",
+        "reason": "Winkler's description is the specific thing that has moved on: at this level he treats hand position changing with flight phase as the standard and names static, hands-always-lightly-on-brakes flying as a false sense of security rather than a safe default. Working the brakes actively is therefore genuinely good flying that is one notch below what this step's own source describes, which is what 0.7 encodes.",
+        "why_the_question_is_reused_rather_than_reworded": "The question — what do your hands do when it gets bumpy — is identical at both steps and the five answers mean the same thing at both. Only the standard applied to those answers changes, and that belongs in the scoring config, not in reworded options. Rewording it would have produced two near-identical screens in a low-B to high-B chain, which is the exact defect the step-4 review had to fix on 'reserve_familiarity' and 'ambitions'. See the CHAIN MERGE note in config/questions/mid-b-to-high-b.json.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+          "cites": "Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor and steering-technique spokesperson): hands fully up on calm glides, a light contact position in mild turbulence to sense pressure changes, dropping to mid-brake-travel for active correction in thermic lift; static \"hands lightly on brakes at all times\" flying explicitly discouraged.",
+          "note": "Single expert voice on the granular detail, which is why the change is a scoring adjustment rather than a new gate. Advance's \"doing the right things in turbulence\" is the second, independent voice on the general point."
+        }
+      },
+      {
+        "id": "v1-collapse-practice-becomes-a-ready-blocker",
+        "change": "'collapse_practice' (weight 10) is a Ready-blocker here, in its two lowest bands. At low-B to mid-B the equivalent question is deliberately excluded from the Ready-blocker list and its worst answer scores 0.25 rather than 0.",
+        "reason": "The status of the skill changes between the two steps. knowledge/steps/low-b-to-mid-b.md calls asymmetric-collapse competence \"the defining collapse-handling skill gained during this step\" — gained during, so its absence cannot block that step. knowledge/steps/mid-b-to-high-b.md instead records Flybubble recommending \"regular proactive practice of wingovers, spirals and asymmetric collapses around this stage of flying, not just theoretical knowledge\". A skill a source asks you to be practising regularly by now is a reasonable thing to require evidence of before the next step.",
+        "what_still_does_not_happen": "It is not a gate. A pilot who has never practised is held at Nearly ready with a specific, high-priority suggestion, not capped. The option scale was also extended upward (five bands, topping out at course plus current practice) rather than raising the floor, so the pressure comes from the top of the scale, not from punishing the bottom.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+          "cites": "Flybubble's Reducing Risk (industry) recommends regular proactive practice of wingovers, spirals and asymmetric collapses around this stage of flying, not just theoretical knowledge.",
+          "note": "Reinforced, from a different direction, by knowledge/disagreements.md points 8 and 12: Hamerton and Winkler independently argue this training has to happen on lower-class wings, because wings from roughly EN-C up resist collapsing too well to simulate realistically. The pilot's current mid-B is close to the last wing they will own where the practice is genuinely representative, which makes 'before this step' the right side of the line to ask for it."
+        }
+      },
+      {
+        "id": "v1-ground-handling-scored-not-gated-not-even-a-blocker",
+        "change": "ground_handling_kiting is weight 7 and ground_handling_practice weight 3. Neither gates, and neither is in critical_check_floor.questions. Same treatment as low-B to mid-B; a step softer than A to low-B, where kiting is a Ready-blocker.",
+        "reason": "knowledge/steps/mid-b-to-high-b.md records that no source gives a ground-handling test for this step, and goes further than the step below by noting that BHPA's own Pilot Rating Scheme page was checked directly for this and describes its Pilot and Advanced Pilot ratings only in general qualitative terms, with no mention of ground handling at all. So the gap is not just thin industry coverage; it extends to the one official UK pilot-rating source we could read directly. Blocking a result on a bar that no source states, official or otherwise, would be inventing a standard.",
+        "what_still_bites": "Weight 10 across the two questions, the worst kiting band scores 0.15, and three suggestions fire off them. The scale was extended upward with Urs Aschmann's named advanced drills so that a pilot who has genuinely gone further gets credit for it.",
+        "source": {
+          "ref": "knowledge/disagreements.md#11",
+          "cites": "Recommended handling: \"treat ground handling as a skill the app can reasonably ask about at every step, not just the first one... Don't invent a numeric ground-handling test for the later steps where none exists — but don't silently drop the question either.\" Urs Aschmann via Podz-Glidz Episode 37 (expert, ground-handling specialist) gives the advanced drills, including deliberately rolling a wingtip out of the wind window on the rear risers before a gust can collapse it. USHPA's 2001 Paragliding Accident Summary (official) found accident rates essentially equivalent across P1-P4 with launch and ground-phase problems a persistent contributor.",
+          "note": "Flybubble's ground-handling article (industry), cited in this step's own file, is the reason the question is weighted at all rather than dropped: it frames kiting as what teaches a pilot, by feel, what a wing looks and feels like just before it collapses — which is exactly what this step's other sources expect in the air."
+        }
+      },
+      {
+        "id": "v1-no-standalone-incident-gate",
+        "change": "incidents_12m:injury_or_reserve scores 0.0 on a weight-12 psychological question but fires no gate. Carried forward from config/scoring/a-to-low-b.json's v2 decision and config/scoring/low-b-to-mid-b.json's v1, rather than re-litigated.",
+        "reason": "An injury or reserve ride is not reliably about wing-class readiness — it can come from a bad landing or a ground-handling accident. The wing-class-relevant version of the same event, losing control after a collapse, is gated separately by 'collapse_control_lost'.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "The brief's gate examples are capability signals (\"frequent collapses they struggle to recover from, very low hours for the target class\"), not incident outcomes.",
+          "note": "One step-specific nuance worth recording: Flybubble's figure for this step is \"50 hours of incident-free thermic flying\", which is the only place in the knowledge base where an hours figure carries an incident qualifier. We handle that by scoring incidents and collapse history as their own questions rather than by building a compound hours-and-incidents question, because a compound question would force a pilot to choose between two true answers. The combination still bites: a pilot with thin thermic hours AND an unexplained incident record loses on both questions."
+        }
+      },
+      {
+        "id": "v1-category-split-returns-to-55-45",
+        "change": "0.55 skills / 0.45 psychological, back to A to low-B's split after low-B to mid-B's 0.52 / 0.48.",
+        "reason": "low-B to mid-B moved toward even because its skills evidence was thin and partly borrowed from a pilot-rating syllabus while its psychological material was the usual general framing. Here the skills evidence is strong again and specific to the boundary: a corroborated hours figure in its own unit, three manufacturers on currency and turbulence, Winkler's granular active-piloting description, Flybubble on collapse practice, and two speed-bar sources. The psychological material is also good at this step (Ospina, the Advance/Gin aspirational warning, Guschlbauer on ambition as legitimate fuel, Hamerton sequencing motive before readiness, Winkler naming social pressure), so it keeps a weight within a few points of skills rather than being cut.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Psychological answers carry real weight, not a side note.\"",
+          "note": "In practice the psychological half is doing more work here than the ratio suggests, because two of the four combination gates and one of the two Not yet category floors are driven by psychological answers, and because the most-agreed single criterion at this step (has the wing actually limited you) sits right on the boundary between the two halves."
+        }
+      },
+      {
+        "id": "v1-ready-blocker-list-is-longer-here",
+        "change": "critical_check_floor.questions holds 10 questions, against 8 at low-B to mid-B and 7 at A to low-B.",
+        "reason": "Not a general tightening — each addition is individually sourced at this boundary. thermic_airtime (the corroborated hours figure), collapse_practice (Flybubble asking for regular practice by this stage) and wing_limiting_evidence (four sources on demonstrated rather than aspirational readiness) are the three genuinely new members. flying_frequency is carried forward but now bites one band higher, because 'about once a month' is what Nova's word 'occasional' most plausibly describes.",
+        "what_was_deliberately_left_out": "launch_reliability is NOT a Ready-blocker at this step, unlike at the two below, because this step's own file says nothing about launches at all. It keeps its weight and its gate on the worst band, both of which rest on the general USHPA accident data rather than on anything step-specific, and that is recorded rather than dressed up. ground_handling_kiting is left out for the reasons in 'v1-ground-handling-scored-not-gated-not-even-a-blocker'. reserve_familiarity is in, on a borrowed criterion, and is flagged below as the weakest-sourced member of the list.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#source-quality-note",
+          "cites": "\"This is one of the stronger-consensus steps in the ladder.\"",
+          "note": "A longer Ready-blocker list is the operational meaning of better evidence, in the same way that low-B to mid-B's wider Nearly ready band was the operational meaning of worse evidence. The engine breaks on the first failing question, so a pilot still sees one specific reason, not ten."
+        }
+      }
+    ],
+    "owner_decisions": [
+      "thresholds.ready.total_min is 76. It is synthesised, not sourced. It sits 4 points above A to low-B and 1 above low-B to mid-B, which encodes 'a more demanding wing class' rather than any figure from the research. The single most consequential number in this file after the thermic-hours bands.",
+      "Whether Hamerton's ridge-soaring alternative (roughly 100 hours of ridge soaring in place of roughly 50 thermic) should be honoured as a genuine second qualifying route for a pilot whose stated plans stay on the ridge. We declined it as the conservative reading — see meta.design_decisions 'v1-hamertons-ridge-soaring-alternative-scored-not-honoured'. A reviewer could reasonably disagree, and tests/personas/mid-b-to-high-b/03 is the pilot the decision affects.",
+      "Whether site_variety belongs here at all. knowledge/disagreements.md point 14 locates the sourced case for it at high-B to low-C and onward, one rung above this one, and this step's own file never mentions it. It is carried forward from low-B to mid-B at weight 3 with a floor of 0.4 so it can barely move anything, purely to avoid a question appearing at rung 2, vanishing at rung 3 and reappearing at rung 4. The honest alternative is to drop it to zero weight and keep it as a suggestion trigger only.",
+      "Whether 'doesnt_bother_me' on response_when_rough deserves its 0.55. It rests on general extreme-sports literature rather than anything paragliding-specific. Scored slightly lower here than at the two steps below (0.6) because this is the first step whose own sources describe genuinely turbulent air as the normal working environment, which makes an untroubled answer slightly more worth noticing. Still a judgement, not a finding.",
+      "Whether the 'still_in_training' gate is worth keeping. It is close to inert two rungs up the ladder. Kept because a deferral to an instructor is the most conservative handling available and costs nothing.",
+      "max_rule_reasons_shown is 2 and max_gate_reasons_shown is 3, carried forward unchanged. With 11 gates and 10 Ready-blockers at this step, a genuinely unready pilot can trip several at once, so these caps matter more here than at the steps below."
+    ],
+    "method": "Each answer has a score from 0 to 1. Within a category, score = sum(weight x answer_score) / sum(weight of answered, scored questions) x 100. Total = 0.55 x skills + 0.45 x psychological, then bonuses are added and the total is clamped to 0-100. Gates are applied last and override the total.",
+    "weight_totals": { "skills": 164, "psychological": 84, "note": "Totals differ from the steps below (130/75 at A to low-B, 140/84 at low-B to mid-B) because the question set differs. Only the within-category ratios matter; the category means are normalised." },
+    "unanswered_handling": {
+      "rule": "exclude_from_denominator",
+      "conservative_backstop": {
+        "max_unanswered_core_for_ready": 2,
+        "effect": "nearly_ready",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's design pattern of defaulting an unregistered glider to the most demanding category unless a lower class is actively registered.",
+          "note": "Applied here as: when the evidence is incomplete, default down rather than up."
+        }
+      }
+    },
+    "rounding": "Round category and total scores to the nearest whole number for display only; compare thresholds against unrounded values.",
+    "source_fields_are_internal": "Every 'source' block in this file is provenance for the owner and reviewer only. Do not render 'ref', 'cites' or 'note' text in the UI. Pilot-facing copy in this file is exactly two things: the 'message' field on each gate, and the 'message' field on each entry under rule_messages.by_rule / rule_messages.fallback_by_rule_id. Everything else — including every 'purpose', 'note', 'reason', 'why_*', 'what_this_costs', 'what_still_bites' and 'disagreement_note' field — is internal. The rest of the pilot-facing copy lives in the questions and suggestions configs. docs/design-context.md informs several decisions here and is named in some source notes; it must never be named, quoted or paraphrased anywhere a pilot can see."
+  },
+
+  "categories": {
+    "skills": {
+      "label": "Skills and experience",
+      "weight": 0.55,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "The usable criteria at this boundary are predominantly skills criteria: a thermic-hours figure corroborated across sources, Advance/Gin/Nova on currency and turbulence, Winkler's phase-dependent active piloting, Flybubble on proactive collapse practice, two sources on speed-bar technique, and Ospina's demonstrated-readiness marker.",
+        "note": "See meta.design_decisions 'v1-category-split-returns-to-55-45'."
+      }
+    },
+    "psychological": {
+      "label": "Mindset and motivation",
+      "weight": 0.45,
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "\"Psychological answers carry real weight, not a side note.\"",
+        "note": "Supported at this step by knowledge/steps/mid-b-to-high-b.md#psychological--mindset-factors: the Advance/Gin warning against buying aspirationally, Hamerton opening his own upgrade guidance with 'why do you want to upgrade?' and sequencing motive before readiness, Guschlbauer via XC Mag's 'The Head Game' treating ambition as the necessary force behind progression, and Winkler naming social pressure plainly. Plus knowledge/disagreements.md point 9."
+      }
+    }
+  },
+
+  "intended_flying_context": {
+    "purpose": "Named, reusable groupings of the 'ambitions' answer, used to decide which demands a pilot's own stated plans create. Never scored and never shown to the pilot. At this step they are referenced by suggestions only — see meta.design_decisions 'v1-no-stated-plans-exemption-at-this-step' for why no Ready-blocker exemption attaches to them here.",
+    "profiles": {
+      "exposure_bound": {
+        "label_internal": "Plans that will put the pilot in thermic, mountain or high-workload air",
+        "ambitions_includes_any": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"],
+        "note": "Cross-country flying, hike-and-fly, competition and acro all mean leaving the known site, working the usable thermic part of the day, or deliberately loading the wing. At this step these are the NORMAL plans rather than the stretching ones — three manufacturers position the class for exactly this flying — so the profile is used to tailor advice, not to add scrutiny."
+      },
+      "local_only": {
+        "label_internal": "Plans that stay inside local, ridge or coastal soaring",
+        "requires_all": [
+          { "ambitions_includes_any": ["local_soaring", "just_enjoy"] },
+          { "ambitions_includes_none_of": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"] }
+        ],
+        "note": "Requires a positive statement of local-only or no-particular-goal flying, not merely the absence of an ambition tick. A pilot who selects nothing at all is NOT local_only — no stated plans means no evidence of scope, and knowledge/disagreements.md point 5 says default down when evidence is missing. At this step the profile triggers an honest conversation suggestion rather than an exemption: a high-B's advantages are mostly cross-country advantages, so a pilot whose plans are local is being told plainly what they would and would not be buying."
+      }
+    },
+    "source": {
+      "ref": "knowledge/disagreements.md#9",
+      "cites": "Recommended handling: ambition must not be treated as a penalty in itself; the diagnostic combination is an ambition-flavoured motive paired with thin readiness elsewhere.",
+      "note": "Using ambitions as scope context never costs the pilot a point. Structure carried forward from config/scoring/a-to-low-b.json v2 and config/scoring/low-b-to-mid-b.json v1 so the three steps stay comparable, with the exemption deliberately absent here."
+    }
+  },
+
+  "questions": {
+    "total_airtime": {
+      "category": "skills",
+      "weight": 5,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+        "cites": "No source gives a cumulative total-airtime figure for this boundary. All three hours sources (Hamerton via Cross Country Magazine, Flybubble, 406 Paragliding) measure thermic flying specifically. The nearest adjacent figure, Flybubble's 150+ cumulative hours on a first B before considering the next step up, is about the step below this one.",
+        "note": "Low weight on purpose — see meta.design_decisions 'v1-the-hours-gate-is-a-thermic-hours-gate'. Kept because BRIEF.md names total hours as an input and because it is the denominator that makes the thermic figure meaningful; it also narrows one gate."
+      },
+      "options": { "under_50": 0.25, "50_100": 0.6, "100_200": 0.9, "over_200": 1.0 },
+      "disagreement_note": "Full marks arrive at 200 hours and nothing is gained above it, because no source distinguishes anything up there for this boundary. The bands are our own, chosen so the question can carry the ridge-route narrowing clause in gate 'thermic_hours_low_and_little_other_airtime' rather than because any source names 50, 100 or 200 here."
+    },
+    "total_flights": {
+      "category": "skills",
+      "weight": 3,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+        "cites": "No source gives a flight count for this boundary. USHPA's P3 (90 flights) and P4 ladders are pilot-rating bars that knowledge/disagreements.md point 5 warns do not map cleanly onto the EN ladder, and neither was written about this transition.",
+        "note": "Lowest weight of any skills question here, alongside ground_handling_practice and site_variety. Asked because BRIEF.md names flights as an input and because flights and hours genuinely measure different things — a coastal pilot accumulates flights far faster than hours. Never gates, never blocks."
+      },
+      "options": { "under_75": 0.3, "75_150": 0.6, "150_300": 0.9, "over_300": 1.0 },
+      "disagreement_note": "Entirely unsourced bands, which is why the weight is 3 and the worst band still scores 0.3. Recorded plainly rather than dressed up with a pilot-rating citation it does not have."
+    },
+    "thermic_airtime": {
+      "category": "skills",
+      "weight": 13,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+        "cites": "Hamerton via Cross Country Magazine (expert): roughly 50 hours of thermic flying as the point to consider a high-B. Flybubble (industry): at least 50 hours of incident-free thermic flying for its \"XC (high EN-B)\" tier. 406 Paragliding (industry): 50+ hours of thermic flying. The step file calls this \"one of the better-corroborated hours figures in the whole ladder\".",
+        "note": "Highest single skills weight in this rubric, and the only hours question that gates anything. This is the best-supported number in the ladder after A to low-B's figures, so it is used with confidence — but see the independence caveat in meta.confidence_source, which is why the gate and the Ready-blocker sit below the 50-hour figure rather than at it."
+      },
+      "options": { "under_10": 0.0, "10_25": 0.3, "25_50": 0.6, "50_100": 1.0, "over_100": 1.0 },
+      "disagreement_note": "Full marks arrive at the 50-hour figure the sources name, and nothing is gained above 100 because none of them distinguishes anything up there. The 25-50 band scores 0.6 — above the Ready-blocker line — deliberately: the figure is 'roughly 50' from two independent voices, the bands are approximate, and treating 40 thermic hours as disqualifying would read more precision into 'roughly' than it carries. knowledge/disagreements.md point 2 also records paragliding24.ch framing high-B in 50-80 ANNUAL hours instead, a different and less comparable measure; that framing informs airtime_last_12m, not this question. Hamerton's alternative route — roughly 100 hours of ridge soaring in place of roughly 50 thermic — is not honoured as a qualifying path here; see meta.design_decisions."
+    },
+    "airtime_last_12m": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Advance and Gin via Flybubble (manufacturer via retailer) both reserve their high-B models for pilots who are naturally talented or flying very current. Nova (manufacturer): their benchmark high-B is \"not suitable for beginners and occasional pilots\". paragliding24.ch (industry) frames high-B as 50-80 annual hours, the only numeric currency figure for this tier anywhere.",
+        "note": "knowledge/disagreements.md point 2 requires currency to be weighted independently of the lifetime total, which is why this is a separate question from total_airtime and thermic_airtime. Weighted twice total_airtime because three manufacturer voices name currency and none names a cumulative total."
+      },
+      "options": { "under_10": 0.1, "10_25": 0.4, "25_50": 0.7, "50_80": 1.0, "over_80": 1.0 },
+      "disagreement_note": "paragliding24.ch's 50-80 band is used as the TOP of the scale, not as a bar to clear: a pilot in the 25-50 band still scores 0.7. knowledge/disagreements.md point 6 flags that source's suspiciously tidy ladder as uncorroborated, so adopting it as a threshold would be adopting an outlier. Using it as the ceiling keeps the one numeric currency figure in play without letting it decide anything on its own."
+    },
+    "current_wing_time": {
+      "category": "skills",
+      "weight": 7,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#psychological--mindset-factors",
+        "cites": "Seb Ospina via XC Mag (industry/expert) frames readiness as consistently maxing out what the current wing can give. Advance and Gin via Flybubble (manufacturer via retailer) both warn against a high-B as an aspirational purchase rather than one earned on the current wing. Hamerton via Cloudbase Mayhem 72 (expert) treats matching equipment to demonstrated ability as the right default.",
+        "note": "No source gives a figure for hours-on-a-mid-B before a high-B, so this is scored as evidence of having used the current wing rather than against a threshold. Flybubble's 150+ hours figure applies to a first B, one rung down, and knowledge/disagreements.md point 6 records Flybubble's own articles disagreeing with each other about it. The behavioural version of the same idea is asked directly by wing_limiting_evidence, which carries more weight."
+      },
+      "options": { "under_20": 0.2, "20_50": 0.45, "50_100": 0.8, "over_100": 1.0 },
+      "disagreement_note": "Bands reused byte-identically from low-B to mid-B so the question merges in a chained run. They are not scaled up even though the wing is a rung higher, because no source gives a figure to scale toward — only the scores applied to them are harder here."
+    },
+    "training_status": {
+      "category": "skills",
+      "weight": 3,
+      "source": {
+        "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class",
+        "cites": "USHPA's syllabus defers wing choice to whatever the manufacturer recommends rather than naming an EN letter, i.e. the call sits with the school or instructor while a pilot is still under supervision.",
+        "note": "Phrased as training status, never as a national rating, per knowledge/disagreements.md point 5. Near-inert two rungs up the ladder — see meta.owner_decisions."
+      },
+      "options": { "in_training": 0.0, "qualified_recent": 0.5, "qualified_independent": 1.0 }
+    },
+    "flying_frequency": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Nova (manufacturer): their benchmark high-B is explicitly \"not suitable for beginners and occasional pilots\". Advance and Gin via Flybubble (manufacturer via retailer) both require pilots to be \"naturally talented or very current\". These are three separate manufacturer voices saying the same thing about currency, which is the broadest agreement on any non-numeric criterion at this boundary.",
+        "note": "Weighted equal to airtime_last_12m: one measures how much, the other how recently and how evenly spread. Together they drive the 'occasional_pilot_profile' gate, which exists only at this step."
+      },
+      "options": { "none_3m": 0.0, "less_than_monthly": 0.2, "about_monthly": 0.45, "two_or_three_monthly": 0.85, "weekly_plus": 1.0 },
+      "disagreement_note": "'About once a month' scores 0.45 here, below the Ready-blocker line, against 0.55 at low-B to mid-B and 0.5 at A to low-B where it sits exactly on the line. That is a deliberate one-band tightening and it is the clearest place three manufacturer voices support one: 'occasional' is Nova's own word, and monthly flying is the most plausible thing it describes. No source gives a figure, so this blocks Ready rather than gating."
+    },
+    "ground_handling_kiting": {
+      "category": "skills",
+      "weight": 7,
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "Urs Aschmann via Podz-Glidz Episode 37 (expert, ground-handling specialist) frames ground handling as a lifelong, never-finished skill and names advanced drills — single-side inflations for pressure sensitivity, rear-riser circling that deliberately rolls a tip out of the wind window before a gust can collapse it, controlled stalling on the rear risers. Flybubble's ground-handling article (industry), cited in this step's file, frames kiting as what teaches a pilot by feel what a wing looks and feels like just before it collapses. USHPA's 2001 Paragliding Accident Summary (official): accident rates essentially equivalent across P1-P4 ratings with launch and ground-phase problems a persistent contributor.",
+        "note": "Scored, never gated, and not a Ready-blocker — see meta.design_decisions 'v1-ground-handling-scored-not-gated-not-even-a-blocker'. knowledge/steps/mid-b-to-high-b.md records that BHPA's own Pilot Rating Scheme page was checked directly and does not name ground handling at all, which makes this the one gap in the knowledge base that extends to an official source."
+      },
+      "options": { "struggles": 0.15, "hold_steady": 0.5, "confident_strong_wind": 0.85, "advanced_drills": 1.0 },
+      "disagreement_note": "The scale starts where low-B to mid-B's finishes and tops out at Aschmann's named advanced drills, which is a reading of his 'never finished' framing rather than a bar any source sets at this boundary. Full marks are therefore genuinely optional — a pilot can reach Ready at 0.85."
+    },
+    "ground_handling_practice": {
+      "category": "skills",
+      "weight": 3,
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "Urs Aschmann via Podz-Glidz (expert) treats ground handling as never finished, with named exercises that only make sense well past the beginner stage; the USHPA 2001 accident data gives the official-side reason not to assume it is solved by this point.",
+        "note": "Low weight — a habit question, used mainly to trigger suggestions."
+      },
+      "options": { "never": 0.2, "rarely": 0.45, "sometimes": 0.8, "regularly": 1.0 }
+    },
+    "launch_reliability": {
+      "category": "skills",
+      "weight": 7,
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "USHPA's 2001 Paragliding Accident Summary (official): around 64% of accidents occurred on the ground or immediately after launch, and accident rates were essentially equivalent across P1-P4 pilot ratings. Greg Hamerton via FAI/CIVL safety pages (expert) notes risk rises from unfamiliarity after any gear change, which lands on launches first.",
+        "note": "Honest flag: knowledge/steps/mid-b-to-high-b.md says nothing about launching at all. This question is carried forward on general accident data, not on a step-specific criterion, which is why it keeps its weight and its gate on the worst band but is NOT a Ready-blocker here, unlike at the two steps below where USHPA P2 and P3 gave something specific to point at."
+      },
+      "options": { "often_aborted": 0.0, "about_half": 0.25, "most_times_easy_conditions": 0.55, "nearly_always_easy": 0.8, "reliable_wider_range": 1.0 },
+      "disagreement_note": "Full marks require reliability across a range of conditions, which is a reading of P3's wording one rung down rather than anything stated for this step. 'Nearly always clean, in the conditions I choose' tops out at 0.8 for that reason, not because a source draws the line there."
+    },
+    "thermal_turn_control": {
+      "category": "skills",
+      "weight": 11,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+        "cites": "All three hours sources measure thermic flying, which makes competent thermalling the defining activity of this step rather than an optional extra. Seb Ospina via XC Mag (industry/expert) adds the quality bar: readiness means reading air well enough that a better-performing wing's extra feedback is actually useful rather than wasted.",
+        "note": "Second-highest skills weight after thermic_airtime. Question reused byte-identically from low-B to mid-B; only the scores are harder here."
+      },
+      "options": { "not_confident": 0.0, "basic_wide_climbs": 0.3, "core_and_vary_bank": 0.8, "tight_and_shared": 1.0, "not_come_up": 0.5 },
+      "disagreement_note": "Non-monotonic. 'I mostly soar or glide rather than thermal' stays at 0.5, neutral and low-information rather than a failure, exactly as at the step below — the pilot has not done something badly, they have not done it. It blocks Ready through thresholds.ready.unevidenced_core_checks, and unlike at the two steps below that block has NO stated-plans exemption. Scores for the other bands are a full band harder than at low-B to mid-B: 'wide turns, losing the core' drops from 0.45 to 0.3 and 'not confident' from 0.1 to 0.0, because 50 hours of thermic flying is the entry condition for this step and a pilot with that exposure who still cannot centre a climb is giving two answers that do not fit together."
+    },
+    "reading_the_day": {
+      "category": "skills",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+        "cites": "Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor) generalises from his own frontal-collapse accident over a sun-heated industrial roof to a caution about heated and thermogenic ground surfaces producing sudden violent turbulence near the ground even on days that do not look rough from altitude. Hamerton via Cross Country Magazine (expert) frames the move to high-B as happening when cross-country flying becomes the pilot's focus, which is the point at which reading an unfamiliar day away from home starts to matter.",
+        "note": "Weaker step-specific sourcing than the other members of the in-air cluster — the material here is about conditions awareness in general rather than about this boundary. Carried forward from low-B to mid-B, where USHPA P3 named it directly, and flagged as the softest member of critical_check_floor.questions after reserve_familiarity."
+      },
+      "options": { "someone_else_judges": 0.1, "sometimes_right": 0.5, "usually_read_it": 0.85, "plan_the_day": 1.0 },
+      "disagreement_note": "'Right about half the time' stays at exactly 0.5, on the Ready-blocker line rather than below it, unchanged from low-B to mid-B. No source gives an accuracy standard for reading a day at this step either, and treating an honest middling answer as disqualifying would invent one. The bar was deliberately not raised here even though several others were."
+    },
+    "active_piloting": {
+      "category": "skills",
+      "weight": 12,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Advance via Flybubble (manufacturer via retailer) calls the step up to a high-B \"a clear step up in demands on the pilot,\" specifically around doing the right things in turbulence. Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor) gives the granular version: hands fully up on calm glides, a light contact position in mild turbulence to sense pressure changes, dropping to mid-brake-travel for active correction in thermic lift — and static \"hands lightly on brakes at all times\" flying explicitly discouraged as a false sense of security.",
+        "note": "Joint-highest skills weight with thermic_airtime's 13 close above it. Of everything in this questionnaire this is the closest read on whether the pilot's existing habits already cover what a less damped wing will ask for. See meta.design_decisions 'v1-active-piloting-bar-raised-again'."
+      },
+      "options": { "hands_still": 0.0, "grip_tight": 0.15, "try_to_react": 0.35, "work_brakes_actively": 0.7, "automatic_and_phase_aware": 1.0 },
+      "disagreement_note": "'I work the brakes to keep the pressure even and the wing overhead' scores 0.7 here against 0.9 at low-B to mid-B. That is the single biggest scoring change on any reused question in this rubric, and it rests on one expert voice (Winkler) for the detail plus one manufacturer voice (Advance) for the general point. Recorded as a scoring adjustment rather than a new block: a pilot who answers this way still passes the Ready-blocker comfortably."
+    },
+    "conditions_flown": {
+      "category": "skills",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#conditions-flown",
+        "cites": "\"Convergent theme across manufacturer positioning (Advance, Gin, Nova) and Flybubble: high-B is explicitly for pilots moving into proper cross-country flying and more turbulent thermic air, not just bigger ridge days. Multiple sources frame this as the step where the wing starts rewarding (and requiring) active piloting in rough air rather than just tolerating it.\"",
+        "note": "Scored as a description of exposure. The scale is monotonic all the way to the top — the first step in this rubric family where the strongest-conditions band is NOT scored down at all."
+      },
+      "options": { "smooth_gentle_only": 0.15, "ridge_coastal": 0.35, "light_moderate_thermal": 0.7, "regular_thermic_days": 1.0, "strong_mountain_big_air": 1.0 },
+      "disagreement_note": "At A to low-B the top band drops to 0.9 because big air sits outside the A class's intended window, and at low-B to mid-B it drops to 0.95 as a token. Neither applies here: three manufacturers position this class for exactly that air, so scoring it down would contradict the sources. knowledge/disagreements.md point 7 is why there is no 'strongest conditions flown without a collapse' question — searched for specifically at this boundary, found nowhere, and the knowledge base recommends against inventing it."
+    },
+    "site_variety": {
+      "category": "skills",
+      "weight": 3,
+      "source": {
+        "ref": "knowledge/disagreements.md#14",
+        "cites": "\"We think there's a real, sourced case for adding a site variety question from roughly the high-B to low-C step onward (two independent national bodies treat it as a distinct milestone, not just a function of hours), with low confidence about exactly which step it should first appear at given the pilot-rating/EN-ladder mismatch.\" FFVL's Brevet de Pilote (official) extends a pilot from \"known site only\" to \"any site\" around the step below; USHPA puts its own site-count item at P4, two rungs up.",
+        "note": "Carried forward from low-B to mid-B at the same low weight and the same 0.4 floor. This step's own file never mentions site variety, and point 14 locates the sourced case one rung above. Included only so a question does not appear at rung 2, vanish at rung 3 and reappear at rung 4. Never gates, never blocks. See meta.owner_decisions."
+      },
+      "options": { "home_site_only": 0.4, "two_or_three": 0.7, "several_varied": 0.95, "regularly_new": 1.0 }
+    },
+    "speed_bar": {
+      "category": "skills",
+      "weight": 6,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "XC Mag's speed bar tips (industry): a pilot who eases onto the bar while actively monitoring pitch reaches full acceleration with meaningfully more height in hand than one who stomps it on, and skilled pilots continuously 'trim' bar pressure to hold the wing overhead rather than locking it fully engaged. Flybubble's Speed To Fly Basics (industry): higher-performance wing categories reward bar use at lower headwind and sink thresholds than beginner-class wings.",
+        "note": "Weight doubled from 3 at the two steps below, because this is the first step in the ladder with real, named speed-bar material rather than a single uncertain-provenance class ladder. The step file notes this is where bar becomes \"a genuinely useful XC tool rather than an occasional extra\"."
+      },
+      "options": { "never_used": 0.25, "tried_with_height": 0.45, "sink_escape_only": 0.6, "regular_on_glides": 0.9, "trim_and_manage": 1.0, "stomp_it_on": 0.15 },
+      "disagreement_note": "Non-monotonic, and the shape has moved up again. At A to low-B 'sink-escape only' takes full marks and 'never used it' scores 0.7; here sink-escape-only is 0.6 and never-used is 0.25, because Flybubble places the useful bar threshold lower for higher-performance categories. 'Stomp it on' scores lowest of all — below never having tried — on the strength of XC Mag's height-in-hand contrast and Daoust's warning that stomping the bar makes a collapse more likely."
+    },
+    "collapse_experience": {
+      "category": "skills",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+        "cites": "Flybubble's Reducing Risk (industry) recommends regular proactive practice of wingovers, spirals and asymmetric collapses around this stage of flying. The step file also records that no source gives a collapse-frequency number for this exact step — those appear later, at the C and D steps.",
+        "note": "Same weight as at low-B to mid-B. What changes is that the two worst answers now sit alongside a Ready-blocker on collapse_practice as well as the gate, so an untested collapse response is caught from two directions."
+      },
+      "options": { "never": 0.55, "small_self_recovered": 0.8, "asymmetric_i_flew_it_out": 1.0, "froze_recovered_itself": 0.2, "lost_control": 0.0, "repeated_struggle": 0.0 },
+      "disagreement_note": "Non-monotonic. 'Never' scores 0.55 — above the Ready-blocker line, below the answers that show a handled collapse — because no source treats having had a collapse as a prerequisite and a pilot must not be pushed into a lower band by the absence of an event. It is scored slightly below the step below's 0.6 only because 50 hours of thermic flying with no collapse at all gives less evidence than the same answer from a low-B soaring pilot. The two worst answers fire the 'collapse_control_lost' gate; 'I froze' blocks Ready without gating."
+    },
+    "collapse_practice": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+        "cites": "Flybubble's Reducing Risk (industry) recommends regular proactive practice of wingovers, spirals and asymmetric collapses around this stage of flying, \"not just theoretical knowledge\".",
+        "note": "A Ready-blocker here, unlike at low-B to mid-B — see meta.design_decisions 'v1-collapse-practice-becomes-a-ready-blocker'. Reinforced by knowledge/disagreements.md points 8 and 12: Hamerton and Winkler independently argue this training has to happen on lower-class wings while a realistic collapse can still be induced, which makes the pilot's current mid-B close to the last wing they will own where the practice is representative."
+      },
+      "options": { "no_practice": 0.0, "theory_only": 0.3, "some_self_practice": 0.6, "regular_practice": 0.9, "course_plus_regular": 1.0 },
+      "disagreement_note": "The scale was extended upward rather than the floor raised: Flybubble asks for regular practice, so regular self-practice reaches 0.9 and only course-plus-current-practice takes full marks. Self-practised tip folds — full marks' worth of achievement one rung down — score 0.6 here. Never a gate: a pilot who has not practised is at the start of the work, not disqualified."
+    },
+    "descent_options": {
+      "category": "skills",
+      "weight": 6,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+        "cites": "Flybubble's Reducing Risk (industry) names spirals specifically among the manoeuvres to be practising proactively around this stage, alongside wingovers and asymmetrics.",
+        "note": "Separate from collapse_practice because having a way down is about options under pressure rather than about recovery, and because a cross-country pilot further from home needs more of them. Scored harder than at the step below: big ears alone now scores 0.4 rather than 0.65."
+      },
+      "options": { "big_ears_only_unsure": 0.1, "big_ears_comfortable": 0.4, "ears_plus_one_more": 0.75, "ears_plus_spiral_and_folds": 1.0 }
+    },
+    "reserve_familiarity": {
+      "category": "skills",
+      "weight": 5,
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "USHPA P2 (official) includes reserve-deployment and PLF knowledge among its required skills.",
+        "note": "Cross-referenced from two steps below and flagged as such: knowledge/steps/mid-b-to-high-b.md names no reserve criterion at all. Carried forward, and kept as a Ready-blocker, on knowledge/disagreements.md point 5's conservative default and because not being sure you could find the handle is cheap to fix and bad at any step. This remains the weakest-sourced member of critical_check_floor.questions, exactly as recorded at low-B to mid-B, and is recorded here so a reviewer can challenge it rather than having to discover it."
+      },
+      "options": { "unsure": 0.0, "know_location_only": 0.5, "practised_once": 0.85, "practised_recent_repack": 1.0 }
+    },
+    "wing_limiting_evidence": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#psychological--mindset-factors",
+        "cites": "Seb Ospina via XC Mag (industry/expert): real readiness looks like having already been limited by the current wing in practice — maxed it out, crossed terrain others on higher-class wings navigate easily — not just wanting more performance in the abstract. Advance and Gin via Flybubble (manufacturer via retailer) both warn against buying a high-B aspirationally rather than because the pilot has demonstrably outgrown what they have. Hamerton via Cloudbase Mayhem 72 (expert) says he personally flies gear below his own technical ceiling and treats matching equipment to demonstrated ability as the right default.",
+        "note": "Four voices, three of them independent of each other, which makes this the broadest agreement on any single criterion at this boundary. See meta.design_decisions 'v1-ospinas-behavioural-marker-is-its-own-question' for why it is a question of its own rather than inferred from upgrade_motivation, and why it is categorised as skills."
+      },
+      "options": { "not_really": 0.15, "occasionally_wondered": 0.4, "left_behind_on_glides": 0.8, "specific_flights": 1.0, "regularly_limiting": 1.0 },
+      "disagreement_note": "Non-monotonic in the sense that the last two bands are equal — once a pilot can name specific flights the wing cost them, more of the same adds nothing. 'Left behind on glides' scores 0.8 rather than full marks on the strength of Joy Paragliding's argument (knowledge/disagreements.md point 14) that the glide difference between adjacent categories is usually too small to explain being left behind, so that answer may be describing a climb-rate or decision-making gap rather than a wing gap. It is still strong evidence of having felt the limit, which is why it is well above the middle."
+    },
+    "external_feedback": {
+      "category": "skills",
+      "weight": 6,
+      "source": {
+        "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class",
+        "cites": "USHPA's syllabus defers the wing-class decision to the manufacturer's recommendation rather than to an EN letter, and in practice to the instructor applying it; BRIEF.md requires the app to recommend discussing the upgrade with an instructor regardless of result.",
+        "note": "Someone who has watched this pilot fly is better evidence than anything in this questionnaire. It matters particularly here because Advance and Gin both reserve their high-B models for pilots who are \"naturally talented or very current\" — a judgement nobody can make about themselves from a form. A direct 'wait' is a gate."
+      },
+      "options": { "advised_to_wait": 0.0, "nobody_seen_recently": 0.4, "friends_think_so": 0.7, "instructor_suggested": 1.0 }
+    },
+
+    "upgrade_motivation": {
+      "category": "psychological",
+      "weight": 12,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#psychological--mindset-factors",
+        "cites": "Hamerton via Cross Country Magazine (expert) opens his own upgrade guidance with exactly this question — why do you want to upgrade? — answers it plainly (\"to get more performance\"), then pivots straight to \"are you ready?\", explicitly sequencing motive before readiness. Advance and Gin via Flybubble (manufacturer via retailer) warn against buying a high-B because of ambition rather than current ability. XC Mag's 'The Head Game' (industry/expert, Guschlbauer) is the counterweight: the wish to achieve goals is the necessary force behind real progression, and the risk is ambition unmatched by preparation, not ambition as such.",
+        "note": "Conservative resolution of knowledge/disagreements.md point 9, same as at both steps below: motivation is genuinely scored, but 'I want more glide and speed' is NOT penalised (0.75, close to full) because Hamerton gives that exact answer himself without treating it as suspect. Only the comparison-driven and equipment-as-a-fix answers score low, and they mainly bite through combination gates."
+      },
+      "options": { "wing_maxed_out": 1.0, "instructor_suggested": 1.0, "want_more_performance": 0.75, "replacing_anyway": 0.5, "keep_up_with_group": 0.2, "wing_will_handle_conditions": 0.05 },
+      "disagreement_note": "'Hoping a better wing will cope with conditions I find hard' scores 0.05 here, the lowest of any answer in this rubric, against 0.1 at both steps below. At this boundary it is not merely optimistic but backwards: Advance calls the step up \"a clear step up in demands on the pilot,\" specifically in turbulence, so the wing in question asks more of the pilot in exactly the conditions they are struggling with."
+    },
+    "wing_expectation": {
+      "category": "psychological",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Advance via Flybubble (manufacturer via retailer): the step up to a high-B is \"a clear step up in demands on the pilot,\" specifically around doing the right things in turbulence. Gin via Flybubble matches it. Nova: not suitable for beginners and occasional pilots. knowledge/classification-overview.md: the EN classes describe a sliding scale of how much the wing forgives versus how much it expects to be actively flown.",
+        "note": "The honest expectation at this boundary is more feedback, more pitch to manage and more to do when it is rough — which is why that answer is the only one taking full marks here, and why 'not a huge difference' is marked down slightly rather than treated as accurate."
+      },
+      "options": { "modest_step": 0.9, "more_feedback_and_pitch": 1.0, "not_sure": 0.3, "less_work_in_rough_air": 0.15, "safer_in_turbulence": 0.0 },
+      "disagreement_note": "'A bit more glide and speed — not a huge difference' takes full marks at both steps below and 0.9 here. That is the one place in this rubric where an answer scored 1.0 lower down is scored down: three manufacturer sources agree this particular step IS a step up in demands, so under-reading it is mildly worth noticing, where under-reading the low-to-mid-B step was accurate (knowledge/disagreements.md point 3 — a specific mid-B can be barely distinguishable from a specific low-B). The deduction is small because Joy Paragliding's point about adjacent-category performance differences being small still has force."
+    },
+    "progress_goals": {
+      "category": "psychological",
+      "weight": 8,
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Yvonne Dathe via Podz-Glidz (expert, psychology graduate with formal sports-psychology training) favours process-oriented goals over outcome-oriented ones, based on her own coaching caseload. XC Mag's 'The Head Game' (industry/expert, Guschlbauer) treats \"the wish to achieve certain goals\" as the necessary force behind real progression.",
+        "note": "Carried forward from low-B to mid-B, where Dathe's material sits. Resolved toward point 9's recommended handling: chasing distance is not penalised hard (0.65), only comparison with peers is."
+      },
+      "options": { "technique_and_enjoyment": 1.0, "specific_skills": 1.0, "distance_and_numbers": 0.65, "keeping_ahead_of_peers": 0.2, "not_thought_about": 0.45 },
+      "disagreement_note": "'Flying further and getting my distances up' scores 0.65 here against 0.6 one rung down — slightly MORE generous, because this is the step where the sources themselves locate the move into cross-country flying, so a distance goal is better matched to the class than it was below. 'Haven't thought about it' is scored as mild absence of information (0.45), not as a bad goal."
+    },
+    "learning_curve_willingness": {
+      "category": "psychological",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#psychological--mindset-factors",
+        "cites": "Greg Hamerton via FAI/CIVL's safety pages (expert): when a pilot takes on new or upgraded gear, risk rises simply from unfamiliarity, so he recommends deliberately compensating elsewhere for a period — more conservative sites, flying less aggressively, front-loaded study of the new wing's specific handling. The step file calls this \"a genuinely new, practical point not found in any other source\" and notes it fits naturally at every step.",
+        "note": "Scored harder than at the steps below (0.25 and 0.1 for the two dismissive answers, against 0.35 and 0.15) because Advance and Gin both specifically caution against a high-B as a first high-B unless the pilot is very current — i.e. this is the step where the sources themselves expect a deliberate, compensated transition."
+      },
+      "options": { "ground_handle_first": 1.0, "easy_days_for_a_while": 0.85, "just_fly_it": 0.25, "straight_back_to_normal": 0.1 }
+    },
+    "ambitions": {
+      "category": "psychological",
+      "weight": 0,
+      "scored": false,
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Recommended handling: avoid treating \"wants more performance\" or \"wants to fly with faster friends\" alone as a penalty; the diagnostic combination is an ambition-flavoured motive paired with thin evidence of readiness elsewhere.",
+        "note": "Deliberately zero-weighted — no answer here adds or removes a single point. At this step ambitions affect the result in exactly one scoring place: the 'ambition_without_readiness' combination gate. Unlike at the two steps below they exempt nothing, so the only direction they can move a result is the conservative one. Otherwise they only shape which suggestions appear."
+      }
+    },
+    "response_when_rough": {
+      "category": "psychological",
+      "weight": 14,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Advance via Flybubble (manufacturer via retailer) names the demand specifically as doing the right things in turbulence, which is a question about behaviour under load rather than about feeling. XC Mag's 'The Head Game' (industry/expert, featuring sports psychologist Thomas Theurillat) frames readiness as challenge matched to honest self-assessed skill, with too big a jump producing stress rather than growth.",
+        "note": "Highest single psychological weight, because it asks what the pilot does under load rather than whether they feel nervous. Nerves themselves are not scored down: 'heart rate goes up, but I carry on flying the wing' scores 0.8. Required by docs/design-context.md, whose terminology appears nowhere pilot-facing."
+      },
+      "options": { "freeze_and_hang_on": 0.05, "tense_want_to_land": 0.25, "heart_up_keep_flying": 0.8, "calm_active_exit_plan": 1.0, "doesnt_bother_me": 0.55 },
+      "disagreement_note": "'It doesn't really bother me' scores 0.55, slightly below the two steps below (0.6), on the strength of general extreme-sports literature in knowledge/sources.md associating risk-seeking and low threat-appraisal with higher injury rates, plus the fact that this is the first step whose own sources treat turbulent air as the normal working environment. That literature is not paragliding-specific, so the reduction stays mild. Flagged in meta.owner_decisions."
+    },
+    "decline_to_fly": {
+      "category": "psychological",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/sources.md#podcast--podz-glidz--lu-glidz-lucian-haas-translatedparaphrased-transcripts",
+        "cites": "Yvonne Dathe (expert, sports psychologist) frames choosing not to launch when conditions and honest self-assessed skill don't match as sound judgement rather than cowardice; Bendicht Erb (expert, flight instructor and sports psychologist) names escalation of commitment — rationalising a marginal launch because of effort already invested — as a specific failure pattern.",
+        "note": "Scoring 'yes, and I was happy with the call' at full marks is the clearest place this rubric refuses to reward pressing on. Required by docs/design-context.md's safety guard, which forbids any question or score that nudges an accurately hesitant pilot toward upgrading."
+      },
+      "options": { "yes_several_comfortable": 1.0, "yes_once_or_twice": 0.85, "no_launch_anyway": 0.2, "not_come_up": 0.5 },
+      "disagreement_note": "'It hasn't come up' scores 0.5 here against 0.55 at both steps below. At a step whose own sources describe regular thermic and cross-country flying, never having turned down a day in several months is slightly less likely to mean the question genuinely has not arisen."
+    },
+    "peer_pressure": {
+      "category": "psychological",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#red-flags",
+        "cites": "Simon Winkler via Podz-Glidz Episode 112 (expert, DHV) names social pressure plainly as a driver of unnecessary risk-taking — being watched or filmed, flying in front of a crowd, comparing yourself to flying partners. The step file records this as independent corroboration of the peer-pressure red flag already logged from Passion Paragliding.",
+        "note": "Asks about behaviour under social pressure rather than about self-image, which is why it is scored more firmly than the motivation question itself. Bendicht Erb (expert) adds that newer, less-drilled skills degrade specifically under observation — relevant at a step where the newest skills are collapse recovery and bar management."
+      },
+      "options": { "launch_anyway": 0.1, "feel_pushed_usually_wait": 0.6, "own_call_comfortable": 1.0, "not_come_up": 0.6 }
+    },
+    "incidents_12m": {
+      "category": "psychological",
+      "weight": 12,
+      "source": {
+        "ref": "BRIEF.md#inputs",
+        "cites": "\"Honesty about recent incidents and near misses\" is listed as a required psychological input.",
+        "note": "Non-monotonic: an honest, reflected-on near miss scores higher (1.0) than 'nothing happened' (0.85), because the first gives evidence of a working debrief habit and the second gives no evidence either way. Supported by Bendicht Erb via Podz-Glidz (expert) on structured incident processing and by Dathe's staged re-exposure approach. Step-specific relevance: Flybubble's figure for this boundary is 50 hours of INCIDENT-FREE thermic flying, the only hours figure in the knowledge base carrying an incident qualifier — handled by scoring this question rather than by building a compound question. No standalone gate; see meta.design_decisions 'v1-no-standalone-incident-gate'."
+      },
+      "options": { "none": 0.85, "one_or_two_reflected": 1.0, "several_unsure": 0.25, "shook_me": 0.2, "injury_or_reserve": 0.0 }
+    }
+  },
+
+  "bonuses": [
+    {
+      "id": "manoeuvre_course_bonus",
+      "question": "manoeuvre_course",
+      "points": { "no": 0, "booked": 0.5, "one_course": 2, "more_than_one": 2 },
+      "max_total_bonus": 2,
+      "never_negative": true,
+      "applies_to": "total",
+      "source": {
+        "ref": "knowledge/disagreements.md#1",
+        "cites": "Recommended handling: SIV should be optional context only, never a hard gate, and should carry light weight at most — a small positive signal if completed, never a penalty or cap if not.",
+        "note": "knowledge/steps/mid-b-to-high-b.md#siv records that no source treats SIV as a gate for this step, and notes it is \"notably absent here even in sources (Flybubble) that start requiring it at the next step up\". So the bonus stays capped at 2 points, identical to both steps below, and cannot move a Not yet to a Ready. knowledge/disagreements.md points 8 and 12 give this step the strongest claim in the ladder on the SUGGESTION — two independent experts arguing the training must happen on lower-class wings — and that claim is honoured in config/suggestions/mid-b-to-high-b.json at priority 2, not in points. BRIEF.md requires SIV to be low weight; a bigger bonus here would quietly breach that."
+      }
+    }
+  ],
+
+  "thresholds": {
+    "ready": {
+      "total_min": 76,
+      "category_floors": { "skills": 70, "psychological": 65 },
+      "on_floor_failure": "nearly_ready",
+      "source": {
+        "ref": "knowledge/disagreements.md#5",
+        "cites": "SAHPA's conservative-by-default pattern: when evidence is ambiguous, default toward 'Not yet' or 'Nearly ready' rather than 'Ready'.",
+        "note": "76 against 72 at A to low-B and 75 at low-B to mid-B. The Nearly ready band is 21 points wide (55 to 76). Category floors are raised with it (70/65 against 66/62 one rung down) so that neither half can stand in for the other at a more demanding class. All of these are synthesised figures, not sourced ones — see meta.owner_decisions."
+      },
+      "critical_check_floor": {
+        "min_answer_score": 0.5,
+        "questions": [
+          "thermic_airtime",
+          "flying_frequency",
+          "wing_limiting_evidence",
+          "thermal_turn_control",
+          "active_piloting",
+          "collapse_experience",
+          "collapse_practice",
+          "response_when_rough",
+          "reading_the_day",
+          "reserve_familiarity"
+        ],
+        "on_failure": "nearly_ready",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md",
+          "cites": "Each member is sourced at this boundary: thermic_airtime (the ~50-hour figure, three sources / two independent voices); flying_frequency (Nova's \"not for occasional pilots\", Advance and Gin's \"very current\"); wing_limiting_evidence (Ospina, Advance, Gin, Hamerton via Cloudbase Mayhem 72); thermal_turn_control (thermic flying is the activity the hours figure measures, plus Ospina on reading air well enough to use the feedback); active_piloting (Advance on turbulence, Winkler on phase-dependent hands); collapse_experience and collapse_practice (Flybubble's Reducing Risk on regular proactive practice); response_when_rough (Advance's turbulence demand, 'The Head Game' on challenge matched to honest skill).",
+          "note": "ORDER MATTERS: the engine breaks on the first failing question in this list, so WHICH message a pilot sees depends on the order, and the list is ordered most-to-least step-specific. thermic_airtime is first because it is the best-evidenced check here and the one a pilot most needs to hear named. reading_the_day and reserve_familiarity are the two softest-sourced members and are placed last for that reason — reading_the_day rests on general conditions-awareness material rather than anything about this boundary, and reserve_familiarity rests on a criterion borrowed from USHPA P2, two rungs down. A reviewer changing this order should re-run tests/personas/mid-b-to-high-b/03 and /08, which are the two personas with more than one failing member. Deliberately EXCLUDED, each for a recorded reason: ground_handling_kiting and ground_handling_practice (no bar exists, and BHPA's own rating pages were checked directly and are silent — knowledge/disagreements.md point 11); launch_reliability (this step's file says nothing about launches, so its gate rests on general accident data and a Ready-block would overreach); conditions_flown and site_variety (no falsifiable marker — knowledge/disagreements.md points 7 and 14); speed_bar (two industry sources describe technique, neither sets a standard); and every cumulative-hours question (no source gives a cumulative figure at this boundary)."
+        }
+      },
+      "unevidenced_core_checks": {
+        "answers": ["thermal_turn_control:not_come_up"],
+        "on_match": "nearly_ready",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's pattern of defaulting to the most conservative category unless a lower one is actively evidenced.",
+          "note": "All three hours figures for this step measure thermic flying, so a pilot who does not thermal has no evidence either way about the main activity the class is positioned for. Treated as not-yet-demonstrated rather than as a failure: it scores 0.5 (neutral), fires no gate, and passes the critical_check_floor. Only one answer is listed, deliberately — collapse_practice:no_practice is NOT here, because it is a weak answer rather than an untested one, and it is already caught by the critical_check_floor."
+        },
+        "exemptions": [],
+        "exemptions_deliberately_empty": {
+          "what_this_differs_from": "config/scoring/a-to-low-b.json has 'stated_plans_dont_require_rough_air_judgement' and config/scoring/low-b-to-mid-b.json has 'stated_plans_dont_require_thermal_evidence'. Both let a pilot whose stated plans are local, ridge or coastal soaring reach Ready with an untested answer. There is no equivalent here, and that is a deliberate design decision rather than an omission.",
+          "reason": "At both steps below, the step's own evidence does not require thermic flying, so a local-only pilot is not missing a sourced requirement. At this step it does: every hours figure is a thermic-hours figure and four sources position the class for cross-country and turbulent thermic air. Exempting the untested thermalling answer here would also reintroduce Hamerton's ridge-soaring alternative by the back door after meta.design_decisions declined to honour it openly.",
+          "how_the_pilot_is_told": "The 'local_plans_and_this_wings_purpose' suggestion in config/suggestions/mid-b-to-high-b.json fires for exactly the profile that would have been exempted (local_only plans plus a smooth or ridge conditions answer) and explains in plain language that a high-B's advantages are mostly cross-country advantages. The block is explained, not silent.",
+          "source": {
+            "ref": "knowledge/steps/mid-b-to-high-b.md#conditions-flown",
+            "cites": "\"Convergent theme across manufacturer positioning (Advance, Gin, Nova) and Flybubble: high-B is explicitly for pilots moving into proper cross-country flying and more turbulent thermic air, not just bigger ridge days.\"",
+            "note": "If the owner decides to honour the ridge route (see meta.owner_decisions), this is the single place to add it back, and it should be conditioned on total_airtime as well as on stated plans and conditions flown — roughly 100 hours of ridge soaring is Hamerton's figure, not merely 'I fly the coast'."
+          }
+        }
+      }
+    },
+    "nearly_ready": {
+      "total_min": 55,
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#source-quality-note",
+        "cites": "\"Reasonably well evidenced... This is one of the stronger-consensus steps in the ladder.\"",
+        "note": "Held at 55, identical to both steps below, so that the whole of this step's extra strictness sits on the Ready edge and in the gates rather than in pushing more pilots into Not yet. Below 55 the result is Not yet."
+      }
+    },
+    "not_yet": {
+      "total_max": 54.999,
+      "framing": "A legitimate, successful result — the tool working, not the pilot failing.",
+      "category_floors": { "psychological": 35, "skills": 45 },
+      "floor_rule": "If either category falls below its floor, the result is Not yet regardless of the total.",
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "\"Psychological answers carry real weight, not a side note.\"",
+        "note": "The psychological floor stays at 35, identical to both steps below, so the two reviewed steps and this one treat a badly-motivated upgrade the same way. The skills floor rises from 40 to 45, because three manufacturer sources say plainly this is not a class for beginners or occasional pilots, so thin skills matter more here than one rung down. Both floors are set low so only genuinely poor profiles trip them, not merely mediocre ones. The psychological floor is what stops very strong hands from buying out a poor answer set on motives, social pressure and unexplained incidents — the combination knowledge/disagreements.md point 9 identifies as the one both camps agree is concerning."
+      }
+    }
+  },
+
+  "gates": [
+    {
+      "id": "still_in_training",
+      "cap": "not_yet",
+      "when": { "question": "training_status", "answer_in": ["in_training"] },
+      "message": "While you're still flying under supervision, your wing choice is your instructor's call rather than a questionnaire's. Ask them directly — they can see your flying, and that's worth more than anything this tool can work out.",
+      "source": {
+        "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class",
+        "cites": "USHPA's syllabus defers wing class to the manufacturer's recommendation rather than naming an EN letter itself.",
+        "note": "A deferral, not a judgement, and the message says so. Conservative per knowledge/disagreements.md point 5. Close to inert two rungs up the ladder and flagged in meta.owner_decisions as removable."
+      }
+    },
+    {
+      "id": "thermic_hours_far_below_every_reading",
+      "cap": "not_yet",
+      "when": { "question": "thermic_airtime", "answer_in": ["under_10"] },
+      "message": "Under about 10 hours of thermal flying, every reading of this step puts you a long way below it — the figure the published guidance keeps landing on is around 50. That's the single most useful thing on this page: thermic hours, on the wing you already trust, in company, on days that aren't the strongest of the season. Nothing else here moves as much as that does.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+        "cites": "Hamerton via Cross Country Magazine (expert), Flybubble (industry) and 406 Paragliding (industry) all land on roughly 50 hours of thermic flying as the practical marker for moving into high-B. The step file calls it \"one of the better-corroborated hours figures in the whole ladder\".",
+        "note": "Gated at a fifth of the figure, not at the figure, because knowledge/disagreements.md point 6 records that the Cross Country Magazine and Flybubble sources are not fully independent of each other — 406 Paragliding is the one genuinely separate voice. The message names the 50-hour figure as what the guidance says rather than as a bar this tool enforces, which is the honest framing. Hamerton's ridge-soaring alternative does not rescue this band: at under 10 thermic hours the pilot is below his thermic route by a factor of five, and the second thermic gate handles the band where the ridge route becomes arguable."
+      }
+    },
+    {
+      "id": "thermic_hours_low_and_little_other_airtime",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "thermic_airtime", "answer_in": ["10_25"] },
+          { "question": "total_airtime", "answer_in": ["under_50", "50_100"] }
+        ]
+      },
+      "message": "Two answers together put this one out of reach for now: under about 25 hours of thermal flying, and not much other airtime behind it either. The guidance for this step keeps landing on around 50 hours of thermic time, and the one source that offers an alternative wants a lot of ridge soaring instead — you're short on both counts rather than one. The route through is ordinary and it works: thermal hours on the wing you've got.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+        "cites": "The ~50-hour thermic figure (Hamerton via Cross Country Magazine, Flybubble, 406 Paragliding). Hamerton separately offers roughly 100 hours of ridge soaring as an alternative route, which is why this gate requires thin TOTAL airtime as well as thin thermic airtime.",
+        "note": "The shape of this gate is the only concession in the rubric to Hamerton's ridge alternative: a pilot with 10-25 thermic hours and 100+ total hours is not capped here, because the ridge route is at least arguable for them — but they are still held at Nearly ready by the critical_check_floor, because knowledge/disagreements.md point 2 and the brief's instruction to prefer the conservative reading mean we do not treat the ridge route as qualifying. See meta.design_decisions 'v1-hamertons-ridge-soaring-alternative-scored-not-honoured'."
+      }
+    },
+    {
+      "id": "no_recent_flying",
+      "cap": "not_yet",
+      "when": { "question": "flying_frequency", "answer_in": ["none_3m"] },
+      "message": "Get current again on the wing you know before changing wings. A few flights back in easy air and this answer changes on its own.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Nova (manufacturer): their benchmark high-B is not suitable for beginners and occasional pilots. Advance and Gin via Flybubble (manufacturer via retailer): reserved for pilots who are naturally talented or very current.",
+        "note": "Gated at the unambiguous case — no flying at all in three months — which is below any reading of any source. Carried forward from both steps below, with better sourcing here than at either."
+      }
+    },
+    {
+      "id": "occasional_pilot_profile",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "flying_frequency", "answer_in": ["less_than_monthly"] },
+          { "question": "airtime_last_12m", "answer_in": ["under_10", "10_25"] }
+        ]
+      },
+      "message": "This one is about how much flying you're doing right now rather than what you can do. The makers of the best-known high-end B wings are unusually blunt about it: these aren't wings for occasional pilots, and they want you current rather than merely experienced. Flying less than monthly, with a thin year behind it, is the profile they're describing. Build the frequency back up first and this question answers itself — and nothing about it says anything bad about your flying.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Nova (manufacturer): the Mentor, their benchmark high-B, is explicitly \"not suitable for beginners and occasional pilots\". Advance via Flybubble (manufacturer via retailer): a high-B is \"probably not ideal\" as a pilot's first unless they are naturally talented or flying very current. Gin via Flybubble: matches almost exactly.",
+        "note": "Three separate manufacturer voices, which is the broadest agreement on any non-numeric criterion at this boundary — see meta.design_decisions 'v1-currency-gets-its-own-combination-gate'. Deliberately a combination so it does not fire for a current pilot in a seasonal lull. No equivalent gate exists at either step below, where no source says anything about currency specifically."
+      }
+    },
+    {
+      "id": "unreliable_launches",
+      "cap": "not_yet",
+      "when": { "question": "launch_reliability", "answer_in": ["often_aborted"] },
+      "message": "Regularly needing several goes, getting pulled around or aborting is worth fixing before adding anything to the wing — a change of glider makes launching harder for a while for everyone, and the ground and the first seconds of flight are where most accidents in this sport happen. Ground handling plus deliberate launch practice moves this faster than anything else.",
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "USHPA's 2001 Paragliding Accident Summary (official): around 64% of accidents occurred on the ground or immediately after launch, with accident rates essentially equivalent across P1-P4 pilot ratings. Greg Hamerton via FAI/CIVL (expert): risk rises from unfamiliarity after any gear change.",
+        "note": "Honest flag: this rests on general accident data, not on anything in knowledge/steps/mid-b-to-high-b.md, which says nothing about launches. Kept as a gate on the worst band only, and deliberately NOT a Ready-blocker at this step for the same reason. This is a launch-reliability gate, not a ground-handling gate."
+      }
+    },
+    {
+      "id": "collapse_control_lost",
+      "cap": "not_yet",
+      "when": { "question": "collapse_experience", "answer_in": ["lost_control", "repeated_struggle"] },
+      "message": "This is the one thing on the list worth sorting out before anything else, and worth doing with a coach rather than alone. A high-B gives you less time and less help in the same situation. There's a practical argument for doing it now rather than later, too: the wing you're on is close to the last one you'll own where a collapse can be made to behave realistically enough to practise on. Get the recovery reliable first, then change the wing.",
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "\"Hard gates: some answers (e.g. frequent collapses they struggle to recover from) cap the result at 'Not yet' regardless of total score.\" This gate is the brief's own example, almost word for word on the 'repeated_struggle' branch.",
+        "note": "Supported at this boundary by Flybubble's Reducing Risk (industry), which asks for regular proactive collapse practice by this stage, and by knowledge/disagreements.md point 12: Simon Winkler (expert, DHV) argues wings from roughly EN-C up resist collapsing too strongly for realistic simulation, so the training has to happen on lower-class wings. The last clause of the message is that argument in plain language. Note what is NOT gated: never having practised. That is a Ready-blocker here, not a cap."
+      }
+    },
+    {
+      "id": "instructor_said_wait",
+      "cap": "not_yet",
+      "when": { "question": "external_feedback", "answer_in": ["advised_to_wait"] },
+      "message": "Someone who has watched you fly has already told you to wait. That beats anything this tool can work out from a questionnaire — and it matters more at this step than most, because two of the manufacturers whose wings you'd be shopping for describe them as being for pilots who are naturally talented or very current, which is precisely the judgement nobody can make about themselves from a form.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Advance and Gin via Flybubble (manufacturer via retailer) both reserve their high-B models for pilots who are naturally talented or very current. knowledge/classification-overview.md: USHPA's syllabus defers the wing-class decision to the manufacturer's recommendation and in practice to the instructor applying it; BRIEF.md requires an instructor recommendation in every result.",
+        "note": "Direct observation outranks self-report. The second clause of the message is specific to this step and is sourced rather than rhetorical."
+      }
+    },
+    {
+      "id": "aspirational_rather_than_demonstrated",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "wing_limiting_evidence", "answer_in": ["not_really"] },
+          {
+            "any_of": [
+              { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group", "wing_will_handle_conditions", "replacing_anyway"] },
+              { "category_below": { "category": "skills", "value": 65 } },
+              { "question": "thermic_airtime", "answer_in": ["under_10", "10_25", "25_50"] }
+            ]
+          }
+        ]
+      },
+      "message": "One answer is doing a lot of work here: by your own account, your current wing hasn't yet been the thing stopping you. That's the clearest marker in the published guidance for this particular step — four separate voices, including two manufacturers writing about their own high-end B wings, all say the same thing in different words: this is a wing you move onto because you've run out of the one you've got, not one you move onto to find out. Nothing about that is a criticism. It usually means there's still performance sitting in your current wing waiting to be collected, which is the cheapest kind there is.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#red-flags",
+        "cites": "\"Buying a high-B as an 'aspirational' first upgrade rather than because you've demonstrably outgrown your current wing is flagged, in different words, by Advance, Gin, and Seb Ospina's interview.\" Hamerton via Cloudbase Mayhem 72 (expert) corroborates from an independent, non-manufacturer position: he flies gear below his own technical ceiling and treats matching equipment to demonstrated ability as the right default.",
+        "note": "Deliberately a combination gate, never a single-answer one: a pilot who says the wing hasn't limited them yet but is strongly current, well above 50 thermic hours and honest about their motive is NOT capped — they are told the same thing by the 'wing_hasnt_limited_you_yet' suggestion instead. 'want_more_performance' is deliberately absent from the motive list, per knowledge/disagreements.md point 9: Hamerton gives that answer himself and Guschlbauer treats it as legitimate fuel, so it must not help cap anyone."
+      }
+    },
+    {
+      "id": "equipment_as_a_fix_with_thin_readiness",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          {
+            "any_of": [
+              { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group", "wing_will_handle_conditions"] },
+              { "question": "wing_expectation", "answer_in": ["safer_in_turbulence", "less_work_in_rough_air"] }
+            ]
+          },
+          {
+            "any_of": [
+              { "category_below": { "category": "skills", "value": 65 } },
+              { "question": "active_piloting", "answer_in": ["hands_still", "grip_tight", "try_to_react"] },
+              { "question": "collapse_experience", "answer_in": ["froze_recovered_itself"] },
+              { "question": "response_when_rough", "answer_in": ["freeze_and_hang_on", "tense_want_to_land"] }
+            ]
+          }
+        ]
+      },
+      "message": "A high-B won't make rough air easier — it's the step where the trade runs the other way. Its own makers describe it as a clear step up in what it asks of the pilot, specifically in turbulence: more feedback, more pitch to manage, more to do. What does make rough air easier is thermic hours, active flying, knowing what you'd do if the wing folded, and picking your days — and all four are available on the wing you already have.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Advance via Flybubble (manufacturer via retailer): the step up to a high-B is \"a clear step up in demands on the pilot,\" specifically around doing the right things in turbulence. Gin via Flybubble matches it. Yvonne Dathe via Podz-Glidz (expert, sports psychologist), via knowledge/steps/low-b-to-mid-b.md, names upgrading equipment to compensate for a skill gap rather than closing it as a specific red flag.",
+        "note": "knowledge/disagreements.md point 9 identifies the combination both camps agree on: an ambition- or comparison-flavoured motive paired with thin evidence of readiness elsewhere. The second clause is broader here than at the steps below — it adds response_when_rough and widens the active_piloting branch to include 'try to react' — because Advance's framing ties the demand specifically to behaviour in turbulence, which is what those two questions measure. It still contains no hours clause; thermic hours gate separately and on their own evidence."
+      }
+    },
+    {
+      "id": "ambition_without_readiness",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "ambitions", "answer_includes_any": ["longer_xc", "competitions", "acro"] },
+          { "category_below": { "category": "skills", "value": 55 } }
+        ]
+      },
+      "message": "The goals are fine — they're the reason people keep flying, and nobody should talk you out of them. One X-Alps pilot interviewed on exactly this calls the wish to achieve something the force that drives real progression. The gap is the groundwork underneath, and almost all of it is learnable on the wing you've got. That's what the suggestions below are about.",
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Recommended handling: ambition itself is legitimate fuel (Guschlbauer via XC Mag's 'The Head Game', cited directly in knowledge/steps/mid-b-to-high-b.md) and must not be penalised alone; the concerning pattern is ambition paired with thin readiness. Seb Ospina via XC Mag is the counterpoint held alongside it: real readiness is demonstrated, not aspirational.",
+        "note": "Only fires when the skills category is already below 55, which is why the message is framed around the groundwork rather than the ambition. Identical in structure to both steps below. Note that at this step 'longer_xc' is the NORMAL ambition for the class — the sources position it as a cross-country tier — so the gate's second clause is doing all the work, exactly as intended."
+      }
+    }
+  ],
+
+  "gates_deliberately_not_included": [
+    {
+      "candidate": "total_airtime_under_N",
+      "reason": "No source gives a cumulative total-airtime figure for this boundary; all three give thermic-hours figures. Gating on a number nobody stated, when the sources agreed on a different number they did state, would be the wrong kind of precision. Scored at weight 5, and used only to narrow the second thermic gate. See meta.design_decisions 'v1-the-hours-gate-is-a-thermic-hours-gate'."
+    },
+    {
+      "candidate": "thermic_hours_under_50",
+      "reason": "Gating at the figure itself was considered and rejected. knowledge/disagreements.md point 6 reduces the ~50-hour agreement from three sources to roughly two independent voices, and all three say 'roughly' or '50+'. The gates sit at under 10 unconditionally and at under 25 with thin total airtime; the 25-50 band is a Ready-blocker through scoring rather than a cap."
+    },
+    {
+      "candidate": "flights_under_N",
+      "reason": "No source gives a flight count at this boundary at all. Scored at weight 3 on entirely unsourced bands, which is recorded in that question's disagreement_note rather than hidden."
+    },
+    {
+      "candidate": "current_wing_hours_under_N",
+      "reason": "No source gives a figure for time on a mid-B before a high-B. Flybubble's 150+ hours applies to a first B one rung down, and knowledge/disagreements.md point 6 records Flybubble's own articles disagreeing with each other on it. Scored at weight 7; the behavioural version is asked directly by wing_limiting_evidence."
+    },
+    {
+      "candidate": "ground_handling_below_N",
+      "reason": "knowledge/steps/mid-b-to-high-b.md records that no source gives a ground-handling test for this step and that BHPA's own Pilot Rating Scheme page was checked directly and does not name ground handling at all. knowledge/disagreements.md point 11 says explicitly not to invent a numeric test where none exists. Scored at weight 7 plus 3, and not even a Ready-blocker."
+    },
+    {
+      "candidate": "collapse_practice_absent",
+      "reason": "Flybubble recommends regular proactive practice at this stage but frames it as practice to be doing, not a precondition. Promoted from 'not even a blocker' at the step below to a Ready-blocker here, which is as far as the evidence reaches. Scored at weight 10 and drives two high-priority suggestions."
+    },
+    {
+      "candidate": "no_thermal_experience",
+      "reason": "'I mostly soar rather than thermal' is an untested answer, not a weak one, so it is handled as a Ready-blocker through unevidenced_core_checks rather than a cap — but with no stated-plans exemption at this step, unlike the two below. See thresholds.ready.unevidenced_core_checks.exemptions_deliberately_empty."
+    },
+    {
+      "candidate": "speed_bar_never_used",
+      "reason": "Two industry sources describe speed-bar technique at this step and neither sets a standard to clear. Weight doubled to 6 and 'never used it' scored down to 0.25, which is the proportionate response to descriptive rather than prescriptive material."
+    },
+    {
+      "candidate": "recent_injury_or_reserve",
+      "reason": "Carried forward from config/scoring/a-to-low-b.json's v2 removal of exactly this gate and config/scoring/low-b-to-mid-b.json's v1 decision not to reinstate it: an injury or reserve ride is not reliably about wing-class readiness. Scored 0.0 on a weight-12 psychological question. Not re-litigated here."
+    },
+    {
+      "candidate": "siv_not_done",
+      "reason": "BRIEF.md requires SIV to be optional context only and knowledge/disagreements.md point 1 agrees. knowledge/steps/mid-b-to-high-b.md records that no source gates on SIV here, and that it is notably absent even from Flybubble, who start requiring it one rung up. Bonus-only, capped at 2 points, can never subtract."
+    },
+    {
+      "candidate": "strongest_conditions_flown_without_a_collapse",
+      "reason": "knowledge/disagreements.md point 7 records this was searched for specifically across every source and found nowhere, and knowledge/steps/mid-b-to-high-b.md re-checked it at this boundary — where sources do discuss turbulent thermic air in general terms — and still found nothing falsifiable. Not asked, not scored, not gated."
+    },
+    {
+      "candidate": "xc_distance_flown",
+      "reason": "knowledge/steps/mid-b-to-high-b.md records that no source ties an XC distance or site count to this boundary; the figures appear one rung up and come from pilot-rating ladders rather than wing-class sources. knowledge/disagreements.md point 14 adds Joy Paragliding arguing against distance as a proxy for wing readiness at all. Not asked."
+    }
+  ],
+
+  "gate_behaviour": {
+    "rule": "Any fired gate caps the recommendation at Not yet, regardless of score. The numeric score is still shown, with the gate reasons listed above it.",
+    "evaluation_order": "Gates are evaluated first and short-circuit: if any gate fires, the recommendation is Not yet and the threshold rules (category floors, critical_check_floor, unevidenced_core_checks) are not evaluated or reported. This keeps the explanation short and specific rather than piling on reasons.",
+    "show_score_with_gate": true,
+    "max_gate_reasons_shown": 3,
+    "tone_rule": "Gate messages state what to work on and why, never that the pilot is unsuitable or has failed. Required by BRIEF.md's safety framing and by docs/design-context.md, which requires a 'not yet' to land as a legitimate, successful result of using the tool.",
+    "source": {
+      "ref": "BRIEF.md#scoring-design",
+      "cites": "\"Hard gates: some answers ... cap the result at 'Not yet' regardless of total score.\"",
+      "note": "This rubric has 11 gates against 9 at A to low-B and 8 at low-B to mid-B, so the cap of 3 shown reasons does real work here: a genuinely unready pilot can trip four or five. The gates array is ordered so that the specific, actionable ones (training status, thermic hours, currency, launches, collapse control, instructor advice) sit above the two combination gates about motive, which read worse when they arrive first. tests/personas/mid-b-to-high-b/06 trips three and is the one to read for whether the stacking reads as a telling-off."
+    }
+  },
+
+  "rule_messages": {
+    "purpose": "Pilot-safe copy for the threshold rules, so a pilot held at Nearly ready or pushed to Not yet by a rule gets the same explicit 'here's what's holding this back' as a pilot held by a hard gate. Gates carry their copy on gate.message. Built in from v1 at this step, as at low-B to mid-B, rather than added in a later pass as at A to low-B.",
+    "lookup": {
+      "engine_output": "app/upgrade/lib/scoreEngine.ts returns ScoreResult.firedRules as an array of strings in one of two shapes: '<rule_id>' (only 'conservative_backstop' today) or '<rule_id>:<question_id_or_category>' (everything else).",
+      "structure": "Two flat maps. 'by_rule' is keyed by the EXACT fired-rule string, so no parsing or templating is needed at render time. 'fallback_by_rule_id' is keyed by the part before the colon, and exists only so a future question added to critical_check_floor.questions (or a future answer added to unevidenced_core_checks.answers) can never render a missing message.",
+      "algorithm": [
+        "1. message = rule_messages.by_rule[firedRule]",
+        "2. if not found: message = rule_messages.fallback_by_rule_id[firedRule.split(':')[0]]",
+        "3. if still not found: render nothing for that rule. Never render the raw fired-rule string, a rule id, or a question id to a pilot."
+      ],
+      "render_as": "Each entry has a plain prose 'message' string, exactly like gate.message, intended for the same 'What's holding this back' card and the same paragraph treatment. There is deliberately no per-message heading field: rules can fire together, and two headings in one card reads badly.",
+      "division_of_labour_with_suggestions": "Every answer band that can trip a threshold rule also triggers a suggestion in config/suggestions/mid-b-to-high-b.json, and both appear on the same result screen. The split is: the rule message says WHY this one answer is holding the result and what the standard is; the suggestion says HOW to move it. The pairs are thermic_airtime/build_thermic_hours, flying_frequency/improve_currency, wing_limiting_evidence/wing_hasnt_limited_you_yet, thermal_turn_control/thermal_skills_drill, reading_the_day/reading_the_day_drill, active_piloting/active_piloting_drill, collapse_experience/post_collapse_support, collapse_practice/collapse_practice_now, reserve_familiarity/reserve_practice, response_when_rough/nerves_are_not_the_problem, and unevidenced_core_checks:thermal_turn_control/thermalling_untested. If any of those suggestions is retired, re-read the paired message — a 'there's a suggestion below' pointer with nothing below it is the failure mode to watch for.",
+      "multiplicity": "critical_check_floor breaks on its first failing question, so at most ONE 'critical_check_floor:*' string can appear in firedRules, and the question it names is the first failure in thresholds.ready.critical_check_floor.questions order, not necessarily the worst one — which is why that list is deliberately ordered most-to-least step-specific. Same for unevidenced_core_checks. The two category-floor rules are independent and can both appear. Gates and rules are mutually exclusive: gates short-circuit, so firedRules is always empty when firedGates is non-empty.",
+      "internal_fields": "The 'source' block on each entry is provenance for the owner and reviewer only. Only 'message' is ever rendered."
+    },
+    "display": {
+      "max_rule_reasons_shown": 2,
+      "order": "The order the engine emits them, which is already roughly most-to-least specific: category floors, then critical_check_floor, then unevidenced_core_checks, then conservative_backstop.",
+      "why_two_and_not_three": "gate_behaviour.max_gate_reasons_shown is 3, but several rules can fire together on the Nearly ready path, and these are softer and more overlapping reasons than gates. Nearly ready means 'close' — listing five things reads as a telling-off and contradicts the result. Two keeps it specific; the suggestions list carries the rest.",
+      "tone_rule": "Same rule as gate_behaviour.tone_rule. Step-specific addition: messages here MAY name the ~50-hour thermic figure, because it is genuinely corroborated and pilots benefit from knowing the number — but they must attribute it ('the guidance keeps landing on', 'the published figure is') rather than state it as this tool's own bar, and must never claim three independent sources agree. knowledge/disagreements.md point 6.",
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "The brief requires the result to be transparent and rule-based rather than a black box, and requires the 'Not yet' framing to be a legitimate result rather than a failure.",
+        "note": "docs/design-context.md's safety guard is the binding constraint on the two not_yet_category_floor messages. No wording from that document, and none of its terminology, appears in any message here."
+      }
+    },
+    "by_rule": {
+      "critical_check_floor:thermic_airtime": {
+        "message": "One thing is holding this back, and it's the best-evidenced check on the whole page: thermal hours specifically. The published guidance for this step keeps landing on around 50 of them, and you're under about 25. Worth being clear about what this isn't — it isn't a comment on your flying, and ridge or coastal hours aren't wasted hours. It's that this particular class of wing is sold and described as a thermic, cross-country wing, so thermic time is the experience it's asking for. One source does count ridge soaring toward it, at roughly half value; we've taken the stricter reading of that, because the other two sources don't. The suggestions below are about how to add the hours without making a project of it.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#hours--experience",
+          "cites": "Hamerton via Cross Country Magazine (expert), Flybubble (industry) and 406 Paragliding (industry) all land on roughly 50 hours of thermic flying; Hamerton alone offers roughly 100 hours of ridge soaring as an alternative. Advance, Gin, Nova and Flybubble all position the class for cross-country and turbulent thermic air.",
+          "note": "Reached by the 10_25 band only: under_10 is caught earlier by a gate, and 25_50 scores 0.6 and passes. The ridge sentence is load-bearing honesty — it tells a coastal pilot their result turns on a choice between disagreeing sources rather than on a settled fact, per knowledge/disagreements.md point 2. This is the message tests/personas/mid-b-to-high-b/03 renders."
+        }
+      },
+      "critical_check_floor:flying_frequency": {
+        "message": "One thing is holding this back: flying about once a month. That's the only check on this page where the three big manufacturers of high-end B wings all say the same thing in their own words — these aren't wings for occasional pilots, and they want you current rather than just experienced. There's no agreed number behind that, so it holds the result rather than capping it. Two or three times a month, in whatever conditions you can get, changes this answer and several others with it.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+          "cites": "Nova (manufacturer): \"not suitable for beginners and occasional pilots\". Advance and Gin via Flybubble (manufacturer via retailer): reserved for pilots who are naturally talented or very current.",
+          "note": "Only 'about once a month' reaches this rule: 'no flying at all in three months' and 'less than monthly with a thin year' are caught earlier by gates. The message says 'no agreed number' deliberately — the manufacturer sources are qualitative, and paragliding24.ch's 50-80 annual-hours figure is flagged as uncorroborated in knowledge/disagreements.md point 6."
+        }
+      },
+      "critical_check_floor:wing_limiting_evidence": {
+        "message": "One thing is holding this back, and it's the single most-agreed point in the guidance for this step: by your own account, your current wing hasn't clearly been the thing stopping you yet. Four voices say the same thing in different words — including two manufacturers writing about their own high-end B wings — that this is a wing you move onto because you've run out of the one you've got. None of that is a criticism, and it's a good problem to have: it usually means there's performance still sitting in your current wing waiting to be collected, which is the cheapest kind there is. The suggestion below has a concrete way to test whether that's true.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#psychological--mindset-factors",
+          "cites": "Seb Ospina via XC Mag (industry/expert) on consistently maxing out the current wing; Advance and Gin via Flybubble (manufacturer via retailer) warning against aspirational purchases; Hamerton via Cloudbase Mayhem 72 (expert) on matching equipment to demonstrated ability.",
+          "note": "Reached by 'not really' and 'I've wondered but couldn't point to a flight'. A pilot answering 'not really' alongside thin currency or thin thermic hours is caught earlier by the 'aspirational_rather_than_demonstrated' gate, so this rule mostly fires for the otherwise-strong pilot, which is why the tone is explicitly non-critical."
+        }
+      },
+      "critical_check_floor:thermal_turn_control": {
+        "message": "One thing is holding this back: thermalling that works but isn't yet under your control — wide turns, losing the core. That carries more weight here than one rung down, because every source that puts a number on this step counts thermal hours specifically, which makes thermalling the activity the class exists for rather than one skill among many. There's a second reason too: the point of a better-gliding wing is that it gives you more information, and that's only worth having if you can already use it. The suggestion below has specific things to drill.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+          "cites": "Seb Ospina via XC Mag (industry/expert): readiness means reading air well enough that a better-performing wing's extra feedback is actually useful rather than wasted. The thermic-hours figures from Hamerton via Cross Country Magazine, Flybubble and 406 Paragliding make thermic flying the measured activity for this step.",
+          "note": "'Not confident with it yet' and 'wide turns, losing the core' reach this rule. 'I mostly soar rather than thermal' scores 0.5, exactly on the minimum, so it passes here and is handled by 'unevidenced_core_checks' instead."
+        }
+      },
+      "critical_check_floor:reading_the_day": {
+        "message": "One thing is holding this back: not yet being able to call the day yourself. Going when experienced pilots say it's good is a sensible way to fly and nobody should talk you out of it — but it means the judgement hasn't been built yet, and this is the step where the flying starts happening further from home, on days you chose, at sites you don't know as well. Worth knowing one instructor's own accident story here: a sudden collapse low over a sun-heated industrial roof on a day that looked benign from altitude. Reading the day includes reading the ground under it. It's a judgement skill, so it builds from conversation and attention as much as from airtime — the suggestion below has the drill.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+          "cites": "Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor) describes his own frontal collapse in otherwise benign-feeling air while gliding low over a sun-heated industrial roof, and generalises a caution about heated and thermogenic ground surfaces producing sudden violent turbulence near the ground even on days that don't look rough from altitude. Hamerton via Cross Country Magazine (expert) frames this step as the point cross-country flying becomes the pilot's focus.",
+          "note": "Only 'I mostly go when other people say it's good' reaches this rule. 'Right about half the time' scores exactly 0.5 and passes — no source gives an accuracy standard for reading a day at this step either, and treating an honest middling answer as disqualifying would invent one. This rule and reserve_familiarity are the two softest-sourced members of the list and sit late in its order for that reason."
+        }
+      },
+      "critical_check_floor:active_piloting": {
+        "message": "One thing is holding this back: what your hands do when the air gets bumpy. Trying to react without it being automatic yet is an honest, common answer — it's held here because this is the one demand the manufacturers of these wings name explicitly. Their own description of the step up is that it asks more of the pilot specifically in turbulence. One DHV instructor puts the standard in useful detail: hands up on calm glides, light contact when it's mildly rough so you can feel the pressure change, down into the brake range to correct when it's working — and he's blunt that holding the brakes in one fixed position all the time is a false sense of security rather than a safe default. The habit builds much more easily on the wing that forgives it. There's a suggestion below with the drill.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+          "cites": "Advance via Flybubble (manufacturer via retailer): \"a clear step up in demands on the pilot,\" specifically around doing the right things in turbulence; Gin via Flybubble matches. Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor): hands fully up on calm glides, light contact position in mild turbulence, mid-brake-travel for active correction in thermic lift, and static light-brake flying explicitly discouraged.",
+          "note": "'Hands still', 'grip tight' and 'try to react' all reach this rule. 'I work the brakes to keep the pressure even' scores 0.7 and passes comfortably, even though it is marked down from 0.9 one rung below — the scoring change is a scoring change, not a block."
+        }
+      },
+      "critical_check_floor:collapse_experience": {
+        "message": "One thing is holding this back, and it isn't that you froze — that's what most people do the first time, and it's the normal starting point rather than a character flaw. It's that the wing sorted itself out without you, so the reaction hasn't been tested. This step's guidance asks for collapses, wingovers and spirals as regular practice rather than theory by now, and there's a specific, practical reason to do it on the wing you've got: two instructors argue separately that wings much above this class resist collapsing so well that a course can't make the failure behave realistically, so the muscle memory has to be built lower down the ladder. Your current wing is close to the last good one for the job. There's a suggestion below.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+          "cites": "Flybubble's Reducing Risk (industry) recommends regular proactive practice of wingovers, spirals and asymmetric collapses around this stage, not just theoretical knowledge. knowledge/disagreements.md points 8 and 12: Greg Hamerton via FAI/CIVL (expert) recommends a manoeuvres clinic before pushing any wing's envelope; Simon Winkler via Podz-Glidz (expert, DHV instructor) argues that from roughly EN-C up, wings resist collapsing too strongly for realistic simulation, so the training has to happen earlier on lower-class wings.",
+          "note": "Only 'I froze and the wing recovered on its own' reaches this rule; 'lost control' and 'happened a few times and I still struggle' fire the 'collapse_control_lost' gate, and 'never' scores 0.55 and passes. The two-instructor argument is the strongest claim this step has on the manoeuvres-course suggestion anywhere in the ladder, which is why it appears in the message rather than only in the suggestion."
+        }
+      },
+      "critical_check_floor:collapse_practice": {
+        "message": "One thing is holding this back: collapses, wingovers and spirals as something you've read about rather than something you practise. That's the one place this step's guidance is more demanding than the step below it — one rung down, this is the skill you're expected to be acquiring; here it's the skill you're expected to have been practising. There's a practical reason to do it now rather than after the upgrade, made independently by two instructors: wings much above this class resist collapsing so well that a course struggles to make the failure realistic, so this is close to your last chance to build the reaction on a wing where it can be induced properly. Height, a calm day, someone watching the first few — the suggestion below has the order to do it in.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+          "cites": "Flybubble's Reducing Risk (industry): regular proactive practice of wingovers, spirals and asymmetric collapses around this stage, \"not just theoretical knowledge\". knowledge/disagreements.md points 8 and 12 for the two-instructor argument (Hamerton on compounding risk, Winkler on training feasibility above EN-C).",
+          "note": "'Not at all' and 'theory only' reach this rule; self-practised tip folds score 0.6 and pass. Deliberately not a gate — see meta.design_decisions 'v1-collapse-practice-becomes-a-ready-blocker'. The message explicitly names the difference from the step below, because a pilot who ran a low-B to high-B chain will have been told the opposite one screen earlier and deserves the reason."
+        }
+      },
+      "critical_check_floor:reserve_familiarity": {
+        "message": "One thing is holding this back, and it's the quickest on the whole list to fix: not being certain you could find the reserve handle in a hurry. Two minutes in a hang check changes this answer permanently. It's the only item here that takes minutes rather than seasons, which is the one reason a single answer about it can hold an otherwise strong result. There's a suggestion below on how to practise it.",
+        "source": {
+          "ref": "knowledge/steps/a-to-low-b.md#skills",
+          "cites": "USHPA P2 (official) includes reserve-deployment and PLF knowledge among its required skills.",
+          "note": "Cross-referenced from two steps below: knowledge/steps/mid-b-to-high-b.md names no reserve criterion at all. Kept as a Ready-blocker on knowledge/disagreements.md point 5's conservative default, and flagged in this file as the weakest-sourced member of critical_check_floor.questions. The message avoids claiming a standard and leans on how cheap the fix is, which is the honest basis for it."
+        }
+      },
+      "critical_check_floor:response_when_rough": {
+        "message": "One thing is holding this back, and it isn't nerves — everyone's heart rate climbs in rough air and that part is normal, not a weakness. It's what comes next: tightening up and waiting it out rather than carrying on flying the wing. That answer carries more weight here than any other mindset question, and more at this step than at the ones below it, because rough thermic air is the working environment this class of wing is actually sold for — its own makers describe the step up as asking more of you specifically in turbulence. What you do under load is a habit rather than a personality trait, so it builds. Until it feels different, the more forgiving wing is the right one to be building it on — there's a suggestion below on how.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+          "cites": "Advance via Flybubble (manufacturer via retailer) names the demand as doing the right things in turbulence; XC Mag's 'The Head Game' (industry/expert, featuring sports psychologist Thomas Theurillat) frames readiness as challenge matched to honest self-assessed skill, with too big a jump producing stress rather than growth.",
+          "note": "Written about behaviour under load, not about feeling afraid, and deliberately does not reassure a hesitant pilot toward upgrading — the hesitation here is well-founded and the message says the forgiving wing is the right one for now. Required by docs/design-context.md; none of its terminology is used."
+        }
+      },
+      "unevidenced_core_checks:thermal_turn_control": {
+        "message": "One thing is unevidenced rather than weak. You've said you mostly soar or glide rather than thermal, so the main thing this step is measured by hasn't been tested — and it isn't counted against you, it scores as neutral. But every source that puts a number on this step counts thermal hours specifically, and the wings in this class are described by their own makers as cross-country wings for turbulent thermic air. So unlike at the steps below this one, this result doesn't move just because your plans are local: there isn't a version of the guidance here that a soaring-only pilot clears. That's worth knowing plainly rather than discovering later. There's a suggestion below about what a high-B would and wouldn't give you for the flying you've described.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md#conditions-flown",
+          "cites": "\"Convergent theme across manufacturer positioning (Advance, Gin, Nova) and Flybubble: high-B is explicitly for pilots moving into proper cross-country flying and more turbulent thermic air, not just bigger ridge days.\" All three hours figures measure thermic flying.",
+          "note": "The third sentence is the pilot-facing form of thresholds.ready.unevidenced_core_checks.exemptions_deliberately_empty, and is the one message in this file that must change if the owner ever honours Hamerton's ridge route. Paired with the 'thermalling_untested' and 'local_plans_and_this_wings_purpose' suggestions, which carry the practical half."
+        }
+      },
+      "ready_category_floor:skills": {
+        "message": "Your total is in the ready band, but the skills and experience half of it isn't carrying its own weight yet. The two halves are scored separately on purpose, so that good judgement and honest motives can't stand in for airtime and handling, or the other way round. What's holding this back is on the skills side, and the suggestions below are the specific parts of it.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's conservative-by-default pattern: when evidence is ambiguous, default toward 'Not yet' or 'Nearly ready' rather than 'Ready'.",
+          "note": "Names the category rather than the floor value; the number would be false precision, since thresholds.ready.source records these figures as synthesised rather than sourced."
+        }
+      },
+      "ready_category_floor:psychological": {
+        "message": "Your total is in the ready band, but the mindset and motivation half of it is sitting well below the skills half. Those are scored separately on purpose and they count for nearly as much: what you expect the new wing to actually do, what you're working on, how the call gets made on a marginal day, and what you do when it gets rough all matter here as much as hours and handling. At this step in particular, the guidance is unusually direct that a high-B is earned rather than aspired to, which is why this half can hold the result on its own. It's usually the quicker half to move.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Psychological answers carry real weight, not a side note.\" Plus knowledge/steps/mid-b-to-high-b.md#red-flags: Advance, Gin and Seb Ospina all flag aspirational buying in different words, and Hamerton via Cloudbase Mayhem 72 corroborates independently.",
+          "note": "'Usually the quicker half to move' is deliberate: these are answers that change with a conversation and some reading, not with another fifty hours — and saying so keeps the message from reading as a verdict on the pilot's character."
+        }
+      },
+      "not_yet_category_floor:skills": {
+        "message": "Whatever the total came out at, the skills and experience answers point the same way: more flying on the wing you've already got is the useful next step, rather than a different wing. That's a normal place to be — this is the rung where the published guidance gets noticeably more demanding, and most pilots spend a couple of seasons on it. It's also the most fixable half of the picture: thermal hours, active flying, collapse practice and reading the day all move it, and every one of them transfers to whatever you fly next, so none of that time is spent waiting.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Hard gates: some answers ... cap the result at 'Not yet' regardless of total score.\" The category floors are the same idea applied to a whole category rather than a single answer.",
+          "note": "Tone is bound by docs/design-context.md's safety guard: this must land as a legitimate, useful result, never as a failure. Hence 'a normal place to be' and 'the most fixable half'. The 'couple of seasons' framing is supported by knowledge/disagreements.md point 13 (every source addressing progression pace assumes one rung at a time) and point 10 (a community rule of thumb of 150-200 hours per wing-class step)."
+        }
+      },
+      "not_yet_category_floor:psychological": {
+        "message": "This one isn't about your hands. The answers about why the change, what you expect it to give you, what you're working on, how decisions get made on a day you're unsure about, and what's happened in the last year are where this result comes from — and here they count for nearly as much as hours and handling, by design. None of that is a judgement on you as a pilot. It's also the half the guidance for this step is most direct about: the people who build these wings write about them as something you move onto having run out of what you've got, not as a way to get there. It's the half worth working through first, and it usually takes a conversation with someone who knows your flying rather than another fifty hours in the air.",
+        "source": {
+          "ref": "knowledge/disagreements.md#9",
+          "cites": "Recommended handling: motivation is a genuinely scored input, and the diagnostic combination both camps agree on is an ambition- or comparison-flavoured motive paired with thin evidence of readiness elsewhere. knowledge/steps/mid-b-to-high-b.md#red-flags: Advance, Gin and Seb Ospina all flag aspirational buying; Hamerton via Cloudbase Mayhem 72 corroborates independently.",
+          "note": "This is the more serious of the two floors — it produces Not yet rather than Nearly ready — so the tone constraint from docs/design-context.md is strictest here. 'None of that is a judgement on you as a pilot' is load-bearing and should not be cut: the answers that trip this floor (comparison-driven motives, launching under social pressure, unexplained near misses) are the ones most likely to read as character criticism if stated plainly. The message names the question areas without quoting any specific answer back at the pilot."
+        }
+      },
+      "conservative_backstop": {
+        "message": "A few of the main questions were left blank, so there isn't quite enough here to put the result any higher than this. Nothing is counted against you for skipping them — when the tool doesn't know, it assumes the more cautious answer rather than the generous one. If you'd like a sharper result, going back and filling those in is the whole fix.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's design pattern of defaulting an unregistered glider to the most demanding category unless a lower class is actively registered. Applied here as: when the evidence is incomplete, default down rather than up.",
+          "note": "Framed as missing information, not as a penalty, and ends with the action. Fires when more than two 'core' questions are unanswered. It can fire alongside other rules, which is one reason display.max_rule_reasons_shown is 2 — but the engine emits it last, so if it is cut by that limit the pilot still sees the more specific reason."
+        }
+      }
+    },
+    "fallback_purpose": "Entries under 'fallback_by_rule_id' are used only when 'by_rule' has no entry for the exact fired-rule string — i.e. when a question is added to thresholds.ready.critical_check_floor.questions, or an answer to thresholds.ready.unevidenced_core_checks.answers, without per-case copy being written. They are intentionally vaguer than the per-question messages and should be treated as a bug signal, not a design target: if one of these ever renders, write the specific message.",
+    "fallback_by_rule_id": {
+      "critical_check_floor": {
+        "message": "One specific check for this step came out low, and a single weak answer in that group holds the result here even when everything else is strong — that's deliberate, so a good overall average can't cover one thin safety skill. The suggestions below name the one it was and what moves it.",
+        "source": {
+          "ref": "knowledge/steps/mid-b-to-high-b.md",
+          "cites": "Every member of this group is individually sourced at this boundary — see thresholds.ready.critical_check_floor.source."
+        }
+      },
+      "unevidenced_core_checks": {
+        "message": "One of the checks for this step hasn't been tested rather than failed. That isn't counted against you — it scores as neutral — but the guidance treats it as something to have demonstrated before moving to a wing that gives you more feedback and less margin, so the result stays here until there's something to go on. The suggestions below cover how to test it while the stakes are low.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's pattern of defaulting to the most conservative category unless a lower one is actively evidenced."
+        }
+      },
+      "ready_category_floor": {
+        "message": "Your total is in the ready band, but one of the two halves of it — skills and experience, or mindset and motivation — is sitting well below the other. They're scored separately on purpose so neither can stand in for the other. The suggestions below are about the half that's holding it.",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's conservative-by-default pattern: default toward 'Nearly ready' rather than 'Ready' where the evidence is uneven."
+        }
+      },
+      "not_yet_category_floor": {
+        "message": "One of the two halves of this — skills and experience, or mindset and motivation — came out low enough that it decides the result on its own, whatever the total says. That's a normal result and a useful one: it means there's a specific half to work on rather than a vague sense of not being ready. The suggestions below are the concrete version.",
+        "source": {
+          "ref": "BRIEF.md#scoring-design",
+          "cites": "\"Psychological answers carry real weight, not a side note.\" Plus docs/design-context.md's requirement that a 'not yet' land as a legitimate result rather than a failure."
+        }
+      }
+    }
+  },
+
+  "always_output": {
+    "instructor_recommendation": "Whatever this says, run it past an instructor or coach who has seen you fly — and test-fly the specific wing before you buy it. That matters here because two of the manufacturers in this class describe their own high-B wings as being for pilots who are naturally talented or very current, which is not a judgement anyone can make about themselves from a form.",
+    "disclaimer": "This is a self-assessment tool based on published guidance from national associations, manufacturers, retailers and instructors. It isn't an instructor, it can't see you fly, and it isn't a safety clearance. Wing choice is your responsibility and your instructor's advice always comes first.",
+    "methodology_note": "This is one of the better-evidenced rungs on the ladder. Three sources land on roughly 50 hours of thermic flying before a high-B, and three manufacturers independently describe their high-B wings as not for beginners or occasional pilots. Two honest caveats: two of those three hours sources share an author, so the agreement is real but narrower than it looks; and the exact thresholds here are still our own synthesis, not a figure lifted from an authoritative table, because no such table exists. Where the sources disagreed — most visibly about whether ridge-soaring hours can substitute for thermic hours — we took the stricter reading. Every weight and gate links back to the criterion it came from.",
+    "source": {
+      "ref": "BRIEF.md#outputs",
+      "cites": "\"A recommendation to discuss the upgrade with an instructor, plus a clear disclaimer.\"",
+      "note": "Methodology wording follows knowledge/disagreements.md point 2's instruction to be explicit that thresholds are synthesised and point 6's instruction to keep confidence language a notch below 'three independent sources agree' wherever Hamerton/Flybubble material forms part of the count. It is more confident than low-B to mid-B's equivalent and more specific than A to low-B's, which matches the relative evidence."
+    }
+  }
+}
