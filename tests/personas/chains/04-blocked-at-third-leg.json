@@ -1,0 +1,20 @@
+{
+  "id": "blocked-at-third-leg",
+  "name": "A full A-to-high-B jump — clears the first two legs, not the third",
+  "summary": "Extends chain coverage to the 3rd rung (mid-B->high-B), added after its step-4 review flagged that no chain persona yet exercised a merged answer being scored against each step's own distinct bands in a 3-leg run. Pairs a-to-low-b's 'ready-earned-upgrade' and low-b-to-mid-b's 'ready-earned-the-step' (both Ready) with mid-b-to-high-b's 'notyet-experienced-but-occasional' (gated Not yet — the new occasional_pilot_profile mechanism, unique to this rung). Tests that the chain correctly moves its focus to the newest/third leg once both earlier ones clear.",
+  "chain": ["a-to-low-b", "low-b-to-mid-b", "mid-b-to-high-b"],
+  "legSources": {
+    "a-to-low-b": "ready-earned-upgrade",
+    "low-b-to-mid-b": "ready-earned-the-step",
+    "mid-b-to-high-b": "notyet-experienced-but-occasional"
+  },
+  "expected": {
+    "legs": [
+      { "stepId": "a-to-low-b", "recommendation": "ready" },
+      { "stepId": "low-b-to-mid-b", "recommendation": "ready" },
+      { "stepId": "mid-b-to-high-b", "recommendation": "not_yet" }
+    ],
+    "focusStepId": "mid-b-to-high-b",
+    "overallRecommendation": "not_yet"
+  }
+}

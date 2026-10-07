@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { LADDER_LABELS, LADDER_RUNGS, reachableTargets, resolveChain } from '../lib/ladder';
 import { STEP_CONFIGS } from '../lib/config';
+import { mergeQuestionsAcrossChain } from '../lib/mergeQuestions';
 import type { LadderRung } from '../lib/types';
 
 interface WingPickerProps {
@@ -32,9 +33,18 @@ export function WingPicker({ onSubmit }: WingPickerProps) {
 
   const chain = useMemo(() => resolveChain(from, to), [from, to]);
 
+  // Scaled from each step's own declared minutes-per-question rate,
+  // applied to the actual DEDUPED question count for this chain — not
+  // a naive sum of each step's estimate, which ignores that merged
+  // questions (see lib/mergeQuestions.ts) are only asked once. For a
+  // single-step "chain" this reduces to exactly that step's own
+  // estimate, unchanged.
   const estimatedMinutes = useMemo(() => {
     if (!chain) return null;
-    return chain.reduce((sum, stepId) => sum + STEP_CONFIGS[stepId].questions.meta.estimated_minutes, 0);
+    const rawQuestions = chain.reduce((sum, stepId) => sum + STEP_CONFIGS[stepId].questions.questions.length, 0);
+    const rawMinutes = chain.reduce((sum, stepId) => sum + STEP_CONFIGS[stepId].questions.meta.estimated_minutes, 0);
+    const dedupedQuestions = mergeQuestionsAcrossChain(chain, STEP_CONFIGS).length;
+    return Math.round((rawMinutes / rawQuestions) * dedupedQuestions);
   }, [chain]);
 
   return (
