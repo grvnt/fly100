@@ -126,6 +126,53 @@ const CHAINS: ChainCheck[] = [
     // difference, not an oversight.
     mustNotMergeIds: ['total_airtime', 'total_flights', 'airtime_last_12m', 'ground_handling_kiting', 'speed_bar', 'wing_expectation', 'collapse_practice'],
   },
+  {
+    label: 'mid-b-to-high-b -> high-b-to-low-c',
+    chain: ['mid-b-to-high-b', 'high-b-to-low-c'],
+    // Added 2026-10-08, independently re-derived by diffing both
+    // question files (not trusted from the rubric-designer's report,
+    // same discipline as the two chains above). 31 of 34 shared ids
+    // merge, including thermic_airtime and wing_limiting_evidence —
+    // both introduced at mid-b-to-high-b and reused verbatim here,
+    // which is the chain-merge discipline working as intended.
+    expectedMergedIds: [
+      'active_piloting',
+      'airtime_last_12m',
+      'ambitions',
+      'collapse_experience',
+      'collapse_practice',
+      'conditions_flown',
+      'current_wing_time',
+      'decline_to_fly',
+      'descent_options',
+      'external_feedback',
+      'flying_frequency',
+      'ground_handling_kiting',
+      'ground_handling_practice',
+      'incidents_12m',
+      'launch_reliability',
+      'learning_curve_willingness',
+      'manoeuvre_course',
+      'peer_pressure',
+      'progress_goals',
+      'reading_the_day',
+      'reserve_familiarity',
+      'response_when_rough',
+      'site_variety',
+      'speed_bar',
+      'thermal_turn_control',
+      'thermic_airtime',
+      'total_airtime',
+      'total_flights',
+      'training_status',
+      'upgrade_motivation',
+      'wing_limiting_evidence',
+    ],
+    // Only one shared id stays deliberately distinct: wing_expectation
+    // names the specific target class (mid-B vs low-C) in its options,
+    // so it can never be the same question across a class boundary.
+    mustNotMergeIds: ['wing_expectation'],
+  },
 ];
 
 let failures = 0;

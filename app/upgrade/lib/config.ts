@@ -16,6 +16,10 @@ import midBToHighBQuestions from '@/config/questions/mid-b-to-high-b.json';
 import midBToHighBScoring from '@/config/scoring/mid-b-to-high-b.json';
 import midBToHighBSuggestions from '@/config/suggestions/mid-b-to-high-b.json';
 
+import highBToLowCQuestions from '@/config/questions/high-b-to-low-c.json';
+import highBToLowCScoring from '@/config/scoring/high-b-to-low-c.json';
+import highBToLowCSuggestions from '@/config/suggestions/high-b-to-low-c.json';
+
 export const STEP_CONFIGS: Record<string, StepConfig> = {
   'a-to-low-b': {
     questions: aToLowBQuestions as unknown as QuestionsConfig,
@@ -31,5 +35,10 @@ export const STEP_CONFIGS: Record<string, StepConfig> = {
     questions: midBToHighBQuestions as unknown as QuestionsConfig,
     scoring: midBToHighBScoring as unknown as ScoringConfig,
     suggestions: midBToHighBSuggestions as unknown as SuggestionsConfig,
+  },
+  'high-b-to-low-c': {
+    questions: highBToLowCQuestions as unknown as QuestionsConfig,
+    scoring: highBToLowCScoring as unknown as ScoringConfig,
+    suggestions: highBToLowCSuggestions as unknown as SuggestionsConfig,
   },
 };
