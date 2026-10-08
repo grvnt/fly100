@@ -1,0 +1,666 @@
+{
+  "step": "low-c-to-high-c",
+  "version": 1,
+  "meta": {
+    "label": "Low-end EN-C to high-end EN-C / two-liner",
+    "pilot_facing_title": "Moving from a low-C to a high-C or a two-liner",
+    "estimated_minutes": 10,
+    "intro": "37 questions, one tap each. This step is really two different questions wearing one label, and the second one is much stricter than the first. Moving from an easy-going low-C to a more demanding high-C is the blurriest line on the whole ladder — there's barely anything published about it, and it runs both ways: one manufacturer sells a high-C as a first sports wing for someone coming off a high-B, and another positions the same kind of wing as a step down for people coming off a D. Moving onto a two-liner is a different matter. That's the best-evidenced thing in all our research, including a survey of nearly 300 pilots flying two-line C wings, and it comes with specific warnings attached. So the first question asks which of the two you're actually looking at, and the answer changes how strictly the rest is read. Answer honestly rather than optimistically — \"not yet\" and \"nearly\" are useful, normal answers, and they come with a list of what to work on.",
+    "category_labels": {
+      "skills": "Skills and experience",
+      "psychological": "Mindset and motivation"
+    },
+    "confidence_statement_for_ui": "Two tracks, two very different levels of confidence. On the letter class — low-C to high-C — the evidence is the thinnest and least settled anywhere on the ladder: almost nobody writes about it, nobody gives an hours figure for it, and it isn't even a one-way step, since high-C wings get marketed both as a first sports wing and as a gentler alternative to a D. We've kept that side deliberately close to how the step below is judged, rather than inventing a harder bar nobody set. On two-liners the picture is the opposite. That's the most detailed, best-corroborated material in the whole knowledge base — a structured survey of nearly 300 two-liner pilots, plus two named experts on how these wings fail differently — and it names specific warning signs. So the two-liner side of this assessment is the strictest in the app, on purpose, and the three-liner side isn't. Where sources disagree we've taken the more cautious reading.",
+    "design_notes": [
+      "THIS STEP IS TWO TRACKS, NOT ONE, AND THE WHOLE RUBRIC IS BUILT AROUND KEEPING THEM APART. knowledge/steps/low-c-to-high-c.md opens by saying it covers two things sources often conflate: (a) an accessible three-line low-C to a more demanding high-C, and (b) moving onto a two-liner, which may itself be certified C or D. knowledge/disagreements.md point 4 instructs: \"Treat 'is this a 2-liner' as its own independent hard-gate trigger, separate from the EN letter. A pilot asking about an EN-C-certified 2-liner should still be asked the stricter 2-liner-specific questions (cravat recovery experience, pitch control, frontal-collapse energy management), not just the standard low-C/high-C questions.\" That is implemented literally: 'is_2_liner' is the first question, six gates fire only on the two-liner branch, and a pilot who answers 'no, it's a three-liner' faces exactly the same number of gates as at the step below. The two tracks must not be averaged into one mushy middle — see config/scoring/low-c-to-high-c.json meta.design_decisions 'v1-two-tracks-kept-apart'.",
+      "ENGINE-COMPATIBILITY CHOICE, DELIBERATE AND NOT AN OVERSIGHT. app/upgrade/lib/scoreEngine.ts and the question flow have no support for conditionally skipping questions: every question in a step's config is shown, in order, to every pilot. Implementing true conditional question-skipping would need app/engine changes, which are out of this rubric's scope. So the two-liner branch is built the way the engine already supports: the two-liner-specific questions (cravat_recovery, frontal_collapse_energy, ears_deflation, collapse_training_access, and the two-liner-specific framing inside pitch_control and wing_expectation) are asked of EVERYONE, and only the GATES are conditional, using the existing all_of/any_of + question/answer_in system. A pilot who answers 'no, it's a three-liner' still sees those questions. Their answers carry moderate weight for everyone — which is honest, because cravats, frontals and ears are not two-liner-only events — but none of them is a Ready-blocker and none of them can cap a three-liner pilot's result. The cost of this choice and the case for a future engine change are recorded in config/scoring/low-c-to-high-c.json meta.design_decisions 'v1-two-liner-branch-is-gate-conditional-not-question-conditional' and meta.owner_decisions.",
+      "THE LETTER BOUNDARY IS THE LEAST RESOLVED ON THE LADDER, AND IT IS BIDIRECTIONAL. knowledge/steps/low-c-to-high-c.md's source-quality note: \"The low-C/high-C letter boundary itself (as opposed to the 2-liner question) remains thin and bidirectional per the Cayenne 6 example.\" Nova's Mentor/Sector comparison and Skywalk's Cayenne 6 positioning both describe higher-end C wings as suited to pilots stepping UP from a high-B for their first sports wing, or stepping DOWN from a high-C/low-D wing for more comfort — \"showing the low-C/high-C boundary is genuinely two-directional and fuzzy in practice, not a one-way ladder rung.\" That is a stronger version of the problem config/questions/high-b-to-low-c.json already handles, and it is why the Ready threshold here rises by only ONE point over that step while all the real strictness sits in the conditional two-liner gates.",
+      "THE UNDER-20-HOURS FIGURE IS THE BEST-EVIDENCED SINGLE RED FLAG IN THE KNOWLEDGE BASE, AND IT IS A HARD GATE ON THE TWO-LINER BRANCH ONLY. Melchior Lindenstruth (expert, organiser of a structured survey of ~287 EN-C two-liner pilots) treats under ~20 hours on a pilot's previous category as itself a red flag before attempting a two-liner, illustrated with a real case: a pilot with about 11 hours on their previous wing moved straight to an EN-C two-liner, took a severe collapse in turbulent terrain and needed a reserve deployment. knowledge/disagreements.md point 2 records it as a single uncorroborated figure — but it is a single figure from a survey-backed expert with a documented outcome behind it, which is a different quality of evidence from the hours figures elsewhere in this knowledge base. 'current_wing_time' is carried forward from the step below BYTE-IDENTICALLY, and its lowest band is already 'under 20 hours', which is exactly the figure. On the two-liner branch that band caps the result; on the three-liner branch it blocks Ready but does not cap.",
+      "BACK-FLYING IS NOT ASKED, NOT SCORED AND NOT GATED. Malin Lobb (industry/expert, via Cross Country Magazine) includes confident back-flying in the must-have SIV skill list before a two-liner. Brett Janaway (expert instructor) explicitly disagrees that it is necessary even for two-liners, and names pitch control and cravat clearing as the real priorities instead. knowledge/disagreements.md point 1 records that the disagreement is narrower than it looks and is confined to back-flying specifically — both camps agree on cravat clearing. Point 4's instruction is explicit: \"don't gate or score on back-flying specifically — weight cravat-clearing and pitch control instead, where both camps agree.\" So there is no back-flying question in this config, no option mentioning it, no weight on it and no gate touching it. The only place it appears anywhere pilot-facing is inside the 'siv_before_a_two_liner' suggestion, which names the disagreement openly and says in terms that it is not something this assessment asks for.",
+      "SUB-CLASS FUZZINESS. Per knowledge/disagreements.md point 3, no question asks the pilot to classify their own wing as a low-C, and no score depends on that label. The one classification question we DO ask — is the target wing a two-liner — is a factual property of the wing (two lines per side or three) that a pilot can check in one line on the maker's website, not a contested marketing label. That distinction is the whole reason point 4 recommends treating two-liner-ness as its own axis.",
+      "NO NATIONAL RATING, AND NO BORROWED PILOT-RATING CRITERIA AT ALL THIS TIME. Per knowledge/disagreements.md point 5 we never ask which rating a pilot holds. New at this step: we also drop the two questions that borrowed from those ladders one rung down. knowledge/steps/low-c-to-high-c.md's own Conditions-flown section records an owner-prompted gap-check: \"The pilot-rating ladders (USHPA, BHPA, FFVL) that gave us XC-distance and site-variety material for steps/high-b-to-low-c.md top out at Advanced Pilot/P4/Confirmé and don't extend to a 2-liner-specific or EN-D-specific tier — so this step inherits no further resolution on these three ideas beyond what the step below already provides as general background.\" See deliberately_not_asked below.",
+      "HOURS IN BANDS, AND THE ONE FIGURE THIS STEP OWNS IS A PER-WING FIGURE, NOT A TOTAL. Per knowledge/disagreements.md point 2, cumulative hours, thermic hours, hours in the last 12 months and hours on the current wing stay four separate questions with four separate weights, and the BANDS are byte-identical to config/questions/high-b-to-low-c.json so they merge in a chained run. The only hours figure this step's own research produces for a TOTAL is richiesadventures.com's 300 hours on three-liners before a two-liner, which knowledge/disagreements.md point 6 calls \"a single enthusiast's personal blog opinion\" and the step file calls indicative rather than authoritative. It is never used as a bar: it sits inside the existing 'over 200 hours' band, which takes full marks. The figure that IS used is Lindenstruth's 20 hours on the previous wing.",
+      "SIV IS THE STRONGEST SUGGESTION IN THE LADDER HERE, AND SCORES THE SAME TWO POINTS AS AT THE FIRST STEP. knowledge/steps/low-c-to-high-c.md: \"This is the step where sources first treat SIV as close to a precondition rather than optional enrichment.\" BRIEF.md and knowledge/disagreements.md point 1 both require it to stay optional context and low weight even here. There is also, newly at this step, EVIDENCE for keeping it small rather than only an instruction: knowledge/disagreements.md point 12 records that a course on a C-class two-liner may not deliver representative practice at all, because most owners lack the folding lines needed to induce a realistic collapse on that wing, and because wings from about EN-C upward resist collapsing hard enough that the simulation can become unrealistic. So the course question stays a capped 2-point bonus, and the emphasis goes into a priority-1 suggestion that includes the folding-lines point as a concrete thing to arrange.",
+      "COLLAPSE BEHAVIOUR IS A DIFFERENT FAILURE MODE HERE, NOT A SCALED-UP ONE. knowledge/steps/low-c-to-high-c.md: \"This is a genuinely distinct risk profile from the high-B to low-C step, which is about frequency and demand of active piloting; this step is additionally about a different failure mode (block collapses, cravats) that 3-liner experience doesn't fully prepare a pilot for.\" Two framings, both surfaced rather than one picked: Malin Lobb on fewer lines giving collapsing fabric more room to tangle (so cravats are likelier) and more rods and span-wise tension making the wing collapse \"as one block\"; Lindenstruth on two-liners staying calmer for longer stretches but failing abruptly, without the small early-warning flutter a three-liner gives first. Both appear as full-marks answers on 'wing_expectation', and both appear in the suggestions.",
+      "ORDERED FLAGS. Questions marked \"ordered\": false are not a worst-to-best ladder and the UI must never imply the last option is the best one. At this step that covers the target-wing question, thermalling, conditions flown, speed bar, collapse history, cravat and frontal experience, what your hands do, whether the wing has limited you, how you like to fly, the long-drive question and all the motivation and mindset questions.",
+      "CHAIN MERGE (BRIEF.md 'Multi-step jumps'). app/upgrade/lib/mergeQuestions.ts only asks a question once across a chain when its id, text, option ids AND option labels are byte-identical. TWENTY-NINE of the 37 questions here are byte-identical to their config/questions/high-b-to-low-c.json counterparts and will merge into a single screen each in a low-C-or-below chain: total_airtime, thermic_airtime, airtime_last_12m, current_wing_time, training_status, flying_frequency, ground_handling_kiting, launch_reliability, thermal_turn_control, reading_the_day, active_piloting, conditions_flown, speed_bar, collapse_experience, collapse_practice, descent_options, reserve_familiarity, manoeuvre_course, wing_limiting_evidence, upgrade_motivation, progress_goals, learning_curve_willingness, ambitions, external_feedback, response_when_rough, decline_to_fly, peer_pressure, effort_already_invested, incidents_12m. EIGHT do not merge: 'wing_expectation' keeps its id but has new text and new options, because the accurate expectation at this step is about collapse behaviour and warning time rather than about information and precision — so it is the one same-id question that deliberately asks again; and 'is_2_liner', 'pitch_control', 'cravat_recovery', 'frontal_collapse_energy', 'ears_deflation', 'collapse_training_access' and 'flying_style_intent' are new questions that exist at no step below. FOUR questions from the step below are deliberately NOT carried forward — total_flights, ground_handling_practice, site_variety and xc_experience — each for a recorded reason, see deliberately_not_asked. Help text is NOT part of the merge key, so several merged questions carry step-specific help here (current_wing_time, thermic_airtime, total_airtime, collapse_practice, speed_bar, ground_handling_kiting, learning_curve_willingness, manoeuvre_course); in a chained run the pilot sees the earlier step's help, which is the existing behaviour across all four steps below.",
+      "deliberately_not_asked: (1) Strongest thermal or conditions flown without a collapse. knowledge/disagreements.md point 7 records this was searched for across every source and every step and found nowhere, and knowledge/steps/low-c-to-high-c.md re-checked it at THIS boundary in an owner-prompted gap-check and again found nothing. Not invented here either. (2) Cross-country distance flown. Asked and scored at the step below, where two national rating ladders locate the sourced case. Dropped here because this step's own gap-check says those ladders \"don't extend to a 2-liner-specific or EN-D-specific tier — so this step inherits no further resolution\", and because knowledge/disagreements.md point 14 is already doubtful about the idea, with a named industry source arguing kilometres say little about wing choice. Carrying it forward as a near-inert question would have added unsourced weight at the step where this knowledge base explicitly declines to add any. A pilot running a chain from high-B or below is asked it at the leg where it IS sourced. (3) Number of different sites flown. Same reasoning, same gap-check sentence. (4) Whether the pilot can fly the wing backwards. See the back-flying design note above — knowledge/disagreements.md points 1 and 4 forbid gating or scoring it, and asking it at all would signal a requirement two sources disagree about. (5) Whether the pilot can perform reliable full and dynamic stalls. knowledge/steps/low-c-to-high-c.md records this as one competitive pilot's own informal readiness test, which he admits he had not practised himself until his second two-liner — \"he names the gap in his own progression rather than presenting it as a model\". Left out on the same two grounds as at the step below: a single informal signal, and putting a stall test in front of a pilot risks reading as encouragement to practise stalls unsupervised. (6) Total number of flights. Asked at the three steps below on the strength of USHPA P4's 250-flight figure; dropped here because P4 is the top of that ladder and nothing above it gives a flight count, so the question would carry weight no source at this step supports. (7) How often the pilot ground-handles away from flying. The habit question is dropped and the skill question (ground_handling_kiting) kept, which satisfies knowledge/disagreements.md point 11's instruction to keep a ground-handling question live at every step; this step's own ground-handling material is a community thread about high-aspect wings being harder to kite, which is about the skill rather than the habit. (8) Which sub-class the current wing is. (9) Which national pilot rating the pilot holds. (10) Whether the pilot has done a manoeuvres course is asked, but sits outside the scored set — bonus only, capped at 2 points. (11) Whether folding lines are available for the new wing is asked, but carries zero weight and is used only to choose suggestions. Each of these is a deliberate decision, not an oversight, and is recorded here so a later reviewer does not 'fix' it by adding an unsourced question."
+    ]
+  },
+  "sections": [
+    {
+      "id": "target_wing",
+      "title": "The wing you're moving to",
+      "questions": ["is_2_liner"]
+    },
+    {
+      "id": "experience",
+      "title": "Your flying so far",
+      "questions": ["total_airtime", "thermic_airtime", "airtime_last_12m", "current_wing_time", "training_status"]
+    },
+    {
+      "id": "currency",
+      "title": "How recently you've been flying",
+      "questions": ["flying_frequency"]
+    },
+    {
+      "id": "ground",
+      "title": "On the ground and on launch",
+      "questions": ["ground_handling_kiting", "launch_reliability"]
+    },
+    {
+      "id": "air",
+      "title": "In the air",
+      "questions": ["thermal_turn_control", "reading_the_day", "active_piloting", "pitch_control", "conditions_flown", "speed_bar"]
+    },
+    {
+      "id": "collapses",
+      "title": "When it goes wrong",
+      "questions": [
+        "collapse_experience",
+        "collapse_practice",
+        "cravat_recovery",
+        "frontal_collapse_energy",
+        "ears_deflation",
+        "descent_options",
+        "reserve_familiarity",
+        "manoeuvre_course",
+        "collapse_training_access"
+      ]
+    },
+    {
+      "id": "upgrade",
+      "title": "About the upgrade",
+      "questions": [
+        "wing_limiting_evidence",
+        "upgrade_motivation",
+        "wing_expectation",
+        "flying_style_intent",
+        "progress_goals",
+        "learning_curve_willingness",
+        "ambitions",
+        "external_feedback"
+      ]
+    },
+    {
+      "id": "pressure",
+      "title": "Rough days and busy launches",
+      "questions": ["response_when_rough", "decline_to_fly", "peer_pressure", "effort_already_invested", "incidents_12m"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "is_2_liner",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "scored": false,
+      "text": "Is the wing you're moving to a two-liner?",
+      "help": "Two lines per side instead of three. Worth getting right, because it matters more here than the letter on the wing does: some two-liners are certified C and some are D, and the extra demands come with the two lines rather than with the letter. If you're not sure, the maker's website or the shop will tell you in one line. This answer doesn't add or lose you any points — it decides which set of questions gets read strictly.",
+      "options": [
+        { "id": "yes", "label": "Yes — it's a two-liner" },
+        { "id": "no_three_liner", "label": "No — it's a three-liner" },
+        { "id": "not_sure", "label": "I'm still deciding, or I don't know yet" }
+      ]
+    },
+    {
+      "id": "total_airtime",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Roughly how many hours have you flown in total, since you started?",
+      "help": "A rough band is fine. Count solo airtime, not tandems. The only total-hours figure anywhere in the research for this step is one pilot's personal blog suggesting 300 hours on three-liners before a two-liner — interesting, but a single opinion, so it isn't used as a bar here. The hours question that does carry weight at this step is the next-but-two one, about time on the wing you're on now.",
+      "options": [
+        { "id": "under_50", "label": "Under 50 hours" },
+        { "id": "50_100", "label": "Between 50 and 100 hours" },
+        { "id": "100_200", "label": "Between 100 and 200 hours" },
+        { "id": "over_200", "label": "More than 200 hours" }
+      ]
+    },
+    {
+      "id": "thermic_airtime",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "And roughly how many of those hours have been in thermic air?",
+      "help": "Thermal flying, not ridge or coastal soaring and not evening glass-offs. Honest note: no source puts a thermal-hours figure on this particular step. The published figures — about 75 to over 100 hours — are for the step below, so they're treated here as a floor you should already be well past rather than a target to reach.",
+      "options": [
+        { "id": "under_10", "label": "Under 10 hours" },
+        { "id": "10_25", "label": "Between 10 and 25 hours" },
+        { "id": "25_50", "label": "Between 25 and 50 hours" },
+        { "id": "50_100", "label": "Between 50 and 100 hours" },
+        { "id": "over_100", "label": "More than 100 hours" }
+      ]
+    },
+    {
+      "id": "airtime_last_12m",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How many hours have you flown in the last 12 months?",
+      "help": "Asked separately on purpose. Nobody publishes an annual figure for this step specifically, but every figure for the classes either side of it is annual rather than lifetime, and one instructor's comparison is blunt: a pilot with a hundred hours behind them is in a very different position from one with twenty, whatever wing they're shopping for.",
+      "options": [
+        { "id": "under_10", "label": "Under 10 hours" },
+        { "id": "10_25", "label": "Between 10 and 25 hours" },
+        { "id": "25_50", "label": "Between 25 and 50 hours" },
+        { "id": "50_80", "label": "Between 50 and 80 hours" },
+        { "id": "over_80", "label": "More than 80 hours" }
+      ]
+    },
+    {
+      "id": "current_wing_time",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How many hours have you flown on the wing you're on now?",
+      "help": "The wing you'd be replacing. This is the one number at this step that comes with real evidence behind it, and it's the reason this question matters more here than anywhere below. The pilot who organised a survey of nearly 300 two-liner owners treats under about 20 hours on your previous wing as a warning sign in itself before moving to a two-liner — and he has a specific case behind it, a pilot who moved onto one with around 11 hours, took a severe collapse in rough terrain and ended up throwing their reserve.",
+      "options": [
+        { "id": "under_20", "label": "Under 20 hours" },
+        { "id": "20_50", "label": "Between 20 and 50 hours" },
+        { "id": "50_100", "label": "Between 50 and 100 hours" },
+        { "id": "over_100", "label": "More than 100 hours" }
+      ]
+    },
+    {
+      "id": "training_status",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Where are you with your training?",
+      "options": [
+        { "id": "in_training", "label": "Still in training, or still flying under instructor supervision" },
+        { "id": "qualified_recent", "label": "Qualified fairly recently and starting to fly on my own" },
+        { "id": "qualified_independent", "label": "Qualified a while ago and flying independently" }
+      ]
+    },
+    {
+      "id": "flying_frequency",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Over the last three months, how often have you actually got in the air?",
+      "help": "Think about months with flyable weather, not the whole calendar.",
+      "options": [
+        { "id": "none_3m", "label": "I haven't flown at all in the last three months" },
+        { "id": "less_than_monthly", "label": "Less than once a month" },
+        { "id": "about_monthly", "label": "About once a month" },
+        { "id": "two_or_three_monthly", "label": "Two or three times a month" },
+        { "id": "weekly_plus", "label": "About once a week or more" }
+      ]
+    },
+    {
+      "id": "ground_handling_kiting",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How far have you taken your ground handling?",
+      "help": "No official or manufacturer source sets a ground-handling bar for this step — we looked specifically. The nearest thing is a forum thread of experienced pilots describing higher-aspect wings as genuinely harder to kite, to the point of recommending against skipping wing-class steps even for ground practice. So this is information rather than a test you can fail, and it can't hold your result on its own.",
+      "options": [
+        { "id": "struggles", "label": "It still gets away from me on a breezy day" },
+        { "id": "hold_steady", "label": "I can hold it steady overhead and walk around under it" },
+        { "id": "confident_strong_wind", "label": "Confident in stronger wind — I can turn it, put it where I want and kill it quickly" },
+        { "id": "advanced_drills", "label": "All that, plus harder drills — one-sided inflations, rear-riser control, feeling the pressure change before it folds" }
+      ]
+    },
+    {
+      "id": "launch_reliability",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How reliable are your launches, and in how wide a range of conditions?",
+      "help": "Count forward and reverse. The thing that moves this answer is the range of conditions, not just the success rate at your home site.",
+      "options": [
+        { "id": "often_aborted", "label": "Not that reliable — I regularly need several goes, get pulled around, or abort" },
+        { "id": "about_half", "label": "Clean first time about half the time" },
+        { "id": "most_times_easy_conditions", "label": "Nearly always clean, but only on the sites and days I know well" },
+        { "id": "nearly_always_easy", "label": "Nearly always clean, in the conditions I choose to fly" },
+        { "id": "reliable_wider_range", "label": "Reliable across a fair range — stronger wind, some cross, slopes I haven't launched before" }
+      ]
+    },
+    {
+      "id": "thermal_turn_control",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "How are you with turning in a thermal?",
+      "help": "There's no wrong answer, including the last one — plenty of people fly happily without thermalling much.",
+      "options": [
+        { "id": "not_confident", "label": "Not confident with it yet" },
+        { "id": "basic_wide_climbs", "label": "I can climb in wide, gentle turns, but I lose the core easily" },
+        { "id": "core_and_vary_bank", "label": "I can centre a climb and change bank angle deliberately, turning both ways" },
+        { "id": "tight_and_shared", "label": "That, plus I'm comfortable in a busy thermal and can tighten up when the core is small" },
+        { "id": "not_come_up", "label": "I mostly soar or glide rather than thermal, so this hasn't really come up" }
+      ]
+    },
+    {
+      "id": "reading_the_day",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How well can you read how a day is going to develop?",
+      "help": "Wind, gradient, where and when the thermals will work, when it'll get strong, when to be somewhere else.",
+      "options": [
+        { "id": "someone_else_judges", "label": "I mostly go when other people say it's good — I couldn't really call it myself" },
+        { "id": "sometimes_right", "label": "I have a go at reading it and I'm right about half the time" },
+        { "id": "usually_read_it", "label": "I can usually tell how it'll develop and when to be careful" },
+        { "id": "plan_the_day", "label": "I plan my flying around how the day will build, and I'm rarely caught out" }
+      ]
+    },
+    {
+      "id": "active_piloting",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "When the air gets bumpy, what do your hands actually do?",
+      "options": [
+        { "id": "hands_still", "label": "They stop moving — I hold still and wait it out" },
+        { "id": "grip_tight", "label": "I grip the brakes and pull them in a bit" },
+        { "id": "try_to_react", "label": "I try to react, but it's not automatic yet" },
+        { "id": "work_brakes_actively", "label": "I work the brakes to keep the pressure even and the wing overhead" },
+        { "id": "automatic_and_phase_aware", "label": "That's automatic now, and my hands sit differently depending on what the air's doing" }
+      ]
+    },
+    {
+      "id": "pitch_control",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "When the wing surges or dives in rough air, how good are you at damping it?",
+      "help": "Pitch — the wing moving forward and back above you, rather than side to side. Two well-known voices on moving to a two-liner disagree about which safety skills really matter; pitch control is one of the two they both name. It matters on a high-C three-liner too, for the same reason: these wings hand you pitch movement sooner and want a lighter touch than the one you're on.",
+      "options": [
+        { "id": "not_thought_about", "label": "I haven't really thought of pitch as something I control" },
+        { "id": "react_unreliably", "label": "I notice the surge and react, but it's hit and miss" },
+        { "id": "damp_with_brakes", "label": "I can catch a surge on the brakes and keep the wing over my head" },
+        { "id": "damp_and_rear_risers", "label": "That, plus I can hold the pitch on the rear risers while I'm on bar, and ease off before it dives" }
+      ]
+    },
+    {
+      "id": "conditions_flown",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "What kind of air have you been flying in, mostly?",
+      "options": [
+        { "id": "smooth_gentle_only", "label": "Smooth evenings and calm mornings, mostly" },
+        { "id": "ridge_coastal", "label": "Ridge and coastal soaring, not much thermic" },
+        { "id": "light_moderate_thermal", "label": "Light to moderate thermals" },
+        { "id": "regular_thermic_days", "label": "Proper thermic days, fairly regularly" },
+        { "id": "strong_mountain_big_air", "label": "Strong thermic or big mountain days, fairly regularly" }
+      ]
+    },
+    {
+      "id": "speed_bar",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "How do you use the speed bar?",
+      "help": "How you put it on matters as much as how much you use. One class-by-class guide treats wings at this level as close to bar-on-constantly, like changing gear — though we couldn't confirm who wrote it, so treat it as a steer. The survey of two-liner pilots adds a sharper point: leaning on the bar passively, without working the brakes as the wing accelerates, gives a feeling of security rather than actual control.",
+      "options": [
+        { "id": "never_used", "label": "I've never really used it" },
+        { "id": "tried_with_height", "label": "I've tried it gently, in smooth air with plenty of height" },
+        { "id": "sink_escape_only", "label": "I use it to get out of sinking air, and otherwise leave it alone" },
+        { "id": "regular_on_glides", "label": "A bit of bar on most glides, easing on and off as the wing moves" },
+        { "id": "trim_and_manage", "label": "On bar for most of my gliding — I ease it on watching the pitch, trim the pressure to keep the wing settled, and come off it when the air changes" },
+        { "id": "stomp_it_on", "label": "I push it on quickly when I want the speed, including fairly low down" }
+      ]
+    },
+    {
+      "id": "collapse_experience",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Has the wing collapsed on you in flight, and what happened?",
+      "help": "\"Never\" is still a normal answer and isn't counted against you.",
+      "options": [
+        { "id": "never", "label": "Never" },
+        { "id": "small_self_recovered", "label": "Small tip collapses that sorted themselves out" },
+        { "id": "asymmetric_i_flew_it_out", "label": "Something bigger — around half the wing — and I caught it and flew it out" },
+        { "id": "froze_recovered_itself", "label": "Yes, and I froze; the wing recovered on its own, not because of me" },
+        { "id": "lost_control", "label": "Yes, and it got away from me — I lost control of where the wing was going" },
+        { "id": "repeated_struggle", "label": "It's happened a few times and I still struggle to sort it out" }
+      ]
+    },
+    {
+      "id": "collapse_practice",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "How much have you practised collapses, wingovers and spirals deliberately?",
+      "help": "Scored harder here than one rung down. The wings at this step don't fold progressively the way the one you're on does — two named experts describe a collapse arriving as one block, with more chance of a tangled tip, and one of them adds that it tends to come without the small flutter a three-liner gives you first. Less warning means the reaction has to be already built. Note that regular practice on your own counts here — a course isn't required for full credit on anything in this assessment.",
+      "options": [
+        { "id": "no_practice", "label": "Not at all — I'd be working it out for the first time" },
+        { "id": "theory_only", "label": "I know in theory what to do, but I've never practised it" },
+        { "id": "some_self_practice", "label": "I've pulled and released tip folds myself, with plenty of height" },
+        { "id": "regular_practice", "label": "I practise wingovers, spirals and asymmetrics fairly regularly" },
+        { "id": "course_plus_regular", "label": "I've worked on all of that with an instructor or on a course, and I keep it current" }
+      ]
+    },
+    {
+      "id": "cravat_recovery",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "A cravat — a wingtip pulled through the lines so it won't shake out on its own. What's your experience of them?",
+      "help": "The other thing both of those voices agree matters most at this step. It's asked separately from the general collapse question because it's a different problem with a different fix, and because wings with fewer lines give collapsing fabric more room to tangle. Never having had one isn't a mark against you by itself.",
+      "options": [
+        { "id": "never", "label": "I've never had one, and I've never practised clearing one" },
+        { "id": "theory_only", "label": "I know what I'd try, but I've never actually done it" },
+        { "id": "resolved_itself", "label": "I've had one and it came out without me really doing anything" },
+        { "id": "cleared_in_flight", "label": "I've had one in flight and got it out myself" },
+        { "id": "practised_deliberately", "label": "I've practised clearing them deliberately, with a coach or over water" }
+      ]
+    },
+    {
+      "id": "frontal_collapse_energy",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "A frontal — the whole leading edge tucking at once, then the wing surging hard as it refills. Where are you with those?",
+      "help": "Asked because managing the energy that comes out of a frontal is on the short list of things one widely-read analysis expects a pilot to have before a two-liner. It's the same skill as pitch control, just at its loudest.",
+      "options": [
+        { "id": "never_thought", "label": "Haven't really thought about it" },
+        { "id": "theory_only", "label": "I know what I'd do, but I've never had one or practised one" },
+        { "id": "had_one_rode_it_out", "label": "I've had one and rode out the surge without it getting away from me" },
+        { "id": "practised_deliberately", "label": "I've practised them deliberately, with height or over water" }
+      ]
+    },
+    {
+      "id": "ears_deflation",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Big ears — pulling the outer lines to fold the wingtips in. How do you get on with them?",
+      "help": "Worth asking on its own here. In that survey of nearly 300 pilots on two-line C wings, about a quarter reported real difficulty getting ears in on the shorter line set, and not being able to put them in confidently on the new wing is one of the warning signs the survey picked out.",
+      "options": [
+        { "id": "unsure", "label": "I'm not that confident with them" },
+        { "id": "ok_on_my_wing", "label": "Fine on my current wing, though I don't use them much" },
+        { "id": "routine", "label": "Routine — I use them when I need them and I know exactly how mine behave" },
+        { "id": "routine_plus_variation", "label": "Routine, and I know they take a different pull on different wings and line sets" }
+      ]
+    },
+    {
+      "id": "descent_options",
+      "category": "skills",
+      "priority": "secondary",
+      "type": "single",
+      "ordered": true,
+      "text": "If you needed to come down quickly, what could you actually do?",
+      "options": [
+        { "id": "big_ears_only_unsure", "label": "Big ears, but I'm not that confident with them" },
+        { "id": "big_ears_comfortable", "label": "Big ears, comfortably" },
+        { "id": "ears_plus_one_more", "label": "Big ears plus one other way down I've actually used" },
+        { "id": "ears_plus_spiral_and_folds", "label": "Ears, bigger tip folds and a controlled spiral — all practised" }
+      ]
+    },
+    {
+      "id": "reserve_familiarity",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "Your reserve — where is it, and have you ever practised the throw?",
+      "options": [
+        { "id": "unsure", "label": "I'm not completely sure I could find the handle in a hurry" },
+        { "id": "know_location_only", "label": "I know exactly where the handle is, but I've never practised" },
+        { "id": "practised_once", "label": "I've practised the throw at least once, hanging in a harness" },
+        { "id": "practised_recent_repack", "label": "Practised recently, and the repack is up to date" }
+      ]
+    },
+    {
+      "id": "manoeuvre_course",
+      "category": "skills",
+      "priority": "optional",
+      "type": "single",
+      "ordered": true,
+      "optional": true,
+      "text": "Have you done a manoeuvres course (over water, with an instructor)?",
+      "help": "Optional, and it can only help your result here, never hurt it. This is the step where the recommendation turns up from the most directions — and also, oddly, the step with the best reason not to lean on it: two instructors point out that wings from about this class upward resist folding so well that a course may not be able to stage a realistic collapse on the actual wing at all. The suggestions at the end explain what to do about that.",
+      "options": [
+        { "id": "no", "label": "No" },
+        { "id": "booked", "label": "Not yet, but I've got one booked" },
+        { "id": "one_course", "label": "Yes, one" },
+        { "id": "more_than_one", "label": "Yes, more than one" }
+      ]
+    },
+    {
+      "id": "collapse_training_access",
+      "category": "skills",
+      "priority": "optional",
+      "type": "single",
+      "ordered": true,
+      "optional": true,
+      "scored": false,
+      "text": "If you did a course on the new wing, could a collapse actually be set up on it?",
+      "help": "Optional, and it doesn't add or lose you any points either way. It's asked because of a practical gap one expert raised that we found nowhere else: most owners of two-line C wings don't have the folding lines a course needs to safely induce a realistic collapse on that particular wing — so even a booked course may not give you representative practice on the wing you'll actually be flying.",
+      "options": [
+        { "id": "never_considered", "label": "Hadn't thought about it" },
+        { "id": "aware_not_arranged", "label": "I know folding lines are a thing, but I haven't looked into getting any" },
+        { "id": "arranged", "label": "Yes — I'd have folding lines, or the school has them for that wing" },
+        { "id": "done_it", "label": "I've already done collapse work on this type of wing with them" }
+      ]
+    },
+    {
+      "id": "wing_limiting_evidence",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Has your current wing actually been the thing that stopped you doing something?",
+      "help": "The most useful question on this page, and the one it's easiest to answer generously. Think about specific flights rather than a general feeling.",
+      "options": [
+        { "id": "not_really", "label": "Not really — I don't think the wing has held me back yet" },
+        { "id": "occasionally_wondered", "label": "I've wondered, but I couldn't point to a particular flight" },
+        { "id": "left_behind_on_glides", "label": "Yes — I get left behind on glides by people on higher-class wings" },
+        { "id": "specific_flights", "label": "Yes — I can name flights where I couldn't get back or couldn't cross something, and more glide would have done it" },
+        { "id": "regularly_limiting", "label": "Regularly — I'm flying at the edge of what it has to give on most cross-country days" }
+      ]
+    },
+    {
+      "id": "upgrade_motivation",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "What's the main reason you want to move up?",
+      "help": "Pick the one closest to the truth, not the one that sounds best. Wanting more performance is a completely normal answer and isn't marked down.",
+      "options": [
+        { "id": "wing_maxed_out", "label": "I've got everything out of my current wing that it has to give" },
+        { "id": "instructor_suggested", "label": "My instructor or coach suggested it" },
+        { "id": "want_more_performance", "label": "I want more glide and speed for longer flights" },
+        { "id": "replacing_anyway", "label": "I need a new wing anyway, so I may as well go a step up" },
+        { "id": "keep_up_with_group", "label": "Most of the people I fly with are on something higher and I don't want to be the odd one out" },
+        { "id": "wing_will_handle_conditions", "label": "I'm hoping a better wing will cope with conditions I currently find hard" }
+      ]
+    },
+    {
+      "id": "wing_expectation",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "What do you expect to actually change on a high-C or a two-liner?",
+      "help": "Worth knowing before you answer, because it surprises people: on a two-liner the difference isn't that things go wrong more often. By several accounts these wings sit calmer than a three-liner for longer stretches of flying. The difference is in what happens when something does go wrong.",
+      "options": [
+        { "id": "calmer_but_less_warning", "label": "Calmer most of the time — but when it does let go, bigger and faster, with less warning" },
+        { "id": "more_precision_and_cravat_risk", "label": "More performance, and I'd need to be more precise — in turns, on bar, and if a tip tangles" },
+        { "id": "modest_step", "label": "Honestly, not a huge difference — I've flown wings about this demanding before" },
+        { "id": "not_sure", "label": "I'm not really sure — I haven't looked into it" },
+        { "id": "less_work_in_rough_air", "label": "Flying will feel less like hard work than it does now" },
+        { "id": "safer_in_turbulence", "label": "It'll handle turbulence better than my current wing" }
+      ]
+    },
+    {
+      "id": "flying_style_intent",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Thinking about how you actually like to fly — which is closest?",
+      "help": "There's no better or worse way to fly, and the first answer isn't a fault. It's asked because one of these is a poor match for a two-liner specifically, whatever your hours — the performance only really pays off when the wing is flown accelerated and actively — and that's much better to hear now than after you've bought one.",
+      "options": [
+        { "id": "relaxed_low_stress", "label": "Relaxed and low-stress — I'm up there to enjoy the air, not to push" },
+        { "id": "mostly_relaxed_some_pushing", "label": "Mostly relaxed, but I'll push on when the day's good" },
+        { "id": "active_and_accelerated", "label": "Active and committed — bar on, working the glides, chasing distance or speed" },
+        { "id": "competitive", "label": "Competitively — tasks, racing, or against the clock" }
+      ]
+    },
+    {
+      "id": "progress_goals",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "What are you mainly trying to get better at this season?",
+      "options": [
+        { "id": "technique_and_enjoyment", "label": "Flying more smoothly, staying relaxed when it's rough, enjoying it more" },
+        { "id": "specific_skills", "label": "Specific skills — centring climbs, launches, reading the day" },
+        { "id": "distance_and_numbers", "label": "Flying further and getting my distances up" },
+        { "id": "keeping_ahead_of_peers", "label": "Keeping up with, or ahead of, the people I fly with" },
+        { "id": "not_thought_about", "label": "I haven't really thought about it in those terms" }
+      ]
+    },
+    {
+      "id": "learning_curve_willingness",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": true,
+      "text": "A new wing means a spell of relearning it — ground handling, launches, how it talks to you. How does that sit with you?",
+      "help": "This one is weighted harder here than anywhere below. Two separate sources point the same way: one pilot who's been through it reckons the first fifty hours on a two-liner go mostly on adapting, and the survey of two-liner owners names skipping familiarisation flights in benign air, before taking the wing into thermals or high terrain, as one of its specific warning signs.",
+      "options": [
+        { "id": "ground_handle_first", "label": "Fine — I'd spend time on the ground with it before flying anything demanding" },
+        { "id": "easy_days_for_a_while", "label": "Fine — I'd keep to easy days and familiar sites for a while" },
+        { "id": "just_fly_it", "label": "I'd rather just get on and fly it" },
+        { "id": "straight_back_to_normal", "label": "I'd expect to be straight back to normal on it within a flight or two" }
+      ]
+    },
+    {
+      "id": "ambitions",
+      "category": "psychological",
+      "priority": "core",
+      "type": "multi",
+      "ordered": false,
+      "scored": false,
+      "text": "Over the next year, what kind of flying do you mainly want to be doing?",
+      "help": "Pick any that apply, including things you're only thinking about. There's no better or worse answer here — it doesn't add or lose you any points. It tells us which skills your own plans will actually ask of you, so the advice fits the flying you do.",
+      "options": [
+        { "id": "local_soaring", "label": "Local flying, ridge or coastal soaring" },
+        { "id": "first_xc", "label": "Cross-country flights — first ones, or building them up" },
+        { "id": "longer_xc", "label": "Long cross-country flights" },
+        { "id": "hike_fly", "label": "Hike and fly in the mountains" },
+        { "id": "competitions", "label": "Competitions" },
+        { "id": "acro", "label": "Acro or wing-overs" },
+        { "id": "just_enjoy", "label": "Nothing in particular — just enjoying it" }
+      ]
+    },
+    {
+      "id": "external_feedback",
+      "category": "skills",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Has anyone who has actually watched you fly said anything about moving up?",
+      "options": [
+        { "id": "advised_to_wait", "label": "An instructor or coach has told me to wait" },
+        { "id": "nobody_seen_recently", "label": "Nobody who knows what they're looking at has seen me fly lately" },
+        { "id": "friends_think_so", "label": "Flying mates reckon I'd be fine on one" },
+        { "id": "instructor_suggested", "label": "An instructor or coach has said I'm ready" }
+      ]
+    },
+    {
+      "id": "response_when_rough",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "When the air gets properly rough, what usually happens for you?",
+      "help": "Everyone's heart rate goes up. We're asking what you do next.",
+      "options": [
+        { "id": "freeze_and_hang_on", "label": "I lock up a bit — I hang on and wait for it to pass" },
+        { "id": "tense_want_to_land", "label": "I get tense, want to land straight away, and my flying gets scrappier" },
+        { "id": "heart_up_keep_flying", "label": "Heart rate goes up, but I carry on flying the wing" },
+        { "id": "calm_active_exit_plan", "label": "I stay fairly calm, keep flying actively, and have a way out if it builds" },
+        { "id": "doesnt_bother_me", "label": "It doesn't really bother me" }
+      ]
+    },
+    {
+      "id": "decline_to_fly",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "In the last few months, have you walked away from a launch, or landed early, because the day wasn't what you wanted to handle?",
+      "options": [
+        { "id": "yes_several_comfortable", "label": "More than once, and I was happy with the call" },
+        { "id": "yes_once_or_twice", "label": "Once or twice" },
+        { "id": "no_launch_anyway", "label": "No — I generally launch and see how it goes" },
+        { "id": "not_come_up", "label": "No — it hasn't come up" }
+      ]
+    },
+    {
+      "id": "peer_pressure",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "Your friends are launching into a day you're unsure about. What usually happens?",
+      "options": [
+        { "id": "launch_anyway", "label": "I go too — I don't want to be the one left on the hill" },
+        { "id": "feel_pushed_usually_wait", "label": "I feel the pull, but I usually wait" },
+        { "id": "own_call_comfortable", "label": "I make my own call and I'm comfortable either way" },
+        { "id": "not_come_up", "label": "Hasn't come up" }
+      ]
+    },
+    {
+      "id": "effort_already_invested",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "You've driven a long way, or walked up for an hour, and the day turns out more marginal than you hoped. What usually happens?",
+      "help": "Not about wings at all — it's about how the call gets made. The last option is a perfectly normal answer.",
+      "options": [
+        { "id": "fly_anyway_dont_waste", "label": "I'll usually fly — it's a long way to come for nothing" },
+        { "id": "tempted_but_usually_wait", "label": "I feel it pulling at me, but I'll usually wait it out or walk down" },
+        { "id": "judge_on_merits", "label": "The journey doesn't come into it — I look at the day as it is" },
+        { "id": "not_come_up", "label": "Hasn't really come up — my flying is mostly close to home" }
+      ]
+    },
+    {
+      "id": "incidents_12m",
+      "category": "psychological",
+      "priority": "core",
+      "type": "single",
+      "ordered": false,
+      "text": "In the last 12 months, any incidents or near misses? A messy launch, a hard landing, a scare in the air?",
+      "help": "Nobody sees this but you. An honest answer makes the result worth having.",
+      "options": [
+        { "id": "none", "label": "Nothing I'd call a near miss" },
+        { "id": "one_or_two_reflected", "label": "One or two moments that made me think — and I know what I'd do differently" },
+        { "id": "several_unsure", "label": "A few, and I'm not really sure what went wrong" },
+        { "id": "shook_me", "label": "Something that shook me up, and I've been uneasy flying since" },
+        { "id": "injury_or_reserve", "label": "An injury, or I threw my reserve" }
+      ]
+    }
+  ]
+}

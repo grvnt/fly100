@@ -1,0 +1,306 @@
+{
+  "step": "low-c-to-high-c",
+  "version": 1,
+  "meta": {
+    "trigger_operators": {
+      "question + answer_in": "Single-select match.",
+      "question + answer_includes_any": "Multi-select question contains at least one of the listed options.",
+      "category_below": "Category score strictly below a value. Evaluated after scoring.",
+      "recommendation_in": "Matches on the final recommendation, so these are evaluated after scoring and gating.",
+      "any_of / all_of": "Boolean combinators over the above.",
+      "intended_flying_context": "Matches a named profile defined in intended_flying_context.profiles in config/scoring/low-c-to-high-c.json ('local_only' or 'exposure_bound')."
+    },
+    "selection": {
+      "min_shown": 3,
+      "max_shown": 5,
+      "order": "ascending priority number, then config order",
+      "dedupe_by": "topic",
+      "rule": "Gate-linked suggestions always take the first slots. Then fill from triggered suggestions by priority. If fewer than three are triggered, fill from the 'always' pool.",
+      "always_pool": {
+        "ids": ["instructor_conversation", "stay_current_whatever_you_decide", "compensate_after_any_upgrade", "judge_the_wing_not_the_label"],
+        "guarantee": "Four always-on suggestions, one more than min_shown, each on a distinct topic (instructor, currency, transition, step_confidence), matching every step below.",
+        "source": { "ref": "BRIEF.md#outputs", "cites": "\"3-5 concrete suggestions for what to work on.\" A floor of three is only meaningful if reachable from every answer set." }
+      },
+      "source": { "ref": "BRIEF.md#outputs", "cites": "\"3-5 concrete suggestions for what to work on.\"" }
+    },
+    "source_fields_are_internal": "Every 'source' block here is provenance for the owner and reviewer only, never rendered. docs/design-context.md must never be named, quoted or paraphrased anywhere a pilot can see.",
+    "tone_rules": [
+      "Every suggestion is phrased as something to do next, never as a defect to fix.",
+      "No suggestion ever encourages a hesitant pilot toward upgrading. Required by docs/design-context.md's safety guard.",
+      "Plain language only. No internal framework terminology.",
+      "Step-specific rule 1 — back-flying is never named as something to go and practise. Where SIV comes up, name cravat clearing and pitch control, per knowledge/disagreements.md points 1 and 4, and if the back-flying disagreement is relevant at all, state it as a disagreement rather than silently picking a side.",
+      "Step-specific rule 2 — the letter boundary (low-C to high-C as such) is named as thin and bidirectional, never as settled. The two-liner question is handled separately and is the one this step's own research is confident about.",
+      "Step-specific rule 3 — the under-20-hours figure, the ears-deflation ~25% figure and the passive-bar-use warning are all attributed to Melchior Lindenstruth's survey specifically, named as survey-based rather than as settled rules, per knowledge/disagreements.md point 2's broad-bands-over-precision instruction.",
+      "Step-specific rule 4 — SIV stays optional context, per BRIEF.md and knowledge/disagreements.md point 1, even in 'siv_before_a_two_liner', which is the strongest SIV suggestion in the whole ladder."
+    ]
+  },
+
+  "suggestions": [
+    {
+      "id": "instructor_conversation",
+      "topic": "instructor",
+      "always": true,
+      "priority": 1,
+      "title": "Get a second opinion from someone who has seen you fly",
+      "body": "Take this result to an instructor, coach or experienced club pilot and ask them straight: would you put me on this wing now, and if it's a two-liner, have they flown one themselves? That second part matters here specifically — a two-liner asks different things of a pilot than a conventional high-C does, and someone who has flown both kinds is worth more than someone who has only flown one.",
+      "source": {
+        "ref": "BRIEF.md#outputs",
+        "cites": "\"A recommendation to discuss the upgrade with an instructor.\"",
+        "note": "Adapted from the high-b-to-low-c version to foreground the 2-liner-specific question, since that is this step's own central distinction."
+      }
+    },
+    {
+      "id": "stay_current_whatever_you_decide",
+      "topic": "currency",
+      "always": true,
+      "priority": 10,
+      "title": "Protect the regular flying, whichever wing you're on",
+      "body": "Nothing in the research for this step gives a precise annual-hours figure the way the step below it does, but every source that touches on it agrees currency matters more than lifetime totals. Treat regular flying as something to defend rather than something that holds by itself, and after any gap or any change of wing, start the next session with ground handling before you launch.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Carried forward from high-b-to-low-c, broad bands over precision per knowledge/disagreements.md point 2.", "note": "Always by design: true for a weekly pilot (keep it) and a monthly one (build it)." }
+    },
+    {
+      "id": "compensate_after_any_upgrade",
+      "topic": "transition",
+      "always": true,
+      "priority": 11,
+      "title": "Whenever you do change wing, tighten everything else for a while",
+      "body": "Any new or upgraded wing raises your risk for a while purely through unfamiliarity. Pick more conservative sites for the first weeks, fly less aggressively than usual, and read up on the specific model's handling before you fly it rather than after — a two-liner more than any other wing on this ladder, since the handling genuinely differs model to model.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling", "cites": "Greg Hamerton via FAI/CIVL (expert), carried forward.", "note": "Always by design — advice about the transition itself, not about whether to make it." }
+    },
+    {
+      "id": "judge_the_wing_not_the_label",
+      "topic": "step_confidence",
+      "always": true,
+      "priority": 12,
+      "title": "Two different questions share one label here — treat them separately",
+      "body": "A conventional low-C to a conventional high-C is a genuinely blurry boundary, same as the letter boundary below it — some sources barely distinguish them, and one manufacturer markets the same wing as a step up from one angle and a step down from another. Moving onto a two-liner is a different matter: that's the best-evidenced material in this whole questionnaire, built on a survey of nearly 300 two-liner pilots, and it's specific about what to have in place first. So if you're shopping within conventional three-liner C wings, read this result as thin guidance on a thin boundary. If you're shopping a two-liner, read it as considerably more confident — and worth taking seriously.",
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#source-quality-note",
+        "cites": "The step file's own stated confidence split.",
+        "note": "Mirrors config/questions/low-c-to-high-c.json's meta.confidence_statement_for_ui almost exactly, since that framing was written to be pilot-facing already."
+      }
+    },
+
+    {
+      "id": "test_fly_first",
+      "topic": "wing_choice",
+      "priority": 9,
+      "trigger": { "recommendation_in": ["ready", "nearly_ready"] },
+      "title": "Test-fly the actual wing before you buy",
+      "body": "Fly the specific model, in calm air, from a site you know, before any money changes hands. If it's a two-liner, pay particular attention to how it handles ears, how the brakes feel compared to what you're used to, and how it behaves on and off the bar. Two wings both sold at this level can feel very different, and a wing at this price is an expensive thing to be wrong about.",
+      "source": { "ref": "knowledge/disagreements.md#3", "cites": "Carried forward from high-b-to-low-c, adapted for the two-liner-specific handling differences.", "note": "" }
+    },
+    {
+      "id": "build_thermic_hours",
+      "topic": "thermic_hours",
+      "priority": 1,
+      "trigger": { "question": "thermic_airtime", "answer_in": ["under_10", "10_25"] },
+      "title": "Thermal hours underneath everything else on this page",
+      "body": "No source puts a new, higher thermal-hours figure specifically on this boundary, but nothing suggests the bar drops from the step below either. Get well past that figure before adding anything else to the equation — it's ordinary, enjoyable flying rather than a training programme, and most of your other answers improve at the same time as this one does.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Carried forward from high-b-to-low-c's figures.", "note": "" }
+    },
+    {
+      "id": "recurrency_plan",
+      "topic": "currency",
+      "priority": 1,
+      "trigger": { "question": "flying_frequency", "answer_in": ["none_3m"] },
+      "title": "Get current again first",
+      "body": "Start with ground handling, then a few easy flights at a site you know, before anything else on this list. Changing wing during a comeback stacks two unfamiliar things on top of each other at exactly the wrong moment.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "improve_currency",
+      "topic": "currency",
+      "priority": 2,
+      "trigger": { "question": "flying_frequency", "answer_in": ["less_than_monthly", "about_monthly"] },
+      "title": "Get the flying more regular before you change wings",
+      "body": "A faster, less forgiving wing is not the thing to add to an occasional flying habit. Two or three sessions a month, in whatever conditions you can get, is the thing that moves this answer and several others with it.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "time_on_current_wing",
+      "topic": "current_wing",
+      "priority": 1,
+      "trigger": { "question": "current_wing_time", "answer_in": ["under_20", "20_50"] },
+      "title": "Put real hours on the wing you're already on",
+      "body": "This is the single best-evidenced figure in the whole research for this step. A pilot who surveyed nearly 300 two-liner owners treats under about 20 hours on your previous wing as a genuine red flag before a two-liner, with a real case attached — someone who moved up with around 11 hours and ended up throwing a reserve after a severe collapse in rough air. There's no equivalent figure for a conventional three-liner high-C, but the direction is the same either way: more time on the wing you trust now, flown properly rather than just logged.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Melchior Lindenstruth's survey and the 11-hour case.", "note": "Pairs with the critical_check_floor:current_wing_time and two_liner_thin_previous_category rule_messages in the scoring config, but written as action rather than explanation." }
+    },
+    {
+      "id": "wing_hasnt_limited_you_yet",
+      "topic": "readiness_evidence",
+      "priority": 1,
+      "trigger": { "question": "wing_limiting_evidence", "answer_in": ["not_really", "occasionally_wondered"] },
+      "title": "Find out whether the wing is actually the limit",
+      "body": "You've said your current wing hasn't clearly held you back. That's worth testing properly before spending money on either kind of wing at this step: over the next few flights, write down what actually stopped you each time you didn't get where you wanted. If it keeps coming back to glide, you've got your answer. If it doesn't, you've found something cheaper and faster to fix than a new wing — and that's doubly true if the wing you're shopping is a two-liner, where the gap between 'wanting the numbers' and 'having used up the wing you've got' is the clearest red flag this research names.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "\"Seeking out a 2-liner primarily for the speed/glide numbers without having already experienced real asymmetric collapses and cravat-type situations on a 3-liner is the clearest red flag pattern across these sources.\"", "note": "" }
+    },
+    {
+      "id": "performance_chasing_reframe",
+      "topic": "motivation_performance",
+      "priority": 3,
+      "trigger": {
+        "all_of": [
+          { "question": "upgrade_motivation", "answer_in": ["want_more_performance"] },
+          { "question": "wing_limiting_evidence", "answer_in": ["not_really", "occasionally_wondered"] }
+        ]
+      },
+      "title": "Wanting more performance is fine — worth checking it's there to be had",
+      "body": "Wanting more glide and speed is a normal reason to want a new wing, and nothing here treats that as a fault. What's worth doing first, especially if a two-liner is in the mix, is finding out where your flights are actually being lost — climbs, decisions, lines, days read wrong — before paying for numbers you might already be leaving on the table.",
+      "source": { "ref": "knowledge/disagreements.md#9", "cites": "Ambition is legitimate fuel; the concerning pattern is ambition paired with thin readiness.", "note": "" }
+    },
+    {
+      "id": "equipment_wont_fix_rough_air",
+      "topic": "motivation_safety_margin",
+      "priority": 3,
+      "trigger": { "question": "wing_expectation", "answer_in": ["safer_in_turbulence", "less_work_in_rough_air"] },
+      "title": "A faster or more demanding wing won't make rough air easier",
+      "body": "At this step the trade runs the other way more clearly than anywhere below it on the ladder. What makes rough air easier is thermal hours, active flying, and knowing exactly what you'd do if the wing folded — all of it available on the wing you already have. A high-C or a two-liner asks more of you in rough air, not less, in exchange for calmer handling the rest of the time.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Lobb and Lindenstruth's framing of 2-liners as calmer-but-less-warning or more-precise-but-higher-cravat-risk, never as simply safer.", "note": "" }
+    },
+    {
+      "id": "ground_handling_basics",
+      "topic": "ground_handling",
+      "priority": 4,
+      "trigger": { "question": "ground_handling_kiting", "answer_in": ["struggles", "hold_steady"] },
+      "title": "Build the kiting up — it pays back everywhere else",
+      "body": "Work towards holding the wing steady overhead, walking around under it, turning it, and killing it quickly when you need to, in genuinely light wind before moving to a slope. No source sets a ground-handling bar at this exact boundary, but it's the cheapest way to learn what a wing feels like just before it folds, which matters more on a pitch-sensitive wing than on the one you're on now.",
+      "source": { "ref": "knowledge/disagreements.md#11", "cites": "Carried forward from high-b-to-low-c.", "note": "" }
+    },
+    {
+      "id": "launch_practice",
+      "topic": "launch",
+      "priority": 5,
+      "trigger": { "question": "launch_reliability", "answer_in": ["often_aborted", "about_half"] },
+      "title": "Widen the launches, not just the success rate",
+      "body": "Nothing in this step's own research mentions launching specifically, but the general accident data found around two-thirds of accidents happen on the ground or in the first seconds of flight, at every rating level. Widen the range deliberately — more wind, some cross, slopes you haven't launched before — before adding anything else to the mix.",
+      "source": { "ref": "knowledge/disagreements.md#11", "cites": "USHPA's 2001 Paragliding Accident Summary.", "note": "" }
+    },
+    {
+      "id": "thermal_skills_drill",
+      "topic": "thermalling",
+      "priority": 2,
+      "trigger": { "question": "thermal_turn_control", "answer_in": ["not_confident", "basic_wide_climbs"] },
+      "title": "Work on turning accurately in lift",
+      "body": "Linked turns at different bank angles, both directions, changed deliberately rather than left to the wing — then use that to centre, feeling which half of the circle is going up and moving toward it. A wing with sharper feedback is only worth having if you can already act on what it tells you.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#skills", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "active_piloting_drill",
+      "topic": "active_piloting",
+      "priority": 2,
+      "trigger": { "question": "active_piloting", "answer_in": ["hands_still", "grip_tight", "try_to_react"] },
+      "title": "Make active flying automatic before the wing needs it",
+      "body": "In light, friendly bumps: keep brake pressure even, easing up when the wing surges and taking a little when it goes light. Hands that stop moving, or brakes held in one fixed position, are both habits worth unlearning on a forgiving wing rather than a quicker one.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#skills", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "pitch_control_practice",
+      "topic": "two_liner_skills",
+      "priority": 1,
+      "trigger": { "question": "pitch_control", "answer_in": ["not_thought_about", "react_unreliably"] },
+      "title": "Build pitch control deliberately, not by trial and error",
+      "body": "This is one of the two skills that two experts who disagree about almost everything else here still agree on. Start with catching a surge on the brakes, in mild turbulence, then build to holding it on the rear risers while you're accelerated on bar. A coach or an SIV session is the fastest way to get it reliable rather than meeting it for the first time on a new wing.",
+      "source": { "ref": "knowledge/disagreements.md#1", "cites": "Lobb and Janaway both name pitch control.", "note": "" }
+    },
+    {
+      "id": "cravat_clearing_practice",
+      "topic": "two_liner_skills",
+      "priority": 1,
+      "trigger": { "question": "cravat_recovery", "answer_in": ["never", "theory_only"] },
+      "title": "Practise clearing a cravat deliberately, with height",
+      "body": "The other skill both of those experts agree on. Fewer lines give collapsing fabric more room to tangle, so a cravat is more likely on a two-liner than on the wing you're on. Never having had one isn't the problem — not having practised clearing one is. An SIV session over water with a coach watching is the direct, deliberate way to close this.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Lobb (fewer lines, more tangling room) and Janaway, both naming cravat clearing as a priority.", "note": "" }
+    },
+    {
+      "id": "frontal_energy_practice",
+      "topic": "two_liner_skills",
+      "priority": 2,
+      "trigger": { "question": "frontal_collapse_energy", "answer_in": ["never_thought", "theory_only"] },
+      "title": "Get a feel for frontal-collapse energy before you need it",
+      "body": "One analysis names managing the energy that comes out of a frontal collapse as a specific must-have before a two-liner — it's the loud version of pitch control. Height, a calm day or better still an SIV course, is where to meet this deliberately rather than for the first time on the new wing.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Malin Lobb's SIV skill list.", "note": "" }
+    },
+    {
+      "id": "ears_deflation_practice",
+      "topic": "two_liner_skills",
+      "priority": 2,
+      "trigger": { "question": "ears_deflation", "answer_in": ["unsure"] },
+      "title": "Get confident with ears before relying on them on a new wing",
+      "body": "In a survey of nearly 300 two-line C pilots, about a quarter had real trouble getting ears in on the shorter line set specifically — different wings pull differently. Build the habit on the wing you're on now: routine ears, then ears plus a turn, so it's second nature before the pull changes under you.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey, the ~25% figure.", "note": "" }
+    },
+    {
+      "id": "speed_bar_active_management",
+      "topic": "speed_bar",
+      "priority": 3,
+      "trigger": { "question": "speed_bar", "answer_in": ["stomp_it_on", "regular_on_glides"] },
+      "title": "Manage the bar actively rather than leaning on it",
+      "body": "The same survey names relying on the bar passively, without working the brakes as the wing accelerates, as a specific warning sign — it feels like security without being real control. Practise easing the bar on while watching the pitch, trimming the pressure as you go, and coming off it early when the air changes, on the wing you're on now.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Lindenstruth's red-flag list.", "note": "" }
+    },
+    {
+      "id": "familiarisation_flights_plan",
+      "topic": "transition_plan",
+      "priority": 2,
+      "trigger": { "question": "learning_curve_willingness", "answer_in": ["just_fly_it", "straight_back_to_normal"] },
+      "title": "Plan the first weeks on the new wing before you buy it",
+      "body": "One pilot who wrote about his own move to a two-liner put the first ~50 hours down mostly to adapting, and the same survey names skipping easy familiarisation flights before taking a new wing into thermals or big terrain as a specific warning sign. Ground handle it first, give the early flights to easy days you'd normally think were too tame, and build up from there — on either kind of wing at this step, not just a two-liner.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "richiesadventures' ~50-hour adaptation estimate; Lindenstruth's familiarisation-skipping red flag.", "note": "Shares the 'transition_plan' topic implicitly with compensate_after_any_upgrade's always-on advice, but is the sharper, step-specific version for a pilot who's said they'd rather just get on with it." }
+    },
+    {
+      "id": "two_liner_goal_mismatch",
+      "topic": "fit",
+      "priority": 4,
+      "trigger": {
+        "all_of": [
+          { "question": "is_2_liner", "answer_in": ["yes"] },
+          { "question": "flying_style_intent", "answer_in": ["relaxed_low_stress"] }
+        ]
+      },
+      "title": "Worth checking a two-liner is actually what you want",
+      "body": "You've said your flying is mostly relaxed and low-stress, and one survey names exactly this combination — wanting calm, easy flying while shopping a two-liner — as a mismatched goal: the performance only pays off when it's flown accelerated and actively, which isn't what you've described wanting. Nobody needs to fly a two-liner to have a complete paragliding life. If what you actually want is some of the glide without the full demands, a strong conventional three-liner C may suit you better.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "Lindenstruth's mismatched-goal red flag.", "note": "Tone rule: ends with a positive alternative rather than a warning, per docs/design-context.md's safety guard." }
+    },
+    {
+      "id": "siv_before_a_two_liner",
+      "topic": "siv",
+      "priority": 6,
+      "trigger": { "question": "is_2_liner", "answer_in": ["yes"] },
+      "title": "SIV is optional, but it's the most strongly recommended it gets on this ladder",
+      "body": "SIV stays optional here, same as every step — it's not a requirement and skipping it isn't a mark against you. But it's worth knowing this is the step where the pro-SIV voices are most emphatic: one coach treats confident cravat clearing, pitch control and managing frontal-collapse energy as close to a precondition for a two-liner specifically. One disagreement worth naming plainly: a second experienced voice thinks back-flying, which some SIV courses include, isn't actually necessary even here — the two broadly agree on cravat clearing and pitch control, which is where this questionnaire puts its own weight too. One practical catch: folding-line two-liners can be harder to get booked onto an SIV course for, since some operators are less set up for them — worth asking when you call, and asking specifically for cravat and frontal-collapse practice rather than a generic course.",
+      "source": {
+        "ref": "knowledge/disagreements.md#1",
+        "cites": "Malin Lobb's near-precondition framing; Brett Janaway's disagreement on back-flying specifically; config/questions/low-c-to-high-c.json's collapse_training_access question for the folding-line booking point.",
+        "note": "The strongest SIV suggestion in the ladder, written to still open with 'optional', per meta.tone_rules step-specific rule 4. This is the one place back-flying is named at all, and only to state the disagreement."
+      }
+    },
+    {
+      "id": "collapse_practice_now",
+      "topic": "collapse",
+      "priority": 1,
+      "trigger": { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only", "some_self_practice"] },
+      "title": "Get the collapse reaction solid before the wing, not after",
+      "body": "The certification wording for this class assumes precise, deliberate input to recover from a collapse — something to arrive with, not learn on the new wing. Wingovers, a controlled spiral, and a bigger asymmetric with someone watching, roughly in that order, is the usual progression. Height and a calm day are what this needs most, whether or not you ever do a formal course.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Carried forward byte-identically from high-b-to-low-c.", "note": "" }
+    },
+    {
+      "id": "response_when_rough_drill",
+      "topic": "fear_response",
+      "priority": 3,
+      "trigger": { "question": "response_when_rough", "answer_in": ["freeze_and_hang_on", "tense_want_to_land"] },
+      "title": "The nerves are normal — build what you do next",
+      "body": "Tensing up or wanting to land when it gets bumpy isn't a character flaw, it's the default starting point for almost everyone. What's worth building deliberately is the next bit: a specific exit plan you already know before you need it, and practice staying active on the controls rather than just holding on. Flying with people who'll talk you through it afterwards helps more than flying alone.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#psychological--mindset-factors", "cites": "Malin Lobb's readiness-not-label framing.", "note": "" }
+    },
+    {
+      "id": "reserve_check",
+      "topic": "reserve",
+      "priority": 7,
+      "trigger": { "question": "reserve_familiarity", "answer_in": ["unsure", "know_location_only"] },
+      "title": "Check you could actually find the handle in a hurry",
+      "body": "Two minutes in a hang check, done properly, fixes this permanently. Worth doing before any wing change, not just this one.",
+      "source": { "ref": "knowledge/steps/a-to-low-b.md#skills", "cites": "USHPA P2.", "note": "" }
+    }
+  ]
+}

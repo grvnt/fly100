@@ -20,6 +20,10 @@ import highBToLowCQuestions from '@/config/questions/high-b-to-low-c.json';
 import highBToLowCScoring from '@/config/scoring/high-b-to-low-c.json';
 import highBToLowCSuggestions from '@/config/suggestions/high-b-to-low-c.json';
 
+import lowCToHighCQuestions from '@/config/questions/low-c-to-high-c.json';
+import lowCToHighCScoring from '@/config/scoring/low-c-to-high-c.json';
+import lowCToHighCSuggestions from '@/config/suggestions/low-c-to-high-c.json';
+
 export const STEP_CONFIGS: Record<string, StepConfig> = {
   'a-to-low-b': {
     questions: aToLowBQuestions as unknown as QuestionsConfig,
@@ -40,5 +44,10 @@ export const STEP_CONFIGS: Record<string, StepConfig> = {
     questions: highBToLowCQuestions as unknown as QuestionsConfig,
     scoring: highBToLowCScoring as unknown as ScoringConfig,
     suggestions: highBToLowCSuggestions as unknown as SuggestionsConfig,
+  },
+  'low-c-to-high-c': {
+    questions: lowCToHighCQuestions as unknown as QuestionsConfig,
+    scoring: lowCToHighCScoring as unknown as ScoringConfig,
+    suggestions: lowCToHighCSuggestions as unknown as SuggestionsConfig,
   },
 };

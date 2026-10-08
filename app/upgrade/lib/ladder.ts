@@ -30,6 +30,7 @@ export const STEP_REGISTRY: Record<string, { from: LadderRung; to: LadderRung }>
   'low-b-to-mid-b': { from: 'low-B', to: 'mid-B' },
   'mid-b-to-high-b': { from: 'mid-B', to: 'high-B' },
   'high-b-to-low-c': { from: 'high-B', to: 'low-C' },
+  'low-c-to-high-c': { from: 'low-C', to: 'high-C' },
 };
 
 function stepIdFor(from: LadderRung, to: LadderRung): string | null {

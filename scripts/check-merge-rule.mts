@@ -173,6 +173,68 @@ const CHAINS: ChainCheck[] = [
     // so it can never be the same question across a class boundary.
     mustNotMergeIds: ['wing_expectation'],
   },
+  {
+    label: 'high-b-to-low-c -> low-c-to-high-c',
+    chain: ['high-b-to-low-c', 'low-c-to-high-c'],
+    // Added 2026-10-08, independently re-derived by diffing both
+    // question files directly (not trusted from the rubric-designer's
+    // design_notes claim, same discipline as every chain above). 29 of
+    // 30 shared ids merge. This is the first chain pair where the
+    // target step adds brand-new questions (is_2_liner and the five
+    // two-liner skill questions, plus flying_style_intent) that don't
+    // exist at all in the step below — those correctly appear in the
+    // merged list unmerged (alsoAnswersForSteps empty) rather than as
+    // a false merge.
+    expectedMergedIds: [
+      'active_piloting',
+      'airtime_last_12m',
+      'ambitions',
+      'collapse_experience',
+      'collapse_practice',
+      'conditions_flown',
+      'current_wing_time',
+      'decline_to_fly',
+      'descent_options',
+      'external_feedback',
+      'flying_frequency',
+      'ground_handling_kiting',
+      'incidents_12m',
+      'launch_reliability',
+      'learning_curve_willingness',
+      'manoeuvre_course',
+      'peer_pressure',
+      'progress_goals',
+      'reading_the_day',
+      'reserve_familiarity',
+      'response_when_rough',
+      'speed_bar',
+      'thermal_turn_control',
+      'thermic_airtime',
+      'total_airtime',
+      'training_status',
+      'upgrade_motivation',
+      'wing_limiting_evidence',
+      'effort_already_invested',
+    ],
+    // wing_expectation is reworded at this step (now about collapse
+    // behaviour/warning-time rather than info/precision) so it must
+    // never merge. is_2_liner, pitch_control, cravat_recovery,
+    // frontal_collapse_energy, ears_deflation, collapse_training_access
+    // and flying_style_intent don't exist at high-b-to-low-c at all, so
+    // they can never be merge candidates — listed here anyway as an
+    // explicit guard against a future regression that invents a
+    // same-named question at the step below and merges it wrongly.
+    mustNotMergeIds: [
+      'wing_expectation',
+      'is_2_liner',
+      'pitch_control',
+      'cravat_recovery',
+      'frontal_collapse_energy',
+      'ears_deflation',
+      'collapse_training_access',
+      'flying_style_intent',
+    ],
+  },
 ];
 
 let failures = 0;

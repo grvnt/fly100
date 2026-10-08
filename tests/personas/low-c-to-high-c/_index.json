@@ -1,0 +1,71 @@
+{
+  "step": "low-c-to-high-c",
+  "version": 1,
+  "how_to_use": "Each persona file holds a complete answer set and the expected outcome, computed against the real scoring engine (not hand-calculated) before being written. Run with: node --experimental-strip-types scripts/check-personas.mts low-c-to-high-c",
+  "field_notes": {
+    "rules_expected": "Threshold rules that actually constrained the result. critical_check_floor breaks on the first failing question in thresholds.ready.critical_check_floor.questions, so at most one 'critical_check_floor:*' string is ever emitted, and which one depends on list order (current_wing_time, collapse_practice, pitch_control, cravat_recovery, ...).",
+    "exemptions_expected": "Every persona here has an empty exemptions list. config/scoring/low-c-to-high-c.json ships an empty thresholds.ready.unevidenced_core_checks.exemptions array on purpose — see meta.design_decisions 'v1-no-stated-plans-exemption-here-either'.",
+    "two_track_architecture": "This is the first step with gates conditional on an answer (is_2_liner) rather than unconditional. Personas 02-06 are built specifically as matched pairs (03/04, 05/06) that hold every answer identical except is_2_liner, to prove the six two-liner-conditional gates fire ONLY on the branch they're meant for and never on the other."
+  },
+  "persona_count_note": "Eight files. Six of the eight are built as three deliberate pairs (01/02 clean baselines for each track, 03/04 the under-20-hours mechanism on both tracks, 05/06 the cravat/pitch mechanism on both tracks) plus two singletons (07 the universal collapse gate, 08 a realistic middling category-floor case). This is the minimum set that actually exercises the new conditional-gate architecture on both sides of every mechanism it introduces, rather than just the two-liner side.",
+  "computed": {
+    "ready-three-liner": { "skills": 100.0, "psychological": 100.0, "total": 100.0, "recommendation": "ready" },
+    "ready-two-liner": { "skills": 100.0, "psychological": 100.0, "total": 100.0, "recommendation": "ready" },
+    "notyet-two-liner-under20": { "skills": 93.9, "psychological": 100.0, "total": 98.8, "recommendation": "not_yet", "gate": "two_liner_thin_previous_category" },
+    "nearly-three-liner-under20": { "skills": 93.9, "psychological": 100.0, "total": 98.8, "recommendation": "nearly_ready", "rule": "critical_check_floor:current_wing_time" },
+    "notyet-two-liner-cravat-pitch": { "skills": 90.2, "psychological": 100.0, "total": 96.8, "recommendation": "not_yet", "gates": ["two_liner_cravat_untested", "two_liner_pitch_control_weak"] },
+    "nearly-three-liner-cravat-pitch-not-gated": { "skills": 90.2, "psychological": 100.0, "total": 96.8, "recommendation": "nearly_ready", "rule": "critical_check_floor:pitch_control" },
+    "notyet-collapse-response-untested": { "skills": 91.9, "psychological": 100.0, "total": 97.7, "recommendation": "not_yet", "gate": "collapse_response_entirely_untested" },
+    "nearly-borderline-skills-floor": { "skills": 64.9, "psychological": 100.0, "total": 81.4, "recommendation": "nearly_ready", "rules": ["ready_category_floor:skills", "critical_check_floor:collapse_practice"] }
+  },
+  "provenance": "Every figure above was produced by running the real engine (app/upgrade/lib/scoreEngine.ts) against each persona's answers via a throwaway script, not hand-computed — see the session this step was built in. If a future engine change produces different numbers here, treat it as a real regression to investigate, not an arithmetic slip to wave through.",
+  "distribution": { "ready": 2, "nearly_ready": 3, "not_yet": 3 },
+  "profile_coverage": {
+    "clean_baseline_three_liner": "01 ready-three-liner",
+    "clean_baseline_two_liner": "02 ready-two-liner",
+    "thin_previous_category_two_liner_capped": "03 notyet-two-liner-under20",
+    "thin_previous_category_three_liner_blocked_not_capped": "04 nearly-three-liner-under20",
+    "cravat_and_pitch_untested_two_liner_capped": "05 notyet-two-liner-cravat-pitch",
+    "cravat_and_pitch_untested_three_liner_blocked_not_capped": "06 nearly-three-liner-cravat-pitch-not-gated",
+    "universal_collapse_response_gate_both_tracks": "07 notyet-collapse-response-untested",
+    "realistic_middling_skills_category_floor": "08 nearly-borderline-skills-floor"
+  },
+  "gate_coverage": {
+    "two_liner_thin_previous_category": ["notyet-two-liner-under20"],
+    "two_liner_cravat_untested": ["notyet-two-liner-cravat-pitch"],
+    "two_liner_pitch_control_weak": ["notyet-two-liner-cravat-pitch"],
+    "collapse_response_entirely_untested": ["notyet-collapse-response-untested"],
+    "not_exercised_by_a_persona": [
+      "two_liner_frontal_energy_untested, two_liner_ears_unsure, two_liner_passive_bar_use — each is mechanically identical in structure to two_liner_cravat_untested and two_liner_pitch_control_weak (same all_of pattern, same is_2_liner:yes gate), so the reviewer should spot-check these three by construction rather than requiring three more near-duplicate personas.",
+      "still_in_training, thermic_hours_far_below_every_reading, no_recent_flying, occasional_pilot_profile, unreliable_launches, instructor_said_wait, collapse_control_lost, aspirational_rather_than_demonstrated, equipment_as_a_fix_with_thin_readiness, ambition_without_readiness — all carried forward unchanged (or near-unchanged) from high-b-to-low-c.json, where they are already proven. Confirmed by code inspection that none of these were altered when this config was written."
+    ]
+  },
+  "rule_coverage": {
+    "critical_check_floor:current_wing_time": ["nearly-three-liner-under20"],
+    "critical_check_floor:pitch_control": ["nearly-three-liner-cravat-pitch-not-gated"],
+    "critical_check_floor:collapse_practice": ["nearly-borderline-skills-floor"],
+    "ready_category_floor:skills": ["nearly-borderline-skills-floor"],
+    "not_exercised": [
+      "critical_check_floor on cravat_recovery, wing_limiting_evidence, active_piloting, thermal_turn_control, response_when_rough, flying_frequency, collapse_experience, reserve_familiarity — list-order means only the first failing member of a multi-failure persona is ever reported, which is exactly what persona 06 demonstrates for pitch_control over cravat_recovery.",
+      "unevidenced_core_checks:thermal_turn_control, not_yet_category_floor:skills, not_yet_category_floor:psychological, ready_category_floor:psychological, conservative_backstop — all carried forward with identical mechanics from high-b-to-low-c, already proven there."
+    ]
+  },
+  "suggestion_coverage": {
+    "always_pool": "All four always-on suggestions (instructor_conversation, stay_current_whatever_you_decide, compensate_after_any_upgrade, judge_the_wing_not_the_label) display for persona 01, the cleanest case with the fewest triggers.",
+    "two_liner_specific_suggestions": "siv_before_a_two_liner fires on is_2_liner:yes alone (personas 02, 03, 05) and correctly stays silent on the three-liner track (01, 04, 06, 07, 08). pitch_control_practice and cravat_clearing_practice fire on their respective weak answers regardless of track (05 AND 06 both), confirming suggestions and gates are evaluated independently — a three-liner pilot still gets the actionable advice even though the gate can't cap them for it.",
+    "not_exercised": "two_liner_goal_mismatch (needs is_2_liner:yes AND flying_style_intent:relaxed_low_stress together — no persona combines both), frontal_energy_practice, ears_deflation_practice, speed_bar_active_management, familiarisation_flights_plan, equipment_wont_fix_rough_air, response_when_rough_drill, reserve_check — all mechanically simple single-answer triggers, spot-checked by construction rather than given dedicated personas."
+  },
+  "negative_checks": [
+    "No two-liner-conditional gate may fire on the three-liner track. Personas 04 and 06 are the direct proof: identical weak answers to their paired two-liner persona (03 and 05), same scores, but gates: [] in both cases.",
+    "No question or message anywhere in this step names back-flying. Verified by grep across config/questions/low-c-to-high-c.json, config/scoring/low-c-to-high-c.json and config/suggestions/low-c-to-high-c.json — the only occurrence in the whole step is inside 'siv_before_a_two_liner', which states the Lobb/Janaway disagreement openly rather than silently picking a side, per knowledge/disagreements.md points 1 and 4.",
+    "The under-20-hours figure must behave completely differently depending on track, never identically. Personas 03 and 04 share every answer except is_2_liner and produce not_yet (capped) versus nearly_ready (blocked, not capped) respectively — this is the single most important regression this persona set guards against.",
+    "pitch_control and cravat_recovery must be SCORED for every pilot, not just two-liner pilots. Persona 06's skills score (90.2) is identical to persona 05's two-liner twin, confirming these two questions carry real weight on the three-liner branch even though their gates can't fire there.",
+    "collapse_response_entirely_untested must remain a universal gate, not accidentally scoped to is_2_liner. Persona 07 answers is_2_liner:no_three_liner and the gate still fires.",
+    "No suggestion may encourage a hesitant pilot toward upgrading, and two_liner_goal_mismatch specifically must end on a positive alternative rather than a warning, per docs/design-context.md's safety guard — worth a manual copy read on that suggestion specifically since no persona exercises it."
+  ],
+  "chain_notes": {
+    "merge_behaviour": "The claimed split in config/questions/low-c-to-high-c.json meta.design_notes (29 of 37 questions byte-identical to high-b-to-low-c.json, merging into a single screen each in a chained run) must be independently re-verified by diffing the two files directly before being trusted, same discipline as every prior rung — see scripts/check-merge-rule.mts.",
+    "registry": "Not yet wired into app/upgrade/lib/ladder.ts STEP_REGISTRY or app/upgrade/lib/config.ts STEP_CONFIGS at the time these personas were written — that wiring is the next step after this persona suite passes.",
+    "source": "BRIEF.md 'Multi-step jumps' and its recorded implementation trap."
+  }
+}

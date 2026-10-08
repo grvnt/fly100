@@ -1,0 +1,809 @@
+{
+  "step": "low-c-to-high-c",
+  "version": 1,
+  "meta": {
+    "confidence": "two tracks, two different confidence levels — the letter boundary is the thinnest and most bidirectional on the ladder, the two-liner branch is the best survey-evidenced material in the whole knowledge base",
+    "confidence_source": {
+      "ref": "knowledge/steps/low-c-to-high-c.md#source-quality-note",
+      "cites": "\"The low-C/high-C letter boundary itself (as opposed to the 2-liner question) remains thin and bidirectional per the Cayenne 6 example.\" Against that: \"Melchior Lindenstruth's episode is the single most detailed, survey-backed 2-liner-specific source in this entire knowledge base\" — a structured survey of ~287 EN-C two-liner pilots.",
+      "note": "Do not reuse high-b-to-low-c's 'plenty of guidance that argues with itself' framing wholesale — that step's letter-class evidence is substantial and contested. Here the letter-class evidence is simply thin (closer to low-b-to-mid-b's problem), while the two-liner evidence is the strongest anywhere. See config/questions/low-c-to-high-c.json meta.confidence_statement_for_ui for the pilot-facing version of this split."
+    },
+    "design_decisions": [
+      {
+        "id": "v1-two-tracks-kept-apart",
+        "change": "Every Ready-blocker and gate is tagged to one of two tracks. The three-liner/letter-class track reuses high-b-to-low-c's structure closely (bands, category floors, unconditional hours gates) with only a one-point rise in thresholds.ready.total_min. The two-liner track adds six NEW conditional gates (see 'v1-two-liner-branch-is-gate-conditional-not-question-conditional') that only evaluate when is_2_liner:yes, built on the Lindenstruth survey and the Lobb/Janaway skill list.",
+        "reason": "knowledge/steps/low-c-to-high-c.md opens by naming these as two things sources conflate, and knowledge/disagreements.md point 4 instructs treating 2-liner-ness as its own independent hard-gate trigger, separate from the EN letter. Averaging the two tracks into one threshold would understate the letter-class fuzziness and understate the 2-liner evidence in opposite directions at once.",
+        "source": {
+          "ref": "knowledge/disagreements.md#4",
+          "cites": "\"Treat 'is this a 2-liner' as its own independent hard-gate trigger, separate from the EN letter. A pilot asking about an EN-C-certified 2-liner should still be asked the stricter 2-liner-specific questions... not just the standard low-C/high-C questions.\"",
+          "note": "config/questions/low-c-to-high-c.json's design_notes record the same decision from the question-authoring side."
+        }
+      },
+      {
+        "id": "v1-two-liner-branch-is-gate-conditional-not-question-conditional",
+        "change": "app/upgrade/lib/scoreEngine.ts has no support for conditionally skipping questions — every question in a step is shown to every pilot. So is_2_liner is asked first, the five two-liner-specific skill questions (pitch_control, cravat_recovery, frontal_collapse_energy, ears_deflation, plus speed_bar's existing scale) are asked of everyone, and only the GATES built on them are conditional, using the existing all_of/any_of + question/answer_in system — e.g. a gate's when can be {\"all_of\": [{\"question\": \"is_2_liner\", \"answer_in\": [\"yes\"]}, {\"question\": \"cravat_recovery\", \"answer_in\": [\"never\", \"theory_only\"]}]}. A three-liner pilot still answers these questions and their answers still carry scored weight (cravats and frontals are not two-liner-only events), but none of the six two-liner-conditional gates can fire for them.",
+        "reason": "Deliberate engine-compatibility choice, not an oversight. True conditional question-skipping would need app/engine changes outside this rubric's scope.",
+        "owner_note": "This step is the first one that would genuinely benefit from real conditional skipping — a three-liner pilot currently answers 5 questions (cravat_recovery, frontal_collapse_energy, ears_deflation, pitch_control, collapse_training_access) whose gates can never apply to them, which adds length without adding safety value for that branch. Worth considering for a future engine change if more 2-liner-gated steps get built (this ladder only has one more 2-liner-relevant step, high-C to D, so the case is moderate, not urgent).",
+        "source": {
+          "ref": "BRIEF.md",
+          "cites": "App architecture: app/upgrade/lib/mergeQuestions.ts and scoreEngine.ts process a step's full question list unconditionally.",
+          "note": "Recorded identically in config/questions/low-c-to-high-c.json's design_notes."
+        }
+      },
+      {
+        "id": "v1-under-20-hours-is-the-best-evidenced-single-gate-in-the-ladder",
+        "change": "current_wing_time:under_20 is a hard gate (caps at Not yet) when is_2_liner:yes, via 'two_liner_thin_previous_category'. On the three-liner branch, the same band is a critical_check_floor member (blocks Ready, does not cap) exactly as at high-b-to-low-c.",
+        "reason": "Melchior Lindenstruth treats under ~20 hours on a pilot's previous category as a red flag before a two-liner specifically, illustrated with a real case: a pilot with ~11 hours moved to an EN-C two-liner, took a severe collapse in turbulent terrain and needed a reserve deployment. This is a single-source figure (knowledge/disagreements.md point 2), but it comes from a survey-backed expert with a documented bad outcome attached, which is a different quality of evidence from most single-source hours figures in this knowledge base.",
+        "source": {
+          "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience",
+          "cites": "\"He treats under ~20 hours on the previous category as itself a red flag before attempting a 2-liner — a new, single-source hours figure... illustrated with a real case: a pilot with only ~11 hours of experience on their previous wing moving straight to an EN-C two-liner, then suffering a severe collapse in turbulent terrain and needing a reserve deployment.\"",
+          "note": "current_wing_time's bands are byte-identical to high-b-to-low-c.json so the question merges in a chained run; only the treatment of the under_20 band differs by track."
+        }
+      },
+      {
+        "id": "v1-back-flying-not-asked-not-scored-not-gated",
+        "change": "No question anywhere in this config mentions back-flying. cravat_recovery and pitch_control carry the weight that Lobb's SIV skill list would otherwise put partly on back-flying.",
+        "reason": "knowledge/disagreements.md point 1: Malin Lobb includes confident back-flying in her must-have list before a two-liner; Brett Janaway explicitly disagrees it's necessary even for two-liners, naming pitch control and cravat clearing as the real priorities instead. Point 4's recommended handling is explicit: don't gate or score on back-flying specifically, weight cravat-clearing and pitch control instead, where both camps actually agree.",
+        "source": {
+          "ref": "knowledge/disagreements.md#1",
+          "cites": "\"Both treat cravat clearing as important — the disagreement is narrower than it first looks, confined to back-flying specifically.\"",
+          "note": "The only place back-flying is named anywhere pilot-facing is inside the 'siv_before_a_two_liner' suggestion, which states the disagreement openly rather than silently picking a side."
+        }
+      },
+      {
+        "id": "v1-six-two-liner-conditional-gates",
+        "change": "Six gates fire only when is_2_liner:yes: two_liner_thin_previous_category (current_wing_time:under_20), two_liner_cravat_untested (cravat_recovery: never/theory_only), two_liner_pitch_control_weak (pitch_control: not_thought_about/react_unreliably), two_liner_frontal_energy_untested (frontal_collapse_energy: never_thought/theory_only), two_liner_ears_unsure (ears_deflation:unsure), two_liner_passive_bar_use (speed_bar:stomp_it_on).",
+        "reason": "Each traces to a specific, named 2-liner finding. cravat_recovery and pitch_control: the two skills both Lobb and Janaway agree matter (point 1). frontal_collapse_energy: Lobb's third must-have SIV skill (managing frontal-collapse energy). ears_deflation: Lindenstruth's survey found ~25% of pilots moving to a two-liner C struggled with ear deflation on the shorter line set specifically, and names it as a warning sign. two_liner_passive_bar_use: Lindenstruth names relying on the bar passively, without active brake management, as a false-security pattern specifically flagged in his red-flag list.",
+        "source": {
+          "ref": "knowledge/steps/low-c-to-high-c.md#red-flags",
+          "cites": "\"A specific, named red-flag list for 2-liners... inability to confidently deploy 'ears' (wingtip deflation) on the specific new wing; relying on the speed bar passively without active brake management during acceleration (which he says creates false security rather than real control); skipping familiarisation flights in benign conditions before flying the new wing in thermic or high terrain.\"",
+          "note": "Skipping familiarisation (richiesadventures, Lindenstruth) is handled as a suggestion (learning_curve_willingness already carries weight) rather than a seventh gate, since no source frames it as a single-answer red flag the way the other six are."
+        }
+      },
+      {
+        "id": "v1-no-stated-plans-exemption-here-either",
+        "change": "No exemption attaches to unevidenced_core_checks at this step, same structural absence as mid-b-to-high-b and high-b-to-low-c.",
+        "reason": "This step inherits the same reasoning as the step below it, with the same force: no source offers a soaring-only or local-only route onto a high-C or a two-liner. If anything the case against an exemption is stronger here, since the 2-liner material is explicitly about active, committed flying.",
+        "source": {
+          "ref": "knowledge/steps/low-c-to-high-c.md#psychological--mindset-factors",
+          "cites": "richiesadventures \"explicitly warning against treating a 2-liner as a quick performance upgrade\"; the mismatched-goal red flag (Lindenstruth) that a pilot wanting relaxed, low-stress flying gains little from a 2-liner's complexity regardless of hours.",
+          "note": "Carried forward unchanged from the two steps directly below."
+        }
+      },
+      {
+        "id": "v1-ready-threshold-rises-one-point",
+        "change": "thresholds.ready.total_min is 79, one point above high-b-to-low-c's 78. Category floors rise slightly (73/69 from 72/68). thresholds.nearly_ready.total_min stays at 55.",
+        "reason": "Letter-class evidence here is thinner than at high-b-to-low-c (not more contested, just thinner), which argues against a larger jump in the baseline threshold — most of the real strictness at this step lives in the six two-liner-conditional gates, not in the three-liner baseline. A one-point rise keeps the three-liner track roughly comparable to the step below while the two-liner track is, by construction, far stricter through its gates.",
+        "source": {
+          "ref": "knowledge/steps/low-c-to-high-c.md#source-quality-note",
+          "cites": "The letter boundary \"remains thin and bidirectional\" — a different, lesser problem than high-b-to-low-c's contested-but-substantial evidence.",
+          "note": "thresholds.nearly_ready.total_min held at 55, identical to every step below, so the extra strictness sits on the Ready edge and in the gates, not in pushing more pilots to Not yet."
+        }
+      },
+      {
+        "id": "v1-collapse-practice-and-collapse-experience-carried-forward-unchanged",
+        "change": "collapse_practice and collapse_experience keep high-b-to-low-c's exact option scores and remain Ready-blockers via critical_check_floor; collapse_response_entirely_untested (both no practice beyond theory AND no real handled collapse) is carried forward as a universal gate, not a two-liner-conditional one.",
+        "reason": "The EN-C certification language ('precise pilot input required for recovery') and Winkler's training-feasibility argument apply to the letter class, not specifically to line count — a high-C three-liner pilot needs this skill as much as a 2-liner pilot does. Keeping it universal (rather than moving it onto the two-liner-conditional list) is a deliberate decision: this is the one collapse-handling mechanism that does NOT differ by line count.",
+        "source": {
+          "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling",
+          "cites": "\"This is a genuinely distinct risk profile from the high-B to low-C step, which is about frequency and demand of active piloting; this step is additionally about a different failure mode (block collapses, cravats) that 3-liner experience doesn't fully prepare a pilot for.\" The block-collapse/cravat material IS 2-liner-specific (hence the conditional gates above); the EN-C certification language is not.",
+          "note": "Carried forward byte-identically from config/scoring/high-b-to-low-c.json."
+        }
+      }
+    ],
+    "owner_decisions": [
+      "thresholds.ready.total_min is 79, synthesised rather than sourced — the lever controlling the three-liner baseline.",
+      "Whether the six two-liner-conditional gates are individually right. They are new territory for this knowledge base and each rests on a single survey or a pair of expert voices (Lindenstruth, Lobb, Janaway) rather than the multi-source convergence some earlier gates have. The evidence quality is good (a 287-pilot survey is unusually strong for this knowledge base) but it is still one survey.",
+      "Whether true conditional question-skipping is worth an engine change, given a three-liner pilot currently answers 5 two-liner-oriented questions whose gates can never apply to them. See 'v1-two-liner-branch-is-gate-conditional-not-question-conditional'.",
+      "max_rule_reasons_shown is 2 and max_gate_reasons_shown is 3, carried forward unchanged."
+    ],
+    "method": "Each answer has a score from 0 to 1. Within a category, score = sum(weight x answer_score) / sum(weight of answered, scored questions) x 100. Total = 0.53 x skills + 0.47 x psychological, then bonuses are added and the total is clamped to 0-100. Gates are applied last and override the total.",
+    "weight_totals": { "skills": 192, "psychological": 98, "note": "Current_wing_time, pitch_control and cravat_recovery carry unusually high skills weight for this step specifically — see their own source notes." },
+    "unanswered_handling": {
+      "rule": "exclude_from_denominator",
+      "conservative_backstop": {
+        "max_unanswered_core_for_ready": 2,
+        "effect": "nearly_ready",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "SAHPA's design pattern of defaulting an unregistered glider to the most demanding category unless a lower class is actively registered.",
+          "note": "Carried forward unchanged from every step below."
+        }
+      }
+    },
+    "rounding": "Round category and total scores to the nearest whole number for display only; compare thresholds against unrounded values.",
+    "source_fields_are_internal": "Every 'source' block in this file is provenance for the owner and reviewer only. Do not render 'ref', 'cites' or 'note' text in the UI. Pilot-facing copy is exactly the 'message' field on each gate, and the 'message' field under rule_messages.by_rule / rule_messages.fallback_by_rule_id. docs/design-context.md informs several decisions and must never be named, quoted or paraphrased anywhere a pilot can see."
+  },
+
+  "categories": {
+    "skills": {
+      "label": "Skills and experience",
+      "weight": 0.53,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md",
+        "cites": "The 2-liner skill material (cravat clearing, pitch control, frontal-collapse energy, ear deflation) is specific and survey-backed; the letter-class skill material is thinner.",
+        "note": "Split carried forward unchanged from high-b-to-low-c, since the psychological material here (motivation, patience, the 'remarkably similar if you're already strong' framing) is comparably substantial."
+      }
+    },
+    "psychological": {
+      "label": "Mindset and motivation",
+      "weight": 0.47,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#psychological--mindset-factors",
+        "cites": "richiesadventures on patience and realistic expectations; Malin Lobb on readiness (not the 2-liner label) determining how big the step feels; the mismatched-goal red flag (relaxed/low-stress flying vs a 2-liner's demands).",
+        "note": "BRIEF.md: \"Psychological answers carry real weight, not a side note.\""
+      }
+    }
+  },
+
+  "intended_flying_context": {
+    "purpose": "Named, reusable groupings of the 'ambitions' answer. Never scored, never shown to the pilot. No exemption attaches at this step — see meta.design_decisions 'v1-no-stated-plans-exemption-here-either'.",
+    "profiles": {
+      "exposure_bound": {
+        "label_internal": "Plans that will put the pilot in thermic, mountain or high-workload air",
+        "ambitions_includes_any": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"]
+      },
+      "local_only": {
+        "label_internal": "Plans that stay inside local, ridge or coastal soaring",
+        "requires_all": [
+          { "ambitions_includes_any": ["local_soaring", "just_enjoy"] },
+          { "ambitions_includes_none_of": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"] }
+        ],
+        "note": "Requires a positive statement, not merely an absence of ticks, per knowledge/disagreements.md point 5."
+      }
+    },
+    "source": {
+      "ref": "knowledge/disagreements.md#9",
+      "cites": "Ambition must not be treated as a penalty in itself.",
+      "note": "Structure carried forward from every step below for comparability."
+    }
+  },
+
+  "questions": {
+    "is_2_liner": {
+      "category": "skills",
+      "weight": 0,
+      "scored": false,
+      "source": {
+        "ref": "knowledge/disagreements.md#4",
+        "cites": "Treat 'is this a 2-liner' as its own independent hard-gate trigger, separate from the EN letter.",
+        "note": "Unscored by design — it decides which gates can fire, not the score itself. See meta.design_decisions 'v1-two-tracks-kept-apart'."
+      }
+    },
+    "total_airtime": {
+      "category": "skills",
+      "weight": 6,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "richiesadventures' single-source 300-hours-on-three-liners figure — indicative, not authoritative, per knowledge/disagreements.md point 6.", "note": "Low weight: the only total-hours figure at this step is one personal blog opinion. Bands reused from high-b-to-low-c for merge safety; it is the 'over_200' band that absorbs the 300-hour figure." },
+      "options": { "under_50": 0.2, "50_100": 0.5, "100_200": 0.8, "over_200": 1.0 }
+    },
+    "thermic_airtime": {
+      "category": "skills",
+      "weight": 10,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "No source puts a thermal-hours figure on this exact boundary; the 75-100+ figures are for the step below.", "note": "Bands and scores reused byte-identically from high-b-to-low-c, treated as a floor a pilot should already be well past rather than a new target — see the question's own help text." },
+      "options": { "under_10": 0.1, "10_25": 0.3, "25_50": 0.5, "50_100": 0.8, "over_100": 1.0 }
+    },
+    "airtime_last_12m": {
+      "category": "skills",
+      "weight": 9,
+      "source": { "ref": "knowledge/disagreements.md#2", "cites": "Currency weighted independently of lifetime total, broad bands over precise figures.", "note": "No annual figure specific to this step; scored on the same principle as the step below, slightly softened since no figure anchors it here." },
+      "options": { "under_10": 0.15, "10_25": 0.4, "25_50": 0.7, "50_80": 0.95, "over_80": 1.0 }
+    },
+    "current_wing_time": {
+      "category": "skills",
+      "weight": 13,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience",
+        "cites": "Melchior Lindenstruth treats under ~20 hours on the previous category as a red flag before a two-liner, with a documented reserve-deployment case behind it.",
+        "note": "The single best-evidenced figure in this rubric. On the two-liner branch, under_20 is also a hard gate (see 'two_liner_thin_previous_category'); on the three-liner branch it is scored here and blocks Ready via critical_check_floor but does not cap. See meta.design_decisions 'v1-under-20-hours-is-the-best-evidenced-single-gate-in-the-ladder'."
+      },
+      "options": { "under_20": 0.1, "20_50": 0.4, "50_100": 0.75, "over_100": 1.0 }
+    },
+    "training_status": {
+      "category": "skills",
+      "weight": 2,
+      "source": { "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class", "cites": "Wing choice deferred to the manufacturer/instructor while under supervision.", "note": "Almost certainly inert four rungs up the ladder — kept for the deferral gate only." },
+      "options": { "in_training": 0.0, "qualified_recent": 0.4, "qualified_independent": 1.0 }
+    },
+    "flying_frequency": {
+      "category": "skills",
+      "weight": 9,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "No annual currency figure specific to this step; the pattern is carried forward from high-b-to-low-c.", "note": "Scored on the same scale as the step below." },
+      "options": { "none_3m": 0.0, "less_than_monthly": 0.15, "about_monthly": 0.4, "two_or_three_monthly": 0.8, "weekly_plus": 1.0 }
+    },
+    "ground_handling_kiting": {
+      "category": "skills",
+      "weight": 6,
+      "source": { "ref": "knowledge/disagreements.md#11", "cites": "No source ties a ground-handling test to this boundary; asked throughout the ladder on the strength of the general accident data and Aschmann's lifelong-skill framing.", "note": "Scored, never gated, not a Ready-blocker." },
+      "options": { "struggles": 0.1, "hold_steady": 0.4, "confident_strong_wind": 0.8, "advanced_drills": 1.0 }
+    },
+    "launch_reliability": {
+      "category": "skills",
+      "weight": 6,
+      "source": { "ref": "knowledge/disagreements.md#11", "cites": "USHPA's 2001 accident summary: ~64% of accidents on the ground or immediately after launch.", "note": "Gates only on the worst band; not a Ready-blocker, since this step's own file says nothing about launches specifically." },
+      "options": { "often_aborted": 0.0, "about_half": 0.2, "most_times_easy_conditions": 0.5, "nearly_always_easy": 0.75, "reliable_wider_range": 1.0 }
+    },
+    "thermal_turn_control": {
+      "category": "skills",
+      "weight": 9,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Carried forward from high-b-to-low-c; this step adds no new thermalling-specific material.", "note": "Non-monotonic — 'not_come_up' stays neutral at 0.5 and blocks Ready via unevidenced_core_checks, with no exemption." },
+      "options": { "not_confident": 0.0, "basic_wide_climbs": 0.25, "core_and_vary_bank": 0.75, "tight_and_shared": 1.0, "not_come_up": 0.5 }
+    },
+    "reading_the_day": {
+      "category": "skills",
+      "weight": 8,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md", "cites": "Carried forward from high-b-to-low-c; no new material at this step.", "note": "Scored on the same scale as the step below." },
+      "options": { "someone_else_judges": 0.1, "sometimes_right": 0.45, "usually_read_it": 0.8, "plan_the_day": 1.0 }
+    },
+    "active_piloting": {
+      "category": "skills",
+      "weight": 11,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "\"EN-C sits in the more demanding part of [the active-flying] spectrum\" — carried forward; pitch_control below carries the step's own new material more specifically.", "note": "Scored slightly softer than at high-b-to-low-c (13) since pitch_control now carries some of the same ground more specifically." },
+      "options": { "hands_still": 0.0, "grip_tight": 0.1, "try_to_react": 0.3, "work_brakes_actively": 0.55, "automatic_and_phase_aware": 1.0 }
+    },
+    "pitch_control": {
+      "category": "skills",
+      "weight": 13,
+      "source": {
+        "ref": "knowledge/disagreements.md#1",
+        "cites": "Both Malin Lobb and Brett Janaway agree pitch control is one of the skills that genuinely matters before a two-liner, even though they disagree about back-flying.",
+        "note": "New question, equal top weight with cravat_recovery. Scored for everyone (pitch sensitivity matters on a high-C three-liner too, per the question's own help text), but only gates conditionally on the two-liner branch — see 'two_liner_pitch_control_weak'."
+      },
+      "options": { "not_thought_about": 0.05, "react_unreliably": 0.3, "damp_with_brakes": 0.75, "damp_and_rear_risers": 1.0 }
+    },
+    "conditions_flown": {
+      "category": "skills",
+      "weight": 8,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#conditions-flown", "cites": "richiesadventures recommends starting 2-liner flying in milder conditions, not extreme thermic days.", "note": "Scored descriptively; no falsifiable collapse-free-survival marker exists (knowledge/disagreements.md point 7)." },
+      "options": { "smooth_gentle_only": 0.15, "ridge_coastal": 0.3, "light_moderate_thermal": 0.6, "regular_thermic_days": 0.95, "strong_mountain_big_air": 1.0 }
+    },
+    "speed_bar": {
+      "category": "skills",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#skills",
+        "cites": "The knowledge base's own synthesis: near-constant bar use is expected on exactly the wings most likely to collapse and hardest to manage cleanly if they do — flagged as inference, not a single source's claim. Lindenstruth names passive bar use (no active brake management while accelerated) as a false-security red flag.",
+        "note": "'stomp_it_on' is also the trigger for the 'two_liner_passive_bar_use' conditional gate on the two-liner branch."
+      },
+      "options": { "never_used": 0.15, "tried_with_height": 0.3, "sink_escape_only": 0.45, "regular_on_glides": 0.75, "trim_and_manage": 1.0, "stomp_it_on": 0.05 }
+    },
+    "collapse_experience": {
+      "category": "skills",
+      "weight": 9,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Carried forward from high-b-to-low-c; the EN-C certification language applies to the letter class regardless of line count.", "note": "Non-monotonic. 'Never' sits at 0.5, same as the step below. Combines with collapse_practice into 'collapse_response_entirely_untested'." },
+      "options": { "never": 0.5, "small_self_recovered": 0.75, "asymmetric_i_flew_it_out": 1.0, "froze_recovered_itself": 0.15, "lost_control": 0.0, "repeated_struggle": 0.0 }
+    },
+    "collapse_practice": {
+      "category": "skills",
+      "weight": 11,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Carried forward byte-identically from high-b-to-low-c — see meta.design_decisions 'v1-collapse-practice-and-collapse-experience-carried-forward-unchanged'.", "note": "Ready-blocker; combines into 'collapse_response_entirely_untested'." },
+      "options": { "no_practice": 0.0, "theory_only": 0.2, "some_self_practice": 0.45, "regular_practice": 0.85, "course_plus_regular": 1.0 }
+    },
+    "cravat_recovery": {
+      "category": "skills",
+      "weight": 13,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling",
+        "cites": "Malin Lobb: fewer lines give collapsing fabric more room to tangle, making cravats more likely; names cravat clearing via a half-spin as one of the must-have SIV skills. Brett Janaway independently agrees cravat clearing is a real priority even while disagreeing about back-flying.",
+        "note": "New question, equal top weight with pitch_control — the one skill both camps in the back-flying disagreement agree matters. Scored for everyone; gates conditionally on the two-liner branch only — see 'two_liner_cravat_untested'."
+      },
+      "options": { "never": 0.5, "theory_only": 0.25, "resolved_itself": 0.6, "cleared_in_flight": 1.0, "practised_deliberately": 1.0 }
+    },
+    "frontal_collapse_energy": {
+      "category": "skills",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#skills",
+        "cites": "Malin Lobb names managing the energy from a frontal collapse as one of the specific SIV-trained skills expected before a two-liner.",
+        "note": "New question. Scored for everyone; gates conditionally on the two-liner branch — see 'two_liner_frontal_energy_untested'."
+      },
+      "options": { "never_thought": 0.2, "theory_only": 0.35, "had_one_rode_it_out": 0.9, "practised_deliberately": 1.0 }
+    },
+    "ears_deflation": {
+      "category": "skills",
+      "weight": 7,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience",
+        "cites": "Lindenstruth's survey found ~25% of pilots moving to a two-liner C had real difficulty getting ears in on the shorter line set, and names it as a warning sign.",
+        "note": "New question, survey-sourced. Scored for everyone (useful on any wing); gates conditionally on the two-liner branch — see 'two_liner_ears_unsure'."
+      },
+      "options": { "unsure": 0.1, "ok_on_my_wing": 0.6, "routine": 0.9, "routine_plus_variation": 1.0 }
+    },
+    "descent_options": {
+      "category": "skills",
+      "weight": 4,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "No specific descent-option criterion at this step; carried forward from the step below.", "note": "Low weight, never gates." },
+      "options": { "big_ears_only_unsure": 0.1, "big_ears_comfortable": 0.4, "ears_plus_one_more": 0.75, "ears_plus_spiral_and_folds": 1.0 }
+    },
+    "reserve_familiarity": {
+      "category": "skills",
+      "weight": 4,
+      "source": { "ref": "knowledge/steps/a-to-low-b.md#skills", "cites": "USHPA P2 (official): reserve-deployment and PLF knowledge.", "note": "Cross-referenced, carried forward unchanged, weakest-sourced critical_check_floor member, sits last in that list." },
+      "options": { "unsure": 0.0, "know_location_only": 0.5, "practised_once": 0.85, "practised_recent_repack": 1.0 }
+    },
+    "wing_limiting_evidence": {
+      "category": "skills",
+      "weight": 10,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "\"Seeking out a 2-liner primarily for the speed/glide numbers without having already experienced (and recovered from) real asymmetric collapses and cravat-type situations on a 3-liner is the clearest red flag pattern across these sources.\"", "note": "Drives 'aspirational_rather_than_demonstrated' with wing_expectation and thin readiness." },
+      "options": { "not_really": 0.1, "occasionally_wondered": 0.35, "left_behind_on_glides": 0.75, "specific_flights": 1.0, "regularly_limiting": 1.0 }
+    },
+    "external_feedback": {
+      "category": "skills",
+      "weight": 5,
+      "source": { "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class", "cites": "Direct observation outranks self-report.", "note": "A direct 'wait' is a gate." },
+      "options": { "advised_to_wait": 0.0, "nobody_seen_recently": 0.35, "friends_think_so": 0.65, "instructor_suggested": 1.0 }
+    },
+
+    "upgrade_motivation": {
+      "category": "psychological",
+      "weight": 12,
+      "source": { "ref": "knowledge/disagreements.md#9", "cites": "Conservative resolution carried forward: performance-chasing marked down one notch, never gated alone.", "note": "Scores reused from high-b-to-low-c with one change: 'wing_will_handle_conditions' stays at 0.0, the only zero, since this step's own research makes the backwards-reasoning point even more sharply (a less forgiving class is being hoped to cope better)." },
+      "options": { "wing_maxed_out": 1.0, "instructor_suggested": 1.0, "want_more_performance": 0.7, "replacing_anyway": 0.4, "keep_up_with_group": 0.15, "wing_will_handle_conditions": 0.0 }
+    },
+    "wing_expectation": {
+      "category": "psychological",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling",
+        "cites": "Malin Lobb: 2-liners collapse 'as one block'. Lindenstruth: 2-liners stay calmer for longer but fail abruptly, with less early warning than a 3-liner.",
+        "note": "The only full-marks answer names both framings (calmer most of the time, but bigger and faster with less warning when it does let go) — both appear, neither is picked over the other."
+      },
+      "options": { "calmer_but_less_warning": 1.0, "more_precision_and_cravat_risk": 0.9, "modest_step": 0.6, "not_sure": 0.25, "less_work_in_rough_air": 0.05, "safer_in_turbulence": 0.0 }
+    },
+    "flying_style_intent": {
+      "category": "psychological",
+      "weight": 9,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#red-flags",
+        "cites": "Lindenstruth: \"a mismatched goal — a pilot who mainly wants relaxed, low-stress ('Genuss') flying gains little from a two-liner's added complexity regardless of their hours, since the performance only pays off when flown accelerated and actively.\"",
+        "note": "New question. Scored, not gated — a poor-fit signal rather than a safety one. Drives the 'two_liner_goal_mismatch' suggestion when paired with is_2_liner:yes."
+      },
+      "options": { "relaxed_low_stress": 0.4, "mostly_relaxed_some_pushing": 0.7, "active_and_accelerated": 1.0, "competitive": 1.0 }
+    },
+    "progress_goals": {
+      "category": "psychological",
+      "weight": 6,
+      "source": { "ref": "knowledge/disagreements.md#9", "cites": "Carried forward unchanged from high-b-to-low-c.", "note": "Distance goals scored generously at this step, consistent with the pattern below." },
+      "options": { "technique_and_enjoyment": 1.0, "specific_skills": 1.0, "distance_and_numbers": 0.7, "keeping_ahead_of_peers": 0.15, "not_thought_about": 0.4 }
+    },
+    "learning_curve_willingness": {
+      "category": "psychological",
+      "weight": 11,
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience",
+        "cites": "richiesadventures: the first ~50 hours on a two-liner go mostly on adapting. Lindenstruth's survey: skipping familiarisation flights in benign air before taking the wing into thermals or high terrain is a named warning sign.",
+        "note": "Weighted harder than at any step below, per the pilot-facing help text's own framing — two independent 2-liner-specific sources point the same way."
+      },
+      "options": { "ground_handle_first": 1.0, "easy_days_for_a_while": 0.85, "just_fly_it": 0.15, "straight_back_to_normal": 0.0 }
+    },
+    "ambitions": {
+      "category": "psychological",
+      "weight": 0,
+      "scored": false,
+      "source": { "ref": "knowledge/disagreements.md#9", "cites": "Deliberately zero-weighted; affects the result only through 'ambition_without_readiness'.", "note": "Carried forward unchanged." }
+    },
+    "response_when_rough": {
+      "category": "psychological",
+      "weight": 14,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#psychological--mindset-factors", "cites": "Malin Lobb: readiness, not the 2-liner label, determines how big the first flight feels for an already-high-level pilot.", "note": "Highest single weight. Nerves are not scored down; asks what the pilot does, not how they feel." },
+      "options": { "freeze_and_hang_on": 0.05, "tense_want_to_land": 0.2, "heart_up_keep_flying": 0.75, "calm_active_exit_plan": 1.0, "doesnt_bother_me": 0.5 }
+    },
+    "decline_to_fly": {
+      "category": "psychological",
+      "weight": 8,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#psychological--mindset-factors", "cites": "XC Mag's 'The Head Game': honest fear or hesitation before a flight is useful signal, directly relevant to a pilot pulled toward a 2-liner by performance envy but untested against real cravats or block collapses.", "note": "Carried forward; docs/design-context.md's safety guard applies." },
+      "options": { "yes_several_comfortable": 1.0, "yes_once_or_twice": 0.85, "no_launch_anyway": 0.15, "not_come_up": 0.45 }
+    },
+    "peer_pressure": {
+      "category": "psychological",
+      "weight": 9,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "Carried forward from high-b-to-low-c; no new material specific to this step.", "note": "Scored identically to the step below." },
+      "options": { "launch_anyway": 0.05, "feel_pushed_usually_wait": 0.55, "own_call_comfortable": 1.0, "not_come_up": 0.55 }
+    },
+    "effort_already_invested": {
+      "category": "psychological",
+      "weight": 8,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "Escalation of commitment (Bendicht Erb), carried forward from the step below.", "note": "General pattern, not 2-liner-specific; scored like the other decision-making questions." },
+      "options": { "fly_anyway_dont_waste": 0.1, "tempted_but_usually_wait": 0.7, "judge_on_merits": 1.0, "not_come_up": 0.55 }
+    },
+    "incidents_12m": {
+      "category": "psychological",
+      "weight": 11,
+      "source": { "ref": "BRIEF.md#inputs", "cites": "\"Honesty about recent incidents and near misses\" is a required psychological input.", "note": "Non-monotonic, carried forward. No standalone gate." },
+      "options": { "none": 0.85, "one_or_two_reflected": 1.0, "several_unsure": 0.2, "shook_me": 0.15, "injury_or_reserve": 0.0 }
+    }
+  },
+
+  "bonuses": [
+    {
+      "id": "manoeuvre_course_bonus",
+      "question": "manoeuvre_course",
+      "points": { "no": 0, "booked": 0.5, "one_course": 2, "more_than_one": 2 },
+      "max_total_bonus": 2,
+      "never_negative": true,
+      "applies_to": "total",
+      "source": {
+        "ref": "knowledge/disagreements.md#1",
+        "cites": "SIV stays optional context only, light weight at most, even at the steps where the pro-SIV sources are most emphatic.",
+        "note": "Byte-identical to every step below. This is the step with the strongest pro-SIV material (Lobb treats it as close to a precondition) AND the strongest practical reason to keep it small — Lindenstruth's folding-lines training-access gap and Winkler's point that EN-C-and-up wings resist realistic simulation. The 'siv_before_a_two_liner' suggestion carries the weight instead."
+      }
+    }
+  ],
+
+  "thresholds": {
+    "ready": {
+      "total_min": 79,
+      "category_floors": { "skills": 73, "psychological": 69 },
+      "on_floor_failure": "nearly_ready",
+      "source": {
+        "ref": "knowledge/steps/low-c-to-high-c.md#source-quality-note",
+        "cites": "See meta.design_decisions 'v1-ready-threshold-rises-one-point'.",
+        "note": "79 against 78 at high-b-to-low-c. Nearly ready band is 24 points wide (55-79)."
+      },
+      "critical_check_floor": {
+        "min_answer_score": 0.5,
+        "questions": [
+          "current_wing_time",
+          "collapse_practice",
+          "pitch_control",
+          "cravat_recovery",
+          "wing_limiting_evidence",
+          "active_piloting",
+          "thermal_turn_control",
+          "response_when_rough",
+          "flying_frequency",
+          "collapse_experience",
+          "reserve_familiarity"
+        ],
+        "on_failure": "nearly_ready",
+        "source": {
+          "ref": "knowledge/steps/low-c-to-high-c.md",
+          "cites": "current_wing_time (Lindenstruth's under-20-hours figure, universal treatment on the three-liner branch); pitch_control and cravat_recovery (both scored for everyone, per 'v1-two-liner-branch-is-gate-conditional-not-question-conditional' — these block Ready for a three-liner pilot too, just can't cap them); the rest carried forward from high-b-to-low-c.",
+          "note": "ORDER MATTERS — the engine breaks on the first failing question. current_wing_time is first because it is the best-evidenced figure at this step. pitch_control and cravat_recovery are placed early because they are this step's own new material. reserve_familiarity stays last as the weakest-sourced member."
+        }
+      },
+      "unevidenced_core_checks": {
+        "answers": ["thermal_turn_control:not_come_up"],
+        "on_match": "nearly_ready",
+        "source": {
+          "ref": "knowledge/disagreements.md#5",
+          "cites": "Carried forward unchanged from high-b-to-low-c.",
+          "note": "No exemption attaches — see meta.design_decisions 'v1-no-stated-plans-exemption-here-either'."
+        },
+        "exemptions": [],
+        "exemptions_deliberately_empty": {
+          "reason": "Same reasoning as high-b-to-low-c, with the same force: no source offers a soaring-only route onto a high-C or a two-liner.",
+          "source": { "ref": "knowledge/steps/low-c-to-high-c.md#psychological--mindset-factors", "cites": "richiesadventures explicitly warns against treating a 2-liner as a quick performance upgrade.", "note": "Pilot-facing explanation lives in rule_messages.by_rule and the 'local_plans_and_this_wings_purpose' suggestion." }
+        }
+      }
+    },
+    "nearly_ready": {
+      "total_min": 55,
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#source-quality-note", "cites": "Held at 55, identical to every step below, so this step's strictness sits on the Ready edge and in the gates.", "note": "Below 55 the result is Not yet." }
+    },
+    "not_yet": {
+      "total_max": 54.999,
+      "framing": "A legitimate, successful result — the tool working, not the pilot failing.",
+      "category_floors": { "psychological": 35, "skills": 49 },
+      "floor_rule": "If either category falls below its floor, the result is Not yet regardless of the total.",
+      "source": {
+        "ref": "BRIEF.md#scoring-design",
+        "cites": "\"Psychological answers carry real weight, not a side note.\"",
+        "note": "Psychological floor held at 35, identical to every step below. Skills floor rises one point from high-b-to-low-c's 48."
+      }
+    }
+  },
+
+  "gates": [
+    {
+      "id": "still_in_training",
+      "cap": "not_yet",
+      "when": { "question": "training_status", "answer_in": ["in_training"] },
+      "message": "While you're still flying under supervision, this is your instructor's call rather than a questionnaire's — and that's especially true at this step, where the gap between a conventional low-C and a two-liner is bigger than the letter on either wing suggests.",
+      "source": { "ref": "knowledge/classification-overview.md", "cites": "Carried forward from every step below.", "note": "Almost certainly inert at this rung." }
+    },
+    {
+      "id": "thermic_hours_far_below_every_reading",
+      "cap": "not_yet",
+      "when": { "question": "thermic_airtime", "answer_in": ["under_10", "10_25"] },
+      "message": "Under about 25 hours of thermal flying is a long way below the figures given for the step below this one — and nothing at this step suggests the bar drops. Thermal hours on the wing you already trust is the most useful thing to add here, whichever track you're on.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Carried forward from high-b-to-low-c's figures — this step adds no new thermal-hours material of its own.", "note": "Universal gate, applies to both tracks." }
+    },
+    {
+      "id": "no_recent_flying",
+      "cap": "not_yet",
+      "when": { "question": "flying_frequency", "answer_in": ["none_3m"] },
+      "message": "Get current again on the wing you know before changing anything. A few flights back in easy air and this answer changes on its own.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md", "cites": "Carried forward from every step below.", "note": "Universal gate." }
+    },
+    {
+      "id": "occasional_pilot_profile",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "flying_frequency", "answer_in": ["less_than_monthly", "about_monthly"] },
+          { "question": "airtime_last_12m", "answer_in": ["under_10", "10_25"] }
+        ]
+      },
+      "message": "This is about how much flying you're doing right now, not what you can do. Occasional flying and a thin year together put this out of reach for now — build the frequency back up and this answers itself.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md", "cites": "Carried forward from high-b-to-low-c.", "note": "Universal, combination gate — never fires for a current pilot in a seasonal lull." }
+    },
+    {
+      "id": "collapse_control_lost",
+      "cap": "not_yet",
+      "when": { "question": "collapse_experience", "answer_in": ["lost_control", "repeated_struggle"] },
+      "message": "This is worth sorting out before anything else, and with a coach rather than alone. The class you're looking at assumes precise input to recover — it gives you less margin in the same situation, not more. Get the recovery reliable on the wing you've got first.",
+      "source": { "ref": "BRIEF.md#scoring-design", "cites": "The brief's own gate example, almost word for word.", "note": "Universal gate, carried forward." }
+    },
+    {
+      "id": "collapse_response_entirely_untested",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only"] },
+          { "question": "collapse_experience", "answer_in": ["never", "froze_recovered_itself"] }
+        ]
+      },
+      "message": "This is the one thing worth sorting out before anything else. The certification wording for this class assumes precise, deliberate input to recover from a collapse — something to arrive with, not learn on the new wing. Neither self-practice nor a real caught collapse shows up in your answers, so there's no evidence yet from either direction. Height, a calm day, someone watching the first few — or a course, if you'd rather.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Carried forward byte-identically from high-b-to-low-c.", "note": "Universal, not two-liner-specific — see meta.design_decisions. Self-practice clears it, not an SIV gate by the back door." }
+    },
+    {
+      "id": "unreliable_launches",
+      "cap": "not_yet",
+      "when": { "question": "launch_reliability", "answer_in": ["often_aborted"] },
+      "message": "Regularly needing several goes, getting pulled around or aborting is worth fixing before adding anything to the wing. Ground handling plus deliberate launch practice moves this faster than anything else.",
+      "source": { "ref": "knowledge/disagreements.md#11", "cites": "General accident data, carried forward.", "note": "Universal gate." }
+    },
+    {
+      "id": "instructor_said_wait",
+      "cap": "not_yet",
+      "when": { "question": "external_feedback", "answer_in": ["advised_to_wait"] },
+      "message": "Someone who has watched you fly has already told you to wait. That beats anything this tool can work out — and it matters even more here, since the specific wing (and whether it's a two-liner) tells you more than the letter on it does.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Direct observation outranks self-report.", "note": "Universal gate." }
+    },
+    {
+      "id": "two_liner_thin_previous_category",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "is_2_liner", "answer_in": ["yes"] },
+          { "question": "current_wing_time", "answer_in": ["under_20"] }
+        ]
+      },
+      "message": "This is the one figure in the whole research with a documented bad outcome behind it. A pilot who organised a survey of nearly 300 two-liner owners treats under about 20 hours on your previous wing as a warning sign before a two-liner specifically — and has a real case attached: someone who moved onto one with around 11 hours, took a severe collapse in rough terrain, and threw their reserve. More hours on the wing you're on now, flown properly rather than just logged, is what closes this.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Melchior Lindenstruth's survey and the documented 11-hour case.", "note": "Two-liner-conditional — see meta.design_decisions 'v1-under-20-hours-is-the-best-evidenced-single-gate-in-the-ladder'. tests/personas/low-c-to-high-c/03 is built for this gate." }
+    },
+    {
+      "id": "two_liner_cravat_untested",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "is_2_liner", "answer_in": ["yes"] },
+          { "question": "cravat_recovery", "answer_in": ["never", "theory_only"] }
+        ]
+      },
+      "message": "This is the one skill two experts who disagree about almost everything else agree matters before a two-liner. Fewer lines give collapsing fabric more room to tangle, so cravats are more likely here than on the wing you're on, and clearing one isn't the same instinct as clearing an ordinary collapse. Practised, deliberately, over water or with a coach, is what this needs.",
+      "source": { "ref": "knowledge/disagreements.md#1", "cites": "Lobb and Janaway both name cravat clearing as a real priority.", "note": "Two-liner-conditional." }
+    },
+    {
+      "id": "two_liner_pitch_control_weak",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "is_2_liner", "answer_in": ["yes"] },
+          { "question": "pitch_control", "answer_in": ["not_thought_about", "react_unreliably"] }
+        ]
+      },
+      "message": "This is the other skill both experts agree on, whatever they disagree about elsewhere. A two-liner hands you pitch movement sooner and wants a lighter touch than the wing you're on — catching a surge on the brakes, holding it on the rear risers while you're on bar, easing off before it dives. Worth building deliberately rather than meeting for the first time on the new wing.",
+      "source": { "ref": "knowledge/disagreements.md#1", "cites": "Pitch control named by both Lobb and Janaway.", "note": "Two-liner-conditional." }
+    },
+    {
+      "id": "two_liner_frontal_energy_untested",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "is_2_liner", "answer_in": ["yes"] },
+          { "question": "frontal_collapse_energy", "answer_in": ["never_thought", "theory_only"] }
+        ]
+      },
+      "message": "Managing the energy that comes out of a frontal collapse is on the short list of things one detailed analysis expects before a two-liner. It's the same skill as pitch control at its loudest — worth meeting deliberately, with height or over water, rather than for the first time on the new wing.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Malin Lobb names frontal-collapse energy management as a must-have SIV skill.", "note": "Two-liner-conditional." }
+    },
+    {
+      "id": "two_liner_ears_unsure",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "is_2_liner", "answer_in": ["yes"] },
+          { "question": "ears_deflation", "answer_in": ["unsure"] }
+        ]
+      },
+      "message": "In a survey of nearly 300 pilots flying two-line C wings, about a quarter had real difficulty getting ears in on the shorter line set — and the survey names it as one of its specific warning signs. Worth being confident with ears on the wing you're on before relying on them on a new one with a different pull.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey, the ~25% figure.", "note": "Two-liner-conditional." }
+    },
+    {
+      "id": "two_liner_passive_bar_use",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "is_2_liner", "answer_in": ["yes"] },
+          { "question": "speed_bar", "answer_in": ["stomp_it_on"] }
+        ]
+      },
+      "message": "The same survey names leaning on the bar passively, without working the brakes as the wing accelerates, as a specific warning sign — it gives a feeling of security rather than actual control, on exactly the wings where that control matters most. Easing the bar on while watching the pitch, and trimming the pressure as you go, is the habit worth building first.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Lindenstruth's red-flag list.", "note": "Two-liner-conditional." }
+    },
+    {
+      "id": "aspirational_rather_than_demonstrated",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "wing_limiting_evidence", "answer_in": ["not_really"] },
+          {
+            "any_of": [
+              { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group", "wing_will_handle_conditions", "replacing_anyway"] },
+              { "category_below": { "category": "skills", "value": 70 } },
+              { "question": "thermic_airtime", "answer_in": ["under_10", "10_25", "25_50"] }
+            ]
+          }
+        ]
+      },
+      "message": "By your own account, your current wing hasn't yet been the thing stopping you — and that's the clearest marker this step's research gives. A later wing is very unlikely to change that on its own. Usually it means there's performance still sitting in the wing you've got, waiting to be collected, which is the cheapest kind there is.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "Carried forward from high-b-to-low-c.", "note": "'want_more_performance' deliberately absent from the motive list, per knowledge/disagreements.md point 9." }
+    },
+    {
+      "id": "equipment_as_a_fix_with_thin_readiness",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          {
+            "any_of": [
+              { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group", "wing_will_handle_conditions"] },
+              { "question": "wing_expectation", "answer_in": ["safer_in_turbulence", "less_work_in_rough_air"] }
+            ]
+          },
+          {
+            "any_of": [
+              { "category_below": { "category": "skills", "value": 70 } },
+              { "question": "active_piloting", "answer_in": ["hands_still", "grip_tight", "try_to_react"] },
+              { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only"] }
+            ]
+          }
+        ]
+      },
+      "message": "A high-C or a two-liner won't make rough air easier — at this step the trade runs the other way more clearly than anywhere below. What does make rough air easier is thermal hours, active flying, and knowing exactly what you'd do if the wing folded. All of that is available on the wing you already have.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Carried forward from high-b-to-low-c.", "note": "Combination gate, never single-answer." }
+    },
+    {
+      "id": "ambition_without_readiness",
+      "cap": "not_yet",
+      "when": {
+        "all_of": [
+          { "question": "ambitions", "answer_includes_any": ["longer_xc", "competitions", "acro"] },
+          { "category_below": { "category": "skills", "value": 55 } }
+        ]
+      },
+      "message": "The goals are fine — they're the reason people keep flying. The gap is the groundwork underneath them, and almost all of it is learnable on the wing you've got.",
+      "source": { "ref": "knowledge/disagreements.md#9", "cites": "Ambition is legitimate fuel; the concerning pattern is ambition paired with thin readiness.", "note": "Carried forward." }
+    }
+  ],
+
+  "gates_deliberately_not_included": [
+    { "candidate": "back_flying_not_practised", "reason": "knowledge/disagreements.md points 1 and 4 forbid gating or scoring on back-flying specifically — the disagreement between Lobb and Janaway is narrower than it looks and confined to this one skill." },
+    { "candidate": "flying_style_mismatch_as_a_hard_gate", "reason": "Lindenstruth's mismatched-goal point (relaxed flying vs a 2-liner's demands) is about fit and value, not safety — handled as a scored question plus the 'two_liner_goal_mismatch' suggestion, not a cap." },
+    { "candidate": "xc_distance_or_site_variety", "reason": "knowledge/steps/low-c-to-high-c.md's own gap-check: the pilot-rating ladders that supported these at high-b-to-low-c top out at Advanced Pilot/P4/Confirmé and don't extend to this step. Not asked at all, let alone gated." },
+    { "candidate": "siv_not_done", "reason": "BRIEF.md and knowledge/disagreements.md point 1 require SIV to stay optional, including at the step with the strongest pro-SIV material. Bonus-only, capped at 2." },
+    { "candidate": "folding_lines_not_arranged", "reason": "collapse_training_access is explicitly scored:false — it informs suggestions only, per Lindenstruth's training-access point, which is a practical caveat on SIV's value rather than a pilot-readiness criterion." }
+  ],
+
+  "gate_behaviour": {
+    "rule": "Any fired gate caps the recommendation at Not yet, regardless of score.",
+    "evaluation_order": "Gates are evaluated first and short-circuit: if any gate fires, the recommendation is Not yet and the threshold rules are not evaluated.",
+    "show_score_with_gate": true,
+    "max_gate_reasons_shown": 3,
+    "tone_rule": "Gate messages state what to work on and why, never that the pilot is unsuitable. No message may imply the letter-class boundary is settled, and none may claim a two-liner is simply a 'better' or 'worse' wing than a three-liner — only that it asks different things.",
+    "source": { "ref": "BRIEF.md#scoring-design", "cites": "Hard gates cap the result regardless of total score.", "note": "17 gates total (11 universal + 6 two-liner-conditional), the most of any step so far, but a given pilot can only ever trip the universal set plus whichever branch applies to them." }
+  },
+
+  "rule_messages": {
+    "purpose": "Pilot-safe copy for the threshold rules, same pattern as every reviewed step so far.",
+    "lookup": {
+      "algorithm": [
+        "1. message = rule_messages.by_rule[firedRule]",
+        "2. if not found: message = rule_messages.fallback_by_rule_id[firedRule.split(':')[0]]",
+        "3. if still not found: render nothing for that rule."
+      ],
+      "multiplicity": "critical_check_floor breaks on its first failing question (order matters, see thresholds.ready.critical_check_floor.source). Gates and rules are mutually exclusive."
+    },
+    "display": {
+      "max_rule_reasons_shown": 2,
+      "tone_rule": "Same as gate_behaviour.tone_rule."
+    },
+    "by_rule": {
+      "critical_check_floor:current_wing_time": {
+        "message": "One thing is holding this back: time on the wing you're on now. This is the single best-evidenced figure in the whole research for this step — a pilot who surveyed nearly 300 two-liner owners treats under about 20 hours on your previous category as a genuine warning sign, with a real case behind it. You're not quite there yet. More time on the wing you already trust, flown properly rather than just logged, is what moves this.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey.", "note": "Reached by the 20_50 band on the three-liner track; under_20 is a hard gate on the two-liner track." }
+      },
+      "critical_check_floor:collapse_practice": {
+        "message": "One thing is holding this back, and it's the one place this step genuinely asks more of you than the wing you're on does. The certification wording for this class assumes precise, deliberate input to recover from a collapse. Wingovers, a controlled spiral, a bigger asymmetric with someone watching — the suggestion below has the order to do it in.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Carried forward from high-b-to-low-c.", "note": "" }
+      },
+      "critical_check_floor:pitch_control": {
+        "message": "One thing is holding this back: damping a surge or a dive when the wing moves on you. Two voices who disagree about a lot of this agree that pitch control is one of the skills worth having before a two-liner specifically — and it matters on a demanding three-liner too. Catching it on the brakes, then holding it on the rear risers while you're on bar, is the progression worth practising.",
+        "source": { "ref": "knowledge/disagreements.md#1", "cites": "Lobb and Janaway both name pitch control.", "note": "" }
+      },
+      "critical_check_floor:cravat_recovery": {
+        "message": "One thing is holding this back: clearing a cravat. It's the other skill both of those voices agree on. Never having had one isn't the problem by itself — not having practised clearing one deliberately is. A session over water with a coach is the direct fix.",
+        "source": { "ref": "knowledge/disagreements.md#1", "cites": "Lobb and Janaway both name cravat clearing.", "note": "" }
+      },
+      "critical_check_floor:wing_limiting_evidence": {
+        "message": "One thing is holding this back: by your own account, your current wing hasn't clearly been the thing stopping you yet. That usually means there's performance still sitting in it, which is worth collecting first.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "Carried forward from high-b-to-low-c.", "note": "" }
+      },
+      "critical_check_floor:active_piloting": {
+        "message": "One thing is holding this back: what your hands do when the air gets bumpy. This class rewards precise, continuous input more than the wing you're on does. Light, friendly bumps are the place to build the habit, not the big days.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Carried forward.", "note": "" }
+      },
+      "critical_check_floor:thermal_turn_control": {
+        "message": "One thing is holding this back: thermalling that works but isn't yet fully under your control. The suggestion below has specific things to drill.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md", "cites": "Carried forward.", "note": "" }
+      },
+      "critical_check_floor:response_when_rough": {
+        "message": "One thing is holding this back, and it isn't nerves — that part is normal. It's what happens next: tightening up and waiting it out rather than carrying on flying the wing. That builds like any other habit.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md#psychological--mindset-factors", "cites": "Carried forward.", "note": "" }
+      },
+      "critical_check_floor:flying_frequency": {
+        "message": "One thing is holding this back: how often you're actually getting in the air right now. Two or three times a month, in whatever conditions you can get, changes this and several other answers with it.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md", "cites": "Carried forward.", "note": "" }
+      },
+      "critical_check_floor:collapse_experience": {
+        "message": "One thing is holding this back, and it isn't that you froze — that's the normal starting point, not a character flaw. It's that the reaction hasn't been tested yet. It's trainable, and the wing you're on is a better one to learn on than the one you're shopping for.",
+        "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Carried forward.", "note": "" }
+      },
+      "critical_check_floor:reserve_familiarity": {
+        "message": "One thing is holding this back, and it's the quickest to fix: not being certain you could find the reserve handle in a hurry. Two minutes in a hang check changes this permanently.",
+        "source": { "ref": "knowledge/steps/a-to-low-b.md#skills", "cites": "Carried forward.", "note": "" }
+      },
+      "unevidenced_core_checks:thermal_turn_control": {
+        "message": "One thing is unevidenced rather than weak. You've said thermalling mostly hasn't come up, so it scores as neutral, not against you. But there isn't a reading of the guidance for this step — on either track — that a soaring-only pilot clears, so this result doesn't move just because your plans stay local. Worth knowing plainly rather than finding out later.",
+        "source": { "ref": "knowledge/disagreements.md#5", "cites": "Carried forward.", "note": "" }
+      },
+      "ready_category_floor:skills": {
+        "message": "Your total is in the ready band, but the skills and experience half isn't carrying its own weight yet. The suggestions below are the specific parts of it.",
+        "source": { "ref": "knowledge/disagreements.md#5", "cites": "SAHPA's conservative-by-default pattern.", "note": "" }
+      },
+      "ready_category_floor:psychological": {
+        "message": "Your total is in the ready band, but the mindset and motivation half is sitting well below the skills half. At this step they count for nearly as much as each other.",
+        "source": { "ref": "BRIEF.md#scoring-design", "cites": "Psychological answers carry real weight.", "note": "" }
+      },
+      "not_yet_category_floor:skills": {
+        "message": "The skills and experience answers point the same way: more flying and more deliberate practice on the wing you've got, not a different wing. Every one of the things that moves this transfers to whatever you fly next.",
+        "source": { "ref": "BRIEF.md#scoring-design", "cites": "Hard gates/floors cap the result.", "note": "" }
+      },
+      "not_yet_category_floor:psychological": {
+        "message": "This one isn't about your hands. Why the change, what you expect it to give you, and how decisions get made on a day you're unsure about are where this result comes from — and none of that is a judgement on you as a pilot. It usually takes a conversation rather than another fifty hours in the air.",
+        "source": { "ref": "knowledge/disagreements.md#9", "cites": "The diagnostic combination both camps agree on.", "note": "The more serious of the two floors — tone constraint strictest here, per docs/design-context.md." }
+      },
+      "conservative_backstop": {
+        "message": "A few of the main questions were left blank, so there isn't quite enough here to put the result any higher than this. Nothing is counted against you for skipping them — filling them in is the whole fix.",
+        "source": { "ref": "knowledge/disagreements.md#5", "cites": "Default down when evidence is incomplete.", "note": "" }
+      }
+    },
+    "fallback_by_rule_id": {
+      "critical_check_floor": { "message": "One specific check for this step came out low, and a single weak answer holds the result here even when everything else is strong. The suggestions below name which one and what moves it.", "source": { "ref": "knowledge/steps/low-c-to-high-c.md", "cites": "", "note": "" } },
+      "unevidenced_core_checks": { "message": "One of the checks for this step hasn't been tested rather than failed. That isn't counted against you, but the result stays here until there's something to go on.", "source": { "ref": "knowledge/disagreements.md#5", "cites": "", "note": "" } },
+      "ready_category_floor": { "message": "Your total is in the ready band, but one half of it is sitting well below the other. They're scored separately on purpose.", "source": { "ref": "knowledge/disagreements.md#5", "cites": "", "note": "" } },
+      "not_yet_category_floor": { "message": "One of the two halves of this came out low enough to decide the result on its own. That's a normal, useful result — it means there's a specific half to work on.", "source": { "ref": "BRIEF.md#scoring-design", "cites": "", "note": "" } }
+    }
+  },
+
+  "always_output": {
+    "instructor_recommendation": "Whatever this says, run it past an instructor or coach who has seen you fly — and test-fly the specific wing before you buy it. That matters more here than almost anywhere else on the ladder: two wings with the same letter can ask very different things of you depending on whether they're a two-liner, and someone who knows both you and the specific wing is doing work no form can do.",
+    "disclaimer": "This is a self-assessment tool based on published guidance from national associations, manufacturers, retailers and instructors. It isn't an instructor, it can't see you fly, and it isn't a safety clearance. Wing choice is your responsibility and your instructor's advice always comes first.",
+    "methodology_note": "This step is really two assessments wearing one label. The letter-class boundary — a conventional low-C to a conventional high-C — is thin and genuinely bidirectional: almost nobody writes about it, and one manufacturer markets the same kind of wing both as a step up and a step down. Moving onto a two-liner is different. That's the best-corroborated material anywhere in this research, including a structured survey of nearly 300 two-liner pilots, and it points at specific, named things worth having in place first — not back-flying, where two respected voices disagree, but cravat clearing and pitch control, where they agree. So this assessment asks which of the two you're actually looking at, and reads the rest of your answers more strictly if the answer is a two-liner. Every weight and gate links back to the criterion it came from.",
+    "source": {
+      "ref": "BRIEF.md#outputs",
+      "cites": "A recommendation to discuss the upgrade with an instructor, plus a clear disclaimer.",
+      "note": "Methodology wording follows knowledge/disagreements.md point 4's framing directly."
+    }
+  }
+}
