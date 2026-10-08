@@ -1,0 +1,700 @@
+{
+  "step": "high-b-to-low-c",
+  "version": 1,
+  "meta": {
+    "trigger_operators": {
+      "question + answer_in": "Single-select match.",
+      "question + answer_includes_any": "Multi-select question contains at least one of the listed options.",
+      "category_below": "Category score strictly below a value. Evaluated after scoring.",
+      "recommendation_in": "Matches on the final recommendation, so these are evaluated after scoring and gating.",
+      "any_of / all_of": "Boolean combinators over the above.",
+      "intended_flying_context": "Matches a named profile defined in intended_flying_context.profiles in config/scoring/high-b-to-low-c.json ('local_only' or 'exposure_bound'), which are groupings of the 'ambitions' answer. Kept in the scoring config rather than duplicated here so the rule and the suggestion can never drift apart."
+    },
+    "selection": {
+      "min_shown": 3,
+      "max_shown": 5,
+      "order": "ascending priority number, then config order",
+      "dedupe_by": "topic",
+      "rule": "Gate-linked suggestions always take the first slots. Then fill from triggered suggestions by priority. If fewer than three are triggered, fill from the 'always' pool.",
+      "testing_note": "The persona files in tests/personas/high-b-to-low-c assert against the full set of suggestions a pilot's answers TRIGGER, not against the 3-5 actually displayed. Many pilots trigger a dozen or more; the display is the highest-priority subset. scripts/check-personas.mts separately asserts, for every persona, that the DISPLAYED count lands between min_shown and max_shown.",
+      "always_pool": {
+        "ids": ["instructor_conversation", "stay_current_whatever_you_decide", "compensate_after_any_upgrade", "judge_the_wing_not_the_label"],
+        "guarantee": "FOUR suggestions carry \"always\": true, one more than min_shown, and each sits on a distinct topic (instructor, currency, transition, step_confidence). min_shown is satisfiable from the always pool alone even when topic dedupe removes one of them.",
+        "why_four_not_one": "config/suggestions/a-to-low-b.json shipped v1 with a single 'always' suggestion and a backfill rule that could not actually deliver three; a reviewer pass found a real profile — a strong, well-prepared pilot with no stated ambitions — that reached only two displayed suggestions, and v3 had to add two more. low-b-to-mid-b and mid-b-to-high-b were built with four from the start. This step matches that and keeps the same spare.",
+        "sizing_check": "Two of the four always items share a topic with a triggered suggestion, so both can be deduped away: 'stay_current_whatever_you_decide' loses to 'improve_currency' or 'recurrency_plan', and 'compensate_after_any_upgrade' loses to 'transition_plan'. In both cases the displacing suggestion occupies the slot, so the displayed COUNT never drops — topic dedupe replaces, it does not subtract. Worst case for the floor is a pilot who triggers nothing gap-specific at all: they get the four always items (distinct topics, nothing deduped) plus 'test_fly_first' on any ready or nearly_ready result, which is five, equal to max_shown. A gated Not yet pilot who somehow triggered nothing else still gets four. Both clear the floor of three.",
+        "source": {
+          "ref": "BRIEF.md#outputs",
+          "cites": "\"3-5 concrete suggestions for what to work on.\" A floor of three is only meaningful if it is reachable from every answer set, including the ones that trigger nothing."
+        }
+      },
+      "source": {
+        "ref": "BRIEF.md#outputs",
+        "cites": "\"3-5 concrete suggestions for what to work on.\""
+      }
+    },
+    "source_fields_are_internal": "Every 'source' block in this file (and in the questions and scoring configs) is provenance for the owner and reviewer only. Do not render 'ref', 'cites' or 'note' text in the UI. Some of them reference docs/design-context.md, which must never be named, quoted or paraphrased anywhere a pilot can see.",
+    "tone_rules": [
+      "Every suggestion is phrased as something to do next, never as a defect to fix.",
+      "No suggestion ever encourages a hesitant pilot toward upgrading. Where hesitation looks well-founded, the suggestion is about closing the skill gap or talking to a coach — not reassurance. Required by docs/design-context.md's safety guard.",
+      "Plain language only. No internal framework terminology, no spiritual or 'energy' framing of fear or flow.",
+      "Step-specific rule 1 — the hours figures: the 75-to-100-plus thermal-hours range MAY be named, because pilots benefit from knowing it, but always as a RANGE and always attributed ('the published figures run from', 'the guidance lands somewhere between'), never as a single number and never as this tool's own bar. Say out loud that one retailer's own two articles disagree, per knowledge/disagreements.md points 2 and 6.",
+      "Step-specific rule 2 — the boundary itself: nothing may imply the high-B/low-C distinction is settled. knowledge/disagreements.md point 3 names it the fuzziest boundary on the ladder and knowledge/steps/high-b-to-low-c.md calls it the most contested on the whole ladder. Where it comes up, say the industry argues about it.",
+      "Step-specific rule 3 — the 'roughly half of EN-C pilots shouldn't be on them' line in Passion Paragliding is the author's own estimate, not a study. It may be reported as 'a large share' or 'a lot of pilots' and must never appear as a statistic or a percentage.",
+      "Step-specific rule 4 — SIV: the 'siv_before_you_upgrade' suggestion is the strongest SIV nudge anywhere in this ladder and must still open by saying it is optional, because BRIEF.md and knowledge/disagreements.md point 1 require SIV to stay optional context. It must never imply a pilot who hasn't done one is disqualified.",
+      "Step-specific rule 5 — cross-country distance: 'xc_experience_build' must carry its own counter-voice (Joy Paragliding's argument that kilometres say little about wing choice), per knowledge/disagreements.md point 14. No suggestion may present a kilometre figure as a bar for a wing class."
+    ]
+  },
+
+  "suggestions": [
+    {
+      "id": "instructor_conversation",
+      "topic": "instructor",
+      "always": true,
+      "priority": 1,
+      "title": "Get a second opinion from someone who has seen you fly",
+      "body": "Take this result to an instructor, coach or experienced club pilot and ask them straight: would you put me on this wing now, or what would you want to see first? It's worth more at this step than at any below it, because this is the boundary the industry argues about most — the labels overlap, one manufacturer calls its own entry-level C a small step from its best-known high-B, and an instructor writing on safety points out that the certification letter doesn't tell you how often a particular wing actually folds. Someone who knows both your flying and the specific wing is doing work no questionnaire can do.",
+      "source": {
+        "ref": "BRIEF.md#outputs",
+        "cites": "\"A recommendation to discuss the upgrade with an instructor.\" Reinforced by knowledge/steps/high-b-to-low-c.md#collapse-handling: Greg Hamerton via FAI/CIVL (expert) is explicit that the EN/AFNOR letter on its own is only a guideline and doesn't tell a pilot how often a given wing actually collapses in practice — recorded as a second independent expert voice agreeing the letter shouldn't be over-trusted at this boundary. Nova (manufacturer) frames its entry C as \"a small step\" from its benchmark high-B. knowledge/classification-overview.md: USHPA's syllabus defers wing class to the manufacturer's recommendation."
+      }
+    },
+    {
+      "id": "stay_current_whatever_you_decide",
+      "topic": "currency",
+      "always": true,
+      "priority": 10,
+      "title": "Protect the regular flying, whichever wing you're on",
+      "body": "Both figures anyone attaches to a first C are annual rather than lifetime — a common rule of thumb among pilots is 50-plus hours a year, and one industry write-up says 70 — which makes how much you're flying now at least as important as your total. Worth treating regular flying as something to defend rather than something that holds by itself: diaries fill up, the weather goes bad for a month, and currency fades faster than most pilots expect. After a long gap, or after any change of wing, start the next session with the wing on the ground before you launch.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience",
+        "cites": "paraglidingforum.com (community, used only to show rough practitioner consensus): roughly 50+ flying hours per year before considering EN-C, with currency treated as the more important framing than the cumulative total. Passion Paragliding (industry): 70 hours/year. Flybubble's \"Reducing Risk\" (industry) attaches \"flown regularly\" to its 75-hour figure. Greg Hamerton via FAI/CIVL safety pages (expert) supports the 'after any change of wing' half. Urs Aschmann via Podz-Glidz (expert, ground-handling specialist) supports starting back on the ground.",
+        "note": "'Always' by design: as true for a pilot flying weekly (keep it) as for one flying monthly (build it). Shares the 'currency' topic with 'improve_currency' and 'recurrency_plan', so a pilot with a specific currency gap sees the specific version instead of this one, never both. Deliberately does not comment on whether the upgrade should happen."
+      }
+    },
+    {
+      "id": "compensate_after_any_upgrade",
+      "topic": "transition",
+      "always": true,
+      "priority": 11,
+      "title": "Whenever you do change wing, tighten everything else for a while",
+      "body": "A practical habit that applies whatever this result says. Any new or upgraded wing raises your risk for a period purely through unfamiliarity, so the advice from instructors writing about safety is to deliberately compensate elsewhere while that settles: pick more conservative sites, fly less aggressively than usual, and read up on how that specific model behaves before you fly it rather than after. Ground handle it first, and give the first few flights to easy days you'd normally think were too tame. It's a few weeks of deliberate under-flying in exchange for the part of the transition that usually catches people out.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling",
+        "cites": "Greg Hamerton via FAI/CIVL's safety pages (expert): when a pilot takes on new or upgraded gear, risk rises simply from unfamiliarity, so he recommends deliberately compensating for a period — more conservative sites, flying less aggressively, front-loaded study of the new wing's specific handling. The same source's point that the certification letter doesn't predict how often a specific wing folds is the reason the advice says 'that specific model'.",
+        "note": "'Always' by design: it is advice about the transition itself rather than about whether to make it, so it is equally true for Ready, Nearly ready and Not yet. Shares the 'transition' topic with 'transition_plan', which is the sharper version for a pilot who said they'd rather just get on and fly it, and which displaces this one."
+      }
+    },
+    {
+      "id": "judge_the_wing_not_the_label",
+      "topic": "step_confidence",
+      "always": true,
+      "priority": 12,
+      "title": "This is the blurriest line on the ladder — judge the specific wing",
+      "body": "Worth knowing plainly: of all the steps on the ladder, this is the one the industry argues about most, and some people don't think it's a real step at all. Only A, B, C and D are official classes; \"high B\" and \"low C\" are shop and forum labels. One manufacturer describes its own entry-level C as a small step up from its best-known high-B. Pilots argue, at length and in good faith, about whether a steady low-C or a lively high-B actually feels calmer in bad air. And one instructor writing on safety makes the underlying point: the letter tells you how a wing behaved in a standard set of test manoeuvres, not how often it folds in the air you fly. So read reviews of the actual model, talk to people who fly it, and test-fly it — twenty minutes in the air will tell you more than the label does. One exception worth flagging: if the C you're looking at is a two-liner, that's a genuinely different question with its own extra demands, and it deserves its own assessment rather than this one.",
+      "source": {
+        "ref": "knowledge/disagreements.md#3",
+        "cites": "A paraglidingforum thread titled \"Low and high intra class classification: Is it BS?\" captures the community scepticism directly; a separate \"High End Bs vs. Low EN Cs\" thread shows pilots disagreeing about which is actually calmer in bad air. Niviuk (manufacturer) avoids the sub-class labels entirely. Nova (manufacturer) frames its entry C as \"a small step\" from its benchmark high-B. Greg Hamerton via FAI/CIVL (expert): the EN/AFNOR letter is only a guideline and doesn't tell a pilot how often a given wing actually collapses. knowledge/classification-overview.md confirms EN/LTF only recognise A-D.",
+        "note": "'Always' by design, and it carries more weight at this step than at any below — knowledge/steps/high-b-to-low-c.md opens by calling this \"arguably the most contested boundary on the entire ladder\". The two-liner sentence implements knowledge/disagreements.md point 4: EN-C-certified two-liners exist, and they belong to the step above this one, which asks the cravat-recovery and pitch-control questions. Priority 12 so it backfills rather than crowding out earned advice; the same honesty reaches every pilot unconditionally through always_output.methodology_note."
+      }
+    },
+
+    {
+      "id": "test_fly_first",
+      "topic": "wing_choice",
+      "priority": 9,
+      "trigger": { "recommendation_in": ["ready", "nearly_ready"] },
+      "title": "Test-fly the actual wing before you buy",
+      "body": "Fly the specific model, in calm air, from a site you know, before any money changes hands. Pay attention to brake pressure, how much pitch it hands you and how quickly, how it sits on half bar, and how it launches — not to the glide figure. Two reasons this matters more here than lower down the ladder. The spread within this band is genuinely wide, so two wings both sold as entry-level C can feel very different. And a C is an expensive thing to be wrong about: they hold their resale value less well than B wings, so an upgrade that doesn't suit you costs real money as well as margin.",
+      "source": {
+        "ref": "knowledge/disagreements.md#3",
+        "cites": "Sub-class labels are applied inconsistently by manufacturers and don't reliably predict how demanding a specific wing is. Greg Hamerton via FAI/CIVL (expert) adds that the certification class is a guideline that doesn't tell you how often a given wing actually collapses, and that new gear raises risk until familiarity catches up. knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors records the resale point: EN-C wings hold resale value worse than B wings, and buying one too early \"can be a very expensive mistake\".",
+        "note": "The 'half bar' clause is specific to this step: the one class-by-class speed-bar source says routine half bar is the EN-C norm, so how a wing behaves there is a real differentiator between models in this band."
+      }
+    },
+    {
+      "id": "build_thermic_hours",
+      "topic": "thermic_hours",
+      "priority": 1,
+      "trigger": { "question": "thermic_airtime", "answer_in": ["under_10", "10_25", "25_50", "50_100"] },
+      "title": "Thermal hours are the thing that moves this",
+      "body": "This is the number the guidance for this step actually measures, and it's worth knowing the honest shape of it: the published figures run from about 75 hours of thermal flying to over 100, and one retailer's own two articles say 75 in one and 100 in the other. So it's a range, not a line — but every source counting is counting thermal time specifically, not total airtime. The good news is that this is ordinary, enjoyable flying rather than a training programme: get out on the moderate days rather than only the big ones, go with pilots who'll talk the climbs through with you afterwards, and let the hours accumulate on the wing you already trust. Almost every other answer on this page improves at the same time.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience",
+        "cites": "Flybubble's \"Which Class?\" (industry): roughly 100 cumulative hours of thermic flying for its \"Sports (EN C)\" tier. Flybubble's \"Reducing Risk\" (industry, same retailer, different article): 75+ hours of thermic flying, flown regularly. 406 Paragliding (industry): 100+ hours of thermic flying. The step file's consensus read: figures cluster loosely in the 75-100+ range, and \"no source gives a hard, well-corroborated single number — treat any figure here as a rough band, not a cutoff.\"",
+        "note": "Fires on the 50-100 band too, because that band straddles both published readings and a pilot inside it may be short of either. The body names the Flybubble inconsistency out loud, per knowledge/disagreements.md points 2 and 6. Priority 1 so it always reaches the displayed set for any pilot short of the range."
+      }
+    },
+    {
+      "id": "build_airtime",
+      "topic": "airtime",
+      "priority": 6,
+      "trigger": { "question": "total_airtime", "answer_in": ["under_50", "50_100"] },
+      "title": "More hours generally, alongside the thermal ones",
+      "body": "The industry sources that write about this step all measure thermal hours rather than total hours — that's the previous suggestion. The reason total hours still gets asked is that two national rating schemes do use them at roughly this level: one asks for around 100 hours logged since its intermediate rating, the other for 75 with at least 25 in thermal lift. Those are pilot ratings rather than wing classes, so treat them as a direction of travel. The practical version: general airtime is what makes launches, approaches and site-reading automatic enough that you've got attention spare for the air, which is exactly what a wing that talks to you more needs from you.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#cross-country-distance-and-site-variety-added-oct-2026-owner-prompted-gap-check",
+        "cites": "BHPA's Advanced Pilot rating (official, extraction caveat): roughly 100 hours of airtime logged since the Pilot rating. USHPA P4 (official via AirAddict): 250 flights and 75 hours airtime, 25+ of it in thermal lift. Seb Ospina via XC Mag (industry/expert) for the attention-spare point: the EN-C step hands a pilot more information about the air, which only helps a pilot who can already process it.",
+        "note": "The body says out loud that both figures come from pilot-rating schemes, per knowledge/disagreements.md point 5. Lower priority than 'build_thermic_hours' deliberately — it must never crowd out the better-matched suggestion."
+      }
+    },
+    {
+      "id": "improve_currency",
+      "topic": "currency",
+      "priority": 2,
+      "trigger": { "question": "flying_frequency", "answer_in": ["none_3m", "less_than_monthly", "about_monthly"] },
+      "title": "Get the flying more regular before you change wings",
+      "body": "This is the step where the numbers stop being about your lifetime total. Both figures anyone gives for a first C are annual — around 50 hours a year as a common rule of thumb among pilots, 70 in one industry write-up — and neither is a strong source, so treat them as a direction rather than a bar. But the direction is clear, and it's the one answer on this page that drags the most others along with it. If two or three flights a month isn't realistic for you at the moment, that's a solid reason to stay on the more forgiving wing rather than add performance to an occasional habit — and it says nothing at all about how well you fly.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience",
+        "cites": "paraglidingforum.com (community, used only to show rough practitioner consensus, not as a citable criterion): roughly 50+ flying hours per year before considering EN-C. Passion Paragliding (industry): 70 hours/year. Flybubble's \"Reducing Risk\" (industry): 75+ thermic hours, \"flown regularly\".",
+        "note": "knowledge/disagreements.md point 2 instructs that currency be weighted independently of the lifetime total; point 10 flags the 70-hour figure as uncorroborated, which is why the body calls both sources weak. Shares the 'currency' topic with the always-on 'stay_current_whatever_you_decide', which it displaces for any pilot with an actual currency gap."
+      }
+    },
+    {
+      "id": "recurrency_plan",
+      "topic": "currency",
+      "priority": 1,
+      "trigger": { "question": "flying_frequency", "answer_in": ["none_3m"] },
+      "title": "Get current again first",
+      "body": "Start with the wing on the ground, then a few easy flights at a site you know, before anything else on this list. Plenty of clubs and schools will do a short refresher or a supervised flight after a break — worth asking rather than just turning up. Changing wing during a comeback stacks two unfamiliar things on top of each other at the worst moment, and at this step the new wing would be the one giving you less margin rather than more.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience",
+        "cites": "Flybubble's \"Reducing Risk\" (industry) attaches \"flown regularly\" to its hours figure; both annual figures at this step treat currency as the primary measure. Greg Hamerton via FAI/CIVL (expert): risk rises from unfamiliarity after any gear change, so compensate deliberately.",
+        "note": "Urs Aschmann via Podz-Glidz (expert) supports the ground-first ordering: his staged progression starts on flat ground and advances only once the easier stage feels solid."
+      }
+    },
+    {
+      "id": "time_on_current_wing",
+      "topic": "current_wing",
+      "priority": 4,
+      "trigger": { "question": "current_wing_time", "answer_in": ["under_20", "20_50"] },
+      "title": "Use up what your current wing has first",
+      "body": "A short test before spending money: can you name a flight where your current wing was the reason something didn't work — a crossing you couldn't make, a climb you couldn't stay with, a glide home that came up short? If the honest answer is no, the performance is still sitting there to be collected, and it's free. No source gives a figure for how long to hold a high-B before a C, so this isn't a time you have to serve — but the most pointed piece written about this exact transition argues that moving up without that evidence is the characteristic mistake pilots make here.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors",
+        "cites": "Passion Paragliding (industry) argues that a large share of pilots already on EN-C wings upgraded chasing perceived performance rather than a demonstrated need. Seb Ospina via XC Mag (industry/expert), via knowledge/steps/mid-b-to-high-b.md, frames real readiness as having already been limited by the current wing in practice.",
+        "note": "No figure appears because no source gives one for hours-on-a-high-B. knowledge/disagreements.md point 10 records a community rule of thumb of 150-200 hours per wing-class step, treated as indicative colour only and deliberately not quoted at a pilot. The author's 'roughly half' estimate is reported as 'a large share', per meta.tone_rules."
+      }
+    },
+    {
+      "id": "wing_hasnt_limited_you_yet",
+      "topic": "readiness_evidence",
+      "priority": 1,
+      "trigger": { "question": "wing_limiting_evidence", "answer_in": ["not_really", "occasionally_wondered"] },
+      "title": "Find out whether the wing is actually the limit",
+      "body": "You've said your current wing hasn't clearly been the thing stopping you, and that's the point the guidance for this step is least shy about. So here's a concrete way to test it over the next few flights: on any day you don't get where you wanted, write down afterwards what actually stopped you. Was it glide — or was it a climb you lost, a decision you made late, a line you picked, or a day you read wrong? Keep that list for a season. If glide genuinely dominates it, you've got your answer and it's a good one. If it doesn't, you've found something cheaper and faster to fix than a new wing. Two cross-country-focused sources argue the glide difference between neighbouring classes is usually too small to be the thing holding anyone back, and one of them goes further: the hundreds of decisions you make during a cross-country flight each affect the outcome more than the wing does.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors",
+        "cites": "Passion Paragliding (industry): a large share of pilots on EN-C wings upgraded chasing perceived performance rather than demonstrated need, and for most B/C pilots the performance difference is \"usually very small\". Joy Paragliding (industry), via knowledge/disagreements.md point 14: no universal answer tied to hours or kilometres, and in-flight decision-making affects an XC flight's outcome far more than the wing does. Flybubble's XC Secrets (industry), via knowledge/sources.md: \"there are hundreds of choices during a cross country flight, and each one will have more impact on your performance than a wing upgrade.\" Seb Ospina via XC Mag (industry/expert) on earned rather than aspirational readiness.",
+        "note": "Deliberately framed as a test to run rather than a verdict, per knowledge/disagreements.md point 9 — ambition and wanting performance must not be treated as faults. Priority 1 because this is the step's signature criterion."
+      }
+    },
+    {
+      "id": "performance_chasing_reframe",
+      "topic": "motivation_performance",
+      "priority": 3,
+      "trigger": {
+        "all_of": [
+          { "question": "upgrade_motivation", "answer_in": ["want_more_performance"] },
+          { "question": "wing_limiting_evidence", "answer_in": ["not_really", "occasionally_wondered"] }
+        ]
+      },
+      "title": "Wanting more performance is fine — worth checking it's there to be had",
+      "body": "Wanting more glide and speed is a completely normal reason to upgrade, and one well-known instructor answers his own \"why upgrade?\" question with exactly that before moving straight on to whether you're ready. So this isn't a reason to feel caught out. It's one specific thing worth checking first, and it's particular to this step: the two sources that write most directly about moving to a first C both argue the performance difference between neighbouring classes is usually smaller than pilots expect — one says it's often too small to notice in practice, and another reckons a lot of pilots already flying C wings moved up for a gain they're not actually collecting. Combine that with your own answer that the current wing hasn't clearly held you back, and the useful next step is to find out where your flights are actually being lost before you pay for glide. If it turns out to be glide, buy the wing with confidence.",
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "Hamerton via Cross Country Magazine (expert) opens his own upgrade guidance with 'why do you want to upgrade?', answers it plainly ('to get more performance'), and pivots to readiness without treating the motive as suspect; Guschlbauer via XC Mag's 'The Head Game' treats the wish to achieve goals as the necessary force behind progression. Against that, knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors: Passion Paragliding (industry) argues performance-chasing is a particularly weak reason at this specific step because the within-class difference is \"usually very small\", and Joy Paragliding (industry) argues adjacent-category glide differences are often too small to notice.",
+        "note": "Holds both sides of point 9 deliberately: the first two sentences refuse to treat the motive as a fault, the middle gives the step-specific reason to check, and the last sentence ends on permission rather than on doubt. Requires BOTH the motive AND the absence of limiting evidence, so a pilot who wants performance and can name the flights that cost them never sees it. The author's 'roughly half' estimate is reported as 'a lot of pilots', per meta.tone_rules."
+      }
+    },
+    {
+      "id": "ground_handling_basics",
+      "topic": "ground_handling",
+      "priority": 4,
+      "trigger": { "question": "ground_handling_kiting", "answer_in": ["struggles", "hold_steady"] },
+      "title": "Build the kiting up — it pays back everywhere else",
+      "body": "Work towards holding the wing steady overhead, then walking around under it, turning it, putting it where you want, and killing it quickly when you need to. Start on flat ground in genuinely light wind and only move to a slope once the flat ground feels solid. No source we could find sets a ground-handling standard for this particular step, so this isn't a test you've failed. It's here because it's the cheapest way there is to learn what a wing feels like just before it folds — which is exactly what a more pitch-sensitive wing will ask you to notice sooner. The more advanced version is worth knowing exists: recognising the stall point, depowering the wing deliberately, keeping control of a launch in strong wind.",
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "Fly With Greg's ground-handling progression (expert), named in knowledge/steps/high-b-to-low-c.md as the most relevant available material for this step, with its advanced exercises — stall-point recognition, depowering, strong-wind launch control. Urs Aschmann via Podz-Glidz Episode 37 (expert, ground-handling specialist) gives the staged progression (flat ground first, then a gentle slope) and treats kiting as a never-finished skill. USHPA's 2001 Paragliding Accident Summary (official): accident rates essentially equivalent across P1-P4 ratings, with launch and ground-phase problems a persistent contributor.",
+        "note": "knowledge/steps/high-b-to-low-c.md records that no source states a ground-handling bar at this boundary, which is why the body says the gap out loud instead of implying a standard."
+      }
+    },
+    {
+      "id": "ground_handling_next_level",
+      "topic": "ground_handling",
+      "priority": 7,
+      "trigger": {
+        "all_of": [
+          { "question": "ground_handling_kiting", "answer_in": ["confident_strong_wind", "advanced_drills"] },
+          { "question": "ground_handling_practice", "answer_in": ["never", "rarely", "sometimes"] }
+        ]
+      },
+      "title": "Keep ground handling in the routine, with harder drills",
+      "body": "You've got the basics, so the useful version now is the harder stuff. Inflate one side only in stronger wind, to learn what pressure feels like through the risers. Circle round the wing on the rear risers so you deliberately roll a tip out of the wind before a gust can take it. Take the wing to its stall point on the rear risers, so you always have a way to stop it. Work weight shift and knee bend in on purpose — most pilots never learn that deliberately. Specialist instructors present all of these as skills with real headroom well past the beginner stage, and they teach exactly what a pitch-sensitive wing asks for in the air: noticing what it's about to do before it does it.",
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "Urs Aschmann via Podz-Glidz Episode 37 (expert, ground-handling specialist): single-side asymmetric inflation in strong wind for pressure sensitivity, a rear-riser circling technique that deliberately rolls one tip out of the wind window before an inbound gust can collapse it, controlled stalling via rear-riser pressure, and conscious weight-shift and knee-bend integration — explicitly presented as skills with headroom well past the beginner stage. Fly With Greg's progression (expert), cited in knowledge/steps/high-b-to-low-c.md, names stall-point recognition and depowering at its advanced end.",
+        "note": "Tied to this step through Simon Winkler's description of EN-C pitch sensitivity demanding the lightest touch — the final clause is that link, and it is the reason this suggestion is kept at this step rather than dropped as unsourced."
+      }
+    },
+    {
+      "id": "ground_handling_habit",
+      "topic": "ground_handling_habit",
+      "priority": 8,
+      "trigger": { "question": "ground_handling_practice", "answer_in": ["never", "rarely"] },
+      "title": "Use the unflyable days",
+      "body": "Ground handling isn't a beginner box that gets ticked and left behind — a ground-handling specialist instructor describes it as a skill that's never finished, with real drills still waiting well past this stage. A breezy, unflyable afternoon on a flat field is some of the cheapest useful practice in the sport, and it's the only practice available on a bad-weather weekend. It also happens to be the first thing worth doing with any new wing, so the habit pays off twice.",
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "Urs Aschmann via Podz-Glidz (expert, ground-handling specialist) frames ground handling as a genuinely lifelong, never-finished skill with concrete advanced exercises that only make sense for a pilot well past the beginner stage. USHPA's 2001 Paragliding Accident Summary (official): accident rates essentially equivalent across P1-P4 ratings.",
+        "note": "Separate topic from 'ground_handling' so a pilot who is both weak at kiting AND never practises can see both the skill advice and the habit advice if the slots allow — they are different actions."
+      }
+    },
+    {
+      "id": "launch_practice",
+      "topic": "launch",
+      "priority": 4,
+      "trigger": { "question": "launch_reliability", "answer_in": ["often_aborted", "about_half", "most_times_easy_conditions"] },
+      "title": "Widen the launches, not just the success rate",
+      "body": "Honest note first: nothing in the guidance for this particular step mentions launching, so this isn't a bar someone set for low-C pilots. The reason it's here anyway is the official accident data, which found around two-thirds of accidents happen on the ground or in the first seconds of flight, and — more tellingly — that the rate barely improves as pilots move up the rating ladder. What's worth widening is the range: more wind, some cross, a slope you haven't launched before. There's a second reason at this step specifically: the rating scheme this step borrows most from expects flights at five different sites, which in practice means launching off hills you've never seen before. Do it before a new wing rather than after, since a change of glider makes launching temporarily harder for everyone.",
+      "source": {
+        "ref": "knowledge/disagreements.md#11",
+        "cites": "USHPA's 2001 Paragliding Accident Summary (official): around 64% of accidents occurred on the ground or immediately after launch, with accident rates \"essentially equivalent\" across P1-P4 ratings. USHPA P4 (official via AirAddict): 5 flights at each of 5 different sites in Intermediate-level conditions. Greg Hamerton via FAI/CIVL (expert) notes risk rises from unfamiliarity after any gear change.",
+        "note": "The opening disclaimer is deliberate and is carried forward from mid-B to high-B: knowledge/steps/high-b-to-low-c.md says nothing about launches either, which is why launch_reliability keeps its gate on the worst band but is not a Ready-blocker."
+      }
+    },
+    {
+      "id": "thermal_skills_drill",
+      "topic": "thermalling",
+      "priority": 2,
+      "trigger": { "question": "thermal_turn_control", "answer_in": ["not_confident", "basic_wide_climbs"] },
+      "title": "Work on turning accurately in lift",
+      "body": "The specific thing worth drilling: linked turns at different bank angles, both directions, changing bank deliberately rather than settling for whatever the wing does on its own. Then use that to centre — feel which half of the circle is going up and move the circle toward it instead of hunting around. It matters more at this step than at any below, for a reason worth hearing: a coach who writes about exactly this transition says what you actually buy at this level is a wing that tells you more about the air, and that's only worth having if you can already act on it. Pilots who can't, he says, notice a better glide and a bit more speed and miss everything else. Flying with people who'll debrief the climbs with you afterwards is worth a season of solo guessing.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#skills",
+        "cites": "Seb Ospina via XC Mag (industry/expert): the EN-C step is where a wing starts transmitting genuinely useful extra information about the air, but only pilots who can already read and interpret that information benefit; pilots who can't will \"notice a better glide and some more speed\" and miss everything else. USHPA P4 (official via AirAddict) asks for at least three one-hour thermal-lift flights from at least two different sites. USHPA P3 via AirAddict (official), via knowledge/steps/low-b-to-mid-b.md, supplies the drill itself: linked 180/360 turns at varied bank angles.",
+        "note": "Shares the 'thermalling' topic with 'thermalling_untested', whose trigger answer is mutually exclusive with this one's, so they can never both fire."
+      }
+    },
+    {
+      "id": "thermalling_untested",
+      "topic": "thermalling",
+      "priority": 2,
+      "trigger": { "question": "thermal_turn_control", "answer_in": ["not_come_up"] },
+      "title": "This class is described around thermic cross-country flying",
+      "body": "If you've mostly soared and glided rather than thermalled, you don't yet know how good your turning in lift is — and at this step that's the central thing, not a side skill. Every source that puts a number on moving to a first C counts thermal hours specifically; this is the first rung where the guidance expects you to have actually flown genuinely rough thermic air rather than just put up with it; and the two national training systems this step borrows from add cross-country flying and a range of different sites on top. So unlike the rungs lower down the ladder, there isn't a reading of the guidance here that a soaring-only pilot clears. None of that is a problem with your flying — it's a mismatch between this particular class of wing and the flying you've described. If you do want to head that way, build it on the wing you already trust: gentle days, pilots who'll talk the climbs through afterwards, deliberate changes of bank angle rather than just going round.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#conditions-flown",
+        "cites": "\"Consistent theme: this step marks the first point where sources explicitly expect a pilot to have flown (not just tolerated) genuinely turbulent thermic conditions, not just smooth-day XC.\" All three industry hours figures measure thermic flying. USHPA P4 and BHPA's Advanced Pilot rating (official) add site variety and specific cross-country distances.",
+        "note": "Pairs with the 'unevidenced_core_checks' rule in config/scoring/high-b-to-low-c.json, which blocks a Ready result on this answer without scoring it as a failure, and — as at mid-B to high-B — with NO stated-plans exemption. The body says that out loud, because a pilot who ran a chain from A or low-B will have been offered the exemption earlier and deserves to know why it has gone. Tone rule: the mismatch is framed as being about the wing class, never about the pilot."
+      }
+    },
+    {
+      "id": "local_plans_and_this_wings_purpose",
+      "topic": "scope",
+      "priority": 4,
+      "trigger": {
+        "all_of": [
+          { "intended_flying_context": "local_only" },
+          { "question": "conditions_flown", "answer_in": ["smooth_gentle_only", "ridge_coastal"] }
+        ]
+      },
+      "title": "Worth knowing what a low-C would and wouldn't give you",
+      "body": "You've described local, ridge or coastal flying, and that's a complete way to enjoy this sport — nobody needs to be talked up the ladder. It is worth knowing what this particular class of wing is built around, though: more glide and speed for getting places, and a wing that tells you more about the air, bought by giving up some of its own forgiveness and expecting precise input from you if it folds. On the sites and days you've described, you'd be paying that price without collecting much of the benefit — and you'd be paying it in cash too, since C wings hold their resale value less well than B wings do. If local soaring is genuinely where you want to stay, the better questions are which wing in your current class suits you best, and whether a harness, a reserve or an instrument would change your flying more than a glider would.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#conditions-flown",
+        "cites": "The step file's consistent theme that this is the first step expecting genuinely turbulent thermic flying, plus the hours figures all measuring thermic time, plus Seb Ospina via XC Mag on the information-transmission trade. The resale point is from the same file's psychological section: EN-C wings hold resale value worse than B wings, and buying one too early \"can be a very expensive mistake\".",
+        "note": "Exists specifically so the ABSENCE of a stated-plans exemption at this step is visible and explained to the pilot it affects, in plain language and without stating the rule mechanically — see thresholds.ready.unevidenced_core_checks.exemptions_deliberately_empty in config/scoring/high-b-to-low-c.json. Tone rule from docs/design-context.md: a local-only pilot must not be made to feel behind, so the suggestion ends with alternatives rather than with a warning. Deliberately does NOT require the thermalling answer, so it also reaches a local-only pilot who does thermal a bit."
+      }
+    },
+    {
+      "id": "reading_the_day_drill",
+      "topic": "air_awareness",
+      "priority": 3,
+      "trigger": { "question": "reading_the_day", "answer_in": ["someone_else_judges", "sometimes_right"] },
+      "title": "Call the day out loud before you fly it",
+      "body": "Before each flight, say out loud or write down what you think the day will do: when it'll start working, where, how strong it'll get, when it'll go rough, and what your plan is when it does. Then check yourself against what actually happened, and against what the experienced pilots on the hill thought. It builds from attention and conversation as much as from airtime, which makes it one of the cheapest things on your list. It matters particularly at this step for two reasons: a coach writing about this exact transition argues that reading the air is what makes a more communicative wing worth having at all, and the rating scheme this step borrows from expects flights at five different sites in real conditions — which means calling days at places you don't know.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#skills",
+        "cites": "Seb Ospina via XC Mag (industry/expert): the EN-C step is where a wing starts transmitting genuinely useful extra information about the air, but only pilots who can already read and interpret it benefit — \"this reframes readiness as an air-reading skill, not just an hours count.\" USHPA P4 (official via AirAddict): 5 flights at each of 5 different sites in Intermediate-level conditions, 3 of them inland.",
+        "note": "Shares the 'air_awareness' topic with 'heated_ground_turbulence', which is the terrain-specific companion and lower priority, so the general drill wins the slot for a pilot who needs both. This is the suggestion paired with the one Ready-blocker this step tightens relative to mid-B to high-B, so it needs to carry the reason — see that question's disagreement_note in the scoring config."
+      }
+    },
+    {
+      "id": "heated_ground_turbulence",
+      "topic": "air_awareness",
+      "priority": 9,
+      "trigger": { "question": "conditions_flown", "answer_in": ["light_moderate_thermal", "regular_thermic_days", "strong_mountain_big_air"] },
+      "title": "Watch the ground you're gliding low over",
+      "body": "One specific, cheap thing to add to your mental map, from a DHV instructor's account of his own accident: he took a frontal collapse in air that felt benign, gliding low over a sun-heated industrial roof. His generalisation is worth borrowing — metal roofs, big asphalt surfaces and sheltered sun-traps can throw sudden, violent turbulence close to the ground on days that look perfectly smooth from altitude. Worth building into your low-level route choices and your final glides, which is exactly where a faster wing will have you lower and quicker than you're used to, and on half bar more of the time.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#collapse-handling",
+        "cites": "Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor and steering-technique spokesperson) shares a personal accident case — a frontal collapse in otherwise benign-feeling air while gliding low over a sun-heated industrial roof — and generalises a caution about heated and thermogenic ground surfaces producing sudden, violent turbulence near the ground even on days that don't look rough from altitude.",
+        "note": "Cross-referenced from the step below and flagged as such: knowledge/steps/high-b-to-low-c.md doesn't repeat this account, though it cites the same episode for pitch sensitivity and collapse-training feasibility. Single expert voice and a personal account rather than a study, so it is low priority and scored nowhere. Kept rather than dropped because it is one of the few genuinely concrete, actionable conditions-awareness points in the knowledge base, and the half-bar clause ties it to this step's own speed-bar material."
+      }
+    },
+    {
+      "id": "active_piloting_drill",
+      "topic": "active_piloting",
+      "priority": 2,
+      "trigger": { "question": "active_piloting", "answer_in": ["hands_still", "grip_tight", "try_to_react"] },
+      "title": "Make active flying automatic before the wing needs it",
+      "body": "This is the check that changes most between the wing you're on and the one you're looking at. An industry piece on active flying describes a range: school wings that stay stable through major collapses, intermediate wings that mostly sort themselves out, and wings nearer the competition end that need real input from the pilot — and the class you're considering sits in the demanding part of that range. The drill, in light friendly bumps: keep the brake pressure even — ease up when the wing surges back at you, take a little when it goes light. Two habits worth unlearning on a forgiving wing rather than a quicker one are hands that stop moving, and brakes held in tight all the time. One instructor is blunt that holding the brakes in one fixed position is a false sense of security rather than a safe default.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#skills",
+        "cites": "XC Mag's active-flying piece (industry): a spectrum from school wings (stable through major collapses) to intermediate wings (self-recovering) to competition-style wings needing active pilot input, with EN-C in the more demanding part — consistent with the EN-C certification language about precise pilot input. Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor): static \"hands lightly on brakes at all times\" flying explicitly discouraged as a false sense of security; hands up on calm glides, light contact in mild turbulence, mid-brake-travel for active correction in thermic lift."
+      }
+    },
+    {
+      "id": "lightest_touch_refinement",
+      "topic": "active_piloting_advanced",
+      "priority": 7,
+      "trigger": { "question": "active_piloting", "answer_in": ["work_brakes_actively"] },
+      "title": "The refinement at this level is lighter hands, not busier ones",
+      "body": "Working the brakes to keep the pressure even is good flying and it's most of the job. The thing that changes at this class is how much input it takes: an instructor who specialises in steering technique describes wings at this level as pitch-sensitive enough to want the lightest touch, where the same correction on a more damped wing would need a firmer hand. In practice that means hands properly up on a calm glide, so you're not damping the wing for nothing; a light contact position when it's mildly rough, where you can feel pressure changes before they become movements; and down into the brake range only to correct when it's genuinely working. He specifically warns against the default of holding the brakes in one position all the time. Worth building the variation now, because the quicker wing will punish a heavy hand faster than your current one does.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#skills",
+        "cites": "Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor and steering-technique spokesperson): EN-C wings have pitch sensitivity demanding \"the lightest touch\"; hand position should shift with flight phase — hands fully up on calm glides, a light contact position in mild turbulence, mid-brake-travel for active correction in thermic lift — and static light-brake flying is explicitly discouraged.",
+        "note": "Shown only to the pilot whose hands are already active, so it reads as a refinement rather than a correction. Single expert voice on the detail, which is why it is a suggestion and the corresponding scoring change (0.7 at mid-B to high-B down to 0.6 here on this answer) is recorded as a judgement in the scoring config rather than as a block."
+      }
+    },
+    {
+      "id": "rear_riser_caution",
+      "topic": "technique",
+      "priority": 8,
+      "trigger": { "question": "active_piloting", "answer_in": ["work_brakes_actively", "automatic_and_phase_aware"] },
+      "title": "If you're using the rear risers, watch the hand-over",
+      "body": "Steering on the rear risers instead of the brakes becomes genuinely useful at this level, especially on fast glides on bar, and it's often smoother. The part worth knowing: a DHV instructor specifically flags the switch back from rear risers to brakes in turbulence as a real risk point if it's done abruptly — a mistimed grab can pitch the wing down and cause the collapse you were trying to avoid. That matters more on a pitch-sensitive wing. Practise the hand-over in calm air until it's unhurried, and when the air picks up, get back on the brakes early rather than late.",
+      "source": {
+        "ref": "knowledge/steps/mid-b-to-high-b.md#skills",
+        "cites": "Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor): rear-riser (BC-line) steering becomes genuinely useful at this level for speed flying, but the transition back to brakes in turbulence is a danger point if rushed — an abrupt switch can pitch the wing down and trigger a collapse rather than prevent one. knowledge/steps/high-b-to-low-c.md cites the same episode for EN-C pitch sensitivity demanding the lightest touch, which is the link to this step.",
+        "note": "Suggestion only, never scored. Shown only to pilots whose hands are already active enough for the technique to be on the table. Low priority so it never crowds out basics."
+      }
+    },
+    {
+      "id": "speed_bar_half_bar_routine",
+      "topic": "speed_bar",
+      "priority": 5,
+      "trigger": { "question": "speed_bar", "answer_in": ["never_used", "tried_with_height", "sink_escape_only", "regular_on_glides"] },
+      "title": "Half bar as the normal cruising position, not an occasional extra",
+      "body": "This is the step with the clearest described change in how the bar gets used. One class-by-class guide puts it directly: by this class, expect to be gliding on roughly half bar as a matter of course, unless you're in lift or running downwind — a real step on from the occasional bar between climbs that's expected on a B. We couldn't confirm who wrote that guide, so treat it as a steer rather than a standard, but it's consistent with what two industry sources say about higher-performance wings rewarding bar at lower headwind and sink thresholds. How you put it on matters as much as how much you use: ease it on while watching the pitch and you reach full speed with meaningfully more height in hand than if you stamp it. Skilled pilots don't lock it fully engaged either — they trim the pressure continuously to keep the wing settled, and come off it the moment the air changes. Build it in smooth air with height to spare.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#skills",
+        "cites": "A class-by-class speedbar ladder mirrored on GitHub (provenance uncertain, see knowledge/sources.md): by EN-C a pilot should expect to glide on half bar routinely, unless in lift or tailwind. XC Mag's speed bar tips (industry): easing onto the bar while actively monitoring pitch reaches full acceleration with meaningfully more height in hand than stomping it on, and skilled pilots continuously trim bar pressure rather than locking it fully engaged. Flybubble's Speed To Fly Basics (industry): higher-performance categories reward bar use at lower headwind and sink thresholds.",
+        "note": "The body states the provenance problem out loud, which is also why speed_bar is weighted 8 but is NOT a Ready-blocker — see gates_deliberately_not_included in the scoring config. Fires on 'a bit of bar on most glides' as well, because that is below the routine-half-bar description."
+      }
+    },
+    {
+      "id": "speed_bar_overuse",
+      "topic": "speed_bar",
+      "priority": 4,
+      "trigger": { "question": "speed_bar", "answer_in": ["stomp_it_on"] },
+      "title": "Change how you put the bar on, not how much you use it",
+      "body": "Using a lot of bar is normal and expected at this level — one guide describes routine half bar as the cruising position for this class. Putting it on fast isn't: easing onto it while you watch the pitch gets you to the same speed with noticeably more height in hand, where stamping it on costs you the height and the margin at the same moment. Bar also reduces your collapse margin even though the wing feels more solid under it, which is why a lot of bar low down is the combination worth dropping first — it removes exactly the height you'd need to sort anything out. That trade gets worse, not better, on a wing whose class is the first one described as needing precise input to recover.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#skills",
+        "cites": "XC Mag's speed bar tips (industry): easing onto the bar while monitoring pitch reaches full acceleration with meaningfully more height in hand than stomping it on. The class-by-class speedbar ladder (provenance uncertain) on routine half bar by EN-C. Flybubble's Speed To Fly Basics (industry) and Daoust's tips (expert), via knowledge/steps/a-to-low-b.md: sustained bar reduces angle of attack and collapse margin even though the wing feels more solid, accelerator near the ground is for emergencies, and stomping the bar makes a collapse more likely. The EN-C certification language: precise pilot input required for recovery.",
+        "note": "Framed as a change of technique rather than a reduction in use, because at this step the sources support frequent bar use — it is the manner of engagement they are specific about."
+      }
+    },
+    {
+      "id": "site_variety_build",
+      "topic": "site_variety",
+      "priority": 3,
+      "trigger": { "question": "site_variety", "answer_in": ["home_site_only", "two_or_three"] },
+      "title": "Fly somewhere else — this is the step where that starts counting",
+      "body": "Two national training systems treat flying a range of sites as a milestone in its own right, not just something that happens with hours, and both of them put it at about this point in a pilot's development. The American one is the most concrete thing in all the research on this: five flights at each of five different sites in real working conditions, three of them inland, plus thermal flights launched from more than one place. The French one makes the same move more simply, by extending a pilot from \"your known site\" to \"any site\". Both are pilot-rating requirements rather than wing-class ones, so neither decides your result here. But the underlying skill is real and it's the one a faster wing leans on hardest: working out an unfamiliar hill, where the lift will be, where the air will be rough, and where you'll land. Visiting a club you've never flown with is a cheap way to start, and the people there will tell you more in an afternoon than a season of reading.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#cross-country-distance-and-site-variety-added-oct-2026-owner-prompted-gap-check",
+        "cites": "USHPA's P4 (Advanced) syllabus (official via AirAddict): 5 flights at each of 5 different sites in Intermediate-level conditions (3 inland), plus at least three 1-hour thermal-lift flights from at least 2 different sites, plus having flown at least 5 different canopies — \"the single clearest, most concrete official site-variety requirement found anywhere in this research\". FFVL's Brevet de Pilote (official), via Soaring Académie's description (industry): extends a pilot from \"known site only\" to \"any site\", framed as deliberately discovering new sites and varying flight conditions. High Adventure (industry, Australian school) treats experience beyond a single site as valuable in its own right.",
+        "note": "New emphasis at this step: at low-B to mid-B and mid-B to high-B the equivalent question is weighted 3 with a floor of 0.4 and exists mainly so it doesn't vanish and reappear. knowledge/disagreements.md point 14 locates the sourced case here. The body says plainly that these are pilot-rating requirements, per point 5, and the scoring config keeps site_variety out of the Ready-blocker list for the same reason."
+      }
+    },
+    {
+      "id": "xc_experience_build",
+      "topic": "xc",
+      "priority": 4,
+      "trigger": { "question": "xc_experience", "answer_in": ["none", "few_short", "several_short"] },
+      "title": "Cross-country flying — what the evidence does and doesn't say",
+      "body": "This is the most argued-about item on the whole questionnaire, so here's both sides. Two national rating schemes do ask for demonstrated cross-country flying at roughly this stage: the British one names specific flights — over 10km, 20km and 30km, a declared goal, and a 20km out-and-return — and the French one counts the number of distance flights instead. So real bodies do treat it as a milestone around here. Against that, a cross-country-focused industry source argues flatly that there's no universal answer tied to hours or kilometres, and that the glide difference between neighbouring classes is usually too small to matter next to the decisions you make in the air. Both can be true: the distance flights evidence general cross-country competence, not that a different wing would help. What's worth doing either way is the skill underneath — committing to a glide you've worked out rather than one you hope about, picking lines, knowing your landing options before you need them, and being comfortable landing somewhere you've never seen. Declaring a modest goal and flying it is the cheapest way to practise all four at once.",
+      "source": {
+        "ref": "knowledge/disagreements.md#14",
+        "cites": "BHPA's Advanced Pilot rating (official, extraction caveat): individual flights over 10km, 20km and 30km, a declared-goal flight over 10km, a 20km out-and-return. FFVL's Brevet de Pilote Confirmé (official, search-summary level only): a minimum of roughly 10 distance flights. Joy Paragliding (industry): \"no universal answer tied to hours or kilometers\", and the glide-ratio difference between adjacent categories is often too small to matter in practice, with in-flight decision-making affecting an XC flight's outcome far more than the wing does. Flybubble's XC Secrets (industry) agrees from a different angle: hundreds of choices during a cross-country flight each matter more than a wing upgrade.",
+        "note": "Required by meta.tone_rules step-specific rule 5: this suggestion must carry its own counter-voice. It does so in the second paragraph-sentence, and it resolves the tension explicitly ('both can be true') rather than picking a side the research hasn't picked. No kilometre figure is presented as a bar for a wing class."
+      }
+    },
+    {
+      "id": "collapse_practice_now",
+      "topic": "collapse",
+      "priority": 1,
+      "trigger": { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only", "some_self_practice"] },
+      "title": "Get the collapse reaction solid before the wing, not after",
+      "body": "This is the one place the guidance for this step genuinely asks more of you than the wing you're on does, and it's worth knowing why rather than just being told. The certification wording for this class is the first that assumes precise, deliberate input from the pilot to recover — the sources here treat that as something to arrive with, not something to learn on the new wing. A sensible order, and none of it needs to be dramatic. Get the response automatic in your head first: weight shift away from the collapsed side, outside brake to stop the turn, then let it fly before you tidy it up. Then pull and release tip folds yourself, with plenty of height, on a calm day. Then build up wingovers, and a spiral you can enter gently and exit tidily. Someone watching the first few is worth a lot. Do all of it on the wing you've got — the next suggestion explains why that order matters more than it sounds.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling",
+        "cites": "\"This is the first step where 'precise pilot input required for recovery' (the core EN-C certification language) starts being treated by sources as something a pilot needs to already be good at, rather than something to learn on the new wing.\" Flybubble's \"Reducing Risk\" (industry) recommends ongoing wingover, spiral and asymmetric practice for pilots at this stage. USHPA P4 (official via AirAddict) requires a demonstrated 50%-asymmetric-collapse recovery with directional control. USHPA P3 via AirAddict (official), via knowledge/steps/low-b-to-mid-b.md, supplies the recovery technique itself.",
+        "note": "Priority 1, and it fires on 'some self practice' too, because at this step self-practised tip folds alone score below the Ready-blocker line — see that question's disagreement_note in the scoring config. Pairs with the 'critical_check_floor:collapse_practice' rule message and with the 'collapse_response_entirely_untested' gate message; the final sentence points at 'siv_before_you_upgrade' rather than repeating it."
+      }
+    },
+    {
+      "id": "siv_before_you_upgrade",
+      "topic": "collapse_training",
+      "priority": 1,
+      "trigger": {
+        "any_of": [
+          { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only", "some_self_practice"] },
+          { "question": "collapse_experience", "answer_in": ["never", "froze_recovered_itself"] },
+          { "question": "manoeuvre_course", "answer_in": ["no", "booked"] }
+        ]
+      },
+      "title": "If you're ever going to do a manoeuvres course, this is the step to do it before",
+      "body": "Optional — and worth saying so clearly, because plenty of good pilots have never done one and several credible sources that take pilots to exactly this level don't ask for one at all. Your result here isn't affected by whether you've done a course. But this is the first step where the recommendation turns up from several directions at once, and one of the arguments is practical rather than just encouraging. An instructor who teaches collapse recovery points out that wings from about this class upward are built to resist collapsing so well that it becomes hard to induce a realistic one — which turns the training into an unconvincing simulation rather than genuine practice. Your current wing still folds properly. That makes it close to the best one you'll ever own for learning what to do about it, and it makes \"before the upgrade\" the useful side of the line rather than \"sometime soon\". Two other things point the same way: the British advanced pilot rating includes a safety-training course in its own requirements, and a retailer who writes about wing choice pairs its hours figure for this class with having some of that experience behind you.",
+      "source": {
+        "ref": "knowledge/disagreements.md#1",
+        "cites": "Flybubble's \"Which Class?\" (industry) pairs \"some SIV experience\" with its ~100-hour figure for EN-C; Flybubble's \"Reducing Risk\" (industry) recommends an SIV course \"especially\" for EN-C-curious pilots. BHPA's Advanced Pilot rating (official, extraction caveat) requires a completed safety-training course. Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor, unrelated to Flybubble) argues from training feasibility: from roughly EN-C upward, wings resist collapsing too strongly for a representative collapse to be induced, so the training must happen earlier on lower-class gear. Against all of that: knowledge/disagreements.md point 1 records that Daoust, USHPA's own syllabi and a national competition series requiring P4 to enter all do not require SIV at all, and point 6 records that Greg Hamerton's endorsement is not independent of Flybubble's.",
+        "note": "The strongest SIV suggestion anywhere in this ladder, and it still opens with the word 'optional' and states in its second sentence that the result is unaffected — required by BRIEF.md and meta.tone_rules step-specific rule 4. Priority 1 and the broadest trigger of any SIV suggestion in the ladder, which is where this step's extra emphasis goes instead of into points: the bonus stays capped at 2, identical to all three steps below. The body deliberately does NOT claim independent corroboration between Flybubble and Hamerton, per knowledge/disagreements.md point 6 — Hamerton is not named or counted."
+      }
+    },
+    {
+      "id": "post_collapse_support",
+      "topic": "incident",
+      "priority": 1,
+      "trigger": {
+        "any_of": [
+          { "question": "collapse_experience", "answer_in": ["froze_recovered_itself", "lost_control", "repeated_struggle"] },
+          { "question": "incidents_12m", "answer_in": ["shook_me", "injury_or_reserve"] }
+        ]
+      },
+      "title": "Work through it before you change anything",
+      "body": "Freezing the first time, or being uneasy after a fright, is information rather than a flaw — and it usually means something real needs rebuilding rather than overriding. A sports psychologist who works with pilots is explicit that hesitation before a flight is a protective signal worth listening to, not something to push past. Debrief what happened with an instructor or a pilot you trust, then rebuild in deliberate small steps: ground handling, then easy flights at a familiar site, then slightly more. Changing wing in the middle of that adds a second unfamiliar thing at exactly the wrong moment, and at this step the new wing would be giving you less margin rather than more.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors",
+        "cites": "Yvonne Dathe via Podz-Glidz Episode 109 (expert, sports psychologist) frames fear or hesitation before a flight as a protective signal worth listening to rather than overriding, and offers the reframe that choosing not to fly or not to upgrade yet is sound judgement rather than something to feel embarrassed about; the step file records her as converging independently with Thomas Theurillat via XC Mag's 'The Head Game'. Bendicht Erb (expert, instructor and sports psychologist) describes the same staged re-exposure path after his own low-altitude double frontal collapse. The final clause rests on the EN-C certification language about precise pilot input.",
+        "note": "Priority 1 so it always reaches the displayed set. Carries most of the weight for the 'injury_or_reserve' answer, which fires no gate of its own — see meta.design_decisions 'v1-no-standalone-incident-gate' in the scoring config. Required by docs/design-context.md: hesitation is treated as information, never as a defect, and the suggestion does not nudge toward upgrading."
+      }
+    },
+    {
+      "id": "descent_toolkit",
+      "topic": "descent",
+      "priority": 5,
+      "trigger": { "question": "descent_options", "answer_in": ["big_ears_only_unsure", "big_ears_comfortable", "ears_plus_one_more"] },
+      "title": "Have more than one way down, and have practised all of them",
+      "body": "Practise with plenty of height and ideally with someone watching the first few: bigger tip folds than big ears, and a controlled spiral you can enter gently and exit tidily. The guidance for this step names spirals specifically among the things to be practising, alongside wingovers and collapses. It matters more here because of the flying this class is described for — further from home, over ground you know less well, on days that can overdevelop while you're committed to a glide. Having more than one way down is what turns that from a problem into a decision.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling",
+        "cites": "Flybubble's \"Reducing Risk\" (industry) names spirals specifically among the manoeuvres to be practising, alongside wingovers and asymmetrics, for pilots at and around this step. BHPA's Advanced Pilot rating (official) and USHPA P4 (official) both locate genuine cross-country flying at roughly this stage, which is the basis for the 'further from home' clause.",
+        "note": "Trigger extends to 'ears plus one other way down' as at the step below, because Flybubble names spirals specifically and 'one other way down' may not be one."
+      }
+    },
+    {
+      "id": "reserve_practice",
+      "topic": "reserve",
+      "priority": 2,
+      "trigger": { "question": "reserve_familiarity", "answer_in": ["unsure", "know_location_only"] },
+      "title": "Practise the reserve throw in a hang check",
+      "body": "Find the handle with your eyes shut, pull it and throw, hanging in your harness in a simulator or off a beam. Two minutes of this is the cheapest safety gain available to you and it's the only item on your list that takes minutes rather than seasons. Check the repack date while you're there, and if you're changing wing, do it again afterwards — a new wing often comes with a new harness or a different hang, and the handle may not be where your hand expects it.",
+      "source": {
+        "ref": "knowledge/steps/a-to-low-b.md#skills",
+        "cites": "USHPA P2 (official) includes reserve-deployment and PLF knowledge among its required skills.",
+        "note": "Cross-referenced from three steps below and flagged as such: knowledge/steps/high-b-to-low-c.md names no reserve criterion. Carried forward on the conservative default in knowledge/disagreements.md point 5. The final clause is new at this step and rests on Hamerton's general point that any gear change raises risk through unfamiliarity."
+      }
+    },
+    {
+      "id": "motivation_reframe_keeping_up",
+      "topic": "motivation",
+      "priority": 2,
+      "trigger": { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group"] },
+      "title": "Separate the wing from the group",
+      "body": "Wanting to fly with your mates is completely normal, and it's one of the most commonly named reasons people upgrade. Three things worth putting next to it, and this is the step where they bite hardest. First, the most pointed piece written about this exact transition names comparing yourself to the people you fly with as one of the two motives that most often go wrong here. Second, two cross-country sources argue the glide difference between neighbouring classes is usually too small to explain being left behind — so work out precisely what you're losing ground on. If it's climb rate, centring, or picking the wrong line, a new wing won't close it. Third, an instructor names social pressure plainly as a driver of risks pilots wouldn't otherwise take: being watched, being filmed, measuring yourself against your flying partners. None of that means the motive is shameful. It means it's worth knowing which part of it is in play before money changes hands — and a C is expensive money to spend twice.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors",
+        "cites": "Passion Paragliding (industry) names ego and peer pressure explicitly as the two unhealthy drivers at this transition. Joy Paragliding (industry) and Flybubble's XC Secrets (industry) on adjacent-category performance differences being too small to matter next to decision-making. Simon Winkler via Podz-Glidz Episode 112 (expert, DHV), via knowledge/steps/mid-b-to-high-b.md, names social pressure plainly as a driver of unnecessary risk-taking. The resale point is from this step's own file: C wings hold value worse, so buying one too early \"can be a very expensive mistake\".",
+        "note": "Framed as a question to answer rather than a motive to be ashamed of, per knowledge/disagreements.md point 9's recommended handling."
+      }
+    },
+    {
+      "id": "motivation_reframe_equipment_fix",
+      "topic": "motivation",
+      "priority": 1,
+      "trigger": {
+        "any_of": [
+          { "question": "upgrade_motivation", "answer_in": ["wing_will_handle_conditions"] },
+          { "question": "wing_expectation", "answer_in": ["safer_in_turbulence", "less_work_in_rough_air"] }
+        ]
+      },
+      "title": "A low-C won't make rough air easier — this is the step where it goes the other way",
+      "body": "Worth being blunt about this one, because it's the direction the whole class ladder runs: each step up trades some of the wing's own forgiveness for performance. At this particular step three separate descriptions say the same thing. The certification wording for this class is the first that assumes precise, deliberate input from the pilot to recover from a collapse. An instructor who specialises in steering technique describes these wings as pitch-sensitive enough to want the lightest touch. And a coach who writes about exactly this transition says the real gain is that the wing tells you more about the air — which is only an advantage if you can already act on what it's saying. So you'd get more glide, more speed and more information, and more to do when it's rough — not a wing that absorbs the rough stuff for you. What does make rough air easier: thermal hours, active flying, knowing exactly what you'd do if the wing folded, and picking your days. All four are available on the wing you already own, and all four transfer to whatever you fly next.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#skills",
+        "cites": "The EN-C certification language: precise pilot input required for recovery. Simon Winkler via Podz-Glidz Episode 112 (expert, DHV instructor): EN-C pitch sensitivity demanding \"the lightest touch\". Seb Ospina via XC Mag (industry/expert): the EN-C step is where a wing transmits genuinely useful extra information about the air, but only pilots who can already read it benefit. XC Mag's active-flying piece (industry) places EN-C in the part of the spectrum needing active pilot input rather than self-recovering.",
+        "note": "Yvonne Dathe's memorable term for upgrading equipment to cover a skill gap supports the same point and is deliberately never used in pilot-facing copy, in any language. Pairs with the 'equipment_as_a_fix_with_thin_readiness' gate, whose message covers the same ground more briefly for a pilot who is capped."
+      }
+    },
+    {
+      "id": "resale_and_cost",
+      "topic": "cost",
+      "priority": 6,
+      "trigger": {
+        "any_of": [
+          { "recommendation_in": ["not_yet", "nearly_ready"] },
+          { "question": "upgrade_motivation", "answer_in": ["replacing_anyway"] }
+        ]
+      },
+      "title": "If you're unsure, waiting is the cheap option here",
+      "body": "One practical point that's specific to this boundary and rarely mentioned in the skills discussion: C wings hold their resale value less well than B wings do. Pilots who've been through this describe buying a C too early as an expensive mistake in a way that buying a B you didn't quite need usually isn't — you lose money as well as margin, and you lose it twice if you end up stepping back down. Combined with the other thing pilots at this boundary keep repeating — that being under-prepared for a C costs you more than staying on a B a season longer — it adds up to a simple asymmetry. If you're genuinely unsure, waiting is the cheap mistake and moving up is the expensive one. That's not a reason to never do it; it's a reason not to do it on a maybe.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors",
+        "cites": "\"Financial/psychological caution flagged repeatedly in community discussion: EN-C wings hold resale value worse than B wings, and 'buying a C can be a very expensive mistake' if the pilot isn't ready, while an unnecessary B purchase rarely is — an asymmetric-downside argument that supports a cautious gate at this step.\" Plus the step's collapse-handling section: \"the penalty for choosing a C when you should be on a B can be rather more severe than the penalty for flying a B when you should have gone for a C.\"",
+        "note": "Community sentiment rather than a citable criterion, which is why it is a suggestion rather than a scoring input — but it is the plainest, most practical version of the asymmetric-risk finding that shapes this whole rubric, so it is worth saying to the pilot it affects. Fires for Not yet and Nearly ready results, and for any pilot whose motive is 'I need a new wing anyway'. Never fires on a Ready result unless that motive is present: a pilot who is ready does not need talking out of it."
+      }
+    },
+    {
+      "id": "expectation_research",
+      "topic": "motivation_research",
+      "priority": 5,
+      "trigger": { "question": "wing_expectation", "answer_in": ["not_sure", "modest_step"] },
+      "title": "Find out what actually changes first",
+      "body": "Before committing, read reviews of the specific wings you're considering and ask people who fly them what's different in the air: brake pressure, how much pitch they hand you and how fast, how they behave in bumps, how they sit on half bar, how they launch. Two things worth going in knowing, and they pull in opposite directions. The performance difference may genuinely be modest — one manufacturer calls its own entry-level C a small step up from its best-known high-B, and two cross-country sources say adjacent classes are closer than pilots expect. But the behaviour difference is real where it counts: this is the first class whose certification wording assumes precise input from you to recover from a collapse. So if you're expecting it to feel much the same as what you've got, expect that in the glide and not in what happens when it folds.",
+      "source": {
+        "ref": "knowledge/disagreements.md#3",
+        "cites": "Nova (manufacturer), via knowledge/steps/high-b-to-low-c.md: frames its entry-level C as \"a small step\" for pilots already comfortable on its benchmark high-B. Joy Paragliding (industry) and Flybubble's XC Secrets (industry) on adjacent-category performance differences. Against that, the EN-C certification language on precise pilot input, and Simon Winkler (expert) on pitch sensitivity. Greg Hamerton via FAI/CIVL safety pages (expert) recommends front-loading study of the new wing's specific behaviour after any class change.",
+        "note": "Triggers on 'not a huge difference' as well as 'not sure', and the body is deliberately even-handed about it — at this boundary that answer is PARTLY right, which is why it scores 0.85 rather than being marked down hard. See that question's disagreement_note in the scoring config."
+      }
+    },
+    {
+      "id": "process_goals",
+      "topic": "goals",
+      "priority": 5,
+      "trigger": { "question": "progress_goals", "answer_in": ["distance_and_numbers", "keeping_ahead_of_peers", "not_thought_about"] },
+      "title": "Put a skill next to the number",
+      "body": "Distance goals fit this step better than any below it — two national rating schemes actually ask for demonstrated cross-country flying at about this stage, and an X-Alps pilot interviewed on exactly this subject argues the wish to achieve something is the force that drives real progression. Keep the number. The useful addition is a skill goal sitting next to it: this season I'll centre climbs faster, or read days myself instead of asking, or fly three sites I've never flown, or finally get the collapse response solid. A sports psychologist who coaches pilots finds those stick better and produce less stress, mostly because they're things you control directly. Another well-known pilot makes a related point: what keeps an ambitious plan's risk manageable is trained skill and a genuine fallback, not toning the plan down.",
+      "source": {
+        "ref": "knowledge/disagreements.md#9",
+        "cites": "XC Mag's 'The Head Game' (industry/expert, Paul Guschlbauer) treats \"the wish to achieve certain goals\" as the necessary force behind real progression. Yvonne Dathe via Podz-Glidz (expert, psychology graduate with formal sports-psychology training) favours process-oriented goals over outcome-oriented ones. Chrigel Maurer via Podz-Glidz Episode 114 (expert), recorded in knowledge/steps/high-b-to-low-c.md: trained competence and a genuine fallback plan determine whether risk stays manageable, not the nominal ambition of the plan. BHPA's Advanced Pilot rating and FFVL's Brevet de Pilote Confirmé (both official) locate demonstrated XC flying at roughly this stage.",
+        "note": "Deliberately additive rather than corrective, per knowledge/disagreements.md point 9: ambition must not be penalised in itself. 'Keep the number' is load-bearing and should not be cut. The opening clause is the most encouraging version of this suggestion anywhere in the ladder, which is also why 'distance_and_numbers' scores 0.7 here against 0.65 and 0.6 lower down."
+      }
+    },
+    {
+      "id": "peer_pressure_plan",
+      "topic": "decision_making",
+      "priority": 3,
+      "trigger": {
+        "any_of": [
+          { "question": "peer_pressure", "answer_in": ["launch_anyway"] },
+          { "question": "decline_to_fly", "answer_in": ["no_launch_anyway"] }
+        ]
+      },
+      "title": "Decide your limits on the ground, before anyone launches",
+      "body": "Set your conditions before you leave the car — wind strength, gust spread, time of day — and say them out loud to someone. It's far easier to stand down from a plan you set yourself than to resist a launch everyone else is already walking toward. An instructor who also trained as a sports psychologist names social pressure plainly: being watched, being filmed and measuring yourself against your flying partners all push pilots into risks they wouldn't otherwise take. A second one, with a survey of several hundred pilots behind him, adds that newer and less-drilled skills are exactly the ones that degrade under an audience — worth knowing at a step where the newest skill is usually collapse recovery.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors",
+        "cites": "Passion Paragliding (industry) names peer pressure explicitly as one of the two unhealthy upgrade drivers at this transition. Simon Winkler via Podz-Glidz Episode 112 (expert, DHV), via knowledge/steps/mid-b-to-high-b.md, names social pressure plainly as a driver of unnecessary risk-taking. Bendicht Erb via Podz-Glidz Episode 35 (expert, flight instructor and certified sports psychologist, survey of 400+ pilots) adds that newer, less-drilled skills degrade specifically under observation. Yvonne Dathe (expert) frames standing down as sound judgement rather than cowardice.",
+        "note": "The sunk-cost half of Erb's material now lives in its own question and its own suggestion ('effort_sunk_cost') at this step, rather than being folded in here as at the three steps below."
+      }
+    },
+    {
+      "id": "effort_sunk_cost",
+      "topic": "decision_making_effort",
+      "priority": 3,
+      "trigger": { "question": "effort_already_invested", "answer_in": ["fly_anyway_dont_waste"] },
+      "title": "The drive up isn't a reason to fly",
+      "body": "This one has a name and a mechanism behind it, which is why it's worth taking seriously rather than shrugging off. An instructor who is also a certified sports psychologist, working from a survey of several hundred pilots, describes exactly this pattern: having put real effort into getting airborne — a long drive, a long walk up, a day of waiting — pilots talk themselves into a marginal launch to avoid \"wasting\" it, instead of judging the day on what it's actually doing. The effort is already spent either way; it can't be recovered by flying. The useful habit is a question you ask out loud on launch: would I fly this day if I'd just walked out of my front door and it was ten minutes away? If the answer is no, the drive doesn't change it. Nobody regrets the drive home nearly as much as they expect to.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#red-flags",
+        "cites": "Bendicht Erb via Podz-Glidz Episode 35 (expert — flight instructor and certified sports psychologist, survey of 400+ pilots): pilots who have already invested significant effort to get airborne rationalise a launch in marginal conditions to avoid 'wasting' that effort, rather than assessing the conditions on their own merits. The step file names this \"a concrete, nameable red flag the app could usefully ask about (e.g. 'would you still make this call if you hadn't already hiked/driven/waited to get here?')\" — which is the question the body uses.",
+        "note": "New at this step, alongside the new 'effort_already_invested' question. Separate topic from 'decision_making' so a pilot with both patterns can see both, since they are different failure modes and have different fixes. Chrigel Maurer's point about a genuine fallback plan supports the same habit from a different angle."
+      }
+    },
+    {
+      "id": "transition_plan",
+      "topic": "transition",
+      "priority": 3,
+      "trigger": { "question": "learning_curve_willingness", "answer_in": ["just_fly_it", "straight_back_to_normal"] },
+      "title": "Plan the first twenty hours on the new wing",
+      "body": "Whenever you do change, treat it as a small reset rather than a continuation: ground handle it before you fly it, pick easy sites and easy days for a few weeks, and read up on how that specific model behaves. Deliberately tightening everything else for a while after any gear change is standard advice from instructors writing about safety, not over-caution — risk rises from unfamiliarity alone, whatever the class. It bites harder at this step for a specific reason: the same instructor points out that the certification letter doesn't tell you how often a particular wing folds, so until you've flown that model in rough air you genuinely don't know what it does. The first few weeks are where you find out, and they're better spent on days you'd normally think were too tame.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling",
+        "cites": "Greg Hamerton via FAI/CIVL safety pages (expert): risk rises from unfamiliarity after any gear change, so compensate deliberately — more conservative sites, less aggressive flying, front-loaded study of the new wing's handling; and separately, the EN/AFNOR letter on its own is only a guideline and doesn't tell a pilot how often a given wing actually collapses in practice.",
+        "note": "Shares the 'transition' topic with the always-on 'compensate_after_any_upgrade' and displaces it, which is intended: this is the sharper version for a pilot who has said they'd rather just get on and fly it."
+      }
+    },
+    {
+      "id": "get_eyes_on_your_flying",
+      "topic": "observation",
+      "priority": 3,
+      "trigger": { "question": "external_feedback", "answer_in": ["nobody_seen_recently", "friends_think_so"] },
+      "title": "Get someone qualified to watch you fly",
+      "body": "Book a coaching day, or ask an instructor at your site to watch a few launches, a few climbs, some rough-air flying and a landing, and give you a straight assessment. Flying friends mean well, but they're usually watching the sky rather than you. It's worth more at this step than most: this is the boundary where the labels overlap and the specific wing matters more than the category, so the useful judgement is about your flying and that model, which is exactly what a questionnaire can't see and an instructor can.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling",
+        "cites": "Greg Hamerton via FAI/CIVL (expert): the certification letter is only a guideline and doesn't tell a pilot how often a given wing actually collapses, which the step file records as corroborating the sub-class fuzziness in knowledge/disagreements.md point 3. knowledge/classification-overview.md: USHPA's syllabus defers the wing-class decision to the manufacturer's recommendation, applied in practice by an instructor who can see the pilot fly."
+      }
+    },
+    {
+      "id": "xc_skills_on_current_wing",
+      "topic": "ambition",
+      "priority": 6,
+      "trigger": { "question": "ambitions", "answer_includes_any": ["first_xc", "longer_xc", "hike_fly", "competitions"] },
+      "title": "Most of what's stopping your longer flights still isn't the wing",
+      "body": "Centring climbs, climbing efficiently, reading the day, route choice, glide decisions and landing out safely — all of that is learnable on the wing you've got, and all of it transfers. Two cross-country-focused sources argue the case directly: one says there's no universal answer tied to hours or kilometres and that the performance difference between adjacent classes is usually too small to matter next to how well you decide in the air, and the other recommends deliberately flying a wing one class below what you think you can handle, for the margin that buys you on difficult days. That said, this is the step where the sources themselves start describing a cross-country wing, and two national rating schemes expect real cross-country flights at about this point — so the ambition and the class genuinely line up here. Build the decisions, and the upgrade becomes something you've earned rather than something you're hoping will help.",
+      "source": {
+        "ref": "knowledge/disagreements.md#14",
+        "cites": "Joy Paragliding (industry) argues explicitly against tying wing upgrades to kilometres flown, on the grounds that adjacent-category glide differences are usually too small to matter and in-flight decision-making affects an XC flight's outcome far more than the wing does. Flybubble's XC Secrets (industry), via knowledge/sources.md, recommends flying \"a wing that is one class below what you think you are capable of handling\" for the confidence margin it buys in difficult conditions. BHPA's Advanced Pilot rating and FFVL's Brevet de Pilote Confirmé (both official) locate demonstrated XC flying at roughly this stage. Guschlbauer via XC Mag's 'The Head Game' (expert) frames goal-driven motivation as legitimate fuel provided it's paired with honest preparation.",
+        "note": "Deliberately encouraging rather than discouraging — knowledge/disagreements.md point 9 instructs that ambition alone must not be penalised. The Flybubble one-class-below recommendation is the single most conservative voice in the knowledge base on wing choice and is included here because it is specifically about XC flying, which is what this suggestion's audience wants to do."
+      }
+    },
+    {
+      "id": "acro_wrong_wing",
+      "topic": "ambition_acro",
+      "priority": 8,
+      "trigger": { "question": "ambitions", "answer_includes_any": ["acro"] },
+      "title": "Acro is a different path, not a step up this ladder",
+      "body": "If wing-overs and acro are the goal, that's its own progression with its own coaching, its own gear and its own sites — a low-C isn't the wing for it, and self-taught acro is one of the more reliable ways to get hurt. Find an acro course and talk to them about what to fly and in what order. Worth separating from this question entirely: deliberately loading a wing is a skill you learn over water with someone watching, not something a performance upgrade gets you closer to.",
+      "source": {
+        "ref": "knowledge/classification-overview.md#sub-class-labels-lowmidhigh-b-2-liner-c-are-not-official",
+        "cites": "The EN A-D ladder grades a wing's passive-safety behaviour in a fixed set of manoeuvres; it is not a progression toward acro flying, which no source in this knowledge base treats as part of this ladder.",
+        "note": "Informational, not scored — ambitions carry no score, per knowledge/disagreements.md point 9. The 'over water with someone watching' clause is consistent with knowledge/disagreements.md point 8's framing of manoeuvres training."
+      }
+    },
+    {
+      "id": "nerves_are_not_the_problem",
+      "topic": "under_load",
+      "priority": 2,
+      "trigger": { "question": "response_when_rough", "answer_in": ["freeze_and_hang_on", "tense_want_to_land"] },
+      "title": "Build what your hands do when it's rough",
+      "body": "Everybody's heart rate goes up in rough air — that part is normal and isn't the issue. What matters is whether you keep flying the wing or tighten up and wait it out. It carries more weight at this step than any other single answer, and that isn't our opinion: pilots who've flown both these classes argue endlessly about which actually feels calmer in bad air, and what that disagreement settles is that your own sense of control in rough air tells you more than the letter on the wing does. Build it in small doses: light bumps at a familiar site, hands working, with a coach or experienced pilot nearby and a clear plan for getting down if it builds. A sports psychologist who coaches pilots recommends exactly that — repeated small steps outward rather than one big one — and treats the hesitation itself as useful information rather than something to override. Until it feels different, the more forgiving wing is the right one to be building it on.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors",
+        "cites": "\"The community thread on 'High End Bs vs. Low EN Cs' shows pilots disagreeing about which actually feels calmer in bad air... This argues for the app weighting the pilot's own reported comfort/control in rough air fairly heavily at this step, rather than leaning only on the EN letter.\" Yvonne Dathe via Podz-Glidz Episode 109 (expert, sports psychologist) treats fear as a protective signal to work with rather than override and recommends deliberate mini-steps outward. XC Mag's 'The Head Game' (industry/expert, Thomas Theurillat) frames readiness as challenge matched to honest self-assessed skill, with too big a jump producing stress rather than growth.",
+        "note": "Framed around behaviour under load rather than around feeling afraid, and explicitly does not reassure a hesitant pilot toward upgrading — required by docs/design-context.md, whose terminology appears nowhere in the body."
+      }
+    },
+    {
+      "id": "debrief_habit",
+      "topic": "incident_debrief",
+      "priority": 4,
+      "trigger": { "question": "incidents_12m", "answer_in": ["several_unsure"] },
+      "title": "Start debriefing the ones you don't understand",
+      "body": "A few near misses you can't explain is the clearest thing on this list to act on. Write up what happened as soon as you land — conditions, what you did, what surprised you — then go through them with an instructor or an experienced pilot. Unexplained incidents tend to repeat, and the ones you can explain usually stop. Two of the instructors behind the advice in this tool work exactly this way with pilots, and one of them built his own recovery after a serious collapse on it. It matters more at this step than at the ones below, because the class you're looking at gives you less time to work out what's happening in the moment — you want the pattern recognition already built.",
+      "source": {
+        "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling",
+        "cites": "Bendicht Erb via Podz-Glidz Episode 35 (expert, instructor and certified sports psychologist) works on structured processing of incidents and describes rebuilding after his own low-altitude double frontal collapse; Yvonne Dathe via Podz-Glidz Episode 109 (expert) works the same way with pilots in her coaching practice. The final clause rests on the EN-C certification language about precise pilot input being required for recovery.",
+        "note": "At mid-B to high-B this suggestion leans on Flybubble's 'incident-free thermic hours' qualifier, which belongs to that step's figure rather than this one. Here the justification is the reduced margin instead, which is this step's own material."
+      }
+    },
+    {
+      "id": "hesitancy_is_valid",
+      "topic": "under_load",
+      "priority": 5,
+      "trigger": { "recommendation_in": ["not_yet", "nearly_ready"] },
+      "title": "If this matched what you already suspected, that's worth something",
+      "body": "Pilots are often right about their own readiness before a tool tells them. If \"not yet\" or \"nearly\" is roughly what you expected, treat that as good judgement rather than a setback — a sports psychologist who works with pilots is explicit that deciding not to fly, or not to upgrade yet, when your honest self-assessment doesn't match the wing or the day is sound judgement, not something to be embarrassed about. There's no hurry built into this step either. Every source on progression pace assumes one rung at a time, this particular rung is the one the industry argues about most, and the pilots who fly these wings keep repeating the same thing: being under-prepared for a C costs you more than spending another season on a B. Almost everything that genuinely makes you better — centring climbs, reading the day, launches, knowing when not to fly — is the same work on every wing, so none of that time is spent waiting.",
+      "source": {
+        "ref": "docs/design-context.md",
+        "cites": "The safety guard: a 'not yet' result must land as a legitimate, successful outcome of using the tool, never as a failure or something to be argued out of.",
+        "note": "The specific supports are knowledge/steps/high-b-to-low-c.md#psychological--mindset-factors (Yvonne Dathe, expert sports psychologist, on choosing not to fly or not to upgrade as sound judgement), the same file's collapse-handling section (the asymmetric-risk consensus), knowledge/disagreements.md point 3 (this is the most contested boundary) and point 13 (every source addressing progression pace assumes one rung at a time). No internal terminology used. Shares the 'under_load' topic with 'nerves_are_not_the_problem', which outranks it for a pilot who has that specific gap."
+      }
+    }
+  ]
+}
