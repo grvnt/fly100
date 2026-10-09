@@ -60,7 +60,7 @@
   ],
   "chain_notes": {
     "merge_behaviour": "The claimed split in config/questions/d-to-ccc.json's design_notes (36 of 38 questions byte-identical to high-c-to-d.json, the highest merge rate of any chain pair on the ladder) must be independently re-verified by diffing the two files directly before being trusted, same discipline as every prior rung — see scripts/check-merge-rule.mts.",
-    "registry": "Not yet wired into app/upgrade/lib/ladder.ts STEP_REGISTRY or app/upgrade/lib/config.ts STEP_CONFIGS at the time these personas were written — that wiring is the next step after this persona suite passes. This completes the full ladder (A through CCC) once wired.",
+    "registry": "Wired into app/upgrade/lib/ladder.ts STEP_REGISTRY ('d-to-ccc': { from: 'D', to: 'CCC' }) and app/upgrade/lib/config.ts STEP_CONFIGS. resolveChain('A', 'CCC') and the picker both correctly offer the full 7-leg jump, completing the ladder.",
     "source": "BRIEF.md 'Multi-step jumps' and its recorded implementation trap."
   }
 }
