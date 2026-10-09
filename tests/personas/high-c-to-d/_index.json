@@ -1,0 +1,68 @@
+{
+  "step": "high-c-to-d",
+  "version": 1,
+  "how_to_use": "Each persona file holds a complete answer set and the expected outcome, computed against the real scoring engine (not hand-calculated) before being written. Run with: node --experimental-strip-types scripts/check-personas.mts high-c-to-d",
+  "field_notes": {
+    "rules_expected": "Threshold rules that actually constrained the result. critical_check_floor breaks on the first failing question in thresholds.ready.critical_check_floor.questions, so at most one 'critical_check_floor:*' string is ever emitted. The engine only reports a Ready-path rule (critical_check_floor / ready_category_floor) when the total itself reaches the Ready threshold (85) — persona 08's total falls short of 85 on the total alone, so it reports no rule even though its skills score is well below the skills floor. See persona 08's own notes.",
+    "exemptions_expected": "Every persona here has an empty exemptions list. config/scoring/high-c-to-d.json ships an empty thresholds.ready.unevidenced_core_checks.exemptions array on purpose — see meta.design_decisions 'v1-no-stated-plans-exemption-here-either', the strongest case for no exemption anywhere on the ladder.",
+    "two_track_architecture_carried_forward": "The six two-liner-conditional gates from low-c-to-high-c carry forward unchanged in mechanism. Personas 02, 05, 06 directly test this carries forward correctly one rung up."
+  },
+  "persona_count_note": "Eight files. Three deliberate pairs (01/02 clean baselines for each track, 03/04 this step's own new annual-currency gate mechanism, 05/06 the carried-forward under-20-hours mechanism on both tracks) plus two singletons (07 the universal collapse gate, 08 a realistic middling case testing the raised Ready threshold). This is the minimum set that exercises every new mechanism this step introduces (the annual-currency gate) on both sides, plus re-confirms the carried-forward two-liner architecture still works.",
+  "computed": {
+    "ready-three-liner": { "skills": 100.0, "psychological": 100.0, "total": 100.0, "recommendation": "ready" },
+    "ready-two-liner": { "skills": 100.0, "psychological": 100.0, "total": 100.0, "recommendation": "ready" },
+    "notyet-annual-currency-under25": { "skills": 92.4, "psychological": 100.0, "total": 98.0, "recommendation": "not_yet", "gate": "annual_currency_far_below_consensus" },
+    "nearly-annual-currency-50-100": { "skills": 95.8, "psychological": 100.0, "total": 99.8, "recommendation": "nearly_ready", "rule": "critical_check_floor:airtime_last_12m" },
+    "notyet-two-liner-under20": { "skills": 94.1, "psychological": 100.0, "total": 98.9, "recommendation": "not_yet", "gate": "two_liner_thin_previous_category" },
+    "nearly-three-liner-under20": { "skills": 94.1, "psychological": 100.0, "total": 98.9, "recommendation": "nearly_ready", "rule": "critical_check_floor:current_wing_time" },
+    "notyet-collapse-response-untested": { "skills": 92.2, "psychological": 100.0, "total": 97.9, "recommendation": "not_yet", "gate": "collapse_response_entirely_untested" },
+    "nearly-borderline-skills-floor": { "skills": 66.2, "psychological": 100.0, "total": 82.1, "recommendation": "nearly_ready", "rules": [] }
+  },
+  "provenance": "Every figure above was produced by running the real engine (app/upgrade/lib/scoreEngine.ts) against each persona's answers via a throwaway script before writing the persona files, per memory practice persona-expected-values-via-real-engine — not hand-computed.",
+  "distribution": { "ready": 2, "nearly_ready": 3, "not_yet": 3 },
+  "profile_coverage": {
+    "clean_baseline_three_liner": "01 ready-three-liner",
+    "clean_baseline_two_liner": "02 ready-two-liner",
+    "new_annual_currency_gate_capped": "03 notyet-annual-currency-under25",
+    "new_annual_currency_middle_band_blocked_not_capped": "04 nearly-annual-currency-50-100",
+    "carried_forward_under20_gate_two_liner_capped": "05 notyet-two-liner-under20",
+    "carried_forward_under20_three_liner_blocked_not_capped": "06 nearly-three-liner-under20",
+    "universal_collapse_response_gate": "07 notyet-collapse-response-untested",
+    "realistic_middling_pilot_raised_threshold": "08 nearly-borderline-skills-floor"
+  },
+  "gate_coverage": {
+    "annual_currency_far_below_consensus": ["notyet-annual-currency-under25"],
+    "two_liner_thin_previous_category": ["notyet-two-liner-under20"],
+    "collapse_response_entirely_untested": ["notyet-collapse-response-untested"],
+    "not_exercised_by_a_persona": [
+      "two_liner_cravat_untested, two_liner_pitch_control_weak, two_liner_frontal_energy_untested, two_liner_ears_unsure, two_liner_passive_bar_use — all mechanically identical to the already-reviewed low-c-to-high-c.json gates (same trigger pattern, byte-identical question/option ids), so not re-tested with dedicated personas here. Spot-checked by construction.",
+      "still_in_training, thermic_hours_far_below_every_reading, no_recent_flying, collapse_control_lost, unreliable_launches, instructor_said_wait, aspirational_rather_than_demonstrated, equipment_as_a_fix_with_thin_readiness, ambition_without_readiness — all carried forward unchanged or near-unchanged (threshold-only changes) from low-c-to-high-c.json, where they are already proven."
+    ]
+  },
+  "rule_coverage": {
+    "critical_check_floor:airtime_last_12m": ["nearly-annual-currency-50-100"],
+    "critical_check_floor:current_wing_time": ["nearly-three-liner-under20"],
+    "not_exercised": [
+      "critical_check_floor on collapse_practice, pitch_control, cravat_recovery, wing_limiting_evidence, active_piloting, thermal_turn_control, response_when_rough, flying_frequency, collapse_experience, reserve_familiarity — all carried forward with identical mechanics from low-c-to-high-c, already proven there.",
+      "ready_category_floor:skills, ready_category_floor:psychological, not_yet_category_floor:skills, not_yet_category_floor:psychological, unevidenced_core_checks:thermal_turn_control, conservative_backstop — mechanically identical to the step below; not independently re-tested here given the review budget, but worth a reviewer spot-check given the Ready threshold itself moved (79→85) and the floors moved with it (73/69→78/73 on the ready side, 49/35→53/38 on the not_yet side)."
+    ]
+  },
+  "suggestion_coverage": {
+    "always_pool": "Five always-on suggestions now (one more than the four-item pool at every step below): instructor_conversation, stay_current_whatever_you_decide, compensate_after_any_upgrade, judge_the_specific_wing, plus siv_fluency_expected which is also always:true but deliberately kept outside meta.selection.always_pool.ids (that list exists for the min-shown guarantee bookkeeping, not as an exhaustive always:true registry).",
+    "new_at_this_step": "build_annual_currency (this step's own headline suggestion, paired with the new gate — fires on under_25/25_50/50_100), siv_fluency_expected (always:true, the Winkler training-infeasibility point generalised beyond 2-liners), judge_the_specific_wing (renamed/reworked from judge_the_wing_not_the_label since the letter boundary itself isn't fuzzy at this step — the model-to-model variation within EN-D is the new caution).",
+    "not_exercised": "two_liner_goal_mismatch, frontal_energy_practice, ears_deflation_practice, familiarisation_flights_plan, equipment_wont_fix_rough_air, response_when_rough_drill, reserve_check, performance_chasing_reframe — all mechanically simple single/combo-answer triggers inherited from the low-c-to-high-c pattern, spot-checked by construction rather than given dedicated personas."
+  },
+  "negative_checks": [
+    "No two-liner-conditional gate may fire on the three-liner track. Personas 06 is the direct proof, paired with 05.",
+    "The new annual-currency gate must be universal, not two-liner-conditional. Persona 03 answers is_2_liner:no_three_liner and the gate still fires.",
+    "The new annual-currency gate's cutoff must be conservative — only the clearest below-consensus band gates, the middle band only blocks. Personas 03 and 04 are the direct proof.",
+    "No question or message anywhere in this step names back-flying. Verified by grep across all three config files — the only occurrence is inside 'siv_fluency_expected', stating the disagreement rather than silently picking a side.",
+    "collapse_response_entirely_untested must remain universal, not accidentally scoped to is_2_liner. Persona 07 answers is_2_liner:no_three_liner and the gate still fires.",
+    "No suggestion may imply EN-D is a uniform class — 'judge_the_specific_wing' and the Enzo/Zeno material must survive a copy read checking this, since no persona directly exercises that suggestion's own content (it's always:true and appears throughout, but its correctness as copy needs a manual read, not a score check)."
+  ],
+  "chain_notes": {
+    "merge_behaviour": "The claimed split in config/questions/high-c-to-d.json's design_notes (35 of 37 questions byte-identical to low-c-to-high-c.json) must be independently re-verified by diffing the two files directly before being trusted, same discipline as every prior rung — see scripts/check-merge-rule.mts.",
+    "registry": "Not yet wired into app/upgrade/lib/ladder.ts STEP_REGISTRY or app/upgrade/lib/config.ts STEP_CONFIGS at the time these personas were written — that wiring is the next step after this persona suite passes.",
+    "source": "BRIEF.md 'Multi-step jumps' and its recorded implementation trap."
+  }
+}

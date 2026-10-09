@@ -235,6 +235,63 @@ const CHAINS: ChainCheck[] = [
       'flying_style_intent',
     ],
   },
+  {
+    label: 'low-c-to-high-c -> high-c-to-d',
+    chain: ['low-c-to-high-c', 'high-c-to-d'],
+    // Added 2026-10-09, independently re-derived by diffing both
+    // question files directly (not trusted from the questions
+    // config's own design_notes claim, same discipline as every chain
+    // above). 35 of 37 shared ids merge — the highest merge rate of
+    // any chain pair so far, since this step deliberately reuses the
+    // two-liner-specific question set (is_2_liner, pitch_control,
+    // cravat_recovery, frontal_collapse_energy, ears_deflation,
+    // collapse_training_access) byte-identically as its own
+    // architectural choice, not just where it happened to line up.
+    expectedMergedIds: [
+      'active_piloting',
+      'ambitions',
+      'collapse_experience',
+      'collapse_practice',
+      'collapse_training_access',
+      'conditions_flown',
+      'cravat_recovery',
+      'current_wing_time',
+      'decline_to_fly',
+      'descent_options',
+      'ears_deflation',
+      'effort_already_invested',
+      'external_feedback',
+      'flying_frequency',
+      'flying_style_intent',
+      'frontal_collapse_energy',
+      'ground_handling_kiting',
+      'incidents_12m',
+      'is_2_liner',
+      'launch_reliability',
+      'learning_curve_willingness',
+      'manoeuvre_course',
+      'peer_pressure',
+      'pitch_control',
+      'progress_goals',
+      'reading_the_day',
+      'reserve_familiarity',
+      'response_when_rough',
+      'speed_bar',
+      'thermal_turn_control',
+      'thermic_airtime',
+      'total_airtime',
+      'training_status',
+      'upgrade_motivation',
+      'wing_limiting_evidence',
+    ],
+    // airtime_last_12m is deliberately rewritten with new, tighter
+    // bands reflecting this step's own 100+/year consensus (see
+    // config/scoring/high-c-to-d.json meta.design_decisions
+    // 'v1-annual-currency-is-this-steps-own-best-evidenced-figure-and-gets-a-new-gate').
+    // wing_expectation is reworded again, same pattern as every prior
+    // chain boundary where the honest expectation genuinely changes.
+    mustNotMergeIds: ['airtime_last_12m', 'wing_expectation'],
+  },
 ];
 
 let failures = 0;
