@@ -61,12 +61,27 @@ export function resolveChain(from: LadderRung, to: LadderRung): string[] | null 
   return chain;
 }
 
-/** Every target rung reachable from `from` with a fully-built chain. */
-export function reachableTargets(from: LadderRung): LadderRung[] {
+// The tool is meant to meet a pilot where they are now and tell them
+// whether they're ready for the next step or two — not to walk them
+// through the entire ladder in one sitting. Decided 2026-10-09: the
+// picker offers at most 2 rungs ahead. resolveChain() itself stays
+// unbounded (scripts/check-chain-personas.mts legitimately exercises
+// a 3-leg chain internally) — only the picker's own target list is
+// capped, via this constant.
+export const MAX_PICKER_RUNGS = 2;
+
+/**
+ * Every target rung reachable from `from` with a fully-built chain,
+ * capped at `maxRungs` steps ahead (default MAX_PICKER_RUNGS). Pass a
+ * larger value (or Infinity) to see the full reachable span regardless
+ * of the picker's own cap.
+ */
+export function reachableTargets(from: LadderRung, maxRungs: number = MAX_PICKER_RUNGS): LadderRung[] {
   const fromIndex = LADDER_RUNGS.indexOf(from);
   if (fromIndex === -1) return [];
   const targets: LadderRung[] = [];
-  for (let i = fromIndex + 1; i < LADDER_RUNGS.length; i++) {
+  const lastIndex = Math.min(LADDER_RUNGS.length - 1, fromIndex + maxRungs);
+  for (let i = fromIndex + 1; i <= lastIndex; i++) {
     if (resolveChain(from, LADDER_RUNGS[i])) targets.push(LADDER_RUNGS[i]);
     else break; // first gap in the registry ends reachability
   }

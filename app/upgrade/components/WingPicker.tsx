@@ -22,6 +22,11 @@ export function WingPicker({ onSubmit }: WingPickerProps) {
   const [to, setTo] = useState<LadderRung>('low-B');
 
   const targets = useMemo(() => reachableTargets(from), [from]);
+  // Separately, whether the ladder keeps going past the picker's own
+  // cap — used only to pick the right explanatory copy below, never
+  // to offer those further rungs directly. See lib/ladder.ts
+  // MAX_PICKER_RUNGS for why the picker itself stays capped.
+  const furtherRungsExist = useMemo(() => reachableTargets(from, Infinity).length > targets.length, [from, targets.length]);
 
   function handleFromChange(next: LadderRung) {
     setFrom(next);
@@ -81,6 +86,11 @@ export function WingPicker({ onSubmit }: WingPickerProps) {
           {targets.length === 0 && (
             <p className="mt-1.5 text-sm text-muted-foreground">
               We haven't built the research and questions for anything past {LADDER_LABELS[from]} yet.
+            </p>
+          )}
+          {targets.length > 0 && furtherRungsExist && (
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              This only checks the next step or two. Once you're on one of these, come back and run it again from there.
             </p>
           )}
         </div>
