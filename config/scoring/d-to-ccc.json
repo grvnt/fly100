@@ -1,0 +1,349 @@
+{
+  "step": "d-to-ccc",
+  "version": 1,
+  "meta": {
+    "confidence": "the thinnest step on the whole ladder by a wide margin — no corroborated CCC-specific pilot-readiness criteria exist beyond what already applies to EN-D, and the one genuinely new, well-sourced thing is a structurally different kind of gate (competition licensing) rather than a stricter skills bar",
+    "confidence_source": {
+      "ref": "knowledge/steps/d-to-ccc.md#source-quality-note-and-explicit-gap",
+      "cites": "\"This step is thin by a wide margin... We specifically checked Greg Hamerton's published material... for CCC-specific pilot-readiness guidance... We did not find anything.\"",
+      "note": "Unlike every step below, where 'much stricter' could be implemented by raising thresholds against genuine new evidence, this step's own research explicitly argues against inventing precision: \"Avoid stating any specific hours figure for this step with confidence.\" Strictness here is implemented through a new, narrowly-scoped gate and stronger instructor-consultation framing, not through unsupported threshold inflation."
+    },
+    "design_decisions": [
+      {
+        "id": "v1-no-new-skills-evidence-means-no-new-skills-bar",
+        "change": "All 36 shared skills, collapse-handling, currency and psychological questions are byte-identical to config/questions/high-c-to-d.json, with identical weights and option scores. Nothing about them changes at this step.",
+        "reason": "knowledge/steps/d-to-ccc.md is explicit that no CCC-specific skill, ground-handling, speed-bar or motivation criteria were found beyond what already applies to EN-D — \"it's reasonable to assume everything that applies to a 2-liner EN-D wing applies at least as strongly to a CCC wing, but we have no direct evidence for anything additional.\" Inventing a stricter version of any of these questions without new sourcing would present synthesised numbers as if they were evidence-backed, which the brief's own transparency requirement forbids.",
+        "source": { "ref": "knowledge/steps/d-to-ccc.md#skills", "cites": "No CCC-specific skills criteria found beyond EN-D.", "note": "Confirmed by a direct weight-by-weight diff against config/scoring/high-c-to-d.json before writing this file." }
+      },
+      {
+        "id": "v1-competition-pathway-is-the-one-new-sourced-criterion",
+        "change": "A new question, competition_pathway, asks whether the pilot holds or is working toward a recognised advanced/competition rating (P4, IPPI-4, or a national equivalent). Scored (weight 14, this step's second-highest skills weight after airtime_last_12m's 15), and feeds a new, narrowly-scoped gate — see 'v1-competition-gate-is-scoped-to-stated-competition-intent'.",
+        "reason": "knowledge/steps/d-to-ccc.md's key finding: \"the official/competition system gates CCC access through pilot rating and competition licensing... not through a wing-specific hours or skills test. This is structurally different from every earlier step.\" The step's own explicit recommendation: \"Treat CCC readiness primarily through the lens of competition licensing and rating... rather than inventing a precise hours number not supported by sources.\"",
+        "source": { "ref": "knowledge/steps/d-to-ccc.md#competition-entry-gating-a-related-but-separate-system", "cites": "USHPA P4 or IPPI-4 required to compete in CCC-eligible events.", "note": "This is also this config's one deliberate, documented departure from knowledge/disagreements.md point 5's general 'don't ask national rating' instruction — see the question's own help text and config/questions/d-to-ccc.json design_notes for the full reasoning." }
+      },
+      {
+        "id": "v1-competition-gate-is-scoped-to-stated-competition-intent",
+        "change": "The new gate, competition_entry_not_on_track, fires ONLY when ambitions includes 'competitions' AND competition_pathway is 'not_pursuing'. A pilot with no stated competition ambition at all is never gated on this question, regardless of their answer.",
+        "reason": "The sourced requirement is specifically about competition ENTRY, not about owning or flying a CCC wing recreationally. Gating every pilot on competition_pathway regardless of their stated plans would overclaim what the source actually supports — an independent tester's view (Dust of the Universe) that a well-flown EN-D 'flies nearly as much' as CCC, with the edge concentrated in glide, implies some pilots reasonably want the wing for its own sake without ever intending to race it. A pilot who genuinely doesn't want to compete and isn't pursuing a rating they don't need is not a readiness gap; a pilot who says they want to compete but has no path to the licence that governs entry is.",
+        "what_this_costs": "A pilot who wants the raw performance without competing is never told their lack of a competition rating matters, even though the gate's absence means that specific combination is scored only, not capped. This is deliberate — see the suggestion 'ccc_purpose_check' for how that case is handled instead (a gentle fit-check, not a block).",
+        "source": { "ref": "knowledge/steps/d-to-ccc.md#skills", "cites": "Dust of the Universe's comparative view that a well-flown EN-D now flies nearly as much as CCC.", "note": "" }
+      },
+      {
+        "id": "v1-two-liner-and-annual-currency-architecture-unchanged",
+        "change": "The six two-liner-conditional gates and the annual_currency_far_below_consensus gate from high-c-to-d.json carry forward completely unchanged — same ids, same trigger logic, same bands.",
+        "reason": "No new evidence at this step touches either mechanism. knowledge/steps/d-to-ccc.md explicitly defers to the EN-D material for everything collapse- and currency-related.",
+        "source": { "ref": "knowledge/steps/d-to-ccc.md#conditions-flown--collapse-handling--psychological-factors", "cites": "\"It's reasonable to assume everything that applies to a 2-liner EN-D wing applies at least as strongly to a CCC wing.\"", "note": "" }
+      },
+      {
+        "id": "v1-the-300-hour-figure-is-never-a-bar",
+        "change": "total_airtime keeps the exact bands, weight and framing from high-c-to-d.json. No band or threshold anywhere references 300 hours.",
+        "reason": "knowledge/steps/d-to-ccc.md: the only total-hours figure found for this step is \"a single secondhand opinion in a personal blog post, not corroborated anywhere else... We would not want the app to treat this as a reliable number.\"",
+        "source": { "ref": "knowledge/steps/d-to-ccc.md#hours--experience", "cites": "richiesadventures.com's secondhand 300-hour figure.", "note": "Same treatment as every other uncorroborated single-source hours figure on this ladder — it sits inside the existing top band, cited nowhere as a target." }
+      },
+      {
+        "id": "v1-siv-stays-light-and-this-steps-evidence-argues-for-that-more-than-any-other",
+        "change": "The manoeuvre_course bonus stays capped at 2 points, identical mechanism to every step below. The suggestion built on it explicitly cites this step's own strongest-yet evidence AGAINST tightening SIV further.",
+        "reason": "knowledge/steps/d-to-ccc.md's SIV section: even a national competition body requiring a P4/IPPI-4 rating to enter CCC-eligible competition only 'highly recommends', rather than mandates, an SIV course — \"a meaningful counterweight to the SIV-should-be-near-mandatory framing found elsewhere.\" This is the single most official-adjacent data point on the SIV question anywhere in the knowledge base, and it argues against tightening, not for it — worth stating honestly even though it cuts against this step's overall stricter framing.",
+        "source": { "ref": "knowledge/steps/d-to-ccc.md#siv", "cites": "US Paragliding Competitions: SIV 'highly recommended', not mandatory, even for CCC-eligible Overall Class entry.", "note": "" }
+      },
+      {
+        "id": "v1-ambition-combination-gates-tighten-one-more-notch",
+        "change": "aspirational_rather_than_demonstrated and equipment_as_a_fix_with_thin_readiness's skills thresholds rise from 75 to 78; ambition_without_readiness rises from 60 to 62.",
+        "reason": "No new CCC-specific psychological sourcing exists — knowledge/steps/d-to-ccc.md: \"the closest material (Ospina's cautionary story, the Head Game's ambition-vs-preparation framing) is general to high-performance wings, not CCC-specific.\" The modest further tightening reflects this being the final, most extreme rung on the ladder rather than new evidence — flagged as a synthesised judgement call, same honesty as the equivalent decision at every step below.",
+        "source": { "ref": "meta.owner_decisions", "cites": "", "note": "Smaller tightening than the 70→75 jump at high-c-to-d, deliberately, since there is no new sourcing behind it this time." }
+      },
+      {
+        "id": "v1-ready-threshold-rises-modestly-not-dramatically",
+        "change": "thresholds.ready.total_min is 87, a smaller rise than the 79→85 jump at the step below (which was backed by the strongest currency evidence on the ladder). Category floors rise to 80/75 (skills/psychological). nearly_ready.total_min stays at 55.",
+        "reason": "The honest position, given this step's own research: there is no new skill evidence to justify a large jump, but BRIEF.md still calls this the top of a ladder that \"needs much stricter requirements.\" The real strictness at this step comes from the new competition-pathway gate and the strengthened instructor/mentor-consultation framing in always_output, not from an invented leap in the numeric bar. A modest, clearly-flagged synthesised bump (rather than either holding flat or inventing a large one) is the most honest middle path.",
+        "source": { "ref": "BRIEF.md", "cites": "\"Much stricter requirements\" for the CCC jump specifically.", "note": "87 is synthesised, not sourced — see meta.owner_decisions." }
+      }
+    ],
+    "owner_decisions": [
+      "thresholds.ready.total_min at 87, and the size of the rise from 85, are synthesised rather than sourced, more so than at any step below — this is the step with the least evidence to calibrate against.",
+      "competition_pathway's weight (14) and its exclusion from critical_check_floor are both judgement calls: weighted meaningfully because it's the one well-sourced criterion, but kept out of the Ready-blocker list so a pilot with zero competition ambition is never blocked by a rating they don't need — see 'v1-competition-gate-is-scoped-to-stated-competition-intent'.",
+      "Whether 'not_sure' on competition_pathway should also contribute to the gate (currently only 'not_pursuing' does). Kept narrow deliberately — genuine unfamiliarity with what the rating even is reads differently from an active decision not to pursue one, and the suggestion pool handles the 'not_sure' case with an explanatory nudge instead.",
+      "max_rule_reasons_shown is 2 and max_gate_reasons_shown is 3, carried forward unchanged."
+    ],
+    "method": "Each answer has a score from 0 to 1. Within a category, score = sum(weight x answer_score) / sum(weight of answered, scored questions) x 100. Total = 0.53 x skills + 0.47 x psychological, then bonuses are added and the total is clamped to 0-100. Gates are applied last and override the total.",
+    "weight_totals": { "skills": 212, "psychological": 98, "note": "competition_pathway (14) is this step's second-highest skills weight after airtime_last_12m (15), reflecting its status as the one genuinely CCC-specific, well-sourced criterion." },
+    "unanswered_handling": {
+      "rule": "exclude_from_denominator",
+      "conservative_backstop": {
+        "max_unanswered_core_for_ready": 2,
+        "effect": "nearly_ready",
+        "source": { "ref": "knowledge/disagreements.md#5", "cites": "SAHPA's design pattern of defaulting an unregistered glider to the most demanding category unless a lower class is actively registered.", "note": "Carried forward unchanged from every step below." }
+      }
+    },
+    "rounding": "Round category and total scores to the nearest whole number for display only; compare thresholds against unrounded values.",
+    "source_fields_are_internal": "Every 'source' block in this file is provenance for the owner and reviewer only. Do not render 'ref', 'cites' or 'note' text in the UI. Pilot-facing copy is exactly the 'message' field on each gate, and the 'message' field under rule_messages.by_rule / rule_messages.fallback_by_rule_id. docs/design-context.md informs several decisions and must never be named, quoted or paraphrased anywhere a pilot can see."
+  },
+
+  "categories": {
+    "skills": {
+      "label": "Skills and experience",
+      "weight": 0.53,
+      "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "competition_pathway, this step's one new well-sourced criterion, sits in this category.", "note": "Split carried forward unchanged, no new evidence to justify moving it." }
+    },
+    "psychological": {
+      "label": "Mindset and motivation",
+      "weight": 0.47,
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#red-flags", "cites": "No new CCC-specific psychological material; the general ambition-vs-preparation pattern from the step below carries forward.", "note": "" }
+    }
+  },
+
+  "intended_flying_context": {
+    "purpose": "Named, reusable groupings of the 'ambitions' answer. Never scored, never shown to the pilot. No exemption attaches at this step, same as every step above high-b-to-low-c.",
+    "profiles": {
+      "exposure_bound": {
+        "label_internal": "Plans that will put the pilot in thermic, mountain or high-workload air",
+        "ambitions_includes_any": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"]
+      },
+      "local_only": {
+        "label_internal": "Plans that stay inside local, ridge or coastal soaring",
+        "requires_all": [
+          { "ambitions_includes_any": ["local_soaring", "just_enjoy"] },
+          { "ambitions_includes_none_of": ["first_xc", "longer_xc", "hike_fly", "competitions", "acro"] }
+        ],
+        "note": "No exemption is built on this profile at this step. CCC is a competition-equipment spec by definition, making the case against an exemption stronger here than anywhere else on the ladder."
+      }
+    },
+    "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "CCC is a FAI/CIVL competition-equipment specification, not a general-purpose wing class.", "note": "" }
+  },
+
+  "questions": {
+    "is_2_liner": { "category": "skills", "weight": 0, "scored": false, "source": { "ref": "knowledge/disagreements.md#4", "cites": "Treat 'is this a 2-liner' as its own independent hard-gate trigger, separate from the EN letter.", "note": "Carried forward unchanged." } },
+    "competition_pathway": {
+      "category": "skills",
+      "weight": 14,
+      "source": {
+        "ref": "knowledge/steps/d-to-ccc.md#competition-entry-gating-a-related-but-separate-system",
+        "cites": "USHPA P4 or IPPI-4 required to compete in CCC-eligible events — the one official, sourced gating mechanism found for this step.",
+        "note": "Scored for everyone, but only gates in combination with stated competition ambition — see thresholds/gates and config/scoring/d-to-ccc.json meta.design_decisions 'v1-competition-gate-is-scoped-to-stated-competition-intent'."
+      },
+      "options": { "has_rating": 1.0, "in_progress": 0.6, "not_sure": 0.25, "not_pursuing": 0.0 }
+    },
+    "total_airtime": { "category": "skills", "weight": 6, "source": { "ref": "knowledge/disagreements.md#2", "cites": "406 Paragliding's uncorroborated 200+ cumulative figure, and the separate uncorroborated 300-hour CCC figure, both sit inside the top band.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "under_50": 0.2, "50_100": 0.5, "100_200": 0.8, "over_200": 1.0 } },
+    "thermic_airtime": { "category": "skills", "weight": 10, "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "No new thermal-hours figure at this step.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "under_10": 0.1, "10_25": 0.3, "25_50": 0.5, "50_100": 0.8, "over_100": 1.0 } },
+    "airtime_last_12m": { "category": "skills", "weight": 15, "source": { "ref": "knowledge/steps/high-c-to-d.md#hours--experience", "cites": "Two Flybubble articles plus Seb Ospina via Cross Country Magazine converge on 100+/year for EN-D; nothing suggests this drops for CCC.", "note": "Byte-identical to high-c-to-d.json, including the gate it feeds." }, "options": { "under_25": 0.0, "25_50": 0.15, "50_100": 0.45, "100_150": 0.85, "over_150": 1.0 } },
+    "current_wing_time": { "category": "skills", "weight": 13, "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey and the documented 11-hour reserve-deployment case.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "under_20": 0.1, "20_50": 0.4, "50_100": 0.75, "over_100": 1.0 } },
+    "training_status": { "category": "skills", "weight": 2, "source": { "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class", "cites": "Wing choice deferred to the manufacturer/instructor while under supervision.", "note": "Almost certainly inert at the top of the ladder — kept for the deferral gate only." }, "options": { "in_training": 0.0, "qualified_recent": 0.4, "qualified_independent": 1.0 } },
+    "flying_frequency": { "category": "skills", "weight": 9, "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "No separate 3-month figure at this step; carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "none_3m": 0.0, "less_than_monthly": 0.15, "about_monthly": 0.4, "two_or_three_monthly": 0.8, "weekly_plus": 1.0 } },
+    "ground_handling_kiting": { "category": "skills", "weight": 6, "source": { "ref": "knowledge/steps/d-to-ccc.md#speed-bar-ground-handling-and-motivation-checked-specifically-oct-2026-genuine-gap-confirmed", "cites": "No CCC-specific ground-handling material found; EN-D's difficulty caution carries forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "struggles": 0.1, "hold_steady": 0.4, "confident_strong_wind": 0.8, "advanced_drills": 1.0 } },
+    "launch_reliability": { "category": "skills", "weight": 6, "source": { "ref": "knowledge/disagreements.md#11", "cites": "USHPA's 2001 accident summary, carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "often_aborted": 0.0, "about_half": 0.2, "most_times_easy_conditions": 0.5, "nearly_always_easy": 0.75, "reliable_wider_range": 1.0 } },
+    "thermal_turn_control": { "category": "skills", "weight": 9, "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward; no new material.", "note": "Byte-identical to high-c-to-d.json. Non-monotonic — 'not_come_up' blocks Ready via unevidenced_core_checks, no exemption." }, "options": { "not_confident": 0.0, "basic_wide_climbs": 0.25, "core_and_vary_bank": 0.75, "tight_and_shared": 1.0, "not_come_up": 0.5 } },
+    "reading_the_day": { "category": "skills", "weight": 8, "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "someone_else_judges": 0.1, "sometimes_right": 0.45, "usually_read_it": 0.8, "plan_the_day": 1.0 } },
+    "active_piloting": { "category": "skills", "weight": 11, "source": { "ref": "knowledge/steps/high-c-to-d.md#skills", "cites": "XC Mag's active-flying piece, carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "hands_still": 0.0, "grip_tight": 0.1, "try_to_react": 0.3, "work_brakes_actively": 0.55, "automatic_and_phase_aware": 1.0 } },
+    "pitch_control": { "category": "skills", "weight": 13, "source": { "ref": "knowledge/disagreements.md#1", "cites": "Both Lobb and Janaway agree pitch control is one of the skills that genuinely matters before a two-liner.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "not_thought_about": 0.05, "react_unreliably": 0.3, "damp_with_brakes": 0.75, "damp_and_rear_risers": 1.0 } },
+    "conditions_flown": { "category": "skills", "weight": 8, "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "No new conditions-flown material; carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "smooth_gentle_only": 0.15, "ridge_coastal": 0.3, "light_moderate_thermal": 0.6, "regular_thermic_days": 0.95, "strong_mountain_big_air": 1.0 } },
+    "speed_bar": { "category": "skills", "weight": 10, "source": { "ref": "knowledge/steps/d-to-ccc.md#speed-bar-ground-handling-and-motivation-checked-specifically-oct-2026-genuine-gap-confirmed", "cites": "FAI's 18cm travel cap is a wing-design constraint, not pilot-technique guidance; no CCC-specific technique material found.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "never_used": 0.15, "tried_with_height": 0.3, "sink_escape_only": 0.45, "regular_on_glides": 0.75, "trim_and_manage": 1.0, "stomp_it_on": 0.05 } },
+    "collapse_experience": { "category": "skills", "weight": 9, "source": { "ref": "knowledge/steps/d-to-ccc.md#conditions-flown--collapse-handling--psychological-factors", "cites": "Assumed at least as demanding as EN-D; no additional CCC-specific criteria found.", "note": "Byte-identical to high-c-to-d.json. Non-monotonic; combines with collapse_practice into 'collapse_response_entirely_untested'." }, "options": { "never": 0.5, "small_self_recovered": 0.75, "asymmetric_i_flew_it_out": 1.0, "froze_recovered_itself": 0.15, "lost_control": 0.0, "repeated_struggle": 0.0 } },
+    "collapse_practice": { "category": "skills", "weight": 11, "source": { "ref": "knowledge/steps/high-c-to-d.md#skills", "cites": "Winkler's training-infeasibility point, carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "no_practice": 0.0, "theory_only": 0.2, "some_self_practice": 0.45, "regular_practice": 0.85, "course_plus_regular": 1.0 } },
+    "cravat_recovery": { "category": "skills", "weight": 13, "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "Lobb and Janaway, both naming cravat clearing as a real priority — reinforced at this step by Flybubble's note that CCC's narrower, tapered tips raise cravat risk further.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "never": 0.5, "theory_only": 0.25, "resolved_itself": 0.6, "cleared_in_flight": 1.0, "practised_deliberately": 1.0 } },
+    "frontal_collapse_energy": { "category": "skills", "weight": 9, "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Malin Lobb names managing frontal-collapse energy as a must-have SIV skill.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "never_thought": 0.2, "theory_only": 0.35, "had_one_rode_it_out": 0.9, "practised_deliberately": 1.0 } },
+    "ears_deflation": { "category": "skills", "weight": 7, "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "unsure": 0.1, "ok_on_my_wing": 0.6, "routine": 0.9, "routine_plus_variation": 1.0 } },
+    "descent_options": { "category": "skills", "weight": 4, "source": { "ref": "knowledge/steps/low-c-to-high-c.md#collapse-handling", "cites": "No specific descent-option criterion at this step; carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "big_ears_only_unsure": 0.1, "big_ears_comfortable": 0.4, "ears_plus_one_more": 0.75, "ears_plus_spiral_and_folds": 1.0 } },
+    "reserve_familiarity": { "category": "skills", "weight": 4, "source": { "ref": "knowledge/steps/a-to-low-b.md#skills", "cites": "USHPA P2 (official): reserve-deployment and PLF knowledge.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "unsure": 0.0, "know_location_only": 0.5, "practised_once": 0.85, "practised_recent_repack": 1.0 } },
+    "wing_limiting_evidence": { "category": "skills", "weight": 10, "source": { "ref": "knowledge/steps/high-c-to-d.md#red-flags", "cites": "Carried forward.", "note": "Byte-identical to high-c-to-d.json. Drives 'aspirational_rather_than_demonstrated'." }, "options": { "not_really": 0.1, "occasionally_wondered": 0.35, "left_behind_on_glides": 0.75, "specific_flights": 1.0, "regularly_limiting": 1.0 } },
+    "external_feedback": { "category": "skills", "weight": 5, "source": { "ref": "knowledge/classification-overview.md#national-pilot-rating-ladders-are-a-separate-system-from-wing-class", "cites": "Direct observation outranks self-report.", "note": "Byte-identical to high-c-to-d.json. A direct 'wait' is a gate." }, "options": { "advised_to_wait": 0.0, "nobody_seen_recently": 0.35, "friends_think_so": 0.65, "instructor_suggested": 1.0 } },
+
+    "upgrade_motivation": { "category": "psychological", "weight": 12, "source": { "ref": "knowledge/disagreements.md#9", "cites": "Conservative resolution carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "wing_maxed_out": 1.0, "instructor_suggested": 1.0, "want_more_performance": 0.7, "replacing_anyway": 0.4, "keep_up_with_group": 0.15, "wing_will_handle_conditions": 0.0 } },
+    "wing_expectation": {
+      "category": "psychological",
+      "weight": 10,
+      "source": {
+        "ref": "knowledge/steps/d-to-ccc.md#skills",
+        "cites": "FAI's aspect-ratio and 18cm speed-bar-travel caps; Dust of the Universe's comparative view that a well-flown EN-D flies nearly as much as a CCC wing, with CCC's edge concentrated in high-speed glide; Flybubble's note on cravat risk from narrower, tapered tips.",
+        "note": "Reworded from high-c-to-d.json's version, same pattern as every step that genuinely changes what a pilot should expect. Top marks goes to the answer naming the glide-specific, narrower-than-expected edge."
+      },
+      "options": { "narrow_edge_glide_specific": 1.0, "more_performance_more_precision": 0.8, "modest_step": 0.5, "not_sure": 0.2, "less_work_overall": 0.05, "safer_in_turbulence": 0.0 }
+    },
+    "flying_style_intent": { "category": "psychological", "weight": 9, "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "A relaxed/low-stress flying style is a poor match for a wing whose performance only pays off flown accelerated and actively.", "note": "Byte-identical to high-c-to-d.json; applies with maximum force at the competition end of the ladder." }, "options": { "relaxed_low_stress": 0.4, "mostly_relaxed_some_pushing": 0.7, "active_and_accelerated": 1.0, "competitive": 1.0 } },
+    "progress_goals": { "category": "psychological", "weight": 6, "source": { "ref": "knowledge/disagreements.md#9", "cites": "Carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "technique_and_enjoyment": 1.0, "specific_skills": 1.0, "distance_and_numbers": 0.7, "keeping_ahead_of_peers": 0.15, "not_thought_about": 0.4 } },
+    "learning_curve_willingness": { "category": "psychological", "weight": 11, "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Adaptation-period and familiarisation-skipping warnings, carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "ground_handle_first": 1.0, "easy_days_for_a_while": 0.85, "just_fly_it": 0.15, "straight_back_to_normal": 0.0 } },
+    "ambitions": { "category": "psychological", "weight": 0, "scored": false, "source": { "ref": "knowledge/disagreements.md#9", "cites": "Deliberately zero-weighted; affects the result only through the combination gates.", "note": "Byte-identical to high-c-to-d.json. At this step, also the trigger for 'competition_entry_not_on_track' alongside competition_pathway." } },
+    "response_when_rough": { "category": "psychological", "weight": 14, "source": { "ref": "knowledge/steps/high-c-to-d.md#psychological--mindset-factors", "cites": "Hamerton's compounding-risk framework, carried forward.", "note": "Byte-identical to high-c-to-d.json. Highest single weight." }, "options": { "freeze_and_hang_on": 0.05, "tense_want_to_land": 0.2, "heart_up_keep_flying": 0.75, "calm_active_exit_plan": 1.0, "doesnt_bother_me": 0.5 } },
+    "decline_to_fly": { "category": "psychological", "weight": 8, "source": { "ref": "knowledge/steps/d-to-ccc.md#red-flags", "cites": "Carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "yes_several_comfortable": 1.0, "yes_once_or_twice": 0.85, "no_launch_anyway": 0.15, "not_come_up": 0.45 } },
+    "peer_pressure": { "category": "psychological", "weight": 9, "source": { "ref": "knowledge/steps/high-c-to-d.md#psychological--mindset-factors", "cites": "Passion Paragliding's peer-pressure material, carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "launch_anyway": 0.05, "feel_pushed_usually_wait": 0.55, "own_call_comfortable": 1.0, "not_come_up": 0.55 } },
+    "effort_already_invested": { "category": "psychological", "weight": 8, "source": { "ref": "knowledge/steps/d-to-ccc.md#red-flags", "cites": "Escalation of commitment, carried forward.", "note": "Byte-identical to high-c-to-d.json." }, "options": { "fly_anyway_dont_waste": 0.1, "tempted_but_usually_wait": 0.7, "judge_on_merits": 1.0, "not_come_up": 0.55 } },
+    "incidents_12m": { "category": "psychological", "weight": 11, "source": { "ref": "BRIEF.md#inputs", "cites": "\"Honesty about recent incidents and near misses.\"", "note": "Byte-identical to high-c-to-d.json." }, "options": { "none": 0.85, "one_or_two_reflected": 1.0, "several_unsure": 0.2, "shook_me": 0.15, "injury_or_reserve": 0.0 } }
+  },
+
+  "bonuses": [
+    {
+      "id": "manoeuvre_course_bonus",
+      "question": "manoeuvre_course",
+      "points": { "no": 0, "booked": 0.5, "one_course": 2, "more_than_one": 2 },
+      "max_total_bonus": 2,
+      "never_negative": true,
+      "applies_to": "total",
+      "source": {
+        "ref": "knowledge/steps/d-to-ccc.md#siv",
+        "cites": "Even a competition body requiring P4/IPPI-4 for CCC-eligible entry only 'highly recommends' SIV — the strongest official-adjacent evidence anywhere in the knowledge base AGAINST tightening SIV further.",
+        "note": "Byte-identical to every step below. This is the step where keeping SIV light is best-evidenced, not worst."
+      }
+    }
+  ],
+
+  "thresholds": {
+    "ready": {
+      "total_min": 87,
+      "category_floors": { "skills": 80, "psychological": 75 },
+      "on_floor_failure": "nearly_ready",
+      "source": { "ref": "BRIEF.md", "cites": "See meta.design_decisions 'v1-ready-threshold-rises-modestly-not-dramatically'.", "note": "87 against 85 at high-c-to-d — a smaller rise than that step's own jump, since there is no new skill evidence behind it this time." },
+      "critical_check_floor": {
+        "min_answer_score": 0.5,
+        "questions": [
+          "airtime_last_12m",
+          "current_wing_time",
+          "collapse_practice",
+          "pitch_control",
+          "cravat_recovery",
+          "wing_limiting_evidence",
+          "active_piloting",
+          "thermal_turn_control",
+          "response_when_rough",
+          "flying_frequency",
+          "collapse_experience",
+          "reserve_familiarity"
+        ],
+        "on_failure": "nearly_ready",
+        "source": {
+          "ref": "knowledge/steps/high-c-to-d.md",
+          "cites": "Carried forward unchanged from high-c-to-d.json.",
+          "note": "ORDER MATTERS — the engine breaks on the first failing question. competition_pathway is deliberately NOT in this list — see meta.design_decisions 'v1-competition-gate-is-scoped-to-stated-competition-intent'; it can cost scored points but can never block Ready on its own for a pilot with no competition ambition."
+        }
+      },
+      "unevidenced_core_checks": {
+        "answers": ["thermal_turn_control:not_come_up"],
+        "on_match": "nearly_ready",
+        "source": { "ref": "knowledge/disagreements.md#5", "cites": "Carried forward unchanged.", "note": "No exemption attaches." },
+        "exemptions": [],
+        "exemptions_deliberately_empty": {
+          "reason": "CCC is a competition-equipment specification by definition; a local-only pilot has no sourced route onto a CCC wing at all, the strongest case against an exemption anywhere on the ladder.",
+          "source": { "ref": "knowledge/steps/d-to-ccc.md#what-ccc-actually-is-recap-from-classification-overviewmd", "cites": "CCC is a FAI/CIVL competition-equipment specification.", "note": "Pilot-facing explanation lives in rule_messages.by_rule and the 'ccc_purpose_check' suggestion." }
+        }
+      }
+    },
+    "nearly_ready": {
+      "total_min": 55,
+      "source": { "ref": "BRIEF.md", "cites": "Held at 55, identical to every step below — strictness sits on the Ready edge and in the gates, not here.", "note": "Below 55 the result is Not yet." }
+    },
+    "not_yet": {
+      "total_max": 54.999,
+      "framing": "A legitimate, successful result — the tool working, not the pilot failing.",
+      "category_floors": { "psychological": 40, "skills": 55 },
+      "floor_rule": "If either category falls below its floor, the result is Not yet regardless of the total.",
+      "source": { "ref": "BRIEF.md#scoring-design", "cites": "\"Psychological answers carry real weight, not a side note.\"", "note": "Both floors rise modestly from high-c-to-d's 53/38." }
+    }
+  },
+
+  "gates": [
+    { "id": "still_in_training", "cap": "not_yet", "when": { "question": "training_status", "answer_in": ["in_training"] }, "message": "While you're still flying under supervision, this is your instructor's call rather than a questionnaire's — true at every step, and most of all at the top of the ladder.", "source": { "ref": "knowledge/classification-overview.md", "cites": "Carried forward.", "note": "Almost certainly inert this far up." } },
+    { "id": "thermic_hours_far_below_every_reading", "cap": "not_yet", "when": { "question": "thermic_airtime", "answer_in": ["under_10", "10_25"] }, "message": "Under about 25 hours of thermal flying is well below the figures given for the step several rungs below this one — and nothing at this step suggests the bar drops. Thermal hours on the wing you already trust is the most useful thing to add here, whichever track you're on.", "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward.", "note": "Universal gate." } },
+    { "id": "no_recent_flying", "cap": "not_yet", "when": { "question": "flying_frequency", "answer_in": ["none_3m"] }, "message": "Get current again on the wing you know before changing anything. A few flights back in easy air and this answer changes on its own.", "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward.", "note": "Universal gate." } },
+    { "id": "annual_currency_far_below_consensus", "cap": "not_yet", "when": { "question": "airtime_last_12m", "answer_in": ["under_25"] }, "message": "This is the single most consistently repeated figure in all the research behind the EN-D and CCC steps: 100-plus hours a year, ongoing, not a total you reach once. Under about 25 hours in the last 12 months is a long way short of that, whatever your lifetime total looks like. More time in the air this year, on the wing you already trust, is what moves this.", "source": { "ref": "knowledge/steps/high-c-to-d.md#hours--experience", "cites": "Carried forward unchanged.", "note": "" } },
+    {
+      "id": "competition_entry_not_on_track",
+      "cap": "not_yet",
+      "when": { "all_of": [ { "question": "ambitions", "answer_includes_any": ["competitions"] }, { "question": "competition_pathway", "answer_in": ["not_pursuing"] } ] },
+      "message": "This is worth knowing plainly, because it's the one thing about CCC wings that's actually well documented: entering CCC-eligible competition requires a recognised advanced or competition rating (an IPPI card at level 4, or your national equivalent, such as USHPA's P4) — it's the real gate, not a hours figure nobody published. You've said competing is part of your plan, but you're not currently working toward that rating. Worth looking into what it takes where you fly, alongside everything else on this list — it's a parallel track, not a detour.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#competition-entry-gating-a-related-but-separate-system", "cites": "P4/IPPI-4 required to compete in CCC-eligible events.", "note": "Scoped to stated competition ambition only — see meta.design_decisions 'v1-competition-gate-is-scoped-to-stated-competition-intent'. A pilot with no competition ambition is never capped on this answer." }
+    },
+    { "id": "collapse_control_lost", "cap": "not_yet", "when": { "question": "collapse_experience", "answer_in": ["lost_control", "repeated_struggle"] }, "message": "This is worth sorting out before anything else, and with a coach rather than alone. The class you're looking at assumes precise, immediate input to recover — it gives you less margin in the same situation, not more. Get the recovery reliable on the wing you've got first.", "source": { "ref": "BRIEF.md#scoring-design", "cites": "Carried forward.", "note": "Universal gate." } },
+    { "id": "collapse_response_entirely_untested", "cap": "not_yet", "when": { "all_of": [ { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only"] }, { "question": "collapse_experience", "answer_in": ["never", "froze_recovered_itself"] } ] }, "message": "This is the one thing worth sorting out before anything else. These wings are built to resist folding, and when they do let go, the certification wording for the class below describes demanding handling needing precise, immediate input — something to arrive with, not learn on the new wing. Neither self-practice nor a real caught collapse shows up in your answers, so there's no evidence yet from either direction. Height, a calm day, someone watching the first few — or a course, if you'd rather, though worth checking first whether the wing you'll fly can actually be realistically collapsed on one.", "source": { "ref": "knowledge/steps/high-c-to-d.md#collapse-handling", "cites": "Carried forward.", "note": "Self-practice clears it, not an SIV gate by the back door." } },
+    { "id": "unreliable_launches", "cap": "not_yet", "when": { "question": "launch_reliability", "answer_in": ["often_aborted"] }, "message": "Regularly needing several goes, getting pulled around or aborting is worth fixing before adding anything to the wing. Ground handling plus deliberate launch practice moves this faster than anything else.", "source": { "ref": "knowledge/disagreements.md#11", "cites": "Carried forward.", "note": "Universal gate." } },
+    { "id": "instructor_said_wait", "cap": "not_yet", "when": { "question": "external_feedback", "answer_in": ["advised_to_wait"] }, "message": "Someone who has watched you fly has already told you to wait. That beats anything this tool can work out — and it matters more here than anywhere else: at the top of the ladder, the specific wing and your specific plans matter more than any form can capture.", "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Direct observation outranks self-report.", "note": "Universal gate." } },
+    { "id": "two_liner_thin_previous_category", "cap": "not_yet", "when": { "all_of": [ { "question": "is_2_liner", "answer_in": ["yes"] }, { "question": "current_wing_time", "answer_in": ["under_20"] } ] }, "message": "This is the one figure in the whole research with a documented bad outcome behind it. A pilot who organised a survey of nearly 300 two-liner owners treats under about 20 hours on your previous wing as a warning sign before a two-liner specifically — and has a real case attached: someone who moved onto one with around 11 hours, took a severe collapse in rough terrain, and threw their reserve. More hours on the wing you're on now, flown properly rather than just logged, is what closes this.", "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey.", "note": "Two-liner-conditional, carried forward unchanged." } },
+    { "id": "two_liner_cravat_untested", "cap": "not_yet", "when": { "all_of": [ { "question": "is_2_liner", "answer_in": ["yes"] }, { "question": "cravat_recovery", "answer_in": ["never", "theory_only"] } ] }, "message": "This is the one skill two experts who disagree about almost everything else agree matters before a two-liner — and this class's narrower, tapered tips raise cravat risk further still. Fewer lines give collapsing fabric more room to tangle, and clearing one isn't the same instinct as clearing an ordinary collapse. Practised, deliberately, over water or with a coach, is what this needs.", "source": { "ref": "knowledge/disagreements.md#1", "cites": "Lobb and Janaway both name cravat clearing.", "note": "Two-liner-conditional, carried forward unchanged." } },
+    { "id": "two_liner_pitch_control_weak", "cap": "not_yet", "when": { "all_of": [ { "question": "is_2_liner", "answer_in": ["yes"] }, { "question": "pitch_control", "answer_in": ["not_thought_about", "react_unreliably"] } ] }, "message": "This is the other skill both experts agree on. A two-liner hands you pitch movement sooner and wants a lighter touch than the wing you're on — catching a surge on the brakes, holding it on the rear risers while you're on bar, easing off before it dives. Worth building deliberately rather than meeting for the first time on the new wing.", "source": { "ref": "knowledge/disagreements.md#1", "cites": "Pitch control named by both Lobb and Janaway.", "note": "Two-liner-conditional, carried forward unchanged." } },
+    { "id": "two_liner_frontal_energy_untested", "cap": "not_yet", "when": { "all_of": [ { "question": "is_2_liner", "answer_in": ["yes"] }, { "question": "frontal_collapse_energy", "answer_in": ["never_thought", "theory_only"] } ] }, "message": "Managing the energy that comes out of a frontal collapse is on the short list of things one detailed analysis expects before a two-liner. Worth meeting deliberately, with height or over water, rather than for the first time on the new wing.", "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Malin Lobb names frontal-collapse energy management as a must-have SIV skill.", "note": "Two-liner-conditional, carried forward unchanged." } },
+    { "id": "two_liner_ears_unsure", "cap": "not_yet", "when": { "all_of": [ { "question": "is_2_liner", "answer_in": ["yes"] }, { "question": "ears_deflation", "answer_in": ["unsure"] } ] }, "message": "In a survey of nearly 300 pilots flying two-line C wings, about a quarter had real difficulty getting ears in on the shorter line set — and the survey names it as one of its specific warning signs. Worth being confident with ears on the wing you're on before relying on them on a new one with a different pull.", "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey.", "note": "Two-liner-conditional, carried forward unchanged." } },
+    { "id": "two_liner_passive_bar_use", "cap": "not_yet", "when": { "all_of": [ { "question": "is_2_liner", "answer_in": ["yes"] }, { "question": "speed_bar", "answer_in": ["stomp_it_on"] } ] }, "message": "A survey of two-liner pilots names leaning on the bar passively, without working the brakes as the wing accelerates, as a specific warning sign — it gives a feeling of security rather than actual control, on exactly the wings where that control matters most. Easing the bar on while watching the pitch, and trimming the pressure as you go, is the habit worth building first.", "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Lindenstruth's red-flag list.", "note": "Two-liner-conditional, carried forward unchanged." } },
+    {
+      "id": "aspirational_rather_than_demonstrated",
+      "cap": "not_yet",
+      "when": { "all_of": [ { "question": "wing_limiting_evidence", "answer_in": ["not_really"] }, { "any_of": [ { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group", "wing_will_handle_conditions", "replacing_anyway"] }, { "category_below": { "category": "skills", "value": 78 } }, { "question": "thermic_airtime", "answer_in": ["under_10", "10_25", "25_50"] } ] } ] },
+      "message": "By your own account, your current wing hasn't yet been the thing stopping you — and that's the clearest marker this ladder's research gives, more pointedly here than anywhere below. Seb Ospina describes his own early jump to high-performance wings as something that set his progression back rather than forward. A later wing is very unlikely to change that on its own. Usually it means there's performance still sitting in the wing you've got, waiting to be collected.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#red-flags", "cites": "Ospina's own cautionary account, carried forward.", "note": "Threshold tightened (75→78) — see meta.design_decisions 'v1-ambition-combination-gates-tighten-one-more-notch'." }
+    },
+    {
+      "id": "equipment_as_a_fix_with_thin_readiness",
+      "cap": "not_yet",
+      "when": { "all_of": [ { "any_of": [ { "question": "upgrade_motivation", "answer_in": ["keep_up_with_group", "wing_will_handle_conditions"] }, { "question": "wing_expectation", "answer_in": ["safer_in_turbulence", "less_work_overall"] } ] }, { "any_of": [ { "category_below": { "category": "skills", "value": 78 } }, { "question": "active_piloting", "answer_in": ["hands_still", "grip_tight", "try_to_react"] }, { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only"] } ] } ] },
+      "message": "A CCC wing won't make rough air easier — at this step the trade runs the other way more clearly than anywhere below. What does make rough air easier is thermal hours, active flying, and knowing exactly what you'd do if the wing folded. All of that is available on the wing you already have.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#conditions-flown--collapse-handling--psychological-factors", "cites": "Carried forward, threshold tightened.", "note": "Combination gate, never single-answer." }
+    },
+    {
+      "id": "ambition_without_readiness",
+      "cap": "not_yet",
+      "when": { "all_of": [ { "question": "ambitions", "answer_includes_any": ["longer_xc", "competitions", "acro"] }, { "category_below": { "category": "skills", "value": 62 } } ] },
+      "message": "The goals are fine — they're the reason people keep flying, and a sports psychologist quoted in this research treats the wish to achieve goals as the force that drives real progression. The gap is the groundwork underneath them, and almost all of it is learnable on the wing you've got.",
+      "source": { "ref": "knowledge/disagreements.md#9", "cites": "Ambition is legitimate fuel; the concerning pattern is ambition paired with thin readiness.", "note": "Threshold tightened (60→62)." }
+    }
+  ],
+
+  "gates_deliberately_not_included": [
+    { "candidate": "back_flying_not_practised", "reason": "knowledge/disagreements.md points 1 and 4 forbid gating or scoring on back-flying specifically, unchanged from every step above high-b-to-low-c." },
+    { "candidate": "cumulative_300_hour_figure_as_a_hard_bar", "reason": "richiesadventures.com's 300-hour CCC figure is a single secondhand opinion, explicitly flagged by the research as unreliable — scored only via total_airtime's existing top band, never gated." },
+    { "candidate": "competition_pathway_as_a_blanket_requirement", "reason": "The sourced requirement governs competition ENTRY specifically, not ownership of a CCC wing. Gating every pilot on this answer regardless of stated plans would overclaim the source — see meta.design_decisions 'v1-competition-gate-is-scoped-to-stated-competition-intent'." },
+    { "candidate": "ground_handling_or_speed_bar_ccc_specific_test", "reason": "knowledge/steps/d-to-ccc.md explicitly checked for and confirmed no CCC-specific material beyond EN-D for either skill." },
+    { "candidate": "xc_distance_or_site_variety", "reason": "Explicitly re-checked for this step and confirmed absent, same as at high-c-to-d." },
+    { "candidate": "siv_or_manoeuvre_course_not_done", "reason": "This step has the single strongest official-adjacent evidence on the whole ladder AGAINST tightening SIV — even CCC-eligible competition entry only 'highly recommends' it. Bonus-only, capped at 2." }
+  ],
+
+  "gate_behaviour": {
+    "rule": "Any fired gate caps the recommendation at Not yet, regardless of score.",
+    "evaluation_order": "Gates are evaluated first and short-circuit: if any gate fires, the recommendation is Not yet and the threshold rules are not evaluated.",
+    "show_score_with_gate": true,
+    "max_gate_reasons_shown": 3,
+    "tone_rule": "Gate messages state what to work on and why, never that the pilot is unsuitable. The competition-pathway gate must never imply a pilot needs the rating to simply own or fly a CCC wing — only that competing in CCC-eligible events specifically requires it.",
+    "source": { "ref": "BRIEF.md#scoring-design", "cites": "Hard gates cap the result regardless of total score.", "note": "18 gates total (10 universal, including the new competition-pathway gate, + 6 two-liner-conditional + 2 ambition-combination), one more than high-c-to-d.json." }
+  },
+
+  "rule_messages": {
+    "purpose": "Pilot-safe copy for the threshold rules, same pattern as every reviewed step so far.",
+    "lookup": {
+      "algorithm": [
+        "1. message = rule_messages.by_rule[firedRule]",
+        "2. if not found: message = rule_messages.fallback_by_rule_id[firedRule.split(':')[0]]",
+        "3. if still not found: render nothing for that rule."
+      ],
+      "multiplicity": "critical_check_floor breaks on its first failing question. Gates and rules are mutually exclusive."
+    },
+    "display": { "max_rule_reasons_shown": 2, "tone_rule": "Same as gate_behaviour.tone_rule." },
+    "by_rule": {
+      "critical_check_floor:airtime_last_12m": { "message": "One thing is holding this back: how much you've flown this year. Two separate industry sources converge closely on 100-plus hours a year, ongoing, for the step below this one, and nothing suggests the bar drops here. More time in the air this year, on the wing you already trust, is what moves this.", "source": { "ref": "knowledge/steps/high-c-to-d.md#hours--experience", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:current_wing_time": { "message": "One thing is holding this back: time on the wing you're on now. More time on the wing you already trust, flown properly rather than just logged, is what moves this.", "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:collapse_practice": { "message": "One thing is holding this back, and it's the one place this ladder genuinely asks more of you than the wing you're on does. These wings are built to resist folding — the instinct needs to already be built, not learned here. Wingovers, a controlled spiral, a bigger asymmetric with someone watching, is the order to do it in.", "source": { "ref": "knowledge/steps/high-c-to-d.md#collapse-handling", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:pitch_control": { "message": "One thing is holding this back: damping a surge or a dive when the wing moves on you. Catching it on the brakes, then holding it on the rear risers while you're on bar, is the progression worth practising.", "source": { "ref": "knowledge/disagreements.md#1", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:cravat_recovery": { "message": "One thing is holding this back: clearing a cravat. Never having had one isn't the problem by itself — not having practised clearing one deliberately is. A session over water with a coach is the direct fix.", "source": { "ref": "knowledge/disagreements.md#1", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:wing_limiting_evidence": { "message": "One thing is holding this back: by your own account, your current wing hasn't clearly been the thing stopping you yet. That usually means there's performance still sitting in it, which is worth collecting first.", "source": { "ref": "knowledge/steps/high-c-to-d.md#red-flags", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:active_piloting": { "message": "One thing is holding this back: what your hands do when the air gets bumpy. This class needs genuinely active, continuous input, unlike wings that mostly recover on their own. Light, friendly bumps are the place to build the habit, not the big days.", "source": { "ref": "knowledge/steps/high-c-to-d.md#skills", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:thermal_turn_control": { "message": "One thing is holding this back: thermalling that works but isn't yet fully under your control. The suggestion below has specific things to drill.", "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:response_when_rough": { "message": "One thing is holding this back, and it isn't nerves — that part is normal. It's what happens next: tightening up and waiting it out rather than carrying on flying the wing. That builds like any other habit.", "source": { "ref": "knowledge/steps/high-c-to-d.md#psychological--mindset-factors", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:flying_frequency": { "message": "One thing is holding this back: how often you're actually getting in the air right now, over the last three months specifically. Two or three times a month changes this and several other answers with it.", "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:collapse_experience": { "message": "One thing is holding this back, and it isn't that you froze — that's the normal starting point, not a character flaw. It's that the reaction hasn't been tested yet. It's trainable, and the wing you're on is a better one to learn on than the one you're shopping for.", "source": { "ref": "knowledge/steps/d-to-ccc.md#conditions-flown--collapse-handling--psychological-factors", "cites": "Carried forward.", "note": "" } },
+      "critical_check_floor:reserve_familiarity": { "message": "One thing is holding this back, and it's the quickest to fix: not being certain you could find the reserve handle in a hurry. Two minutes in a hang check changes this permanently.", "source": { "ref": "knowledge/steps/a-to-low-b.md#skills", "cites": "Carried forward.", "note": "" } },
+      "unevidenced_core_checks:thermal_turn_control": { "message": "One thing is unevidenced rather than weak. You've said thermalling mostly hasn't come up, so it scores as neutral, not against you. But CCC is a competition-equipment class by definition, and there's no reading of the guidance for this step that a soaring-only pilot clears. Worth knowing plainly rather than finding out later.", "source": { "ref": "knowledge/disagreements.md#5", "cites": "Carried forward.", "note": "" } },
+      "ready_category_floor:skills": { "message": "Your total is in the ready band, but the skills and experience half isn't carrying its own weight yet. The suggestions below are the specific parts of it.", "source": { "ref": "knowledge/disagreements.md#5", "cites": "Carried forward.", "note": "" } },
+      "ready_category_floor:psychological": { "message": "Your total is in the ready band, but the mindset and motivation half is sitting well below the skills half. At this step they count for nearly as much as each other.", "source": { "ref": "BRIEF.md#scoring-design", "cites": "Carried forward.", "note": "" } },
+      "not_yet_category_floor:skills": { "message": "The skills and experience answers point the same way: more flying and more deliberate practice on the wing you've got, not a different wing. Every one of the things that moves this transfers to whatever you fly next.", "source": { "ref": "BRIEF.md#scoring-design", "cites": "Carried forward.", "note": "" } },
+      "not_yet_category_floor:psychological": { "message": "This one isn't about your hands. Why the change, what you expect it to give you, and how decisions get made on a day you're unsure about are where this result comes from — and none of that is a judgement on you as a pilot. It usually takes a conversation rather than another fifty hours in the air.", "source": { "ref": "knowledge/disagreements.md#9", "cites": "Carried forward.", "note": "The more serious of the two floors." } },
+      "conservative_backstop": { "message": "A few of the main questions were left blank, so there isn't quite enough here to put the result any higher than this. Nothing is counted against you for skipping them — filling them in is the whole fix.", "source": { "ref": "knowledge/disagreements.md#5", "cites": "Carried forward.", "note": "" } }
+    },
+    "fallback_by_rule_id": {
+      "critical_check_floor": { "message": "One specific check for this step came out low, and a single weak answer holds the result here even when everything else is strong. The suggestions below name which one and what moves it.", "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "", "note": "" } },
+      "unevidenced_core_checks": { "message": "One of the checks for this step hasn't been tested rather than failed. That isn't counted against you, but the result stays here until there's something to go on.", "source": { "ref": "knowledge/disagreements.md#5", "cites": "", "note": "" } },
+      "ready_category_floor": { "message": "Your total is in the ready band, but one half of it is sitting well below the other. They're scored separately on purpose.", "source": { "ref": "knowledge/disagreements.md#5", "cites": "", "note": "" } },
+      "not_yet_category_floor": { "message": "One of the two halves of this came out low enough to decide the result on its own. That's a normal, useful result — it means there's a specific half to work on.", "source": { "ref": "BRIEF.md#scoring-design", "cites": "", "note": "" } }
+    }
+  },
+
+  "always_output": {
+    "instructor_recommendation": "Whatever this says, talk it through with an instructor or, better still, someone who has actually competed or coached at CCC level. That matters more here than anywhere else on the ladder: this is the step with the least independent criteria to check a result against, and a competition mentor can tell you things no questionnaire can — including whether the specific wing suits the kind of flying or racing you actually want to do.",
+    "disclaimer": "This is a self-assessment tool based on published guidance from national associations, manufacturers, retailers and instructors. It isn't an instructor, it can't see you fly, and it isn't a safety clearance. Wing choice is your responsibility and your instructor's advice always comes first.",
+    "methodology_note": "This is the thinnest-evidenced step on the whole ladder, and worth saying so plainly rather than dressing up a thin result as a precise one. CCC isn't a safety class — it's a competition equipment specification — and almost nothing published addresses pilot readiness for it specifically, beyond what already applies to a well-flown EN-D. What IS well documented is how pilots actually get into CCC-eligible competition: through a recognised advanced or competition rating, not a wing-specific skills test. So this step leans on that rating question more than any other on the ladder, and carries the skills and judgement questions from the step below largely unchanged, because nothing suggests they stop mattering — not because new evidence demands a stricter version of them. Every weight and gate links back to the criterion it came from.",
+    "source": { "ref": "BRIEF.md#outputs", "cites": "A recommendation to discuss the upgrade with an instructor, plus a clear disclaimer.", "note": "Reflects knowledge/steps/d-to-ccc.md's own explicit recommendation to require instructor/competition-mentor consultation more heavily at this step than at any other." }
+  }
+}

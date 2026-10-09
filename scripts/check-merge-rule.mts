@@ -292,6 +292,62 @@ const CHAINS: ChainCheck[] = [
     // chain boundary where the honest expectation genuinely changes.
     mustNotMergeIds: ['airtime_last_12m', 'wing_expectation'],
   },
+  {
+    label: 'high-c-to-d -> d-to-ccc',
+    chain: ['high-c-to-d', 'd-to-ccc'],
+    // Added 2026-10-09, independently re-derived by diffing both
+    // question files directly (not trusted from d-to-ccc's own
+    // design_notes claim). 36 of 37 shared ids merge — the highest
+    // merge rate of any chain pair on the ladder, reflecting how
+    // little new skill evidence this step's own research found: it
+    // explicitly instructs treating everything that applies to EN-D
+    // as applying at least as strongly to CCC, so nearly every
+    // question is deliberately unchanged rather than re-derived.
+    expectedMergedIds: [
+      'active_piloting',
+      'airtime_last_12m',
+      'ambitions',
+      'collapse_experience',
+      'collapse_practice',
+      'collapse_training_access',
+      'conditions_flown',
+      'cravat_recovery',
+      'current_wing_time',
+      'decline_to_fly',
+      'descent_options',
+      'ears_deflation',
+      'effort_already_invested',
+      'external_feedback',
+      'flying_frequency',
+      'flying_style_intent',
+      'frontal_collapse_energy',
+      'ground_handling_kiting',
+      'incidents_12m',
+      'is_2_liner',
+      'launch_reliability',
+      'learning_curve_willingness',
+      'manoeuvre_course',
+      'peer_pressure',
+      'pitch_control',
+      'progress_goals',
+      'reading_the_day',
+      'reserve_familiarity',
+      'response_when_rough',
+      'speed_bar',
+      'thermal_turn_control',
+      'thermic_airtime',
+      'total_airtime',
+      'training_status',
+      'upgrade_motivation',
+      'wing_limiting_evidence',
+    ],
+    // wing_expectation is reworded again (CCC-specific framing).
+    // competition_pathway is entirely new at this step and has no
+    // counterpart at high-c-to-d, so it can never be a merge
+    // candidate — listed here as an explicit guard against a future
+    // regression that invents a same-named question at the step below.
+    mustNotMergeIds: ['wing_expectation', 'competition_pathway'],
+  },
 ];
 
 let failures = 0;

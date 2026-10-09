@@ -1,0 +1,66 @@
+{
+  "step": "d-to-ccc",
+  "version": 1,
+  "how_to_use": "Each persona file holds a complete answer set and the expected outcome, computed against the real scoring engine (not hand-calculated) before being written. Run with: node --experimental-strip-types scripts/check-personas.mts d-to-ccc",
+  "field_notes": {
+    "rules_expected": "Threshold rules that actually constrained the result. The engine only reports a Ready-path rule when the total itself reaches the Ready threshold (87) — persona 08's total falls short, so it reports no rule even though its skills score is well below the skills floor. See persona 08's own notes.",
+    "exemptions_expected": "Every persona here has an empty exemptions list. config/scoring/d-to-ccc.json ships an empty thresholds.ready.unevidenced_core_checks.exemptions array on purpose — CCC is a competition-equipment specification by definition, the strongest case against an exemption anywhere on the ladder.",
+    "competition_pathway_scoping": "The central new mechanism this step introduces. competition_pathway is scored for every pilot, but the competition_entry_not_on_track gate only fires when BOTH ambitions includes 'competitions' AND competition_pathway is 'not_pursuing'. Personas 03 and 04 are a deliberate pair proving this: identical answers except for one ambitions entry, same scores, but only persona 03 (which states competition intent) gets gated."
+  },
+  "persona_count_note": "Eight files. Two deliberate pairs (01/02 clean baselines for each track, 03/04 the new competition-pathway gate's scoping proof) plus four singletons sanity-checking carried-forward mechanisms (05 annual currency, 06 two-liner under-20, 07 universal collapse gate) and one realistic middling case (08, testing the modestly-raised 87 threshold). Given how much of this step's architecture is carried forward unchanged from high-c-to-d (36 of 38 questions byte-identical), the persona budget concentrates on the one genuinely new mechanism rather than re-proving mechanisms already covered at two prior rungs.",
+  "computed": {
+    "ready-three-liner": { "skills": 100.0, "psychological": 100.0, "total": 100.0, "recommendation": "ready" },
+    "ready-two-liner": { "skills": 100.0, "psychological": 100.0, "total": 100.0, "recommendation": "ready" },
+    "notyet-competition-entry-not-on-track": { "skills": 93.4, "psychological": 100.0, "total": 98.5, "recommendation": "not_yet", "gate": "competition_entry_not_on_track" },
+    "ready-ccc-without-competition-ambition": { "skills": 93.4, "psychological": 100.0, "total": 98.5, "recommendation": "ready" },
+    "notyet-annual-currency-under25": { "skills": 92.9, "psychological": 100.0, "total": 98.3, "recommendation": "not_yet", "gate": "annual_currency_far_below_consensus" },
+    "notyet-two-liner-under20": { "skills": 94.5, "psychological": 100.0, "total": 99.1, "recommendation": "not_yet", "gate": "two_liner_thin_previous_category" },
+    "notyet-collapse-response-untested": { "skills": 92.7, "psychological": 100.0, "total": 98.1, "recommendation": "not_yet", "gate": "collapse_response_entirely_untested" },
+    "nearly-borderline-skills-floor": { "skills": 65.8, "psychological": 100.0, "total": 81.9, "recommendation": "nearly_ready", "rules": [] }
+  },
+  "provenance": "Every figure above was produced by running the real engine (app/upgrade/lib/scoreEngine.ts) against each persona's answers via a throwaway script before writing the persona files, per memory practice persona-expected-values-via-real-engine — not hand-computed.",
+  "distribution": { "ready": 3, "nearly_ready": 1, "not_yet": 4 },
+  "profile_coverage": {
+    "clean_baseline_three_liner": "01 ready-three-liner",
+    "clean_baseline_two_liner": "02 ready-two-liner",
+    "new_competition_gate_capped_stated_intent": "03 notyet-competition-entry-not-on-track",
+    "new_competition_gate_silent_no_stated_intent": "04 ready-ccc-without-competition-ambition",
+    "carried_forward_annual_currency_gate": "05 notyet-annual-currency-under25",
+    "carried_forward_two_liner_under20_gate": "06 notyet-two-liner-under20",
+    "universal_collapse_response_gate": "07 notyet-collapse-response-untested",
+    "realistic_middling_pilot_raised_threshold": "08 nearly-borderline-skills-floor"
+  },
+  "gate_coverage": {
+    "competition_entry_not_on_track": ["notyet-competition-entry-not-on-track"],
+    "annual_currency_far_below_consensus": ["notyet-annual-currency-under25"],
+    "two_liner_thin_previous_category": ["notyet-two-liner-under20"],
+    "collapse_response_entirely_untested": ["notyet-collapse-response-untested"],
+    "not_exercised_by_a_persona": [
+      "two_liner_cravat_untested, two_liner_pitch_control_weak, two_liner_frontal_energy_untested, two_liner_ears_unsure, two_liner_passive_bar_use — mechanically identical to the already-reviewed low-c-to-high-c.json/high-c-to-d.json gates. Not re-tested with dedicated personas, two prior rungs deep.",
+      "still_in_training, thermic_hours_far_below_every_reading, no_recent_flying, collapse_control_lost, unreliable_launches, instructor_said_wait, aspirational_rather_than_demonstrated, equipment_as_a_fix_with_thin_readiness, ambition_without_readiness — all carried forward unchanged or near-unchanged (threshold-only changes) from high-c-to-d.json, where they are already proven."
+    ]
+  },
+  "rule_coverage": {
+    "not_exercised": [
+      "No persona in this set trips a critical_check_floor or category_floor rule specifically — persona 08's total falls short of the Ready threshold entirely rather than tripping a floor on a Ready-path total. This mirrors the equivalent gap at high-c-to-d and is a deliberate budget choice given these mechanisms are proven at two prior rungs already; a reviewer spot-check is worthwhile given the thresholds themselves moved again (85→87, floors 78/73→80/75 on the ready side, 53/38→55/40 on the not_yet side)."
+    ]
+  },
+  "suggestion_coverage": {
+    "always_pool": "Five always-on suggestions: instructor_conversation, stay_current_whatever_you_decide, compensate_after_any_upgrade, thin_evidence_honesty (replaces judge_the_specific_wing from the step below, since the letter-vs-model-variation framing doesn't carry over cleanly — this step's own confidence caveat is the more honest always-on message), plus siv_highly_recommended_not_required which is also always:true but kept outside meta.selection.always_pool.ids per the established convention.",
+    "new_at_this_step": "build_competition_pathway (fires on any answer short of already holding the rating, paired with stated competition ambition), ccc_purpose_check (fires for a local-only pilot, gently checking fit against CCC's competition-built purpose), thin_evidence_honesty (always-on, states this step's thinness directly), siv_highly_recommended_not_required (reworked from siv_fluency_expected to foreground the strongest non-mandatory evidence on the ladder).",
+    "not_exercised": "ccc_purpose_check, two_liner_goal_mismatch, frontal_energy_practice, ears_deflation_practice, familiarisation_flights_plan, equipment_wont_fix_rough_air, response_when_rough_drill, reserve_check, performance_chasing_reframe — all mechanically simple single/combo-answer triggers inherited from the high-c-to-d pattern, spot-checked by construction rather than given dedicated personas."
+  },
+  "negative_checks": [
+    "The competition-pathway gate must never fire for a pilot with no stated competition ambition, regardless of their rating status. Persona 04 is the direct proof, paired with persona 03.",
+    "No two-liner-conditional gate may fire on the three-liner track — inherited correctness from two prior rungs, spot-checked by personas 01/02/06 here.",
+    "No question or message anywhere in this step names back-flying. Verified by grep across all three config files — no occurrence at all in this step's files (unlike low-c-to-high-c and high-c-to-d, which name it once each inside their SIV suggestion, this step's SIV suggestion doesn't need to re-litigate the disagreement since it's making a different point about non-mandatory status).",
+    "The 300-hour CCC figure never appears as a bar anywhere — grep confirms it isn't quoted in any question, gate or rule message; total_airtime's bands and help text are byte-identical to high-c-to-d.json.",
+    "No suggestion may imply a pilot needs a competition rating to simply own or fly a CCC wing. 'build_competition_pathway' and the gate message both frame it specifically around competition entry.",
+    "'thin_evidence_honesty' and the reworked wing_expectation content must stay accurate to the genuinely thin evidence base — worth a reviewer copy-read specifically checking neither oversells CCC-specific danger the research doesn't actually support, nor undersells it either."
+  ],
+  "chain_notes": {
+    "merge_behaviour": "The claimed split in config/questions/d-to-ccc.json's design_notes (36 of 38 questions byte-identical to high-c-to-d.json, the highest merge rate of any chain pair on the ladder) must be independently re-verified by diffing the two files directly before being trusted, same discipline as every prior rung — see scripts/check-merge-rule.mts.",
+    "registry": "Not yet wired into app/upgrade/lib/ladder.ts STEP_REGISTRY or app/upgrade/lib/config.ts STEP_CONFIGS at the time these personas were written — that wiring is the next step after this persona suite passes. This completes the full ladder (A through CCC) once wired.",
+    "source": "BRIEF.md 'Multi-step jumps' and its recorded implementation trap."
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "step": "d-to-ccc",
+  "version": 1,
+  "meta": {
+    "trigger_operators": {
+      "question + answer_in": "Single-select match.",
+      "question + answer_includes_any": "Multi-select question contains at least one of the listed options.",
+      "category_below": "Category score strictly below a value. Evaluated after scoring.",
+      "recommendation_in": "Matches on the final recommendation, so these are evaluated after scoring and gating.",
+      "any_of / all_of": "Boolean combinators over the above.",
+      "intended_flying_context": "Matches a named profile defined in intended_flying_context.profiles in config/scoring/d-to-ccc.json ('local_only' or 'exposure_bound')."
+    },
+    "selection": {
+      "min_shown": 3,
+      "max_shown": 5,
+      "order": "ascending priority number, then config order",
+      "dedupe_by": "topic",
+      "rule": "Gate-linked suggestions always take the first slots. Then fill from triggered suggestions by priority. If fewer than three are triggered, fill from the 'always' pool.",
+      "always_pool": {
+        "ids": ["instructor_conversation", "stay_current_whatever_you_decide", "compensate_after_any_upgrade", "thin_evidence_honesty"],
+        "guarantee": "Four always-on suggestions, one more than min_shown, each on a distinct topic (instructor, currency, transition, step_confidence), matching every step below.",
+        "source": { "ref": "BRIEF.md#outputs", "cites": "\"3-5 concrete suggestions for what to work on.\" A floor of three is only meaningful if reachable from every answer set." }
+      },
+      "source": { "ref": "BRIEF.md#outputs", "cites": "\"3-5 concrete suggestions for what to work on.\"" }
+    },
+    "source_fields_are_internal": "Every 'source' block here is provenance for the owner and reviewer only, never rendered. docs/design-context.md must never be named, quoted or paraphrased anywhere a pilot can see.",
+    "tone_rules": [
+      "Every suggestion is phrased as something to do next, never as a defect to fix.",
+      "No suggestion ever encourages a hesitant pilot toward upgrading. Required by docs/design-context.md's safety guard.",
+      "Plain language only. No internal framework terminology.",
+      "Step-specific rule 1 — back-flying is never named as something to go and practise.",
+      "Step-specific rule 2 — nothing may claim CCC wings demand more skill or stricter handling than EN-D in a way the research doesn't actually support. 'thin_evidence_honesty' and the reworked wing-expectation content must stay accurate to the genuinely thin evidence base, not inflate it for dramatic effect.",
+      "Step-specific rule 3 — 'ccc_purpose_check' must never read as gatekeeping who 'deserves' a CCC wing. It ends on a positive, practical note, same discipline as the equivalent local-plans suggestions at earlier steps.",
+      "Step-specific rule 4 — SIV stays optional, and this step's own evidence (competition bodies only 'highly recommend' it even for CCC-eligible entry) is the strongest case anywhere on the ladder for NOT tightening it. Say so plainly rather than defaulting to the usual 'strongest recommendation yet' framing used at steps below."
+    ]
+  },
+
+  "suggestions": [
+    {
+      "id": "instructor_conversation",
+      "topic": "instructor",
+      "always": true,
+      "priority": 1,
+      "title": "Talk to someone who has actually flown or coached at this level",
+      "body": "Take this result to an instructor or, better still, someone who has competed or coached in CCC-eligible competition. This matters more here than at any step below — there's less published to check a result against than anywhere else on the ladder, so someone who has actually been there is doing work no questionnaire can do, including telling you whether the specific wing suits the kind of flying or racing you actually want.",
+      "source": { "ref": "BRIEF.md#outputs", "cites": "\"A recommendation to discuss the upgrade with an instructor.\"", "note": "Reinforced by knowledge/steps/d-to-ccc.md's own explicit recommendation to require instructor/competition-mentor consultation more heavily at this step than at any other." }
+    },
+    {
+      "id": "stay_current_whatever_you_decide",
+      "topic": "currency",
+      "always": true,
+      "priority": 10,
+      "title": "Protect the regular flying, whichever wing you're on",
+      "body": "The clearest figure anywhere on this ladder — 100-plus hours a year, kept up rather than banked once — comes from the step below and nothing suggests it eases off here. Worth treating as a standing commitment, not a box to tick before buying the wing.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#hours--experience", "cites": "The 100+/year consensus, carried forward.", "note": "Always by design." }
+    },
+    {
+      "id": "compensate_after_any_upgrade",
+      "topic": "transition",
+      "always": true,
+      "priority": 11,
+      "title": "Whenever you do change wing, tighten everything else for a while",
+      "body": "Any new or upgraded wing raises your risk for a while purely through unfamiliarity. Pick more conservative sites for the first weeks, fly less aggressively than usual, and read up on the specific model's handling before you fly it rather than after.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#collapse-handling", "cites": "Greg Hamerton via FAI/CIVL, carried forward.", "note": "Always by design." }
+    },
+    {
+      "id": "thin_evidence_honesty",
+      "topic": "step_confidence",
+      "always": true,
+      "priority": 12,
+      "title": "This is the thinnest-evidenced step on the whole ladder — worth knowing plainly",
+      "body": "CCC isn't a safety class the way A through D are — it's a competition equipment specification, and almost nothing published addresses pilot readiness for it specifically, beyond what already applies to a well-flown EN-D. What IS well documented is how pilots actually get into CCC-eligible competition: a recognised advanced or competition rating, not a wing-specific skills test. One independent tester's own view is worth knowing too: a well-flown EN-D now flies nearly as much as a CCC wing, with CCC's edge concentrated mainly in high-speed glide. So read this result as honest best judgement built on the clearest material available, not as a precise standard the way the lower rungs can be — and lean harder on the conversation above than on the number itself.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#source-quality-note-and-explicit-gap", "cites": "\"This step is thin by a wide margin.\"", "note": "Always by design, and carries more weight here than the equivalent step-confidence suggestion does anywhere below." }
+    },
+
+    {
+      "id": "test_fly_first",
+      "topic": "wing_choice",
+      "priority": 9,
+      "trigger": { "recommendation_in": ["ready", "nearly_ready"] },
+      "title": "Test-fly the actual wing before you buy",
+      "body": "Fly the specific model, in calm air, from a site you know, before any money changes hands. Given how much of this class's reputation outruns the actual documented difference from a well-flown EN-D, this is the step where a real test flight tells you more than the label ever will.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#skills", "cites": "Dust of the Universe's comparative EN-D/CCC view.", "note": "" }
+    },
+    {
+      "id": "build_competition_pathway",
+      "topic": "competition_pathway",
+      "priority": 1,
+      "trigger": { "all_of": [ { "question": "ambitions", "answer_includes_any": ["competitions"] }, { "question": "competition_pathway", "answer_in": ["not_pursuing", "not_sure", "in_progress"] } ] },
+      "title": "Look into the rating that actually governs competition entry",
+      "body": "This is the one thing about CCC wings that's genuinely well documented: entering CCC-eligible competition requires a recognised advanced or competition pilot rating — an IPPI card at level 4, or your national equivalent (USHPA's P4, for example). It's worth finding out exactly what that takes where you fly and starting on it alongside everything else here, rather than after — it's a parallel track, not something to leave until the wing is bought.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#competition-entry-gating-a-related-but-separate-system", "cites": "P4/IPPI-4 required for CCC-eligible competition entry.", "note": "Fires on any answer short of already holding the rating, for any pilot who has named competitions among their plans — paired with the 'competition_entry_not_on_track' gate for the clearest case (not_pursuing)." }
+    },
+    {
+      "id": "ccc_purpose_check",
+      "topic": "fit",
+      "priority": 6,
+      "trigger": { "all_of": [ { "intended_flying_context": "local_only" } ] },
+      "title": "Worth checking what a CCC wing is actually built for",
+      "body": "You've described local, ridge or coastal flying, and that's a complete way to enjoy this sport. Worth knowing plainly: CCC is a competition equipment specification first — the design trade-offs (narrower tips, tighter aspect-ratio limits, the collapse behaviour that comes with both) exist to serve racing performance specifically. One independent tester's own view is that a well-flown EN-D now flies nearly as much as a CCC wing day to day, with CCC's edge concentrated in high-speed glide — exactly the kind of flying that matters most in competition and least in local soaring. If competition isn't part of your plans, the better question might be whether an EN-D already gives you what you're after, with less of the sharper edge CCC specifically trades for.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#skills", "cites": "Dust of the Universe's comparative view; Flybubble's CCC technical explainer.", "note": "Tone rule: ends with a practical alternative, not a judgement, per docs/design-context.md's safety guard. Uses the same intended_flying_context profile as earlier steps' local-plans suggestions, though no exemption is built on it here." }
+    },
+    {
+      "id": "build_thermic_hours",
+      "topic": "thermic_hours",
+      "priority": 2,
+      "trigger": { "question": "thermic_airtime", "answer_in": ["under_10", "10_25"] },
+      "title": "Thermal hours underneath everything else on this page",
+      "body": "No source puts a new thermal-hours figure specifically on this boundary, but nothing suggests the bar drops from several rungs below. Get well past that figure before adding anything else to the equation.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "build_annual_currency",
+      "topic": "annual_currency",
+      "priority": 1,
+      "trigger": { "question": "airtime_last_12m", "answer_in": ["under_25", "25_50", "50_100"] },
+      "title": "This year's hours, specifically — the clearest figure anywhere on this ladder",
+      "body": "100-plus hours a year, kept up, not banked once and forgotten. It's worth treating as separate from your lifetime total — a pilot with thousands of hours but a quiet year is in a genuinely different position from one who's been flying every week. If you're short of it, the fix is just more flying, spread through the season rather than crammed into a few trips.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#hours--experience", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "recurrency_plan",
+      "topic": "currency_recent",
+      "priority": 1,
+      "trigger": { "question": "flying_frequency", "answer_in": ["none_3m"] },
+      "title": "Get current again first",
+      "body": "Start with ground handling, then a few easy flights at a site you know, before anything else on this list. Changing wing during a comeback stacks two unfamiliar things on top of each other at exactly the wrong moment.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "improve_currency",
+      "topic": "currency_recent",
+      "priority": 3,
+      "trigger": { "question": "flying_frequency", "answer_in": ["less_than_monthly", "about_monthly"] },
+      "title": "Get the flying more regular, month to month",
+      "body": "This is about the last three months specifically, separate from your annual total above. Two or three sessions a month is the thing that moves this answer and several others with it.",
+      "source": { "ref": "knowledge/steps/high-b-to-low-c.md#hours--experience", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "time_on_current_wing",
+      "topic": "current_wing",
+      "priority": 2,
+      "trigger": { "question": "current_wing_time", "answer_in": ["under_20", "20_50"] },
+      "title": "Put real hours on the wing you're already on",
+      "body": "A pilot who surveyed nearly 300 two-liner owners treats under about 20 hours on your previous wing as a genuine red flag before a two-liner, with a real case attached. More time on the wing you trust now, flown properly rather than just logged, is the direction either way.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey.", "note": "" }
+    },
+    {
+      "id": "wing_hasnt_limited_you_yet",
+      "topic": "readiness_evidence",
+      "priority": 1,
+      "trigger": { "question": "wing_limiting_evidence", "answer_in": ["not_really", "occasionally_wondered"] },
+      "title": "Find out whether the wing is actually the limit",
+      "body": "You've said your current wing hasn't clearly held you back. Over the next few flights, write down what actually stopped you each time you didn't get where you wanted. If it keeps coming back to glide, you've got your answer. If it doesn't, you've found something cheaper and faster to fix than a new wing — and at the very top of the ladder, that's worth taking especially seriously.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#red-flags", "cites": "The general ambition-outrunning-currency pattern, carried over from D.", "note": "" }
+    },
+    {
+      "id": "performance_chasing_reframe",
+      "topic": "motivation_performance",
+      "priority": 4,
+      "trigger": { "all_of": [ { "question": "upgrade_motivation", "answer_in": ["want_more_performance"] }, { "question": "wing_limiting_evidence", "answer_in": ["not_really", "occasionally_wondered"] } ] },
+      "title": "Wanting more performance is fine — worth hearing one pilot's own experience first",
+      "body": "Seb Ospina, who reached this level young, is candid that his own early jump to high-performance wings set his progression back rather than forward, and offers it as a caution. None of that means your motive is wrong — it means it's worth checking where your flights are actually being lost before paying for numbers you might already be leaving on the table, especially given how marginal the real-world gap over a well-flown EN-D may actually be.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#psychological--mindset-factors", "cites": "Seb Ospina's own account, carried forward.", "note": "" }
+    },
+    {
+      "id": "equipment_wont_fix_rough_air",
+      "topic": "motivation_safety_margin",
+      "priority": 4,
+      "trigger": { "question": "wing_expectation", "answer_in": ["safer_in_turbulence", "less_work_overall"] },
+      "title": "A CCC wing won't make rough air easier",
+      "body": "At the top of this ladder the trade runs the other way more clearly than anywhere below it. What makes rough air easier is thermal hours, active flying, and knowing exactly what you'd do if the wing folded — all available on the wing you already have.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#conditions-flown--collapse-handling--psychological-factors", "cites": "Assumed at least as demanding as EN-D.", "note": "" }
+    },
+    {
+      "id": "ground_handling_basics",
+      "topic": "ground_handling",
+      "priority": 5,
+      "trigger": { "question": "ground_handling_kiting", "answer_in": ["struggles", "hold_steady"] },
+      "title": "Build the kiting up before you meet the actual wing",
+      "body": "Experienced pilots describe EN-D wings as genuinely difficult to ground handle, and nothing suggests CCC is easier. Build the basics on a wing you already know first: holding it steady overhead, walking around under it, turning it, killing it quickly, in genuinely light wind before moving to a slope.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#skills", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "launch_practice",
+      "topic": "launch",
+      "priority": 6,
+      "trigger": { "question": "launch_reliability", "answer_in": ["often_aborted", "about_half"] },
+      "title": "Widen the launches, not just the success rate",
+      "body": "The general accident data found around two-thirds of accidents happen on the ground or in the first seconds of flight, at every rating level. Widen the range deliberately — more wind, some cross, slopes you haven't launched before.",
+      "source": { "ref": "knowledge/disagreements.md#11", "cites": "USHPA's 2001 Paragliding Accident Summary.", "note": "" }
+    },
+    {
+      "id": "thermal_skills_drill",
+      "topic": "thermalling",
+      "priority": 3,
+      "trigger": { "question": "thermal_turn_control", "answer_in": ["not_confident", "basic_wide_climbs"] },
+      "title": "Work on turning accurately in lift",
+      "body": "Linked turns at different bank angles, both directions, changed deliberately rather than left to the wing — then use that to centre. A wing with sharper feedback is only worth having if you can already act on what it tells you.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "active_piloting_drill",
+      "topic": "active_piloting",
+      "priority": 3,
+      "trigger": { "question": "active_piloting", "answer_in": ["hands_still", "grip_tight", "try_to_react"] },
+      "title": "Make active flying automatic before the wing needs it",
+      "body": "In light, friendly bumps: keep brake pressure even, easing up when the wing surges and taking a little when it goes light. This class needs genuinely active, continuous input, unlike wings that mostly sort themselves out.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#skills", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "pitch_control_practice",
+      "topic": "two_liner_skills",
+      "priority": 1,
+      "trigger": { "question": "pitch_control", "answer_in": ["not_thought_about", "react_unreliably"] },
+      "title": "Build pitch control deliberately, not by trial and error",
+      "body": "This is one of the two skills that two experts who disagree about almost everything else still agree on. Start with catching a surge on the brakes, in mild turbulence, then build to holding it on the rear risers while you're accelerated on bar. A coach or an SIV session is the fastest way to get it reliable.",
+      "source": { "ref": "knowledge/disagreements.md#1", "cites": "Lobb and Janaway both name pitch control.", "note": "" }
+    },
+    {
+      "id": "cravat_clearing_practice",
+      "topic": "two_liner_skills",
+      "priority": 1,
+      "trigger": { "question": "cravat_recovery", "answer_in": ["never", "theory_only"] },
+      "title": "Practise clearing a cravat deliberately, with height",
+      "body": "The other skill both of those experts agree on — and worth taking especially seriously here, since CCC's narrower, tapered tips raise cravat risk further than a D. Never having had one isn't the problem — not having practised clearing one is. An SIV session over water with a coach watching is the direct, deliberate way to close this.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#skills", "cites": "Flybubble's CCC technical explainer on tip tapering and cravat risk.", "note": "" }
+    },
+    {
+      "id": "frontal_energy_practice",
+      "topic": "two_liner_skills",
+      "priority": 2,
+      "trigger": { "question": "frontal_collapse_energy", "answer_in": ["never_thought", "theory_only"] },
+      "title": "Get a feel for frontal-collapse energy before you need it",
+      "body": "One analysis names managing the energy that comes out of a frontal collapse as a specific must-have before a two-liner — it's the loud version of pitch control. Height, a calm day or better still an SIV course, is where to meet this deliberately.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#skills", "cites": "Malin Lobb's SIV skill list.", "note": "" }
+    },
+    {
+      "id": "ears_deflation_practice",
+      "topic": "two_liner_skills",
+      "priority": 2,
+      "trigger": { "question": "ears_deflation", "answer_in": ["unsure"] },
+      "title": "Get confident with ears before relying on them on a new wing",
+      "body": "In a survey of nearly 300 two-line C pilots, about a quarter had real trouble getting ears in on the shorter line set specifically. Build the habit on the wing you're on now: routine ears, then ears plus a turn, so it's second nature before the pull changes under you.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "Lindenstruth's survey.", "note": "" }
+    },
+    {
+      "id": "speed_bar_active_management",
+      "topic": "speed_bar",
+      "priority": 4,
+      "trigger": { "question": "speed_bar", "answer_in": ["stomp_it_on", "regular_on_glides"] },
+      "title": "Manage the bar actively rather than leaning on it",
+      "body": "Bar use is close to constant at this level. A survey of two-liner pilots names relying on the bar passively, without working the brakes as the wing accelerates, as a specific warning sign. Practise easing the bar on while watching the pitch, trimming the pressure as you go, on the wing you're on now.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#skills", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "familiarisation_flights_plan",
+      "topic": "transition_plan",
+      "priority": 3,
+      "trigger": { "question": "learning_curve_willingness", "answer_in": ["just_fly_it", "straight_back_to_normal"] },
+      "title": "Plan the first weeks on the new wing before you buy it",
+      "body": "One pilot who wrote about his own move to a two-liner put the first ~50 hours down mostly to adapting. Ground handle it first, give the early flights to easy days you'd normally think were too tame, and build up from there — nothing about this step shortens that curve.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#hours--experience", "cites": "richiesadventures' ~50-hour estimate.", "note": "" }
+    },
+    {
+      "id": "two_liner_goal_mismatch",
+      "topic": "fit_two_liner",
+      "priority": 5,
+      "trigger": { "all_of": [ { "question": "is_2_liner", "answer_in": ["yes"] }, { "question": "flying_style_intent", "answer_in": ["relaxed_low_stress"] } ] },
+      "title": "Worth checking a two-liner at this level is actually what you want",
+      "body": "You've said your flying is mostly relaxed and low-stress. A survey names exactly this combination — wanting calm, easy flying while shopping a two-liner — as a mismatched goal: the performance only pays off when it's flown accelerated and actively. That's at its most extreme at CCC level, where the entire equipment class is built around competitive performance.",
+      "source": { "ref": "knowledge/steps/low-c-to-high-c.md#red-flags", "cites": "Lindenstruth's mismatched-goal red flag.", "note": "" }
+    },
+    {
+      "id": "siv_highly_recommended_not_required",
+      "topic": "siv",
+      "always": true,
+      "priority": 7,
+      "title": "SIV stays optional — and this step has the clearest evidence yet for keeping it that way",
+      "body": "SIV stays optional, same as every step — skipping it isn't a mark against you. Worth knowing the strongest piece of official-adjacent evidence anywhere in this research on the question: even a national competition body that requires a recognised advanced rating just to enter CCC-eligible competition only 'highly recommends' an SIV or wing-control course, rather than mandating one. That's a genuine counterweight to the 'SIV is near-essential at the top of the ladder' framing found elsewhere. The skill that actually matters — cravat clearing and pitch control, built from practice on the wing you're on now — is worth having regardless of whether it comes from a formal course.",
+      "source": { "ref": "knowledge/steps/d-to-ccc.md#siv", "cites": "US Paragliding Competitions: SIV 'highly recommended', not mandatory, for CCC-eligible Overall Class entry.", "note": "The one place on the ladder where the step's own evidence argues explicitly against tightening SIV further, and the suggestion says so plainly rather than defaulting to the usual escalating framing." }
+    },
+    {
+      "id": "collapse_practice_now",
+      "topic": "collapse",
+      "priority": 1,
+      "trigger": { "question": "collapse_practice", "answer_in": ["no_practice", "theory_only", "some_self_practice"] },
+      "title": "Get the collapse reaction solid before the wing, not after",
+      "body": "These wings are built to resist folding, and when they do let go you want the reaction to already be automatic, not something you work out in the moment. Wingovers, a controlled spiral, and a bigger asymmetric with someone watching, roughly in that order, is the usual progression.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#collapse-handling", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "response_when_rough_drill",
+      "topic": "fear_response",
+      "priority": 4,
+      "trigger": { "question": "response_when_rough", "answer_in": ["freeze_and_hang_on", "tense_want_to_land"] },
+      "title": "The nerves are normal — build what you do next",
+      "body": "Tensing up or wanting to land when it gets bumpy isn't a character flaw. What's worth building deliberately is the next bit: a specific exit plan you already know before you need it, and practice staying active on the controls rather than just holding on.",
+      "source": { "ref": "knowledge/steps/high-c-to-d.md#psychological--mindset-factors", "cites": "Carried forward.", "note": "" }
+    },
+    {
+      "id": "reserve_check",
+      "topic": "reserve",
+      "priority": 8,
+      "trigger": { "question": "reserve_familiarity", "answer_in": ["unsure", "know_location_only"] },
+      "title": "Check you could actually find the handle in a hurry",
+      "body": "Two minutes in a hang check, done properly, fixes this permanently. Worth doing before any wing change, not just this one.",
+      "source": { "ref": "knowledge/steps/a-to-low-b.md#skills", "cites": "USHPA P2.", "note": "" }
+    }
+  ]
+}
