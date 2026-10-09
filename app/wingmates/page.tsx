@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import TestimonialMerakai from '@/components/General/TestimonialMerakai';
 import PricingWingmates from '@/components/General/PricingWingmates';
+import WingmatesPromoBanner from '@/components/General/WingmatesPromoBanner';
 import WallOfLove from '@/components/General/WallOfLove';
 import ParallaxTestimonials from '@/components/General/ParallaxTestimonials';
 import {
@@ -265,7 +266,9 @@ function Refrain({
 
 export default function WingmatesPage() {
   return (
-    <main className="bg-black text-white overflow-x-hidden">
+    <>
+      <WingmatesPromoBanner />
+      <main className="bg-black text-white overflow-x-hidden">
       {/* ===== 1. HERO ===== */}
       {/*
         The section is black and the glow covers it edge to edge. Previously the wash was a
@@ -744,6 +747,7 @@ export default function WingmatesPage() {
       */}
 
       <ParallaxTestimonials />
-    </main>
+      </main>
+    </>
   );
 }
