@@ -98,7 +98,7 @@ export const teacher = {
     'Flow coach, trained through the Flow Centre.',
     'Instructor and Guide at Birdmen Paragliding and Cofounder of the Sparrows XC Mentorship Academy.',
     'Founder of Wingmates, a paragliding mentorship community.',
-    "I've set multiple local XC records, including, as far as anyone can tell, the furthest any footlaunch pilot had flown on an EN B in South Africa (193km from Sir Lowry's Pass). I'm also one of a handful of pilots to have flown over 200km in the Western Cape.",
+    "Set multiple local XC records, including the furthest footlaunch flight on an EN B in South Africa (193km from Sir Lowry's Pass). One of a handful of pilots to have ever flown over 200km in the Western Cape Province, South Africa.",
   ],
 };
 
