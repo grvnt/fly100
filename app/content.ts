@@ -472,7 +472,7 @@ export const lastCall = {
     'The founding Fly100 cohort kicks off on Thursday 10 December, and enrolment closes at midnight on Black Friday, 27 November. The founding price is $297, and it rises for the next cohort.',
   ],
   cta: 'Join the Waitlist',
-  signoff: 'Happy flying,\nGrant',
+  signoff: 'Happy flying 🪽\nGrant',
   ps:
     "P.S. Your next personal best won't come from flying more hours. It will come from the questions you ask after you land. The first 5 pilots to join within 24 hours of doors opening (Monday 23 November) also get a private 30-minute Personal XC Strategy Call with me.",
 };

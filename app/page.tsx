@@ -843,13 +843,15 @@ export default function Home() {
                 {lastCall.ps}
               </p>
 
-              <div className="mt-14 flex items-center gap-5">
-                {/* Grant's in-flight selfie as a signature portrait — slightly
-                    rounded square (rounded-2xl) so it reads as a framed photo
-                    rather than an avatar, sized to sit comfortably next to the
-                    two-line signoff. Soft ring + subtle glow preserved from the
-                    original treatment; both still work with the square shape. */}
-                <div className="w-[132px] h-[132px] shrink-0 rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_48px_rgba(0,118,255,0.14)]">
+              <div className="mt-14 flex items-center justify-center gap-6">
+                <div className={`${BODY_ON_DARK} whitespace-pre-line text-left`}>
+                  {lastCall.signoff}
+                </div>
+                {/* Grant's in-flight selfie, kept in its natural landscape
+                    shape (848×444, the real source aspect) rather than
+                    force-cropped into a square — reads as a real photo,
+                    not an avatar. Sits to the right of the signoff. */}
+                <div className="w-[180px] sm:w-[220px] shrink-0 aspect-[848/444] rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-[0_0_48px_rgba(0,118,255,0.14)]">
                   <Image
                     src="/grant-signoff.png"
                     alt="Grant Smith, mid-flight"
@@ -858,9 +860,6 @@ export default function Home() {
                     className="w-full h-full object-cover"
                     style={{ objectPosition: "25% 50%" }}
                   />
-                </div>
-                <div className={`${BODY_ON_DARK} whitespace-pre-line`}>
-                  {lastCall.signoff}
                 </div>
               </div>
             </div>
