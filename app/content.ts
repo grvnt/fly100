@@ -232,11 +232,24 @@ export const bonuses = {
 
 /**
  * Section 7 — "What pilots say"
- * Five testimonials. Senja, cleared for use. Rendered as a mix of Band (statement) and
- * MemberQuote markup. Photo URLs are Senja CDN-hosted; `photo` is optional and
- * falls back to an initial-circle when absent (currently Farrell).
+ * Six testimonials. Senja, cleared for use. Rendered as a mix of Band (statement) and
+ * MemberQuote markup. Photo URLs are Senja CDN-hosted, except Farrell's which is a
+ * local file (`photo` is optional and falls back to an initial-circle when absent).
  */
 export const testimonials: Array<{ quote: string; name: string; photo?: string }> = [
+  {
+    quote:
+      'Through flight debriefs, Grant helped me understand how thermals actually behave, and how my own reactions — turning small problems into bigger ones — were feeding my fear. My last three or four flights have all been new personal bests, and an 80km flight that once felt far off is now in my crosshairs.',
+    name: 'Ben Haire',
+    photo:
+      'https://cdn.senja.io/public/avatar/2beed4e1-1f37-462b-bf65-b51d88eaddca_D996F0F9-08ED-47EF-8F43-AEB37573D238.jpeg',
+  },
+  {
+    quote:
+      'My debriefs helped me see where I could improve — maxing the thermals, being aware of my emotional state, feeling what the air and the wing were doing. My thermal handling became consistent, and on my 50km flight I could see the lines and choose between route A, B, or C.',
+    name: 'Farrell Davids',
+    photo: '/farrell-davids.jpg',
+  },
   {
     quote:
       'In the last two months I have made more progress... broke my personal best twice, crossed over to another valley for the first time and was higher than ever before!',
@@ -252,12 +265,6 @@ export const testimonials: Array<{ quote: string; name: string; photo?: string }
       'https://cdn.senja.io/public/avatar/95351647-9b01-4a31-b89a-6bf97540cdb9_Birdmen%20Paragliding%2C%20Kardoesie%20SW%20-%20Samuel%20Tome%20%2820250715%29%20%28STP53969%29_2048px.jpg',
   },
   {
-    quote: "I'm finally starting to feel like I'm actually flying now",
-    name: 'Kurt Bester',
-    photo:
-      'https://cdn.senja.io/public/avatar/acab6065-c6ef-4b5a-89e1-7acf0267d3a7_F351DA62-F948-450F-BDA7-698C63033D68.jpeg',
-  },
-  {
     quote:
       'I was searching for a long time why I lack flow state during paragliding... I followed the steps — and got it! And will never let it go.',
     name: 'Nikola Dentschev',
@@ -265,10 +272,10 @@ export const testimonials: Array<{ quote: string; name: string; photo?: string }
       'https://cdn.senja.io/public/avatar/e8ad2ea2-f32d-4b7f-a207-92b31d3ee946_IMG_4384.jpeg',
   },
   {
-    quote:
-      'My debriefs helped me see where I could improve — maxing the thermals, being aware of my emotional state, feeling what the air and the wing were doing. My thermal handling became consistent, and on my 50km flight I could see the lines and choose between route A, B, or C.',
-    name: 'Farrell Davids',
-    photo: '/farrell-davids.jpg',
+    quote: "I'm finally starting to feel like I'm actually flying now",
+    name: 'Kurt Bester',
+    photo:
+      'https://cdn.senja.io/public/avatar/acab6065-c6ef-4b5a-89e1-7acf0267d3a7_F351DA62-F948-450F-BDA7-698C63033D68.jpeg',
   },
 ];
 
