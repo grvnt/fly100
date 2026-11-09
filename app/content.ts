@@ -38,7 +38,7 @@ export const proofTeaser = {
  * Grant's origin story, verbatim. Rendered as paragraph blocks with one pull quote.
  */
 export const origin = {
-  heading: 'I landed 100km from launch and had no idea how I got there',
+  heading: 'I Landed 100km from Launch and Had No Idea How I Got There',
   blocks: [
     {
       type: 'p' as const,
@@ -91,7 +91,7 @@ export const origin = {
  * Section 3 — "Who's teaching this". Short credentials list.
  */
 export const teacher = {
-  heading: "Who's teaching this",
+  heading: "Who's teaching this?",
   lead: "I'm Grant, a paragliding instructor, XC guide and flow coach.",
   credentials: [
     'SAHPA Grade B and Grade C (tandem) instructor.',
@@ -108,7 +108,7 @@ export const teacher = {
  * callout surfaced as an Refrain element.
  */
 export const method = {
-  heading: 'Learn on the ground, so you can fly in flow',
+  heading: 'Learn on the Ground, Fly in Flow',
   blocks: [
     {
       type: 'p' as const,
