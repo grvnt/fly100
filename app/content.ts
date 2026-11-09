@@ -95,7 +95,7 @@ export const teacher = {
   lead: "I'm Grant, a paragliding instructor, XC guide and flow coach.",
   credentials: [
     'SAHPA Grade B and Grade C (tandem) instructor.',
-    'Flow coach, trained through the Flow Centre (ICF Level 2 accredited).',
+    'Flow coach, trained through the Flow Centre.',
     'I instruct for Birdmen Paragliding and run the Birdmen Sparrows XC mentorship cohort.',
     'Founder of Wingmates, a paragliding mentorship community.',
     "I've set multiple local XC records, including, as far as anyone can tell, the furthest any footlaunch pilot had flown on an EN B in South Africa (193km from Sir Lowry's Pass). I'm also one of a handful of pilots to have flown over 200km in the Western Cape.",
