@@ -14,6 +14,7 @@ import {
   whatYouGet,
   bonuses,
   testimonials,
+  pullQuotes,
   pricing,
   notThis,
   timeline,
@@ -269,6 +270,39 @@ function TestimonialCard({
         <span className="text-[14px] font-semibold text-[#4DA3FF]">{name}</span>
       </figcaption>
     </figure>
+  );
+}
+
+function PullQuote({
+  quote,
+  name,
+  photo,
+}: {
+  quote: string;
+  name: string;
+  photo?: string;
+}) {
+  return (
+    <section
+      className="px-6 sm:px-8 py-14 sm:py-16"
+      style={{ backgroundColor: BAND }}
+    >
+      <div className="max-w-[46rem] mx-auto">
+        <figure className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-7">
+          <TestimonialAvatar name={name} photo={photo} size={80} />
+          <div className="flex-1 border-l-2 border-[#0076FF] pl-6">
+            <blockquote
+              className={`${DISPLAY} text-[20px] sm:text-[22px] font-light leading-[1.4] tracking-[-0.015em] text-white`}
+            >
+              &ldquo;{quote}&rdquo;
+            </blockquote>
+            <figcaption className="mt-4 text-[14px] font-semibold tracking-[0.02em] text-[#4DA3FF]">
+              — {name}
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </section>
   );
 }
 
@@ -735,6 +769,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ===== 12.5 PULL-QUOTE — Nick, answers "am I good enough?" ===== */}
+        <PullQuote {...pullQuotes.beforeForYou} />
+
         {/* ===== 13. IS THIS FOR YOU ===== */}
         <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
           <div className={WRAP}>
@@ -828,6 +865,24 @@ export default function Home() {
                   {p}
                 </p>
               ))}
+              <figure className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-7">
+                <TestimonialAvatar
+                  name={pullQuotes.beforeClose.name}
+                  photo={pullQuotes.beforeClose.photo}
+                  size={80}
+                />
+                <div className="flex-1 border-l-2 border-[#0076FF] pl-6">
+                  <blockquote
+                    className={`${DISPLAY} text-[20px] sm:text-[22px] font-light leading-[1.4] tracking-[-0.015em] text-white`}
+                  >
+                    &ldquo;{pullQuotes.beforeClose.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-4 text-[14px] font-semibold tracking-[0.02em] text-[#4DA3FF]">
+                    — {pullQuotes.beforeClose.name}
+                  </figcaption>
+                </div>
+              </figure>
+
               <div className="mt-10">
                 <CtaQuiet label={lastCall.cta} />
               </div>

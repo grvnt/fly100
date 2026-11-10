@@ -258,10 +258,9 @@ export const testimonials: Array<{ quote: string; name: string; photo?: string }
   },
   {
     quote:
-      'In the last two months I have made more progress... broke my personal best twice, crossed over to another valley for the first time and was higher than ever before!',
-    name: 'Zee',
-    photo:
-      'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
+      "The debriefs really helped me understand my flights better, identify inefficient routes and recognise decisions I could have made differently. More importantly, I understood why certain decisions weren't the best and how to manage difficult conditions better.",
+    name: 'Nick Hewitt',
+    photo: '/nick-hewitt.jpg',
   },
   {
     quote:
@@ -278,12 +277,33 @@ export const testimonials: Array<{ quote: string; name: string; photo?: string }
       'https://cdn.senja.io/public/avatar/e8ad2ea2-f32d-4b7f-a207-92b31d3ee946_IMG_4384.jpeg',
   },
   {
+    quote:
+      'In the last two months I have made more progress... broke my personal best twice, crossed over to another valley for the first time and was higher than ever before!',
+    name: 'Zee',
+    photo:
+      'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
+  },
+];
+
+/**
+ * Single pull-quotes placed mid-page (same look as proofTeaser).
+ * - beforeForYou: sits between the guarantee and "Is this for you?"
+ * - beforeClose: sits in Last Call, above the final button
+ */
+export const pullQuotes = {
+  beforeForYou: {
+    quote:
+      'The biggest change was realising that I did have the ability to do XC flying and that I needed to trust my knowledge and decisions more.',
+    name: 'Nick Hewitt',
+    photo: '/nick-hewitt.jpg',
+  },
+  beforeClose: {
     quote: "I'm finally starting to feel like I'm actually flying now",
     name: 'Kurt Bester',
     photo:
       'https://cdn.senja.io/public/avatar/acab6065-c6ef-4b5a-89e1-7acf0267d3a7_F351DA62-F948-450F-BDA7-698C63033D68.jpeg',
   },
-];
+};
 
 /**
  * Section 8 — "Add it all up". The pricing summary.
@@ -489,7 +509,7 @@ export const lastCall = {
     'The founding Fly100 cohort kicks off on Thursday 10 December, and enrolment closes at midnight on Black Friday, 27 November. The founding price is $297, and it rises for the next cohort.',
   ],
   cta: 'Join the Waitlist',
-  signoff: 'Happy flying 🪽\nGrant',
+  signoff: 'Happy flying,\nGrant 🪂🪽',
   ps:
     "P.S. Your next personal best won't come from flying more hours. It will come from the questions you ask after you land. The first 5 pilots to join within 24 hours of doors opening (Monday 23 November) also get a private 30-minute Personal XC Strategy Call with me.",
 };
