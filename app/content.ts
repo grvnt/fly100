@@ -131,6 +131,11 @@ export const method = {
     {
       type: 'p' as const,
       text:
+        "The same questions work forwards. Study how other pilots flew your dream route, and you've flown it in your head before you launch. In Fly100 the two run together every week as the PARA Loop: Prepare, Air, Reflect, Adjust.",
+    },
+    {
+      type: 'p' as const,
+      text:
         "There's research behind the habit. Debriefing, also called an after-action review, improved performance by about 25% on average across 46 samples (Tannenbaum & Cerasoli, 2013). A later review of 61 studies found that self-led debriefs work when they're anchored in an objective record (Keiser & Arthur, 2021), and your tracklog is exactly that.",
     },
     {
@@ -157,8 +162,9 @@ export const whatYouGet = {
   items: [
     {
       label: 'Training',
-      title: 'The Fly100 Debrief System',
-      body: 'Read any tracklog through six lenses.',
+      title: 'The Fly100 PARA Loop',
+      body:
+        'Prepare, Air, Reflect, Adjust. Every week, study a 100km flight (or one on your dream route), compare it with one of your own, and find your next step.',
     },
     {
       label: 'Quests',
@@ -178,7 +184,7 @@ export const whatYouGet = {
     {
       label: 'Training',
       title: 'Flow Training Built In',
-      body: "Learn to spot when you're in flow and what pulls you out.",
+      body: "Learn to spot when you're in flow and what pulls you out, and how fear and ego shape your decisions.",
     },
     {
       label: 'Live call',
@@ -286,7 +292,7 @@ export const pricing = {
   heading: 'Add it all up',
   stack: [
     {
-      line: 'The Fly100 Programme: Debrief System, weekly quests, FlowGhost, flow training, live kickoff',
+      line: 'The Fly100 Programme: PARA Loop, weekly quests, FlowGhost, flow training, live kickoff',
       value: '$397',
     },
     { line: 'Bonuses (see above)', value: '$924' },
@@ -352,7 +358,7 @@ export const timeline = {
     {
       when: 'Week 1, from Mon 11 Jan',
       what:
-        'Install the system. Learn the Fly100 Debrief System and debrief a flight of your own.',
+        'Install the system. Learn the Fly100 PARA Loop: study your first 100km flight (or one on your dream route) and compare it with one of your own.',
     },
     {
       when: 'Weeks 2 to 6',
@@ -377,8 +383,8 @@ export const walkAway = {
   heading: 'What you walk away with',
   items: [
     "A debrief habit you'll still be using next season.",
-    "Your own system for reading a tracklog, yours and other pilots'.",
-    'A library of your own debriefed flights, and a project you can explain in one sentence.',
+    'Your own system for reading a tracklog, to prepare your route and debrief your flight.',
+    'A library of six studied 100km flights, your own flights compared against them, and a project you can explain in one sentence.',
     "Clearer, calmer decisions in the air, because you know what's holding you back.",
     'A real answer to "what should I work on next?"',
     'A community of pilots who debrief, and a year of it included.',
@@ -432,11 +438,15 @@ export const faq = {
     },
     {
       q: 'Do I have to be flying during the 6 weeks?',
-      a: "No. You can run the loop on your own flights, friends' or master tracklogs, or filmed ground handling. It works in your off-season.",
+      a: "No. Each week you study a 100km flight and compare it with one of your own, new or old. If you're not flying, you rehearse on the ground or ground handle. It works in your off-season.",
     },
     {
       q: 'What if I fall behind?',
       a: 'You keep lifetime access to the course, so you can catch up any time.',
+    },
+    {
+      q: 'How much time does it take?',
+      a: 'About two hours a week. Every quest has a 30-minute version.',
     },
     {
       q: 'Do I get coaching?',
