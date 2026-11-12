@@ -13,6 +13,7 @@ import {
   teacher,
   method,
   whatYouGet,
+  flowghost,
   bonuses,
   testimonials,
   pullQuotes,
@@ -301,6 +302,168 @@ function PullQuote({
   );
 }
 
+function StepList({
+  items,
+  startAt,
+  last,
+  first = false,
+}: {
+  items: typeof whatYouGet.items;
+  startAt: number;
+  last: boolean;
+  first?: boolean;
+}) {
+  return (
+    <ol className={first ? 'mt-16' : ''}>
+      {items.map((step, i) => {
+        const isEnd = i === items.length - 1;
+        return (
+          <li
+            key={step.title}
+            className={`relative grid grid-cols-[auto_1fr] gap-x-6 sm:gap-x-8 ${
+              isEnd && last ? '' : 'pb-14'
+            }`}
+          >
+            <div className="relative">
+              <span
+                aria-hidden="true"
+                className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-[#0076FF] bg-black text-[15px] font-semibold text-[#4DA3FF]"
+              >
+                {String(startAt + i).padStart(2, '0')}
+              </span>
+              {!(isEnd && last) ? (
+                <span
+                  aria-hidden="true"
+                  className="absolute left-1/2 top-14 -ml-px h-[calc(100%-3.5rem)] w-px bg-white/12"
+                />
+              ) : null}
+            </div>
+            <div className="pt-2.5">
+              <p className={`${EYEBROW} mb-2`}>{step.label}</p>
+              <h3 className={`${H3} mb-3`}>{step.title}</h3>
+              <p className={BODY}>{step.body}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+/**
+ * FlowGhost standout block: wider than the page column, glowing blue card,
+ * "Free inside Fly100" badge, three benefit lines and a visual. Without a
+ * `media` asset the visual slot shows the FlowGhost mascot.
+ */
+function FlowGhostBlock({
+  number,
+  label,
+  badge,
+  heading,
+  lead,
+  points,
+  closing,
+  mascot,
+  media,
+}: {
+  number: number;
+} & typeof flowghost) {
+  return (
+    <div>
+      <div className="relative overflow-hidden rounded-3xl border border-[#0076FF]/50 bg-gradient-to-br from-[#0F1724] via-[#0A0E14] to-black shadow-[0_0_64px_rgba(0,118,255,0.18)]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-[#0076FF]/20 blur-3xl"
+        />
+        <div className="relative flex flex-col gap-8 p-7 sm:p-10">
+          <div>
+            <div className="flex flex-wrap items-center gap-3 mb-5">
+              <span
+                aria-hidden="true"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-[#0076FF] bg-black text-[14px] font-semibold text-[#4DA3FF]"
+              >
+                {String(number).padStart(2, '0')}
+              </span>
+              <p className={EYEBROW}>{label}</p>
+              <span className="rounded-full bg-[#0076FF] px-3 py-1 text-[12px] font-semibold tracking-[0.02em] text-white shadow-[0_0_18px_rgba(0,118,255,0.5)]">
+                {badge}
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              <h3 className={`${DISPLAY} text-[26px] sm:text-[32px] font-semibold leading-[1.15] tracking-[-0.02em] text-white`}>
+                {heading}
+              </h3>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={mascot}
+                alt=""
+                aria-hidden="true"
+                width={56}
+                height={56}
+                className="h-12 w-12 sm:h-14 sm:w-14 shrink-0 object-contain drop-shadow-[0_0_18px_rgba(0,118,255,0.5)]"
+              />
+            </div>
+            <p className={`${LEAD} mt-5 font-semibold text-white/90 [text-wrap:balance]`}>
+              {lead}
+            </p>
+            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {points.map((t) => (
+                <li
+                  key={t.slice(0, 24)}
+                  className="rounded-xl border border-[#0076FF]/30 bg-white/5 backdrop-blur-[6px] p-4"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mb-3 block h-1 w-8 rounded-full bg-[#0076FF]"
+                  />
+                  <span className={`${BODYFONT} block text-[15px] leading-[1.55] text-white/85 [text-wrap:pretty]`}>
+                    {t}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className={`${BODY_ON_DARK} mt-5 border-l-2 border-[#0076FF] pl-4`}>
+              {closing}
+            </p>
+          </div>
+          <div className="relative flex items-center justify-center">
+            {media ? (
+              media.kind === 'video' ? (
+                <video
+                  className="w-full rounded-2xl border border-white/10 shadow-[0_0_48px_rgba(0,118,255,0.25)]"
+                  src={media.src}
+                  poster={media.poster}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={media.alt}
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  className="w-full rounded-2xl border border-white/10 shadow-[0_0_48px_rgba(0,118,255,0.25)]"
+                  src={media.src}
+                  alt={media.alt}
+                  loading="lazy"
+                />
+              )
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={mascot}
+                alt=""
+                aria-hidden="true"
+                className="h-48 w-48 sm:h-60 sm:w-60 object-contain drop-shadow-[0_0_40px_rgba(0,118,255,0.45)]"
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /**
  * One component, three modes (see lib/launch.ts for the dates):
  *  - 'sales'  full page, doors open. No hero button; the timer counts to close.
@@ -548,47 +711,28 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
             <h2 className={`${H2} text-center mb-5`}>{whatYouGet.heading}</h2>
             <p className={`${LEAD} text-center`}>{whatYouGet.intro}</p>
 
-            <ol className="mt-16">
-              {whatYouGet.items.map((step, i) => (
-                <li
-                  key={step.title}
-                  className="relative grid grid-cols-[auto_1fr] gap-x-6 sm:gap-x-8 pb-14 last:pb-0"
-                >
-                  <div className="relative">
-                    <span
-                      aria-hidden="true"
-                      className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-[#0076FF] bg-black text-[15px] font-semibold text-[#4DA3FF]"
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    {i < whatYouGet.items.length - 1 ? (
-                      <span
-                        aria-hidden="true"
-                        className="absolute left-1/2 top-14 -ml-px h-[calc(100%-3.5rem)] w-px bg-white/12"
-                      />
-                    ) : null}
-                  </div>
-                  <div className="pt-2.5">
-                    <p className={`${EYEBROW} mb-2`}>{step.label}</p>
-                    <div className="mb-3 flex items-center gap-3">
-                      <h3 className={H3}>{step.title}</h3>
-                      {step.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={step.image}
-                          alt=""
-                          aria-hidden="true"
-                          width={40}
-                          height={40}
-                          className="h-10 w-10 object-contain"
-                        />
-                      ) : null}
-                    </div>
-                    <p className={BODY}>{step.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <StepList
+              items={whatYouGet.items.slice(0, flowghost.afterItems)}
+              startAt={1}
+              last={false}
+              first
+            />
+          </div>
+
+          {/* FlowGhost: full-width feature block, numbered as the next step. */}
+          <div className={`${WRAP} mb-14 sm:mb-16`}>
+            <FlowGhostBlock
+              number={flowghost.afterItems + 1}
+              {...flowghost}
+            />
+          </div>
+
+          <div className={WRAP}>
+            <StepList
+              items={whatYouGet.items.slice(flowghost.afterItems)}
+              startAt={flowghost.afterItems + 2}
+              last
+            />
 
             <div className="mt-12">
               <CtaQuiet label="Join Fly100" href="#enrol" />
@@ -742,8 +886,11 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
         <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
           <div className={WRAP}>
             <h2 className={`${H2} text-center mb-6`}>{notThis.heading}</h2>
-            <p className={`${LEAD} text-center max-w-[40rem] mx-auto mb-12`}>
+            <p className={`${LEAD} text-center max-w-[40rem] mx-auto mb-5`}>
               {notThis.lead}
+            </p>
+            <p className={`${LEAD} text-center max-w-[40rem] mx-auto mb-12`}>
+              {notThis.widen}
             </p>
 
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">

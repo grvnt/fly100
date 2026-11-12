@@ -178,16 +178,6 @@ export const whatYouGet = {
       body: 'A new quest every week, each one looking at a different side of your XC Project and building on the last.',
     },
     {
-      label: 'Tool',
-      title: 'FlowGhost App',
-      body:
-        "The tracklog app I built for this programme. Load your flights and other pilots' flights on your route, and replay them together in 3D to see where they climbed, where they struggled, and where you can improve. It's the heart of both planning and debriefing, and it's free inside Fly100.",
-      // Grant's own mascot from the FlowGhost app itself (public/mascot/
-      // mascot-idle.png in the flowghost repo) — ties this bullet to the
-      // real product rather than just naming it.
-      image: '/flowghost-mascot.png',
-    },
-    {
       label: 'Training',
       title: 'Flow Training Built In',
       body: "Learn to spot when you're in flow and what pulls you out, how fear and ego shape your decisions, and how to build trust in your own judgement. It runs through every week, not just one module.",
@@ -199,6 +189,48 @@ export const whatYouGet = {
         "Thursday 10 December. Choose your XC Project, the flight you're working towards. It can be 100km or any flight that matters to you.",
     },
   ],
+};
+
+/**
+ * FlowGhost feature block. Rendered full-width inside "Here's exactly what you
+ * get", right after the PARA Loop item (it is the tool members use for that
+ * loop), and numbered as an item in the list.
+ *
+ * `media` is the visual. Until Grant's screenshot / looping clip arrives it is
+ * left out and the block shows the FlowGhost mascot instead. To switch:
+ *   media: { kind: 'video', src: '/flowghost-replay.mp4', poster: '/flowghost-replay.jpg', alt: '...' }
+ *   media: { kind: 'image', src: '/flowghost-replay.png', alt: '...' }
+ * Blur pilot names in the asset unless they have said OK.
+ */
+export const flowghost: {
+  afterItems: number;
+  label: string;
+  badge: string;
+  heading: string;
+  lead: string;
+  points: string[];
+  closing: string;
+  mascot: string;
+  media?: { kind: 'image' | 'video'; src: string; poster?: string; alt: string };
+} = {
+  afterItems: 2,
+  label: 'Tool',
+  badge: 'Free inside Fly100',
+  heading: 'FlowGhost App',
+  lead: 'The tracklog app I built for this programme, because nothing else could do it.',
+  points: [
+    'FlowGhost lets you replay flights from different days and seasons together in 3D.',
+    'Link them so they start in sync, or play each one on its own clock.',
+    'See where other pilots climbed, where they struggled, and how your flight compares on the same route.',
+  ],
+  closing: "It's the heart of both planning and debriefing, and it's free inside Fly100.",
+  mascot: '/flowghost-mascot.png',
+  media: {
+    kind: 'video',
+    src: '/flowghost-replay.mp4',
+    poster: '/flowghost-replay.jpg',
+    alt: 'FlowGhost replaying two flights together in 3D over mountain terrain',
+  },
 };
 
 /**
@@ -356,6 +388,8 @@ export const notThis = {
   heading: 'This is not a "fly 100km or fail" course',
   lead:
     'Your XC Project is legitimate. Don\'t set targets. Set experiments. Fly100 is about becoming the pilot who can fly it with confidence, not about chasing a scoreboard.',
+  widen:
+    "Fly100 isn't only about the number. It's about going all in on XC again: 100% commitment to your growth, your flying and flow.",
   items: [
     {
       head: "It's not a technique course.",
@@ -448,6 +482,8 @@ export const forYou = {
   forHeading: 'This is for you if',
   forItems: [
     "You're a licensed pilot with some XC flights and you can thermal at least a little.",
+    "You've flown far before, maybe even 100km, but lost your spark, and you want it back.",
+    "You've done your first 100km and want to go bigger.",
     'You want a repeatable way to improve, not a one-off tip.',
     "You're willing to look honestly at your own flights, including the ones that went badly.",
     "You'll debrief and share what you learn so others learn too.",
