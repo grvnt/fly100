@@ -201,3 +201,69 @@ input[type="range"]::-moz-range-thumb {
   border: 2px solid white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
+
+/* On-page waitlist form (see lib/kitWaitlist.ts and app/WaitlistButton.tsx).
+   The markup is plain HTML handed to Kit's script, so it is styled here by
+   class. Kit's script adds the error list items and swaps the fields for a
+   .formkit-alert-success box. */
+.fg-waitlist .formkit-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.fg-waitlist .fg-waitlist-label {
+  font-size: 0.8125rem;
+  color: rgb(255 255 255 / 0.85);
+  text-align: center;
+}
+.fg-waitlist .formkit-input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid #0076ff;
+  background: rgb(0 0 0 / 0.6);
+  backdrop-filter: blur(6px);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9375rem;
+  color: #fff;
+  outline: none;
+}
+.fg-waitlist .formkit-input:focus {
+  border-color: #4da3ff;
+}
+.fg-waitlist .formkit-submit {
+  width: 100%;
+  border-radius: 0.5rem;
+  background: #0076ff;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+.fg-waitlist .formkit-submit:hover {
+  background: #006ae6;
+}
+.fg-waitlist .formkit-submit:disabled,
+.fg-waitlist .formkit-submit[data-active] {
+  opacity: 0.5;
+  cursor: wait;
+}
+.fg-waitlist .formkit-alert-error {
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  color: #fda4af;
+}
+.fg-waitlist .formkit-alert-error:empty {
+  display: none;
+}
+.fg-waitlist .formkit-alert-success {
+  border-radius: 0.5rem;
+  border: 1px solid rgb(16 185 129 / 0.4);
+  background: rgb(2 44 34 / 0.6);
+  padding: 0.75rem 0.85rem;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: #6ee7b7;
+}

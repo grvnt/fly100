@@ -50,8 +50,8 @@ import React, { useEffect, useState } from 'react';
  * chatter. Users who want precise time can focus the element manually.
  */
 
-// Explicit SAST offset — no reliance on the viewer's local clock zone.
-const DEADLINE_MS = Date.parse('2026-11-28T00:00:00+02:00');
+// Target time comes in as a prop (epoch ms, built from explicit SAST ISO strings
+// in lib/launch.ts) — no reliance on the viewer's local clock zone.
 
 type Parts = {
   days: number;
@@ -60,8 +60,8 @@ type Parts = {
   seconds: number;
 };
 
-function computeParts(now: number): Parts | null {
-  const diff = DEADLINE_MS - now;
+function computeParts(targetMs: number, now: number): Parts | null {
+  const diff = targetMs - now;
   if (diff <= 0) return null;
   const days = Math.floor(diff / 86_400_000);
   const hours = Math.floor((diff % 86_400_000) / 3_600_000);
@@ -79,6 +79,10 @@ type Props = {
    *  outer spacing (margin, alignment) without the component prescribing
    *  it. Internal tile styling is fixed. */
   className?: string;
+  /** Small caption above the tiles, e.g. "Doors open in". */
+  label: string;
+  /** Epoch ms the timer counts down to. */
+  targetMs: number;
 };
 
 type TileProps = {
@@ -107,19 +111,19 @@ function Tile({ value, label }: TileProps): React.ReactElement {
   );
 }
 
-export function CountdownTimer({ className }: Props): React.ReactElement {
+export function CountdownTimer({ className, label, targetMs }: Props): React.ReactElement {
   // `undefined` = pre-mount (server + first client paint share this state,
   // so no hydration mismatch). `null` = deadline passed. `Parts` = live.
   const [parts, setParts] = useState<Parts | null | undefined>(undefined);
 
   useEffect(() => {
-    const tick = (): void => setParts(computeParts(Date.now()));
+    const tick = (): void => setParts(computeParts(targetMs, Date.now()));
     tick();
     const id = window.setInterval(tick, 1000);
     return (): void => {
       window.clearInterval(id);
     };
-  }, []);
+  }, [targetMs]);
 
   if (parts === undefined) {
     // Pre-hydration placeholder. Four tiles with "--" so the grid takes
@@ -131,7 +135,7 @@ export function CountdownTimer({ className }: Props): React.ReactElement {
         suppressHydrationWarning
       >
         <p className="text-center text-[11px] font-medium uppercase tracking-[0.18em] text-white/60">
-          Doors close in
+          {label}
         </p>
         <div className="mt-3 flex items-center justify-center gap-2 sm:gap-3">
           <Tile value="--" label="Days" />
@@ -154,7 +158,7 @@ export function CountdownTimer({ className }: Props): React.ReactElement {
   return (
     <div className={className} aria-live="off">
       <p className="text-center text-[11px] font-medium uppercase tracking-[0.18em] text-white/60">
-        Doors close in
+        {label}
       </p>
       <div className="mt-3 flex items-center justify-center gap-2 sm:gap-3">
         <Tile value={pad(parts.days)} label="Days" />
@@ -163,7 +167,7 @@ export function CountdownTimer({ className }: Props): React.ReactElement {
         <Tile value={pad(parts.seconds)} label="Sec" />
       </div>
       <span className="sr-only">
-        Doors close in {parts.days} days, {parts.hours} hours,{' '}
+        {label} {parts.days} days, {parts.hours} hours,{' '}
         {parts.minutes} minutes, {parts.seconds} seconds.
       </span>
     </div>

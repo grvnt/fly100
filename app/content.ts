@@ -131,7 +131,7 @@ export const method = {
     {
       type: 'p' as const,
       text:
-        "The same questions work forwards. Study how other pilots flew your dream route, and you've flown it in your head before you launch. In Fly100 the two run together every week as the PARA Loop: Prepare, Air, Reflect, Adjust.",
+        "The same questions work forwards. Study how other pilots flew your XC Project route, and you've flown it in your head before you launch. In Fly100 the two run together every week as the PARA Loop: Prepare, Air, Reflect, Adjust.",
     },
     {
       type: 'p' as const,
@@ -162,20 +162,26 @@ export const whatYouGet = {
   items: [
     {
       label: 'Training',
+      title: 'The Fly100 Foundation',
+      body:
+        'Nine short videos that set up everything else: why you fly (deep vs shallow motivation), choosing your XC Project, running experiments instead of chasing targets, the debrief, and flow. Plus fear, trust and learning through failure.',
+    },
+    {
+      label: 'Training',
       title: 'The Fly100 PARA Loop',
       body:
-        'Prepare, Air, Reflect, Adjust. Every week, study a 100km flight (or one on your dream route), compare it with one of your own, and find your next step.',
+        'Prepare, Air, Reflect, Adjust. Choose one XC Project and study it from a new angle each week (where pilots climbed, the weather it needs, the crux points, where they landed and why), through pilots who flew it and some who didn\'t. Then run one experiment on your own flying ("When ___, I\'ll ___") and debrief it.',
     },
     {
       label: 'Quests',
       title: 'Weekly Quests',
-      body: 'A new quest every week, each one building on the last.',
+      body: 'A new quest every week, each one looking at a different side of your XC Project and building on the last.',
     },
     {
       label: 'Tool',
       title: 'FlowGhost App',
       body:
-        'Load tracks from different days or seasons and watch them together in 3D. Free inside Fly100.',
+        "The tracklog app I built for this programme. Load your flights and other pilots' flights on your route, and replay them together in 3D to see where they climbed, where they struggled, and where you can improve. It's the heart of both planning and debriefing, and it's free inside Fly100.",
       // Grant's own mascot from the FlowGhost app itself (public/mascot/
       // mascot-idle.png in the flowghost repo) — ties this bullet to the
       // real product rather than just naming it.
@@ -184,13 +190,13 @@ export const whatYouGet = {
     {
       label: 'Training',
       title: 'Flow Training Built In',
-      body: "Learn to spot when you're in flow and what pulls you out, and how fear and ego shape your decisions.",
+      body: "Learn to spot when you're in flow and what pulls you out, how fear and ego shape your decisions, and how to build trust in your own judgement. It runs through every week, not just one module.",
     },
     {
       label: 'Live call',
       title: 'Live Kickoff',
       body:
-        "Thursday 10 December. Pick the flight you're working towards. It can be 100km or any dream flight.",
+        "Thursday 10 December. Choose your XC Project, the flight you're working towards. It can be 100km or any flight that matters to you.",
     },
   ],
 };
@@ -198,6 +204,13 @@ export const whatYouGet = {
 /**
  * Section 6 — "Stacked bonuses"
  */
+type Bonus = {
+  title: string;
+  body: string;
+  value: string;
+  testimonial?: { quote: string; name: string; photo?: string };
+};
+
 export const bonuses = {
   heading: 'Stacked bonuses',
   intro: 'Every bonus is included.',
@@ -207,6 +220,12 @@ export const bonuses = {
       body:
         "Your global crew to plan, fly and debrief with, including the space where you post your debriefs and read other pilots'. Access starts the day you enrol and runs 12 months from the cohort start.",
       value: '$596',
+      testimonial: {
+        quote:
+          'Hearing the experiences of fellow pilots and receiving their encouragement fundamentally boosted my confidence and transformed my flying.',
+        name: 'Richard Oellermann',
+        photo: '/richard-oellermann.jpg',
+      },
     },
     {
       title: 'Thermal Flow Masterclass',
@@ -230,7 +249,7 @@ export const bonuses = {
         'How record-setting pilots fly together, and how to fly with your own crew (coming in 2027).',
       value: '$97',
     },
-  ],
+  ] as Bonus[],
   total: 'Total bonus value: $924',
   plus:
     'Plus: The first 5 pilots to join within 24 hours of doors opening (Monday 23 November) get a private 30-minute Personal XC Strategy Call with me, booked any time between 11 January and 21 February.',
@@ -312,7 +331,7 @@ export const pricing = {
   heading: 'Add it all up',
   stack: [
     {
-      line: 'The Fly100 Programme: PARA Loop, weekly quests, FlowGhost, flow training, live kickoff',
+      line: 'The Fly100 Programme: Foundation, PARA Loop, weekly quests, FlowGhost, flow training, live kickoff',
       value: '$397',
     },
     { line: 'Bonuses (see above)', value: '$924' },
@@ -327,7 +346,7 @@ export const pricing = {
   },
   note:
     'Join Wingmates the day you enrol, with 12 months of community support from the cohort start and every bonus. After 12 months the course is still yours, and the community continues at $60 per quarter.',
-  cta: 'Join the Waitlist',
+  cta: 'Join Fly100',
 };
 
 /**
@@ -336,7 +355,7 @@ export const pricing = {
 export const notThis = {
   heading: 'This is not a "fly 100km or fail" course',
   lead:
-    'Your dream flight is legitimate. Fly100 is about becoming the pilot who can fly it with confidence, not about chasing a scoreboard.',
+    'Your XC Project is legitimate. Don\'t set targets. Set experiments. Fly100 is about becoming the pilot who can fly it with confidence, not about chasing a scoreboard.',
   items: [
     {
       head: "It's not a technique course.",
@@ -345,7 +364,7 @@ export const notThis = {
     },
     {
       head: "It's not a ranking or a competition.",
-      tail: 'Your project can be any dream flight, not only 100km.',
+      tail: 'Your XC Project can be any flight that matters to you, not only 100km.',
     },
     {
       head: "It's not a guarantee.",
@@ -378,12 +397,12 @@ export const timeline = {
     {
       when: 'Week 1, from Mon 11 Jan',
       what:
-        'Install the system. Learn the Fly100 PARA Loop: study your first 100km flight (or one on your dream route) and compare it with one of your own.',
+        'Foundation and system. Watch the Foundation videos, lock in your XC Project, learn the PARA Loop in FlowGhost, and run your first study of your route.',
     },
     {
       when: 'Weeks 2 to 6',
       what:
-        'Mondays 18 Jan, 25 Jan, 1 Feb, 8 Feb, 15 Feb. A new quest is revealed each Monday. Bonuses are released through the programme.',
+        'Mondays 18 Jan, 25 Jan, 1 Feb, 8 Feb, 15 Feb. Each week you study your project from a new angle and run one experiment on your own flying. A new quest is revealed each Monday. Bonuses are released through the programme.',
     },
     {
       when: 'Sun 21 Feb',
@@ -404,7 +423,8 @@ export const walkAway = {
   items: [
     "A debrief habit you'll still be using next season.",
     'Your own system for reading a tracklog, to prepare your route and debrief your flight.',
-    'A library of six studied 100km flights, your own flights compared against them, and a project you can explain in one sentence.',
+    'Your XC Project studied from six angles, through pilots who flew it and some who didn\'t, with your own flights compared against them.',
+    'A habit of running one experiment at a time, judged by what you learn, not by the number.',
     "Clearer, calmer decisions in the air, because you know what's holding you back.",
     'A real answer to "what should I work on next?"',
     'A community of pilots who debrief, and a year of it included.',
@@ -458,7 +478,7 @@ export const faq = {
     },
     {
       q: 'Do I have to be flying during the 6 weeks?',
-      a: "No. Each week you study a 100km flight and compare it with one of your own, new or old. If you're not flying, you rehearse on the ground or ground handle. It works in your off-season.",
+      a: "No. Each week you study your XC Project from a new angle and compare it with your own flights, new or old. If you're not flying, you rehearse on the ground or ground handle. It works in your off-season.",
     },
     {
       q: 'What if I fall behind?',
