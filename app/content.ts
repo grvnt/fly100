@@ -28,9 +28,10 @@ export const hero = {
  */
 export const proofTeaser = {
   quote:
-    "I'd recommend Fly100 to anyone who has a mental barrier or is struggling with progression. The guidance I received from Grant made internal dialogue an important part of flying, alongside discussing technical skills and strategies.",
-  name: 'Farrell Davids',
-  photo: '/farrell-davids.jpg',
+    'In the last two months I have made more progress in my flying journey than in the last ten. Last month I broke my personal best twice, crossed over to another valley for the first time and was higher than ever before!',
+  name: 'Zee',
+  photo:
+    'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
 };
 
 /**
@@ -40,50 +41,20 @@ export const proofTeaser = {
 export const origin = {
   heading: 'I Landed 100km from Launch and Had No Idea How I Got There',
   blocks: [
-    {
-      type: 'p' as const,
-      text:
-        "I'm standing on a dusty semi-desert plateau in what feels like the middle-of-nowhere. It's getting windy now. I've just landed over a 100km away from launch. I'm tired but in that good way you feel after doing something strenuous and meaningful, like after a long hike in the mountains. It's as if I feel everything all at once: elated, surprised, fulfilled, whole, and mind-blown. But most of all my whole being is satisfyingly confused.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "I hadn't expected to fly 100km today. How did this happen? How did I get here? How is this possible?",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "I'd had some incredible XC experiences before this but none had exceeded around 35km distance. I'd dreamt of flying to a place called Clanwilliam that season. I'd secretly set it as a goal but didn't really believe it would happen. It was just a dream that I'd excitedly entertained. Yet here I was on my first truly big XC flight having flown over Clanwilliam and flying my first 100km.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "Thinking about how I got here brought about a feeling of familiarity. It was as if I'd flown this route before. I didn't have to think in the air. I was so immersed in the experience that every moment and every decision just flowed into the next one as if it was meant to be.",
-    },
-    {
-      type: 'quote' as const,
-      text:
-        "I'd been studying this route so well by looking at the tracklogs of others that my mind was free to just fly.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "And that's when it dawned on me. I didn't know about it then but I was in flow. I'd visualised the whole route so many times that when I got there it was already so familiar.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "I became obsessed with a simple process: ask questions, debrief, test. I studied my own tracklogs. Looked at crux points of others. Planned routes. And somehow, that season, my first full XC season, I flew six 100km+ flights including a local record and, as far as anyone can tell, the furthest any footlaunch pilot had flown on an EN B in South Africa.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        'And all of them "just happened." My expectation on each day was not to fly 100km. I went out to have fun. To fly and go with the flow to see what the day would bring.',
-    },
-    {
-      type: 'quote' as const,
-      text: 'Later I would come to realise that the debrief is the learning.',
-    },
+    { type: 'p' as const, text: "I'm standing on a dusty semi-desert plateau in the middle of nowhere." },
+    { type: 'p' as const, text: "I've just landed over 100km from launch." },
+    { type: 'p' as const, text: "I'm tired, but in that good way. Elated, surprised, fulfilled. Mind-blown." },
+    { type: 'p' as const, text: "But most of all, I'm confused. How did I get here?" },
+    { type: 'p' as const, text: "Before this, none of my XC flights had gone further than about 35km." },
+    { type: 'p' as const, text: "That season I'd secretly dreamt of flying to a town called Clanwilliam. I didn't really believe it would happen." },
+    { type: 'p' as const, text: "Yet here I was, past Clanwilliam, on my first 100km." },
+    { type: 'p' as const, text: "The strangest part? It felt familiar. I didn't have to think in the air. Every decision just flowed into the next." },
+    { type: 'quote' as const, text: "I'd studied this route so well in other pilots' tracklogs that my mind was free to just fly." },
+    { type: 'p' as const, text: "I didn't know it then, but I was in flow." },
+    { type: 'p' as const, text: "So I became obsessed with a simple process: ask questions, debrief, test." },
+    { type: 'p' as const, text: "That season, my first full XC season, I flew six 100km+ flights. One was a local record, and as far as anyone can tell, the furthest any footlaunch pilot had flown on an EN B in South Africa." },
+    { type: 'p' as const, text: "I never went out to fly 100km. I went out to have fun and see what the day would bring." },
+    { type: 'quote' as const, text: "Later I would come to realise that the debrief is the learning." },
   ],
 };
 
@@ -110,44 +81,21 @@ export const teacher = {
 export const method = {
   heading: 'Learn on the Ground, Fly in Flow',
   blocks: [
-    {
-      type: 'p' as const,
-      text:
-        "If you're like most pilots you land, tell the story in the retrieve vehicle, and move on. The flight you can't explain, the thermal you left too early, the fear you had in turbulence, never gets looked at properly. You might call it luck, or blame your gear, or claim that you wanted to land while not really understanding why you did.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        'But that confusion after the flight is the best material you have. I call it curious confusion: embracing confusion with curiosity. Instead of blaming you ask questions. You answer them by studying tracklogs. And then you test the answers by turning them into an experiment for your next flight.',
-    },
+    { type: 'p' as const, text: "Most pilots land, tell the story in the retrieve vehicle, and move on." },
+    { type: 'p' as const, text: "The thermal you left too early. The fear you felt in turbulence. The flight you can't explain. None of it gets looked at properly." },
+    { type: 'p' as const, text: "So you call it luck. Or you blame your gear." },
+    { type: 'p' as const, text: "But that confusion after a flight is the best material you have." },
+    { type: 'p' as const, text: "I call it curious confusion. Instead of blaming, you ask questions. You answer them by studying tracklogs. Then you test the answers on your next flight." },
   ],
   loop: 'Confused → Questions → Debrief → Experiment → Repeat',
   afterLoop: [
-    {
-      type: 'p' as const,
-      text:
-        "That loop is at the heart of Fly100. You don't need talent. You need a way to learn from every flight so that no experience is wasted.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "The same questions work forwards. Study how other pilots flew your XC Project route, and you've flown it in your head before you launch. In Fly100 the two run together every week as the PARA Loop: Prepare, Air, Reflect, Adjust.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "There's research behind the habit. Debriefing, also called an after-action review, improved performance by about 25% on average across 46 samples (Tannenbaum & Cerasoli, 2013). A later review of 61 studies found that self-led debriefs work when they're anchored in an objective record (Keiser & Arthur, 2021), and your tracklog is exactly that.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "It's also why the work happens on the ground. When you've done the thinking before you launch, you don't have to do it in the air, and that leaves your mind free so you can fly in flow. Studying a tracklog is a form of visualisation too: you've already flown the route in your head, so when you get there it feels familiar.",
-    },
-    {
-      type: 'p' as const,
-      text:
-        "You'll fly further because you'll fly better: calmer decisions, clearer debriefs, and knowing exactly what to work on next.",
-    },
+    { type: 'p' as const, text: "That loop is the heart of Fly100." },
+    { type: 'p' as const, text: "You don't need talent. You need a way to learn from every flight, so no flight is wasted." },
+    { type: 'p' as const, text: "It works forwards too. Study how other pilots flew your XC Project route, and you've flown it in your head before you launch." },
+    { type: 'p' as const, text: "In Fly100 the two run together every week as the PARA Loop: Prepare, Air, Reflect, Adjust." },
+    { type: 'p' as const, text: "There's research behind it. Debriefing improved performance by about 25% on average across 46 samples (Tannenbaum & Cerasoli, 2013). It works best when it's anchored in an objective record (Keiser & Arthur, 2021). Your tracklog is exactly that." },
+    { type: 'p' as const, text: "Do the thinking on the ground, and you don't have to do it in the air. Your mind is free, and that's how you fly in flow." },
+    { type: 'p' as const, text: "You'll fly further because you'll fly better: calmer decisions, clearer debriefs, and knowing exactly what to work on next." },
   ],
 };
 
@@ -296,6 +244,12 @@ export const bonuses = {
 export const testimonials: Array<{ quote: string; name: string; photo?: string }> = [
   {
     quote:
+      "The debriefs really helped me understand my flights better, identify inefficient routes and recognise decisions I could have made differently. More importantly, I understood why certain decisions weren't the best and how to manage difficult conditions better.",
+    name: 'Nick Hewitt',
+    photo: '/nick-hewitt.jpg',
+  },
+  {
+    quote:
       'Through flight debriefs, Grant helped me understand how thermals actually behave, and how my own reactions — turning small problems into bigger ones — were feeding my fear. My last three or four flights have all been new personal bests, and an 80km flight that once felt far off is now in my crosshairs.',
     name: 'Ben Haire',
     photo:
@@ -309,9 +263,10 @@ export const testimonials: Array<{ quote: string; name: string; photo?: string }
   },
   {
     quote:
-      "The debriefs really helped me understand my flights better, identify inefficient routes and recognise decisions I could have made differently. More importantly, I understood why certain decisions weren't the best and how to manage difficult conditions better.",
-    name: 'Nick Hewitt',
-    photo: '/nick-hewitt.jpg',
+      "Growth is sneaky and often happens without us even noticing. It's the many little things, turning tighter, pushing into wind once again, practicing patience and breathing deeply to ease off anxiety at take off. And those are exactly the things that Grant teaches!",
+    name: 'Zee',
+    photo:
+      'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
   },
   {
     quote:
@@ -327,13 +282,6 @@ export const testimonials: Array<{ quote: string; name: string; photo?: string }
     photo:
       'https://cdn.senja.io/public/avatar/e8ad2ea2-f32d-4b7f-a207-92b31d3ee946_IMG_4384.jpeg',
   },
-  {
-    quote:
-      'In the last two months I have made more progress... broke my personal best twice, crossed over to another valley for the first time and was higher than ever before!',
-    name: 'Zee',
-    photo:
-      'https://cdn.senja.io/public/media/2e833191-d1e6-45e5-8c0e-7a6e370107cb_b97de09c-a2ce-47d9-bcdc-e83e347a7a57_zeeeeeee.jpg',
-  },
 ];
 
 /**
@@ -342,6 +290,12 @@ export const testimonials: Array<{ quote: string; name: string; photo?: string }
  * - beforeClose: sits in Last Call, above the final button
  */
 export const pullQuotes = {
+  afterNotThis: {
+    quote:
+      "I'd recommend Fly100 to anyone who has a mental barrier or is struggling with progression. The guidance I received from Grant made internal dialogue an important part of flying, alongside discussing technical skills and strategies.",
+    name: 'Farrell Davids',
+    photo: '/farrell-davids.jpg',
+  },
   beforeForYou: {
     quote:
       'The biggest change was realising that I did have the ability to do XC flying and that I needed to trust my knowledge and decisions more.',
@@ -385,30 +339,15 @@ export const pricing = {
  * Section 9 — "This is not a 'fly 100km or fail' course"
  */
 export const notThis = {
-  heading: 'This is not a "fly 100km or fail" course',
-  lead:
-    'Your XC Project is legitimate. Don\'t set targets. Set experiments. Fly100 is about becoming the pilot who can fly it with confidence, not about chasing a scoreboard.',
-  widen:
-    "Fly100 isn't only about the number. It's about going all in on XC again: 100% commitment to your growth, your flying and flow.",
-  items: [
-    {
-      head: "It's not a technique course.",
-      tail:
-        "You'll get some thermaling and gliding content, but the heart of it is learning from your own flights and those of others.",
-    },
-    {
-      head: "It's not a ranking or a competition.",
-      tail: 'Your XC Project can be any flight that matters to you, not only 100km.',
-    },
-    {
-      head: "It's not a guarantee.",
-      tail:
-        "I can't promise you a distance, and no honest coach can. I can give you a system that makes every flight teach you something so that you learn faster.",
-    },
-    {
-      head: "It's not a one-off.",
-      tail: "You build a habit that keeps working, including when you can't fly.",
-    },
+  heading: 'This is not a "just get more airtime" course',
+  blocks: [
+    { type: 'p' as const, text: "Every pilot has heard it: \"Just get more airtime.\"" },
+    { type: 'p' as const, text: "But hours don't make you better if you never look at them. Plenty of pilots have hundreds of hours and still sink out at the same spot every time." },
+    { type: 'p' as const, text: "You don't need more flights. You need to learn more from the flights you already have." },
+    { type: 'p' as const, text: "Right now your thermalling might be patchy. You might bomb out at the same crux every time. You might freeze when it gets rough." },
+    { type: 'quote' as const, text: "Good. That's a baseline we can learn from." },
+    { type: 'p' as const, text: "Your XC Project can be 100km, or any flight that matters to you. Fly100 isn't only about the number. It's about going all in on XC again: 100% commitment to your growth, your flying and flow." },
+    { type: 'p' as const, text: "I can't promise you a distance. No honest coach can. But I can give you a system that makes every flight teach you something, and it keeps working on the days you can't fly." },
   ],
 };
 
@@ -416,37 +355,37 @@ export const notThis = {
  * Section 10 — "Your next 6 weeks". Rendered as a dated timeline.
  */
 export const timeline = {
-  heading: 'Your next 6 weeks',
-  items: [
-    { when: 'Fri 27 Nov', what: 'Doors close at midnight.' },
+  eyebrow: "Your next 6 weeks · What's waiting for you on the inside…",
+  headlineTop: '1 week to install the system',
+  headlineAccent: '5 weeks to build the habit',
+  headlineEnd: '12 months to practise and fly',
+  // Odd-numbered parts (the dates) render in bold.
+  kickoff: [
+    'We kick off on ',
+    'Thursday 10 December',
+    '. Get set up over the holidays, and the six weeks start on ',
+    'Monday 11 January',
+    '.',
+  ],
+  steps: [
     {
-      when: 'Thu 10 Dec',
-      what: 'Live kickoff: meet the cohort, get access, set your project.',
+      when: '10 December',
+      title: 'Kickoff',
+      body: 'Get access, join the live kickoff call and meet the cohort.',
     },
     {
       when: 'Over the holidays',
-      what:
-        'Optional Week 0 at your own pace: read "Goals ruin your paragliding" and introduce yourself in Wingmates.',
+      title: 'Get set up',
+      body:
+        "Short videos at your own pace on why the system works, and choosing the flight you'll work towards.",
     },
     {
-      when: 'Week 1, from Mon 11 Jan',
-      what:
-        'Foundation and system. Watch the Foundation videos, lock in your XC Project, learn the PARA Loop in FlowGhost, and run your first study of your route.',
-    },
-    {
-      when: 'Weeks 2 to 6',
-      what:
-        'Mondays 18 Jan, 25 Jan, 1 Feb, 8 Feb, 15 Feb. Each week you study your project from a new angle and run one experiment on your own flying. A new quest is revealed each Monday. Bonuses are released through the programme.',
-    },
-    {
-      when: 'Sun 21 Feb',
-      what: 'The 6 weeks end. Your system is running, and your community continues.',
+      when: 'From 11 January →',
+      title: 'Six weeks of quests',
+      body:
+        "Learn the system in week 1, then get a new quest every Monday. You learn by doing it on every flight, or on the ground when you can't fly.",
     },
   ],
-  note:
-    "What's in each quest stays a surprise until the Monday it opens. Each one builds on the last.",
-  afterNote:
-    "You get Wingmates access the day you enrol, so there's plenty to do before Week 1: meet the pilots you'll be learning alongside, join the live kickoff, and start Week 0 at your own pace.",
 };
 
 /**
@@ -455,13 +394,33 @@ export const timeline = {
 export const walkAway = {
   heading: 'What you walk away with',
   items: [
-    "A debrief habit you'll still be using next season.",
-    'Your own system for reading a tracklog, to prepare your route and debrief your flight.',
-    'Your XC Project studied from six angles, through pilots who flew it and some who didn\'t, with your own flights compared against them.',
-    'A habit of running one experiment at a time, judged by what you learn, not by the number.',
-    "Clearer, calmer decisions in the air, because you know what's holding you back.",
-    'A real answer to "what should I work on next?"',
-    'A community of pilots who debrief, and a year of it included.',
+    {
+      title: 'Your XC Project, mapped',
+      body:
+        'Six weeks of study on your route: where the lift comes from, the crux points, the landings, and the kind of day it needs.',
+    },
+    {
+      title: 'The complete system',
+      body: "A simple loop for every flight, and for the days you can't fly.",
+    },
+    {
+      title: 'The skills',
+      body:
+        "Read any tracklog, yours or another pilot's, to plan a route or debrief a flight.",
+    },
+    {
+      title: 'Calmer decisions',
+      body: 'Tell a real warning from your ego talking, and fly with more flow.',
+    },
+    {
+      title: 'Lasting momentum',
+      body:
+        'A debrief habit, a 12-month plan built from your own experiments, and a year in Wingmates.',
+    },
+    {
+      title: 'More fun',
+      body: 'Less pressure, because every flight teaches you something.',
+    },
   ],
 };
 

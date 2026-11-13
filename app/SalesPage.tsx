@@ -78,7 +78,7 @@ function CtaBig({
   href?: string;
 }) {
   const base =
-    'inline-flex items-center justify-center rounded-full px-7 py-3.5 text-[15px] font-medium tracking-[-0.005em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shadow-[0_0_28px_rgba(0,118,255,0.45)] hover:shadow-[0_0_38px_rgba(0,118,255,0.6)] bg-[#0076FF] text-white hover:bg-[#006AE6] focus-visible:ring-[#0076FF] focus-visible:ring-offset-black';
+    'inline-flex items-center justify-center rounded-lg px-7 py-3.5 text-[15px] font-medium tracking-[-0.005em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shadow-[0_0_28px_rgba(0,118,255,0.45)] hover:shadow-[0_0_38px_rgba(0,118,255,0.6)] bg-[#0076FF] text-white hover:bg-[#006AE6] focus-visible:ring-[#0076FF] focus-visible:ring-offset-black';
   return (
     <div className={align === 'center' ? 'flex justify-center' : 'flex justify-start'}>
       <Link href={href} className={base}>
@@ -466,9 +466,9 @@ function FlowGhostBlock({
 
 /**
  * One component, three modes (see lib/launch.ts for the dates):
- *  - 'sales'  full page, doors open. No hero button; the timer counts to close.
- *             Every button below the fold says "Join Fly100" and scrolls to
- *             the pricing block (#enrol).
+ *  - 'sales'  full page, doors open. Hero button and every button below the
+ *             fold say "Join Fly100" and scroll to the pricing block (#enrol);
+ *             the timer counts to close.
  *  - 'pre'    hero + Farrell quote + timer counting to doors opening, and the
  *             waitlist button. Nothing else.
  *  - 'closed' same as 'pre' but the timer is replaced by "Doors are closed" and
@@ -589,6 +589,11 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
                     label="Doors open in"
                     targetMs={OPEN_AT}
                   />
+                )}
+                {full && (
+                  <div className="mt-4">
+                    <CtaBig label="Join Fly100" href="#enrol" />
+                  </div>
                 )}
                 {full && (
                   <CountdownTimer
@@ -882,71 +887,77 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
           </div>
         </section>
 
-        {/* ===== 9. THIS IS NOT A "FLY 100KM OR FAIL" COURSE ===== */}
+        {/* ===== 9. THIS IS NOT A "JUST GET MORE AIRTIME" COURSE ===== */}
         <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
           <div className={WRAP}>
-            <h2 className={`${H2} text-center mb-6`}>{notThis.heading}</h2>
-            <p className={`${LEAD} text-center max-w-[40rem] mx-auto mb-5`}>
-              {notThis.lead}
-            </p>
-            <p className={`${LEAD} text-center max-w-[40rem] mx-auto mb-12`}>
-              {notThis.widen}
-            </p>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {notThis.items.map((item) => (
-                <li
-                  key={item.head}
-                  className="rounded-xl p-6 sm:p-7 bg-[#0F0F0F] border border-[#222222]"
-                >
-                  <p className="text-[17px] font-semibold text-white mb-2">
-                    {item.head}
-                  </p>
-                  <p className={BODY}>{item.tail}</p>
-                </li>
-              ))}
-            </ul>
+            <h2 className={`${H2} text-center mb-10`}>{notThis.heading}</h2>
+            <Blocks blocks={notThis.blocks} />
           </div>
         </section>
 
-        {/* ===== 10. YOUR NEXT 6 WEEKS — timeline ===== */}
-        <section className={SECTION} style={{ backgroundColor: CANVAS }}>
-          <div className={WRAP}>
-            <h2 className={`${H2} text-center mb-14`}>{timeline.heading}</h2>
+        {/* ===== 9.5 PULL-QUOTE — Farrell, mental barrier / progression ===== */}
+        <PullQuote {...pullQuotes.afterNotThis} />
 
-            <ol className="space-y-5">
-              {timeline.items.map((row) => (
-                <li
-                  key={row.when}
-                  className="grid grid-cols-1 sm:grid-cols-[13rem_1fr] gap-x-6 gap-y-2 items-start rounded-xl p-6 bg-[#0F0F0F] border border-[#222222]"
-                >
-                  <p
-                    className={`${EYEBROW} text-[13px] tracking-[0.1em] text-[#4DA3FF]`}
+        {/* ===== 10 + 11. YOUR NEXT 6 WEEKS + WHAT YOU WALK AWAY WITH — one
+            section, modelled on the 3-Hour YouTube System page: eyebrow,
+            two-line headline (second line in accent), three top-ruled step
+            cards, then six left-ruled numbered outcome cards. Weekly quest
+            topics are deliberately not named; they stay a surprise. ===== */}
+        <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
+          <div className={WRAP}>
+            <p className={`${EYEBROW} text-center mb-5`}>{timeline.eyebrow}</p>
+            <h2
+              className={`${DISPLAY} text-center uppercase font-black tracking-[-0.03em] leading-[1.1] text-[1.75rem] sm:text-[2.25rem] lg:text-[2.5rem]`}
+            >
+              <span className="block text-white">{timeline.headlineTop}</span>
+              <span className="block text-white">{timeline.headlineAccent}</span>
+              <span className="block text-[#4DA3FF]">{timeline.headlineEnd}</span>
+            </h2>
+            <p className={`${BODYFONT} mt-6 mb-12 text-center text-[17px] text-white/85`}>
+              {timeline.kickoff.map((part, i) =>
+                i % 2 === 1 ? (
+                  <strong key={i} className="text-white">
+                    {part}
+                  </strong>
+                ) : (
+                  <React.Fragment key={i}>{part}</React.Fragment>
+                )
+              )}
+            </p>
+
+            <ol className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4">
+              {timeline.steps.map((row) => (
+                <li key={row.when} className="border-t-4 border-[#0076FF]/40 pt-4 px-1 sm:px-3">
+                  <p className={`${EYEBROW} text-[11px] mb-2`}>{row.when}</p>
+                  <h3
+                    className={`${DISPLAY} uppercase font-extrabold text-[1.25rem] leading-[1.2] tracking-[-0.01em] text-white mb-2`}
                   >
-                    {row.when}
+                    {row.title}
+                  </h3>
+                  <p className={`${BODYFONT} text-[15px] leading-[1.5] font-semibold text-white/90`}>
+                    {row.body}
                   </p>
-                  <p className={BODY_ON_DARK}>{row.what}</p>
                 </li>
               ))}
             </ol>
 
-            <p className={`${BODY} mt-10`}>{timeline.note}</p>
-            <p className={`${BODY} mt-4`}>{timeline.afterNote}</p>
-          </div>
-        </section>
-
-        {/* ===== 11. WHAT YOU WALK AWAY WITH ===== */}
-        <section className={SECTION} style={{ backgroundColor: CANVAS_ALT }}>
-          <div className={WRAP}>
-            <h2 className={`${H2} text-center mb-12`}>{walkAway.heading}</h2>
-            <ul className="space-y-4 max-w-[42rem] mx-auto">
-              {walkAway.items.map((item) => (
-                <li key={item.slice(0, 24)} className={`flex gap-3 ${BODY_ON_DARK}`}>
-                  <span
-                    aria-hidden="true"
-                    className="mt-[11px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#0076FF]"
-                  />
-                  <span>{item}</span>
+            <h3
+              className={`${DISPLAY} mt-20 mb-10 text-center uppercase font-black tracking-[-0.02em] text-[1.25rem] sm:text-[1.5rem] text-white`}
+            >
+              {walkAway.heading}
+            </h3>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-8">
+              {walkAway.items.map((item, i) => (
+                <li key={item.title} className="border-l-4 border-[#0076FF]/40 pl-4 py-3">
+                  <p className={`${EYEBROW} text-[11px] mb-2`}>{String(i + 1).padStart(2, '0')}</p>
+                  <h4
+                    className={`${DISPLAY} font-bold text-[1.25rem] leading-[1.25] tracking-[-0.01em] text-white mb-2`}
+                  >
+                    {item.title}
+                  </h4>
+                  <p className={`${BODYFONT} text-[15px] leading-[1.5] font-semibold text-white/90`}>
+                    {item.body}
+                  </p>
                 </li>
               ))}
             </ul>
