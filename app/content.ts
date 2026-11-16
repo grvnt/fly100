@@ -325,6 +325,8 @@ export const pricing = {
   totalLabel: 'Total value',
   totalValue: '$1,321',
   founding: {
+    badge: 'Black Friday',
+    eyebrow: 'Founding Offer',
     price: '$297',
     oneLine:
       "Founding price: $297, one payment, with lifetime access to the course. That's 77% off the total value.",

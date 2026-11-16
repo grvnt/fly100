@@ -1,8 +1,11 @@
 # Current State
 
-_Last updated: 2026-10-09_
+_Last updated: 2026-11-16_
 
 ## Open threads
+
+- **Fly100 founding-cohort sales page — Black Friday pricing (2026-11-16).** Pricing card now has a "BLACK FRIDAY" badge (Anton font, loaded only in `app/SalesPage.tsx`), a bolder "Founding Offer" line, and the $1,321 total crossed out in red before $297. Screenshot-checked at phone and desktop width. Committed locally, not pushed or deployed.
+  - **Open: close date.** Grant wants doors to close Sunday night instead of Friday 27 Nov. Recommended Sun 29 Nov 23:59 US Pacific (= Mon 30 Nov 07:59 UTC, 09:59 SAST, 18:59 Sydney). Awaiting Grant's yes. When confirmed, update `lib/launch.ts` CLOSE_AT, `hero.urgency` and `lastCall` text in `app/content.ts` (the latter says "midnight on Black Friday"), the metadata description in `app/page.tsx`, and the comment in `app/CountdownTimer.tsx`.
 
 - **Upgrade Readiness app** (`BRIEF.md`): **THE FULL LADDER IS DONE.** All 8 rungs (A→low-B, low-B→mid-B, mid-B→high-B, high-B→low-C, low-C→high-C/2-liner, high-C→D, D→CCC) are fully closed (research→rubric→build→review) to the same bar. A pilot can run the complete A-to-CCC chain today (7 legs). This is the first point in the project where "build the ladder" (BRIEF.md step 5, "Expand") is actually finished — what's left is owner decisions, not more building. Full history in memory `upgrade-app-knowledge-base`; highlights below.
   - **Standing rule (memory `no-deploy-without-approval`): nothing gets deployed or pushed toward deployment until Grant gives explicit final approval**, even with the ladder complete and every rung verified. Keep committing locally; don't push to `origin` or run `/fly100-deploy` without being asked.

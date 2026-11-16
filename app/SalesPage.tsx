@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Anton } from 'next/font/google';
 import logo from '@/app/icon.png';
 import { HeroParallax } from './HeroParallax';
 import { CountdownTimer } from './CountdownTimer';
@@ -33,6 +34,9 @@ import {
  * one brand system. Change colour or type here, never on elements.
  * ---------------------------------------------------------------------------
  */
+// Poster-style condensed face, used only for the "Black Friday" badge.
+const anton = Anton({ weight: '400', subsets: ['latin'], display: 'swap' });
+
 const INK_SOFT = '#B4B4B4';
 const CANVAS = '#16181B'; // elevated surface
 const CANVAS_ALT = '#0C0E11'; // near-black panel
@@ -859,11 +863,29 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
             </div>
 
             <div className="mt-10 rounded-2xl p-8 sm:p-10 border border-[#0076FF]/40 bg-gradient-to-b from-[#0F141C] to-[#0A0E14] text-center">
-              <p className={`${EYEBROW} mb-3`}>FOUNDING OFFER</p>
               <p
-                className={`${DISPLAY} text-[2.5rem] sm:text-[3rem] font-semibold tracking-[-0.03em] text-white`}
+                className={`${anton.className} inline-block rounded-md border border-white/20 bg-black px-4 py-1.5 text-[1.75rem] sm:text-[2.25rem] uppercase leading-none tracking-[0.04em] text-white`}
               >
-                {pricing.founding.price}
+                {pricing.founding.badge}
+              </p>
+              <p
+                className={`${BODYFONT} mt-3 mb-5 text-[15px] sm:text-[17px] font-bold uppercase tracking-[0.14em] text-[#4DA3FF]`}
+              >
+                {pricing.founding.eyebrow}
+              </p>
+              <p className="flex items-baseline justify-center gap-4 sm:gap-5">
+                <span className="sr-only">Was {pricing.totalValue}, now </span>
+                <s
+                  aria-hidden="true"
+                  className={`${DISPLAY} text-[1.75rem] sm:text-[2.125rem] font-semibold tracking-[-0.02em] text-[#FF4D4D] decoration-[#FF4D4D] decoration-[3px] tabular-nums`}
+                >
+                  {pricing.totalValue}
+                </s>
+                <span
+                  className={`${DISPLAY} text-[2.5rem] sm:text-[3rem] font-semibold tracking-[-0.03em] text-white tabular-nums`}
+                >
+                  {pricing.founding.price}
+                </span>
               </p>
               <p className={`${BODY_ON_DARK} mt-4 max-w-[36rem] mx-auto`}>
                 {pricing.founding.oneLine}
