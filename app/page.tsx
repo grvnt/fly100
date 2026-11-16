@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Fly100 | Paraglide Your First 100km With Confidence',
   description:
-    'A 6-week founding cohort for licensed XC pilots who want to fly further with confidence. Doors close 27 November. Kickoff 10 December.',
+    'A 6-week founding cohort for licensed XC pilots who want to fly further with confidence. Doors close 29 November. Kickoff 10 December.',
 };
 
 export default function Home() {

@@ -17,7 +17,7 @@ export const hero = {
   audience:
     "For licensed pilots who've flown their first XC flights and want to go further.",
   cta: 'Join Fly100 (founding cohort, $297)',
-  urgency: 'Doors close at midnight on Friday 27 November.',
+  urgency: 'Doors close Sunday 29 November, 11:59pm PT.',
 };
 
 /**
@@ -523,7 +523,7 @@ export const lastCall = {
   heading: 'Last call',
   body: [
     'You can keep landing with questions you never answer, or you can build a way to learn from every flight.',
-    'The founding Fly100 cohort kicks off on Thursday 10 December, and enrolment closes at midnight on Black Friday, 27 November. The founding price is $297, and it rises for the next cohort.',
+    'The founding Fly100 cohort kicks off on Thursday 10 December, and enrolment closes on Sunday 29 November at 11:59pm PT. The founding price is $297, and it rises for the next cohort.',
   ],
   cta: 'Join the Waitlist',
   signoff: 'Happy flying,\nGrant 🪂🪽',

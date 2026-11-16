@@ -16,10 +16,9 @@ import React, { useEffect, useState } from 'react';
  *
  * Deadline interpretation
  * -----------------------
- * "Midnight on Friday 27 November" is read as the end of Friday — the
- * instant that closes the day — in South Africa Standard Time (SAST,
- * UTC+2, no DST). That's 2026-11-28T00:00:00+02:00. If the intent is
- * actually the START of Friday, bump the ISO string back 24 hours.
+ * The target comes from lib/launch.ts (OPEN_AT / CLOSE_AT), the same
+ * instants that switch the homepage between waitlist and sales page. Doors
+ * close Sunday 29 November, 11:59pm US Pacific (Mon 30 Nov 07:59 UTC).
  *
  * Hydration
  * ---------
@@ -33,7 +32,7 @@ import React, { useEffect, useState } from 'react';
  * Past-deadline behaviour
  * -----------------------
  * Once the target has passed, the component falls back to a single-line
- * "Doors are closed." — safe if this branch is still live past 28 Nov.
+ * "Doors are closed." — safe if this branch is still live past the close.
  *
  * Reduced motion
  * --------------
