@@ -61,21 +61,18 @@ const BODY = `${BODYFONT} text-[17px] leading-[1.65] text-[#B4B4B4]`;
 const BODY_ON_DARK = `${BODYFONT} text-[17px] leading-[1.65] text-white/80`;
 const LEAD = `${BODYFONT} text-[19px] sm:text-[20px] leading-[1.55] text-[#B4B4B4]`;
 
+const CHECKOUT_URL = 'https://wingmates.fly100.co/checkout/fly100-founding-cohort';
+
 /**
  * Loud, pill-shaped CTA — reserved for the one real conversion moment inside
  * the pricing section (section 8). Mirrors wingmates/Cta visually so the sites
- * read as siblings. All other CTAs on this page go to /fly100 via CtaQuiet.
- *
- * Note: until a real checkout exists, every CTA on this page (including this
- * one) points at /fly100 — the site's existing internal path that redirects
- * to the live Kit waitlist via next.config.js. Using /fly100 instead of
- * hardcoding the Kit URL means we can repoint the redirect to real checkout
- * later without touching this file.
+ * read as siblings. The founding offer card button goes to CHECKOUT_URL; every
+ * other CTA scrolls to the offer card (#enrol).
  */
 function CtaBig({
   label,
   align = 'center',
-  href = '/fly100',
+  href = '#enrol',
 }: {
   label: string;
   align?: 'center' | 'start';
@@ -95,14 +92,12 @@ function CtaBig({
 /**
  * Quieter page-local CTA. Standard rounded-corner button (not pill), no glow,
  * for every CTA on this page that isn't the final buy moment — hero, mid-page
- * repeats, walk-away, last call. All of these point to /fly100 (the site's
- * existing path that currently redirects to the Kit waitlist) until a real
- * checkout exists.
+ * repeats, walk-away, last call. All of these scroll to the offer card (#enrol).
  */
 function CtaQuiet({
   label,
   align = 'center',
-  href = '/fly100',
+  href = '#enrol',
 }: {
   label: string;
   align?: 'center' | 'start';
@@ -896,7 +891,7 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
               <div className="mt-8">
                 {/* The one real conversion moment on the page — loud,
                     glowing, pill-shaped. Every other CTA defers to this. */}
-                <CtaBig label={pricing.cta} />
+                <CtaBig label={pricing.cta} href={CHECKOUT_URL} />
               </div>
               <p className="mt-4 text-[13px] text-[#7A7A7A]">
                 {hero.urgency}
