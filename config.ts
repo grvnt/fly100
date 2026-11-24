@@ -89,10 +89,10 @@ const config: ConfigProps = {
     main: '#38bdf8', // This is the primary color from our dark theme
   },
   auth: {
-    // Sign-in page; used to protect /blog/new and by apiClient on 401.
+    // Sign-in page; used by apiClient on 401.
     loginUrl: '/signin',
-    // Redirect after successful login (blog editor).
-    callbackUrl: '/blog/new',
+    // Redirect after successful login.
+    callbackUrl: '/',
   },
 } as ConfigProps;
 

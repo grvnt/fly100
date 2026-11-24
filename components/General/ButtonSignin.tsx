@@ -8,7 +8,7 @@ import supabase from '@/lib/supabase/client';
 import config from '@/config';
 
 // A simple button to sign in with our providers (Google & Magic Links).
-// After login, redirects to callbackUrl (e.g. /blog/new).
+// After login, redirects to callbackUrl (the home page).
 // If the user is already logged in, it will show their profile picture & redirect them to callbackUrl immediately.
 const ButtonSignin = ({
   text = 'Get started',
