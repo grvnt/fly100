@@ -4,7 +4,7 @@ _Last updated: 2026-11-24_
 
 ## Open threads
 
-- **Blog editor and sign-in page removed (2026-11-24, Grant's go, deployed and verified 404 live, commits `6db8050`, `0f1fec3`).** The old `/api/blog/save` route wrote to `public.posts` with no admin check, and `/signin` let strangers create empty accounts in the Supabase project shared with FlowGhost. Pending Grant: `select count(*) from public.posts;` then `drop table public.posts;` if nothing matters. Keep the `blog-images` storage bucket (the Problem section image uses it).
+- **Blog editor and sign-in page removed (2026-11-24, Grant's go, deployed and verified 404 live, commits `6db8050`, `0f1fec3`).** The old `/api/blog/save` route wrote to `public.posts` with no admin check, and `/signin` let strangers create empty accounts in the Supabase project shared with FlowGhost. Grant dropped `public.posts` the same day (only template samples and a test). Closed. Keep the `blog-images` storage bucket (the Problem section image uses it).
 
 - **Fly100 founding-cohort sales page — Black Friday pricing (2026-11-16).** Pricing card now has a "BLACK FRIDAY" badge (Anton font, loaded only in `app/SalesPage.tsx`), a bolder "Founding Offer" line, and the $1,321 total crossed out in red before $297. Screenshot-checked at phone and desktop width. Deployed 2026-11-16.
   - **Close date moved (Grant confirmed 2026-11-16):** doors close Sun 29 Nov 2026, 11:59pm PT (= Mon 30 Nov 07:59 UTC / 09:59 SAST / 18:59 Sydney). `CLOSE_AT` in `lib/launch.ts` drives both the countdown and the homepage open/close redirect; boundary-tested. Deployed to fly100.co 2026-11-16 with Grant's go, verified live on /preview.
