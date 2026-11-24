@@ -89,7 +89,7 @@ const config: ConfigProps = {
     main: '#38bdf8', // This is the primary color from our dark theme
   },
   auth: {
-    // Sign-in page; used by apiClient on 401.
+    // No sign-in page on fly100.co any more (removed 2026-11-24).
     loginUrl: '/signin',
     // Redirect after successful login.
     callbackUrl: '/',
