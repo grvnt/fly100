@@ -6,6 +6,7 @@ import logo from '@/app/icon.png';
 import { HeroParallax } from './HeroParallax';
 import { CountdownTimer } from './CountdownTimer';
 import { WaitlistButton } from './WaitlistButton';
+import { TrackedLink } from './TrackedLink';
 import { OPEN_AT, CLOSE_AT } from '@/lib/launch';
 import {
   hero,
@@ -73,18 +74,20 @@ function CtaBig({
   label,
   align = 'center',
   href = '#enrol',
+  location,
 }: {
   label: string;
   align?: 'center' | 'start';
   href?: string;
+  location: string;
 }) {
   const base =
     'inline-flex items-center justify-center rounded-lg px-7 py-3.5 text-[15px] font-medium tracking-[-0.005em] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shadow-[0_0_28px_rgba(0,118,255,0.45)] hover:shadow-[0_0_38px_rgba(0,118,255,0.6)] bg-[#0076FF] text-white hover:bg-[#006AE6] focus-visible:ring-[#0076FF] focus-visible:ring-offset-black';
   return (
     <div className={align === 'center' ? 'flex justify-center' : 'flex justify-start'}>
-      <Link href={href} className={base}>
+      <TrackedLink href={href} className={base} location={location} checkout={href === CHECKOUT_URL}>
         {label}
-      </Link>
+      </TrackedLink>
     </div>
   );
 }
@@ -98,10 +101,12 @@ function CtaQuiet({
   label,
   align = 'center',
   href = '#enrol',
+  location,
 }: {
   label: string;
   align?: 'center' | 'start';
   href?: string;
+  location: string;
 }) {
   // Glass-tile treatment matching the countdown tiles, eyebrow badge, audience
   // badge and navbar: bg-white/5 + backdrop-blur-[6px] + a muted blue border.
@@ -112,9 +117,9 @@ function CtaQuiet({
     'inline-flex items-center justify-center rounded-lg px-6 py-3 text-[15px] font-medium tracking-[-0.005em] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-white/5 backdrop-blur-[6px] text-[#4DA3FF] hover:text-white border border-[#0076FF] hover:bg-[#0076FF]/15 hover:border-[#4DA3FF] focus-visible:ring-[#0076FF] focus-visible:ring-offset-black';
   return (
     <div className={align === 'center' ? 'flex justify-center' : 'flex justify-start'}>
-      <Link href={href} className={base}>
+      <TrackedLink href={href} className={base} location={location} checkout={href === CHECKOUT_URL}>
         {label}
-      </Link>
+      </TrackedLink>
     </div>
   );
 }
@@ -591,7 +596,7 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
                 )}
                 {full && (
                   <div className="mt-4">
-                    <CtaBig label="Join Fly100" href="#enrol" />
+                    <CtaBig label="Join Fly100" href="#enrol" location="hero" />
                   </div>
                 )}
                 {full && (
@@ -704,7 +709,7 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
               <Blocks blocks={method.afterLoop} />
             </div>
             <div className="mt-12">
-              <CtaQuiet label="Join Fly100" href="#enrol" />
+              <CtaQuiet label="Join Fly100" href="#enrol" location="learn_on_the_ground" />
             </div>
           </div>
         </section>
@@ -739,7 +744,7 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
             />
 
             <div className="mt-12">
-              <CtaQuiet label="Join Fly100" href="#enrol" />
+              <CtaQuiet label="Join Fly100" href="#enrol" location="what_you_get" />
             </div>
           </div>
         </section>
@@ -891,7 +896,7 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
               <div className="mt-8">
                 {/* The one real conversion moment on the page — loud,
                     glowing, pill-shaped. Every other CTA defers to this. */}
-                <CtaBig label={pricing.cta} href={CHECKOUT_URL} />
+                <CtaBig label={pricing.cta} href={CHECKOUT_URL} location="pricing_checkout" />
               </div>
               <p className="mt-4 text-[13px] text-[#7A7A7A]">
                 {hero.urgency}
@@ -979,7 +984,7 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
               ))}
             </ul>
             <div className="mt-12">
-              <CtaQuiet label="Join Fly100" href="#enrol" />
+              <CtaQuiet label="Join Fly100" href="#enrol" location="next_6_weeks" />
             </div>
           </div>
         </section>
@@ -1111,7 +1116,7 @@ export function SalesPage({ mode = 'sales' }: { mode?: PageMode }) {
               </figure>
 
               <div className="mt-10">
-                <CtaQuiet label="Join Fly100" href="#enrol" />
+                <CtaQuiet label="Join Fly100" href="#enrol" location="last_call" />
               </div>
               <p className="text-center text-[14px] text-[#7A7A7A] mt-4">
                 {hero.urgency}
