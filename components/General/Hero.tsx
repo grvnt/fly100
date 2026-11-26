@@ -66,7 +66,7 @@ const Hero = () => {
         <p className="max-w-2xl mx-auto text-xl font-medium leading-relaxed mb-5 text-center italic border-t border-white/10 pt-8">
           We practice paragliding not as a sport, but as a way of life.
         </p>
-        <ButtonGradient href="/wingmates/#pricing" text="Start Your QUEST" className="btn-wide" />
+        <ButtonGradient href="/#enrol" text="Start Your QUEST" className="btn-wide" />
       </div>
     </section>
   );

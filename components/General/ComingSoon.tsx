@@ -65,7 +65,7 @@ const ComingSoon = () => {
             }`}
           >
             <a
-              href="/wingmates"
+              href="/"
               className="block text-gray-600 transition-colors duration-300 dark:text-white md:px-6 hover:text-blue-500 dark:hover:text-blue-400"
             >
               Wingmates

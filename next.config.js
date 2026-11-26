@@ -33,6 +33,17 @@ const nextConfig = {
     // (307), so if we ever repoint the destination we aren't fighting cached
     // 301s in people's browsers.
     return [
+      // Wingmates is retired; Fly100 is the only way in. Explicit 301 (permanent: true would send 308).
+      {
+        source: '/wingmates',
+        destination: '/',
+        statusCode: 301,
+      },
+      {
+        source: '/wingmates/:path*',
+        destination: '/',
+        statusCode: 301,
+      },
       {
         source: '/fly100',
         destination: 'https://fly100.kit.com/b7904fde1f',

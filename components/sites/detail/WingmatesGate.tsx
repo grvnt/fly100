@@ -59,7 +59,7 @@ export default function WingmatesGate({
 function WingmatesCta({ title }: { title: string }) {
   return (
     <Link
-      href="/wingmates"
+      href="/"
       className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-sky-400"
     >
       <Lock className="h-3.5 w-3.5" aria-hidden="true" />

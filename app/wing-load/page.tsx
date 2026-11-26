@@ -451,7 +451,7 @@ const App: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
             <p className="text-sm text-slate-300">Fly better, together.</p>
             <a
-              href="/wingmates?utm_source=webapp&utm_medium=wing-load&utm_content=footer_cta"
+              href="/?utm_source=webapp&utm_medium=wing-load&utm_content=footer_cta"
               className="inline-flex items-center gap-1.5 rounded-md bg-sky-500 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-sky-400"
             >
               <span>Join Wingmates</span>

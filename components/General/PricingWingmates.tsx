@@ -6,7 +6,7 @@ import React, { useState } from 'react';
  * Circle paywall checkout. Quarterly and annual are the two plans Grant set on
  * 2026-10-01: $149/quarter, or $490/year which saves $106 against four quarters.
  */
-const CIRCLE_CHECKOUT_URL = 'https://wingmates.fly100.co/checkout/wingmates-new';
+const CIRCLE_CHECKOUT_URL = '/#enrol';
 
 const PLANS = {
   quarterly: { price: '$149', period: '/quarter', note: 'Billed every three months.' },

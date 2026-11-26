@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
  * 2026-10-09 23:59:59 SAST (UTC+2) = 21:59:59 UTC same day.
  */
 const DEADLINE = new Date('2026-10-09T21:59:59Z').getTime();
-const CHECKOUT_URL = 'https://wingmates.fly100.co/checkout/wingmates-new';
+const CHECKOUT_URL = '/#enrol';
 const BANNER_RED = '#C81E3A';
 
 function getTimeLeft() {

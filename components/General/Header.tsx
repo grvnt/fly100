@@ -18,8 +18,8 @@ const links: {
     label: 'Wing Load',
   },
   {
-    href: '/wingmates',
-    label: 'Wingmates',
+    href: '/',
+    label: 'Fly100',
   },
   // {
   //   href: "/#pricing",
